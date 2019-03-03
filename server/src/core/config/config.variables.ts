@@ -1,0 +1,13 @@
+export enum EnvVariables {
+  NODE_ENV,
+
+  PRISMA_HOST,
+  PRISMA_PORT,
+
+  MONGO_HOST,
+  MONGO_PORT,
+  MONGO_USER,
+  MONGO_PASSWORD,
+
+  JWT_TOKEN_EXPIRES_IN,
+}
