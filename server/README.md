@@ -1,4 +1,4 @@
-# re-radio server documentation
+# re-radio-server
 
 ## Requirement
 
@@ -10,7 +10,7 @@
 ## One command to rule them all
 
 ```sh
-npm run docker-compose:start
+npm run docker-compose:up
 ```
 
 This commands will include these containers:
@@ -19,39 +19,13 @@ This commands will include these containers:
 
 * A Prisma server container
 
-* A re-radio server container
-
-P/S: to stop the service
-
-```sh
-npm run docker-compose:stop
-```
+* A re-radio server container that enables a nodemon process
 
 ## Development guideline
 
-### Start the Prisma service
-
-#### To start the service
-
-```sh
-npm run prisma:up
-```
-
-This commands will include these containers:
-
-* A Mongo Database container
-
-* A Prisma server container
-
-#### To stop the service
-
-```sh
-npm run prisma:stop
-```
-
 ### Modify host file
 
-* Due to some limitation with .env configuration. We need to modify the host file in the system to be able to access the containers without changing the .env to frequently
+* Due to some limitation with .env configuration. We need to modify the host file in the system to be able to access the containers without changing the .env too frequently.
 
 * Add these lines to the host file
 
@@ -62,12 +36,18 @@ npm run prisma:stop
 127.0.0.1 mongo
 ```
 
-### Start the development server on host machine
+### Deploy changed data model
 
 ```sh
-npm start
+npm run prisma:deploy
 ```
 
+Sometimes, you will need to force the database to be updated with whole new structure (refer to Prisma [data model documentation](https://www.prisma.io/docs/datamodel-and-migrations/datamodel-MONGO-knun/) for more information). If so, run command with `-- --force` to override the whole structure, which will cause data loss on database.
+
+### Seed initial data
+
 ```sh
-npm run dev
+npm run worker:seed
 ```
+
+This script is only executable after running `prisma:deploy` command. Which will seed the basic data like: Admin users, default users,... and more.
