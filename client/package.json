@@ -8,23 +8,26 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "docker-compose up -d --build"
+    "docker-compose:up": "docker-compose up",
+    "docker-compose:start": "docker-compose up -d",
+    "docker-compose:stop": "docker-compose stop"
   },
   "dependencies": {
     "@material-ui/core": "next",
     "@material-ui/icons": "next",
     "@material-ui/styles": "next",
+    "jss": "next",
     "apollo-boost": "^0.3.1",
     "apollo-link-context": "^1.0.14",
     "graphql": "^14.1.1",
-    "jss": "next",
     "navi": "^0.11.6",
     "react": "^16.8.3",
     "react-apollo": "^2.5.1",
     "react-dom": "^16.8.3",
     "react-helmet": "^5.2.0",
     "react-navi": "^0.11.7",
-    "react-scripts": "2.1.5"
+    "react-scripts": "2.1.5",
+    "react-apollo-hooks": "^0.4.3"
   },
   "devDependencies": {
     "@types/graphql": "^14.0.7",
