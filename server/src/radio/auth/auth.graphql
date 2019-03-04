@@ -1,0 +1,20 @@
+type LoginReturnType {
+  token: String
+}
+
+input LoginInput {
+  username: String
+  email: String
+  password: String!
+}
+
+input RegisterInput {
+  username: String
+  email: String
+  password: String!
+}
+
+type Mutation {
+  login(data: LoginInput!): LoginReturnType!
+  register(data: RegisterInput!): Boolean
+}

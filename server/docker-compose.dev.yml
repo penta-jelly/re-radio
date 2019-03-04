@@ -1,0 +1,12 @@
+version: '3'
+services:
+  service:
+    volumes:
+      - .:/user/app
+      - /user/app/node_modules
+    command: >
+      sh -c "
+        wait-on http://prisma:${PRISMA_PORT} && 
+        npm run prisma:deploy --force &&
+        npm run dev
+      "
