@@ -7,6 +7,8 @@
 * NodeJS: 10.x
 * Npm: 6.x
 
+* Allow docker-users group to have Full Control access to project files because there is a need of using mounted driver for development.
+
 ## One command to rule them all
 
 ```sh
@@ -35,6 +37,14 @@ This commands will include these containers:
 127.0.0.1 prisma
 127.0.0.1 mongo
 ```
+
+* If you find this frustrating, another option is to run it inside the container. *Using this method, you **will not** have code generation feature support by default, use it at your own risk.* For example, running `npm run prisma:deploy` will be executed as:
+
+```sh
+docker-compose run service npm run prisma:deploy
+```
+
+P/S: "service" can be replaced with any other names.
 
 ### Deploy changed data model
 

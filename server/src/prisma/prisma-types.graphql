@@ -1,5 +1,5 @@
 # source: http://prisma:4466
-# timestamp: Sun Mar 03 2019 09:56:10 GMT+0700 (Indochina Time)
+# timestamp: Mon Mar 04 2019 17:58:19 GMT+0700 (Indochina Time)
 
 type AggregateUser {
   count: Int!

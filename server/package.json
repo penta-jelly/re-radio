@@ -18,7 +18,7 @@
     "worker": "ts-node -r tsconfig-paths/register src/workers.ts",
     "worker:seed": "npm run worker -- seed",
     "docker-compose:start": "npm run docker-compose:up -- -d",
-    "docker-compose:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml -f ./database/docker-compose.yml -f ./database/docker-compose.mongo.yml up --build",
+    "docker-compose:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml -f ./database/docker-compose.yml -f ./database/docker-compose.mongo.yml up",
     "docker-compose:stop": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml -f ./database/docker-compose.yml -f ./database/docker-compose.mongo.yml stop"
   },
   "dependencies": {

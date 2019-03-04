@@ -1,8 +1,9 @@
 version: '3'
 services:
-  server:
+  service:
     volumes:
       - .:/user/app
+      - /user/app/node_modules
     command: >
       sh -c "
         wait-on http://prisma:${PRISMA_PORT} && 
