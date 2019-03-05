@@ -1,0 +1,68 @@
+{
+  "name": "re-radio-client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "cp -n .env.example .env",
+    "start": "react-scripts start",
+    "stop": "docker-compose stop",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "docker-compose:up": "docker-compose -f docker-compose.dev.yml up",
+    "docker-compose:start": "docker-compose -f docker-compose.dev.yml up -d",
+    "docker-compose:stop": "docker-compose stop",
+    "docker-compose:deploy": "docker-compose up -d --build",
+    "generate": "gql-gen"
+  },
+  "dependencies": {
+    "@material-ui/core": "next",
+    "@material-ui/icons": "next",
+    "@material-ui/styles": "next",
+    "apollo-boost": "^0.3.1",
+    "apollo-link-context": "^1.0.14",
+    "formik": "^1.5.1",
+    "graphql": "^14.1.1",
+    "jss": "next",
+    "navi": "^0.11.6",
+    "react": "^16.8.3",
+    "react-apollo": "^2.5.1",
+    "react-apollo-hooks": "^0.4.3",
+    "react-dom": "^16.8.3",
+    "react-helmet": "^5.2.0",
+    "react-navi": "^0.11.7",
+    "react-scripts": "2.1.5",
+    "yup": "^0.26.10"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.7",
+    "@types/jest": "24.0.9",
+    "@types/node": "11.10.4",
+    "@types/react": "16.8.6",
+    "@types/react-dom": "16.8.2",
+    "@types/react-helmet": "^5.0.8",
+    "@types/yup": "^0.26.11",
+    "graphql-code-generator": "^0.18.0",
+    "graphql-codegen-add": "^0.18.0",
+    "graphql-codegen-introspection": "^0.18.0",
+    "graphql-codegen-typescript-client": "^0.18.0",
+    "graphql-codegen-typescript-common": "^0.18.0",
+    "graphql-codegen-typescript-react-apollo": "^0.18.0",
+    "prettier": "^1.16.4",
+    "tslint": "^5.13.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "tslint-react": "^3.6.0",
+    "typescript": "^3.3.3"
+  },
+  "author": {
+    "name": "Penta Jelly",
+    "email": "lednhatkhanh@gmail.com"
+  },
+  "browserslist": [
+    ">1%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}

@@ -1,0 +1,13 @@
+version: "3"
+services:
+  re-radio-client:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+      - ./node_modules:/usr/src/app/node_modules

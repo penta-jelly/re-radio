@@ -23,6 +23,8 @@ This commands will include these containers:
 
 * A re-radio server container that enables a nodemon process
 
+* Server will be served at [http://localhost:8000/graphql](http://localhost:8000/graphql)
+
 ## Development guideline
 
 ### Modify host file
