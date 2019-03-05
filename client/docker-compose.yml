@@ -1,13 +1,8 @@
 version: "3"
 services:
-  re-radio-client:
+  deploy:
     build:
       context: .
-      dockerfile: Dockerfile.dev
-    expose:
-      - 3000
+      dockerfile: Dockerfile
     ports:
-      - 3000:3000
-    volumes:
-      - ./src:/usr/src/app/src
-      - ./public:/usr/src/app/public
+      - "80:80"

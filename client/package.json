@@ -8,9 +8,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "docker-compose:up": "docker-compose up",
-    "docker-compose:start": "docker-compose up -d",
-    "docker-compose:stop": "docker-compose stop"
+    "docker-compose:up": "docker-compose -f docker-compose.dev.yml up",
+    "docker-compose:start": "docker-compose -f docker-compose.dev.yml up -d",
+    "docker-compose:stop": "docker-compose stop",
+    "docker-compose:deploy": "docker-compose up -d --build"
   },
   "dependencies": {
     "@material-ui/core": "next",
@@ -44,7 +45,7 @@
     "typescript": "^3.3.3"
   },
   "author": {
-    "name": "Nhat Khanh",
+    "name": "Penta Jelly",
     "email": "lednhatkhanh@gmail.com"
   },
   "browserslist": [
