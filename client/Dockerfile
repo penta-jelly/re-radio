@@ -1,4 +1,4 @@
-FROM node:10 as build-stage
+FROM node:10-alpine as build-stage
 WORKDIR /app
 COPY . /app
 RUN npm install
