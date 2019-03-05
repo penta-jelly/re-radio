@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "postinstall": "cp -n .env.example .env",
     "start": "react-scripts start",
     "stop": "docker-compose stop",
     "build": "react-scripts build",
