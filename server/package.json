@@ -5,7 +5,7 @@
   "author": "@pvtri96",
   "license": "MIT",
   "scripts": {
-    "postinstall": "cp -n .env.dev .env",
+    "postinstall": "cp -n .env.example .env",
     "format": "prettier --write \"**/*.ts\" --ignore-path src/prisma/prisma.binding.ts",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "dev": "nodemon -L",

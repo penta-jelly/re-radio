@@ -25,36 +25,36 @@ export class UsersResolver {
     return await this.prisma.query.user(args, info);
   }
 
-  @UseGuards(AuthenticationGuard)
   @Mutation('createUser')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles('ADMIN')
   async createUser(@Args() args: UserCreateInputDTO, @Info() info): Promise<User> {
     return await this.usersService.createUser(args, info);
   }
 
-  @UseGuards(AuthenticationGuard)
   @Mutation('updateUser')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles('ADMIN')
   async updateUser(@Args() args: UserUpdateInputDTO, @Info() info): Promise<User> {
     return await this.usersService.updateUser(args, info);
   }
 
-  @UseGuards(AuthenticationGuard)
   @Mutation('updateManyUsers')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles('ADMIN')
   async updateManyUsers(@Args() args, @Info() info): Promise<BatchPayload> {
     return await this.usersService.updateManyUsers(args, info);
   }
 
-  @UseGuards(AuthenticationGuard)
   @Mutation('deleteUser')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles('ADMIN')
   async deleteUser(@Args() args, @Info() info): Promise<User> {
     return await this.prisma.mutation.deleteUser(args, info);
   }
 
-  @UseGuards(AuthenticationGuard)
   @Mutation('deleteManyUsers')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles('ADMIN')
   async deleteManyUsers(@Args() args, @Info() info): Promise<BatchPayload> {
     return await this.prisma.mutation.deleteManyUsers(args, info);
