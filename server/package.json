@@ -1,9 +1,7 @@
 {
   "name": "re-radio-server",
-  "version": "0.0.0",
-  "description": "description",
-  "author": "@pvtri96",
-  "license": "MIT",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
     "postinstall": "cp -n .env.example .env",
     "format": "prettier --write \"**/*.ts\" --ignore-path src/prisma/prisma.binding.ts",
@@ -53,5 +51,11 @@
     "tsconfig-paths": "^3.8.0",
     "tslint": "^5.13.0",
     "typescript": "^3.3.0"
-  }
+  },
+  "description": "description",
+  "author": {
+    "name": "Penta Jelly",
+    "email": "pvtri96@gmail.com"
+  },
+  "license": "MIT"
 }

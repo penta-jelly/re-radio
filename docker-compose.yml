@@ -1,0 +1,6 @@
+version: "3"
+services:
+  service:
+    build: ./server
+  client:
+    build: ./client
