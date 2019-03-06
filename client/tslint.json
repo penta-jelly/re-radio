@@ -1,6 +1,6 @@
 {
   "defaultSeverity": "error",
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": ["tslint:recommended", "tslint-react", "tslint-react-hooks", "tslint-config-prettier"],
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
     "prettier": true,
@@ -8,6 +8,8 @@
     "ordered-imports": false,
     "member-ordering": false,
     "object-literal-sort-keys": false,
-    "variable-name": false
+    "variable-name": false,
+    "jsx-boolean-value": false,
+    "react-hooks-nesting": "error"
   }
 }

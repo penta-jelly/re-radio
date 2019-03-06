@@ -1,8 +1,8 @@
 #!/bin/bash
 
 cd server 
-npm install
+npm ci
 
 cd ..
 cd client 
-npm install
+npm ci
