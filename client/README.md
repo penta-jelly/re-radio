@@ -20,6 +20,12 @@ Client project for re-radio
 
 - Run `docker-compose:deploy` to deploy the project to docker.
 
+## Translation
+
+- Currently we support English and Vietnamese
+- Please take a look at `src/translates` for resource files
+- Example file is `src/pages/register.tsx`
+
 ## Recommended Extensions
 
 - [Apollo GraphQL](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo): This provides auto complete for `.graphql` files, see `apollo.config.js` for more detail.

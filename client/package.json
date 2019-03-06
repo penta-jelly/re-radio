@@ -13,7 +13,9 @@
     "docker-compose:start": "docker-compose -f docker-compose.dev.yml up -d",
     "docker-compose:stop": "docker-compose stop",
     "docker-compose:deploy": "docker-compose up -d --build",
-    "generate": "gql-gen"
+    "generate": "gql-gen",
+    "type-check": "tsc --noEmit",
+    "lint": "tslint \"src/**/*.{tsx,ts}\""
   },
   "dependencies": {
     "@material-ui/core": "next",
@@ -23,6 +25,7 @@
     "apollo-link-context": "^1.0.14",
     "formik": "^1.5.1",
     "graphql": "^14.1.1",
+    "i18next": "^15.0.5",
     "jss": "next",
     "navi": "^0.11.6",
     "react": "^16.8.3",
@@ -30,6 +33,7 @@
     "react-apollo-hooks": "^0.4.3",
     "react-dom": "^16.8.3",
     "react-helmet": "^5.2.0",
+    "react-i18next": "^10.2.1",
     "react-navi": "^0.11.7",
     "react-scripts": "2.1.5",
     "yup": "^0.26.10"
@@ -53,6 +57,7 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
     "tslint-react": "^3.6.0",
+    "tslint-react-hooks": "^1.1.0",
     "typescript": "^3.3.3"
   },
   "author": {

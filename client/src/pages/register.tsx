@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { mount, route } from 'navi';
 import { Formik } from 'formik';
 import * as yup from 'yup';
@@ -12,6 +12,7 @@ import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
 import { RegisterInput, RegisterDocument, RegisterVariables } from '../graphql';
+import { useTranslation } from 'react-i18next';
 
 type DataKeys = keyof RegisterInput;
 type Data = { [key in DataKeys]: string };
@@ -30,12 +31,34 @@ const useStyles = makeStyles({
 
 const Register = () => {
   const classNames = useStyles();
-  const registerMutation = useMutation<Boolean, RegisterVariables>(RegisterDocument);
+  const registerMutation = useMutation<boolean, RegisterVariables>(RegisterDocument);
   const history = useHistory();
   const [registerError, setRegisterError] = useState<string | null>(null);
+  const { t, i18n } = useTranslation('common');
+  const onRegister = useCallback(async (values: Data) => {
+    setRegisterError(null);
+
+    try {
+      const response = await registerMutation({ variables: { data: values } });
+      if (response.data) {
+        history.replace('/');
+        return;
+      }
+
+      if (response.errors) {
+        setRegisterError(response.errors[0].message);
+      }
+    } catch (error) {
+      setRegisterError(error.message);
+    }
+  }, []);
+  const onChangeLanguage = useCallback(() => {
+    i18n.changeLanguage(i18n.language === 'en-US' ? 'vi-VN' : 'en-US');
+  }, []);
 
   return (
     <div className={classNames.root}>
+      <Button onClick={onChangeLanguage}>Change Language</Button>
       <Formik<Data>
         initialValues={{ username: '', email: '', password: '' }}
         validationSchema={yup.object().shape({
@@ -46,28 +69,12 @@ const Register = () => {
             .required('Email is required'),
           password: yup.string().required('Password is required'),
         })}
-        onSubmit={async values => {
-          setRegisterError(null);
-
-          try {
-            const response = await registerMutation({ variables: { data: values } });
-            if (response.data) {
-              history.replace('/');
-              return;
-            }
-
-            if (response.errors) {
-              setRegisterError(response.errors[0].message);
-            }
-          } catch (error) {
-            setRegisterError(error.message);
-          }
-        }}
+        onSubmit={onRegister}
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
           <form noValidate onSubmit={handleSubmit} className={classNames.form}>
             <Typography variant="h3" gutterBottom align="center">
-              Register
+              {t('register')}
             </Typography>
             {registerError && <FormHelperText error>{registerError}</FormHelperText>}
             <TextField
