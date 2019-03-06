@@ -1,6 +1,6 @@
 version: "3"
 services:
-  re-radio-client:
+  client:
     build:
       context: .
       dockerfile: Dockerfile.dev
