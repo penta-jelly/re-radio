@@ -4,13 +4,13 @@
 cat server/.env client/.env > .env
 
 base="docker-compose \
-  -f docker-compose.yml \
-  -f ./server/docker-compose.yml \
-  -f ./server/docker-compose.dev.yml \
   -f ./server/database/docker-compose.yml \
   -f ./server/database/docker-compose.mongo.yml \
+  -f ./server/docker-compose.yml \
+  -f ./server/docker-compose.dev.yml \
   -f ./client/docker-compose.dev.yml \
   -f docker-compose.dev.yml \
+  --project-directory . \
 "
 case "$1" in
 'up' | 'down' | 'start' | 'stop' | 'config')
