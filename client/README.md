@@ -5,7 +5,7 @@ Client project for re-radio
 ## Development
 
 - Make sure you have `Docker` up and running
-- Run `npm install`
+- Run `npm ci`
 - Run `npm run docker-compose:up`
 - Run `npm run generate` to generate typescript types, **make sure server is running first**.
 - Navigate to [http://localhost:3000](http://localhost:3000)
