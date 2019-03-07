@@ -1,4 +1,4 @@
-import { Length, IsOptional, ValidateNested, IsEmail, IsNotEmpty, IsUrl } from 'class-validator';
+import { Length, IsOptional, ValidateNested, IsEmail, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class LoginDTO {

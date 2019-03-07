@@ -1,10 +1,11 @@
-import { Logger, forwardRef, Inject } from '@nestjs/common';
-import { Mutation, Resolver, Args } from '@nestjs/graphql';
+import { forwardRef, Inject, Logger, UnprocessableEntityException } from '@nestjs/common';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { PrismaService } from 'prisma/prisma.service';
+import { UsersService } from 'radio/users/user.service';
 import { AuthService } from './auth.service';
 import { LoginInputDTO } from './dto/LoginInput.dto';
 import { RegisterInputDTO } from './dto/RegisterInput.dto';
-import { UsersService } from 'radio/users/user.service';
+import { LoginOrRegisterReturnType } from './interfaces/LoginOrRegisterReturnType.interface';
 
 @Resolver()
 export class AuthResolver {
@@ -16,20 +17,27 @@ export class AuthResolver {
   ) {}
 
   @Mutation('login')
-  async login(@Args() loginDTO: LoginInputDTO) {
+  async login(@Args() loginDTO: LoginInputDTO): Promise<LoginOrRegisterReturnType> {
     const user = await this.authService.verifyUser(loginDTO.data);
-    this.logger.log(`Generate JWT token for user ${user.username}`);
+    this.logger.log(`Generating JWT token for user ${user.username}`);
     const jwtToken = await this.authService.createToken(user);
     this.logger.log(`Generated JWT token for user ${user.username}`);
-
-    return {
-      token: jwtToken.token,
-    };
+    return jwtToken;
   }
 
   @Mutation('register')
-  async register(@Args() registerDTO: RegisterInputDTO) {
-    await this.usersService.createUser({ data: registerDTO.data });
-    return true;
+  async register(@Args() registerDTO: RegisterInputDTO): Promise<LoginOrRegisterReturnType> {
+    try {
+      const user = await this.usersService.createUser({ data: registerDTO.data });
+      this.logger.log(`Generating JWT token for user ${user.username}`);
+      const jwtToken = await this.authService.createToken(user);
+      this.logger.log(`Generated JWT token for user ${user.username}`);
+      return jwtToken;
+    } catch (error) {
+      if (this.prisma.isViolatedUniqueConstraint(error)) {
+        throw new UnprocessableEntityException(`User ${registerDTO.data.email} has already existed in the system.`);
+      }
+      throw error;
+    }
   }
 }

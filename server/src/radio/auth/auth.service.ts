@@ -5,7 +5,8 @@ import { User } from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
 import { UsersService } from 'radio/users/user.service';
 import { LoginDTO } from './dto/LoginInput.dto';
-import { JwtPayload } from './interfaces/jwt-payload.interface';
+import { JwtPayload } from './interfaces/JwtPayload.interface';
+import { LoginOrRegisterReturnType } from './interfaces/LoginOrRegisterReturnType.interface';
 
 @Injectable()
 export class AuthService {
@@ -26,7 +27,7 @@ export class AuthService {
     return user;
   }
 
-  async createToken(user: User) {
+  async createToken(user: User): Promise<LoginOrRegisterReturnType> {
     const { username, email, password } = user;
     const jwtPayload: JwtPayload = { username, email, password };
     const token = this.jwtService.sign(jwtPayload);
