@@ -1,5 +1,10 @@
 {
   "recommendations": [
-    "apollographql.vscode-apollo"
+    "apollographql.vscode-apollo",
+    "peterjausovec.vscode-docker",
+    "mikestead.dotenv",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-tslint-plugin"
   ]
 }
