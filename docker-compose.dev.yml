@@ -1,12 +1,10 @@
 version: "3"
 services:
   service:
-    build: ./server
     volumes:
       - ./server:/user/app
-      - /user/app/node_modules
+      - ./server/node_modules:/user/app/node_modules
   client:
-    build: ./client
     volumes:
       - ./client:/usr/src/app
       - ./client/node_modules:/usr/src/app/node_modules

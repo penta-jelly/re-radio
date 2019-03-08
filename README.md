@@ -18,5 +18,11 @@ sh install.sh
 ## Start all services using development environment
 
 ```sh
-sh dev.sh start
+sh dev.sh up
+```
+
+## Clean up containers data
+
+```sh
+sh dev.sh down
 ```
