@@ -3052,7 +3052,7 @@
             "type": {
               "kind": "NON_NULL",
               "name": null,
-              "ofType": { "kind": "OBJECT", "name": "LoginReturnType", "ofType": null }
+              "ofType": { "kind": "OBJECT", "name": "LoginOrRegisterReturnType", "ofType": null }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -3072,7 +3072,11 @@
                 "defaultValue": null
               }
             ],
-            "type": { "kind": "SCALAR", "name": "Boolean", "ofType": null },
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": { "kind": "OBJECT", "name": "LoginOrRegisterReturnType", "ofType": null }
+            },
             "isDeprecated": false,
             "deprecationReason": null
           }
@@ -4424,7 +4428,7 @@
       },
       {
         "kind": "OBJECT",
-        "name": "LoginReturnType",
+        "name": "LoginOrRegisterReturnType",
         "description": "",
         "fields": [
           {
@@ -4456,7 +4460,11 @@
           {
             "name": "email",
             "description": "",
-            "type": { "kind": "SCALAR", "name": "String", "ofType": null },
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": { "kind": "SCALAR", "name": "String", "ofType": null }
+            },
             "defaultValue": null
           },
           {
