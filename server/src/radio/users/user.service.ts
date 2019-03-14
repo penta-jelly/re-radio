@@ -26,7 +26,7 @@ export class UsersService {
 
   async updateManyUsers(args: UserUpdateManyInputDTO, info?: GraphQLResolveInfo | string) {
     if (args.data.password) {
-      throw new BadRequestException('Password are not allowed to update in this action.');
+      throw new BadRequestException('Password are not allowed to be updated in this action.');
     }
     return await this.prisma.mutation.updateManyUsers(args, info);
   }

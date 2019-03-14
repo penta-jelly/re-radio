@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
-import { RegisterInput, RegisterDocument, RegisterVariables } from '../graphql';
+import { RegisterInput, RegisterDocument, RegisterVariables, RegisterMutation } from '../graphql';
 import { useTranslation } from 'react-i18next';
 
 type DataKeys = keyof RegisterInput;
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
 
 const Register = () => {
   const classNames = useStyles();
-  const registerMutation = useMutation<boolean, RegisterVariables>(RegisterDocument);
+  const registerMutation = useMutation<RegisterMutation, RegisterVariables>(RegisterDocument);
   const history = useHistory();
   const [registerError, setRegisterError] = useState<string | null>(null);
   const { t, i18n } = useTranslation('common');
@@ -40,7 +40,8 @@ const Register = () => {
 
     try {
       const response = await registerMutation({ variables: { data: values } });
-      if (response.data) {
+      if (response.data && response.data.register.token) {
+        localStorage.setItem('token', response.data.register.token);
         history.replace('/');
         return;
       }
@@ -72,7 +73,7 @@ const Register = () => {
         onSubmit={onRegister}
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
-          <form noValidate onSubmit={handleSubmit} className={classNames.form}>
+          <form noValidate onSubmit={handleSubmit} className={classNames.form} method="POST">
             <Typography variant="h3" gutterBottom align="center">
               {t('register')}
             </Typography>

@@ -801,7 +801,7 @@ export interface LoginInput {
 export interface RegisterInput {
   username?: Maybe<string>;
 
-  email?: Maybe<string>;
+  email: string;
 
   password: string;
 }
@@ -905,7 +905,13 @@ export type RegisterVariables = {
 export type RegisterMutation = {
   __typename?: 'Mutation';
 
-  register: Maybe<boolean>;
+  register: RegisterRegister;
+};
+
+export type RegisterRegister = {
+  __typename?: 'LoginOrRegisterReturnType';
+
+  token: Maybe<string>;
 };
 
 import gql from 'graphql-tag';
@@ -918,7 +924,9 @@ import * as ReactApollo from 'react-apollo';
 
 export const RegisterDocument = gql`
   mutation Register($data: RegisterInput!) {
-    register(data: $data)
+    register(data: $data) {
+      token
+    }
   }
 `;
 export class RegisterComponent extends React.Component<

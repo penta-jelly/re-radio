@@ -1,4 +1,4 @@
-type LoginReturnType {
+type LoginOrRegisterReturnType {
   token: String
 }
 
@@ -10,11 +10,11 @@ input LoginInput {
 
 input RegisterInput {
   username: String
-  email: String
+  email: String!
   password: String!
 }
 
 type Mutation {
-  login(data: LoginInput!): LoginReturnType!
-  register(data: RegisterInput!): Boolean
+  login(data: LoginInput!): LoginOrRegisterReturnType!
+  register(data: RegisterInput!): LoginOrRegisterReturnType!
 }
