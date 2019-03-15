@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "postinstall": "cp -n .env.example .env",
     "format": "prettier --write \"**/*.ts\" --ignore-path src/prisma/prisma.binding.ts",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "dev": "nodemon -L",
