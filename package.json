@@ -1,0 +1,25 @@
+{
+  "name": "re-radio",
+  "version": "0.1.0",
+  "scripts": {
+    "cypress:run": "cypress run",
+    "cypress:open": "cypress open",
+    "format": "prettier --write \"cypress/**/*.ts\""
+  },
+  "dependencies": {
+    "cypress": "^3.2.0"
+  },
+  "devDependencies": {
+    "@cypress/webpack-preprocessor": "^4.0.3",
+    "@types/cypress": "^1.1.3",
+    "@types/node": "^11.10.4",
+    "prettier": "^1.16.4",
+    "ts-loader": "^5.3.3",
+    "tslint": "^5.13.1",
+    "typescript": "^3.3.3333",
+    "webpack": "^4.29.6"
+  },
+  "author": "@dungle1811",
+  "license": "ISC",
+  "description": ""
+}

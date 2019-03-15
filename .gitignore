@@ -1,1 +1,10 @@
 .env
+
+# Cypress
+cypress/screenshots
+cypress/videos
+node_modules
+
+# IntelliJ IDEA
+.idea
+.eclipse
