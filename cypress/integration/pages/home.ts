@@ -2,7 +2,7 @@ import { Search } from './search';
 
 export class Home {
   navigate() {
-    cy.visit('https://css-tricks.com/');
+    cy.visit('/');
     return this;
   }
 

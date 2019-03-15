@@ -1,12 +1,11 @@
 #!/bin/bash
 
-cd server 
+cd server
 npm ci
 
 cd ..
-cd client 
+cd client
 npm ci
 
 cd ..
-cd testing
 npm ci
