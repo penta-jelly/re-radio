@@ -1,6 +1,9 @@
 version: '3'
 services:
   service:
-    build: .
+    build:
+      context: .
+      args:
+        PRISMA_VERSION: ${PRISMA_VERSION}
     ports:
       - "8000:3000"

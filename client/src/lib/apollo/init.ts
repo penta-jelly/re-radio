@@ -3,7 +3,7 @@ import { setContext } from 'apollo-link-context';
 
 export function initApollo() {
   const httpLink = new HttpLink({
-    uri: process.env.REACT_APP_BACKEND_ENDPOINT,
+    uri: `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`,
   });
 
   const authLink = setContext((_, { headers }) => {
