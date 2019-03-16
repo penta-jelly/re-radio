@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10
+        environment:
+          ## this enables colors in the output
+          TERM: xterm
+    steps:
+      - run: 
+          name: Install Docker compose
+          command: curl -L https://github.com/docker/compose/releases/download/1.23.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose && chmod +x ~/docker-compose && sudo mv ~/docker-compose /usr/local/bin/docker-compose
+      - checkout
+      - setup_remote_docker
+      - run: 
+          name: Run Test
+          command: sh test.sh
+workflows:
+  build:
+    jobs:
+    - build
+  version: 2

@@ -5,6 +5,7 @@ import { RequestsInterceptor } from 'core/request.interceptor';
 import { PrismaModule } from 'prisma/prisma.module';
 import { AuthModule } from 'radio/auth/auth.module';
 import { UsersModule } from 'radio/users/users.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [GraphqlModule, PrismaModule, UsersModule, AuthModule],
@@ -18,5 +19,6 @@ import { UsersModule } from 'radio/users/users.module';
       useClass: RequestsInterceptor,
     },
   ],
+  controllers: [AppController],
 })
 export class ApplicationModule {}

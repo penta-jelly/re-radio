@@ -1,7 +1,10 @@
 #!/bin/bash
 
+cp ./server/.env.example ./server/.env
+cp ./client/.env.example ./client/.env
+
 # Get the current IP of the host machine using Docker Toolbox
-host=`docker-machine ip || echo localhost`
+host=`docker-machine ip || echo 127.0.0.1`
 
 # Replace the service host variable in client environment
 sed -i "s/REACT_APP_SERVICE_HOST=.*/REACT_APP_SERVICE_HOST=$host/g" ./client/.env
@@ -15,19 +18,10 @@ base="docker-compose \
   -f ./server/database/docker-compose.yml \
   -f ./server/database/docker-compose.mongo.yml \
   -f ./server/docker-compose.yml \
-  -f ./server/docker-compose.dev.yml \
-  -f ./client/docker-compose.dev.yml \
+  -f ./client/docker-compose.yml \
   -f docker-compose.yml \
-  -f docker-compose.dev.yml \
+  -f docker-compose.test.yml \
   --project-directory . \
 "
 
-case "$1" in
-'up' | 'down' | 'start' | 'stop' | 'config')
-  eval "$base $1 $2 $3"
-;;
-*)
-  echo $"Incorrect usage: It should be one of start, stop, up, down, config. For example:"
-  echo $"$0 start"
-  exit 1
-esac
+eval "$base up --abort-on-container-exit --exit-code-from e2e $1 $2"

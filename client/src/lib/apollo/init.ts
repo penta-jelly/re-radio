@@ -3,7 +3,7 @@ import { setContext } from 'apollo-link-context';
 
 export function initApollo() {
   const httpLink = new HttpLink({
-    uri: `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`,
+    uri: `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
   });
 
   const authLink = setContext((_, { headers }) => {

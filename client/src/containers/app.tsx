@@ -9,14 +9,16 @@ import '../lib/react-i18next';
 import { theme } from '../lib/@material-ui/theme';
 import { initApollo } from '../lib/apollo/init';
 
-import { Router } from './router';
+import { Home } from '../pages';
+// import { Router } from './router';
 
 const apolloClient = initApollo();
 
 export const App: React.FunctionComponent<{}> = (): React.ReactElement<{}> => (
   <ThemeProvider theme={theme}>
     <ApolloProvider client={apolloClient}>
-      <Router />
+      <Home />
+      {/* <Router /> */}
     </ApolloProvider>
     <CssBaseline />
   </ThemeProvider>
