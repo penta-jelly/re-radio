@@ -6,4 +6,4 @@ services:
       args:
         PRISMA_VERSION: ${PRISMA_VERSION}
     ports:
-      - "8000:3000"
+      - "8000:8000"

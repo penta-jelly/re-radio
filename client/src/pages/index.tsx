@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Home = () => {
+export const Home = () => {
   const classes = useStyles();
   return <Button className={classes.root}>Hello from home page</Button>;
 };

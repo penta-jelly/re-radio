@@ -10,4 +10,5 @@ npm ci
 cp .env.example .env
 
 cd ..
+cd e2e
 npm ci
