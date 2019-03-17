@@ -1,18 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import { mount, route } from 'navi';
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useMutation } from 'react-apollo-hooks';
-import { useHistory } from 'react-navi';
+import { useTranslation } from 'react-i18next';
 
 import { makeStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
+import { RouteComponentProps } from 'react-router';
 
 import { RegisterInput, RegisterDocument, RegisterVariables, RegisterMutation } from '../graphql';
-import { useTranslation } from 'react-i18next';
 
 type DataKeys = keyof RegisterInput;
 type Data = { [key in DataKeys]: string };
@@ -29,10 +28,9 @@ const useStyles = makeStyles({
   },
 });
 
-const Register = () => {
+const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
   const registerMutation = useMutation<RegisterMutation, RegisterVariables>(RegisterDocument);
-  const history = useHistory();
   const [registerError, setRegisterError] = useState<string | null>(null);
   const { t, i18n } = useTranslation('common');
   const onRegister = useCallback(async (values: Data) => {
@@ -129,10 +127,4 @@ const Register = () => {
   );
 };
 
-export default mount({
-  '/': route({
-    async getView(_request) {
-      return <Register />;
-    },
-  }),
-});
+export default Register;

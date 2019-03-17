@@ -1,5 +1,4 @@
 import React from 'react';
-import { mount, route } from 'navi';
 import { makeStyles } from '@material-ui/styles';
 import Button from '@material-ui/core/Button';
 
@@ -15,15 +14,9 @@ const useStyles = makeStyles({
   },
 });
 
-export const Home = () => {
+const Home = () => {
   const classes = useStyles();
   return <Button className={classes.root}>Hello from home page</Button>;
 };
 
-export default mount({
-  '/': route({
-    async getView(_request) {
-      return <Home />;
-    },
-  }),
-});
+export default Home;
