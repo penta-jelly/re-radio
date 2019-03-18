@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, Logger, NestInterceptor } from '@nestjs/common';
+import { ExecutionContext, Injectable, Logger, NestInterceptor, CallHandler } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ const COLOR_RESET = '\x1b[0m';
 export class RequestsInterceptor implements NestInterceptor {
   private logger = new Logger(RequestsInterceptor.name, false);
 
-  intercept(context: ExecutionContext, call$: Observable<any>): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> {
     if (context.getArgs().length === 4) {
       // GraphQL request
       const ctx = GqlExecutionContext.create(context);
@@ -21,15 +21,17 @@ export class RequestsInterceptor implements NestInterceptor {
       const operation = info.operation.operation;
       const before = Date.now();
       const rawArgs = JSON.stringify(ctx.getArgs());
-      return call$.pipe(
-        tap(() =>
-          this.logger.log(
-            `[GRAPHQL] ${operation} ${info.fieldName} ${this.colorizeDiffTime(before)} [Args: ${rawArgs}]`,
+      return next
+        .handle()
+        .pipe(
+          tap(() =>
+            this.logger.log(
+              `[GRAPHQL] ${operation} ${info.fieldName} ${this.colorizeDiffTime(before)} [Args: ${rawArgs}]`,
+            ),
           ),
-        ),
-      );
+        );
     }
-    return call$;
+    return next.handle();
   }
 
   private colorizeDiffTime(before: number) {

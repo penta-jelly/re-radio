@@ -61,11 +61,7 @@ export class UsersResolver {
   }
 
   @Subscription('user')
-  onUserMutation() {
-    return {
-      subscribe: (obj, args, ctx, info) => {
-        return this.prisma.subscription.user(args, info);
-      },
-    };
+  onUserMutation(@Args() args, @Info() info) {
+    return this.prisma.subscription.user(args, info);
   }
 }
