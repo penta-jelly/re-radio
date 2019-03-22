@@ -1,14 +1,15 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
-import { GraphqlModule } from 'core/graphql/graphql.module';
-import { RequestsInterceptor } from 'core/request.interceptor';
-import { PrismaModule } from 'prisma/prisma.module';
-import { AuthModule } from 'radio/auth/auth.module';
-import { UsersModule } from 'radio/users/users.module';
 import { AppController } from './app.controller';
+import { GraphqlModule } from './core/graphql/graphql.module';
+import { RequestsInterceptor } from './core/request.interceptor';
+import { PrismaModule } from './prisma/prisma.module';
+import { AuthModule } from './radio/auth/auth.module';
+import { StationsModule } from './radio/stations/stations.module';
+import { UsersModule } from './radio/users/users.module';
 
 @Module({
-  imports: [GraphqlModule, PrismaModule, UsersModule, AuthModule],
+  imports: [GraphqlModule, PrismaModule, UsersModule, AuthModule, StationsModule],
   providers: [
     {
       provide: APP_PIPE,

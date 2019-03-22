@@ -1,6 +1,9 @@
 version: '3'
 services:
   service:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     volumes:
       - .:/user/app
       - ./node_modules:/user/app/node_modules
@@ -8,5 +11,6 @@ services:
       sh -c "
         wait-on http://prisma:${PRISMA_PORT} && 
         npm run prisma:deploy --force &&
+        npm run worker:seed &&
         npm run dev
       "

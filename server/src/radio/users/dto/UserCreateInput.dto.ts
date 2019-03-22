@@ -1,4 +1,8 @@
-import { UserCreateInput } from 'prisma/prisma.binding';
+import {
+  UserCreateInput,
+  UserRoleCreateManyWithoutUserInput,
+  StationCreateManyWithoutOwnerInput,
+} from '../../../prisma/prisma.binding';
 import { Length, IsOptional, ValidateNested, IsEmail, IsNotEmpty, IsUrl } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -27,7 +31,10 @@ export class UserCreateDTO implements UserCreateInput {
 
   @Length(6, 32)
   @IsOptional()
-  username?: string;
+  username: string;
+
+  roles?: UserRoleCreateManyWithoutUserInput | null;
+  stations?: StationCreateManyWithoutOwnerInput | null;
 }
 
 export class UserCreateInputDTO {

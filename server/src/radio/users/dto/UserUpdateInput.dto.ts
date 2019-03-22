@@ -1,11 +1,16 @@
-import { UserUpdateInput, UserRoleUpdateManyWithoutUserInput, UserWhereUniqueInput } from 'prisma/prisma.binding';
-import { Length, IsOptional, ValidateNested, IsEmail, IsUrl } from 'class-validator';
 import { Type } from 'class-transformer';
+import { IsEmail, IsOptional, IsUrl, Length, ValidateNested } from 'class-validator';
+import {
+  StationUpdateManyWithoutOwnerInput,
+  UserRoleUpdateManyWithoutUserInput,
+  UserUpdateInput,
+  UserWhereUniqueInput,
+} from '../../../prisma/prisma.binding';
 
 export class UserUpdateDTO implements UserUpdateInput {
   @IsEmail()
   @Length(6, 64)
-  email: string;
+  email?: string;
 
   @Length(6, 32)
   @IsOptional()
@@ -36,7 +41,8 @@ export class UserUpdateDTO implements UserUpdateInput {
 
   reputation?: number;
 
-  roles?: UserRoleUpdateManyWithoutUserInput;
+  roles?: UserRoleUpdateManyWithoutUserInput | null;
+  stations?: StationUpdateManyWithoutOwnerInput | null;
 }
 
 export class UserUpdateInputDTO {

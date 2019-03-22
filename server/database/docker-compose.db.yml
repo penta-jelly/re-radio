@@ -1,0 +1,11 @@
+version: '3'
+services:
+  db:
+    container_name: re-radio_db
+    image: postgres:10.3
+    restart: "no"
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}

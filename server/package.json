@@ -4,19 +4,16 @@
   "private": true,
   "scripts": {
     "format": "prettier --write \"**/*.ts\" --ignore-path src/prisma/prisma.binding.ts",
-    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "build": "tsc -p .",
+    "start": "node dist/main.js",
     "dev": "nodemon -L",
-    "prisma:up": "docker-compose -f ./database/docker-compose.yml -f ./database/docker-compose.mongo.yml up -d",
-    "prisma:stop": "docker-compose -f ./database/docker-compose.yml -f ./database/docker-compose.mongo.yml stop",
-    "prisma:deploy": "cd database && prisma deploy -e ../.env",
-    "prisma:reset": "cd database && prisma reset -e ../.env",
+    "prisma": "cd database && prisma",
+    "prisma:deploy": "npm run prisma -- deploy -e ../.env",
+    "prisma:reset": "npm run prisma -- reset -e ../.env",
     "graphql:get-schema": "graphql get-schema --project database",
     "graphql:codegen": "graphql codegen --project database",
-    "worker": "ts-node -r tsconfig-paths/register src/workers.ts",
-    "worker:seed": "npm run worker -- seed",
-    "docker-compose:start": "npm run docker-compose:up -- -d",
-    "docker-compose:up": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml -f ./database/docker-compose.yml -f ./database/docker-compose.mongo.yml up",
-    "docker-compose:stop": "docker-compose -f docker-compose.yml -f docker-compose.dev.yml -f ./database/docker-compose.yml -f ./database/docker-compose.mongo.yml stop"
+    "worker": "node dist/workers.js",
+    "worker:seed": "npm run worker -- seed"
   },
   "dependencies": {
     "@nestjs/common": "^6.0.0",
@@ -46,8 +43,6 @@
     "graphql-cli": "^3.0.11",
     "nodemon": "^1.18.10",
     "prettier": "^1.16.4",
-    "ts-node": "^8.0.2",
-    "tsconfig-paths": "^3.8.0",
     "tslint": "^5.13.0",
     "typescript": "^3.3.0"
   },

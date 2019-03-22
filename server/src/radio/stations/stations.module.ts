@@ -2,12 +2,12 @@ import { forwardRef, Module } from '@nestjs/common';
 import { ConfigModule } from '../../core/config/config.module';
 import { PrismaModule } from '../../prisma/prisma.module';
 import { AuthModule } from '../auth/auth.module';
-import { UsersService } from './user.service';
-import { UsersResolver } from './users.resolver';
+import { StationsService } from './stations.service';
+import { StationsResolver } from './stations.resolver';
 
 @Module({
   imports: [ConfigModule, PrismaModule, forwardRef(() => AuthModule)],
-  providers: [UsersResolver, UsersService, UsersService],
-  exports: [UsersService],
+  providers: [StationsResolver, StationsService, StationsService],
+  exports: [StationsService],
 })
-export class UsersModule {}
+export class StationsModule {}

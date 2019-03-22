@@ -1,6 +1,7 @@
 version: '3'
 services:
   prisma:
+    container_name: re-radio_prisma
     image: prismagraphql/prisma:${PRISMA_VERSION}
     restart: "no"
     ports:
@@ -10,5 +11,9 @@ services:
         port: ${PRISMA_PORT}
         databases:
           default:
-            connector: mongo
-            uri: mongodb://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_HOST}:${MONGO_PORT}
+            connector: postgres
+            host: ${DB_HOST}
+            port: ${DB_PORT}
+            user: ${DB_USER}
+            password: ${DB_PASSWORD}
+            migrations: true

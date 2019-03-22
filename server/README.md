@@ -27,26 +27,15 @@ This commands will include these containers:
 
 ## Development guideline
 
-### Modify host file
+### Typescript watch mode
 
-* Due to some limitation with .env configuration. We need to modify the host file in the system to be able to access the containers without changing the .env too frequently.
-
-* Add these lines to the host file
-
-```text
-...
-
-127.0.0.1 prisma
-127.0.0.1 mongo
-```
-
-* If you find this frustrating, another option is to run it inside the container. *Using this method, you **will not** have code generation feature support by default, use it at your own risk.* For example, running `npm run prisma:deploy` will be executed as:
+After starting the container, run
 
 ```sh
-docker-compose run service npm run prisma:deploy
+npx tsc -w
 ```
 
-P/S: "service" can be replaced with any other names.
+concurrently in another process to make sure that every changes in the typescript code will persist into the container.
 
 ### Deploy changed data model
 
