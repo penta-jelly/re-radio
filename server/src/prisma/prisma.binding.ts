@@ -6,36 +6,58 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 export interface Query {
     users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     userRoles: <T = Array<UserRole | null>>(args: { where?: UserRoleWhereInput | null, orderBy?: UserRoleOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    stationTags: <T = Array<StationTag | null>>(args: { where?: StationTagWhereInput | null, orderBy?: StationTagOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    stations: <T = Array<Station | null>>(args: { where?: StationWhereInput | null, orderBy?: StationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     userRole: <T = UserRole | null>(args: { where: UserRoleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    stationTag: <T = StationTag | null>(args: { where: StationTagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    station: <T = Station | null>(args: { where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     userRolesConnection: <T = UserRoleConnection>(args: { where?: UserRoleWhereInput | null, orderBy?: UserRoleOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    stationTagsConnection: <T = StationTagConnection>(args: { where?: StationTagWhereInput | null, orderBy?: StationTagOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    stationsConnection: <T = StationConnection>(args: { where?: StationWhereInput | null, orderBy?: StationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
 export interface Mutation {
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUserRole: <T = UserRole>(args: { data: UserRoleCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createStationTag: <T = StationTag>(args: { data: StationTagCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createStation: <T = Station>(args: { data: StationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateUserRole: <T = UserRole | null>(args: { data: UserRoleUpdateInput, where: UserRoleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateStationTag: <T = StationTag | null>(args: { data: StationTagUpdateInput, where: StationTagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateStation: <T = Station | null>(args: { data: StationUpdateInput, where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUserRole: <T = UserRole | null>(args: { where: UserRoleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteStationTag: <T = StationTag | null>(args: { where: StationTagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteStation: <T = Station | null>(args: { where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUserRole: <T = UserRole>(args: { where: UserRoleWhereUniqueInput, create: UserRoleCreateInput, update: UserRoleUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertStationTag: <T = StationTag>(args: { where: StationTagWhereUniqueInput, create: StationTagCreateInput, update: StationTagUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertStation: <T = Station>(args: { where: StationWhereUniqueInput, create: StationCreateInput, update: StationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUserRoles: <T = BatchPayload>(args: { data: UserRoleUpdateManyMutationInput, where?: UserRoleWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyStationTags: <T = BatchPayload>(args: { data: StationTagUpdateManyMutationInput, where?: StationTagWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyStations: <T = BatchPayload>(args: { data: StationUpdateManyMutationInput, where?: StationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyUserRoles: <T = BatchPayload>(args: { where?: UserRoleWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyUserRoles: <T = BatchPayload>(args: { where?: UserRoleWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyStationTags: <T = BatchPayload>(args: { where?: StationTagWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyStations: <T = BatchPayload>(args: { where?: StationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    userRole: <T = UserRoleSubscriptionPayload | null>(args: { where?: UserRoleSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
+    userRole: <T = UserRoleSubscriptionPayload | null>(args: { where?: UserRoleSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    stationTag: <T = StationTagSubscriptionPayload | null>(args: { where?: StationTagSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    station: <T = StationSubscriptionPayload | null>(args: { where?: StationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
   User: (where?: UserWhereInput) => Promise<boolean>
   UserRole: (where?: UserRoleWhereInput) => Promise<boolean>
+  StationTag: (where?: StationTagWhereInput) => Promise<boolean>
+  Station: (where?: StationWhereInput) => Promise<boolean>
 }
 
 export interface Prisma {
@@ -60,7 +82,15 @@ export interface BindingConstructor<T> {
  * Type Defs
 */
 
-const typeDefs = `type AggregateUser {
+const typeDefs = `type AggregateStation {
+  count: Int!
+}
+
+type AggregateStationTag {
+  count: Int!
+}
+
+type AggregateUser {
   count: Int!
 }
 
@@ -84,16 +114,28 @@ scalar Long
 type Mutation {
   createUser(data: UserCreateInput!): User!
   createUserRole(data: UserRoleCreateInput!): UserRole!
+  createStationTag(data: StationTagCreateInput!): StationTag!
+  createStation(data: StationCreateInput!): Station!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateUserRole(data: UserRoleUpdateInput!, where: UserRoleWhereUniqueInput!): UserRole
+  updateStationTag(data: StationTagUpdateInput!, where: StationTagWhereUniqueInput!): StationTag
+  updateStation(data: StationUpdateInput!, where: StationWhereUniqueInput!): Station
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUserRole(where: UserRoleWhereUniqueInput!): UserRole
+  deleteStationTag(where: StationTagWhereUniqueInput!): StationTag
+  deleteStation(where: StationWhereUniqueInput!): Station
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertUserRole(where: UserRoleWhereUniqueInput!, create: UserRoleCreateInput!, update: UserRoleUpdateInput!): UserRole!
+  upsertStationTag(where: StationTagWhereUniqueInput!, create: StationTagCreateInput!, update: StationTagUpdateInput!): StationTag!
+  upsertStation(where: StationWhereUniqueInput!, create: StationCreateInput!, update: StationUpdateInput!): Station!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   updateManyUserRoles(data: UserRoleUpdateManyMutationInput!, where: UserRoleWhereInput): BatchPayload!
+  updateManyStationTags(data: StationTagUpdateManyMutationInput!, where: StationTagWhereInput): BatchPayload!
+  updateManyStations(data: StationUpdateManyMutationInput!, where: StationWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyUserRoles(where: UserRoleWhereInput): BatchPayload!
+  deleteManyStationTags(where: StationTagWhereInput): BatchPayload!
+  deleteManyStations(where: StationWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -126,10 +168,16 @@ type PageInfo {
 type Query {
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole]!
+  stationTags(where: StationTagWhereInput, orderBy: StationTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StationTag]!
+  stations(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Station]!
   user(where: UserWhereUniqueInput!): User
   userRole(where: UserRoleWhereUniqueInput!): UserRole
+  stationTag(where: StationTagWhereUniqueInput!): StationTag
+  station(where: StationWhereUniqueInput!): Station
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   userRolesConnection(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRoleConnection!
+  stationTagsConnection(where: StationTagWhereInput, orderBy: StationTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StationTagConnection!
+  stationsConnection(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StationConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -138,9 +186,924 @@ type Query {
   ): Node
 }
 
+type Station implements Node {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+  owner: User!
+  tags(where: StationTagWhereInput, orderBy: StationTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StationTag!]
+}
+
+"""A connection to a list of items."""
+type StationConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [StationEdge]!
+  aggregate: AggregateStation!
+}
+
+input StationCreateInput {
+  name: String!
+  slug: String!
+  description: String
+  owner: UserCreateOneWithoutStationsInput!
+  tags: StationTagCreateManyWithoutStationsInput
+}
+
+input StationCreateManyWithoutOwnerInput {
+  create: [StationCreateWithoutOwnerInput!]
+  connect: [StationWhereUniqueInput!]
+}
+
+input StationCreateManyWithoutTagsInput {
+  create: [StationCreateWithoutTagsInput!]
+  connect: [StationWhereUniqueInput!]
+}
+
+input StationCreateOneInput {
+  create: StationCreateInput
+  connect: StationWhereUniqueInput
+}
+
+input StationCreateWithoutOwnerInput {
+  name: String!
+  slug: String!
+  description: String
+  tags: StationTagCreateManyWithoutStationsInput
+}
+
+input StationCreateWithoutTagsInput {
+  name: String!
+  slug: String!
+  description: String
+  owner: UserCreateOneWithoutStationsInput!
+}
+
+"""An edge in a connection."""
+type StationEdge {
+  """The item at the end of the edge."""
+  node: Station!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum StationOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  slug_ASC
+  slug_DESC
+  description_ASC
+  description_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type StationPreviousValues {
+  id: ID!
+  name: String!
+  slug: String!
+  description: String
+}
+
+input StationScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StationScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StationScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StationScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  slug: String
+
+  """All values that are not equal to given value."""
+  slug_not: String
+
+  """All values that are contained in given list."""
+  slug_in: [String!]
+
+  """All values that are not contained in given list."""
+  slug_not_in: [String!]
+
+  """All values less than the given value."""
+  slug_lt: String
+
+  """All values less than or equal the given value."""
+  slug_lte: String
+
+  """All values greater than the given value."""
+  slug_gt: String
+
+  """All values greater than or equal the given value."""
+  slug_gte: String
+
+  """All values containing the given string."""
+  slug_contains: String
+
+  """All values not containing the given string."""
+  slug_not_contains: String
+
+  """All values starting with the given string."""
+  slug_starts_with: String
+
+  """All values not starting with the given string."""
+  slug_not_starts_with: String
+
+  """All values ending with the given string."""
+  slug_ends_with: String
+
+  """All values not ending with the given string."""
+  slug_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+}
+
+type StationSubscriptionPayload {
+  mutation: MutationType!
+  node: Station
+  updatedFields: [String!]
+  previousValues: StationPreviousValues
+}
+
+input StationSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StationSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StationSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StationSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: StationWhereInput
+}
+
+type StationTag implements Node {
+  id: ID!
+  name: String!
+  stations(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Station!]
+}
+
+"""A connection to a list of items."""
+type StationTagConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [StationTagEdge]!
+  aggregate: AggregateStationTag!
+}
+
+input StationTagCreateInput {
+  name: String!
+  stations: StationCreateManyWithoutTagsInput
+}
+
+input StationTagCreateManyWithoutStationsInput {
+  create: [StationTagCreateWithoutStationsInput!]
+  connect: [StationTagWhereUniqueInput!]
+}
+
+input StationTagCreateWithoutStationsInput {
+  name: String!
+}
+
+"""An edge in a connection."""
+type StationTagEdge {
+  """The item at the end of the edge."""
+  node: StationTag!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum StationTagOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type StationTagPreviousValues {
+  id: ID!
+  name: String!
+}
+
+input StationTagScalarWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StationTagScalarWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StationTagScalarWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StationTagScalarWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+}
+
+type StationTagSubscriptionPayload {
+  mutation: MutationType!
+  node: StationTag
+  updatedFields: [String!]
+  previousValues: StationTagPreviousValues
+}
+
+input StationTagSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StationTagSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StationTagSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StationTagSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: StationTagWhereInput
+}
+
+input StationTagUpdateInput {
+  name: String
+  stations: StationUpdateManyWithoutTagsInput
+}
+
+input StationTagUpdateManyDataInput {
+  name: String
+}
+
+input StationTagUpdateManyMutationInput {
+  name: String
+}
+
+input StationTagUpdateManyWithoutStationsInput {
+  create: [StationTagCreateWithoutStationsInput!]
+  connect: [StationTagWhereUniqueInput!]
+  set: [StationTagWhereUniqueInput!]
+  disconnect: [StationTagWhereUniqueInput!]
+  delete: [StationTagWhereUniqueInput!]
+  update: [StationTagUpdateWithWhereUniqueWithoutStationsInput!]
+  updateMany: [StationTagUpdateManyWithWhereNestedInput!]
+  deleteMany: [StationTagScalarWhereInput!]
+  upsert: [StationTagUpsertWithWhereUniqueWithoutStationsInput!]
+}
+
+input StationTagUpdateManyWithWhereNestedInput {
+  where: StationTagScalarWhereInput!
+  data: StationTagUpdateManyDataInput!
+}
+
+input StationTagUpdateWithoutStationsDataInput {
+  name: String
+}
+
+input StationTagUpdateWithWhereUniqueWithoutStationsInput {
+  where: StationTagWhereUniqueInput!
+  data: StationTagUpdateWithoutStationsDataInput!
+}
+
+input StationTagUpsertWithWhereUniqueWithoutStationsInput {
+  where: StationTagWhereUniqueInput!
+  update: StationTagUpdateWithoutStationsDataInput!
+  create: StationTagCreateWithoutStationsInput!
+}
+
+input StationTagWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StationTagWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StationTagWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StationTagWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  stations_every: StationWhereInput
+  stations_some: StationWhereInput
+  stations_none: StationWhereInput
+}
+
+input StationTagWhereUniqueInput {
+  id: ID
+}
+
+input StationUpdateDataInput {
+  name: String
+  slug: String
+  description: String
+  owner: UserUpdateOneRequiredWithoutStationsInput
+  tags: StationTagUpdateManyWithoutStationsInput
+}
+
+input StationUpdateInput {
+  name: String
+  slug: String
+  description: String
+  owner: UserUpdateOneRequiredWithoutStationsInput
+  tags: StationTagUpdateManyWithoutStationsInput
+}
+
+input StationUpdateManyDataInput {
+  name: String
+  slug: String
+  description: String
+}
+
+input StationUpdateManyMutationInput {
+  name: String
+  slug: String
+  description: String
+}
+
+input StationUpdateManyWithoutOwnerInput {
+  create: [StationCreateWithoutOwnerInput!]
+  connect: [StationWhereUniqueInput!]
+  set: [StationWhereUniqueInput!]
+  disconnect: [StationWhereUniqueInput!]
+  delete: [StationWhereUniqueInput!]
+  update: [StationUpdateWithWhereUniqueWithoutOwnerInput!]
+  updateMany: [StationUpdateManyWithWhereNestedInput!]
+  deleteMany: [StationScalarWhereInput!]
+  upsert: [StationUpsertWithWhereUniqueWithoutOwnerInput!]
+}
+
+input StationUpdateManyWithoutTagsInput {
+  create: [StationCreateWithoutTagsInput!]
+  connect: [StationWhereUniqueInput!]
+  set: [StationWhereUniqueInput!]
+  disconnect: [StationWhereUniqueInput!]
+  delete: [StationWhereUniqueInput!]
+  update: [StationUpdateWithWhereUniqueWithoutTagsInput!]
+  updateMany: [StationUpdateManyWithWhereNestedInput!]
+  deleteMany: [StationScalarWhereInput!]
+  upsert: [StationUpsertWithWhereUniqueWithoutTagsInput!]
+}
+
+input StationUpdateManyWithWhereNestedInput {
+  where: StationScalarWhereInput!
+  data: StationUpdateManyDataInput!
+}
+
+input StationUpdateOneInput {
+  create: StationCreateInput
+  connect: StationWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: StationUpdateDataInput
+  upsert: StationUpsertNestedInput
+}
+
+input StationUpdateWithoutOwnerDataInput {
+  name: String
+  slug: String
+  description: String
+  tags: StationTagUpdateManyWithoutStationsInput
+}
+
+input StationUpdateWithoutTagsDataInput {
+  name: String
+  slug: String
+  description: String
+  owner: UserUpdateOneRequiredWithoutStationsInput
+}
+
+input StationUpdateWithWhereUniqueWithoutOwnerInput {
+  where: StationWhereUniqueInput!
+  data: StationUpdateWithoutOwnerDataInput!
+}
+
+input StationUpdateWithWhereUniqueWithoutTagsInput {
+  where: StationWhereUniqueInput!
+  data: StationUpdateWithoutTagsDataInput!
+}
+
+input StationUpsertNestedInput {
+  update: StationUpdateDataInput!
+  create: StationCreateInput!
+}
+
+input StationUpsertWithWhereUniqueWithoutOwnerInput {
+  where: StationWhereUniqueInput!
+  update: StationUpdateWithoutOwnerDataInput!
+  create: StationCreateWithoutOwnerInput!
+}
+
+input StationUpsertWithWhereUniqueWithoutTagsInput {
+  where: StationWhereUniqueInput!
+  update: StationUpdateWithoutTagsDataInput!
+  create: StationCreateWithoutTagsInput!
+}
+
+input StationWhereInput {
+  """Logical AND on all given filters."""
+  AND: [StationWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [StationWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [StationWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  slug: String
+
+  """All values that are not equal to given value."""
+  slug_not: String
+
+  """All values that are contained in given list."""
+  slug_in: [String!]
+
+  """All values that are not contained in given list."""
+  slug_not_in: [String!]
+
+  """All values less than the given value."""
+  slug_lt: String
+
+  """All values less than or equal the given value."""
+  slug_lte: String
+
+  """All values greater than the given value."""
+  slug_gt: String
+
+  """All values greater than or equal the given value."""
+  slug_gte: String
+
+  """All values containing the given string."""
+  slug_contains: String
+
+  """All values not containing the given string."""
+  slug_not_contains: String
+
+  """All values starting with the given string."""
+  slug_starts_with: String
+
+  """All values not starting with the given string."""
+  slug_not_starts_with: String
+
+  """All values ending with the given string."""
+  slug_ends_with: String
+
+  """All values not ending with the given string."""
+  slug_not_ends_with: String
+  description: String
+
+  """All values that are not equal to given value."""
+  description_not: String
+
+  """All values that are contained in given list."""
+  description_in: [String!]
+
+  """All values that are not contained in given list."""
+  description_not_in: [String!]
+
+  """All values less than the given value."""
+  description_lt: String
+
+  """All values less than or equal the given value."""
+  description_lte: String
+
+  """All values greater than the given value."""
+  description_gt: String
+
+  """All values greater than or equal the given value."""
+  description_gte: String
+
+  """All values containing the given string."""
+  description_contains: String
+
+  """All values not containing the given string."""
+  description_not_contains: String
+
+  """All values starting with the given string."""
+  description_starts_with: String
+
+  """All values not starting with the given string."""
+  description_not_starts_with: String
+
+  """All values ending with the given string."""
+  description_ends_with: String
+
+  """All values not ending with the given string."""
+  description_not_ends_with: String
+  owner: UserWhereInput
+  tags_every: StationTagWhereInput
+  tags_some: StationTagWhereInput
+  tags_none: StationTagWhereInput
+}
+
+input StationWhereUniqueInput {
+  id: ID
+  name: String
+  slug: String
+}
+
 type Subscription {
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   userRole(where: UserRoleSubscriptionWhereInput): UserRoleSubscriptionPayload
+  stationTag(where: StationTagSubscriptionWhereInput): StationTagSubscriptionPayload
+  station(where: StationSubscriptionWhereInput): StationSubscriptionPayload
 }
 
 type User implements Node {
@@ -148,7 +1111,7 @@ type User implements Node {
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
-  username: String
+  username: String!
   password: String!
   name: String
   country: String
@@ -160,6 +1123,7 @@ type User implements Node {
   facebookId: String
   googleId: String
   roles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
+  stations(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Station!]
 }
 
 """A connection to a list of items."""
@@ -174,7 +1138,7 @@ type UserConnection {
 
 input UserCreateInput {
   email: String!
-  username: String
+  username: String!
   password: String!
   name: String
   country: String
@@ -186,6 +1150,7 @@ input UserCreateInput {
   facebookId: String
   googleId: String
   roles: UserRoleCreateManyWithoutUserInput
+  stations: StationCreateManyWithoutOwnerInput
 }
 
 input UserCreateOneWithoutRolesInput {
@@ -193,9 +1158,14 @@ input UserCreateOneWithoutRolesInput {
   connect: UserWhereUniqueInput
 }
 
+input UserCreateOneWithoutStationsInput {
+  create: UserCreateWithoutStationsInput
+  connect: UserWhereUniqueInput
+}
+
 input UserCreateWithoutRolesInput {
   email: String!
-  username: String
+  username: String!
   password: String!
   name: String
   country: String
@@ -206,6 +1176,23 @@ input UserCreateWithoutRolesInput {
   reputation: Int
   facebookId: String
   googleId: String
+  stations: StationCreateManyWithoutOwnerInput
+}
+
+input UserCreateWithoutStationsInput {
+  email: String!
+  username: String!
+  password: String!
+  name: String
+  country: String
+  city: String
+  bio: String
+  avatarUrl: String
+  coverUrl: String
+  reputation: Int
+  facebookId: String
+  googleId: String
+  roles: UserRoleCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -255,7 +1242,7 @@ type UserPreviousValues {
   createdAt: DateTime!
   updatedAt: DateTime!
   email: String!
-  username: String
+  username: String!
   password: String!
   name: String
   country: String
@@ -271,8 +1258,8 @@ type UserPreviousValues {
 type UserRole implements Node {
   id: ID!
   role: UserRoleEnum!
-  stationId: String
   user: User!
+  station: Station
 }
 
 """A connection to a list of items."""
@@ -287,8 +1274,8 @@ type UserRoleConnection {
 
 input UserRoleCreateInput {
   role: UserRoleEnum!
-  stationId: String
   user: UserCreateOneWithoutRolesInput!
+  station: StationCreateOneInput
 }
 
 input UserRoleCreateManyWithoutUserInput {
@@ -298,7 +1285,7 @@ input UserRoleCreateManyWithoutUserInput {
 
 input UserRoleCreateWithoutUserInput {
   role: UserRoleEnum!
-  stationId: String
+  station: StationCreateOneInput
 }
 
 """An edge in a connection."""
@@ -320,14 +1307,15 @@ enum UserRoleOrderByInput {
   id_DESC
   role_ASC
   role_DESC
-  stationId_ASC
-  stationId_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
 }
 
 type UserRolePreviousValues {
   id: ID!
   role: UserRoleEnum!
-  stationId: String
 }
 
 input UserRoleScalarWhereInput {
@@ -389,46 +1377,6 @@ input UserRoleScalarWhereInput {
 
   """All values that are not contained in given list."""
   role_not_in: [UserRoleEnum!]
-  stationId: String
-
-  """All values that are not equal to given value."""
-  stationId_not: String
-
-  """All values that are contained in given list."""
-  stationId_in: [String!]
-
-  """All values that are not contained in given list."""
-  stationId_not_in: [String!]
-
-  """All values less than the given value."""
-  stationId_lt: String
-
-  """All values less than or equal the given value."""
-  stationId_lte: String
-
-  """All values greater than the given value."""
-  stationId_gt: String
-
-  """All values greater than or equal the given value."""
-  stationId_gte: String
-
-  """All values containing the given string."""
-  stationId_contains: String
-
-  """All values not containing the given string."""
-  stationId_not_contains: String
-
-  """All values starting with the given string."""
-  stationId_starts_with: String
-
-  """All values not starting with the given string."""
-  stationId_not_starts_with: String
-
-  """All values ending with the given string."""
-  stationId_ends_with: String
-
-  """All values not ending with the given string."""
-  stationId_not_ends_with: String
 }
 
 type UserRoleSubscriptionPayload {
@@ -441,6 +1389,12 @@ type UserRoleSubscriptionPayload {
 input UserRoleSubscriptionWhereInput {
   """Logical AND on all given filters."""
   AND: [UserRoleSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserRoleSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserRoleSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -466,18 +1420,16 @@ input UserRoleSubscriptionWhereInput {
 
 input UserRoleUpdateInput {
   role: UserRoleEnum
-  stationId: String
   user: UserUpdateOneRequiredWithoutRolesInput
+  station: StationUpdateOneInput
 }
 
 input UserRoleUpdateManyDataInput {
   role: UserRoleEnum
-  stationId: String
 }
 
 input UserRoleUpdateManyMutationInput {
   role: UserRoleEnum
-  stationId: String
 }
 
 input UserRoleUpdateManyWithoutUserInput {
@@ -499,7 +1451,7 @@ input UserRoleUpdateManyWithWhereNestedInput {
 
 input UserRoleUpdateWithoutUserDataInput {
   role: UserRoleEnum
-  stationId: String
+  station: StationUpdateOneInput
 }
 
 input UserRoleUpdateWithWhereUniqueWithoutUserInput {
@@ -516,6 +1468,12 @@ input UserRoleUpsertWithWhereUniqueWithoutUserInput {
 input UserRoleWhereInput {
   """Logical AND on all given filters."""
   AND: [UserRoleWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserRoleWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserRoleWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -566,47 +1524,8 @@ input UserRoleWhereInput {
 
   """All values that are not contained in given list."""
   role_not_in: [UserRoleEnum!]
-  stationId: String
-
-  """All values that are not equal to given value."""
-  stationId_not: String
-
-  """All values that are contained in given list."""
-  stationId_in: [String!]
-
-  """All values that are not contained in given list."""
-  stationId_not_in: [String!]
-
-  """All values less than the given value."""
-  stationId_lt: String
-
-  """All values less than or equal the given value."""
-  stationId_lte: String
-
-  """All values greater than the given value."""
-  stationId_gt: String
-
-  """All values greater than or equal the given value."""
-  stationId_gte: String
-
-  """All values containing the given string."""
-  stationId_contains: String
-
-  """All values not containing the given string."""
-  stationId_not_contains: String
-
-  """All values starting with the given string."""
-  stationId_starts_with: String
-
-  """All values not starting with the given string."""
-  stationId_not_starts_with: String
-
-  """All values ending with the given string."""
-  stationId_ends_with: String
-
-  """All values not ending with the given string."""
-  stationId_not_ends_with: String
   user: UserWhereInput
+  station: StationWhereInput
 }
 
 input UserRoleWhereUniqueInput {
@@ -623,6 +1542,12 @@ type UserSubscriptionPayload {
 input UserSubscriptionWhereInput {
   """Logical AND on all given filters."""
   AND: [UserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -660,6 +1585,7 @@ input UserUpdateInput {
   facebookId: String
   googleId: String
   roles: UserRoleUpdateManyWithoutUserInput
+  stations: StationUpdateManyWithoutOwnerInput
 }
 
 input UserUpdateManyMutationInput {
@@ -684,6 +1610,13 @@ input UserUpdateOneRequiredWithoutRolesInput {
   upsert: UserUpsertWithoutRolesInput
 }
 
+input UserUpdateOneRequiredWithoutStationsInput {
+  create: UserCreateWithoutStationsInput
+  connect: UserWhereUniqueInput
+  update: UserUpdateWithoutStationsDataInput
+  upsert: UserUpsertWithoutStationsInput
+}
+
 input UserUpdateWithoutRolesDataInput {
   email: String
   username: String
@@ -697,6 +1630,23 @@ input UserUpdateWithoutRolesDataInput {
   reputation: Int
   facebookId: String
   googleId: String
+  stations: StationUpdateManyWithoutOwnerInput
+}
+
+input UserUpdateWithoutStationsDataInput {
+  email: String
+  username: String
+  password: String
+  name: String
+  country: String
+  city: String
+  bio: String
+  avatarUrl: String
+  coverUrl: String
+  reputation: Int
+  facebookId: String
+  googleId: String
+  roles: UserRoleUpdateManyWithoutUserInput
 }
 
 input UserUpsertWithoutRolesInput {
@@ -704,9 +1654,20 @@ input UserUpsertWithoutRolesInput {
   create: UserCreateWithoutRolesInput!
 }
 
+input UserUpsertWithoutStationsInput {
+  update: UserUpdateWithoutStationsDataInput!
+  create: UserCreateWithoutStationsInput!
+}
+
 input UserWhereInput {
   """Logical AND on all given filters."""
   AND: [UserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [UserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [UserWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -1253,7 +2214,12 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   googleId_not_ends_with: String
+  roles_every: UserRoleWhereInput
   roles_some: UserRoleWhereInput
+  roles_none: UserRoleWhereInput
+  stations_every: StationWhereInput
+  stations_some: StationWhereInput
+  stations_none: StationWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -1272,6 +2238,28 @@ export const Prisma = makePrismaBindingClass<BindingConstructor<Prisma>>({typeDe
 export type MutationType =   'CREATED' |
   'UPDATED' |
   'DELETED'
+
+export type StationOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'slug_ASC' |
+  'slug_DESC' |
+  'description_ASC' |
+  'description_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export type StationTagOrderByInput =   'id_ASC' |
+  'id_DESC' |
+  'name_ASC' |
+  'name_DESC' |
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -1311,12 +2299,491 @@ export type UserRoleOrderByInput =   'id_ASC' |
   'id_DESC' |
   'role_ASC' |
   'role_DESC' |
-  'stationId_ASC' |
-  'stationId_DESC'
+  'updatedAt_ASC' |
+  'updatedAt_DESC' |
+  'createdAt_ASC' |
+  'createdAt_DESC'
+
+export interface StationCreateInput {
+  name: String
+  slug: String
+  description?: String | null
+  owner: UserCreateOneWithoutStationsInput
+  tags?: StationTagCreateManyWithoutStationsInput | null
+}
+
+export interface StationCreateManyWithoutOwnerInput {
+  create?: StationCreateWithoutOwnerInput[] | StationCreateWithoutOwnerInput | null
+  connect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+}
+
+export interface StationCreateManyWithoutTagsInput {
+  create?: StationCreateWithoutTagsInput[] | StationCreateWithoutTagsInput | null
+  connect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+}
+
+export interface StationCreateOneInput {
+  create?: StationCreateInput | null
+  connect?: StationWhereUniqueInput | null
+}
+
+export interface StationCreateWithoutOwnerInput {
+  name: String
+  slug: String
+  description?: String | null
+  tags?: StationTagCreateManyWithoutStationsInput | null
+}
+
+export interface StationCreateWithoutTagsInput {
+  name: String
+  slug: String
+  description?: String | null
+  owner: UserCreateOneWithoutStationsInput
+}
+
+export interface StationScalarWhereInput {
+  AND?: StationScalarWhereInput[] | StationScalarWhereInput | null
+  OR?: StationScalarWhereInput[] | StationScalarWhereInput | null
+  NOT?: StationScalarWhereInput[] | StationScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  slug?: String | null
+  slug_not?: String | null
+  slug_in?: String[] | String | null
+  slug_not_in?: String[] | String | null
+  slug_lt?: String | null
+  slug_lte?: String | null
+  slug_gt?: String | null
+  slug_gte?: String | null
+  slug_contains?: String | null
+  slug_not_contains?: String | null
+  slug_starts_with?: String | null
+  slug_not_starts_with?: String | null
+  slug_ends_with?: String | null
+  slug_not_ends_with?: String | null
+  description?: String | null
+  description_not?: String | null
+  description_in?: String[] | String | null
+  description_not_in?: String[] | String | null
+  description_lt?: String | null
+  description_lte?: String | null
+  description_gt?: String | null
+  description_gte?: String | null
+  description_contains?: String | null
+  description_not_contains?: String | null
+  description_starts_with?: String | null
+  description_not_starts_with?: String | null
+  description_ends_with?: String | null
+  description_not_ends_with?: String | null
+}
+
+export interface StationSubscriptionWhereInput {
+  AND?: StationSubscriptionWhereInput[] | StationSubscriptionWhereInput | null
+  OR?: StationSubscriptionWhereInput[] | StationSubscriptionWhereInput | null
+  NOT?: StationSubscriptionWhereInput[] | StationSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: StationWhereInput | null
+}
+
+export interface StationTagCreateInput {
+  name: String
+  stations?: StationCreateManyWithoutTagsInput | null
+}
+
+export interface StationTagCreateManyWithoutStationsInput {
+  create?: StationTagCreateWithoutStationsInput[] | StationTagCreateWithoutStationsInput | null
+  connect?: StationTagWhereUniqueInput[] | StationTagWhereUniqueInput | null
+}
+
+export interface StationTagCreateWithoutStationsInput {
+  name: String
+}
+
+export interface StationTagScalarWhereInput {
+  AND?: StationTagScalarWhereInput[] | StationTagScalarWhereInput | null
+  OR?: StationTagScalarWhereInput[] | StationTagScalarWhereInput | null
+  NOT?: StationTagScalarWhereInput[] | StationTagScalarWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+}
+
+export interface StationTagSubscriptionWhereInput {
+  AND?: StationTagSubscriptionWhereInput[] | StationTagSubscriptionWhereInput | null
+  OR?: StationTagSubscriptionWhereInput[] | StationTagSubscriptionWhereInput | null
+  NOT?: StationTagSubscriptionWhereInput[] | StationTagSubscriptionWhereInput | null
+  mutation_in?: MutationType[] | MutationType | null
+  updatedFields_contains?: String | null
+  updatedFields_contains_every?: String[] | String | null
+  updatedFields_contains_some?: String[] | String | null
+  node?: StationTagWhereInput | null
+}
+
+export interface StationTagUpdateInput {
+  name?: String | null
+  stations?: StationUpdateManyWithoutTagsInput | null
+}
+
+export interface StationTagUpdateManyDataInput {
+  name?: String | null
+}
+
+export interface StationTagUpdateManyMutationInput {
+  name?: String | null
+}
+
+export interface StationTagUpdateManyWithoutStationsInput {
+  create?: StationTagCreateWithoutStationsInput[] | StationTagCreateWithoutStationsInput | null
+  connect?: StationTagWhereUniqueInput[] | StationTagWhereUniqueInput | null
+  set?: StationTagWhereUniqueInput[] | StationTagWhereUniqueInput | null
+  disconnect?: StationTagWhereUniqueInput[] | StationTagWhereUniqueInput | null
+  delete?: StationTagWhereUniqueInput[] | StationTagWhereUniqueInput | null
+  update?: StationTagUpdateWithWhereUniqueWithoutStationsInput[] | StationTagUpdateWithWhereUniqueWithoutStationsInput | null
+  updateMany?: StationTagUpdateManyWithWhereNestedInput[] | StationTagUpdateManyWithWhereNestedInput | null
+  deleteMany?: StationTagScalarWhereInput[] | StationTagScalarWhereInput | null
+  upsert?: StationTagUpsertWithWhereUniqueWithoutStationsInput[] | StationTagUpsertWithWhereUniqueWithoutStationsInput | null
+}
+
+export interface StationTagUpdateManyWithWhereNestedInput {
+  where: StationTagScalarWhereInput
+  data: StationTagUpdateManyDataInput
+}
+
+export interface StationTagUpdateWithoutStationsDataInput {
+  name?: String | null
+}
+
+export interface StationTagUpdateWithWhereUniqueWithoutStationsInput {
+  where: StationTagWhereUniqueInput
+  data: StationTagUpdateWithoutStationsDataInput
+}
+
+export interface StationTagUpsertWithWhereUniqueWithoutStationsInput {
+  where: StationTagWhereUniqueInput
+  update: StationTagUpdateWithoutStationsDataInput
+  create: StationTagCreateWithoutStationsInput
+}
+
+export interface StationTagWhereInput {
+  AND?: StationTagWhereInput[] | StationTagWhereInput | null
+  OR?: StationTagWhereInput[] | StationTagWhereInput | null
+  NOT?: StationTagWhereInput[] | StationTagWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  stations_every?: StationWhereInput | null
+  stations_some?: StationWhereInput | null
+  stations_none?: StationWhereInput | null
+}
+
+export interface StationTagWhereUniqueInput {
+  id?: ID_Input | null
+}
+
+export interface StationUpdateDataInput {
+  name?: String | null
+  slug?: String | null
+  description?: String | null
+  owner?: UserUpdateOneRequiredWithoutStationsInput | null
+  tags?: StationTagUpdateManyWithoutStationsInput | null
+}
+
+export interface StationUpdateInput {
+  name?: String | null
+  slug?: String | null
+  description?: String | null
+  owner?: UserUpdateOneRequiredWithoutStationsInput | null
+  tags?: StationTagUpdateManyWithoutStationsInput | null
+}
+
+export interface StationUpdateManyDataInput {
+  name?: String | null
+  slug?: String | null
+  description?: String | null
+}
+
+export interface StationUpdateManyMutationInput {
+  name?: String | null
+  slug?: String | null
+  description?: String | null
+}
+
+export interface StationUpdateManyWithoutOwnerInput {
+  create?: StationCreateWithoutOwnerInput[] | StationCreateWithoutOwnerInput | null
+  connect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  set?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  disconnect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  delete?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  update?: StationUpdateWithWhereUniqueWithoutOwnerInput[] | StationUpdateWithWhereUniqueWithoutOwnerInput | null
+  updateMany?: StationUpdateManyWithWhereNestedInput[] | StationUpdateManyWithWhereNestedInput | null
+  deleteMany?: StationScalarWhereInput[] | StationScalarWhereInput | null
+  upsert?: StationUpsertWithWhereUniqueWithoutOwnerInput[] | StationUpsertWithWhereUniqueWithoutOwnerInput | null
+}
+
+export interface StationUpdateManyWithoutTagsInput {
+  create?: StationCreateWithoutTagsInput[] | StationCreateWithoutTagsInput | null
+  connect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  set?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  disconnect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  delete?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
+  update?: StationUpdateWithWhereUniqueWithoutTagsInput[] | StationUpdateWithWhereUniqueWithoutTagsInput | null
+  updateMany?: StationUpdateManyWithWhereNestedInput[] | StationUpdateManyWithWhereNestedInput | null
+  deleteMany?: StationScalarWhereInput[] | StationScalarWhereInput | null
+  upsert?: StationUpsertWithWhereUniqueWithoutTagsInput[] | StationUpsertWithWhereUniqueWithoutTagsInput | null
+}
+
+export interface StationUpdateManyWithWhereNestedInput {
+  where: StationScalarWhereInput
+  data: StationUpdateManyDataInput
+}
+
+export interface StationUpdateOneInput {
+  create?: StationCreateInput | null
+  connect?: StationWhereUniqueInput | null
+  disconnect?: Boolean | null
+  delete?: Boolean | null
+  update?: StationUpdateDataInput | null
+  upsert?: StationUpsertNestedInput | null
+}
+
+export interface StationUpdateWithoutOwnerDataInput {
+  name?: String | null
+  slug?: String | null
+  description?: String | null
+  tags?: StationTagUpdateManyWithoutStationsInput | null
+}
+
+export interface StationUpdateWithoutTagsDataInput {
+  name?: String | null
+  slug?: String | null
+  description?: String | null
+  owner?: UserUpdateOneRequiredWithoutStationsInput | null
+}
+
+export interface StationUpdateWithWhereUniqueWithoutOwnerInput {
+  where: StationWhereUniqueInput
+  data: StationUpdateWithoutOwnerDataInput
+}
+
+export interface StationUpdateWithWhereUniqueWithoutTagsInput {
+  where: StationWhereUniqueInput
+  data: StationUpdateWithoutTagsDataInput
+}
+
+export interface StationUpsertNestedInput {
+  update: StationUpdateDataInput
+  create: StationCreateInput
+}
+
+export interface StationUpsertWithWhereUniqueWithoutOwnerInput {
+  where: StationWhereUniqueInput
+  update: StationUpdateWithoutOwnerDataInput
+  create: StationCreateWithoutOwnerInput
+}
+
+export interface StationUpsertWithWhereUniqueWithoutTagsInput {
+  where: StationWhereUniqueInput
+  update: StationUpdateWithoutTagsDataInput
+  create: StationCreateWithoutTagsInput
+}
+
+export interface StationWhereInput {
+  AND?: StationWhereInput[] | StationWhereInput | null
+  OR?: StationWhereInput[] | StationWhereInput | null
+  NOT?: StationWhereInput[] | StationWhereInput | null
+  id?: ID_Input | null
+  id_not?: ID_Input | null
+  id_in?: ID_Output[] | ID_Output | null
+  id_not_in?: ID_Output[] | ID_Output | null
+  id_lt?: ID_Input | null
+  id_lte?: ID_Input | null
+  id_gt?: ID_Input | null
+  id_gte?: ID_Input | null
+  id_contains?: ID_Input | null
+  id_not_contains?: ID_Input | null
+  id_starts_with?: ID_Input | null
+  id_not_starts_with?: ID_Input | null
+  id_ends_with?: ID_Input | null
+  id_not_ends_with?: ID_Input | null
+  name?: String | null
+  name_not?: String | null
+  name_in?: String[] | String | null
+  name_not_in?: String[] | String | null
+  name_lt?: String | null
+  name_lte?: String | null
+  name_gt?: String | null
+  name_gte?: String | null
+  name_contains?: String | null
+  name_not_contains?: String | null
+  name_starts_with?: String | null
+  name_not_starts_with?: String | null
+  name_ends_with?: String | null
+  name_not_ends_with?: String | null
+  slug?: String | null
+  slug_not?: String | null
+  slug_in?: String[] | String | null
+  slug_not_in?: String[] | String | null
+  slug_lt?: String | null
+  slug_lte?: String | null
+  slug_gt?: String | null
+  slug_gte?: String | null
+  slug_contains?: String | null
+  slug_not_contains?: String | null
+  slug_starts_with?: String | null
+  slug_not_starts_with?: String | null
+  slug_ends_with?: String | null
+  slug_not_ends_with?: String | null
+  description?: String | null
+  description_not?: String | null
+  description_in?: String[] | String | null
+  description_not_in?: String[] | String | null
+  description_lt?: String | null
+  description_lte?: String | null
+  description_gt?: String | null
+  description_gte?: String | null
+  description_contains?: String | null
+  description_not_contains?: String | null
+  description_starts_with?: String | null
+  description_not_starts_with?: String | null
+  description_ends_with?: String | null
+  description_not_ends_with?: String | null
+  owner?: UserWhereInput | null
+  tags_every?: StationTagWhereInput | null
+  tags_some?: StationTagWhereInput | null
+  tags_none?: StationTagWhereInput | null
+}
+
+export interface StationWhereUniqueInput {
+  id?: ID_Input | null
+  name?: String | null
+  slug?: String | null
+}
 
 export interface UserCreateInput {
   email: String
-  username?: String | null
+  username: String
+  password: String
+  name?: String | null
+  country?: String | null
+  city?: String | null
+  bio?: String | null
+  avatarUrl?: String | null
+  coverUrl?: String | null
+  reputation?: Int | null
+  facebookId?: String | null
+  googleId?: String | null
+  roles?: UserRoleCreateManyWithoutUserInput | null
+  stations?: StationCreateManyWithoutOwnerInput | null
+}
+
+export interface UserCreateOneWithoutRolesInput {
+  create?: UserCreateWithoutRolesInput | null
+  connect?: UserWhereUniqueInput | null
+}
+
+export interface UserCreateOneWithoutStationsInput {
+  create?: UserCreateWithoutStationsInput | null
+  connect?: UserWhereUniqueInput | null
+}
+
+export interface UserCreateWithoutRolesInput {
+  email: String
+  username: String
+  password: String
+  name?: String | null
+  country?: String | null
+  city?: String | null
+  bio?: String | null
+  avatarUrl?: String | null
+  coverUrl?: String | null
+  reputation?: Int | null
+  facebookId?: String | null
+  googleId?: String | null
+  stations?: StationCreateManyWithoutOwnerInput | null
+}
+
+export interface UserCreateWithoutStationsInput {
+  email: String
+  username: String
   password: String
   name?: String | null
   country?: String | null
@@ -1330,30 +2797,10 @@ export interface UserCreateInput {
   roles?: UserRoleCreateManyWithoutUserInput | null
 }
 
-export interface UserCreateOneWithoutRolesInput {
-  create?: UserCreateWithoutRolesInput | null
-  connect?: UserWhereUniqueInput | null
-}
-
-export interface UserCreateWithoutRolesInput {
-  email: String
-  username?: String | null
-  password: String
-  name?: String | null
-  country?: String | null
-  city?: String | null
-  bio?: String | null
-  avatarUrl?: String | null
-  coverUrl?: String | null
-  reputation?: Int | null
-  facebookId?: String | null
-  googleId?: String | null
-}
-
 export interface UserRoleCreateInput {
   role: UserRoleEnum
-  stationId?: String | null
   user: UserCreateOneWithoutRolesInput
+  station?: StationCreateOneInput | null
 }
 
 export interface UserRoleCreateManyWithoutUserInput {
@@ -1363,7 +2810,7 @@ export interface UserRoleCreateManyWithoutUserInput {
 
 export interface UserRoleCreateWithoutUserInput {
   role: UserRoleEnum
-  stationId?: String | null
+  station?: StationCreateOneInput | null
 }
 
 export interface UserRoleScalarWhereInput {
@@ -1388,24 +2835,12 @@ export interface UserRoleScalarWhereInput {
   role_not?: UserRoleEnum | null
   role_in?: UserRoleEnum[] | UserRoleEnum | null
   role_not_in?: UserRoleEnum[] | UserRoleEnum | null
-  stationId?: String | null
-  stationId_not?: String | null
-  stationId_in?: String[] | String | null
-  stationId_not_in?: String[] | String | null
-  stationId_lt?: String | null
-  stationId_lte?: String | null
-  stationId_gt?: String | null
-  stationId_gte?: String | null
-  stationId_contains?: String | null
-  stationId_not_contains?: String | null
-  stationId_starts_with?: String | null
-  stationId_not_starts_with?: String | null
-  stationId_ends_with?: String | null
-  stationId_not_ends_with?: String | null
 }
 
 export interface UserRoleSubscriptionWhereInput {
   AND?: UserRoleSubscriptionWhereInput[] | UserRoleSubscriptionWhereInput | null
+  OR?: UserRoleSubscriptionWhereInput[] | UserRoleSubscriptionWhereInput | null
+  NOT?: UserRoleSubscriptionWhereInput[] | UserRoleSubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
@@ -1415,18 +2850,16 @@ export interface UserRoleSubscriptionWhereInput {
 
 export interface UserRoleUpdateInput {
   role?: UserRoleEnum | null
-  stationId?: String | null
   user?: UserUpdateOneRequiredWithoutRolesInput | null
+  station?: StationUpdateOneInput | null
 }
 
 export interface UserRoleUpdateManyDataInput {
   role?: UserRoleEnum | null
-  stationId?: String | null
 }
 
 export interface UserRoleUpdateManyMutationInput {
   role?: UserRoleEnum | null
-  stationId?: String | null
 }
 
 export interface UserRoleUpdateManyWithoutUserInput {
@@ -1448,7 +2881,7 @@ export interface UserRoleUpdateManyWithWhereNestedInput {
 
 export interface UserRoleUpdateWithoutUserDataInput {
   role?: UserRoleEnum | null
-  stationId?: String | null
+  station?: StationUpdateOneInput | null
 }
 
 export interface UserRoleUpdateWithWhereUniqueWithoutUserInput {
@@ -1464,6 +2897,8 @@ export interface UserRoleUpsertWithWhereUniqueWithoutUserInput {
 
 export interface UserRoleWhereInput {
   AND?: UserRoleWhereInput[] | UserRoleWhereInput | null
+  OR?: UserRoleWhereInput[] | UserRoleWhereInput | null
+  NOT?: UserRoleWhereInput[] | UserRoleWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -1482,21 +2917,8 @@ export interface UserRoleWhereInput {
   role_not?: UserRoleEnum | null
   role_in?: UserRoleEnum[] | UserRoleEnum | null
   role_not_in?: UserRoleEnum[] | UserRoleEnum | null
-  stationId?: String | null
-  stationId_not?: String | null
-  stationId_in?: String[] | String | null
-  stationId_not_in?: String[] | String | null
-  stationId_lt?: String | null
-  stationId_lte?: String | null
-  stationId_gt?: String | null
-  stationId_gte?: String | null
-  stationId_contains?: String | null
-  stationId_not_contains?: String | null
-  stationId_starts_with?: String | null
-  stationId_not_starts_with?: String | null
-  stationId_ends_with?: String | null
-  stationId_not_ends_with?: String | null
   user?: UserWhereInput | null
+  station?: StationWhereInput | null
 }
 
 export interface UserRoleWhereUniqueInput {
@@ -1505,6 +2927,8 @@ export interface UserRoleWhereUniqueInput {
 
 export interface UserSubscriptionWhereInput {
   AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput | null
   mutation_in?: MutationType[] | MutationType | null
   updatedFields_contains?: String | null
   updatedFields_contains_every?: String[] | String | null
@@ -1526,6 +2950,7 @@ export interface UserUpdateInput {
   facebookId?: String | null
   googleId?: String | null
   roles?: UserRoleUpdateManyWithoutUserInput | null
+  stations?: StationUpdateManyWithoutOwnerInput | null
 }
 
 export interface UserUpdateManyMutationInput {
@@ -1550,6 +2975,13 @@ export interface UserUpdateOneRequiredWithoutRolesInput {
   upsert?: UserUpsertWithoutRolesInput | null
 }
 
+export interface UserUpdateOneRequiredWithoutStationsInput {
+  create?: UserCreateWithoutStationsInput | null
+  connect?: UserWhereUniqueInput | null
+  update?: UserUpdateWithoutStationsDataInput | null
+  upsert?: UserUpsertWithoutStationsInput | null
+}
+
 export interface UserUpdateWithoutRolesDataInput {
   email?: String | null
   username?: String | null
@@ -1563,6 +2995,23 @@ export interface UserUpdateWithoutRolesDataInput {
   reputation?: Int | null
   facebookId?: String | null
   googleId?: String | null
+  stations?: StationUpdateManyWithoutOwnerInput | null
+}
+
+export interface UserUpdateWithoutStationsDataInput {
+  email?: String | null
+  username?: String | null
+  password?: String | null
+  name?: String | null
+  country?: String | null
+  city?: String | null
+  bio?: String | null
+  avatarUrl?: String | null
+  coverUrl?: String | null
+  reputation?: Int | null
+  facebookId?: String | null
+  googleId?: String | null
+  roles?: UserRoleUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpsertWithoutRolesInput {
@@ -1570,8 +3019,15 @@ export interface UserUpsertWithoutRolesInput {
   create: UserCreateWithoutRolesInput
 }
 
+export interface UserUpsertWithoutStationsInput {
+  update: UserUpdateWithoutStationsDataInput
+  create: UserCreateWithoutStationsInput
+}
+
 export interface UserWhereInput {
   AND?: UserWhereInput[] | UserWhereInput | null
+  OR?: UserWhereInput[] | UserWhereInput | null
+  NOT?: UserWhereInput[] | UserWhereInput | null
   id?: ID_Input | null
   id_not?: ID_Input | null
   id_in?: ID_Output[] | ID_Output | null
@@ -1764,7 +3220,12 @@ export interface UserWhereInput {
   googleId_not_starts_with?: String | null
   googleId_ends_with?: String | null
   googleId_not_ends_with?: String | null
+  roles_every?: UserRoleWhereInput | null
   roles_some?: UserRoleWhereInput | null
+  roles_none?: UserRoleWhereInput | null
+  stations_every?: StationWhereInput | null
+  stations_some?: StationWhereInput | null
+  stations_none?: StationWhereInput | null
 }
 
 export interface UserWhereUniqueInput {
@@ -1779,6 +3240,14 @@ export interface UserWhereUniqueInput {
  */
 export interface Node {
   id: ID_Output
+}
+
+export interface AggregateStation {
+  count: Int
+}
+
+export interface AggregateStationTag {
+  count: Int
 }
 
 export interface AggregateUser {
@@ -1804,12 +3273,91 @@ export interface PageInfo {
   endCursor?: String | null
 }
 
+export interface Station extends Node {
+  id: ID_Output
+  name: String
+  slug: String
+  description?: String | null
+  owner: User
+  tags?: Array<StationTag> | null
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface StationConnection {
+  pageInfo: PageInfo
+  edges: Array<StationEdge | null>
+  aggregate: AggregateStation
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface StationEdge {
+  node: Station
+  cursor: String
+}
+
+export interface StationPreviousValues {
+  id: ID_Output
+  name: String
+  slug: String
+  description?: String | null
+}
+
+export interface StationSubscriptionPayload {
+  mutation: MutationType
+  node?: Station | null
+  updatedFields?: Array<String> | null
+  previousValues?: StationPreviousValues | null
+}
+
+export interface StationTag extends Node {
+  id: ID_Output
+  name: String
+  stations?: Array<Station> | null
+}
+
+/*
+ * A connection to a list of items.
+
+ */
+export interface StationTagConnection {
+  pageInfo: PageInfo
+  edges: Array<StationTagEdge | null>
+  aggregate: AggregateStationTag
+}
+
+/*
+ * An edge in a connection.
+
+ */
+export interface StationTagEdge {
+  node: StationTag
+  cursor: String
+}
+
+export interface StationTagPreviousValues {
+  id: ID_Output
+  name: String
+}
+
+export interface StationTagSubscriptionPayload {
+  mutation: MutationType
+  node?: StationTag | null
+  updatedFields?: Array<String> | null
+  previousValues?: StationTagPreviousValues | null
+}
+
 export interface User extends Node {
   id: ID_Output
   createdAt: DateTime
   updatedAt: DateTime
   email: String
-  username?: String | null
+  username: String
   password: String
   name?: String | null
   country?: String | null
@@ -1821,6 +3369,7 @@ export interface User extends Node {
   facebookId?: String | null
   googleId?: String | null
   roles?: Array<UserRole> | null
+  stations?: Array<Station> | null
 }
 
 /*
@@ -1847,7 +3396,7 @@ export interface UserPreviousValues {
   createdAt: DateTime
   updatedAt: DateTime
   email: String
-  username?: String | null
+  username: String
   password: String
   name?: String | null
   country?: String | null
@@ -1863,8 +3412,8 @@ export interface UserPreviousValues {
 export interface UserRole extends Node {
   id: ID_Output
   role: UserRoleEnum
-  stationId?: String | null
   user: User
+  station?: Station | null
 }
 
 /*
@@ -1889,7 +3438,6 @@ export interface UserRoleEdge {
 export interface UserRolePreviousValues {
   id: ID_Output
   role: UserRoleEnum
-  stationId?: String | null
 }
 
 export interface UserRoleSubscriptionPayload {

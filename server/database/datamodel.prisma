@@ -1,9 +1,9 @@
 type User {
-  id: ID! @id
+  id: ID! @unique
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   email: String! @unique
-  username: String @unique
+  username: String! @unique
   password: String!
   name: String
   country: String
@@ -14,17 +14,33 @@ type User {
   reputation: Int @default(value: 0)
   facebookId: String
   googleId: String
-  roles: [UserRole!]! @relation(link: INLINE)
+  roles: [UserRole!]! @relation(name: "UserRole", onDelete: CASCADE)
+  stations: [Station!]! @relation(name: "StationOwner", onDelete: CASCADE)
 }
 
 type UserRole {
-  id: ID! @id
+  id: ID! @unique
   role: UserRoleEnum!
-  stationId: String
-  user: User!
+  user: User! @relation(name: "UserRole")
+  station: Station
 }
 
 enum UserRoleEnum {
   ADMIN
   STATION_OWNER
+}
+
+type Station {
+  id: ID! @unique
+  name: String! @unique
+  slug: String! @unique
+  description: String
+  owner: User! @relation(name: "StationOwner")
+  tags: [StationTag!]! @relation(name: "StationsAndTags", onDelete: CASCADE)
+}
+
+type StationTag {
+  id: ID! @unique
+  name: String!
+  stations: [Station!]! @relation(name: "StationsAndTags")
 }

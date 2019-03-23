@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
-import { PrismaModule } from 'prisma/prisma.module';
-import { UsersModule } from 'radio/users/users.module';
+import { PrismaModule } from '../../prisma/prisma.module';
 import { SeederService } from './Seeder.service';
 
 @Module({
-  imports: [PrismaModule, UsersModule],
+  imports: [PrismaModule],
   providers: [SeederService],
   exports: [SeederService],
 })

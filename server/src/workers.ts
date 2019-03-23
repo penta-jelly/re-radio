@@ -1,7 +1,7 @@
-import { NestFactory } from '@nestjs/core';
-import { SeederService } from 'workers/seeder/Seeder.service';
-import { WorkersModule } from './workers.module';
 import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { WorkersModule } from './workers.module';
+import { SeederService } from './workers/seeder/Seeder.service';
 
 async function bootstrap() {
   const logger = new Logger('Workers');

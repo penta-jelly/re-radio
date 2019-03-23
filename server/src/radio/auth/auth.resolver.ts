@@ -1,7 +1,6 @@
-import { forwardRef, Inject, Logger, UnprocessableEntityException } from '@nestjs/common';
+import { Logger, UnprocessableEntityException } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { PrismaService } from 'prisma/prisma.service';
-import { UsersService } from 'radio/users/user.service';
+import { PrismaService } from '../../prisma/prisma.service';
 import { AuthService } from './auth.service';
 import { LoginInputDTO } from './dto/LoginInput.dto';
 import { RegisterInputDTO } from './dto/RegisterInput.dto';
@@ -10,11 +9,7 @@ import { LoginOrRegisterReturnType } from './interfaces/LoginOrRegisterReturnTyp
 @Resolver()
 export class AuthResolver {
   private logger = new Logger(AuthResolver.name);
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly authService: AuthService,
-    @Inject(forwardRef(() => UsersService)) private readonly usersService: UsersService,
-  ) {}
+  constructor(private readonly prisma: PrismaService, private readonly authService: AuthService) {}
 
   @Mutation('login')
   async login(@Args() loginDTO: LoginInputDTO): Promise<LoginOrRegisterReturnType> {
@@ -28,7 +23,7 @@ export class AuthResolver {
   @Mutation('register')
   async register(@Args() registerDTO: RegisterInputDTO): Promise<LoginOrRegisterReturnType> {
     try {
-      const user = await this.usersService.createUser({ data: registerDTO.data });
+      const user = await this.authService.createUser({ data: registerDTO.data });
       this.logger.log(`Generating JWT token for user ${user.username}`);
       const jwtToken = await this.authService.createToken(user);
       this.logger.log(`Generated JWT token for user ${user.username}`);

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { SeederModule } from 'workers/seeder/Seeder.module';
+import { SeederModule } from './workers/seeder/Seeder.module';
 
 @Module({
   imports: [SeederModule],
