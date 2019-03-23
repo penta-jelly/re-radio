@@ -1,0 +1,13 @@
+import register from '../support/RegisterPage';
+
+describe('Register', () => {
+  const RegisterPage = register('/register');
+
+  it('should open the register page', () => {
+    RegisterPage.navigate();
+  });
+
+  it('should fill in all inputs and submit form', () => {
+    RegisterPage.register('dungle1811@gmail.com', 'dungle', 'abcdef');
+  });
+});
