@@ -9,6 +9,7 @@ services:
       - ./node_modules:/user/app/node_modules
     command: >
       sh -c "
+        npm run build &&
         wait-on http://prisma:${PRISMA_PORT} && 
         npm run prisma:deploy --force &&
         npm run worker:seed &&
