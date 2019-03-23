@@ -117,7 +117,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
               helperText={touched.password && !!errors.password && errors.password}
               error={touched.password && !!errors.password}
             />
-            <Button variant="contained" color="primary" size="large" type="submit">
+            <Button variant="contained" color="primary" size="large" type="submit" id="register-button">
               Register
             </Button>
           </form>
