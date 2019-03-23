@@ -4,6 +4,10 @@ export type Maybe<T> = T | null;
 export interface UserWhereInput {
   /** Logical AND on all given filters. */
   AND?: Maybe<UserWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<UserWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<UserWhereInput[]>;
 
   id?: Maybe<string>;
   /** All values that are not equal to given value. */
@@ -389,12 +393,26 @@ export interface UserWhereInput {
   /** All values not ending with the given string. */
   googleId_not_ends_with?: Maybe<string>;
 
+  roles_every?: Maybe<UserRoleWhereInput>;
+
   roles_some?: Maybe<UserRoleWhereInput>;
+
+  roles_none?: Maybe<UserRoleWhereInput>;
+
+  stations_every?: Maybe<StationWhereInput>;
+
+  stations_some?: Maybe<StationWhereInput>;
+
+  stations_none?: Maybe<StationWhereInput>;
 }
 
 export interface UserRoleWhereInput {
   /** Logical AND on all given filters. */
   AND?: Maybe<UserRoleWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<UserRoleWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<UserRoleWhereInput[]>;
 
   id?: Maybe<string>;
   /** All values that are not equal to given value. */
@@ -432,35 +450,209 @@ export interface UserRoleWhereInput {
   /** All values that are not contained in given list. */
   role_not_in?: Maybe<UserRoleEnum[]>;
 
-  stationId?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  stationId_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  stationId_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  stationId_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  stationId_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  stationId_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  stationId_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  stationId_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  stationId_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  stationId_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  stationId_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  stationId_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  stationId_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  stationId_not_ends_with?: Maybe<string>;
-
   user?: Maybe<UserWhereInput>;
+
+  station?: Maybe<StationWhereInput>;
+}
+
+export interface StationWhereInput {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<StationWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<StationWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<StationWhereInput[]>;
+
+  id?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  id_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  id_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  id_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  id_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  id_not_ends_with?: Maybe<string>;
+
+  name?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  name_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  name_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  name_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  name_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  name_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  name_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  name_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  name_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  name_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  name_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  name_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  name_not_ends_with?: Maybe<string>;
+
+  slug?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  slug_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  slug_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  slug_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  slug_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  slug_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  slug_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  slug_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  slug_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  slug_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  slug_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  slug_not_ends_with?: Maybe<string>;
+
+  description?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  description_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  description_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  description_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  description_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  description_not_ends_with?: Maybe<string>;
+
+  owner?: Maybe<UserWhereInput>;
+
+  tags_every?: Maybe<StationTagWhereInput>;
+
+  tags_some?: Maybe<StationTagWhereInput>;
+
+  tags_none?: Maybe<StationTagWhereInput>;
+}
+
+export interface StationTagWhereInput {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<StationTagWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<StationTagWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<StationTagWhereInput[]>;
+
+  id?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  id_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  id_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  id_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  id_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  id_not_ends_with?: Maybe<string>;
+
+  name?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  name_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  name_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  name_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  name_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  name_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  name_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  name_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  name_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  name_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  name_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  name_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  name_not_ends_with?: Maybe<string>;
+
+  stations_every?: Maybe<StationWhereInput>;
+
+  stations_some?: Maybe<StationWhereInput>;
+
+  stations_none?: Maybe<StationWhereInput>;
 }
 
 export interface UserWhereUniqueInput {
@@ -475,10 +667,88 @@ export interface UserRoleWhereUniqueInput {
   id?: Maybe<string>;
 }
 
+export interface StationTagWhereUniqueInput {
+  id?: Maybe<string>;
+}
+
+export interface StationWhereUniqueInput {
+  id?: Maybe<string>;
+
+  name?: Maybe<string>;
+
+  slug?: Maybe<string>;
+}
+
 export interface UserCreateInput {
   email: string;
 
-  username?: Maybe<string>;
+  username: string;
+
+  password: string;
+
+  name?: Maybe<string>;
+
+  country?: Maybe<string>;
+
+  city?: Maybe<string>;
+
+  bio?: Maybe<string>;
+
+  avatarUrl?: Maybe<string>;
+
+  coverUrl?: Maybe<string>;
+
+  reputation?: Maybe<number>;
+
+  facebookId?: Maybe<string>;
+
+  googleId?: Maybe<string>;
+
+  roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
+
+  stations?: Maybe<StationCreateManyWithoutOwnerInput>;
+}
+
+export interface UserRoleCreateManyWithoutUserInput {
+  create?: Maybe<UserRoleCreateWithoutUserInput[]>;
+
+  connect?: Maybe<UserRoleWhereUniqueInput[]>;
+}
+
+export interface UserRoleCreateWithoutUserInput {
+  role: UserRoleEnum;
+
+  station?: Maybe<StationCreateOneInput>;
+}
+
+export interface StationCreateOneInput {
+  create?: Maybe<StationCreateInput>;
+
+  connect?: Maybe<StationWhereUniqueInput>;
+}
+
+export interface StationCreateInput {
+  name: string;
+
+  slug: string;
+
+  description?: Maybe<string>;
+
+  owner: UserCreateOneWithoutStationsInput;
+
+  tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
+}
+
+export interface UserCreateOneWithoutStationsInput {
+  create?: Maybe<UserCreateWithoutStationsInput>;
+
+  connect?: Maybe<UserWhereUniqueInput>;
+}
+
+export interface UserCreateWithoutStationsInput {
+  email: string;
+
+  username: string;
 
   password: string;
 
@@ -503,24 +773,38 @@ export interface UserCreateInput {
   roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
 }
 
-export interface UserRoleCreateManyWithoutUserInput {
-  create?: Maybe<UserRoleCreateWithoutUserInput[]>;
+export interface StationTagCreateManyWithoutStationsInput {
+  create?: Maybe<StationTagCreateWithoutStationsInput[]>;
 
-  connect?: Maybe<UserRoleWhereUniqueInput[]>;
+  connect?: Maybe<StationTagWhereUniqueInput[]>;
 }
 
-export interface UserRoleCreateWithoutUserInput {
-  role: UserRoleEnum;
+export interface StationTagCreateWithoutStationsInput {
+  name: string;
+}
 
-  stationId?: Maybe<string>;
+export interface StationCreateManyWithoutOwnerInput {
+  create?: Maybe<StationCreateWithoutOwnerInput[]>;
+
+  connect?: Maybe<StationWhereUniqueInput[]>;
+}
+
+export interface StationCreateWithoutOwnerInput {
+  name: string;
+
+  slug: string;
+
+  description?: Maybe<string>;
+
+  tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
 }
 
 export interface UserRoleCreateInput {
   role: UserRoleEnum;
 
-  stationId?: Maybe<string>;
-
   user: UserCreateOneWithoutRolesInput;
+
+  station?: Maybe<StationCreateOneInput>;
 }
 
 export interface UserCreateOneWithoutRolesInput {
@@ -532,7 +816,7 @@ export interface UserCreateOneWithoutRolesInput {
 export interface UserCreateWithoutRolesInput {
   email: string;
 
-  username?: Maybe<string>;
+  username: string;
 
   password: string;
 
@@ -553,6 +837,30 @@ export interface UserCreateWithoutRolesInput {
   facebookId?: Maybe<string>;
 
   googleId?: Maybe<string>;
+
+  stations?: Maybe<StationCreateManyWithoutOwnerInput>;
+}
+
+export interface StationTagCreateInput {
+  name: string;
+
+  stations?: Maybe<StationCreateManyWithoutTagsInput>;
+}
+
+export interface StationCreateManyWithoutTagsInput {
+  create?: Maybe<StationCreateWithoutTagsInput[]>;
+
+  connect?: Maybe<StationWhereUniqueInput[]>;
+}
+
+export interface StationCreateWithoutTagsInput {
+  name: string;
+
+  slug: string;
+
+  description?: Maybe<string>;
+
+  owner: UserCreateOneWithoutStationsInput;
 }
 
 export interface UserUpdateInput {
@@ -581,6 +889,8 @@ export interface UserUpdateInput {
   googleId?: Maybe<string>;
 
   roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
+
+  stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
 }
 
 export interface UserRoleUpdateManyWithoutUserInput {
@@ -612,7 +922,196 @@ export interface UserRoleUpdateWithWhereUniqueWithoutUserInput {
 export interface UserRoleUpdateWithoutUserDataInput {
   role?: Maybe<UserRoleEnum>;
 
-  stationId?: Maybe<string>;
+  station?: Maybe<StationUpdateOneInput>;
+}
+
+export interface StationUpdateOneInput {
+  create?: Maybe<StationCreateInput>;
+
+  connect?: Maybe<StationWhereUniqueInput>;
+
+  disconnect?: Maybe<boolean>;
+
+  delete?: Maybe<boolean>;
+
+  update?: Maybe<StationUpdateDataInput>;
+
+  upsert?: Maybe<StationUpsertNestedInput>;
+}
+
+export interface StationUpdateDataInput {
+  name?: Maybe<string>;
+
+  slug?: Maybe<string>;
+
+  description?: Maybe<string>;
+
+  owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+
+  tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+}
+
+export interface UserUpdateOneRequiredWithoutStationsInput {
+  create?: Maybe<UserCreateWithoutStationsInput>;
+
+  connect?: Maybe<UserWhereUniqueInput>;
+
+  update?: Maybe<UserUpdateWithoutStationsDataInput>;
+
+  upsert?: Maybe<UserUpsertWithoutStationsInput>;
+}
+
+export interface UserUpdateWithoutStationsDataInput {
+  email?: Maybe<string>;
+
+  username?: Maybe<string>;
+
+  password?: Maybe<string>;
+
+  name?: Maybe<string>;
+
+  country?: Maybe<string>;
+
+  city?: Maybe<string>;
+
+  bio?: Maybe<string>;
+
+  avatarUrl?: Maybe<string>;
+
+  coverUrl?: Maybe<string>;
+
+  reputation?: Maybe<number>;
+
+  facebookId?: Maybe<string>;
+
+  googleId?: Maybe<string>;
+
+  roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
+}
+
+export interface UserUpsertWithoutStationsInput {
+  update: UserUpdateWithoutStationsDataInput;
+
+  create: UserCreateWithoutStationsInput;
+}
+
+export interface StationTagUpdateManyWithoutStationsInput {
+  create?: Maybe<StationTagCreateWithoutStationsInput[]>;
+
+  connect?: Maybe<StationTagWhereUniqueInput[]>;
+
+  set?: Maybe<StationTagWhereUniqueInput[]>;
+
+  disconnect?: Maybe<StationTagWhereUniqueInput[]>;
+
+  delete?: Maybe<StationTagWhereUniqueInput[]>;
+
+  update?: Maybe<StationTagUpdateWithWhereUniqueWithoutStationsInput[]>;
+
+  updateMany?: Maybe<StationTagUpdateManyWithWhereNestedInput[]>;
+
+  deleteMany?: Maybe<StationTagScalarWhereInput[]>;
+
+  upsert?: Maybe<StationTagUpsertWithWhereUniqueWithoutStationsInput[]>;
+}
+
+export interface StationTagUpdateWithWhereUniqueWithoutStationsInput {
+  where: StationTagWhereUniqueInput;
+
+  data: StationTagUpdateWithoutStationsDataInput;
+}
+
+export interface StationTagUpdateWithoutStationsDataInput {
+  name?: Maybe<string>;
+}
+
+export interface StationTagUpdateManyWithWhereNestedInput {
+  where: StationTagScalarWhereInput;
+
+  data: StationTagUpdateManyDataInput;
+}
+
+export interface StationTagScalarWhereInput {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<StationTagScalarWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<StationTagScalarWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<StationTagScalarWhereInput[]>;
+
+  id?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  id_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  id_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  id_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  id_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  id_not_ends_with?: Maybe<string>;
+
+  name?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  name_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  name_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  name_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  name_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  name_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  name_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  name_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  name_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  name_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  name_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  name_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  name_not_ends_with?: Maybe<string>;
+}
+
+export interface StationTagUpdateManyDataInput {
+  name?: Maybe<string>;
+}
+
+export interface StationTagUpsertWithWhereUniqueWithoutStationsInput {
+  where: StationTagWhereUniqueInput;
+
+  update: StationTagUpdateWithoutStationsDataInput;
+
+  create: StationTagCreateWithoutStationsInput;
+}
+
+export interface StationUpsertNestedInput {
+  update: StationUpdateDataInput;
+
+  create: StationCreateInput;
 }
 
 export interface UserRoleUpdateManyWithWhereNestedInput {
@@ -664,40 +1163,10 @@ export interface UserRoleScalarWhereInput {
   role_in?: Maybe<UserRoleEnum[]>;
   /** All values that are not contained in given list. */
   role_not_in?: Maybe<UserRoleEnum[]>;
-
-  stationId?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  stationId_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  stationId_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  stationId_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  stationId_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  stationId_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  stationId_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  stationId_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  stationId_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  stationId_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  stationId_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  stationId_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  stationId_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  stationId_not_ends_with?: Maybe<string>;
 }
 
 export interface UserRoleUpdateManyDataInput {
   role?: Maybe<UserRoleEnum>;
-
-  stationId?: Maybe<string>;
 }
 
 export interface UserRoleUpsertWithWhereUniqueWithoutUserInput {
@@ -708,12 +1177,191 @@ export interface UserRoleUpsertWithWhereUniqueWithoutUserInput {
   create: UserRoleCreateWithoutUserInput;
 }
 
+export interface StationUpdateManyWithoutOwnerInput {
+  create?: Maybe<StationCreateWithoutOwnerInput[]>;
+
+  connect?: Maybe<StationWhereUniqueInput[]>;
+
+  set?: Maybe<StationWhereUniqueInput[]>;
+
+  disconnect?: Maybe<StationWhereUniqueInput[]>;
+
+  delete?: Maybe<StationWhereUniqueInput[]>;
+
+  update?: Maybe<StationUpdateWithWhereUniqueWithoutOwnerInput[]>;
+
+  updateMany?: Maybe<StationUpdateManyWithWhereNestedInput[]>;
+
+  deleteMany?: Maybe<StationScalarWhereInput[]>;
+
+  upsert?: Maybe<StationUpsertWithWhereUniqueWithoutOwnerInput[]>;
+}
+
+export interface StationUpdateWithWhereUniqueWithoutOwnerInput {
+  where: StationWhereUniqueInput;
+
+  data: StationUpdateWithoutOwnerDataInput;
+}
+
+export interface StationUpdateWithoutOwnerDataInput {
+  name?: Maybe<string>;
+
+  slug?: Maybe<string>;
+
+  description?: Maybe<string>;
+
+  tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+}
+
+export interface StationUpdateManyWithWhereNestedInput {
+  where: StationScalarWhereInput;
+
+  data: StationUpdateManyDataInput;
+}
+
+export interface StationScalarWhereInput {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<StationScalarWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<StationScalarWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<StationScalarWhereInput[]>;
+
+  id?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  id_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  id_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  id_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  id_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  id_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  id_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  id_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  id_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  id_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  id_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  id_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  id_not_ends_with?: Maybe<string>;
+
+  name?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  name_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  name_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  name_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  name_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  name_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  name_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  name_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  name_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  name_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  name_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  name_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  name_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  name_not_ends_with?: Maybe<string>;
+
+  slug?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  slug_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  slug_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  slug_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  slug_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  slug_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  slug_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  slug_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  slug_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  slug_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  slug_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  slug_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  slug_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  slug_not_ends_with?: Maybe<string>;
+
+  description?: Maybe<string>;
+  /** All values that are not equal to given value. */
+  description_not?: Maybe<string>;
+  /** All values that are contained in given list. */
+  description_in?: Maybe<string[]>;
+  /** All values that are not contained in given list. */
+  description_not_in?: Maybe<string[]>;
+  /** All values less than the given value. */
+  description_lt?: Maybe<string>;
+  /** All values less than or equal the given value. */
+  description_lte?: Maybe<string>;
+  /** All values greater than the given value. */
+  description_gt?: Maybe<string>;
+  /** All values greater than or equal the given value. */
+  description_gte?: Maybe<string>;
+  /** All values containing the given string. */
+  description_contains?: Maybe<string>;
+  /** All values not containing the given string. */
+  description_not_contains?: Maybe<string>;
+  /** All values starting with the given string. */
+  description_starts_with?: Maybe<string>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: Maybe<string>;
+  /** All values ending with the given string. */
+  description_ends_with?: Maybe<string>;
+  /** All values not ending with the given string. */
+  description_not_ends_with?: Maybe<string>;
+}
+
+export interface StationUpdateManyDataInput {
+  name?: Maybe<string>;
+
+  slug?: Maybe<string>;
+
+  description?: Maybe<string>;
+}
+
+export interface StationUpsertWithWhereUniqueWithoutOwnerInput {
+  where: StationWhereUniqueInput;
+
+  update: StationUpdateWithoutOwnerDataInput;
+
+  create: StationCreateWithoutOwnerInput;
+}
+
 export interface UserRoleUpdateInput {
   role?: Maybe<UserRoleEnum>;
 
-  stationId?: Maybe<string>;
-
   user?: Maybe<UserUpdateOneRequiredWithoutRolesInput>;
+
+  station?: Maybe<StationUpdateOneInput>;
 }
 
 export interface UserUpdateOneRequiredWithoutRolesInput {
@@ -750,12 +1398,76 @@ export interface UserUpdateWithoutRolesDataInput {
   facebookId?: Maybe<string>;
 
   googleId?: Maybe<string>;
+
+  stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
 }
 
 export interface UserUpsertWithoutRolesInput {
   update: UserUpdateWithoutRolesDataInput;
 
   create: UserCreateWithoutRolesInput;
+}
+
+export interface StationTagUpdateInput {
+  name?: Maybe<string>;
+
+  stations?: Maybe<StationUpdateManyWithoutTagsInput>;
+}
+
+export interface StationUpdateManyWithoutTagsInput {
+  create?: Maybe<StationCreateWithoutTagsInput[]>;
+
+  connect?: Maybe<StationWhereUniqueInput[]>;
+
+  set?: Maybe<StationWhereUniqueInput[]>;
+
+  disconnect?: Maybe<StationWhereUniqueInput[]>;
+
+  delete?: Maybe<StationWhereUniqueInput[]>;
+
+  update?: Maybe<StationUpdateWithWhereUniqueWithoutTagsInput[]>;
+
+  updateMany?: Maybe<StationUpdateManyWithWhereNestedInput[]>;
+
+  deleteMany?: Maybe<StationScalarWhereInput[]>;
+
+  upsert?: Maybe<StationUpsertWithWhereUniqueWithoutTagsInput[]>;
+}
+
+export interface StationUpdateWithWhereUniqueWithoutTagsInput {
+  where: StationWhereUniqueInput;
+
+  data: StationUpdateWithoutTagsDataInput;
+}
+
+export interface StationUpdateWithoutTagsDataInput {
+  name?: Maybe<string>;
+
+  slug?: Maybe<string>;
+
+  description?: Maybe<string>;
+
+  owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+}
+
+export interface StationUpsertWithWhereUniqueWithoutTagsInput {
+  where: StationWhereUniqueInput;
+
+  update: StationUpdateWithoutTagsDataInput;
+
+  create: StationCreateWithoutTagsInput;
+}
+
+export interface StationUpdateInput {
+  name?: Maybe<string>;
+
+  slug?: Maybe<string>;
+
+  description?: Maybe<string>;
+
+  owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+
+  tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
 }
 
 export interface UserUpdateManyMutationInput {
@@ -786,8 +1498,18 @@ export interface UserUpdateManyMutationInput {
 
 export interface UserRoleUpdateManyMutationInput {
   role?: Maybe<UserRoleEnum>;
+}
 
-  stationId?: Maybe<string>;
+export interface StationTagUpdateManyMutationInput {
+  name?: Maybe<string>;
+}
+
+export interface StationUpdateManyMutationInput {
+  name?: Maybe<string>;
+
+  slug?: Maybe<string>;
+
+  description?: Maybe<string>;
 }
 
 export interface LoginInput {
@@ -809,6 +1531,10 @@ export interface RegisterInput {
 export interface UserSubscriptionWhereInput {
   /** Logical AND on all given filters. */
   AND?: Maybe<UserSubscriptionWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<UserSubscriptionWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<UserSubscriptionWhereInput[]>;
   /** The subscription event gets dispatched when it's listed in mutation_in */
   mutation_in?: Maybe<MutationType[]>;
   /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
@@ -824,6 +1550,10 @@ export interface UserSubscriptionWhereInput {
 export interface UserRoleSubscriptionWhereInput {
   /** Logical AND on all given filters. */
   AND?: Maybe<UserRoleSubscriptionWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<UserRoleSubscriptionWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<UserRoleSubscriptionWhereInput[]>;
   /** The subscription event gets dispatched when it's listed in mutation_in */
   mutation_in?: Maybe<MutationType[]>;
   /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
@@ -834,6 +1564,44 @@ export interface UserRoleSubscriptionWhereInput {
   updatedFields_contains_some?: Maybe<string[]>;
 
   node?: Maybe<UserRoleWhereInput>;
+}
+
+export interface StationTagSubscriptionWhereInput {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<StationTagSubscriptionWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<StationTagSubscriptionWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<StationTagSubscriptionWhereInput[]>;
+  /** The subscription event gets dispatched when it's listed in mutation_in */
+  mutation_in?: Maybe<MutationType[]>;
+  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
+  updatedFields_contains?: Maybe<string>;
+  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
+  updatedFields_contains_every?: Maybe<string[]>;
+  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
+  updatedFields_contains_some?: Maybe<string[]>;
+
+  node?: Maybe<StationTagWhereInput>;
+}
+
+export interface StationSubscriptionWhereInput {
+  /** Logical AND on all given filters. */
+  AND?: Maybe<StationSubscriptionWhereInput[]>;
+  /** Logical OR on all given filters. */
+  OR?: Maybe<StationSubscriptionWhereInput[]>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: Maybe<StationSubscriptionWhereInput[]>;
+  /** The subscription event gets dispatched when it's listed in mutation_in */
+  mutation_in?: Maybe<MutationType[]>;
+  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
+  updatedFields_contains?: Maybe<string>;
+  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
+  updatedFields_contains_every?: Maybe<string[]>;
+  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
+  updatedFields_contains_some?: Maybe<string[]>;
+
+  node?: Maybe<StationWhereInput>;
 }
 
 export enum UserRoleEnum {
@@ -879,8 +1647,36 @@ export enum UserRoleOrderByInput {
   IdDesc = 'id_DESC',
   RoleAsc = 'role_ASC',
   RoleDesc = 'role_DESC',
-  StationIdAsc = 'stationId_ASC',
-  StationIdDesc = 'stationId_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+}
+
+export enum StationTagOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+}
+
+export enum StationOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
 }
 
 export enum MutationType {
