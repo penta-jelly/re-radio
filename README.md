@@ -26,3 +26,9 @@ sh dev.sh up
 ```sh
 sh dev.sh down
 ```
+
+## All services:
+
+* Server: [http://localhost:8000/graphql](http://localhost:8000/graphql)
+* Client: [http://localhost:3000](http://localhost:3000)
+* Storybook: [http://localhost:4000](http://localhost:4000)
