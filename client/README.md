@@ -8,8 +8,12 @@ Client project for re-radio
 - Run `npm ci`
 - Run `npm run docker-compose:up`
 - Run `npm run generate` to generate typescript types, **make sure server is running first**.
-- Navigate to [http://localhost:3000](http://localhost:3000)
+- Navigate to [http://localhost:3000](http://localhost:3000) for the website.
 - To stop docker, run `npm run docker-compose:stop`
+
+## Storybook
+
+- Storybook lives at [http://localhost:4000](http://localhost:4000), this is the places for all customized components.
 
 ## Note
 

@@ -2,5 +2,7 @@ version: "3"
 services:
   service:
     build: ./server
+  storybook:
+    build: ./client
   client:
     build: ./client
