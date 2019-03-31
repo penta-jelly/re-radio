@@ -3,14 +3,14 @@ schema:
 overwrite: true
 documents: ./src/graphql/**/*.graphql
 generates:
-  ./schema.json:
-    plugins:
-      - introspection
   ./src/graphql/index.tsx:
     config:
       noNamespaces: true
+      withComponent: false
+      withHooks: true
+      immutableTypes: true
     plugins:
       - add: "/* tslint:disable */"
-      - typescript-common
-      - typescript-client
+      - typescript
+      - typescript-operations
       - typescript-react-apollo

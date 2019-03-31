@@ -1,7 +1,8 @@
 module.exports = {
   client: {
     service: {
-      localSchemaFile: "./schema.json",
-    },
+      name: "re-radio-local",
+      url: "http://localhost:8000/graphql"
+    }
   },
 };

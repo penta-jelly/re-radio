@@ -1,1613 +1,1223 @@
 /* tslint:disable */
-export type Maybe<T> = T | null;
 
-export interface UserWhereInput {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<UserWhereInput[]>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<UserWhereInput[]>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<UserWhereInput[]>;
-
-  id?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<string>;
-
-  createdAt?: Maybe<DateTime>;
-  /** All values that are not equal to given value. */
-  createdAt_not?: Maybe<DateTime>;
-  /** All values that are contained in given list. */
-  createdAt_in?: Maybe<DateTime[]>;
-  /** All values that are not contained in given list. */
-  createdAt_not_in?: Maybe<DateTime[]>;
-  /** All values less than the given value. */
-  createdAt_lt?: Maybe<DateTime>;
-  /** All values less than or equal the given value. */
-  createdAt_lte?: Maybe<DateTime>;
-  /** All values greater than the given value. */
-  createdAt_gt?: Maybe<DateTime>;
-  /** All values greater than or equal the given value. */
-  createdAt_gte?: Maybe<DateTime>;
-
-  updatedAt?: Maybe<DateTime>;
-  /** All values that are not equal to given value. */
-  updatedAt_not?: Maybe<DateTime>;
-  /** All values that are contained in given list. */
-  updatedAt_in?: Maybe<DateTime[]>;
-  /** All values that are not contained in given list. */
-  updatedAt_not_in?: Maybe<DateTime[]>;
-  /** All values less than the given value. */
-  updatedAt_lt?: Maybe<DateTime>;
-  /** All values less than or equal the given value. */
-  updatedAt_lte?: Maybe<DateTime>;
-  /** All values greater than the given value. */
-  updatedAt_gt?: Maybe<DateTime>;
-  /** All values greater than or equal the given value. */
-  updatedAt_gte?: Maybe<DateTime>;
-
-  email?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  email_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  email_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  email_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  email_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  email_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  email_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  email_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  email_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  email_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  email_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  email_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  email_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  email_not_ends_with?: Maybe<string>;
-
-  username?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  username_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  username_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  username_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  username_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  username_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  username_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  username_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  username_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  username_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  username_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  username_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  username_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  username_not_ends_with?: Maybe<string>;
-
-  password?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  password_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  password_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  password_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  password_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  password_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  password_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  password_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  password_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  password_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  password_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  password_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  password_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  password_not_ends_with?: Maybe<string>;
-
-  name?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  name_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  name_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  name_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  name_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  name_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  name_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  name_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  name_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  name_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  name_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  name_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  name_not_ends_with?: Maybe<string>;
-
-  country?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  country_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  country_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  country_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  country_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  country_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  country_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  country_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  country_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  country_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  country_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  country_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  country_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  country_not_ends_with?: Maybe<string>;
-
-  city?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  city_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  city_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  city_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  city_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  city_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  city_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  city_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  city_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  city_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  city_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  city_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  city_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  city_not_ends_with?: Maybe<string>;
-
-  bio?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  bio_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  bio_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  bio_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  bio_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  bio_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  bio_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  bio_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  bio_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  bio_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  bio_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  bio_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  bio_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  bio_not_ends_with?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  avatarUrl_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  avatarUrl_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  avatarUrl_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  avatarUrl_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  avatarUrl_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  avatarUrl_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  avatarUrl_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  avatarUrl_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  avatarUrl_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  avatarUrl_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  avatarUrl_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  avatarUrl_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  avatarUrl_not_ends_with?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  coverUrl_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  coverUrl_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  coverUrl_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  coverUrl_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  coverUrl_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  coverUrl_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  coverUrl_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  coverUrl_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  coverUrl_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  coverUrl_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  coverUrl_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  coverUrl_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  coverUrl_not_ends_with?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-  /** All values that are not equal to given value. */
-  reputation_not?: Maybe<number>;
-  /** All values that are contained in given list. */
-  reputation_in?: Maybe<number[]>;
-  /** All values that are not contained in given list. */
-  reputation_not_in?: Maybe<number[]>;
-  /** All values less than the given value. */
-  reputation_lt?: Maybe<number>;
-  /** All values less than or equal the given value. */
-  reputation_lte?: Maybe<number>;
-  /** All values greater than the given value. */
-  reputation_gt?: Maybe<number>;
-  /** All values greater than or equal the given value. */
-  reputation_gte?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  facebookId_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  facebookId_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  facebookId_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  facebookId_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  facebookId_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  facebookId_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  facebookId_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  facebookId_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  facebookId_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  facebookId_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  facebookId_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  facebookId_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  facebookId_not_ends_with?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  googleId_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  googleId_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  googleId_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  googleId_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  googleId_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  googleId_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  googleId_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  googleId_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  googleId_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  googleId_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  googleId_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  googleId_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  googleId_not_ends_with?: Maybe<string>;
-
-  roles_every?: Maybe<UserRoleWhereInput>;
-
-  roles_some?: Maybe<UserRoleWhereInput>;
-
-  roles_none?: Maybe<UserRoleWhereInput>;
-
-  stations_every?: Maybe<StationWhereInput>;
-
-  stations_some?: Maybe<StationWhereInput>;
-
-  stations_none?: Maybe<StationWhereInput>;
-}
-
-export interface UserRoleWhereInput {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<UserRoleWhereInput[]>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<UserRoleWhereInput[]>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<UserRoleWhereInput[]>;
-
-  id?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<string>;
-
-  role?: Maybe<UserRoleEnum>;
-  /** All values that are not equal to given value. */
-  role_not?: Maybe<UserRoleEnum>;
-  /** All values that are contained in given list. */
-  role_in?: Maybe<UserRoleEnum[]>;
-  /** All values that are not contained in given list. */
-  role_not_in?: Maybe<UserRoleEnum[]>;
-
-  user?: Maybe<UserWhereInput>;
-
-  station?: Maybe<StationWhereInput>;
-}
-
-export interface StationWhereInput {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<StationWhereInput[]>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<StationWhereInput[]>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<StationWhereInput[]>;
-
-  id?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<string>;
-
-  name?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  name_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  name_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  name_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  name_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  name_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  name_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  name_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  name_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  name_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  name_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  name_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  name_not_ends_with?: Maybe<string>;
-
-  slug?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  slug_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  slug_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  slug_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  slug_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  slug_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  slug_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  slug_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  slug_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  slug_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  slug_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  slug_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  slug_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  slug_not_ends_with?: Maybe<string>;
-
-  description?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  description_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  description_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  description_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  description_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  description_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  description_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  description_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  description_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  description_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  description_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  description_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  description_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  description_not_ends_with?: Maybe<string>;
-
-  owner?: Maybe<UserWhereInput>;
-
-  tags_every?: Maybe<StationTagWhereInput>;
-
-  tags_some?: Maybe<StationTagWhereInput>;
-
-  tags_none?: Maybe<StationTagWhereInput>;
-}
-
-export interface StationTagWhereInput {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<StationTagWhereInput[]>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<StationTagWhereInput[]>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<StationTagWhereInput[]>;
-
-  id?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<string>;
-
-  name?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  name_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  name_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  name_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  name_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  name_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  name_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  name_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  name_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  name_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  name_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  name_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  name_not_ends_with?: Maybe<string>;
-
-  stations_every?: Maybe<StationWhereInput>;
-
-  stations_some?: Maybe<StationWhereInput>;
-
-  stations_none?: Maybe<StationWhereInput>;
-}
-
-export interface UserWhereUniqueInput {
-  id?: Maybe<string>;
-
-  email?: Maybe<string>;
-
-  username?: Maybe<string>;
-}
-
-export interface UserRoleWhereUniqueInput {
-  id?: Maybe<string>;
-}
-
-export interface StationTagWhereUniqueInput {
-  id?: Maybe<string>;
-}
-
-export interface StationWhereUniqueInput {
-  id?: Maybe<string>;
-
-  name?: Maybe<string>;
-
-  slug?: Maybe<string>;
-}
-
-export interface UserCreateInput {
-  email: string;
-
-  username: string;
-
-  password: string;
-
-  name?: Maybe<string>;
-
-  country?: Maybe<string>;
-
-  city?: Maybe<string>;
-
-  bio?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-
-  roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
-
-  stations?: Maybe<StationCreateManyWithoutOwnerInput>;
-}
-
-export interface UserRoleCreateManyWithoutUserInput {
-  create?: Maybe<UserRoleCreateWithoutUserInput[]>;
-
-  connect?: Maybe<UserRoleWhereUniqueInput[]>;
-}
-
-export interface UserRoleCreateWithoutUserInput {
-  role: UserRoleEnum;
-
-  station?: Maybe<StationCreateOneInput>;
-}
-
-export interface StationCreateOneInput {
-  create?: Maybe<StationCreateInput>;
-
-  connect?: Maybe<StationWhereUniqueInput>;
-}
-
-export interface StationCreateInput {
-  name: string;
-
-  slug: string;
-
-  description?: Maybe<string>;
-
-  owner: UserCreateOneWithoutStationsInput;
-
-  tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
-}
-
-export interface UserCreateOneWithoutStationsInput {
-  create?: Maybe<UserCreateWithoutStationsInput>;
-
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutStationsInput {
-  email: string;
-
-  username: string;
-
-  password: string;
-
-  name?: Maybe<string>;
-
-  country?: Maybe<string>;
-
-  city?: Maybe<string>;
-
-  bio?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-
-  roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
-}
-
-export interface StationTagCreateManyWithoutStationsInput {
-  create?: Maybe<StationTagCreateWithoutStationsInput[]>;
-
-  connect?: Maybe<StationTagWhereUniqueInput[]>;
-}
-
-export interface StationTagCreateWithoutStationsInput {
-  name: string;
-}
-
-export interface StationCreateManyWithoutOwnerInput {
-  create?: Maybe<StationCreateWithoutOwnerInput[]>;
-
-  connect?: Maybe<StationWhereUniqueInput[]>;
-}
-
-export interface StationCreateWithoutOwnerInput {
-  name: string;
-
-  slug: string;
-
-  description?: Maybe<string>;
-
-  tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
-}
-
-export interface UserRoleCreateInput {
-  role: UserRoleEnum;
-
-  user: UserCreateOneWithoutRolesInput;
-
-  station?: Maybe<StationCreateOneInput>;
-}
-
-export interface UserCreateOneWithoutRolesInput {
-  create?: Maybe<UserCreateWithoutRolesInput>;
-
-  connect?: Maybe<UserWhereUniqueInput>;
-}
-
-export interface UserCreateWithoutRolesInput {
-  email: string;
-
-  username: string;
-
-  password: string;
-
-  name?: Maybe<string>;
-
-  country?: Maybe<string>;
-
-  city?: Maybe<string>;
-
-  bio?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-
-  stations?: Maybe<StationCreateManyWithoutOwnerInput>;
-}
-
-export interface StationTagCreateInput {
-  name: string;
-
-  stations?: Maybe<StationCreateManyWithoutTagsInput>;
-}
-
-export interface StationCreateManyWithoutTagsInput {
-  create?: Maybe<StationCreateWithoutTagsInput[]>;
-
-  connect?: Maybe<StationWhereUniqueInput[]>;
-}
-
-export interface StationCreateWithoutTagsInput {
-  name: string;
-
-  slug: string;
-
-  description?: Maybe<string>;
-
-  owner: UserCreateOneWithoutStationsInput;
-}
-
-export interface UserUpdateInput {
-  email?: Maybe<string>;
-
-  username?: Maybe<string>;
-
-  password?: Maybe<string>;
-
-  name?: Maybe<string>;
-
-  country?: Maybe<string>;
-
-  city?: Maybe<string>;
-
-  bio?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-
-  roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
-
-  stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
-}
-
-export interface UserRoleUpdateManyWithoutUserInput {
-  create?: Maybe<UserRoleCreateWithoutUserInput[]>;
-
-  connect?: Maybe<UserRoleWhereUniqueInput[]>;
-
-  set?: Maybe<UserRoleWhereUniqueInput[]>;
-
-  disconnect?: Maybe<UserRoleWhereUniqueInput[]>;
-
-  delete?: Maybe<UserRoleWhereUniqueInput[]>;
-
-  update?: Maybe<UserRoleUpdateWithWhereUniqueWithoutUserInput[]>;
-
-  updateMany?: Maybe<UserRoleUpdateManyWithWhereNestedInput[]>;
-
-  deleteMany?: Maybe<UserRoleScalarWhereInput[]>;
-
-  upsert?: Maybe<UserRoleUpsertWithWhereUniqueWithoutUserInput[]>;
-}
-
-export interface UserRoleUpdateWithWhereUniqueWithoutUserInput {
+type Maybe<T> = T | null;
+/** All built-in and custom scalars, mapped to their actual values */
+export type Scalars = {
+  ID: string;
+  String: string;
+  Boolean: boolean;
+  Int: number;
+  Float: number;
+  DateTime: any;
+  /** The `Long` scalar type represents non-fractional signed whole numeric values.
+   * Long can represent values between -(2^63) and 2^63 - 1.
+   */
+  Long: any;
+};
+
+export type AggregateStation = {
+  readonly count: Scalars['Int'];
+};
+
+export type AggregateStationTag = {
+  readonly count: Scalars['Int'];
+};
+
+export type AggregateUser = {
+  readonly count: Scalars['Int'];
+};
+
+export type AggregateUserRole = {
+  readonly count: Scalars['Int'];
+};
+
+export type BatchPayload = {
+  /** The number of nodes that have been affected by the Batch operation. */
+  readonly count: Scalars['Long'];
+};
+
+export type LoginInput = {
+  readonly username?: Maybe<Scalars['String']>;
+  readonly email?: Maybe<Scalars['String']>;
+  readonly password: Scalars['String'];
+};
+
+export type LoginOrRegisterReturnType = {
+  readonly token?: Maybe<Scalars['String']>;
+};
+
+export type Mutation = {
+  readonly createUser: User;
+  readonly createUserRole: UserRole;
+  readonly createStationTag: StationTag;
+  readonly createStation: Station;
+  readonly updateUser?: Maybe<User>;
+  readonly updateUserRole?: Maybe<UserRole>;
+  readonly updateStationTag?: Maybe<StationTag>;
+  readonly updateStation?: Maybe<Station>;
+  readonly deleteUser?: Maybe<User>;
+  readonly deleteUserRole?: Maybe<UserRole>;
+  readonly deleteStationTag?: Maybe<StationTag>;
+  readonly deleteStation?: Maybe<Station>;
+  readonly upsertUser: User;
+  readonly upsertUserRole: UserRole;
+  readonly upsertStationTag: StationTag;
+  readonly upsertStation: Station;
+  readonly updateManyUsers: BatchPayload;
+  readonly updateManyUserRoles: BatchPayload;
+  readonly updateManyStationTags: BatchPayload;
+  readonly updateManyStations: BatchPayload;
+  readonly deleteManyUsers: BatchPayload;
+  readonly deleteManyUserRoles: BatchPayload;
+  readonly deleteManyStationTags: BatchPayload;
+  readonly deleteManyStations: BatchPayload;
+  readonly login: LoginOrRegisterReturnType;
+  readonly register: LoginOrRegisterReturnType;
+};
+
+export type MutationCreateUserArgs = {
+  data: UserCreateInput;
+};
+
+export type MutationCreateUserRoleArgs = {
+  data: UserRoleCreateInput;
+};
+
+export type MutationCreateStationTagArgs = {
+  data: StationTagCreateInput;
+};
+
+export type MutationCreateStationArgs = {
+  data: StationCreateInput;
+};
+
+export type MutationUpdateUserArgs = {
+  data: UserUpdateInput;
+  where: UserWhereUniqueInput;
+};
+
+export type MutationUpdateUserRoleArgs = {
+  data: UserRoleUpdateInput;
   where: UserRoleWhereUniqueInput;
+};
 
-  data: UserRoleUpdateWithoutUserDataInput;
-}
-
-export interface UserRoleUpdateWithoutUserDataInput {
-  role?: Maybe<UserRoleEnum>;
-
-  station?: Maybe<StationUpdateOneInput>;
-}
-
-export interface StationUpdateOneInput {
-  create?: Maybe<StationCreateInput>;
-
-  connect?: Maybe<StationWhereUniqueInput>;
-
-  disconnect?: Maybe<boolean>;
-
-  delete?: Maybe<boolean>;
-
-  update?: Maybe<StationUpdateDataInput>;
-
-  upsert?: Maybe<StationUpsertNestedInput>;
-}
-
-export interface StationUpdateDataInput {
-  name?: Maybe<string>;
-
-  slug?: Maybe<string>;
-
-  description?: Maybe<string>;
-
-  owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
-
-  tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
-}
-
-export interface UserUpdateOneRequiredWithoutStationsInput {
-  create?: Maybe<UserCreateWithoutStationsInput>;
-
-  connect?: Maybe<UserWhereUniqueInput>;
-
-  update?: Maybe<UserUpdateWithoutStationsDataInput>;
-
-  upsert?: Maybe<UserUpsertWithoutStationsInput>;
-}
-
-export interface UserUpdateWithoutStationsDataInput {
-  email?: Maybe<string>;
-
-  username?: Maybe<string>;
-
-  password?: Maybe<string>;
-
-  name?: Maybe<string>;
-
-  country?: Maybe<string>;
-
-  city?: Maybe<string>;
-
-  bio?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-
-  roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
-}
-
-export interface UserUpsertWithoutStationsInput {
-  update: UserUpdateWithoutStationsDataInput;
-
-  create: UserCreateWithoutStationsInput;
-}
-
-export interface StationTagUpdateManyWithoutStationsInput {
-  create?: Maybe<StationTagCreateWithoutStationsInput[]>;
-
-  connect?: Maybe<StationTagWhereUniqueInput[]>;
-
-  set?: Maybe<StationTagWhereUniqueInput[]>;
-
-  disconnect?: Maybe<StationTagWhereUniqueInput[]>;
-
-  delete?: Maybe<StationTagWhereUniqueInput[]>;
-
-  update?: Maybe<StationTagUpdateWithWhereUniqueWithoutStationsInput[]>;
-
-  updateMany?: Maybe<StationTagUpdateManyWithWhereNestedInput[]>;
-
-  deleteMany?: Maybe<StationTagScalarWhereInput[]>;
-
-  upsert?: Maybe<StationTagUpsertWithWhereUniqueWithoutStationsInput[]>;
-}
-
-export interface StationTagUpdateWithWhereUniqueWithoutStationsInput {
+export type MutationUpdateStationTagArgs = {
+  data: StationTagUpdateInput;
   where: StationTagWhereUniqueInput;
+};
 
-  data: StationTagUpdateWithoutStationsDataInput;
-}
+export type MutationUpdateStationArgs = {
+  data: StationUpdateInput;
+  where: StationWhereUniqueInput;
+};
 
-export interface StationTagUpdateWithoutStationsDataInput {
-  name?: Maybe<string>;
-}
+export type MutationDeleteUserArgs = {
+  where: UserWhereUniqueInput;
+};
 
-export interface StationTagUpdateManyWithWhereNestedInput {
-  where: StationTagScalarWhereInput;
+export type MutationDeleteUserRoleArgs = {
+  where: UserRoleWhereUniqueInput;
+};
 
-  data: StationTagUpdateManyDataInput;
-}
-
-export interface StationTagScalarWhereInput {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<StationTagScalarWhereInput[]>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<StationTagScalarWhereInput[]>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<StationTagScalarWhereInput[]>;
-
-  id?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<string>;
-
-  name?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  name_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  name_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  name_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  name_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  name_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  name_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  name_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  name_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  name_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  name_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  name_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  name_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  name_not_ends_with?: Maybe<string>;
-}
-
-export interface StationTagUpdateManyDataInput {
-  name?: Maybe<string>;
-}
-
-export interface StationTagUpsertWithWhereUniqueWithoutStationsInput {
+export type MutationDeleteStationTagArgs = {
   where: StationTagWhereUniqueInput;
+};
 
-  update: StationTagUpdateWithoutStationsDataInput;
+export type MutationDeleteStationArgs = {
+  where: StationWhereUniqueInput;
+};
 
-  create: StationTagCreateWithoutStationsInput;
-}
+export type MutationUpsertUserArgs = {
+  where: UserWhereUniqueInput;
+  create: UserCreateInput;
+  update: UserUpdateInput;
+};
 
-export interface StationUpsertNestedInput {
-  update: StationUpdateDataInput;
+export type MutationUpsertUserRoleArgs = {
+  where: UserRoleWhereUniqueInput;
+  create: UserRoleCreateInput;
+  update: UserRoleUpdateInput;
+};
 
+export type MutationUpsertStationTagArgs = {
+  where: StationTagWhereUniqueInput;
+  create: StationTagCreateInput;
+  update: StationTagUpdateInput;
+};
+
+export type MutationUpsertStationArgs = {
+  where: StationWhereUniqueInput;
   create: StationCreateInput;
+  update: StationUpdateInput;
+};
+
+export type MutationUpdateManyUsersArgs = {
+  data: UserUpdateManyMutationInput;
+  where?: Maybe<UserWhereInput>;
+};
+
+export type MutationUpdateManyUserRolesArgs = {
+  data: UserRoleUpdateManyMutationInput;
+  where?: Maybe<UserRoleWhereInput>;
+};
+
+export type MutationUpdateManyStationTagsArgs = {
+  data: StationTagUpdateManyMutationInput;
+  where?: Maybe<StationTagWhereInput>;
+};
+
+export type MutationUpdateManyStationsArgs = {
+  data: StationUpdateManyMutationInput;
+  where?: Maybe<StationWhereInput>;
+};
+
+export type MutationDeleteManyUsersArgs = {
+  where?: Maybe<UserWhereInput>;
+};
+
+export type MutationDeleteManyUserRolesArgs = {
+  where?: Maybe<UserRoleWhereInput>;
+};
+
+export type MutationDeleteManyStationTagsArgs = {
+  where?: Maybe<StationTagWhereInput>;
+};
+
+export type MutationDeleteManyStationsArgs = {
+  where?: Maybe<StationWhereInput>;
+};
+
+export type MutationLoginArgs = {
+  data: LoginInput;
+};
+
+export type MutationRegisterArgs = {
+  data: RegisterInput;
+};
+
+export enum MutationType {
+  Created = 'CREATED',
+  Updated = 'UPDATED',
+  Deleted = 'DELETED',
 }
 
-export interface UserRoleUpdateManyWithWhereNestedInput {
-  where: UserRoleScalarWhereInput;
+/** An object with an ID */
+export type Node = {
+  /** The id of the object. */
+  readonly id: Scalars['ID'];
+};
 
-  data: UserRoleUpdateManyDataInput;
-}
+/** Information about pagination in a connection. */
+export type PageInfo = {
+  /** When paginating forwards, are there more items? */
+  readonly hasNextPage: Scalars['Boolean'];
+  /** When paginating backwards, are there more items? */
+  readonly hasPreviousPage: Scalars['Boolean'];
+  /** When paginating backwards, the cursor to continue. */
+  readonly startCursor?: Maybe<Scalars['String']>;
+  /** When paginating forwards, the cursor to continue. */
+  readonly endCursor?: Maybe<Scalars['String']>;
+};
 
-export interface UserRoleScalarWhereInput {
-  /** Logical AND on all given filters. */
-  AND?: Maybe<UserRoleScalarWhereInput[]>;
-  /** Logical OR on all given filters. */
-  OR?: Maybe<UserRoleScalarWhereInput[]>;
-  /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<UserRoleScalarWhereInput[]>;
+export type Query = {
+  readonly users: ReadonlyArray<Maybe<User>>;
+  readonly userRoles: ReadonlyArray<Maybe<UserRole>>;
+  readonly stationTags: ReadonlyArray<Maybe<StationTag>>;
+  readonly stations: ReadonlyArray<Maybe<Station>>;
+  readonly user?: Maybe<User>;
+  readonly userRole?: Maybe<UserRole>;
+  readonly stationTag?: Maybe<StationTag>;
+  readonly station?: Maybe<Station>;
+  readonly usersConnection: UserConnection;
+  readonly userRolesConnection: UserRoleConnection;
+  readonly stationTagsConnection: StationTagConnection;
+  readonly stationsConnection: StationConnection;
+  /** Fetches an object given its ID */
+  readonly node?: Maybe<Node>;
+  readonly temp__?: Maybe<Scalars['Boolean']>;
+};
 
-  id?: Maybe<string>;
-  /** All values that are not equal to given value. */
-  id_not?: Maybe<string>;
-  /** All values that are contained in given list. */
-  id_in?: Maybe<string[]>;
-  /** All values that are not contained in given list. */
-  id_not_in?: Maybe<string[]>;
-  /** All values less than the given value. */
-  id_lt?: Maybe<string>;
-  /** All values less than or equal the given value. */
-  id_lte?: Maybe<string>;
-  /** All values greater than the given value. */
-  id_gt?: Maybe<string>;
-  /** All values greater than or equal the given value. */
-  id_gte?: Maybe<string>;
-  /** All values containing the given string. */
-  id_contains?: Maybe<string>;
-  /** All values not containing the given string. */
-  id_not_contains?: Maybe<string>;
-  /** All values starting with the given string. */
-  id_starts_with?: Maybe<string>;
-  /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<string>;
-  /** All values ending with the given string. */
-  id_ends_with?: Maybe<string>;
-  /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<string>;
+export type QueryUsersArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
 
-  role?: Maybe<UserRoleEnum>;
-  /** All values that are not equal to given value. */
-  role_not?: Maybe<UserRoleEnum>;
-  /** All values that are contained in given list. */
-  role_in?: Maybe<UserRoleEnum[]>;
-  /** All values that are not contained in given list. */
-  role_not_in?: Maybe<UserRoleEnum[]>;
-}
+export type QueryUserRolesArgs = {
+  where?: Maybe<UserRoleWhereInput>;
+  orderBy?: Maybe<UserRoleOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
 
-export interface UserRoleUpdateManyDataInput {
-  role?: Maybe<UserRoleEnum>;
-}
+export type QueryStationTagsArgs = {
+  where?: Maybe<StationTagWhereInput>;
+  orderBy?: Maybe<StationTagOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
 
-export interface UserRoleUpsertWithWhereUniqueWithoutUserInput {
+export type QueryStationsArgs = {
+  where?: Maybe<StationWhereInput>;
+  orderBy?: Maybe<StationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryUserArgs = {
+  where: UserWhereUniqueInput;
+};
+
+export type QueryUserRoleArgs = {
   where: UserRoleWhereUniqueInput;
+};
 
-  update: UserRoleUpdateWithoutUserDataInput;
+export type QueryStationTagArgs = {
+  where: StationTagWhereUniqueInput;
+};
 
-  create: UserRoleCreateWithoutUserInput;
-}
-
-export interface StationUpdateManyWithoutOwnerInput {
-  create?: Maybe<StationCreateWithoutOwnerInput[]>;
-
-  connect?: Maybe<StationWhereUniqueInput[]>;
-
-  set?: Maybe<StationWhereUniqueInput[]>;
-
-  disconnect?: Maybe<StationWhereUniqueInput[]>;
-
-  delete?: Maybe<StationWhereUniqueInput[]>;
-
-  update?: Maybe<StationUpdateWithWhereUniqueWithoutOwnerInput[]>;
-
-  updateMany?: Maybe<StationUpdateManyWithWhereNestedInput[]>;
-
-  deleteMany?: Maybe<StationScalarWhereInput[]>;
-
-  upsert?: Maybe<StationUpsertWithWhereUniqueWithoutOwnerInput[]>;
-}
-
-export interface StationUpdateWithWhereUniqueWithoutOwnerInput {
+export type QueryStationArgs = {
   where: StationWhereUniqueInput;
+};
 
-  data: StationUpdateWithoutOwnerDataInput;
+export type QueryUsersConnectionArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryUserRolesConnectionArgs = {
+  where?: Maybe<UserRoleWhereInput>;
+  orderBy?: Maybe<UserRoleOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryStationTagsConnectionArgs = {
+  where?: Maybe<StationTagWhereInput>;
+  orderBy?: Maybe<StationTagOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryStationsConnectionArgs = {
+  where?: Maybe<StationWhereInput>;
+  orderBy?: Maybe<StationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryNodeArgs = {
+  id: Scalars['ID'];
+};
+
+export type RegisterInput = {
+  readonly username?: Maybe<Scalars['String']>;
+  readonly email: Scalars['String'];
+  readonly password: Scalars['String'];
+};
+
+export type Station = Node & {
+  readonly id: Scalars['ID'];
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner: User;
+  readonly tags?: Maybe<ReadonlyArray<StationTag>>;
+};
+
+export type StationTagsArgs = {
+  where?: Maybe<StationTagWhereInput>;
+  orderBy?: Maybe<StationTagOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+/** A connection to a list of items. */
+export type StationConnection = {
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** A list of edges. */
+  readonly edges: ReadonlyArray<Maybe<StationEdge>>;
+  readonly aggregate: AggregateStation;
+};
+
+export type StationCreateInput = {
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner: UserCreateOneWithoutStationsInput;
+  readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
+};
+
+export type StationCreateManyWithoutOwnerInput = {
+  readonly create?: Maybe<ReadonlyArray<StationCreateWithoutOwnerInput>>;
+  readonly connect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+};
+
+export type StationCreateManyWithoutTagsInput = {
+  readonly create?: Maybe<ReadonlyArray<StationCreateWithoutTagsInput>>;
+  readonly connect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+};
+
+export type StationCreateOneInput = {
+  readonly create?: Maybe<StationCreateInput>;
+  readonly connect?: Maybe<StationWhereUniqueInput>;
+};
+
+export type StationCreateWithoutOwnerInput = {
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
+};
+
+export type StationCreateWithoutTagsInput = {
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner: UserCreateOneWithoutStationsInput;
+};
+
+/** An edge in a connection. */
+export type StationEdge = {
+  /** The item at the end of the edge. */
+  readonly node: Station;
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+};
+
+export enum StationOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
 }
 
-export interface StationUpdateWithoutOwnerDataInput {
-  name?: Maybe<string>;
+export type StationPreviousValues = {
+  readonly id: Scalars['ID'];
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+};
 
-  slug?: Maybe<string>;
-
-  description?: Maybe<string>;
-
-  tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
-}
-
-export interface StationUpdateManyWithWhereNestedInput {
-  where: StationScalarWhereInput;
-
-  data: StationUpdateManyDataInput;
-}
-
-export interface StationScalarWhereInput {
+export type StationScalarWhereInput = {
   /** Logical AND on all given filters. */
-  AND?: Maybe<StationScalarWhereInput[]>;
+  readonly AND?: Maybe<ReadonlyArray<StationScalarWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<StationScalarWhereInput[]>;
+  readonly OR?: Maybe<ReadonlyArray<StationScalarWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<StationScalarWhereInput[]>;
-
-  id?: Maybe<string>;
+  readonly NOT?: Maybe<ReadonlyArray<StationScalarWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
   /** All values that are not equal to given value. */
-  id_not?: Maybe<string>;
+  readonly id_not?: Maybe<Scalars['ID']>;
   /** All values that are contained in given list. */
-  id_in?: Maybe<string[]>;
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
   /** All values that are not contained in given list. */
-  id_not_in?: Maybe<string[]>;
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
   /** All values less than the given value. */
-  id_lt?: Maybe<string>;
+  readonly id_lt?: Maybe<Scalars['ID']>;
   /** All values less than or equal the given value. */
-  id_lte?: Maybe<string>;
+  readonly id_lte?: Maybe<Scalars['ID']>;
   /** All values greater than the given value. */
-  id_gt?: Maybe<string>;
+  readonly id_gt?: Maybe<Scalars['ID']>;
   /** All values greater than or equal the given value. */
-  id_gte?: Maybe<string>;
+  readonly id_gte?: Maybe<Scalars['ID']>;
   /** All values containing the given string. */
-  id_contains?: Maybe<string>;
+  readonly id_contains?: Maybe<Scalars['ID']>;
   /** All values not containing the given string. */
-  id_not_contains?: Maybe<string>;
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
   /** All values starting with the given string. */
-  id_starts_with?: Maybe<string>;
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
   /** All values not starting with the given string. */
-  id_not_starts_with?: Maybe<string>;
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
   /** All values ending with the given string. */
-  id_ends_with?: Maybe<string>;
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
   /** All values not ending with the given string. */
-  id_not_ends_with?: Maybe<string>;
-
-  name?: Maybe<string>;
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly name?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
-  name_not?: Maybe<string>;
+  readonly name_not?: Maybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  name_in?: Maybe<string[]>;
+  readonly name_in?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** All values that are not contained in given list. */
-  name_not_in?: Maybe<string[]>;
+  readonly name_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** All values less than the given value. */
-  name_lt?: Maybe<string>;
+  readonly name_lt?: Maybe<Scalars['String']>;
   /** All values less than or equal the given value. */
-  name_lte?: Maybe<string>;
+  readonly name_lte?: Maybe<Scalars['String']>;
   /** All values greater than the given value. */
-  name_gt?: Maybe<string>;
+  readonly name_gt?: Maybe<Scalars['String']>;
   /** All values greater than or equal the given value. */
-  name_gte?: Maybe<string>;
+  readonly name_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
-  name_contains?: Maybe<string>;
+  readonly name_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
-  name_not_contains?: Maybe<string>;
+  readonly name_not_contains?: Maybe<Scalars['String']>;
   /** All values starting with the given string. */
-  name_starts_with?: Maybe<string>;
+  readonly name_starts_with?: Maybe<Scalars['String']>;
   /** All values not starting with the given string. */
-  name_not_starts_with?: Maybe<string>;
+  readonly name_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
-  name_ends_with?: Maybe<string>;
+  readonly name_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string. */
-  name_not_ends_with?: Maybe<string>;
-
-  slug?: Maybe<string>;
+  readonly name_not_ends_with?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
-  slug_not?: Maybe<string>;
+  readonly slug_not?: Maybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  slug_in?: Maybe<string[]>;
+  readonly slug_in?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** All values that are not contained in given list. */
-  slug_not_in?: Maybe<string[]>;
+  readonly slug_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** All values less than the given value. */
-  slug_lt?: Maybe<string>;
+  readonly slug_lt?: Maybe<Scalars['String']>;
   /** All values less than or equal the given value. */
-  slug_lte?: Maybe<string>;
+  readonly slug_lte?: Maybe<Scalars['String']>;
   /** All values greater than the given value. */
-  slug_gt?: Maybe<string>;
+  readonly slug_gt?: Maybe<Scalars['String']>;
   /** All values greater than or equal the given value. */
-  slug_gte?: Maybe<string>;
+  readonly slug_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
-  slug_contains?: Maybe<string>;
+  readonly slug_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
-  slug_not_contains?: Maybe<string>;
+  readonly slug_not_contains?: Maybe<Scalars['String']>;
   /** All values starting with the given string. */
-  slug_starts_with?: Maybe<string>;
+  readonly slug_starts_with?: Maybe<Scalars['String']>;
   /** All values not starting with the given string. */
-  slug_not_starts_with?: Maybe<string>;
+  readonly slug_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
-  slug_ends_with?: Maybe<string>;
+  readonly slug_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string. */
-  slug_not_ends_with?: Maybe<string>;
-
-  description?: Maybe<string>;
+  readonly slug_not_ends_with?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
-  description_not?: Maybe<string>;
+  readonly description_not?: Maybe<Scalars['String']>;
   /** All values that are contained in given list. */
-  description_in?: Maybe<string[]>;
+  readonly description_in?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** All values that are not contained in given list. */
-  description_not_in?: Maybe<string[]>;
+  readonly description_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** All values less than the given value. */
-  description_lt?: Maybe<string>;
+  readonly description_lt?: Maybe<Scalars['String']>;
   /** All values less than or equal the given value. */
-  description_lte?: Maybe<string>;
+  readonly description_lte?: Maybe<Scalars['String']>;
   /** All values greater than the given value. */
-  description_gt?: Maybe<string>;
+  readonly description_gt?: Maybe<Scalars['String']>;
   /** All values greater than or equal the given value. */
-  description_gte?: Maybe<string>;
+  readonly description_gte?: Maybe<Scalars['String']>;
   /** All values containing the given string. */
-  description_contains?: Maybe<string>;
+  readonly description_contains?: Maybe<Scalars['String']>;
   /** All values not containing the given string. */
-  description_not_contains?: Maybe<string>;
+  readonly description_not_contains?: Maybe<Scalars['String']>;
   /** All values starting with the given string. */
-  description_starts_with?: Maybe<string>;
+  readonly description_starts_with?: Maybe<Scalars['String']>;
   /** All values not starting with the given string. */
-  description_not_starts_with?: Maybe<string>;
+  readonly description_not_starts_with?: Maybe<Scalars['String']>;
   /** All values ending with the given string. */
-  description_ends_with?: Maybe<string>;
+  readonly description_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string. */
-  description_not_ends_with?: Maybe<string>;
-}
-
-export interface StationUpdateManyDataInput {
-  name?: Maybe<string>;
-
-  slug?: Maybe<string>;
-
-  description?: Maybe<string>;
-}
-
-export interface StationUpsertWithWhereUniqueWithoutOwnerInput {
-  where: StationWhereUniqueInput;
-
-  update: StationUpdateWithoutOwnerDataInput;
-
-  create: StationCreateWithoutOwnerInput;
-}
-
-export interface UserRoleUpdateInput {
-  role?: Maybe<UserRoleEnum>;
-
-  user?: Maybe<UserUpdateOneRequiredWithoutRolesInput>;
-
-  station?: Maybe<StationUpdateOneInput>;
-}
-
-export interface UserUpdateOneRequiredWithoutRolesInput {
-  create?: Maybe<UserCreateWithoutRolesInput>;
-
-  connect?: Maybe<UserWhereUniqueInput>;
-
-  update?: Maybe<UserUpdateWithoutRolesDataInput>;
-
-  upsert?: Maybe<UserUpsertWithoutRolesInput>;
-}
-
-export interface UserUpdateWithoutRolesDataInput {
-  email?: Maybe<string>;
-
-  username?: Maybe<string>;
-
-  password?: Maybe<string>;
-
-  name?: Maybe<string>;
-
-  country?: Maybe<string>;
-
-  city?: Maybe<string>;
-
-  bio?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-
-  stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
-}
-
-export interface UserUpsertWithoutRolesInput {
-  update: UserUpdateWithoutRolesDataInput;
-
-  create: UserCreateWithoutRolesInput;
-}
-
-export interface StationTagUpdateInput {
-  name?: Maybe<string>;
-
-  stations?: Maybe<StationUpdateManyWithoutTagsInput>;
-}
-
-export interface StationUpdateManyWithoutTagsInput {
-  create?: Maybe<StationCreateWithoutTagsInput[]>;
-
-  connect?: Maybe<StationWhereUniqueInput[]>;
-
-  set?: Maybe<StationWhereUniqueInput[]>;
-
-  disconnect?: Maybe<StationWhereUniqueInput[]>;
-
-  delete?: Maybe<StationWhereUniqueInput[]>;
-
-  update?: Maybe<StationUpdateWithWhereUniqueWithoutTagsInput[]>;
-
-  updateMany?: Maybe<StationUpdateManyWithWhereNestedInput[]>;
-
-  deleteMany?: Maybe<StationScalarWhereInput[]>;
-
-  upsert?: Maybe<StationUpsertWithWhereUniqueWithoutTagsInput[]>;
-}
-
-export interface StationUpdateWithWhereUniqueWithoutTagsInput {
-  where: StationWhereUniqueInput;
-
-  data: StationUpdateWithoutTagsDataInput;
-}
-
-export interface StationUpdateWithoutTagsDataInput {
-  name?: Maybe<string>;
-
-  slug?: Maybe<string>;
-
-  description?: Maybe<string>;
-
-  owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
-}
-
-export interface StationUpsertWithWhereUniqueWithoutTagsInput {
-  where: StationWhereUniqueInput;
-
-  update: StationUpdateWithoutTagsDataInput;
-
-  create: StationCreateWithoutTagsInput;
-}
-
-export interface StationUpdateInput {
-  name?: Maybe<string>;
-
-  slug?: Maybe<string>;
-
-  description?: Maybe<string>;
-
-  owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
-
-  tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
-}
-
-export interface UserUpdateManyMutationInput {
-  email?: Maybe<string>;
-
-  username?: Maybe<string>;
-
-  password?: Maybe<string>;
-
-  name?: Maybe<string>;
-
-  country?: Maybe<string>;
-
-  city?: Maybe<string>;
-
-  bio?: Maybe<string>;
-
-  avatarUrl?: Maybe<string>;
-
-  coverUrl?: Maybe<string>;
-
-  reputation?: Maybe<number>;
-
-  facebookId?: Maybe<string>;
-
-  googleId?: Maybe<string>;
-}
-
-export interface UserRoleUpdateManyMutationInput {
-  role?: Maybe<UserRoleEnum>;
-}
-
-export interface StationTagUpdateManyMutationInput {
-  name?: Maybe<string>;
-}
-
-export interface StationUpdateManyMutationInput {
-  name?: Maybe<string>;
-
-  slug?: Maybe<string>;
-
-  description?: Maybe<string>;
-}
-
-export interface LoginInput {
-  username?: Maybe<string>;
-
-  email?: Maybe<string>;
-
-  password: string;
-}
-
-export interface RegisterInput {
-  username?: Maybe<string>;
-
-  email: string;
-
-  password: string;
-}
-
-export interface UserSubscriptionWhereInput {
+  readonly description_not_ends_with?: Maybe<Scalars['String']>;
+};
+
+export type StationSubscriptionPayload = {
+  readonly mutation: MutationType;
+  readonly node?: Maybe<Station>;
+  readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly previousValues?: Maybe<StationPreviousValues>;
+};
+
+export type StationSubscriptionWhereInput = {
   /** Logical AND on all given filters. */
-  AND?: Maybe<UserSubscriptionWhereInput[]>;
+  readonly AND?: Maybe<ReadonlyArray<StationSubscriptionWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<UserSubscriptionWhereInput[]>;
+  readonly OR?: Maybe<ReadonlyArray<StationSubscriptionWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<UserSubscriptionWhereInput[]>;
+  readonly NOT?: Maybe<ReadonlyArray<StationSubscriptionWhereInput>>;
   /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<MutationType[]>;
+  readonly mutation_in?: Maybe<ReadonlyArray<MutationType>>;
   /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<string>;
+  readonly updatedFields_contains?: Maybe<Scalars['String']>;
   /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<string[]>;
+  readonly updatedFields_contains_every?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<string[]>;
+  readonly updatedFields_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly node?: Maybe<StationWhereInput>;
+};
 
-  node?: Maybe<UserWhereInput>;
+export type StationTag = Node & {
+  readonly id: Scalars['ID'];
+  readonly name: Scalars['String'];
+  readonly stations?: Maybe<ReadonlyArray<Station>>;
+};
+
+export type StationTagStationsArgs = {
+  where?: Maybe<StationWhereInput>;
+  orderBy?: Maybe<StationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+/** A connection to a list of items. */
+export type StationTagConnection = {
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** A list of edges. */
+  readonly edges: ReadonlyArray<Maybe<StationTagEdge>>;
+  readonly aggregate: AggregateStationTag;
+};
+
+export type StationTagCreateInput = {
+  readonly name: Scalars['String'];
+  readonly stations?: Maybe<StationCreateManyWithoutTagsInput>;
+};
+
+export type StationTagCreateManyWithoutStationsInput = {
+  readonly create?: Maybe<ReadonlyArray<StationTagCreateWithoutStationsInput>>;
+  readonly connect?: Maybe<ReadonlyArray<StationTagWhereUniqueInput>>;
+};
+
+export type StationTagCreateWithoutStationsInput = {
+  readonly name: Scalars['String'];
+};
+
+/** An edge in a connection. */
+export type StationTagEdge = {
+  /** The item at the end of the edge. */
+  readonly node: StationTag;
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+};
+
+export enum StationTagOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
 }
 
-export interface UserRoleSubscriptionWhereInput {
+export type StationTagPreviousValues = {
+  readonly id: Scalars['ID'];
+  readonly name: Scalars['String'];
+};
+
+export type StationTagScalarWhereInput = {
   /** Logical AND on all given filters. */
-  AND?: Maybe<UserRoleSubscriptionWhereInput[]>;
+  readonly AND?: Maybe<ReadonlyArray<StationTagScalarWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<UserRoleSubscriptionWhereInput[]>;
+  readonly OR?: Maybe<ReadonlyArray<StationTagScalarWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<UserRoleSubscriptionWhereInput[]>;
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<MutationType[]>;
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<string>;
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<string[]>;
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<string[]>;
+  readonly NOT?: Maybe<ReadonlyArray<StationTagScalarWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly name?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly name_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly name_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly name_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly name_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly name_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly name_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly name_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly name_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly name_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly name_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly name_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly name_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly name_not_ends_with?: Maybe<Scalars['String']>;
+};
 
-  node?: Maybe<UserRoleWhereInput>;
-}
+export type StationTagSubscriptionPayload = {
+  readonly mutation: MutationType;
+  readonly node?: Maybe<StationTag>;
+  readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly previousValues?: Maybe<StationTagPreviousValues>;
+};
 
-export interface StationTagSubscriptionWhereInput {
+export type StationTagSubscriptionWhereInput = {
   /** Logical AND on all given filters. */
-  AND?: Maybe<StationTagSubscriptionWhereInput[]>;
+  readonly AND?: Maybe<ReadonlyArray<StationTagSubscriptionWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<StationTagSubscriptionWhereInput[]>;
+  readonly OR?: Maybe<ReadonlyArray<StationTagSubscriptionWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<StationTagSubscriptionWhereInput[]>;
+  readonly NOT?: Maybe<ReadonlyArray<StationTagSubscriptionWhereInput>>;
   /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<MutationType[]>;
+  readonly mutation_in?: Maybe<ReadonlyArray<MutationType>>;
   /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<string>;
+  readonly updatedFields_contains?: Maybe<Scalars['String']>;
   /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<string[]>;
+  readonly updatedFields_contains_every?: Maybe<ReadonlyArray<Scalars['String']>>;
   /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<string[]>;
+  readonly updatedFields_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly node?: Maybe<StationTagWhereInput>;
+};
 
-  node?: Maybe<StationTagWhereInput>;
-}
+export type StationTagUpdateInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly stations?: Maybe<StationUpdateManyWithoutTagsInput>;
+};
 
-export interface StationSubscriptionWhereInput {
+export type StationTagUpdateManyDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+};
+
+export type StationTagUpdateManyMutationInput = {
+  readonly name?: Maybe<Scalars['String']>;
+};
+
+export type StationTagUpdateManyWithoutStationsInput = {
+  readonly create?: Maybe<ReadonlyArray<StationTagCreateWithoutStationsInput>>;
+  readonly connect?: Maybe<ReadonlyArray<StationTagWhereUniqueInput>>;
+  readonly set?: Maybe<ReadonlyArray<StationTagWhereUniqueInput>>;
+  readonly disconnect?: Maybe<ReadonlyArray<StationTagWhereUniqueInput>>;
+  readonly delete?: Maybe<ReadonlyArray<StationTagWhereUniqueInput>>;
+  readonly update?: Maybe<ReadonlyArray<StationTagUpdateWithWhereUniqueWithoutStationsInput>>;
+  readonly updateMany?: Maybe<ReadonlyArray<StationTagUpdateManyWithWhereNestedInput>>;
+  readonly deleteMany?: Maybe<ReadonlyArray<StationTagScalarWhereInput>>;
+  readonly upsert?: Maybe<ReadonlyArray<StationTagUpsertWithWhereUniqueWithoutStationsInput>>;
+};
+
+export type StationTagUpdateManyWithWhereNestedInput = {
+  readonly where: StationTagScalarWhereInput;
+  readonly data: StationTagUpdateManyDataInput;
+};
+
+export type StationTagUpdateWithoutStationsDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+};
+
+export type StationTagUpdateWithWhereUniqueWithoutStationsInput = {
+  readonly where: StationTagWhereUniqueInput;
+  readonly data: StationTagUpdateWithoutStationsDataInput;
+};
+
+export type StationTagUpsertWithWhereUniqueWithoutStationsInput = {
+  readonly where: StationTagWhereUniqueInput;
+  readonly update: StationTagUpdateWithoutStationsDataInput;
+  readonly create: StationTagCreateWithoutStationsInput;
+};
+
+export type StationTagWhereInput = {
   /** Logical AND on all given filters. */
-  AND?: Maybe<StationSubscriptionWhereInput[]>;
+  readonly AND?: Maybe<ReadonlyArray<StationTagWhereInput>>;
   /** Logical OR on all given filters. */
-  OR?: Maybe<StationSubscriptionWhereInput[]>;
+  readonly OR?: Maybe<ReadonlyArray<StationTagWhereInput>>;
   /** Logical NOT on all given filters combined by AND. */
-  NOT?: Maybe<StationSubscriptionWhereInput[]>;
-  /** The subscription event gets dispatched when it's listed in mutation_in */
-  mutation_in?: Maybe<MutationType[]>;
-  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
-  updatedFields_contains?: Maybe<string>;
-  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
-  updatedFields_contains_every?: Maybe<string[]>;
-  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
-  updatedFields_contains_some?: Maybe<string[]>;
+  readonly NOT?: Maybe<ReadonlyArray<StationTagWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly name?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly name_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly name_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly name_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly name_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly name_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly name_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly name_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly name_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly name_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly name_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly name_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly name_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly name_not_ends_with?: Maybe<Scalars['String']>;
+  readonly stations_every?: Maybe<StationWhereInput>;
+  readonly stations_some?: Maybe<StationWhereInput>;
+  readonly stations_none?: Maybe<StationWhereInput>;
+};
 
-  node?: Maybe<StationWhereInput>;
-}
+export type StationTagWhereUniqueInput = {
+  readonly id?: Maybe<Scalars['ID']>;
+};
 
-export enum UserRoleEnum {
-  Admin = 'ADMIN',
-  StationOwner = 'STATION_OWNER',
-}
+export type StationUpdateDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+  readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+};
+
+export type StationUpdateInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+  readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+};
+
+export type StationUpdateManyDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+};
+
+export type StationUpdateManyMutationInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+};
+
+export type StationUpdateManyWithoutOwnerInput = {
+  readonly create?: Maybe<ReadonlyArray<StationCreateWithoutOwnerInput>>;
+  readonly connect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly set?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly disconnect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly delete?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly update?: Maybe<ReadonlyArray<StationUpdateWithWhereUniqueWithoutOwnerInput>>;
+  readonly updateMany?: Maybe<ReadonlyArray<StationUpdateManyWithWhereNestedInput>>;
+  readonly deleteMany?: Maybe<ReadonlyArray<StationScalarWhereInput>>;
+  readonly upsert?: Maybe<ReadonlyArray<StationUpsertWithWhereUniqueWithoutOwnerInput>>;
+};
+
+export type StationUpdateManyWithoutTagsInput = {
+  readonly create?: Maybe<ReadonlyArray<StationCreateWithoutTagsInput>>;
+  readonly connect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly set?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly disconnect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly delete?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
+  readonly update?: Maybe<ReadonlyArray<StationUpdateWithWhereUniqueWithoutTagsInput>>;
+  readonly updateMany?: Maybe<ReadonlyArray<StationUpdateManyWithWhereNestedInput>>;
+  readonly deleteMany?: Maybe<ReadonlyArray<StationScalarWhereInput>>;
+  readonly upsert?: Maybe<ReadonlyArray<StationUpsertWithWhereUniqueWithoutTagsInput>>;
+};
+
+export type StationUpdateManyWithWhereNestedInput = {
+  readonly where: StationScalarWhereInput;
+  readonly data: StationUpdateManyDataInput;
+};
+
+export type StationUpdateOneInput = {
+  readonly create?: Maybe<StationCreateInput>;
+  readonly connect?: Maybe<StationWhereUniqueInput>;
+  readonly disconnect?: Maybe<Scalars['Boolean']>;
+  readonly delete?: Maybe<Scalars['Boolean']>;
+  readonly update?: Maybe<StationUpdateDataInput>;
+  readonly upsert?: Maybe<StationUpsertNestedInput>;
+};
+
+export type StationUpdateWithoutOwnerDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+};
+
+export type StationUpdateWithoutTagsDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+};
+
+export type StationUpdateWithWhereUniqueWithoutOwnerInput = {
+  readonly where: StationWhereUniqueInput;
+  readonly data: StationUpdateWithoutOwnerDataInput;
+};
+
+export type StationUpdateWithWhereUniqueWithoutTagsInput = {
+  readonly where: StationWhereUniqueInput;
+  readonly data: StationUpdateWithoutTagsDataInput;
+};
+
+export type StationUpsertNestedInput = {
+  readonly update: StationUpdateDataInput;
+  readonly create: StationCreateInput;
+};
+
+export type StationUpsertWithWhereUniqueWithoutOwnerInput = {
+  readonly where: StationWhereUniqueInput;
+  readonly update: StationUpdateWithoutOwnerDataInput;
+  readonly create: StationCreateWithoutOwnerInput;
+};
+
+export type StationUpsertWithWhereUniqueWithoutTagsInput = {
+  readonly where: StationWhereUniqueInput;
+  readonly update: StationUpdateWithoutTagsDataInput;
+  readonly create: StationCreateWithoutTagsInput;
+};
+
+export type StationWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<StationWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<StationWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<StationWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly name?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly name_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly name_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly name_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly name_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly name_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly name_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly name_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly name_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly name_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly name_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly name_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly name_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly name_not_ends_with?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly slug_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly slug_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly slug_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly slug_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly slug_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly slug_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly slug_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly slug_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly slug_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly slug_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly slug_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly slug_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly slug_not_ends_with?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly description_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly description_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly description_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly description_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly description_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly description_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly description_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly description_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly description_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly description_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly description_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly description_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly description_not_ends_with?: Maybe<Scalars['String']>;
+  readonly owner?: Maybe<UserWhereInput>;
+  readonly tags_every?: Maybe<StationTagWhereInput>;
+  readonly tags_some?: Maybe<StationTagWhereInput>;
+  readonly tags_none?: Maybe<StationTagWhereInput>;
+};
+
+export type StationWhereUniqueInput = {
+  readonly id?: Maybe<Scalars['ID']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+};
+
+export type Subscription = {
+  readonly user?: Maybe<UserSubscriptionPayload>;
+  readonly userRole?: Maybe<UserRoleSubscriptionPayload>;
+  readonly stationTag?: Maybe<StationTagSubscriptionPayload>;
+  readonly station?: Maybe<StationSubscriptionPayload>;
+};
+
+export type SubscriptionUserArgs = {
+  where?: Maybe<UserSubscriptionWhereInput>;
+};
+
+export type SubscriptionUserRoleArgs = {
+  where?: Maybe<UserRoleSubscriptionWhereInput>;
+};
+
+export type SubscriptionStationTagArgs = {
+  where?: Maybe<StationTagSubscriptionWhereInput>;
+};
+
+export type SubscriptionStationArgs = {
+  where?: Maybe<StationSubscriptionWhereInput>;
+};
+
+export type User = Node & {
+  readonly id: Scalars['ID'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly updatedAt: Scalars['DateTime'];
+  readonly email: Scalars['String'];
+  readonly username: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly roles?: Maybe<ReadonlyArray<UserRole>>;
+  readonly stations?: Maybe<ReadonlyArray<Station>>;
+};
+
+export type UserRolesArgs = {
+  where?: Maybe<UserRoleWhereInput>;
+  orderBy?: Maybe<UserRoleOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type UserStationsArgs = {
+  where?: Maybe<StationWhereInput>;
+  orderBy?: Maybe<StationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+/** A connection to a list of items. */
+export type UserConnection = {
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** A list of edges. */
+  readonly edges: ReadonlyArray<Maybe<UserEdge>>;
+  readonly aggregate: AggregateUser;
+};
+
+export type UserCreateInput = {
+  readonly email: Scalars['String'];
+  readonly username: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
+  readonly stations?: Maybe<StationCreateManyWithoutOwnerInput>;
+};
+
+export type UserCreateOneWithoutRolesInput = {
+  readonly create?: Maybe<UserCreateWithoutRolesInput>;
+  readonly connect?: Maybe<UserWhereUniqueInput>;
+};
+
+export type UserCreateOneWithoutStationsInput = {
+  readonly create?: Maybe<UserCreateWithoutStationsInput>;
+  readonly connect?: Maybe<UserWhereUniqueInput>;
+};
+
+export type UserCreateWithoutRolesInput = {
+  readonly email: Scalars['String'];
+  readonly username: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly stations?: Maybe<StationCreateManyWithoutOwnerInput>;
+};
+
+export type UserCreateWithoutStationsInput = {
+  readonly email: Scalars['String'];
+  readonly username: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
+};
+
+/** An edge in a connection. */
+export type UserEdge = {
+  /** The item at the end of the edge. */
+  readonly node: User;
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+};
 
 export enum UserOrderByInput {
   IdAsc = 'id_ASC',
@@ -1642,6 +1252,69 @@ export enum UserOrderByInput {
   GoogleIdDesc = 'googleId_DESC',
 }
 
+export type UserPreviousValues = {
+  readonly id: Scalars['ID'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly updatedAt: Scalars['DateTime'];
+  readonly email: Scalars['String'];
+  readonly username: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+};
+
+export type UserRole = Node & {
+  readonly id: Scalars['ID'];
+  readonly role: UserRoleEnum;
+  readonly user: User;
+  readonly station?: Maybe<Station>;
+};
+
+/** A connection to a list of items. */
+export type UserRoleConnection = {
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** A list of edges. */
+  readonly edges: ReadonlyArray<Maybe<UserRoleEdge>>;
+  readonly aggregate: AggregateUserRole;
+};
+
+export type UserRoleCreateInput = {
+  readonly role: UserRoleEnum;
+  readonly user: UserCreateOneWithoutRolesInput;
+  readonly station?: Maybe<StationCreateOneInput>;
+};
+
+export type UserRoleCreateManyWithoutUserInput = {
+  readonly create?: Maybe<ReadonlyArray<UserRoleCreateWithoutUserInput>>;
+  readonly connect?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+};
+
+export type UserRoleCreateWithoutUserInput = {
+  readonly role: UserRoleEnum;
+  readonly station?: Maybe<StationCreateOneInput>;
+};
+
+/** An edge in a connection. */
+export type UserRoleEdge = {
+  /** The item at the end of the edge. */
+  readonly node: UserRole;
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+};
+
+export enum UserRoleEnum {
+  Admin = 'ADMIN',
+  StationOwner = 'STATION_OWNER',
+}
+
 export enum UserRoleOrderByInput {
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
@@ -1653,70 +1326,688 @@ export enum UserRoleOrderByInput {
   CreatedAtDesc = 'createdAt_DESC',
 }
 
-export enum StationTagOrderByInput {
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
-}
+export type UserRolePreviousValues = {
+  readonly id: Scalars['ID'];
+  readonly role: UserRoleEnum;
+};
 
-export enum StationOrderByInput {
-  IdAsc = 'id_ASC',
-  IdDesc = 'id_DESC',
-  NameAsc = 'name_ASC',
-  NameDesc = 'name_DESC',
-  SlugAsc = 'slug_ASC',
-  SlugDesc = 'slug_DESC',
-  DescriptionAsc = 'description_ASC',
-  DescriptionDesc = 'description_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
-}
+export type UserRoleScalarWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<UserRoleScalarWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<UserRoleScalarWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<UserRoleScalarWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly role?: Maybe<UserRoleEnum>;
+  /** All values that are not equal to given value. */
+  readonly role_not?: Maybe<UserRoleEnum>;
+  /** All values that are contained in given list. */
+  readonly role_in?: Maybe<ReadonlyArray<UserRoleEnum>>;
+  /** All values that are not contained in given list. */
+  readonly role_not_in?: Maybe<ReadonlyArray<UserRoleEnum>>;
+};
 
-export enum MutationType {
-  Created = 'CREATED',
-  Updated = 'UPDATED',
-  Deleted = 'DELETED',
-}
+export type UserRoleSubscriptionPayload = {
+  readonly mutation: MutationType;
+  readonly node?: Maybe<UserRole>;
+  readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly previousValues?: Maybe<UserRolePreviousValues>;
+};
 
-export type DateTime = any;
+export type UserRoleSubscriptionWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<UserRoleSubscriptionWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<UserRoleSubscriptionWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<UserRoleSubscriptionWhereInput>>;
+  /** The subscription event gets dispatched when it's listed in mutation_in */
+  readonly mutation_in?: Maybe<ReadonlyArray<MutationType>>;
+  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
+  readonly updatedFields_contains?: Maybe<Scalars['String']>;
+  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
+  readonly updatedFields_contains_every?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
+  readonly updatedFields_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly node?: Maybe<UserRoleWhereInput>;
+};
 
-/** The `Long` scalar type represents non-fractional signed whole numeric values. Long can represent values between -(2^63) and 2^63 - 1. */
-export type Long = any;
+export type UserRoleUpdateInput = {
+  readonly role?: Maybe<UserRoleEnum>;
+  readonly user?: Maybe<UserUpdateOneRequiredWithoutRolesInput>;
+  readonly station?: Maybe<StationUpdateOneInput>;
+};
 
-// ====================================================
-// Documents
-// ====================================================
+export type UserRoleUpdateManyDataInput = {
+  readonly role?: Maybe<UserRoleEnum>;
+};
 
-export type RegisterVariables = {
+export type UserRoleUpdateManyMutationInput = {
+  readonly role?: Maybe<UserRoleEnum>;
+};
+
+export type UserRoleUpdateManyWithoutUserInput = {
+  readonly create?: Maybe<ReadonlyArray<UserRoleCreateWithoutUserInput>>;
+  readonly connect?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly set?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly disconnect?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly delete?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly update?: Maybe<ReadonlyArray<UserRoleUpdateWithWhereUniqueWithoutUserInput>>;
+  readonly updateMany?: Maybe<ReadonlyArray<UserRoleUpdateManyWithWhereNestedInput>>;
+  readonly deleteMany?: Maybe<ReadonlyArray<UserRoleScalarWhereInput>>;
+  readonly upsert?: Maybe<ReadonlyArray<UserRoleUpsertWithWhereUniqueWithoutUserInput>>;
+};
+
+export type UserRoleUpdateManyWithWhereNestedInput = {
+  readonly where: UserRoleScalarWhereInput;
+  readonly data: UserRoleUpdateManyDataInput;
+};
+
+export type UserRoleUpdateWithoutUserDataInput = {
+  readonly role?: Maybe<UserRoleEnum>;
+  readonly station?: Maybe<StationUpdateOneInput>;
+};
+
+export type UserRoleUpdateWithWhereUniqueWithoutUserInput = {
+  readonly where: UserRoleWhereUniqueInput;
+  readonly data: UserRoleUpdateWithoutUserDataInput;
+};
+
+export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
+  readonly where: UserRoleWhereUniqueInput;
+  readonly update: UserRoleUpdateWithoutUserDataInput;
+  readonly create: UserRoleCreateWithoutUserInput;
+};
+
+export type UserRoleWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<UserRoleWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<UserRoleWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<UserRoleWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly role?: Maybe<UserRoleEnum>;
+  /** All values that are not equal to given value. */
+  readonly role_not?: Maybe<UserRoleEnum>;
+  /** All values that are contained in given list. */
+  readonly role_in?: Maybe<ReadonlyArray<UserRoleEnum>>;
+  /** All values that are not contained in given list. */
+  readonly role_not_in?: Maybe<ReadonlyArray<UserRoleEnum>>;
+  readonly user?: Maybe<UserWhereInput>;
+  readonly station?: Maybe<StationWhereInput>;
+};
+
+export type UserRoleWhereUniqueInput = {
+  readonly id?: Maybe<Scalars['ID']>;
+};
+
+export type UserSubscriptionPayload = {
+  readonly mutation: MutationType;
+  readonly node?: Maybe<User>;
+  readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly previousValues?: Maybe<UserPreviousValues>;
+};
+
+export type UserSubscriptionWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<UserSubscriptionWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<UserSubscriptionWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<UserSubscriptionWhereInput>>;
+  /** The subscription event gets dispatched when it's listed in mutation_in */
+  readonly mutation_in?: Maybe<ReadonlyArray<MutationType>>;
+  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
+  readonly updatedFields_contains?: Maybe<Scalars['String']>;
+  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
+  readonly updatedFields_contains_every?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
+  readonly updatedFields_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly node?: Maybe<UserWhereInput>;
+};
+
+export type UserUpdateInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
+  readonly stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
+};
+
+export type UserUpdateManyMutationInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+};
+
+export type UserUpdateOneRequiredWithoutRolesInput = {
+  readonly create?: Maybe<UserCreateWithoutRolesInput>;
+  readonly connect?: Maybe<UserWhereUniqueInput>;
+  readonly update?: Maybe<UserUpdateWithoutRolesDataInput>;
+  readonly upsert?: Maybe<UserUpsertWithoutRolesInput>;
+};
+
+export type UserUpdateOneRequiredWithoutStationsInput = {
+  readonly create?: Maybe<UserCreateWithoutStationsInput>;
+  readonly connect?: Maybe<UserWhereUniqueInput>;
+  readonly update?: Maybe<UserUpdateWithoutStationsDataInput>;
+  readonly upsert?: Maybe<UserUpsertWithoutStationsInput>;
+};
+
+export type UserUpdateWithoutRolesDataInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
+};
+
+export type UserUpdateWithoutStationsDataInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
+};
+
+export type UserUpsertWithoutRolesInput = {
+  readonly update: UserUpdateWithoutRolesDataInput;
+  readonly create: UserCreateWithoutRolesInput;
+};
+
+export type UserUpsertWithoutStationsInput = {
+  readonly update: UserUpdateWithoutStationsDataInput;
+  readonly create: UserCreateWithoutStationsInput;
+};
+
+export type UserWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<UserWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<UserWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<UserWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly email?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly email_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly email_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly email_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly email_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly email_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly email_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly email_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly email_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly email_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly email_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly email_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly email_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly email_not_ends_with?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly username_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly username_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly username_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly username_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly username_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly username_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly username_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly username_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly username_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly username_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly username_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly username_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly username_not_ends_with?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly password_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly password_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly password_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly password_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly password_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly password_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly password_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly password_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly password_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly password_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly password_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly password_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly password_not_ends_with?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly name_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly name_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly name_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly name_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly name_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly name_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly name_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly name_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly name_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly name_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly name_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly name_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly name_not_ends_with?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly country_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly country_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly country_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly country_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly country_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly country_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly country_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly country_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly country_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly country_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly country_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly country_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly country_not_ends_with?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly city_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly city_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly city_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly city_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly city_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly city_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly city_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly city_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly city_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly city_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly city_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly city_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly city_not_ends_with?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly bio_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly bio_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly bio_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly bio_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly bio_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly bio_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly bio_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly bio_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly bio_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly bio_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly bio_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly bio_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly bio_not_ends_with?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly avatarUrl_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly avatarUrl_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly avatarUrl_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly avatarUrl_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly avatarUrl_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly avatarUrl_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly avatarUrl_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly avatarUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly avatarUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly avatarUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly avatarUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly avatarUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly avatarUrl_not_ends_with?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly coverUrl_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly coverUrl_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly coverUrl_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly coverUrl_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly coverUrl_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly coverUrl_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly coverUrl_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly coverUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly coverUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly coverUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly coverUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly coverUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly coverUrl_not_ends_with?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  readonly reputation_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  readonly reputation_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  readonly reputation_not_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values less than the given value. */
+  readonly reputation_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  readonly reputation_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  readonly reputation_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  readonly reputation_gte?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly facebookId_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly facebookId_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly facebookId_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly facebookId_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly facebookId_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly facebookId_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly facebookId_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly facebookId_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly facebookId_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly facebookId_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly facebookId_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly facebookId_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly facebookId_not_ends_with?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly googleId_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly googleId_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly googleId_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly googleId_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly googleId_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly googleId_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly googleId_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly googleId_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly googleId_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly googleId_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly googleId_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly googleId_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly googleId_not_ends_with?: Maybe<Scalars['String']>;
+  readonly roles_every?: Maybe<UserRoleWhereInput>;
+  readonly roles_some?: Maybe<UserRoleWhereInput>;
+  readonly roles_none?: Maybe<UserRoleWhereInput>;
+  readonly stations_every?: Maybe<StationWhereInput>;
+  readonly stations_some?: Maybe<StationWhereInput>;
+  readonly stations_none?: Maybe<StationWhereInput>;
+};
+
+export type UserWhereUniqueInput = {
+  readonly id?: Maybe<Scalars['ID']>;
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+};
+export type RegisterMutationVariables = {
   data: RegisterInput;
 };
 
-export type RegisterMutation = {
-  __typename?: 'Mutation';
-
-  register: RegisterRegister;
-};
-
-export type RegisterRegister = {
-  __typename?: 'LoginOrRegisterReturnType';
-
-  token: Maybe<string>;
+export type RegisterMutation = { readonly __typename?: 'Mutation' } & {
+  readonly register: { readonly __typename?: 'LoginOrRegisterReturnType' } & Pick<LoginOrRegisterReturnType, 'token'>;
 };
 
 import gql from 'graphql-tag';
-import * as React from 'react';
 import * as ReactApollo from 'react-apollo';
-
-// ====================================================
-// Components
-// ====================================================
+import * as ReactApolloHooks from 'react-apollo-hooks';
 
 export const RegisterDocument = gql`
   mutation Register($data: RegisterInput!) {
@@ -1725,28 +2016,24 @@ export const RegisterDocument = gql`
     }
   }
 `;
-export class RegisterComponent extends React.Component<
-  Partial<ReactApollo.MutationProps<RegisterMutation, RegisterVariables>>
-> {
-  render() {
-    return (
-      <ReactApollo.Mutation<RegisterMutation, RegisterVariables>
-        mutation={RegisterDocument}
-        {...(this as any)['props'] as any}
-      />
-    );
-  }
-}
-export type RegisterProps<TChildProps = any> = Partial<ReactApollo.MutateProps<RegisterMutation, RegisterVariables>> &
+export type RegisterProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<RegisterMutation, RegisterMutationVariables>
+> &
   TChildProps;
-export type RegisterMutationFn = ReactApollo.MutationFn<RegisterMutation, RegisterVariables>;
-export function RegisterHOC<TProps, TChildProps = any>(
+export type RegisterMutationFn = ReactApollo.MutationFn<RegisterMutation, RegisterMutationVariables>;
+export function withRegister<TProps, TChildProps = {}>(
   operationOptions:
-    | ReactApollo.OperationOption<TProps, RegisterMutation, RegisterVariables, RegisterProps<TChildProps>>
+    | ReactApollo.OperationOption<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>
     | undefined,
 ) {
-  return ReactApollo.graphql<TProps, RegisterMutation, RegisterVariables, RegisterProps<TChildProps>>(
+  return ReactApollo.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>(
     RegisterDocument,
     operationOptions,
   );
+}
+
+export function useRegisterMutation(
+  baseOptions?: ReactApolloHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>,
+) {
+  return ReactApolloHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
 }

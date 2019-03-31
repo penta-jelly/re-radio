@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import { RouteComponentProps } from 'react-router';
 
-import { RegisterInput, RegisterDocument, RegisterVariables, RegisterMutation } from '../graphql';
+import { useRegisterMutation, RegisterInput } from '../graphql';
 
 type DataKeys = keyof RegisterInput;
 type Data = { [key in DataKeys]: string };
@@ -30,14 +30,18 @@ const useStyles = makeStyles({
 
 const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
-  const registerMutation = useMutation<RegisterMutation, RegisterVariables>(RegisterDocument);
+  const registerMutation = useRegisterMutation();
   const [registerError, setRegisterError] = useState<string | null>(null);
   const { t, i18n } = useTranslation('common');
   const onRegister = useCallback(async (values: Data) => {
     setRegisterError(null);
 
     try {
-      const response = await registerMutation({ variables: { data: values } });
+      const response = await registerMutation({
+        variables: {
+          data: values,
+        },
+      });
       if (response.data && response.data.register.token) {
         localStorage.setItem('token', response.data.register.token);
         history.replace('/');
