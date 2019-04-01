@@ -461,9 +461,7 @@ input StationSubscriptionWhereInput {
   """Logical NOT on all given filters combined by AND."""
   NOT: [StationSubscriptionWhereInput!]
 
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
 
   """
@@ -646,9 +644,7 @@ input StationTagSubscriptionWhereInput {
   """Logical NOT on all given filters combined by AND."""
   NOT: [StationTagSubscriptionWhereInput!]
 
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
 
   """
@@ -1396,9 +1392,7 @@ input UserRoleSubscriptionWhereInput {
   """Logical NOT on all given filters combined by AND."""
   NOT: [UserRoleSubscriptionWhereInput!]
 
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
 
   """
@@ -1549,9 +1543,7 @@ input UserSubscriptionWhereInput {
   """Logical NOT on all given filters combined by AND."""
   NOT: [UserSubscriptionWhereInput!]
 
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
+  """The subscription event gets dispatched when it's listed in mutation_in"""
   mutation_in: [MutationType!]
 
   """

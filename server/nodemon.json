@@ -1,6 +1,0 @@
-{
-  "watch": ["dist"],
-  "ext": "js",
-  "ignore": ["dist/**/*.spec.js", "dist/workers/**/*.js"],
-  "exec": "node dist/main.js"
-}
