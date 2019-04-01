@@ -16,7 +16,11 @@ const useStyles = makeStyles({
 
 const Home = () => {
   const classes = useStyles();
-  return <Button className={classes.root} id="home-page-button">Hello from home page</Button>;
-}
+  return (
+    <Button className={classes.root} id="home-page-button">
+      Hello from home page
+    </Button>
+  );
+};
 
 export default Home;
