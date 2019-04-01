@@ -37,7 +37,7 @@ export class AuthService {
     if (!username && !email) throw new BadRequestException();
     const user = await this.prisma.query.user({ where: { username, email } });
     if (!user || !this.usersService.isValidPassword(rawPassword, user.password)) {
-      throw new UnauthorizedException('User not found.');
+      throw new UnauthorizedException();
     }
     return user;
   }
@@ -53,9 +53,20 @@ export class AuthService {
 
   async validateUserFromJWTPayload(payload: JwtPayload): Promise<User> {
     const { username, email, password } = payload;
-    const user = await this.prisma.query.user({ where: { username, email } });
-    if (!user || user.password !== password) throw new UnauthorizedException('User not found.');
-    return user;
+    try {
+      const user = await this.prisma.query.user(
+        { where: { username, email } },
+        `{
+          id createdAt updatedAt email username password name country city bio avatarUrl coverUrl reputation facebookId googleId
+          password
+          roles { id  role }
+        }`,
+      );
+      if (user.password !== password) throw new UnauthorizedException();
+      return user;
+    } catch (error) {
+      throw new UnauthorizedException();
+    }
   }
 
   private async generateUsername(email: string) {

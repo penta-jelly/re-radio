@@ -10,12 +10,12 @@ import {
 export class StationUpdateDTO implements StationUpdateInput {
   @Length(2, 32)
   @IsOptional()
-  name: string;
+  name?: string;
 
   @Length(2, 32)
   @IsOptional()
   @NotContains(' ')
-  slug: string;
+  slug?: string;
 
   @IsOptional()
   description?: string | null;

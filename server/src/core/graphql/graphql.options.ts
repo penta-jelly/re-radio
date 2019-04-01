@@ -1,11 +1,11 @@
-import { HttpException, Injectable } from '@nestjs/common';
-import { GqlOptionsFactory } from '@nestjs/graphql';
+import { Injectable } from '@nestjs/common';
+import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { ValidationError } from 'class-validator';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 
 @Injectable()
 export class GraphqlOptions implements GqlOptionsFactory {
-  createGqlOptions() {
+  createGqlOptions(): GqlModuleOptions {
     return {
       typePaths: ['**/*.graphql'],
       path: '/graphql',
@@ -36,13 +36,13 @@ export class GraphqlOptions implements GqlOptionsFactory {
     return formattedError;
   }
 
-  private formatHttpExceptionError(error: HttpException): string {
-    return error.message;
+  private formatHttpExceptionError(error: { message?: string; error?: string }): string {
+    return error.message || error.error;
   }
 
   // tslint:disable-next-line no-any
-  private isHttpExceptionError(object: any): object is HttpException {
-    if (object && object.message) return true;
+  private isHttpExceptionError(object: any): object is { message?: string; error?: string } {
+    if (object && (object.message || object.error)) return true;
     return false;
   }
 

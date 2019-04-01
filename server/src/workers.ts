@@ -1,5 +1,6 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import 'source-map-support/register';
 import { WorkersModule } from './workers.module';
 import { SeederService } from './workers/seeder/Seeder.service';
 

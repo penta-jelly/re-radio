@@ -12,6 +12,5 @@ services:
         npm run build &&
         wait-on http://prisma:${PRISMA_PORT} && 
         npm run prisma:deploy --force &&
-        npm run worker:seed &&
         npm run dev
       "

@@ -1,8 +1,8 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { BatchPayload, Station, StationWhereUniqueInput } from '../../prisma/prisma.binding';
+import { BatchPayload, Station, StationWhereInput, StationWhereUniqueInput, User } from '../../prisma/prisma.binding';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Roles } from '../auth/decorators/Roles.decorator';
+import { Roles, RoleDecoratorParam } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
 import { AuthorizationGuard } from '../auth/guards/Authorization.guard';
 import { StationCreateInputDTO } from './dto/StationCreateInput.dto';
@@ -31,36 +31,28 @@ export class StationsResolver {
 
   @Mutation('updateStation')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
-  @Roles('ADMIN', [
-    'STATION_OWNER',
-    (user, { where }: StationUpdateInputDTO) =>
-      user.stations.some(({ id, name, slug }) => where.id === id || where.name === name || where.slug === slug),
-  ])
+  @Roles(['ADMIN', StationsResolver.stationOwnerChecker])
   async updateStation(@Args() args: StationUpdateInputDTO, @Info() info): Promise<Station> {
     return await this.prisma.mutation.updateStation(args, info);
   }
 
   @Mutation('updateManyStations')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
-  @Roles('ADMIN')
+  @Roles(['ADMIN'])
   async updateManyStations(@Args() args, @Info() info): Promise<BatchPayload> {
     return await this.prisma.mutation.updateManyStations(args, info);
   }
 
   @Mutation('deleteStation')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
-  @Roles('ADMIN', [
-    'STATION_OWNER',
-    (user, { where }: { where: StationWhereUniqueInput }) =>
-      user.stations.some(({ id, name, slug }) => where.id === id || where.name === name || where.slug === slug),
-  ])
+  @Roles(['ADMIN', StationsResolver.stationOwnerChecker])
   async deleteStation(@Args() args, @Info() info): Promise<Station> {
     return await this.prisma.mutation.deleteStation(args, info);
   }
 
   @Mutation('deleteManyStations')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
-  @Roles('ADMIN')
+  @Roles(['ADMIN'])
   async deleteManyStations(@Args() args, @Info() info): Promise<BatchPayload> {
     return await this.prisma.mutation.deleteManyStations(args, info);
   }
@@ -68,5 +60,15 @@ export class StationsResolver {
   @Subscription('station')
   onStationMutation(@Args() args, @Info() info) {
     return this.prisma.subscription.station(args, info);
+  }
+
+  static stationOwnerChecker({
+    user,
+    args: { where },
+  }: RoleDecoratorParam<{ where: StationWhereUniqueInput | StationWhereInput }>) {
+    return (
+      user.roles.some(userRole => userRole.role === 'STATION_OWNER') &&
+      user.stations.some(({ id, name, slug }) => where.id === id || where.name === name || where.slug === slug)
+    );
   }
 }

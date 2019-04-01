@@ -48,7 +48,7 @@ Sometimes, you will need to force the database to be updated with whole new stru
 ### Seed initial data
 
 ```sh
-npm run worker:seed
+npm run prisma:seed
 ```
 
-This script is only executable after running `prisma:deploy` command. Which will seed the basic data like: Admin users, default users,... and more.
+This script by default is executed after running `prisma:deploy` command.
