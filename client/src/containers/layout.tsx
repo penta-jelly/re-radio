@@ -3,12 +3,15 @@ import { makeStyles } from '@material-ui/styles';
 import { Drawer, List, ListItem, ListItemText, ListItemIcon } from '@material-ui/core';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 
+import logoImage from '../assets/logo.png';
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
-    display: 'flex',
+    display: 'grid',
+    gridTemplateColumns: '240px 1fr',
   },
   sidebar: {
     width: drawerWidth,
@@ -27,9 +30,19 @@ const useStyles = makeStyles(theme => ({
   spacer: {
     flex: 1,
   },
-  logo: {
+  title: {
     height: '4rem',
+    padding: 10,
     backgroundColor: '#f85b5c',
+    color: '#fff',
+    fontSize: 20,
+    display: 'flex',
+    alignItems: 'center',
+  },
+  logo: {
+    height: 40,
+    verticalAlign: 'middle',
+    marginRight: 20,
   },
 }));
 
@@ -43,7 +56,10 @@ export const Layout: React.FC<Props> & { defaultProps: typeof defaultProps } = (
     <div className={classes.root}>
       <Drawer variant="permanent" className={classes.sidebar} classes={{ paper: classes.sidebarPaper }}>
         <List className={classes.sidebarContent}>
-          <ListItem className={classes.logo} />
+          <li className={classes.title}>
+            <img className={classes.logo} src={logoImage} alt="Logo" />
+            re-Radio
+          </li>
           <ListItem button>
             <ListItemIcon>
               <FavoriteIcon />

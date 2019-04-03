@@ -1,10 +1,9 @@
 import React from 'react';
 import MuiButton, { ButtonProps } from '@material-ui/core/Button';
-
-import { usePrimaryButtonStyles } from './primary-button.styles';
+import { useStyles } from './styles';
 
 export const PrimaryButton: React.FunctionComponent<ButtonProps> = ({ children, ...rest }) => {
-  const classes = usePrimaryButtonStyles();
+  const classes = useStyles();
 
   return (
     <MuiButton className={classes.button} variant="contained" size="small" {...rest}>

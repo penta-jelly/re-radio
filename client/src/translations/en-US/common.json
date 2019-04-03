@@ -1,3 +1,5 @@
 {
-  "register": "Register"
+  "register": "Register",
+  "error": "Error",
+  "search": "Search"
 }
