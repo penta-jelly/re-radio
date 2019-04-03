@@ -6,8 +6,4 @@ describe('Show Home Page', () => {
   it('should open the home page', () => {
     HomePage.navigate();
   });
-
-  it('should have a demo button', () => {
-    HomePage.checkButton();
-  });
 });
