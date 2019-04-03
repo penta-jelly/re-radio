@@ -9,7 +9,7 @@ import { theme } from '../lib/@material-ui/theme';
 import { initApollo } from '../lib/apollo/init';
 import { PageLoader } from '../components/page-loader';
 
-import { AppRouter } from './app-router';
+import { AppRouter } from './router';
 
 initI18n();
 const apolloClient = initApollo();

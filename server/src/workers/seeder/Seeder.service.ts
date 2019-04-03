@@ -85,6 +85,14 @@ export class SeederService {
         owner: { connect: { username: 'normie' } },
         tags: { create: { name: 'i-team' } },
       },
+      ...Array(100)
+        .fill(null)
+        .map((_v, index) => ({
+          name: `Station ${index}`,
+          slug: `station-${index}`,
+          owner,
+          tags: { create: { name: `${index}-team` } },
+        })),
     ];
   }
 }

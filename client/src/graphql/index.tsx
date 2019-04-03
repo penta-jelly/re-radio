@@ -2005,6 +2005,24 @@ export type RegisterMutation = { readonly __typename?: 'Mutation' } & {
   readonly register: { readonly __typename?: 'LoginOrRegisterReturnType' } & Pick<LoginOrRegisterReturnType, 'token'>;
 };
 
+export type StationsQueryVariables = {
+  first?: Maybe<Scalars['Int']>;
+  skip?: Maybe<Scalars['Int']>;
+  where?: Maybe<StationWhereInput>;
+  orderBy?: Maybe<StationOrderByInput>;
+};
+
+export type StationsQuery = { readonly __typename?: 'Query' } & {
+  readonly stations: ReadonlyArray<
+    Maybe<
+      { readonly __typename?: 'Station' } & Pick<Station, 'id' | 'name' | 'slug'> & {
+          readonly tags: Maybe<ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>>;
+          readonly owner: { readonly __typename?: 'User' } & Pick<User, 'id'>;
+        }
+    >
+  >;
+};
+
 import gql from 'graphql-tag';
 import * as ReactApollo from 'react-apollo';
 import * as ReactApolloHooks from 'react-apollo-hooks';
@@ -2036,4 +2054,36 @@ export function useRegisterMutation(
   baseOptions?: ReactApolloHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>,
 ) {
   return ReactApolloHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+}
+export const StationsDocument = gql`
+  query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {
+    stations(first: $first, skip: $skip, where: $where, orderBy: $orderBy) {
+      id
+      name
+      slug
+      tags {
+        id
+        name
+      }
+      owner {
+        id
+      }
+    }
+  }
+`;
+export type StationsProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationsQuery, StationsQueryVariables>> &
+  TChildProps;
+export function withStations<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>
+    | undefined,
+) {
+  return ReactApollo.withQuery<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>(
+    StationsDocument,
+    operationOptions,
+  );
+}
+
+export function useStationsQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationsQueryVariables>) {
+  return ReactApolloHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
 }

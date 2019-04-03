@@ -1,0 +1,14 @@
+query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {
+  stations(first: $first, skip: $skip, where: $where, orderBy: $orderBy) {
+    id
+    name
+    slug
+    tags {
+      id
+      name
+    }
+    owner {
+      id
+    }
+  }
+}
