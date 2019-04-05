@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as Bcrypt from 'bcrypt-nodejs';
-import { StationCreateInput, UserCreateInput, UserRoleEnum } from '../../prisma/prisma.binding';
+import { StationCreateInput, UserCreateInput, UserRoleEnum, SongCreateInput } from '../../prisma/prisma.binding';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
@@ -12,19 +12,13 @@ export class SeederService {
     this.logger.log('Start seeder service');
     await this.seedUsers();
     await this.seedStations();
+    await this.seedStationSongs();
     this.logger.log('Finish seeder service');
   }
 
   public async seedUsers() {
     this.logger.log('Start seeding users');
-    await Promise.all(
-      this.getUserFixtures().map(async dto => {
-        if (await this.prisma.exists.User({ email: dto.email })) {
-          await this.prisma.mutation.deleteUser({ where: { email: dto.email } });
-        }
-        await this.prisma.mutation.createUser({ data: dto });
-      }),
-    );
+    await Promise.all(this.getUserFixtures().map(dto => this.prisma.mutation.createUser({ data: dto })));
   }
 
   private getUserFixtures(): UserCreateInput[] {
@@ -46,9 +40,6 @@ export class SeederService {
     const qaTag = await this.prisma.mutation.createStationTag({ data: { name: 'qa' } });
     await Promise.all(
       this.getStationFixtures().map(async dto => {
-        if (await this.prisma.exists.Station({ slug: dto.slug })) {
-          await this.prisma.mutation.deleteStation({ where: { slug: dto.slug } });
-        }
         const station = await this.prisma.mutation.createStation({
           data: {
             ...dto,
@@ -93,6 +84,59 @@ export class SeederService {
           owner,
           tags: { create: { name: `${index}-team` } },
         })),
+    ];
+  }
+
+  public async seedStationSongs() {
+    await Promise.all(this.getSongFixtures().map(song => this.prisma.mutation.createSong({ data: song })));
+  }
+
+  private getSongFixtures(): SongCreateInput[] {
+    const base = this.getStationFixtures().reduce<SongCreateInput[]>(
+      (prev, station) => [
+        ...prev,
+        {
+          title: 'Westlife - My Love (Official Music Video)',
+          url: 'https://www.youtube.com/watch?v=ulOb9gIGGd0',
+          creator: { connect: { username: 'admin' } },
+          duration: 240000,
+          thumbnail: 'https://i.ytimg.com/vi/ulOb9gIGGd0/hqdefault.jpg',
+          station: { connect: { slug: station.slug } },
+          status: 'PENDING',
+        },
+        {
+          title: 'TWICE "Heart Shaker" M/V',
+          url: 'https://www.youtube.com/watch?v=rRzxEiBLQCA',
+          creator: { connect: { username: 'admin' } },
+          duration: 195000,
+          thumbnail: 'https://i.ytimg.com/vi/rRzxEiBLQCA/hqdefault.jpg',
+          station: { connect: { slug: station.slug } },
+          status: 'PENDING',
+        },
+        {
+          title: 'Zedd - I Want You To Know (Official Music Video) ft. Selena Gomez',
+          url: 'https://www.youtube.com/watch?v=X46t8ZFqUB4',
+          creator: { connect: { username: 'admin' } },
+          duration: 195000,
+          thumbnail: 'https://i.ytimg.com/vi/X46t8ZFqUB4/hqdefault.jpg',
+          station: { connect: { slug: station.slug } },
+          status: 'PENDING',
+        },
+      ],
+      [],
+    );
+
+    return [
+      ...base,
+      {
+        title: 'Westlife - My Love (Official Music Video)',
+        url: 'https://www.youtube.com/watch?v=ulOb9gIGGd0',
+        creator: { connect: { username: 'normie' } },
+        duration: 240000,
+        thumbnail: 'https://i.ytimg.com/vi/ulOb9gIGGd0/hqdefault.jpg',
+        station: { connect: { slug: 'station-a' } },
+        status: 'PENDING',
+      },
     ];
   }
 }

@@ -1,27 +1,19 @@
 import { Type } from 'class-transformer';
 import { IsOptional, Length, NotContains, ValidateNested } from 'class-validator';
-import {
-  StationTagUpdateManyWithoutStationsInput,
-  StationUpdateInput,
-  StationWhereInput,
-  UserUpdateOneRequiredWithoutStationsInput,
-} from '../../../prisma/prisma.binding';
+import { StationUpdateManyDataInput, StationWhereInput } from '../../../prisma/prisma.binding';
 
-export class StationUpdateManyDTO implements StationUpdateInput {
+export class StationUpdateManyDTO implements StationUpdateManyDataInput {
   @Length(2, 32)
   @IsOptional()
-  name: string;
+  name?: string;
 
   @Length(2, 32)
   @IsOptional()
   @NotContains(' ')
-  slug: string;
+  slug?: string;
 
   @IsOptional()
   description?: string | null;
-
-  owner?: UserUpdateOneRequiredWithoutStationsInput;
-  tags?: StationTagUpdateManyWithoutStationsInput;
 }
 
 export class StationUpdateManyInputDTO {

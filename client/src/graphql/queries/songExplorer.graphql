@@ -1,0 +1,49 @@
+query songExplorer($where: SongExplorerInput!){
+  songExplorer(where: $where) {
+    id
+    snippet {
+      publishedAt
+      channelId
+      title
+      description
+      thumbnails {
+        default {
+          url
+          width
+          height
+        }
+        medium {
+          url
+          width
+          height
+        }
+        high {
+          url
+          width
+          height
+        }
+        standard {
+          url
+          width
+          height
+        }
+        maxres {
+          url
+          width
+          height
+        }
+      }
+      liveBroadcastContent
+      channelTitle
+      tags
+      categoryId
+      defaultAudioLanguage
+    }
+    contentDetails {
+      duration
+      dimension
+      caption
+      licensedContent
+    }
+  }
+}

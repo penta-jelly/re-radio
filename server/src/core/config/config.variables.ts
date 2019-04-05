@@ -10,4 +10,7 @@ export enum EnvVariables {
   DB_PASSWORD,
 
   JWT_TOKEN_EXPIRES_IN,
+
+  YOUTUBE_API_URL,
+  YOUTUBE_API_KEY,
 }

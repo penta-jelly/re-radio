@@ -31,16 +31,42 @@ enum UserRoleEnum {
 }
 
 type Station {
+  # Information
   id: ID! @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
   name: String! @unique
   slug: String! @unique
   description: String
   owner: User! @relation(name: "StationOwner")
   tags: [StationTag!]! @relation(name: "StationsAndTags", onDelete: CASCADE)
+  # Realtime part
+  onlineUsers: [User!]! @relation(name: "StationOnlineUsers")
+  songs: [Song!]! @relation(name: "StationPlaylist", onDelete: CASCADE)
 }
 
 type StationTag {
   id: ID! @unique
   name: String!
   stations: [Station!]! @relation(name: "StationsAndTags")
+}
+
+type Song {
+  id: ID! @unique
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  creator: User!
+  station: Station! @relation(name: "StationPlaylist")
+  status: SongStatusEnum!
+}
+
+enum SongStatusEnum {
+  PENDING
+  PLAYING
+  PLAYED
+  SKIPPED
 }

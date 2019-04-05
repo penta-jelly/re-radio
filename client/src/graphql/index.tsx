@@ -15,6 +15,10 @@ export type Scalars = {
   Long: any;
 };
 
+export type AggregateSong = {
+  readonly count: Scalars['Int'];
+};
+
 export type AggregateStation = {
   readonly count: Scalars['Int'];
 };
@@ -36,6 +40,14 @@ export type BatchPayload = {
   readonly count: Scalars['Long'];
 };
 
+export type ContentDetail = {
+  readonly duration: Scalars['Int'];
+  readonly dimension: Scalars['String'];
+  readonly definition: Scalars['String'];
+  readonly caption: Scalars['String'];
+  readonly licensedContent: Scalars['Boolean'];
+};
+
 export type LoginInput = {
   readonly username?: Maybe<Scalars['String']>;
   readonly email?: Maybe<Scalars['String']>;
@@ -46,37 +58,58 @@ export type LoginOrRegisterReturnType = {
   readonly token?: Maybe<Scalars['String']>;
 };
 
-export type Mutation = {
-  readonly createUser: User;
-  readonly createUserRole: UserRole;
-  readonly createStationTag: StationTag;
-  readonly createStation: Station;
-  readonly updateUser?: Maybe<User>;
-  readonly updateUserRole?: Maybe<UserRole>;
-  readonly updateStationTag?: Maybe<StationTag>;
-  readonly updateStation?: Maybe<Station>;
-  readonly deleteUser?: Maybe<User>;
-  readonly deleteUserRole?: Maybe<UserRole>;
-  readonly deleteStationTag?: Maybe<StationTag>;
-  readonly deleteStation?: Maybe<Station>;
-  readonly upsertUser: User;
-  readonly upsertUserRole: UserRole;
-  readonly upsertStationTag: StationTag;
-  readonly upsertStation: Station;
-  readonly updateManyUsers: BatchPayload;
-  readonly updateManyUserRoles: BatchPayload;
-  readonly updateManyStationTags: BatchPayload;
-  readonly updateManyStations: BatchPayload;
-  readonly deleteManyUsers: BatchPayload;
-  readonly deleteManyUserRoles: BatchPayload;
-  readonly deleteManyStationTags: BatchPayload;
-  readonly deleteManyStations: BatchPayload;
-  readonly login: LoginOrRegisterReturnType;
-  readonly register: LoginOrRegisterReturnType;
+export type MiniSnippet = {
+  readonly publishedAt: Scalars['DateTime'];
+  readonly channelId: Scalars['String'];
+  readonly title: Scalars['String'];
+  readonly description: Scalars['String'];
+  readonly thumbnails: Thumbnails;
+  readonly channelTitle: Scalars['String'];
 };
 
-export type MutationCreateUserArgs = {
-  data: UserCreateInput;
+export type MiniSongExplorer = {
+  readonly id: MiniSongExplorerId;
+  readonly snippet: Snippet;
+};
+
+export type MiniSongExplorerId = {
+  readonly kind: Scalars['String'];
+  readonly videoId: Scalars['String'];
+};
+
+export type Mutation = {
+  readonly createUserRole: UserRole;
+  readonly createStationTag: StationTag;
+  readonly createSong: Song;
+  readonly createStation: Station;
+  readonly createUser: User;
+  readonly updateUserRole?: Maybe<UserRole>;
+  readonly updateStationTag?: Maybe<StationTag>;
+  readonly updateSong?: Maybe<Song>;
+  readonly updateStation?: Maybe<Station>;
+  readonly updateUser?: Maybe<User>;
+  readonly deleteUserRole?: Maybe<UserRole>;
+  readonly deleteStationTag?: Maybe<StationTag>;
+  readonly deleteSong?: Maybe<Song>;
+  readonly deleteStation?: Maybe<Station>;
+  readonly deleteUser?: Maybe<User>;
+  readonly upsertUserRole: UserRole;
+  readonly upsertStationTag: StationTag;
+  readonly upsertSong: Song;
+  readonly upsertStation: Station;
+  readonly upsertUser: User;
+  readonly updateManyUserRoles: BatchPayload;
+  readonly updateManyStationTags: BatchPayload;
+  readonly updateManySongs: BatchPayload;
+  readonly updateManyStations: BatchPayload;
+  readonly updateManyUsers: BatchPayload;
+  readonly deleteManyUserRoles: BatchPayload;
+  readonly deleteManyStationTags: BatchPayload;
+  readonly deleteManySongs: BatchPayload;
+  readonly deleteManyStations: BatchPayload;
+  readonly deleteManyUsers: BatchPayload;
+  readonly login: LoginOrRegisterReturnType;
+  readonly register: LoginOrRegisterReturnType;
 };
 
 export type MutationCreateUserRoleArgs = {
@@ -87,13 +120,16 @@ export type MutationCreateStationTagArgs = {
   data: StationTagCreateInput;
 };
 
+export type MutationCreateSongArgs = {
+  data: SongCreateInput;
+};
+
 export type MutationCreateStationArgs = {
   data: StationCreateInput;
 };
 
-export type MutationUpdateUserArgs = {
-  data: UserUpdateInput;
-  where: UserWhereUniqueInput;
+export type MutationCreateUserArgs = {
+  data: UserCreateInput;
 };
 
 export type MutationUpdateUserRoleArgs = {
@@ -106,12 +142,18 @@ export type MutationUpdateStationTagArgs = {
   where: StationTagWhereUniqueInput;
 };
 
+export type MutationUpdateSongArgs = {
+  data: SongUpdateInput;
+  where: SongWhereUniqueInput;
+};
+
 export type MutationUpdateStationArgs = {
   data: StationUpdateInput;
   where: StationWhereUniqueInput;
 };
 
-export type MutationDeleteUserArgs = {
+export type MutationUpdateUserArgs = {
+  data: UserUpdateInput;
   where: UserWhereUniqueInput;
 };
 
@@ -123,14 +165,16 @@ export type MutationDeleteStationTagArgs = {
   where: StationTagWhereUniqueInput;
 };
 
+export type MutationDeleteSongArgs = {
+  where: SongWhereUniqueInput;
+};
+
 export type MutationDeleteStationArgs = {
   where: StationWhereUniqueInput;
 };
 
-export type MutationUpsertUserArgs = {
+export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
-  create: UserCreateInput;
-  update: UserUpdateInput;
 };
 
 export type MutationUpsertUserRoleArgs = {
@@ -145,15 +189,22 @@ export type MutationUpsertStationTagArgs = {
   update: StationTagUpdateInput;
 };
 
+export type MutationUpsertSongArgs = {
+  where: SongWhereUniqueInput;
+  create: SongCreateInput;
+  update: SongUpdateInput;
+};
+
 export type MutationUpsertStationArgs = {
   where: StationWhereUniqueInput;
   create: StationCreateInput;
   update: StationUpdateInput;
 };
 
-export type MutationUpdateManyUsersArgs = {
-  data: UserUpdateManyMutationInput;
-  where?: Maybe<UserWhereInput>;
+export type MutationUpsertUserArgs = {
+  where: UserWhereUniqueInput;
+  create: UserCreateInput;
+  update: UserUpdateInput;
 };
 
 export type MutationUpdateManyUserRolesArgs = {
@@ -166,12 +217,18 @@ export type MutationUpdateManyStationTagsArgs = {
   where?: Maybe<StationTagWhereInput>;
 };
 
+export type MutationUpdateManySongsArgs = {
+  data: SongUpdateManyMutationInput;
+  where?: Maybe<SongWhereInput>;
+};
+
 export type MutationUpdateManyStationsArgs = {
   data: StationUpdateManyMutationInput;
   where?: Maybe<StationWhereInput>;
 };
 
-export type MutationDeleteManyUsersArgs = {
+export type MutationUpdateManyUsersArgs = {
+  data: UserUpdateManyMutationInput;
   where?: Maybe<UserWhereInput>;
 };
 
@@ -183,8 +240,16 @@ export type MutationDeleteManyStationTagsArgs = {
   where?: Maybe<StationTagWhereInput>;
 };
 
+export type MutationDeleteManySongsArgs = {
+  where?: Maybe<SongWhereInput>;
+};
+
 export type MutationDeleteManyStationsArgs = {
   where?: Maybe<StationWhereInput>;
+};
+
+export type MutationDeleteManyUsersArgs = {
+  where?: Maybe<UserWhereInput>;
 };
 
 export type MutationLoginArgs = {
@@ -207,6 +272,15 @@ export type Node = {
   readonly id: Scalars['ID'];
 };
 
+export enum Order {
+  Date = 'date',
+  Rating = 'rating',
+  Relevance = 'relevance',
+  Title = 'title',
+  ViewCount = 'viewCount',
+  VideoCount = 'videoCount',
+}
+
 /** Information about pagination in a connection. */
 export type PageInfo = {
   /** When paginating forwards, are there more items? */
@@ -220,31 +294,26 @@ export type PageInfo = {
 };
 
 export type Query = {
-  readonly users: ReadonlyArray<Maybe<User>>;
   readonly userRoles: ReadonlyArray<Maybe<UserRole>>;
   readonly stationTags: ReadonlyArray<Maybe<StationTag>>;
+  readonly songs: ReadonlyArray<Maybe<Song>>;
   readonly stations: ReadonlyArray<Maybe<Station>>;
-  readonly user?: Maybe<User>;
+  readonly users: ReadonlyArray<Maybe<User>>;
   readonly userRole?: Maybe<UserRole>;
   readonly stationTag?: Maybe<StationTag>;
+  readonly song?: Maybe<Song>;
   readonly station?: Maybe<Station>;
-  readonly usersConnection: UserConnection;
+  readonly user?: Maybe<User>;
   readonly userRolesConnection: UserRoleConnection;
   readonly stationTagsConnection: StationTagConnection;
+  readonly songsConnection: SongConnection;
   readonly stationsConnection: StationConnection;
+  readonly usersConnection: UserConnection;
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
+  readonly songExplorer: SongExplorer;
+  readonly songExplorers: ReadonlyArray<MiniSongExplorer>;
   readonly temp__?: Maybe<Scalars['Boolean']>;
-};
-
-export type QueryUsersArgs = {
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<UserOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
 };
 
 export type QueryUserRolesArgs = {
@@ -267,6 +336,16 @@ export type QueryStationTagsArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+export type QuerySongsArgs = {
+  where?: Maybe<SongWhereInput>;
+  orderBy?: Maybe<SongOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
 export type QueryStationsArgs = {
   where?: Maybe<StationWhereInput>;
   orderBy?: Maybe<StationOrderByInput>;
@@ -277,8 +356,14 @@ export type QueryStationsArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-export type QueryUserArgs = {
-  where: UserWhereUniqueInput;
+export type QueryUsersArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 export type QueryUserRoleArgs = {
@@ -289,18 +374,16 @@ export type QueryStationTagArgs = {
   where: StationTagWhereUniqueInput;
 };
 
+export type QuerySongArgs = {
+  where: SongWhereUniqueInput;
+};
+
 export type QueryStationArgs = {
   where: StationWhereUniqueInput;
 };
 
-export type QueryUsersConnectionArgs = {
-  where?: Maybe<UserWhereInput>;
-  orderBy?: Maybe<UserOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
+export type QueryUserArgs = {
+  where: UserWhereUniqueInput;
 };
 
 export type QueryUserRolesConnectionArgs = {
@@ -323,9 +406,29 @@ export type QueryStationTagsConnectionArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
+export type QuerySongsConnectionArgs = {
+  where?: Maybe<SongWhereInput>;
+  orderBy?: Maybe<SongOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
 export type QueryStationsConnectionArgs = {
   where?: Maybe<StationWhereInput>;
   orderBy?: Maybe<StationOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryUsersConnectionArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -337,24 +440,609 @@ export type QueryNodeArgs = {
   id: Scalars['ID'];
 };
 
+export type QuerySongExplorerArgs = {
+  where: SongExplorerInput;
+};
+
+export type QuerySongExplorersArgs = {
+  where: SongExplorersInput;
+};
+
 export type RegisterInput = {
   readonly username?: Maybe<Scalars['String']>;
   readonly email: Scalars['String'];
   readonly password: Scalars['String'];
 };
 
+export type Snippet = {
+  readonly publishedAt: Scalars['DateTime'];
+  readonly channelId: Scalars['String'];
+  readonly title: Scalars['String'];
+  readonly description: Scalars['String'];
+  readonly thumbnails: Thumbnails;
+  readonly channelTitle: Scalars['String'];
+  readonly tags: ReadonlyArray<Scalars['String']>;
+  readonly categoryId: Scalars['String'];
+  readonly defaultAudioLanguage?: Maybe<Scalars['String']>;
+  readonly liveBroadcastContent?: Maybe<Scalars['String']>;
+};
+
+export type Song = Node & {
+  readonly id: Scalars['ID'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly updatedAt: Scalars['DateTime'];
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
+  readonly thumbnail: Scalars['String'];
+  readonly duration: Scalars['Int'];
+  readonly creator: User;
+  readonly station: Station;
+  readonly status: SongStatusEnum;
+};
+
+/** A connection to a list of items. */
+export type SongConnection = {
+  /** Information to aid in pagination. */
+  readonly pageInfo: PageInfo;
+  /** A list of edges. */
+  readonly edges: ReadonlyArray<Maybe<SongEdge>>;
+  readonly aggregate: AggregateSong;
+};
+
+export type SongCreateInput = {
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
+  readonly thumbnail: Scalars['String'];
+  readonly duration: Scalars['Int'];
+  readonly status: SongStatusEnum;
+  readonly creator: UserCreateOneInput;
+  readonly station: StationCreateOneWithoutSongsInput;
+};
+
+export type SongCreateManyWithoutStationInput = {
+  readonly create?: Maybe<ReadonlyArray<SongCreateWithoutStationInput>>;
+  readonly connect?: Maybe<ReadonlyArray<SongWhereUniqueInput>>;
+};
+
+export type SongCreateWithoutStationInput = {
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
+  readonly thumbnail: Scalars['String'];
+  readonly duration: Scalars['Int'];
+  readonly status: SongStatusEnum;
+  readonly creator: UserCreateOneInput;
+};
+
+/** An edge in a connection. */
+export type SongEdge = {
+  /** The item at the end of the edge. */
+  readonly node: Song;
+  /** A cursor for use in pagination. */
+  readonly cursor: Scalars['String'];
+};
+
+export type SongExplorer = {
+  readonly id: Scalars['String'];
+  readonly snippet: Snippet;
+  readonly contentDetails: ContentDetail;
+};
+
+export type SongExplorerInput = {
+  readonly url?: Maybe<Scalars['String']>;
+  readonly videoId?: Maybe<Scalars['String']>;
+};
+
+export type SongExplorersInput = {
+  readonly q: Scalars['String'];
+  readonly maxResults?: Maybe<Scalars['Int']>;
+  readonly order?: Maybe<Order>;
+};
+
+export enum SongOrderByInput {
+  IdAsc = 'id_ASC',
+  IdDesc = 'id_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  UrlAsc = 'url_ASC',
+  UrlDesc = 'url_DESC',
+  ThumbnailAsc = 'thumbnail_ASC',
+  ThumbnailDesc = 'thumbnail_DESC',
+  DurationAsc = 'duration_ASC',
+  DurationDesc = 'duration_DESC',
+  StatusAsc = 'status_ASC',
+  StatusDesc = 'status_DESC',
+}
+
+export type SongPreviousValues = {
+  readonly id: Scalars['ID'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly updatedAt: Scalars['DateTime'];
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
+  readonly thumbnail: Scalars['String'];
+  readonly duration: Scalars['Int'];
+  readonly status: SongStatusEnum;
+};
+
+export type SongScalarWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<SongScalarWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<SongScalarWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<SongScalarWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly title?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly title_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly title_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly title_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly title_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly title_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly title_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly title_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly title_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly title_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly title_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly title_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly title_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly title_not_ends_with?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly url_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly url_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly url_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly url_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly url_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly url_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly url_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly url_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly url_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly url_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly url_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly url_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly url_not_ends_with?: Maybe<Scalars['String']>;
+  readonly thumbnail?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly thumbnail_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly thumbnail_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly thumbnail_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly thumbnail_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly thumbnail_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly thumbnail_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly thumbnail_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly thumbnail_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly thumbnail_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly thumbnail_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly thumbnail_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly thumbnail_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly thumbnail_not_ends_with?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  readonly duration_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  readonly duration_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  readonly duration_not_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values less than the given value. */
+  readonly duration_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  readonly duration_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  readonly duration_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  readonly duration_gte?: Maybe<Scalars['Int']>;
+  readonly status?: Maybe<SongStatusEnum>;
+  /** All values that are not equal to given value. */
+  readonly status_not?: Maybe<SongStatusEnum>;
+  /** All values that are contained in given list. */
+  readonly status_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
+  /** All values that are not contained in given list. */
+  readonly status_not_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
+};
+
+export enum SongStatusEnum {
+  Pending = 'PENDING',
+  Playing = 'PLAYING',
+  Played = 'PLAYED',
+  Skipped = 'SKIPPED',
+}
+
+export type SongSubscriptionPayload = {
+  readonly mutation: MutationType;
+  readonly node?: Maybe<Song>;
+  readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly previousValues?: Maybe<SongPreviousValues>;
+};
+
+export type SongSubscriptionWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<SongSubscriptionWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<SongSubscriptionWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<SongSubscriptionWhereInput>>;
+  /** The subscription event gets dispatched when it's listed in mutation_in */
+  readonly mutation_in?: Maybe<ReadonlyArray<MutationType>>;
+  /** The subscription event gets only dispatched when one of the updated fields names is included in this list */
+  readonly updatedFields_contains?: Maybe<Scalars['String']>;
+  /** The subscription event gets only dispatched when all of the field names included in this list have been updated */
+  readonly updatedFields_contains_every?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** The subscription event gets only dispatched when some of the field names included in this list have been updated */
+  readonly updatedFields_contains_some?: Maybe<ReadonlyArray<Scalars['String']>>;
+  readonly node?: Maybe<SongWhereInput>;
+};
+
+export type SongUpdateInput = {
+  readonly title?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
+  readonly thumbnail?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['Int']>;
+  readonly status?: Maybe<SongStatusEnum>;
+  readonly creator?: Maybe<UserUpdateOneRequiredInput>;
+  readonly station?: Maybe<StationUpdateOneRequiredWithoutSongsInput>;
+};
+
+export type SongUpdateManyDataInput = {
+  readonly title?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
+  readonly thumbnail?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['Int']>;
+  readonly status?: Maybe<SongStatusEnum>;
+};
+
+export type SongUpdateManyMutationInput = {
+  readonly title?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
+  readonly thumbnail?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['Int']>;
+  readonly status?: Maybe<SongStatusEnum>;
+};
+
+export type SongUpdateManyWithoutStationInput = {
+  readonly create?: Maybe<ReadonlyArray<SongCreateWithoutStationInput>>;
+  readonly connect?: Maybe<ReadonlyArray<SongWhereUniqueInput>>;
+  readonly set?: Maybe<ReadonlyArray<SongWhereUniqueInput>>;
+  readonly disconnect?: Maybe<ReadonlyArray<SongWhereUniqueInput>>;
+  readonly delete?: Maybe<ReadonlyArray<SongWhereUniqueInput>>;
+  readonly update?: Maybe<ReadonlyArray<SongUpdateWithWhereUniqueWithoutStationInput>>;
+  readonly updateMany?: Maybe<ReadonlyArray<SongUpdateManyWithWhereNestedInput>>;
+  readonly deleteMany?: Maybe<ReadonlyArray<SongScalarWhereInput>>;
+  readonly upsert?: Maybe<ReadonlyArray<SongUpsertWithWhereUniqueWithoutStationInput>>;
+};
+
+export type SongUpdateManyWithWhereNestedInput = {
+  readonly where: SongScalarWhereInput;
+  readonly data: SongUpdateManyDataInput;
+};
+
+export type SongUpdateWithoutStationDataInput = {
+  readonly title?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
+  readonly thumbnail?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['Int']>;
+  readonly status?: Maybe<SongStatusEnum>;
+  readonly creator?: Maybe<UserUpdateOneRequiredInput>;
+};
+
+export type SongUpdateWithWhereUniqueWithoutStationInput = {
+  readonly where: SongWhereUniqueInput;
+  readonly data: SongUpdateWithoutStationDataInput;
+};
+
+export type SongUpsertWithWhereUniqueWithoutStationInput = {
+  readonly where: SongWhereUniqueInput;
+  readonly update: SongUpdateWithoutStationDataInput;
+  readonly create: SongCreateWithoutStationInput;
+};
+
+export type SongWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<SongWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<SongWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<SongWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly title?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly title_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly title_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly title_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly title_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly title_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly title_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly title_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly title_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly title_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly title_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly title_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly title_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly title_not_ends_with?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly url_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly url_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly url_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly url_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly url_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly url_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly url_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly url_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly url_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly url_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly url_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly url_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly url_not_ends_with?: Maybe<Scalars['String']>;
+  readonly thumbnail?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly thumbnail_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly thumbnail_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly thumbnail_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly thumbnail_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly thumbnail_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly thumbnail_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly thumbnail_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly thumbnail_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly thumbnail_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly thumbnail_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly thumbnail_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly thumbnail_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly thumbnail_not_ends_with?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  readonly duration_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  readonly duration_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  readonly duration_not_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values less than the given value. */
+  readonly duration_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  readonly duration_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  readonly duration_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  readonly duration_gte?: Maybe<Scalars['Int']>;
+  readonly status?: Maybe<SongStatusEnum>;
+  /** All values that are not equal to given value. */
+  readonly status_not?: Maybe<SongStatusEnum>;
+  /** All values that are contained in given list. */
+  readonly status_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
+  /** All values that are not contained in given list. */
+  readonly status_not_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
+  readonly creator?: Maybe<UserWhereInput>;
+  readonly station?: Maybe<StationWhereInput>;
+};
+
+export type SongWhereUniqueInput = {
+  readonly id?: Maybe<Scalars['ID']>;
+};
+
 export type Station = Node & {
   readonly id: Scalars['ID'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly owner: User;
   readonly tags?: Maybe<ReadonlyArray<StationTag>>;
+  readonly onlineUsers?: Maybe<ReadonlyArray<User>>;
+  readonly songs?: Maybe<ReadonlyArray<Song>>;
 };
 
 export type StationTagsArgs = {
   where?: Maybe<StationTagWhereInput>;
   orderBy?: Maybe<StationTagOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type StationOnlineUsersArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type StationSongsArgs = {
+  where?: Maybe<SongWhereInput>;
+  orderBy?: Maybe<SongOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -377,6 +1065,8 @@ export type StationCreateInput = {
   readonly description?: Maybe<Scalars['String']>;
   readonly owner: UserCreateOneWithoutStationsInput;
   readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserCreateManyInput>;
+  readonly songs?: Maybe<SongCreateManyWithoutStationInput>;
 };
 
 export type StationCreateManyWithoutOwnerInput = {
@@ -394,11 +1084,27 @@ export type StationCreateOneInput = {
   readonly connect?: Maybe<StationWhereUniqueInput>;
 };
 
+export type StationCreateOneWithoutSongsInput = {
+  readonly create?: Maybe<StationCreateWithoutSongsInput>;
+  readonly connect?: Maybe<StationWhereUniqueInput>;
+};
+
 export type StationCreateWithoutOwnerInput = {
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserCreateManyInput>;
+  readonly songs?: Maybe<SongCreateManyWithoutStationInput>;
+};
+
+export type StationCreateWithoutSongsInput = {
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner: UserCreateOneWithoutStationsInput;
+  readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserCreateManyInput>;
 };
 
 export type StationCreateWithoutTagsInput = {
@@ -406,6 +1112,8 @@ export type StationCreateWithoutTagsInput = {
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
   readonly owner: UserCreateOneWithoutStationsInput;
+  readonly onlineUsers?: Maybe<UserCreateManyInput>;
+  readonly songs?: Maybe<SongCreateManyWithoutStationInput>;
 };
 
 /** An edge in a connection. */
@@ -419,20 +1127,22 @@ export type StationEdge = {
 export enum StationOrderByInput {
   IdAsc = 'id_ASC',
   IdDesc = 'id_DESC',
+  CreatedAtAsc = 'createdAt_ASC',
+  CreatedAtDesc = 'createdAt_DESC',
+  UpdatedAtAsc = 'updatedAt_ASC',
+  UpdatedAtDesc = 'updatedAt_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
   SlugAsc = 'slug_ASC',
   SlugDesc = 'slug_DESC',
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
 }
 
 export type StationPreviousValues = {
   readonly id: Scalars['ID'];
+  readonly createdAt: Scalars['DateTime'];
+  readonly updatedAt: Scalars['DateTime'];
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
@@ -472,6 +1182,36 @@ export type StationScalarWhereInput = {
   readonly id_ends_with?: Maybe<Scalars['ID']>;
   /** All values not ending with the given string. */
   readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
   readonly name?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly name_not?: Maybe<Scalars['String']>;
@@ -852,6 +1592,8 @@ export type StationUpdateDataInput = {
   readonly description?: Maybe<Scalars['String']>;
   readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
   readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
+  readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
 };
 
 export type StationUpdateInput = {
@@ -860,6 +1602,8 @@ export type StationUpdateInput = {
   readonly description?: Maybe<Scalars['String']>;
   readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
   readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
+  readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
 };
 
 export type StationUpdateManyDataInput = {
@@ -912,11 +1656,29 @@ export type StationUpdateOneInput = {
   readonly upsert?: Maybe<StationUpsertNestedInput>;
 };
 
+export type StationUpdateOneRequiredWithoutSongsInput = {
+  readonly create?: Maybe<StationCreateWithoutSongsInput>;
+  readonly connect?: Maybe<StationWhereUniqueInput>;
+  readonly update?: Maybe<StationUpdateWithoutSongsDataInput>;
+  readonly upsert?: Maybe<StationUpsertWithoutSongsInput>;
+};
+
 export type StationUpdateWithoutOwnerDataInput = {
   readonly name?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
   readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
+  readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
+};
+
+export type StationUpdateWithoutSongsDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+  readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
 };
 
 export type StationUpdateWithoutTagsDataInput = {
@@ -924,6 +1686,8 @@ export type StationUpdateWithoutTagsDataInput = {
   readonly slug?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
   readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
+  readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
 };
 
 export type StationUpdateWithWhereUniqueWithoutOwnerInput = {
@@ -939,6 +1703,11 @@ export type StationUpdateWithWhereUniqueWithoutTagsInput = {
 export type StationUpsertNestedInput = {
   readonly update: StationUpdateDataInput;
   readonly create: StationCreateInput;
+};
+
+export type StationUpsertWithoutSongsInput = {
+  readonly update: StationUpdateWithoutSongsDataInput;
+  readonly create: StationCreateWithoutSongsInput;
 };
 
 export type StationUpsertWithWhereUniqueWithoutOwnerInput = {
@@ -987,6 +1756,36 @@ export type StationWhereInput = {
   readonly id_ends_with?: Maybe<Scalars['ID']>;
   /** All values not ending with the given string. */
   readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
   readonly name?: Maybe<Scalars['String']>;
   /** All values that are not equal to given value. */
   readonly name_not?: Maybe<Scalars['String']>;
@@ -1072,6 +1871,12 @@ export type StationWhereInput = {
   readonly tags_every?: Maybe<StationTagWhereInput>;
   readonly tags_some?: Maybe<StationTagWhereInput>;
   readonly tags_none?: Maybe<StationTagWhereInput>;
+  readonly onlineUsers_every?: Maybe<UserWhereInput>;
+  readonly onlineUsers_some?: Maybe<UserWhereInput>;
+  readonly onlineUsers_none?: Maybe<UserWhereInput>;
+  readonly songs_every?: Maybe<SongWhereInput>;
+  readonly songs_some?: Maybe<SongWhereInput>;
+  readonly songs_none?: Maybe<SongWhereInput>;
 };
 
 export type StationWhereUniqueInput = {
@@ -1081,14 +1886,11 @@ export type StationWhereUniqueInput = {
 };
 
 export type Subscription = {
-  readonly user?: Maybe<UserSubscriptionPayload>;
   readonly userRole?: Maybe<UserRoleSubscriptionPayload>;
   readonly stationTag?: Maybe<StationTagSubscriptionPayload>;
+  readonly song?: Maybe<SongSubscriptionPayload>;
   readonly station?: Maybe<StationSubscriptionPayload>;
-};
-
-export type SubscriptionUserArgs = {
-  where?: Maybe<UserSubscriptionWhereInput>;
+  readonly user?: Maybe<UserSubscriptionPayload>;
 };
 
 export type SubscriptionUserRoleArgs = {
@@ -1099,8 +1901,30 @@ export type SubscriptionStationTagArgs = {
   where?: Maybe<StationTagSubscriptionWhereInput>;
 };
 
+export type SubscriptionSongArgs = {
+  where?: Maybe<SongSubscriptionWhereInput>;
+};
+
 export type SubscriptionStationArgs = {
   where?: Maybe<StationSubscriptionWhereInput>;
+};
+
+export type SubscriptionUserArgs = {
+  where?: Maybe<UserSubscriptionWhereInput>;
+};
+
+export type Thumbnail = {
+  readonly url: Scalars['String'];
+  readonly width: Scalars['Int'];
+  readonly height: Scalars['Int'];
+};
+
+export type Thumbnails = {
+  readonly default: Thumbnail;
+  readonly medium?: Maybe<Thumbnail>;
+  readonly high?: Maybe<Thumbnail>;
+  readonly standard?: Maybe<Thumbnail>;
+  readonly maxres?: Maybe<Thumbnail>;
 };
 
 export type User = Node & {
@@ -1167,6 +1991,16 @@ export type UserCreateInput = {
   readonly googleId?: Maybe<Scalars['String']>;
   readonly roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
   readonly stations?: Maybe<StationCreateManyWithoutOwnerInput>;
+};
+
+export type UserCreateManyInput = {
+  readonly create?: Maybe<ReadonlyArray<UserCreateInput>>;
+  readonly connect?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+};
+
+export type UserCreateOneInput = {
+  readonly create?: Maybe<UserCreateInput>;
+  readonly connect?: Maybe<UserWhereUniqueInput>;
 };
 
 export type UserCreateOneWithoutRolesInput = {
@@ -1495,6 +2329,384 @@ export type UserRoleWhereUniqueInput = {
   readonly id?: Maybe<Scalars['ID']>;
 };
 
+export type UserScalarWhereInput = {
+  /** Logical AND on all given filters. */
+  readonly AND?: Maybe<ReadonlyArray<UserScalarWhereInput>>;
+  /** Logical OR on all given filters. */
+  readonly OR?: Maybe<ReadonlyArray<UserScalarWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  readonly NOT?: Maybe<ReadonlyArray<UserScalarWhereInput>>;
+  readonly id?: Maybe<Scalars['ID']>;
+  /** All values that are not equal to given value. */
+  readonly id_not?: Maybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  readonly id_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values that are not contained in given list. */
+  readonly id_not_in?: Maybe<ReadonlyArray<Scalars['ID']>>;
+  /** All values less than the given value. */
+  readonly id_lt?: Maybe<Scalars['ID']>;
+  /** All values less than or equal the given value. */
+  readonly id_lte?: Maybe<Scalars['ID']>;
+  /** All values greater than the given value. */
+  readonly id_gt?: Maybe<Scalars['ID']>;
+  /** All values greater than or equal the given value. */
+  readonly id_gte?: Maybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  readonly id_contains?: Maybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  readonly id_not_contains?: Maybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  readonly id_starts_with?: Maybe<Scalars['ID']>;
+  /** All values not starting with the given string. */
+  readonly id_not_starts_with?: Maybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  readonly id_ends_with?: Maybe<Scalars['ID']>;
+  /** All values not ending with the given string. */
+  readonly id_not_ends_with?: Maybe<Scalars['ID']>;
+  readonly createdAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly createdAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly createdAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly createdAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly createdAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly createdAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly createdAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly createdAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly updatedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly updatedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly updatedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly updatedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly updatedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly updatedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly updatedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly updatedAt_gte?: Maybe<Scalars['DateTime']>;
+  readonly email?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly email_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly email_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly email_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly email_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly email_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly email_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly email_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly email_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly email_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly email_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly email_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly email_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly email_not_ends_with?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly username_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly username_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly username_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly username_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly username_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly username_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly username_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly username_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly username_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly username_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly username_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly username_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly username_not_ends_with?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly password_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly password_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly password_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly password_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly password_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly password_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly password_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly password_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly password_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly password_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly password_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly password_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly password_not_ends_with?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly name_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly name_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly name_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly name_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly name_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly name_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly name_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly name_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly name_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly name_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly name_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly name_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly name_not_ends_with?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly country_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly country_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly country_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly country_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly country_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly country_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly country_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly country_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly country_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly country_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly country_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly country_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly country_not_ends_with?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly city_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly city_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly city_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly city_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly city_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly city_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly city_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly city_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly city_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly city_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly city_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly city_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly city_not_ends_with?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly bio_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly bio_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly bio_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly bio_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly bio_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly bio_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly bio_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly bio_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly bio_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly bio_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly bio_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly bio_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly bio_not_ends_with?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly avatarUrl_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly avatarUrl_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly avatarUrl_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly avatarUrl_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly avatarUrl_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly avatarUrl_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly avatarUrl_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly avatarUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly avatarUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly avatarUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly avatarUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly avatarUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly avatarUrl_not_ends_with?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly coverUrl_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly coverUrl_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly coverUrl_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly coverUrl_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly coverUrl_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly coverUrl_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly coverUrl_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly coverUrl_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly coverUrl_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly coverUrl_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly coverUrl_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly coverUrl_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly coverUrl_not_ends_with?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  /** All values that are not equal to given value. */
+  readonly reputation_not?: Maybe<Scalars['Int']>;
+  /** All values that are contained in given list. */
+  readonly reputation_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values that are not contained in given list. */
+  readonly reputation_not_in?: Maybe<ReadonlyArray<Scalars['Int']>>;
+  /** All values less than the given value. */
+  readonly reputation_lt?: Maybe<Scalars['Int']>;
+  /** All values less than or equal the given value. */
+  readonly reputation_lte?: Maybe<Scalars['Int']>;
+  /** All values greater than the given value. */
+  readonly reputation_gt?: Maybe<Scalars['Int']>;
+  /** All values greater than or equal the given value. */
+  readonly reputation_gte?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly facebookId_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly facebookId_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly facebookId_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly facebookId_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly facebookId_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly facebookId_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly facebookId_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly facebookId_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly facebookId_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly facebookId_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly facebookId_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly facebookId_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly facebookId_not_ends_with?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  /** All values that are not equal to given value. */
+  readonly googleId_not?: Maybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  readonly googleId_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values that are not contained in given list. */
+  readonly googleId_not_in?: Maybe<ReadonlyArray<Scalars['String']>>;
+  /** All values less than the given value. */
+  readonly googleId_lt?: Maybe<Scalars['String']>;
+  /** All values less than or equal the given value. */
+  readonly googleId_lte?: Maybe<Scalars['String']>;
+  /** All values greater than the given value. */
+  readonly googleId_gt?: Maybe<Scalars['String']>;
+  /** All values greater than or equal the given value. */
+  readonly googleId_gte?: Maybe<Scalars['String']>;
+  /** All values containing the given string. */
+  readonly googleId_contains?: Maybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  readonly googleId_not_contains?: Maybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  readonly googleId_starts_with?: Maybe<Scalars['String']>;
+  /** All values not starting with the given string. */
+  readonly googleId_not_starts_with?: Maybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  readonly googleId_ends_with?: Maybe<Scalars['String']>;
+  /** All values not ending with the given string. */
+  readonly googleId_not_ends_with?: Maybe<Scalars['String']>;
+};
+
 export type UserSubscriptionPayload = {
   readonly mutation: MutationType;
   readonly node?: Maybe<User>;
@@ -1520,6 +2732,23 @@ export type UserSubscriptionWhereInput = {
   readonly node?: Maybe<UserWhereInput>;
 };
 
+export type UserUpdateDataInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
+  readonly stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
+};
+
 export type UserUpdateInput = {
   readonly email?: Maybe<Scalars['String']>;
   readonly username?: Maybe<Scalars['String']>;
@@ -1537,6 +2766,33 @@ export type UserUpdateInput = {
   readonly stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
 };
 
+export type UserUpdateManyDataInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  readonly password?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+};
+
+export type UserUpdateManyInput = {
+  readonly create?: Maybe<ReadonlyArray<UserCreateInput>>;
+  readonly connect?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+  readonly set?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+  readonly disconnect?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+  readonly delete?: Maybe<ReadonlyArray<UserWhereUniqueInput>>;
+  readonly update?: Maybe<ReadonlyArray<UserUpdateWithWhereUniqueNestedInput>>;
+  readonly updateMany?: Maybe<ReadonlyArray<UserUpdateManyWithWhereNestedInput>>;
+  readonly deleteMany?: Maybe<ReadonlyArray<UserScalarWhereInput>>;
+  readonly upsert?: Maybe<ReadonlyArray<UserUpsertWithWhereUniqueNestedInput>>;
+};
+
 export type UserUpdateManyMutationInput = {
   readonly email?: Maybe<Scalars['String']>;
   readonly username?: Maybe<Scalars['String']>;
@@ -1550,6 +2806,18 @@ export type UserUpdateManyMutationInput = {
   readonly reputation?: Maybe<Scalars['Int']>;
   readonly facebookId?: Maybe<Scalars['String']>;
   readonly googleId?: Maybe<Scalars['String']>;
+};
+
+export type UserUpdateManyWithWhereNestedInput = {
+  readonly where: UserScalarWhereInput;
+  readonly data: UserUpdateManyDataInput;
+};
+
+export type UserUpdateOneRequiredInput = {
+  readonly create?: Maybe<UserCreateInput>;
+  readonly connect?: Maybe<UserWhereUniqueInput>;
+  readonly update?: Maybe<UserUpdateDataInput>;
+  readonly upsert?: Maybe<UserUpsertNestedInput>;
 };
 
 export type UserUpdateOneRequiredWithoutRolesInput = {
@@ -1598,6 +2866,16 @@ export type UserUpdateWithoutStationsDataInput = {
   readonly roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
 };
 
+export type UserUpdateWithWhereUniqueNestedInput = {
+  readonly where: UserWhereUniqueInput;
+  readonly data: UserUpdateDataInput;
+};
+
+export type UserUpsertNestedInput = {
+  readonly update: UserUpdateDataInput;
+  readonly create: UserCreateInput;
+};
+
 export type UserUpsertWithoutRolesInput = {
   readonly update: UserUpdateWithoutRolesDataInput;
   readonly create: UserCreateWithoutRolesInput;
@@ -1606,6 +2884,12 @@ export type UserUpsertWithoutRolesInput = {
 export type UserUpsertWithoutStationsInput = {
   readonly update: UserUpdateWithoutStationsDataInput;
   readonly create: UserCreateWithoutStationsInput;
+};
+
+export type UserUpsertWithWhereUniqueNestedInput = {
+  readonly where: UserWhereUniqueInput;
+  readonly update: UserUpdateDataInput;
+  readonly create: UserCreateInput;
 };
 
 export type UserWhereInput = {
@@ -2005,6 +3289,67 @@ export type RegisterMutation = { readonly __typename?: 'Mutation' } & {
   readonly register: { readonly __typename?: 'LoginOrRegisterReturnType' } & Pick<LoginOrRegisterReturnType, 'token'>;
 };
 
+export type SongExplorerQueryVariables = {
+  where: SongExplorerInput;
+};
+
+export type SongExplorerQuery = { readonly __typename?: 'Query' } & {
+  readonly songExplorer: { readonly __typename?: 'SongExplorer' } & Pick<SongExplorer, 'id'> & {
+      readonly snippet: { readonly __typename?: 'Snippet' } & Pick<
+        Snippet,
+        | 'publishedAt'
+        | 'channelId'
+        | 'title'
+        | 'description'
+        | 'liveBroadcastContent'
+        | 'channelTitle'
+        | 'tags'
+        | 'categoryId'
+        | 'defaultAudioLanguage'
+      > & {
+          readonly thumbnails: { readonly __typename?: 'Thumbnails' } & {
+            readonly default: { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>;
+            readonly medium: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+            readonly high: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+            readonly standard: Maybe<
+              { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>
+            >;
+            readonly maxres: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+          };
+        };
+      readonly contentDetails: { readonly __typename?: 'ContentDetail' } & Pick<
+        ContentDetail,
+        'duration' | 'dimension' | 'caption' | 'licensedContent'
+      >;
+    };
+};
+
+export type SongExplorersQueryVariables = {
+  where: SongExplorersInput;
+};
+
+export type SongExplorersQuery = { readonly __typename?: 'Query' } & {
+  readonly songExplorers: ReadonlyArray<
+    { readonly __typename?: 'MiniSongExplorer' } & {
+      readonly id: { readonly __typename?: 'MiniSongExplorerId' } & Pick<MiniSongExplorerId, 'kind' | 'videoId'>;
+      readonly snippet: { readonly __typename?: 'Snippet' } & Pick<
+        Snippet,
+        'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'
+      > & {
+          readonly thumbnails: { readonly __typename?: 'Thumbnails' } & {
+            readonly default: { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>;
+            readonly medium: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+            readonly high: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+            readonly standard: Maybe<
+              { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>
+            >;
+            readonly maxres: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+          };
+        };
+    }
+  >;
+};
+
 export type StationsQueryVariables = {
   first?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
@@ -2054,6 +3399,144 @@ export function useRegisterMutation(
   baseOptions?: ReactApolloHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>,
 ) {
   return ReactApolloHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+}
+export const SongExplorerDocument = gql`
+  query songExplorer($where: SongExplorerInput!) {
+    songExplorer(where: $where) {
+      id
+      snippet {
+        publishedAt
+        channelId
+        title
+        description
+        thumbnails {
+          default {
+            url
+            width
+            height
+          }
+          medium {
+            url
+            width
+            height
+          }
+          high {
+            url
+            width
+            height
+          }
+          standard {
+            url
+            width
+            height
+          }
+          maxres {
+            url
+            width
+            height
+          }
+        }
+        liveBroadcastContent
+        channelTitle
+        tags
+        categoryId
+        defaultAudioLanguage
+      }
+      contentDetails {
+        duration
+        dimension
+        caption
+        licensedContent
+      }
+    }
+  }
+`;
+export type SongExplorerProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<SongExplorerQuery, SongExplorerQueryVariables>
+> &
+  TChildProps;
+export function withSongExplorer<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>
+    | undefined,
+) {
+  return ReactApollo.withQuery<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>(
+    SongExplorerDocument,
+    operationOptions,
+  );
+}
+
+export function useSongExplorerQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorerQueryVariables>) {
+  return ReactApolloHooks.useQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
+}
+export const SongExplorersDocument = gql`
+  query songExplorers($where: SongExplorersInput!) {
+    songExplorers(where: $where) {
+      id {
+        kind
+        videoId
+      }
+      snippet {
+        publishedAt
+        channelId
+        title
+        description
+        thumbnails {
+          default {
+            url
+            width
+            height
+          }
+          medium {
+            url
+            width
+            height
+          }
+          high {
+            url
+            width
+            height
+          }
+          standard {
+            url
+            width
+            height
+          }
+          maxres {
+            url
+            width
+            height
+          }
+        }
+        channelTitle
+      }
+    }
+  }
+`;
+export type SongExplorersProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<SongExplorersQuery, SongExplorersQueryVariables>
+> &
+  TChildProps;
+export function withSongExplorers<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<
+        TProps,
+        SongExplorersQuery,
+        SongExplorersQueryVariables,
+        SongExplorersProps<TChildProps>
+      >
+    | undefined,
+) {
+  return ReactApollo.withQuery<
+    TProps,
+    SongExplorersQuery,
+    SongExplorersQueryVariables,
+    SongExplorersProps<TChildProps>
+  >(SongExplorersDocument, operationOptions);
+}
+
+export function useSongExplorersQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorersQueryVariables>) {
+  return ReactApolloHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
 }
 export const StationsDocument = gql`
   query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {

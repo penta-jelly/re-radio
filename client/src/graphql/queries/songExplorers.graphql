@@ -1,0 +1,42 @@
+query songExplorers($where: SongExplorersInput!){
+  songExplorers(where: $where) {
+    id {
+      kind
+      videoId
+    }
+    snippet {
+      publishedAt
+      channelId
+      title
+      description
+      thumbnails {
+        default {
+          url
+          width
+          height
+        }
+        medium {
+          url
+          width
+          height
+        }
+        high {
+          url
+          width
+          height
+        }
+        standard {
+          url
+          width
+          height
+        }
+        maxres {
+          url
+          width
+          height
+        }
+      }
+      channelTitle
+    }
+  }
+}

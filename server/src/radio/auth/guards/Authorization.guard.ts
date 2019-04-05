@@ -8,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
+import { GraphQLResolveInfo } from 'graphql';
 import { User } from '../../../prisma/prisma.binding';
 import { PrismaService } from '../../../prisma/prisma.service';
 import { UsersService } from '../../users/user.service';
@@ -28,9 +29,11 @@ export class AuthorizationGuard implements CanActivate {
     if (!allowedRoles) {
       return true;
     }
-    const { req } = GqlExecutionContext.create(context).getContext();
-    const args = GqlExecutionContext.create(context).getArgs();
-    this.logger.log(args);
+    const executionContext = GqlExecutionContext.create(context);
+    const { req } = executionContext.getContext();
+    const args = executionContext.getArgs();
+    const info = executionContext.getInfo<GraphQLResolveInfo>();
+
     const user: User = req.user;
     if (!user) {
       throw new InternalServerErrorException(
@@ -46,17 +49,16 @@ export class AuthorizationGuard implements CanActivate {
     user.stations = stations;
 
     if (user.roles) {
-      const allowed = allowedRoles.some(allowedRole => {
-        if (Array.isArray(allowedRole)) {
-          const [role, validate] = allowedRole;
-          this.logger.log(`First array: ${user.roles.some(userRole => userRole.role === role)}`);
-          this.logger.log(`Last: ${validate(user, args)}`);
-          return user.roles.some(userRole => userRole.role === role) && validate(user, args);
-        } else {
-          this.logger.log(`First string: ${user.roles.some(userRole => userRole.role === allowedRole)}`);
-          return user.roles.some(userRole => userRole.role === allowedRole);
-        }
-      });
+      const result = await Promise.all(
+        allowedRoles.map(role => {
+          if (typeof role === 'function') {
+            return role({ user, args, info, services: { prisma: this.prisma } });
+          } else {
+            return user.roles.some(userRole => userRole.role === role);
+          }
+        }),
+      );
+      const allowed = result.some(a => a === true);
       if (!allowed) throw new UnauthorizedException();
     }
     return true;
