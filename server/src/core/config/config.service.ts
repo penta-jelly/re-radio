@@ -5,7 +5,7 @@ import { EnvVariables } from './config.variables';
 @Injectable()
 export class ConfigService {
   constructor() {
-    dotenv.load();
+    dotenv.config();
   }
 
   get(key: EnvVariables): string {
@@ -17,7 +17,7 @@ export class ConfigService {
   }
 
   static get(key: EnvVariables): string {
-    dotenv.load();
+    dotenv.config();
     const value = process.env[EnvVariables[key]];
     if (value === undefined) {
       throw new InternalServerErrorException(`Can not get environment variable ${key}`);
