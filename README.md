@@ -1,5 +1,8 @@
 # re-radio
 
+[![CircleCI](https://circleci.com/gh/penta-jelly/re-radio.svg?style=svg)](https://circleci.com/gh/penta-jelly/re-radio)
+[![Renovate](https://badges.renovateapi.com/github/penta-jelly/re-radio)](https://renovatebot.com/)
+
 ## Introduction
 
 ```txt
