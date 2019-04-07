@@ -1,6 +1,8 @@
 version: "3"
 services:
-  service:
+  graphql_service:
+    build: ./server
+  real-time_service:
     build: ./server
   storybook:
     build: ./client

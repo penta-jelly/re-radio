@@ -1,7 +1,7 @@
 version: '3'
 services:
-  service:
-    container_name: re-radio_service
+  graphql_service:
+    container_name: re-radio_graphql_service
     build:
       context: .
       args:
@@ -9,8 +9,12 @@ services:
     ports:
       - "8000:8000"
     command: >
-      sh -c "
-        npm run build &&
-        wait-on http://prisma:${PRISMA_PORT} && 
-        npm start
-      "
+      sh -c "npm run build && wait-on http://prisma:${PRISMA_PORT} && npm run prisma:deploy && npm start"
+  real-time_service:
+    container_name: re-radio_real-time_service
+    build:
+      context: .
+      args:
+        PRISMA_VERSION: ${PRISMA_VERSION}
+    command: >
+      sh -c "npm run build && wait-on http://graphql_service:8000/status && npm run start:real-time-radio"

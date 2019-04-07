@@ -3,18 +3,9 @@ services:
   e2e:
     build: ./e2e
     depends_on:
-      - service
+      - graphql_service
       - client
     environment:
       - CYPRESS_baseUrl=http://client:3000
     command: > 
-      sh -c "wait-on http://service:8000/status http://client:3000 && npx cypress run"
-  service:
-    command: >
-      sh -c "
-        npm run build &&
-        wait-on http://prisma:${PRISMA_PORT} && 
-        npm run prisma:deploy --force &&
-        npm run worker:seed &&
-        npm start
-      "
+      sh -c "wait-on http://graphql_service:8000/status http://client:3000 && npx cypress run"
