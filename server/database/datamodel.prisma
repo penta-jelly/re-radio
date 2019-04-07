@@ -59,9 +59,12 @@ type Song {
   url: String!
   thumbnail: String!
   duration: Int!
-  creator: User!
+  creator: User! @relation(name: "UserSongCreator")
   station: Station! @relation(name: "StationPlaylist")
   status: SongStatusEnum!
+  startedAt: DateTime
+  upVotes: [User!]! @relation(name: "UserSongUpVotes")
+  downVotes: [User!]! @relation(name: "UserSongDownVotes")
 }
 
 enum SongStatusEnum {
