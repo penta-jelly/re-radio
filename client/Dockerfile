@@ -1,7 +1,7 @@
 FROM node:10-alpine as build-stage
 WORKDIR /app
 COPY . /app
-RUN npm ci
+RUN npm install
 RUN npm run build
 
 FROM nginx
