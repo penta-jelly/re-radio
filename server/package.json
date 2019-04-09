@@ -55,7 +55,7 @@
     "ts-loader": "5.3.3",
     "tsc-watch": "2.1.2",
     "tslint": "5.15.0",
-    "typescript": "3.4.2"
+    "typescript": "3.4.3"
   },
   "description": "description",
   "author": {
