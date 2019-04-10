@@ -59,8 +59,6 @@
     "@types/storybook__addon-actions": "3.4.2",
     "@types/storybook__react": "4.0.1",
     "@types/yup": "0.26.12",
-    "install": "0.12.2",
-    "npm": "6.9.0",
     "prettier": "1.16.4",
     "tslint": "5.15.0",
     "tslint-config-prettier": "1.18.0",
