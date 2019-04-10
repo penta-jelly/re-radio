@@ -58,7 +58,7 @@ export const Layout: React.FC<Props> & { defaultProps: typeof defaultProps } = (
         <List className={classes.sidebarContent}>
           <li className={classes.title}>
             <img className={classes.logo} src={logoImage} alt="Logo" />
-            re-Radio
+            Re-radio
           </li>
           <ListItem button>
             <ListItemIcon>
