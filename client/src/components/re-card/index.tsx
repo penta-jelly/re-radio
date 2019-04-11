@@ -1,13 +1,8 @@
 import React from 'react';
 import { Card as MaterialCard, CardActionArea, CardMedia, Typography, CardContent } from '@material-ui/core';
-import { CardMediaProps } from '@material-ui/core/CardMedia';
 import { CardActionAreaProps } from '@material-ui/core/CardActionArea';
 
 import { useStyles } from './styles';
-
-const CardMediaImage = CardMedia as React.ComponentType<
-  CardMediaProps & React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement>
->;
 
 const CardActionAreaDiv = CardActionArea as React.ComponentType<
   CardActionAreaProps & { component?: React.ElementType }
@@ -33,7 +28,7 @@ export const ReCard: React.FC<Props> = ({ media, title, content, icon, onIconBut
     <MaterialCard className={[classes.root, className || ''].join(' ').trim()}>
       {media && (
         <CardActionAreaDiv component="div" className={classes.imageContainer}>
-          <CardMediaImage component="img" alt={media.alt} image={media.image} />
+          <CardMedia component="img" alt={media.alt} image={media.image} />
           {icon && (
             <button className={classes.iconButton} onClick={onIconButtonClick}>
               {icon}
