@@ -2,8 +2,12 @@ import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
 import { setContext } from 'apollo-link-context';
 
 export function initApollo() {
+  let uri = '';
+  if (process.env.NODE_ENV !== 'production') {
+    uri = `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
+  }
   const httpLink = new HttpLink({
-    uri: `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
+    uri: `${uri}/graphql`,
   });
 
   const authLink = setContext((_, { headers }) => {
