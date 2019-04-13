@@ -1,14 +1,14 @@
 export default (url: string) => ({
   elements: {
-    headerText: 'Header',
+    headerText: /(.*)/,
     chatBoxText: 'Chat Box',
     playlistText: 'Playlist',
     playerText: 'Player',
     addSongText: 'Add Song',
   },
 
-  navigate() {
-    cy.visit(url);
+  navigate(slug: string) {
+    cy.visit(`${url}/${slug}`);
   },
 
   checkStationLayout() {

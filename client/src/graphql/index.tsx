@@ -3427,6 +3427,19 @@ export type SongExplorersQuery = { readonly __typename?: 'Query' } & {
   >;
 };
 
+export type StationQueryVariables = {
+  slug: Scalars['String'];
+};
+
+export type StationQuery = { readonly __typename?: 'Query' } & {
+  readonly station: Maybe<
+    { readonly __typename?: 'Station' } & Pick<Station, 'id' | 'name' | 'slug'> & {
+        readonly tags: Maybe<ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>>;
+        readonly owner: { readonly __typename?: 'User' } & Pick<User, 'id'>;
+      }
+  >;
+};
+
 export type StationsQueryVariables = {
   first?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
@@ -3614,6 +3627,38 @@ export function withSongExplorers<TProps, TChildProps = {}>(
 
 export function useSongExplorersQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorersQueryVariables>) {
   return ReactApolloHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
+}
+export const StationDocument = gql`
+  query Station($slug: String!) {
+    station(where: { slug: $slug }) {
+      id
+      name
+      slug
+      tags {
+        id
+        name
+      }
+      owner {
+        id
+      }
+    }
+  }
+`;
+export type StationProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationQuery, StationQueryVariables>> &
+  TChildProps;
+export function withStation<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>
+    | undefined,
+) {
+  return ReactApollo.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(
+    StationDocument,
+    operationOptions,
+  );
+}
+
+export function useStationQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationQueryVariables>) {
+  return ReactApolloHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
 }
 export const StationsDocument = gql`
   query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {

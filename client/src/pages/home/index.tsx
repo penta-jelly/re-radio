@@ -58,7 +58,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
                     <ReCard
                       key={station.id}
                       title={station.name}
-                      media={{ image: placeHolderImage, alt: station.name }}
+                      media={{ image: placeHolderImage, alt: station.name, linkTo: `/station/${station.slug}` }}
                       content={stringifiedTagNames}
                       id={`station-${station.slug}`}
                       links={
