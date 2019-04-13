@@ -9,22 +9,6 @@
 
 * Allow docker-users group to have Full Control access to project files because there is a need of using mounted driver for development.
 
-## One command to rule them all
-
-```sh
-npm run docker-compose:up
-```
-
-This commands will include these containers:
-
-* A Mongo Database container
-
-* A Prisma server container
-
-* A re-radio server container that enables a nodemon process
-
-* Server will be served at [http://localhost:8000/graphql](http://localhost:8000/graphql)
-
 ## Development guideline
 
 ### Typescript watch mode

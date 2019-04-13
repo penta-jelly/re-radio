@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  graphql_service:
+    container_name: re-radio_graphql_service
+    build:
+      context: ./server
+    ports:
+      - "8000:8000"
+    command: >
+      sh -c "npx wait-on http://prisma:${PRISMA_PORT} && npm run prisma:deploy && npm start"
+  real-time_service:
+    container_name: re-radio_real-time_service
+    build:
+      context: ./server
+    command: >
+      sh -c "npx wait-on http://graphql_service:8000/status && npm run start:real-time-radio"
+  client:
+    container_name: re-radio_client
+    build:
+      context: ./client
+      target: bundle-stage
+    ports:
+      - "3000:3000"
+  e2e:
+    build: ./e2e
+    depends_on:
+      - graphql_service
+      - client
+    environment:
+      - CYPRESS_baseUrl=http://client:3000
+    command: > 
+      sh -c "npx wait-on http://graphql_service:8000/status http://client:3000 && npx cypress run"
