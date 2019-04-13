@@ -1,19 +1,16 @@
-import React from 'react';
-import { useQuery } from 'react-apollo-hooks';
 import { Typography } from '@material-ui/core';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-
 import { PrimaryButton } from '../../components/button/primary-button';
-import { Layout } from '../../containers/layout';
-import { useStationsQuery, StationOrderByInput } from '../../graphql';
+import { ReSearch } from '../../components/input/re-search';
+import { PageLoader } from '../../components/page-loader';
 import { ReCard } from '../../components/re-card';
 import { ReCardLink } from '../../components/re-card/card-link';
-import { PageLoader } from '../../components/page-loader';
-
+import { Layout } from '../../containers/layout';
+import { StationOrderByInput, useStationsQuery } from '../../graphql';
 import { useStyles } from './styles';
-import { ReSearch } from '../../components/input/re-search';
 
 const placeHolderImage =
   'https://images.unsplash.com/photo-1506157786151-b8491531f063?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80';
@@ -39,8 +36,8 @@ const HomePage: React.FunctionComponent<{}> = () => {
         ) : (
           <>
             <div className={classes.header}>
-              <ReSearch placeholder={t('common:search')} />
-              <PrimaryButton>{t('stations:createStation')}</PrimaryButton>
+              <ReSearch placeholder={t('common:search')} id="search" />
+              <PrimaryButton id="create-station">{t('stations:createStation')}</PrimaryButton>
             </div>
             <div className={classes.section}>
               <Typography gutterBottom component="h3" variant="h5" className={classes.sectionTitle}>
@@ -61,12 +58,21 @@ const HomePage: React.FunctionComponent<{}> = () => {
                     <ReCard
                       key={station.id}
                       title={station.name}
-                      media={{ image: placeHolderImage, alt: 'Placeholder image' }}
+                      media={{ image: placeHolderImage, alt: station.name }}
                       content={stringifiedTagNames}
+                      id={`station-${station.slug}`}
                       links={
                         <>
-                          <ReCardLink icon={<FiberManualRecordIcon color="primary" />} text="0 online" />
-                          <ReCardLink icon={<ShowChartIcon color="inherit" />} text="6 pinned" />
+                          <ReCardLink
+                            icon={<FiberManualRecordIcon color="primary" />}
+                            text="0 online"
+                            data-role="online-users-label"
+                          />
+                          <ReCardLink
+                            icon={<ShowChartIcon color="inherit" />}
+                            text="6 pinned"
+                            data-role="pinned-label"
+                          />
                         </>
                       }
                     />

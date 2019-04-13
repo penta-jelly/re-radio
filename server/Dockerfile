@@ -13,4 +13,6 @@ COPY . .
 
 RUN npm install -g wait-on@latest prisma@${PRISMA_VERSION}
 
+RUN npm run build
+
 CMD [ "npm", "start" ]

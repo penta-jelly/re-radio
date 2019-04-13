@@ -9,6 +9,7 @@ const CardActionAreaDiv = CardActionArea as React.ComponentType<
 >;
 
 interface Props {
+  id?: string;
   media?: {
     alt?: string;
     image?: string;
@@ -21,14 +22,14 @@ interface Props {
   onIconButtonClick?(event: React.MouseEvent<HTMLButtonElement>): void;
 }
 
-export const ReCard: React.FC<Props> = ({ media, title, content, icon, onIconButtonClick, links, className }) => {
+export const ReCard: React.FC<Props> = ({ id, media, title, content, icon, onIconButtonClick, links, className }) => {
   const classes = useStyles();
 
   return (
-    <MaterialCard className={[classes.root, className || ''].join(' ').trim()}>
+    <MaterialCard className={[classes.root, className || ''].join(' ').trim()} id={id}>
       {media && (
         <CardActionAreaDiv component="div" className={classes.imageContainer}>
-          <CardMedia component="img" alt={media.alt} image={media.image} />
+          <CardMedia component="img" alt={media.alt} image={media.image} data-role="card-media" />
           {icon && (
             <button className={classes.iconButton} onClick={onIconButtonClick}>
               {icon}
@@ -37,10 +38,10 @@ export const ReCard: React.FC<Props> = ({ media, title, content, icon, onIconBut
         </CardActionAreaDiv>
       )}
       <CardContent className={classes.contentContainer}>
-        <Typography component="h5" className={classes.title}>
+        <Typography component="h5" className={classes.title} data-role="card-title">
           {title}
         </Typography>
-        <Typography component="p" className={classes.content}>
+        <Typography component="p" className={classes.content} data-role="card-content">
           {content}
         </Typography>
         <span className={classes.divider} />
