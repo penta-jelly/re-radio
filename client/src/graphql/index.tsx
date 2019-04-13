@@ -311,6 +311,7 @@ export type Query = {
   readonly usersConnection: UserConnection;
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
+  readonly currentUser: User;
   readonly songExplorer: SongExplorer;
   readonly songExplorers: ReadonlyArray<MiniSongExplorer>;
   readonly temp__?: Maybe<Scalars['Boolean']>;
