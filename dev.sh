@@ -12,13 +12,8 @@ echo "HOST_NAME=$host" >> .env
 
 # Base executed script
 base="docker-compose \
-  -f ./server/database/docker-compose.yml \
-  -f ./server/database/docker-compose.db.yml \
-  -f ./server/docker-compose.yml \
-  -f ./server/docker-compose.dev.yml \
-  -f ./client/docker-compose.dev.yml \
-  -f docker-compose.yml \
-  -f docker-compose.dev.yml \
+  -f ./compose/docker-compose.db.yml \
+  -f ./compose/docker-compose.dev.yml \
   --project-directory . \
 "
 

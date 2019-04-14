@@ -15,13 +15,15 @@ echo "HOST_NAME=$host" >> .env
 
 # Base executed script
 base="docker-compose \
-  -f ./server/database/docker-compose.yml \
-  -f ./server/database/docker-compose.db.yml \
-  -f ./server/docker-compose.yml \
-  -f ./client/docker-compose.yml \
-  -f docker-compose.yml \
-  -f docker-compose.test.yml \
+  -f ./compose/docker-compose.db.yml \
+  -f ./compose/docker-compose.test.yml \
   --project-directory . \
 "
 
-eval "$base up --abort-on-container-exit --exit-code-from e2e $1 $2"
+case "$1" in
+'up' | 'down' | 'start' | 'stop' | 'config' | 'build')
+  eval "$base $1 $2 $3"
+;;
+*)
+  eval "$base up --abort-on-container-exit --exit-code-from e2e $1 $2"
+esac

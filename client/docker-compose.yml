@@ -1,7 +1,0 @@
-version: "3"
-services:
-  client:
-    container_name: re-radio_client
-    build: .
-    ports:
-      - "3000:3000"
