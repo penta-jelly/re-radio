@@ -4,7 +4,5 @@ services:
     build: ./server
   real-time_service:
     build: ./server
-  storybook:
-    build: ./client
   client:
     build: ./client
