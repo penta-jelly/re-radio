@@ -1,17 +1,5 @@
 version: "3"
 services:
-  storybook:
-    container_name: re-radio_storybook
-    build:
-      context: .
-      dockerfile: Dockerfile.storybook
-    expose:
-      - 4000
-    ports:
-      - 4000:4000
-    volumes:
-      - .:/usr/src/app
-      - node_modules:/usr/src/app/node_modules
   client:
     container_name: re-radio_client
     build:

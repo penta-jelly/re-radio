@@ -8,10 +8,6 @@ services:
     volumes:
       - ./server:/user/app
       - ./server/node_modules:/user/app/node_modules
-  storybook:
-    volumes:
-      - ./client:/usr/src/app
-      - ./client/node_modules:/usr/src/app/node_modules
   client:
     volumes:
       - ./client:/usr/src/app
