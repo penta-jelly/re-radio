@@ -4,6 +4,8 @@
   "scripts": {
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
+    "type-check": "tsc --project cypress --noEmit",
+    "lint": "tslint --project cypress",
     "format": "prettier --write \"cypress/**/*.ts\""
   },
   "dependencies": {
@@ -18,6 +20,7 @@
     "prettier": "1.17.0",
     "ts-loader": "5.3.3",
     "tslint": "5.15.0",
+    "tslint-config-prettier": "1.18.0",
     "typescript": "3.4.3",
     "webpack": "4.30.0"
   },

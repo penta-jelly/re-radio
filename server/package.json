@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "format": "prettier --write \"**/*.ts\" --ignore-path src/prisma/prisma.binding.ts",
+    "lint": "tslint \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" --ignore-path src/prisma/prisma.binding.ts",
     "build": "tsc",
     "start": "node dist/radio.js",
     "start:real-time-radio": "node dist/real-time-radio.js",
@@ -56,6 +57,7 @@
     "prettier": "1.17.0",
     "tsc-watch": "2.1.2",
     "tslint": "5.15.0",
+    "tslint-config-prettier": "1.18.0",
     "typescript": "3.4.3"
   },
   "description": "description",
