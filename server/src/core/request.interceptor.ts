@@ -13,7 +13,7 @@ const COLOR_RESET = '\x1b[0m';
 export class RequestsInterceptor implements NestInterceptor {
   private logger = new Logger(RequestsInterceptor.name, false);
 
-  intercept(context: ExecutionContext, next: CallHandler<any>): Observable<any> {
+  intercept(context: ExecutionContext, next: CallHandler<unknown>): Observable<unknown> {
     if (context.getArgs().length === 4) {
       // GraphQL request
       const ctx = GqlExecutionContext.create(context);

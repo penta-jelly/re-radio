@@ -17,3 +17,6 @@ RUN npx cypress verify
 
 COPY cypress cypress
 COPY cypress.json .
+
+RUN npm run type-check
+RUN npm run lint

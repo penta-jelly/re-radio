@@ -1,7 +1,16 @@
 FROM node:10-alpine as build-stage
+
 WORKDIR /app
-COPY . /app
+
+COPY package.json .
+COPY package-lock.json .
 RUN npm ci
+
+COPY .env.example .env
+COPY . .
+
+RUN npm run type-check
+RUN npm run lint
 RUN npm run build
 
 FROM nginx as bundle-stage

@@ -9,6 +9,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generate": "gql-gen",
+    "format": "prettier --write \"src/**/*.{tsx,ts}\"",
     "type-check": "tsc --noEmit",
     "lint": "tslint \"src/**/*.{tsx,ts}\""
   },
@@ -48,10 +49,9 @@
     "@types/react-helmet": "5.0.8",
     "@types/react-router-dom": "4.3.2",
     "@types/yup": "0.26.12",
-    "prettier": "1.16.4",
+    "prettier": "1.17.0",
     "tslint": "5.15.0",
     "tslint-config-prettier": "1.18.0",
-    "tslint-plugin-prettier": "2.0.1",
     "tslint-react": "4.0.0",
     "tslint-react-hooks": "2.0.0",
     "typescript": "3.4.3"
