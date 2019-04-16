@@ -28,7 +28,7 @@
     "react-apollo-hooks": "0.4.5",
     "react-dom": "16.8.6",
     "react-helmet": "5.2.0",
-    "react-i18next": "10.7.0",
+    "react-i18next": "10.8.0",
     "react-router-dom": "5.0.0",
     "react-scripts": "2.1.8",
     "type-fest": "0.3.1",
