@@ -19,7 +19,7 @@
     "@types/node": "11.13.4",
     "prettier": "1.17.0",
     "ts-loader": "5.3.3",
-    "tslint": "5.15.0",
+    "tslint": "5.16.0",
     "tslint-config-prettier": "1.18.0",
     "typescript": "3.4.3",
     "webpack": "4.30.0"
