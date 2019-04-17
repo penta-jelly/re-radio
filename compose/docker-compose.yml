@@ -1,0 +1,42 @@
+version: "3.7"
+services:
+  prisma:
+    restart: ${DOCKER_CONTAINER_RESTART_POLICY}
+    ports:
+      - "${DOCKER_HOST_PRISMA_PORT}:${PRISMA_PORT}"
+  db:
+    restart: ${DOCKER_CONTAINER_RESTART_POLICY}
+    ports:
+      - "${DOCKER_HOST_DB_PORT}:${DB_PORT}"
+  graphql_service:
+    container_name: re-radio_graphql_service
+    restart: ${DOCKER_CONTAINER_RESTART_POLICY}
+    build:
+      context: ./server
+    ports:
+      - "${DOCKER_HOST_SERVER_PORT}:8000"
+    command: >
+      sh -c "npx wait-on http://prisma:${PRISMA_PORT} && npm run prisma:deploy && npm start"
+    environment:
+      - "YOUTUBE_API_KEY=${YOUTUBE_API_KEY}"
+      - "NODE_ENV=production"
+  real-time_service:
+    container_name: re-radio_real-time_service
+    restart: ${DOCKER_CONTAINER_RESTART_POLICY}
+    build:
+      context: ./server
+    command: >
+      sh -c "npx wait-on http://graphql_service:8000/status && npm run start:real-time-radio"
+    environment:
+      - "YOUTUBE_API_KEY=${YOUTUBE_API_KEY}"
+      - "NODE_ENV=production"
+  client:
+    container_name: re-radio_client
+    restart: ${DOCKER_CONTAINER_RESTART_POLICY}
+    build:
+      context: ./client
+      target: bundle-stage
+    ports:
+      - "${DOCKER_HOST_CLIENT_PORT}:3000"
+    environment:
+      - "NODE_ENV=production"

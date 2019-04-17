@@ -9,9 +9,34 @@
 TODO: This section need to be updated
 ```
 
-## Installation guide
+## How to start the application
 
 ### System requirement
+
+* Docker: 18.x
+* Docker Compose: 1.24
+
+### Build & start
+
+```sh
+sh start.sh
+```
+
+**Note**: To stop and clean up all services: run `sh start.sh down`.
+
+## All services
+
+Assume there is no customized configuration and we are talking about *localhost*.
+
+* Prisma:
+  * GraphQL Playground: [http://localhost:4466](http://localhost:4466)
+  * Admin: [http://localhost:4466/_admin](http://localhost:4466/_admin)
+* Server: [http://localhost:8000/graphql](http://localhost:8000/graphql)
+* Client: [http://localhost:3000](http://localhost:3000)
+
+## Development guideline
+
+### Development system requirement
 
 * Docker: 18.x [Windows users](https://github.com/penta-jelly/re-radio/wiki/Docker-for-Windows)
 * Docker Compose: 1.x
@@ -45,12 +70,3 @@ sh dev.sh up
 ```sh
 sh dev.sh down
 ```
-
-## All services
-
-* Prisma:
-  * GraphQL Playground: [http://localhost:4466](http://localhost:4466)
-  * Admin: [http://localhost:4466/_admin](http://localhost:4466/_admin)
-* Server: [http://localhost:8000/graphql](http://localhost:8000/graphql)
-* Client: [http://localhost:3000](http://localhost:3000)
-* Storybook: [http://localhost:4000](http://localhost:4000)
