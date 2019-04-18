@@ -54,7 +54,7 @@
     "tslint-config-prettier": "1.18.0",
     "tslint-react": "4.0.0",
     "tslint-react-hooks": "2.0.0",
-    "typescript": "3.4.3"
+    "typescript": "3.4.4"
   },
   "author": {
     "name": "Penta Jelly",
