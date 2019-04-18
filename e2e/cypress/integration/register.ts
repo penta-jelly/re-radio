@@ -1,4 +1,4 @@
-import register from '../support/RegisterPage';
+import register from '../support/authentication/RegisterPage';
 
 describe('Register', () => {
   const RegisterPage = register('/register');

@@ -74,7 +74,11 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
             <Typography variant="h3" gutterBottom align="center">
               {t('Login')}
             </Typography>
-            {loginError && <FormHelperText error>{loginError}</FormHelperText>}
+            {loginError && (
+              <FormHelperText error id="login-error">
+                {loginError}
+              </FormHelperText>
+            )}
             <TextField
               variant="outlined"
               value={values.email}
@@ -111,7 +115,14 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
                 />
               </FormGroup>
             </div>
-            <Button variant="contained" color="primary" size="large" type="submit" className={classNames.button}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              type="submit"
+              className={classNames.button}
+              id="login-button"
+            >
               Login
             </Button>
             <Typography className={classNames.forgotPassRow} variant="caption">
@@ -119,7 +130,11 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
             </Typography>
             <div className={classNames.iconRow}>
               <Typography variant="caption">
-                or <Link to="/register">signup</Link> using
+                or{' '}
+                <Link to="/register" id="register-link">
+                  signup
+                </Link>{' '}
+                using
               </Typography>
             </div>
             <div className={classNames.iconRow}>
