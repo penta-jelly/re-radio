@@ -237,6 +237,7 @@ type SongConnection {
 }
 
 input SongCreateInput {
+  id: ID
   title: String!
   url: String!
   thumbnail: String!
@@ -255,6 +256,7 @@ input SongCreateManyWithoutStationInput {
 }
 
 input SongCreateWithoutStationInput {
+  id: ID
   title: String!
   url: String!
   thumbnail: String!
@@ -997,6 +999,7 @@ type StationConnection {
 }
 
 input StationCreateInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -1027,6 +1030,7 @@ input StationCreateOneWithoutSongsInput {
 }
 
 input StationCreateWithoutOwnerInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -1036,6 +1040,7 @@ input StationCreateWithoutOwnerInput {
 }
 
 input StationCreateWithoutSongsInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -1045,6 +1050,7 @@ input StationCreateWithoutSongsInput {
 }
 
 input StationCreateWithoutTagsInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -1355,6 +1361,7 @@ type StationTagConnection {
 }
 
 input StationTagCreateInput {
+  id: ID
   name: String!
   stations: StationCreateManyWithoutTagsInput
 }
@@ -1365,6 +1372,7 @@ input StationTagCreateManyWithoutStationsInput {
 }
 
 input StationTagCreateWithoutStationsInput {
+  id: ID
   name: String!
 }
 
@@ -2070,6 +2078,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   username: String!
   password: String!
@@ -2107,6 +2116,7 @@ input UserCreateOneWithoutStationsInput {
 }
 
 input UserCreateWithoutRolesInput {
+  id: ID
   email: String!
   username: String!
   password: String!
@@ -2123,6 +2133,7 @@ input UserCreateWithoutRolesInput {
 }
 
 input UserCreateWithoutStationsInput {
+  id: ID
   email: String!
   username: String!
   password: String!
@@ -2216,6 +2227,7 @@ type UserRoleConnection {
 }
 
 input UserRoleCreateInput {
+  id: ID
   role: UserRoleEnum!
   user: UserCreateOneWithoutRolesInput!
   station: StationCreateOneInput
@@ -2227,6 +2239,7 @@ input UserRoleCreateManyWithoutUserInput {
 }
 
 input UserRoleCreateWithoutUserInput {
+  id: ID
   role: UserRoleEnum!
   station: StationCreateOneInput
 }
@@ -3897,6 +3910,7 @@ export type UserRoleOrderByInput =   'id_ASC' |
   'createdAt_DESC'
 
 export interface SongCreateInput {
+  id?: ID_Input | null
   title: String
   url: String
   thumbnail: String
@@ -3915,6 +3929,7 @@ export interface SongCreateManyWithoutStationInput {
 }
 
 export interface SongCreateWithoutStationInput {
+  id?: ID_Input | null
   title: String
   url: String
   thumbnail: String
@@ -4217,6 +4232,7 @@ export interface SongWhereUniqueInput {
 }
 
 export interface StationCreateInput {
+  id?: ID_Input | null
   name: String
   slug: String
   description?: String | null
@@ -4247,6 +4263,7 @@ export interface StationCreateOneWithoutSongsInput {
 }
 
 export interface StationCreateWithoutOwnerInput {
+  id?: ID_Input | null
   name: String
   slug: String
   description?: String | null
@@ -4256,6 +4273,7 @@ export interface StationCreateWithoutOwnerInput {
 }
 
 export interface StationCreateWithoutSongsInput {
+  id?: ID_Input | null
   name: String
   slug: String
   description?: String | null
@@ -4265,6 +4283,7 @@ export interface StationCreateWithoutSongsInput {
 }
 
 export interface StationCreateWithoutTagsInput {
+  id?: ID_Input | null
   name: String
   slug: String
   description?: String | null
@@ -4363,6 +4382,7 @@ export interface StationSubscriptionWhereInput {
 }
 
 export interface StationTagCreateInput {
+  id?: ID_Input | null
   name: String
   stations?: StationCreateManyWithoutTagsInput | null
 }
@@ -4373,6 +4393,7 @@ export interface StationTagCreateManyWithoutStationsInput {
 }
 
 export interface StationTagCreateWithoutStationsInput {
+  id?: ID_Input | null
   name: String
 }
 
@@ -4738,6 +4759,7 @@ export interface StationWhereUniqueInput {
 }
 
 export interface UserCreateInput {
+  id?: ID_Input | null
   email: String
   username: String
   password: String
@@ -4775,6 +4797,7 @@ export interface UserCreateOneWithoutStationsInput {
 }
 
 export interface UserCreateWithoutRolesInput {
+  id?: ID_Input | null
   email: String
   username: String
   password: String
@@ -4791,6 +4814,7 @@ export interface UserCreateWithoutRolesInput {
 }
 
 export interface UserCreateWithoutStationsInput {
+  id?: ID_Input | null
   email: String
   username: String
   password: String
@@ -4807,6 +4831,7 @@ export interface UserCreateWithoutStationsInput {
 }
 
 export interface UserRoleCreateInput {
+  id?: ID_Input | null
   role: UserRoleEnum
   user: UserCreateOneWithoutRolesInput
   station?: StationCreateOneInput | null
@@ -4818,6 +4843,7 @@ export interface UserRoleCreateManyWithoutUserInput {
 }
 
 export interface UserRoleCreateWithoutUserInput {
+  id?: ID_Input | null
   role: UserRoleEnum
   station?: StationCreateOneInput | null
 }

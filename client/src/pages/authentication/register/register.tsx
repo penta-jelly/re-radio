@@ -3,9 +3,9 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from 'react-router';
-import { useRegisterMutation, RegisterInput } from '../../graphql';
+import { useRegisterMutation, RegisterInput } from '../../../graphql';
 import { Avatar, Typography, TextField, Button, FormHelperText } from '@material-ui/core';
-import { useStyles } from '../../styles/authentication/register';
+import { useStyles } from './registerStyle';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 
 type DataKeys = keyof RegisterInput;
