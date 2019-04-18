@@ -15,7 +15,8 @@ RUN npm ci
 # to avoid verifying again when running the tests
 RUN npx cypress verify
 
-RUN npm install -g wait-on
-
 COPY cypress cypress
 COPY cypress.json .
+
+RUN npm run type-check
+RUN npm run lint

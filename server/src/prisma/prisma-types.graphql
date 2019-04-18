@@ -1,5 +1,5 @@
 # source: http://prisma:4466
-# timestamp: Tue Apr 02 2019 04:15:16 GMT+0000 (Coordinated Universal Time)
+# timestamp: Sat Apr 06 2019 16:01:00 GMT+0000 (Coordinated Universal Time)
 
 type AggregateSong {
   count: Int!
@@ -129,6 +129,9 @@ type Song implements Node {
   creator: User!
   station: Station!
   status: SongStatusEnum!
+  startedAt: DateTime
+  upVotes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  downVotes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -147,8 +150,11 @@ input SongCreateInput {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum!
+  startedAt: DateTime
   creator: UserCreateOneInput!
   station: StationCreateOneWithoutSongsInput!
+  upVotes: UserCreateManyInput
+  downVotes: UserCreateManyInput
 }
 
 input SongCreateManyWithoutStationInput {
@@ -162,7 +168,10 @@ input SongCreateWithoutStationInput {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum!
+  startedAt: DateTime
   creator: UserCreateOneInput!
+  upVotes: UserCreateManyInput
+  downVotes: UserCreateManyInput
 }
 
 """An edge in a connection."""
@@ -191,6 +200,8 @@ enum SongOrderByInput {
   duration_DESC
   status_ASC
   status_DESC
+  startedAt_ASC
+  startedAt_DESC
 }
 
 type SongPreviousValues {
@@ -202,6 +213,7 @@ type SongPreviousValues {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum!
+  startedAt: DateTime
 }
 
 input SongScalarWhereInput {
@@ -449,6 +461,28 @@ input SongScalarWhereInput {
 
   """All values that are not contained in given list."""
   status_not_in: [SongStatusEnum!]
+  startedAt: DateTime
+
+  """All values that are not equal to given value."""
+  startedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  startedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  startedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startedAt_gte: DateTime
 }
 
 enum SongStatusEnum {
@@ -501,8 +535,11 @@ input SongUpdateInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
   creator: UserUpdateOneRequiredInput
   station: StationUpdateOneRequiredWithoutSongsInput
+  upVotes: UserUpdateManyInput
+  downVotes: UserUpdateManyInput
 }
 
 input SongUpdateManyDataInput {
@@ -511,6 +548,7 @@ input SongUpdateManyDataInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
 }
 
 input SongUpdateManyMutationInput {
@@ -519,6 +557,7 @@ input SongUpdateManyMutationInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
 }
 
 input SongUpdateManyWithoutStationInput {
@@ -544,7 +583,10 @@ input SongUpdateWithoutStationDataInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
   creator: UserUpdateOneRequiredInput
+  upVotes: UserUpdateManyInput
+  downVotes: UserUpdateManyInput
 }
 
 input SongUpdateWithWhereUniqueWithoutStationInput {
@@ -803,8 +845,36 @@ input SongWhereInput {
 
   """All values that are not contained in given list."""
   status_not_in: [SongStatusEnum!]
+  startedAt: DateTime
+
+  """All values that are not equal to given value."""
+  startedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  startedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  startedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startedAt_gte: DateTime
   creator: UserWhereInput
   station: StationWhereInput
+  upVotes_every: UserWhereInput
+  upVotes_some: UserWhereInput
+  upVotes_none: UserWhereInput
+  downVotes_every: UserWhereInput
+  downVotes_some: UserWhereInput
+  downVotes_none: UserWhereInput
 }
 
 input SongWhereUniqueInput {

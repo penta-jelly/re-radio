@@ -221,6 +221,9 @@ type Song implements Node {
   creator: User!
   station: Station!
   status: SongStatusEnum!
+  startedAt: DateTime
+  upVotes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
+  downVotes(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
 }
 
 """A connection to a list of items."""
@@ -239,8 +242,11 @@ input SongCreateInput {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum!
+  startedAt: DateTime
   creator: UserCreateOneInput!
   station: StationCreateOneWithoutSongsInput!
+  upVotes: UserCreateManyInput
+  downVotes: UserCreateManyInput
 }
 
 input SongCreateManyWithoutStationInput {
@@ -254,7 +260,10 @@ input SongCreateWithoutStationInput {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum!
+  startedAt: DateTime
   creator: UserCreateOneInput!
+  upVotes: UserCreateManyInput
+  downVotes: UserCreateManyInput
 }
 
 """An edge in a connection."""
@@ -283,6 +292,8 @@ enum SongOrderByInput {
   duration_DESC
   status_ASC
   status_DESC
+  startedAt_ASC
+  startedAt_DESC
 }
 
 type SongPreviousValues {
@@ -294,6 +305,7 @@ type SongPreviousValues {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum!
+  startedAt: DateTime
 }
 
 input SongScalarWhereInput {
@@ -541,6 +553,28 @@ input SongScalarWhereInput {
 
   """All values that are not contained in given list."""
   status_not_in: [SongStatusEnum!]
+  startedAt: DateTime
+
+  """All values that are not equal to given value."""
+  startedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  startedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  startedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startedAt_gte: DateTime
 }
 
 enum SongStatusEnum {
@@ -593,8 +627,11 @@ input SongUpdateInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
   creator: UserUpdateOneRequiredInput
   station: StationUpdateOneRequiredWithoutSongsInput
+  upVotes: UserUpdateManyInput
+  downVotes: UserUpdateManyInput
 }
 
 input SongUpdateManyDataInput {
@@ -603,6 +640,7 @@ input SongUpdateManyDataInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
 }
 
 input SongUpdateManyMutationInput {
@@ -611,6 +649,7 @@ input SongUpdateManyMutationInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
 }
 
 input SongUpdateManyWithoutStationInput {
@@ -636,7 +675,10 @@ input SongUpdateWithoutStationDataInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt: DateTime
   creator: UserUpdateOneRequiredInput
+  upVotes: UserUpdateManyInput
+  downVotes: UserUpdateManyInput
 }
 
 input SongUpdateWithWhereUniqueWithoutStationInput {
@@ -895,8 +937,36 @@ input SongWhereInput {
 
   """All values that are not contained in given list."""
   status_not_in: [SongStatusEnum!]
+  startedAt: DateTime
+
+  """All values that are not equal to given value."""
+  startedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  startedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  startedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  startedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  startedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  startedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  startedAt_gte: DateTime
   creator: UserWhereInput
   station: StationWhereInput
+  upVotes_every: UserWhereInput
+  upVotes_some: UserWhereInput
+  upVotes_none: UserWhereInput
+  downVotes_every: UserWhereInput
+  downVotes_some: UserWhereInput
+  downVotes_none: UserWhereInput
 }
 
 input SongWhereUniqueInput {
@@ -3752,7 +3822,9 @@ export type SongOrderByInput =   'id_ASC' |
   'duration_ASC' |
   'duration_DESC' |
   'status_ASC' |
-  'status_DESC'
+  'status_DESC' |
+  'startedAt_ASC' |
+  'startedAt_DESC'
 
 export type SongStatusEnum =   'PENDING' |
   'PLAYING' |
@@ -3830,8 +3902,11 @@ export interface SongCreateInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt?: DateTime | null
   creator: UserCreateOneInput
   station: StationCreateOneWithoutSongsInput
+  upVotes?: UserCreateManyInput | null
+  downVotes?: UserCreateManyInput | null
 }
 
 export interface SongCreateManyWithoutStationInput {
@@ -3845,7 +3920,10 @@ export interface SongCreateWithoutStationInput {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt?: DateTime | null
   creator: UserCreateOneInput
+  upVotes?: UserCreateManyInput | null
+  downVotes?: UserCreateManyInput | null
 }
 
 export interface SongScalarWhereInput {
@@ -3936,6 +4014,14 @@ export interface SongScalarWhereInput {
   status_not?: SongStatusEnum | null
   status_in?: SongStatusEnum[] | SongStatusEnum | null
   status_not_in?: SongStatusEnum[] | SongStatusEnum | null
+  startedAt?: DateTime | null
+  startedAt_not?: DateTime | null
+  startedAt_in?: DateTime[] | DateTime | null
+  startedAt_not_in?: DateTime[] | DateTime | null
+  startedAt_lt?: DateTime | null
+  startedAt_lte?: DateTime | null
+  startedAt_gt?: DateTime | null
+  startedAt_gte?: DateTime | null
 }
 
 export interface SongSubscriptionWhereInput {
@@ -3955,8 +4041,11 @@ export interface SongUpdateInput {
   thumbnail?: String | null
   duration?: Int | null
   status?: SongStatusEnum | null
+  startedAt?: DateTime | null
   creator?: UserUpdateOneRequiredInput | null
   station?: StationUpdateOneRequiredWithoutSongsInput | null
+  upVotes?: UserUpdateManyInput | null
+  downVotes?: UserUpdateManyInput | null
 }
 
 export interface SongUpdateManyDataInput {
@@ -3965,6 +4054,7 @@ export interface SongUpdateManyDataInput {
   thumbnail?: String | null
   duration?: Int | null
   status?: SongStatusEnum | null
+  startedAt?: DateTime | null
 }
 
 export interface SongUpdateManyMutationInput {
@@ -3973,6 +4063,7 @@ export interface SongUpdateManyMutationInput {
   thumbnail?: String | null
   duration?: Int | null
   status?: SongStatusEnum | null
+  startedAt?: DateTime | null
 }
 
 export interface SongUpdateManyWithoutStationInput {
@@ -3998,7 +4089,10 @@ export interface SongUpdateWithoutStationDataInput {
   thumbnail?: String | null
   duration?: Int | null
   status?: SongStatusEnum | null
+  startedAt?: DateTime | null
   creator?: UserUpdateOneRequiredInput | null
+  upVotes?: UserUpdateManyInput | null
+  downVotes?: UserUpdateManyInput | null
 }
 
 export interface SongUpdateWithWhereUniqueWithoutStationInput {
@@ -4100,8 +4194,22 @@ export interface SongWhereInput {
   status_not?: SongStatusEnum | null
   status_in?: SongStatusEnum[] | SongStatusEnum | null
   status_not_in?: SongStatusEnum[] | SongStatusEnum | null
+  startedAt?: DateTime | null
+  startedAt_not?: DateTime | null
+  startedAt_in?: DateTime[] | DateTime | null
+  startedAt_not_in?: DateTime[] | DateTime | null
+  startedAt_lt?: DateTime | null
+  startedAt_lte?: DateTime | null
+  startedAt_gt?: DateTime | null
+  startedAt_gte?: DateTime | null
   creator?: UserWhereInput | null
   station?: StationWhereInput | null
+  upVotes_every?: UserWhereInput | null
+  upVotes_some?: UserWhereInput | null
+  upVotes_none?: UserWhereInput | null
+  downVotes_every?: UserWhereInput | null
+  downVotes_some?: UserWhereInput | null
+  downVotes_none?: UserWhereInput | null
 }
 
 export interface SongWhereUniqueInput {
@@ -5459,6 +5567,9 @@ export interface Song extends Node {
   creator: User
   station: Station
   status: SongStatusEnum
+  startedAt?: DateTime | null
+  upVotes?: Array<User> | null
+  downVotes?: Array<User> | null
 }
 
 /*
@@ -5489,6 +5600,7 @@ export interface SongPreviousValues {
   thumbnail: String
   duration: Int
   status: SongStatusEnum
+  startedAt?: DateTime | null
 }
 
 export interface SongSubscriptionPayload {

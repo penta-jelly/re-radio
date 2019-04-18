@@ -1,8 +1,8 @@
-version: '3'
+version: "3.7"
 services:
   prisma:
     container_name: re-radio_prisma
-    image: prismagraphql/prisma:${PRISMA_VERSION}
+    image: prismagraphql/prisma:1.30.1
     restart: "no"
     ports:
       - "${PRISMA_PORT}:${PRISMA_PORT}"
@@ -17,3 +17,12 @@ services:
             user: ${DB_USER}
             password: ${DB_PASSWORD}
             migrations: true
+  db:
+    container_name: re-radio_db
+    image: postgres:10.7
+    restart: "no"
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}

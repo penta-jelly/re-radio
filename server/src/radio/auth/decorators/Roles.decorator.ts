@@ -1,4 +1,4 @@
-import { SetMetadata, HttpException } from '@nestjs/common';
+import { SetMetadata } from '@nestjs/common';
 import { GraphQLResolveInfo } from 'graphql';
 import { User } from '../../../prisma/prisma.binding';
 import { PrismaService } from '../../../prisma/prisma.service';

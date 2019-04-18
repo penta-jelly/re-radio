@@ -64,7 +64,7 @@ export class SeederService {
       { name: 'Station A', slug: 'station-a', owner, tags: { create: { name: 'a-team' } } },
       { name: 'Station B', slug: 'station-b', owner, tags: { create: { name: 'b-team' } } },
       { name: 'Station C', slug: 'station-c', owner, tags: { create: { name: 'c-team' } } },
-      { name: 'Station D', slug: 'station-D', owner, tags: { create: { name: 'e-team' } } },
+      { name: 'Station D', slug: 'station-d', owner, tags: { create: { name: 'd-team' } } },
       { name: 'Station E', slug: 'station-e', owner, tags: { create: { name: 'e-team' } } },
       { name: 'Station F', slug: 'station-f', owner, tags: { create: { name: 'f-team' } } },
       { name: 'Station G', slug: 'station-g', owner, tags: { create: { name: 'g-team' } } },
@@ -76,9 +76,9 @@ export class SeederService {
         owner: { connect: { username: 'normie' } },
         tags: { create: { name: 'i-team' } },
       },
-      ...Array(100)
+      ...Array(0)
         .fill(null)
-        .map((_v, index) => ({
+        .map((_, index) => ({
           name: `Station ${index}`,
           slug: `station-${index}`,
           owner,

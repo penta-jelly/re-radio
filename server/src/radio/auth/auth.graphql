@@ -14,6 +14,10 @@ input RegisterInput {
   password: String!
 }
 
+type Query {
+  currentUser: User!
+}
+
 type Mutation {
   login(data: LoginInput!): LoginOrRegisterReturnType!
   register(data: RegisterInput!): LoginOrRegisterReturnType!

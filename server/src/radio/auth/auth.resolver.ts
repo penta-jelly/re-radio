@@ -1,15 +1,24 @@
-import { Logger, UnprocessableEntityException } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Logger, UnprocessableEntityException, UseGuards } from '@nestjs/common';
+import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql';
+import { User } from '../../prisma/prisma.binding';
 import { PrismaService } from '../../prisma/prisma.service';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators/CurrentUser.decorator';
 import { LoginInputDTO } from './dto/LoginInput.dto';
 import { RegisterInputDTO } from './dto/RegisterInput.dto';
+import { AuthenticationGuard } from './guards/Authentication.guard';
 import { LoginOrRegisterReturnType } from './interfaces/LoginOrRegisterReturnType.interface';
 
 @Resolver()
 export class AuthResolver {
   private logger = new Logger(AuthResolver.name);
   constructor(private readonly prisma: PrismaService, private readonly authService: AuthService) {}
+
+  @Query('currentUser')
+  @UseGuards(AuthenticationGuard)
+  async currentUser(@CurrentUser() user: User, @Info() info): Promise<User> {
+    return this.prisma.query.user({ where: { id: user.id } }, info);
+  }
 
   @Mutation('login')
   async login(@Args() loginDTO: LoginInputDTO): Promise<LoginOrRegisterReturnType> {

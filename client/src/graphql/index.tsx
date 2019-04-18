@@ -311,6 +311,7 @@ export type Query = {
   readonly usersConnection: UserConnection;
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
+  readonly currentUser: User;
   readonly songExplorer: SongExplorer;
   readonly songExplorers: ReadonlyArray<MiniSongExplorer>;
   readonly temp__?: Maybe<Scalars['Boolean']>;
@@ -478,6 +479,29 @@ export type Song = Node & {
   readonly creator: User;
   readonly station: Station;
   readonly status: SongStatusEnum;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
+  readonly upVotes?: Maybe<ReadonlyArray<User>>;
+  readonly downVotes?: Maybe<ReadonlyArray<User>>;
+};
+
+export type SongUpVotesArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type SongDownVotesArgs = {
+  where?: Maybe<UserWhereInput>;
+  orderBy?: Maybe<UserOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 /** A connection to a list of items. */
@@ -495,8 +519,11 @@ export type SongCreateInput = {
   readonly thumbnail: Scalars['String'];
   readonly duration: Scalars['Int'];
   readonly status: SongStatusEnum;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
   readonly creator: UserCreateOneInput;
   readonly station: StationCreateOneWithoutSongsInput;
+  readonly upVotes?: Maybe<UserCreateManyInput>;
+  readonly downVotes?: Maybe<UserCreateManyInput>;
 };
 
 export type SongCreateManyWithoutStationInput = {
@@ -510,7 +537,10 @@ export type SongCreateWithoutStationInput = {
   readonly thumbnail: Scalars['String'];
   readonly duration: Scalars['Int'];
   readonly status: SongStatusEnum;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
   readonly creator: UserCreateOneInput;
+  readonly upVotes?: Maybe<UserCreateManyInput>;
+  readonly downVotes?: Maybe<UserCreateManyInput>;
 };
 
 /** An edge in a connection. */
@@ -555,6 +585,8 @@ export enum SongOrderByInput {
   DurationDesc = 'duration_DESC',
   StatusAsc = 'status_ASC',
   StatusDesc = 'status_DESC',
+  StartedAtAsc = 'startedAt_ASC',
+  StartedAtDesc = 'startedAt_DESC',
 }
 
 export type SongPreviousValues = {
@@ -566,6 +598,7 @@ export type SongPreviousValues = {
   readonly thumbnail: Scalars['String'];
   readonly duration: Scalars['Int'];
   readonly status: SongStatusEnum;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type SongScalarWhereInput = {
@@ -735,6 +768,21 @@ export type SongScalarWhereInput = {
   readonly status_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
   /** All values that are not contained in given list. */
   readonly status_not_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly startedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly startedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly startedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly startedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly startedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly startedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly startedAt_gte?: Maybe<Scalars['DateTime']>;
 };
 
 export enum SongStatusEnum {
@@ -775,8 +823,11 @@ export type SongUpdateInput = {
   readonly thumbnail?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['Int']>;
   readonly status?: Maybe<SongStatusEnum>;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
   readonly creator?: Maybe<UserUpdateOneRequiredInput>;
   readonly station?: Maybe<StationUpdateOneRequiredWithoutSongsInput>;
+  readonly upVotes?: Maybe<UserUpdateManyInput>;
+  readonly downVotes?: Maybe<UserUpdateManyInput>;
 };
 
 export type SongUpdateManyDataInput = {
@@ -785,6 +836,7 @@ export type SongUpdateManyDataInput = {
   readonly thumbnail?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['Int']>;
   readonly status?: Maybe<SongStatusEnum>;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type SongUpdateManyMutationInput = {
@@ -793,6 +845,7 @@ export type SongUpdateManyMutationInput = {
   readonly thumbnail?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['Int']>;
   readonly status?: Maybe<SongStatusEnum>;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
 };
 
 export type SongUpdateManyWithoutStationInput = {
@@ -818,7 +871,10 @@ export type SongUpdateWithoutStationDataInput = {
   readonly thumbnail?: Maybe<Scalars['String']>;
   readonly duration?: Maybe<Scalars['Int']>;
   readonly status?: Maybe<SongStatusEnum>;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
   readonly creator?: Maybe<UserUpdateOneRequiredInput>;
+  readonly upVotes?: Maybe<UserUpdateManyInput>;
+  readonly downVotes?: Maybe<UserUpdateManyInput>;
 };
 
 export type SongUpdateWithWhereUniqueWithoutStationInput = {
@@ -999,8 +1055,29 @@ export type SongWhereInput = {
   readonly status_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
   /** All values that are not contained in given list. */
   readonly status_not_in?: Maybe<ReadonlyArray<SongStatusEnum>>;
+  readonly startedAt?: Maybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  readonly startedAt_not?: Maybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  readonly startedAt_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values that are not contained in given list. */
+  readonly startedAt_not_in?: Maybe<ReadonlyArray<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  readonly startedAt_lt?: Maybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  readonly startedAt_lte?: Maybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  readonly startedAt_gt?: Maybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  readonly startedAt_gte?: Maybe<Scalars['DateTime']>;
   readonly creator?: Maybe<UserWhereInput>;
   readonly station?: Maybe<StationWhereInput>;
+  readonly upVotes_every?: Maybe<UserWhereInput>;
+  readonly upVotes_some?: Maybe<UserWhereInput>;
+  readonly upVotes_none?: Maybe<UserWhereInput>;
+  readonly downVotes_every?: Maybe<UserWhereInput>;
+  readonly downVotes_some?: Maybe<UserWhereInput>;
+  readonly downVotes_none?: Maybe<UserWhereInput>;
 };
 
 export type SongWhereUniqueInput = {
@@ -3358,6 +3435,19 @@ export type SongExplorersQuery = { readonly __typename?: 'Query' } & {
   >;
 };
 
+export type StationQueryVariables = {
+  slug: Scalars['String'];
+};
+
+export type StationQuery = { readonly __typename?: 'Query' } & {
+  readonly station: Maybe<
+    { readonly __typename?: 'Station' } & Pick<Station, 'id' | 'name' | 'slug'> & {
+        readonly tags: Maybe<ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>>;
+        readonly owner: { readonly __typename?: 'User' } & Pick<User, 'id'>;
+      }
+  >;
+};
+
 export type StationsQueryVariables = {
   first?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
@@ -3571,6 +3661,38 @@ export function withSongExplorers<TProps, TChildProps = {}>(
 
 export function useSongExplorersQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorersQueryVariables>) {
   return ReactApolloHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
+}
+export const StationDocument = gql`
+  query Station($slug: String!) {
+    station(where: { slug: $slug }) {
+      id
+      name
+      slug
+      tags {
+        id
+        name
+      }
+      owner {
+        id
+      }
+    }
+  }
+`;
+export type StationProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationQuery, StationQueryVariables>> &
+  TChildProps;
+export function withStation<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>
+    | undefined,
+) {
+  return ReactApollo.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(
+    StationDocument,
+    operationOptions,
+  );
+}
+
+export function useStationQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationQueryVariables>) {
+  return ReactApolloHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
 }
 export const StationsDocument = gql`
   query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {

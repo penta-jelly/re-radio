@@ -1,0 +1,14 @@
+query Station($slug: String!) {
+  station(where: { slug: $slug }) {
+    id
+    name
+    slug
+    tags {
+      id
+      name
+    }
+    owner {
+      id
+    }
+  }
+}
