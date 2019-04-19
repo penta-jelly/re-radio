@@ -1390,10 +1390,6 @@ enum StationTagOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type StationTagPreviousValues {
@@ -2263,10 +2259,6 @@ enum UserRoleOrderByInput {
   id_DESC
   role_ASC
   role_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type UserRolePreviousValues {
@@ -3860,11 +3852,7 @@ export type StationOrderByInput =   'id_ASC' |
 export type StationTagOrderByInput =   'id_ASC' |
   'id_DESC' |
   'name_ASC' |
-  'name_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
+  'name_DESC'
 
 export type UserOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -3903,11 +3891,7 @@ export type UserRoleEnum =   'ADMIN' |
 export type UserRoleOrderByInput =   'id_ASC' |
   'id_DESC' |
   'role_ASC' |
-  'role_DESC' |
-  'updatedAt_ASC' |
-  'updatedAt_DESC' |
-  'createdAt_ASC' |
-  'createdAt_DESC'
+  'role_DESC'
 
 export interface SongCreateInput {
   id?: ID_Input | null

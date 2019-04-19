@@ -1298,10 +1298,6 @@ enum StationTagOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type StationTagPreviousValues {
@@ -2171,10 +2167,6 @@ enum UserRoleOrderByInput {
   id_DESC
   role_ASC
   role_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type UserRolePreviousValues {

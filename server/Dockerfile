@@ -10,5 +10,6 @@ COPY .env.example .env
 COPY . .
 
 RUN npm run build
+RUN npm run lint
 
 CMD [ "npm", "start" ]

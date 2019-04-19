@@ -10,7 +10,7 @@ export interface Props {
   drawer?: DrawerProps;
 }
 
-interface DrawerProps {
+export interface DrawerProps {
   open: boolean;
   collapsed: boolean;
 }

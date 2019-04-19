@@ -41,7 +41,7 @@
     "passport": "0.4.0",
     "passport-http-bearer": "1.0.1",
     "passport-jwt": "4.0.0",
-    "prisma": "1.30.1",
+    "prisma": "1.31.1",
     "prisma-binding": "2.3.10",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.4.0",
@@ -58,7 +58,7 @@
     "tsc-watch": "2.1.2",
     "tslint": "5.16.0",
     "tslint-config-prettier": "1.18.0",
-    "typescript": "3.4.3"
+    "typescript": "3.4.4"
   },
   "description": "description",
   "author": {

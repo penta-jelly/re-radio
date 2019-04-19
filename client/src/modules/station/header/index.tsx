@@ -1,16 +1,17 @@
+import { Card, CircularProgress, Typography } from '@material-ui/core';
 import React from 'react';
-import { Typography, Card, CircularProgress } from '@material-ui/core';
-import { useStyles } from './styles';
-import { RouteComponentProps, withRouter } from 'react-router';
 import { useStationQuery } from '../../../graphql';
+import { useRouter } from '../../../hooks/useRouter';
+import { useStyles } from './styles';
 
 interface RouteParams {
   slug: string;
 }
 
-const BaseHeader: React.FC<RouteComponentProps<RouteParams>> = props => {
+export const Header: React.FC = props => {
   const classes = useStyles();
-  const { data, loading, error } = useStationQuery({ variables: { slug: props.match.params.slug } });
+  const { match } = useRouter<RouteParams>();
+  const { data, loading, error } = useStationQuery({ variables: { slug: match.params.slug } });
 
   const content = React.useMemo<React.ReactNode>(() => {
     if (error) {
@@ -28,5 +29,3 @@ const BaseHeader: React.FC<RouteComponentProps<RouteParams>> = props => {
     </Card>
   );
 };
-
-export const Header = withRouter(BaseHeader);
