@@ -1,6 +1,6 @@
 {
   "recommendations": [
-    "apollographql.vscode-apollo",
+    "mquandalle.graphql",
     "peterjausovec.vscode-docker",
     "mikestead.dotenv",
     "editorconfig.editorconfig",

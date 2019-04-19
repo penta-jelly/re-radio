@@ -1,6 +1,6 @@
 /* tslint:disable */
 
-type Maybe<T> = T | null;
+export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -514,6 +514,7 @@ export type SongConnection = {
 };
 
 export type SongCreateInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly title: Scalars['String'];
   readonly url: Scalars['String'];
   readonly thumbnail: Scalars['String'];
@@ -532,6 +533,7 @@ export type SongCreateManyWithoutStationInput = {
 };
 
 export type SongCreateWithoutStationInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly title: Scalars['String'];
   readonly url: Scalars['String'];
   readonly thumbnail: Scalars['String'];
@@ -1137,6 +1139,7 @@ export type StationConnection = {
 };
 
 export type StationCreateInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
@@ -1167,6 +1170,7 @@ export type StationCreateOneWithoutSongsInput = {
 };
 
 export type StationCreateWithoutOwnerInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
@@ -1176,6 +1180,7 @@ export type StationCreateWithoutOwnerInput = {
 };
 
 export type StationCreateWithoutSongsInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
@@ -1185,6 +1190,7 @@ export type StationCreateWithoutSongsInput = {
 };
 
 export type StationCreateWithoutTagsInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
@@ -1423,6 +1429,7 @@ export type StationTagConnection = {
 };
 
 export type StationTagCreateInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly name: Scalars['String'];
   readonly stations?: Maybe<StationCreateManyWithoutTagsInput>;
 };
@@ -1433,6 +1440,7 @@ export type StationTagCreateManyWithoutStationsInput = {
 };
 
 export type StationTagCreateWithoutStationsInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly name: Scalars['String'];
 };
 
@@ -1449,10 +1457,6 @@ export enum StationTagOrderByInput {
   IdDesc = 'id_DESC',
   NameAsc = 'name_ASC',
   NameDesc = 'name_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
 }
 
 export type StationTagPreviousValues = {
@@ -2054,6 +2058,7 @@ export type UserConnection = {
 };
 
 export type UserCreateInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly email: Scalars['String'];
   readonly username: Scalars['String'];
   readonly password: Scalars['String'];
@@ -2091,6 +2096,7 @@ export type UserCreateOneWithoutStationsInput = {
 };
 
 export type UserCreateWithoutRolesInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly email: Scalars['String'];
   readonly username: Scalars['String'];
   readonly password: Scalars['String'];
@@ -2107,6 +2113,7 @@ export type UserCreateWithoutRolesInput = {
 };
 
 export type UserCreateWithoutStationsInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly email: Scalars['String'];
   readonly username: Scalars['String'];
   readonly password: Scalars['String'];
@@ -2198,6 +2205,7 @@ export type UserRoleConnection = {
 };
 
 export type UserRoleCreateInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly role: UserRoleEnum;
   readonly user: UserCreateOneWithoutRolesInput;
   readonly station?: Maybe<StationCreateOneInput>;
@@ -2209,6 +2217,7 @@ export type UserRoleCreateManyWithoutUserInput = {
 };
 
 export type UserRoleCreateWithoutUserInput = {
+  readonly id?: Maybe<Scalars['ID']>;
   readonly role: UserRoleEnum;
   readonly station?: Maybe<StationCreateOneInput>;
 };
@@ -2231,10 +2240,6 @@ export enum UserRoleOrderByInput {
   IdDesc = 'id_DESC',
   RoleAsc = 'role_ASC',
   RoleDesc = 'role_DESC',
-  UpdatedAtAsc = 'updatedAt_ASC',
-  UpdatedAtDesc = 'updatedAt_DESC',
-  CreatedAtAsc = 'createdAt_ASC',
-  CreatedAtDesc = 'createdAt_DESC',
 }
 
 export type UserRolePreviousValues = {
@@ -3461,6 +3466,7 @@ export type StationsQuery = { readonly __typename?: 'Query' } & {
 import gql from 'graphql-tag';
 import * as ReactApollo from 'react-apollo';
 import * as ReactApolloHooks from 'react-apollo-hooks';
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export const RegisterDocument = gql`
   mutation Register($data: RegisterInput!) {
@@ -3475,9 +3481,12 @@ export type RegisterProps<TChildProps = {}> = Partial<
   TChildProps;
 export type RegisterMutationFn = ReactApollo.MutationFn<RegisterMutation, RegisterMutationVariables>;
 export function withRegister<TProps, TChildProps = {}>(
-  operationOptions:
-    | ReactApollo.OperationOption<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>
-    | undefined,
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    RegisterMutation,
+    RegisterMutationVariables,
+    RegisterProps<TChildProps>
+  >,
 ) {
   return ReactApollo.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>(
     RegisterDocument,
@@ -3546,9 +3555,12 @@ export type SongExplorerProps<TChildProps = {}> = Partial<
 > &
   TChildProps;
 export function withSongExplorer<TProps, TChildProps = {}>(
-  operationOptions:
-    | ReactApollo.OperationOption<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>
-    | undefined,
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    SongExplorerQuery,
+    SongExplorerQueryVariables,
+    SongExplorerProps<TChildProps>
+  >,
 ) {
   return ReactApollo.withQuery<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>(
     SongExplorerDocument,
@@ -3608,14 +3620,12 @@ export type SongExplorersProps<TChildProps = {}> = Partial<
 > &
   TChildProps;
 export function withSongExplorers<TProps, TChildProps = {}>(
-  operationOptions:
-    | ReactApollo.OperationOption<
-        TProps,
-        SongExplorersQuery,
-        SongExplorersQueryVariables,
-        SongExplorersProps<TChildProps>
-      >
-    | undefined,
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    SongExplorersQuery,
+    SongExplorersQueryVariables,
+    SongExplorersProps<TChildProps>
+  >,
 ) {
   return ReactApollo.withQuery<
     TProps,
@@ -3647,9 +3657,12 @@ export const StationDocument = gql`
 export type StationProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationQuery, StationQueryVariables>> &
   TChildProps;
 export function withStation<TProps, TChildProps = {}>(
-  operationOptions:
-    | ReactApollo.OperationOption<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>
-    | undefined,
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    StationQuery,
+    StationQueryVariables,
+    StationProps<TChildProps>
+  >,
 ) {
   return ReactApollo.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(
     StationDocument,
@@ -3679,9 +3692,12 @@ export const StationsDocument = gql`
 export type StationsProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationsQuery, StationsQueryVariables>> &
   TChildProps;
 export function withStations<TProps, TChildProps = {}>(
-  operationOptions:
-    | ReactApollo.OperationOption<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>
-    | undefined,
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    StationsQuery,
+    StationsQueryVariables,
+    StationsProps<TChildProps>
+  >,
 ) {
   return ReactApollo.withQuery<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>(
     StationsDocument,
