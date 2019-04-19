@@ -1,5 +1,5 @@
 type User {
-  id: ID! @unique
+  id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   email: String! @unique
@@ -19,7 +19,7 @@ type User {
 }
 
 type UserRole {
-  id: ID! @unique
+  id: ID! @id
   role: UserRoleEnum!
   user: User! @relation(name: "UserRole")
   station: Station
@@ -32,7 +32,7 @@ enum UserRoleEnum {
 
 type Station {
   # Information
-  id: ID! @unique
+  id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   name: String! @unique
@@ -46,13 +46,13 @@ type Station {
 }
 
 type StationTag {
-  id: ID! @unique
+  id: ID! @id
   name: String!
   stations: [Station!]! @relation(name: "StationsAndTags")
 }
 
 type Song {
-  id: ID! @unique
+  id: ID! @id
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
   title: String!
