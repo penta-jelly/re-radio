@@ -15,13 +15,6 @@ export default (url: string) => ({
     cy.visit('/');
   },
 
-  loginWithEmail(email: string = '', password: string = '') {
-    cy.get(this.elements.emailInput).type(email);
-    cy.get(this.elements.passwordInput).type(password);
-
-    cy.get(this.elements.loginButton).click();
-  },
-
   loginWithWrongPassword(email: string = '', password: string = '') {
     cy.get(this.elements.emailInput).type(email);
     cy.get(this.elements.passwordInput).type(password);
@@ -36,16 +29,34 @@ export default (url: string) => ({
     cy.get(this.elements.passwordInput).clear();
   },
 
+  loginWithEmail(email: string = '', password: string = '') {
+    cy.get(this.elements.emailInput).type(email);
+    cy.get(this.elements.passwordInput).type(password);
+
+    cy.get(this.elements.loginButton).click();
+
+    cy.clearLocalStorage();
+    cy.reload();
+  },
+
   loginWithUsername(username: string = '', password: string = '') {
     cy.get(this.elements.emailInput).type(username);
     cy.get(this.elements.passwordInput).type(password);
 
     cy.get(this.elements.loginButton).click();
+
+    cy.clearLocalStorage();
+    cy.reload();
   },
 
   redirectToRegisterPage() {
     cy.get(this.elements.registerLink).click();
 
     cy.visit('/register');
+  },
+
+  clearLocalStorage() {
+    cy.clearLocalStorage();
+    cy.visit(url);
   },
 });
