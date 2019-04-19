@@ -1,5 +1,5 @@
 # source: http://prisma:4466
-# timestamp: Sat Apr 06 2019 16:01:00 GMT+0000 (Coordinated Universal Time)
+# timestamp: Fri Apr 19 2019 13:45:23 GMT+0000 (Coordinated Universal Time)
 
 type AggregateSong {
   count: Int!
@@ -145,6 +145,7 @@ type SongConnection {
 }
 
 input SongCreateInput {
+  id: ID
   title: String!
   url: String!
   thumbnail: String!
@@ -163,6 +164,7 @@ input SongCreateManyWithoutStationInput {
 }
 
 input SongCreateWithoutStationInput {
+  id: ID
   title: String!
   url: String!
   thumbnail: String!
@@ -905,6 +907,7 @@ type StationConnection {
 }
 
 input StationCreateInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -935,6 +938,7 @@ input StationCreateOneWithoutSongsInput {
 }
 
 input StationCreateWithoutOwnerInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -944,6 +948,7 @@ input StationCreateWithoutOwnerInput {
 }
 
 input StationCreateWithoutSongsInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -953,6 +958,7 @@ input StationCreateWithoutSongsInput {
 }
 
 input StationCreateWithoutTagsInput {
+  id: ID
   name: String!
   slug: String!
   description: String
@@ -1263,6 +1269,7 @@ type StationTagConnection {
 }
 
 input StationTagCreateInput {
+  id: ID
   name: String!
   stations: StationCreateManyWithoutTagsInput
 }
@@ -1273,6 +1280,7 @@ input StationTagCreateManyWithoutStationsInput {
 }
 
 input StationTagCreateWithoutStationsInput {
+  id: ID
   name: String!
 }
 
@@ -1290,10 +1298,6 @@ enum StationTagOrderByInput {
   id_DESC
   name_ASC
   name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type StationTagPreviousValues {
@@ -1978,6 +1982,7 @@ type UserConnection {
 }
 
 input UserCreateInput {
+  id: ID
   email: String!
   username: String!
   password: String!
@@ -2015,6 +2020,7 @@ input UserCreateOneWithoutStationsInput {
 }
 
 input UserCreateWithoutRolesInput {
+  id: ID
   email: String!
   username: String!
   password: String!
@@ -2031,6 +2037,7 @@ input UserCreateWithoutRolesInput {
 }
 
 input UserCreateWithoutStationsInput {
+  id: ID
   email: String!
   username: String!
   password: String!
@@ -2124,6 +2131,7 @@ type UserRoleConnection {
 }
 
 input UserRoleCreateInput {
+  id: ID
   role: UserRoleEnum!
   user: UserCreateOneWithoutRolesInput!
   station: StationCreateOneInput
@@ -2135,6 +2143,7 @@ input UserRoleCreateManyWithoutUserInput {
 }
 
 input UserRoleCreateWithoutUserInput {
+  id: ID
   role: UserRoleEnum!
   station: StationCreateOneInput
 }
@@ -2158,10 +2167,6 @@ enum UserRoleOrderByInput {
   id_DESC
   role_ASC
   role_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
 }
 
 type UserRolePreviousValues {
