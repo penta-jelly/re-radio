@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from 'react-router';
 import { useRegisterMutation, RegisterInput } from '../../../graphql';
 import { Avatar, Typography, TextField, Button, FormHelperText } from '@material-ui/core';
-import { useStyles } from './registerStyle';
+import { useStyles } from './styles';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 
 type DataKeys = keyof RegisterInput;

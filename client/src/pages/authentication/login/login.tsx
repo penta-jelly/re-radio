@@ -9,7 +9,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
-import { useStyles } from './loginStyle';
+import { useStyles } from './styles';
 import { Formik } from 'formik';
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
