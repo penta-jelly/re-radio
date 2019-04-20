@@ -1,32 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { useMutation } from 'react-apollo-hooks';
 import { useTranslation } from 'react-i18next';
-
-import { makeStyles } from '@material-ui/styles';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import FormHelperText from '@material-ui/core/FormHelperText';
 import { RouteComponentProps } from 'react-router';
-
-import { useRegisterMutation, RegisterInput } from '../graphql';
+import { useRegisterMutation, RegisterInput } from '../../../graphql';
+import { Avatar, Typography, TextField, Button, FormHelperText } from '@material-ui/core';
+import { useStyles } from './styles';
+import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 
 type DataKeys = keyof RegisterInput;
 type Data = { [key in DataKeys]: string };
-
-const useStyles = makeStyles({
-  root: {
-    height: '100vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  form: {
-    maxWidth: '50rem',
-  },
-});
 
 const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
@@ -60,8 +43,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
   }, []);
 
   return (
-    <div className={classNames.root}>
-      <Button onClick={onChangeLanguage}>Change Language</Button>
+    <div className={classNames.container}>
       <Formik<Data>
         initialValues={{ username: '', email: '', password: '' }}
         validationSchema={yup.object().shape({
@@ -121,9 +103,27 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
               helperText={touched.password && !!errors.password && errors.password}
               error={touched.password && !!errors.password}
             />
-            <Button variant="contained" color="primary" size="large" type="submit" id="register-button">
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              type="submit"
+              id="register-button"
+              className={classNames.button}
+            >
               Register
             </Button>
+            <div className={classNames.iconRow}>
+              <Typography variant="caption">or signup using</Typography>
+            </div>
+            <div className={classNames.iconRow}>
+              <Avatar className={classNames.facebookIcon}>
+                <FaFacebookF />
+              </Avatar>
+              <Avatar className={classNames.googleIcon}>
+                <FaGoogle />
+              </Avatar>
+            </div>
           </form>
         )}
       </Formik>

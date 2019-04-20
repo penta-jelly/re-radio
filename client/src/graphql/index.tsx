@@ -3363,6 +3363,14 @@ export type UserWhereUniqueInput = {
   readonly email?: Maybe<Scalars['String']>;
   readonly username?: Maybe<Scalars['String']>;
 };
+export type LoginMutationVariables = {
+  data: LoginInput;
+};
+
+export type LoginMutation = { readonly __typename?: 'Mutation' } & {
+  readonly login: { readonly __typename?: 'LoginOrRegisterReturnType' } & Pick<LoginOrRegisterReturnType, 'token'>;
+};
+
 export type RegisterMutationVariables = {
   data: RegisterInput;
 };
@@ -3468,6 +3476,32 @@ import * as ReactApollo from 'react-apollo';
 import * as ReactApolloHooks from 'react-apollo-hooks';
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
+export const LoginDocument = gql`
+  mutation login($data: LoginInput!) {
+    login(data: $data) {
+      token
+    }
+  }
+`;
+export type LoginProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<LoginMutation, LoginMutationVariables>> &
+  TChildProps;
+export type LoginMutationFn = ReactApollo.MutationFn<LoginMutation, LoginMutationVariables>;
+export function withLogin<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>
+    | undefined,
+) {
+  return ReactApollo.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>(
+    LoginDocument,
+    operationOptions,
+  );
+}
+
+export function useLoginMutation(
+  baseOptions?: ReactApolloHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>,
+) {
+  return ReactApolloHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+}
 export const RegisterDocument = gql`
   mutation Register($data: RegisterInput!) {
     register(data: $data) {
