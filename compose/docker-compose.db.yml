@@ -19,7 +19,7 @@ services:
             migrations: true
   db:
     container_name: re-radio_db
-    image: postgres:10.7
+    image: postgres:10-alpine
     restart: "no"
     ports:
       - "${DB_PORT}:${DB_PORT}"
