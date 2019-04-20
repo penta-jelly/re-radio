@@ -1,0 +1,17 @@
+query Songs {
+  songs {
+    id
+    title
+    url
+    thumbnail
+    duration
+    creator {
+      email
+      username
+      name
+      avatarUrl
+    }
+    createdAt
+    updatedAt
+  }
+}

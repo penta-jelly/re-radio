@@ -3464,6 +3464,7 @@ export type SongExplorersQuery = { readonly __typename?: 'Query' } & {
   >;
 };
 
+<<<<<<< HEAD
 export type StationQueryVariables = {
   slug: Scalars['String'];
 };
@@ -3474,6 +3475,20 @@ export type StationQuery = { readonly __typename?: 'Query' } & {
         readonly tags: Maybe<ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>>;
         readonly owner: { readonly __typename?: 'User' } & Pick<User, 'id'>;
       }
+=======
+export type SongsQueryVariables = {};
+
+export type SongsQuery = { readonly __typename?: 'Query' } & {
+  readonly songs: ReadonlyArray<
+    Maybe<
+      { readonly __typename?: 'Song' } & Pick<
+        Song,
+        'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'updatedAt'
+      > & {
+          readonly creator: { readonly __typename?: 'User' } & Pick<User, 'email' | 'username' | 'name' | 'avatarUrl'>;
+        }
+    >
+>>>>>>> Add Playlist layout and Songs data
   >;
 };
 
@@ -3803,6 +3818,7 @@ export function withSongExplorers<TProps, TChildProps = {}>(
 export function useSongExplorersQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorersQueryVariables>) {
   return ReactApolloHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
 }
+<<<<<<< HEAD
 export const StationDocument = gql`
   query Station($slug: String!) {
     station(where: { slug: $slug }) {
@@ -3831,12 +3847,47 @@ export function withStation<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(
     StationDocument,
+=======
+export const SongsDocument = gql`
+  query Songs {
+    songs {
+      id
+      title
+      url
+      thumbnail
+      duration
+      creator {
+        email
+        username
+        name
+        avatarUrl
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export type SongsProps<TChildProps = {}> = Partial<ReactApollo.DataProps<SongsQuery, SongsQueryVariables>> &
+  TChildProps;
+export function withSongs<TProps, TChildProps = {}>(
+  operationOptions:
+    | ReactApollo.OperationOption<TProps, SongsQuery, SongsQueryVariables, SongsProps<TChildProps>>
+    | undefined,
+) {
+  return ReactApollo.withQuery<TProps, SongsQuery, SongsQueryVariables, SongsProps<TChildProps>>(
+    SongsDocument,
+>>>>>>> Add Playlist layout and Songs data
     operationOptions,
   );
 }
 
+<<<<<<< HEAD
 export function useStationQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationQueryVariables>) {
   return ReactApolloHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+=======
+export function useSongsQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongsQueryVariables>) {
+  return ReactApolloHooks.useQuery<SongsQuery, SongsQueryVariables>(SongsDocument, baseOptions);
+>>>>>>> Add Playlist layout and Songs data
 }
 export const StationsDocument = gql`
   query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {
