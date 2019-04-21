@@ -1,5 +1,8 @@
 version: "3.7"
 services:
+  prisma:
+    ports:
+      - "${PRISMA_PORT}:${PRISMA_PORT}"
   graphql_service:
     container_name: re-radio_graphql_service
     build:
