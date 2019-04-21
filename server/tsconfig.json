@@ -13,7 +13,8 @@
     "allowJs": true,
     "outDir": "./dist",
     "lib": ["dom", "es2018", "esnext"],
-    "incremental": true
+    "incremental": true,
+    "types": ["./typing"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

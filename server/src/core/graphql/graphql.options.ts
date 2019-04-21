@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { ValidationError } from 'class-validator';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { GraphQLUpload } from 'graphql-upload';
 
 @Injectable()
 export class GraphqlOptions implements GqlOptionsFactory {
@@ -13,6 +14,10 @@ export class GraphqlOptions implements GqlOptionsFactory {
       resolverValidationOptions: {
         requireResolversForResolveType: false,
       },
+      resolvers: {
+        Upload: GraphQLUpload,
+      },
+      typeDefs: `scalar Upload`,
       context: context => context,
       formatError: this.formatError.bind(this),
     };

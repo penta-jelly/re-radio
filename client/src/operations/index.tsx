@@ -13,6 +13,8 @@ export type Scalars = {
    * Long can represent values between -(2^63) and 2^63 - 1.
    */
   Long: any;
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: any;
 };
 
 export type AggregateSong = {
@@ -110,6 +112,7 @@ export type Mutation = {
   readonly deleteManyUsers: BatchPayload;
   readonly login: LoginOrRegisterReturnType;
   readonly register: LoginOrRegisterReturnType;
+  readonly updateUserAvatar: Scalars['String'];
 };
 
 export type MutationCreateUserRoleArgs = {
@@ -258,6 +261,11 @@ export type MutationLoginArgs = {
 
 export type MutationRegisterArgs = {
   data: RegisterInput;
+};
+
+export type MutationUpdateUserAvatarArgs = {
+  where: UserWhereUniqueInput;
+  file: Scalars['Upload'];
 };
 
 export enum MutationType {
@@ -3379,6 +3387,13 @@ export type RegisterMutation = { readonly __typename?: 'Mutation' } & {
   readonly register: { readonly __typename?: 'LoginOrRegisterReturnType' } & Pick<LoginOrRegisterReturnType, 'token'>;
 };
 
+export type UpdateUserAvatarMutationVariables = {
+  where: UserWhereUniqueInput;
+  file: Scalars['Upload'];
+};
+
+export type UpdateUserAvatarMutation = { readonly __typename?: 'Mutation' } & Pick<Mutation, 'updateUserAvatar'>;
+
 export type SongExplorerQueryVariables = {
   where: SongExplorerInput;
 };
@@ -3487,9 +3502,12 @@ export type LoginProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<Login
   TChildProps;
 export type LoginMutationFn = ReactApollo.MutationFn<LoginMutation, LoginMutationVariables>;
 export function withLogin<TProps, TChildProps = {}>(
-  operationOptions:
-    | ReactApollo.OperationOption<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>
-    | undefined,
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    LoginMutation,
+    LoginMutationVariables,
+    LoginProps<TChildProps>
+  >,
 ) {
   return ReactApollo.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>(
     LoginDocument,
@@ -3532,6 +3550,43 @@ export function useRegisterMutation(
   baseOptions?: ReactApolloHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>,
 ) {
   return ReactApolloHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+}
+export const UpdateUserAvatarDocument = gql`
+  mutation UpdateUserAvatar($where: UserWhereUniqueInput!, $file: Upload!) {
+    updateUserAvatar(where: $where, file: $file)
+  }
+`;
+export type UpdateUserAvatarProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>
+> &
+  TChildProps;
+export type UpdateUserAvatarMutationFn = ReactApollo.MutationFn<
+  UpdateUserAvatarMutation,
+  UpdateUserAvatarMutationVariables
+>;
+export function withUpdateUserAvatar<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    UpdateUserAvatarMutation,
+    UpdateUserAvatarMutationVariables,
+    UpdateUserAvatarProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    UpdateUserAvatarMutation,
+    UpdateUserAvatarMutationVariables,
+    UpdateUserAvatarProps<TChildProps>
+  >(UpdateUserAvatarDocument, operationOptions);
+}
+
+export function useUpdateUserAvatarMutation(
+  baseOptions?: ReactApolloHooks.MutationHookOptions<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>,
+) {
+  return ReactApolloHooks.useMutation<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>(
+    UpdateUserAvatarDocument,
+    baseOptions,
+  );
 }
 export const SongExplorerDocument = gql`
   query songExplorer($where: SongExplorerInput!) {

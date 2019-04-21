@@ -1,12 +1,14 @@
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost';
+import { ApolloClient, InMemoryCache } from 'apollo-boost';
 import { setContext } from 'apollo-link-context';
+const { createUploadLink } = require('apollo-upload-client'); // tslint:disable-line
 
 export function initApollo() {
   let uri = '';
   if (process.env.NODE_ENV !== 'production') {
     uri = `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
   }
-  const httpLink = new HttpLink({
+
+  const httpLink = createUploadLink({
     uri: `${uri}/graphql`,
   });
 
