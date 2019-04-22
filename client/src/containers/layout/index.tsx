@@ -1,11 +1,9 @@
 import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import StationIcon from '@material-ui/icons/Radio';
-import LoginIcon from '@material-ui/icons/Fingerprint';
+import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
 import React from 'react';
 import { Link } from 'react-router-dom';
-
 import logoImage from 'assets/logo.png';
-
+import { Image } from 'components/image';
 import { useStyles } from './styles';
 
 export interface Props {
@@ -35,7 +33,7 @@ export const Layout: React.FC<Props> = props => {
         <List className={classes.sidebarContent}>
           <li className={classes.title}>
             <Link to="/">
-              <img className={classes.logo} src={logoImage} alt="Logo" />
+              <Image className={classes.logo} src={logoImage} alt="Logo" />
             </Link>
             {sidebar.collapsed || 'Re-radio'}
           </li>

@@ -1,39 +1,59 @@
+import { Grid } from '@material-ui/core';
 import React from 'react';
+import { PageLoader } from '../../components/page-loader';
 import { Layout } from '../../containers/layout';
-import { useUpdateUserAvatarMutation } from '../../graphql';
-import { Typography, Card, CardHeader, Grid, CardContent } from '@material-ui/core';
+import { useCurrentUserQuery } from '../../graphql';
+import { useRouter } from '../../hooks/use-router';
+import { DetailUserProfile } from '../../modules/user';
+import { useStyles } from './styles';
 
-export const UserProfile: React.FC = () => {
-  const [hashedFileName, setHashedFilename] = React.useState<string>();
-  const mutation = useUpdateUserAvatarMutation();
-  const callback = React.useCallback<React.ChangeEventHandler<HTMLInputElement>>(
-    async ({ target: { validity, files } }) => {
-      if (validity.valid && files) {
-        const result = await mutation({ variables: { file: files[0], where: { username: 'admin' } } });
-        if (result.data) {
-          setHashedFilename(result.data.updateUserAvatar);
-        }
-      }
-    },
-    [mutation],
-  );
+interface RouteParams {
+  username?: string;
+}
+
+const UserProfilePage: React.FC = () => {
+  const { match, history } = useRouter<RouteParams>();
+  const classes = useStyles();
+
+  const { data, loading, error } = useCurrentUserQuery();
+  const username = React.useMemo<string | undefined>(() => {
+    //  tslint:disable curly
+    if (match.params.username) return match.params.username;
+    if (loading || error) return undefined;
+    if (data) return data.user.username;
+    //  tslint:enable curly
+  }, [match.params.username, data, loading, error]);
+
+  const ownedProfile = React.useMemo<boolean>(() => {
+    //  tslint:disable curly
+    if (loading || error) return false;
+    if (!match.params.username) return true;
+    if (data && data.user.username === match.params.username) return true;
+    return false;
+    //  tslint:enable curly
+  }, [match.params.username, data, loading, error]);
+
+  React.useEffect(() => {
+    if (error && !match.params.username) {
+      history.push('/');
+    }
+  }, [error, match.params.username]);
+
+  if (!username) {
+    return <PageLoader />;
+  }
   return (
-    <Layout>
-      <Grid container>
-        <Card>
-          <CardHeader title="This is an example of how to upload a file to server via Apollo GraphQL" />
-          <CardContent>
-            <input type="file" required onChange={callback} />
-            <Typography>You uploaded file should be render under this section</Typography>
-            {hashedFileName && <img src={`http://localhost:8000/images/${hashedFileName}`} alt="" />}
-            {hashedFileName && (
-              <Typography>This file is storages under ./server/storages/images/{hashedFileName}</Typography>
-            )}
-          </CardContent>
-        </Card>
+    <Layout drawer={{ collapsed: true, open: true }}>
+      <Grid container className={classes.root}>
+        <Grid item xs={12} md={3}>
+          <DetailUserProfile username={username} editable={ownedProfile} />
+        </Grid>
+        <Grid item xs={12} md={9}>
+          <div />
+        </Grid>
       </Grid>
     </Layout>
   );
 };
 
-export default UserProfile;
+export default UserProfilePage;

@@ -3394,6 +3394,15 @@ export type UpdateUserAvatarMutationVariables = {
 
 export type UpdateUserAvatarMutation = { readonly __typename?: 'Mutation' } & Pick<Mutation, 'updateUserAvatar'>;
 
+export type CurrentUserQueryVariables = {};
+
+export type CurrentUserQuery = { readonly __typename?: 'Query' } & {
+  readonly user: { readonly __typename?: 'User' } & Pick<
+    User,
+    'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'
+  >;
+};
+
 export type SongExplorerQueryVariables = {
   where: SongExplorerInput;
 };
@@ -3483,6 +3492,39 @@ export type StationsQuery = { readonly __typename?: 'Query' } & {
           readonly owner: { readonly __typename?: 'User' } & Pick<User, 'id'>;
         }
     >
+  >;
+};
+
+export type UserProfileQueryVariables = {
+  where: UserWhereUniqueInput;
+};
+
+export type UserProfileQuery = { readonly __typename?: 'Query' } & {
+  readonly user: Maybe<
+    { readonly __typename?: 'User' } & Pick<
+      User,
+      | 'id'
+      | 'email'
+      | 'username'
+      | 'avatarUrl'
+      | 'coverUrl'
+      | 'reputation'
+      | 'bio'
+      | 'city'
+      | 'country'
+      | 'googleId'
+      | 'facebookId'
+    > & {
+        readonly stations: Maybe<
+          ReadonlyArray<
+            { readonly __typename?: 'Station' } & Pick<Station, 'name' | 'slug' | 'description'> & {
+                readonly tags: Maybe<
+                  ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>
+                >;
+              }
+          >
+        >;
+      }
   >;
 };
 
@@ -3587,6 +3629,39 @@ export function useUpdateUserAvatarMutation(
     UpdateUserAvatarDocument,
     baseOptions,
   );
+}
+export const CurrentUserDocument = gql`
+  query CurrentUser {
+    user: currentUser {
+      id
+      email
+      username
+      avatarUrl
+      coverUrl
+      reputation
+    }
+  }
+`;
+export type CurrentUserProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<CurrentUserQuery, CurrentUserQueryVariables>
+> &
+  TChildProps;
+export function withCurrentUser<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    CurrentUserQuery,
+    CurrentUserQueryVariables,
+    CurrentUserProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withQuery<TProps, CurrentUserQuery, CurrentUserQueryVariables, CurrentUserProps<TChildProps>>(
+    CurrentUserDocument,
+    operationOptions,
+  );
+}
+
+export function useCurrentUserQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<CurrentUserQueryVariables>) {
+  return ReactApolloHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
 }
 export const SongExplorerDocument = gql`
   query songExplorer($where: SongExplorerInput!) {
@@ -3796,4 +3871,51 @@ export function withStations<TProps, TChildProps = {}>(
 
 export function useStationsQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationsQueryVariables>) {
   return ReactApolloHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+}
+export const UserProfileDocument = gql`
+  query UserProfile($where: UserWhereUniqueInput!) {
+    user(where: $where) {
+      id
+      email
+      username
+      avatarUrl
+      coverUrl
+      reputation
+      bio
+      city
+      country
+      googleId
+      facebookId
+      stations {
+        name
+        slug
+        description
+        tags {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+export type UserProfileProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<UserProfileQuery, UserProfileQueryVariables>
+> &
+  TChildProps;
+export function withUserProfile<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    UserProfileQuery,
+    UserProfileQueryVariables,
+    UserProfileProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withQuery<TProps, UserProfileQuery, UserProfileQueryVariables, UserProfileProps<TChildProps>>(
+    UserProfileDocument,
+    operationOptions,
+  );
+}
+
+export function useUserProfileQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<UserProfileQueryVariables>) {
+  return ReactApolloHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
 }

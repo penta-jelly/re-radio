@@ -1,4 +1,4 @@
-import { UseGuards, InternalServerErrorException, Logger } from '@nestjs/common';
+import { InternalServerErrorException, Logger, NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { FilesService } from '../../core/files/files.service';
 import { BatchPayload, User, UserWhereInput, UserWhereUniqueInput } from '../../prisma/prisma.binding';
@@ -72,13 +72,16 @@ export class UsersResolver {
   }
 
   @Mutation('updateUserAvatar')
-  // @UseGuards()
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles(['ADMIN', UsersResolver.profileOwner])
   async uploadUserAvatar(@Args() args: UserUpdateAvatarDTO) {
-    const file = await args.file;
+    const user = await this.prisma.query.user(args);
+    if (!user) throw new NotFoundException();
 
+    const file = await args.file;
     try {
       const { hashedFilename } = await this.filesService.storeFile(file.createReadStream(), file.filename);
+      await this.prisma.mutation.updateUser({ where: args.where, data: { avatarUrl: hashedFilename } });
       return hashedFilename;
     } catch (e) {
       this.logger.error(e, e.stack);

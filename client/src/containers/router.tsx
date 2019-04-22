@@ -9,7 +9,7 @@ export const AppRouter = () => (
       <Route path="/register" component={React.lazy(() => import('pages/authentication/register/register'))} />
       <Route path="/login" component={React.lazy(() => import('pages/authentication/login/login'))} />
       <Route path="/station/:slug" component={React.lazy(() => import('pages/station'))} />
-      <Route path="/profile" component={React.lazy(() => import('../pages/profile'))} />
+      <Route path="/profile/:username?" component={React.lazy(() => import('pages/profile'))} />
     </Switch>
   </BrowserRouter>
 );

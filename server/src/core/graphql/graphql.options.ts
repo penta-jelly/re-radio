@@ -17,7 +17,6 @@ export class GraphqlOptions implements GqlOptionsFactory {
       resolvers: {
         Upload: GraphQLUpload,
       },
-      typeDefs: `scalar Upload`,
       context: context => context,
       formatError: this.formatError.bind(this),
     };

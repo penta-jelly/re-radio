@@ -1,9 +1,9 @@
-import React from 'react';
-import { Card as MaterialCard, CardActionArea, CardMedia, Typography, CardContent } from '@material-ui/core';
+import { Card as MaterialCard, CardActionArea, CardContent, Typography } from '@material-ui/core';
 import { CardActionAreaProps } from '@material-ui/core/CardActionArea';
-
-import { useStyles } from './styles';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { Image } from '../image';
+import { useStyles } from './styles';
 
 const CardActionAreaDiv = CardActionArea as React.ComponentType<
   CardActionAreaProps & { component?: React.ElementType }
@@ -30,7 +30,7 @@ export const ReCard: React.FC<Props> = ({ id, media, title, content, icon, onIco
   const cardMedia = React.useMemo(
     () => (
       <CardActionAreaDiv component="div" className={classes.imageContainer}>
-        <CardMedia component="img" alt={media && media.alt} image={media && media.image} data-role="card-media" />
+        <Image className={classes.image} alt={media && media.alt} src={media && media.image} data-role="card-media" />
         {icon && (
           <button className={classes.iconButton} onClick={onIconButtonClick}>
             {icon}

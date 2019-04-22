@@ -1,6 +1,5 @@
 import { Typography } from '@material-ui/core';
-import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
+import { MdFiberManualRecord as FiberManualRecordIcon, MdShowChart as ShowChartIcon } from 'react-icons/md';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PrimaryButton } from 'components/button/primary-button';

@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from 'react';
 import { InputBase } from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/Search';
 import { InputBaseProps } from '@material-ui/core/InputBase';
-
+import React, { useCallback, useState } from 'react';
+import { MdSearch as SearchIcon } from 'react-icons/md';
 import { useStyles } from './styles';
 
 interface Props extends InputBaseProps {

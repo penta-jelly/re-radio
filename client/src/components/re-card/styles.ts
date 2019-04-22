@@ -11,6 +11,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
   imageContainer: {
     position: 'relative',
   },
+  image: { margin: 'auto', width: '100%', height: '100%' },
   iconButton: {
     backgroundColor: '#fff',
     border: 'none',
