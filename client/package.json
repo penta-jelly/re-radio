@@ -24,7 +24,7 @@
     "i18next": "15.0.9",
     "jss": "10.0.0-alpha.16",
     "react": "16.8.6",
-    "react-apollo": "2.5.4",
+    "react-apollo": "2.5.5",
     "react-apollo-hooks": "0.4.5",
     "react-dom": "16.8.6",
     "react-helmet": "5.2.0",
