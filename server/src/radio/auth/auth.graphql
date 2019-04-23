@@ -14,11 +14,11 @@ input RegisterInput {
   password: String!
 }
 
-type Query {
+extend type Query {
   currentUser: User!
 }
 
-type Mutation {
+extend type Mutation {
   login(data: LoginInput!): LoginOrRegisterReturnType!
   register(data: RegisterInput!): LoginOrRegisterReturnType!
 }
