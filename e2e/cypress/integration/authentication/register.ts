@@ -1,7 +1,7 @@
 import register from '../../support/authentication/RegisterPage';
 
 describe('Register', () => {
-  const RegisterPage = register('/register');
+  const RegisterPage = register();
 
   it('should open the register page', () => {
     RegisterPage.navigate();

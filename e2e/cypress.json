@@ -1,4 +1,6 @@
 {
   "integrationFolder": "cypress/integration",
-  "chromeWebSecurity": false
+  "chromeWebSecurity": false,
+  "viewportWidth": 1020,
+  "viewportHeight": 800
 }

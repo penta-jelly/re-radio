@@ -6,11 +6,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
-    '& > svg': {
-      fontSize: '1.125rem',
-      marginRight: 6,
-    },
-    '&:hover > $text': {
+    '&:hover $text': {
       opacity: 1,
     },
   },

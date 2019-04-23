@@ -64,12 +64,14 @@ const HomePage: React.FunctionComponent<{}> = () => {
                       links={
                         <>
                           <ReCardLink
-                            icon={<FiberManualRecordIcon color="primary" />}
+                            Icon={FiberManualRecordIcon}
+                            iconColor="primary"
                             text="0 online"
                             data-role="online-users-label"
                           />
                           <ReCardLink
-                            icon={<ShowChartIcon color="inherit" />}
+                            Icon={ShowChartIcon}
+                            iconColor="inherit"
                             text="6 pinned"
                             data-role="pinned-label"
                           />

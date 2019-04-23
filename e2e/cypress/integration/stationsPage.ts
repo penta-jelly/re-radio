@@ -1,7 +1,7 @@
 import StationsPage from '../support/StationsPage';
 
 describe('Show Stations Page', () => {
-  const stationsPage = StationsPage('/');
+  const stationsPage = StationsPage();
 
   it('should be able to visit', () => {
     stationsPage.navigate();

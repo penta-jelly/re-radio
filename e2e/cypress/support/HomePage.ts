@@ -1,4 +1,4 @@
-export default (url: string) => ({
+export default (url: string = '/') => ({
   elements: {},
 
   navigate() {

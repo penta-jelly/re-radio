@@ -1,4 +1,4 @@
-import { InputBase } from '@material-ui/core';
+import { InputBase, Icon } from '@material-ui/core';
 import { InputBaseProps } from '@material-ui/core/InputBase';
 import React, { useCallback, useState } from 'react';
 import { MdSearch as SearchIcon } from 'react-icons/md';
@@ -33,7 +33,9 @@ export const ReSearch: React.FC<Props> = ({ icon, className, onBlur, onFocus, ..
   return (
     <div className={[classes.root, isInputFocused ? classes.rootFocused : '', className].join(' ').trim()}>
       <InputBase type="text" {...rest} onFocus={handleInputFocus} onBlur={handleInputBlur} />
-      <SearchIcon className={classes.icon} />
+      <Icon className={classes.icon}>
+        <SearchIcon />
+      </Icon>
     </div>
   );
 };

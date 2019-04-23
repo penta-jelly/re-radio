@@ -7,18 +7,20 @@ export const useStyles = makeStyles<Styles<Theme, { editable: boolean }>>(({ spa
     display: 'block',
     margin: spacing(2),
     cursor: props.editable ? 'pointer' : 'default',
-    '& .overlay': {
-      display: 'none',
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    },
-    '&:hover .overlay': {
-      display: props.editable ? 'flex' : 'none',
-    },
   }),
+  label: {
+    '&:hover $overlay': {
+      display: 'flex',
+    },
+  },
+  overlay: {
+    display: 'none',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
   overlayWrapper: {
     margin: 'auto',
     borderRadius: '50%',

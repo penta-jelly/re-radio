@@ -1,6 +1,6 @@
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
+import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import React from 'react';
+import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import logoImage from 'assets/logo.png';
 import { Image } from 'components/image';
@@ -40,7 +40,7 @@ export const Layout: React.FC<Props> = props => {
           <ListItem button component={Link} to="/">
             <>
               <ListItemIcon>
-                <StationIcon />
+                <Icon><StationIcon /></Icon>
               </ListItemIcon>
               {sidebar.collapsed || <ListItemText primary="Stations" />}
             </>
@@ -49,7 +49,7 @@ export const Layout: React.FC<Props> = props => {
           <ListItem button component={Link} to="/register">
             <>
               <ListItemIcon>
-                <LoginIcon />
+                <Icon><LoginIcon /></Icon>
               </ListItemIcon>
               {sidebar.collapsed || <ListItemText primary="Sign In" />}
             </>

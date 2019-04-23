@@ -11,7 +11,6 @@ import {
   FaInfoCircle,
   FaUser,
 } from 'react-icons/fa';
-import { IconType } from 'react-icons/lib/cjs';
 import { PrimaryButton } from '../../../../components/button/primary-button';
 import { useUserProfileQuery } from '../../../../graphql';
 import { ProfileAvatar } from '../avatar';
@@ -47,19 +46,19 @@ export const DetailUserProfile: React.FC<Props> = ({ username, editable }) => {
               />
             </Grid>
             <Grid item xs={12}>
-              <InfoSection placeholder="Email" value={data.user.email} Icon={FaEnvelope} />
-              <InfoSection placeholder="Username" value={data.user.username} Icon={FaUser} />
-              <InfoSection placeholder="Reputation" value={data.user.reputation} Icon={FaGlobe} />
-              <InfoSection placeholder="Google" value={data.user.googleId} Icon={FaGoogle} />
-              <InfoSection placeholder="Facebook" value={data.user.facebookId} Icon={FaFacebook} />
-              <InfoSection placeholder="City" value={data.user.city} Icon={FaBuilding} />
-              <InfoSection placeholder="Country" value={data.user.country} Icon={FaCity} />
-              <InfoSection placeholder="Bio" value={data.user.bio} Icon={FaInfoCircle} />
+              <InfoSection id="email-container" placeholder="Email" value={data.user.email} Icon={FaEnvelope} />
+              <InfoSection id="username-container" placeholder="Username" value={data.user.username} Icon={FaUser} />
+              <InfoSection id="rep-container" placeholder="Reputation" value={data.user.reputation} Icon={FaGlobe} />
+              <InfoSection id="google-container" placeholder="Google" value={data.user.googleId} Icon={FaGoogle} />
+              <InfoSection id="fb-container" placeholder="Facebook" value={data.user.facebookId} Icon={FaFacebook} />
+              <InfoSection id="city-container" placeholder="City" value={data.user.city} Icon={FaBuilding} />
+              <InfoSection id="country-container" placeholder="Country" value={data.user.country} Icon={FaCity} />
+              <InfoSection id="bio-container" placeholder="Bio" value={data.user.bio} Icon={FaInfoCircle} />
             </Grid>
             <Grid item xs={12} style={{ marginTop: 'auto' }}>
               {editable && (
                 <div className={classes.editButtonContainer}>
-                  <PrimaryButton fullWidth>
+                  <PrimaryButton fullWidth id="edit-user-profile">
                     <FaEdit className={classes.editButtonIcon} />
                     Edit
                   </PrimaryButton>
@@ -73,14 +72,17 @@ export const DetailUserProfile: React.FC<Props> = ({ username, editable }) => {
   );
 };
 
-const InfoSection: React.FC<{ placeholder?: string; value?: string | number | null; Icon: IconType }> = ({
-  placeholder,
-  value,
-  Icon: SvgIcon,
-}) => {
+interface InfoSectionProps {
+  id?: string;
+  placeholder?: string;
+  value?: string | number | null;
+  Icon: React.ElementType;
+}
+
+const InfoSection: React.FC<InfoSectionProps> = ({ id, placeholder, value, Icon: SvgIcon }) => {
   const classes = useStyles();
   return (
-    <div className={classes.infoSectionContainer}>
+    <div className={classes.infoSectionContainer} id={id}>
       <Icon className={classes.infoSectionIcon}>
         <SvgIcon />
       </Icon>

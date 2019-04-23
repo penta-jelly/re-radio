@@ -31,13 +31,15 @@ export const ProfileAvatar: React.FC<Props> = ({ id, editable, url, alt, usernam
     [mutate],
   );
   return (
-    <label className={classes.root} htmlFor={editable ? id : ''}>
+    <label className={[classes.root, classes.label].join(' ')} htmlFor={editable ? id : ''}>
       <Image src={url} alt={alt} className={classes.avatar} fallbackSrc={DEFAULT_AVATAR} />
-      <div className={'overlay'}>
-        <div className={classes.overlayWrapper}>
-          <FaUpload className={classes.overlayIcon} />
+      {editable && (
+        <div className={classes.overlay}>
+          <div className={classes.overlayWrapper}>
+            <FaUpload className={classes.overlayIcon} />
+          </div>
         </div>
-      </div>
+      )}
       <input
         type="file"
         required
