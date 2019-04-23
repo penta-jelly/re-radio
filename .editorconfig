@@ -10,5 +10,8 @@ indent_style = space
 [*.json]
 indent_size = 2
 
+[*.graphql]
+indent_size = 2
+
 [*.{js,jsx,ts,tsx}]
 indent_size = 2

@@ -71,7 +71,7 @@ input SongExplorersInput {
 
 enum Order { date, rating, relevance, title, viewCount, videoCount }
 
-type Query {
+extend type Query {
   songExplorer(where: SongExplorerInput!): SongExplorer!
   songExplorers(where: SongExplorersInput!): [MiniSongExplorer!]!
 }
