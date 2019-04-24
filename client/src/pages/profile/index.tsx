@@ -4,7 +4,7 @@ import { PageLoader } from '../../components/page-loader';
 import { Layout } from '../../containers/layout';
 import { useCurrentUserQuery } from '../../graphql';
 import { useRouter } from '../../hooks/use-router';
-import { DetailUserProfile } from '../../modules/user';
+import { DetailUserProfile, UserProfileSongs, UserProfileStations } from '../../modules/user';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -49,7 +49,14 @@ const UserProfilePage: React.FC = () => {
           <DetailUserProfile username={username} editable={ownedProfile} />
         </Grid>
         <Grid item xs={12} md={9}>
-          <div />
+          <Grid container>
+            <Grid item xs={12}>
+              <UserProfileStations username={username} editable={ownedProfile} />
+            </Grid>
+            <Grid item xs={12}>
+              <UserProfileSongs username={username} editable={ownedProfile} />
+            </Grid>
+          </Grid>
         </Grid>
       </Grid>
     </Layout>

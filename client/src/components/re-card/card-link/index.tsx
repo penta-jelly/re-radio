@@ -16,7 +16,7 @@ export const ReCardLink: React.FC<Props> = ({ Icon: SvgIcon, iconColor, text, on
   return (
     <span className={classes.link} onClick={onClick || undefined}>
       {SvgIcon && (
-        <Icon color={iconColor} >
+        <Icon color={iconColor} className={classes.icon}>
           <SvgIcon />
         </Icon>
       )}

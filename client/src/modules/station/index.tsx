@@ -7,6 +7,7 @@ import { Player } from './player';
 import { Playlist } from './playlist';
 import { useStyles } from './styles';
 export * from './context';
+export * from './list';
 
 export const StationLayout: React.FC<{}> = () => {
   const classes = useStyles();

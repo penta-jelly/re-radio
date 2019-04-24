@@ -46,7 +46,7 @@ export const Layout: React.FC<Props> = props => {
             </>
           </ListItem>
           <div className={classes.spacer} />
-          <ListItem button component={Link} to="/register">
+          <ListItem button component={Link} to="/login">
             <>
               <ListItemIcon>
                 <Icon><LoginIcon /></Icon>
@@ -56,7 +56,7 @@ export const Layout: React.FC<Props> = props => {
           </ListItem>
         </List>
       </Drawer>
-      <div>{props.children}</div>
+      <div className={classes.content}>{props.children}</div>
     </div>
   );
 };

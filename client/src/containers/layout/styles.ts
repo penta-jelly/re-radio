@@ -32,6 +32,9 @@ export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) =>
     flexDirection: 'column',
     height: '100%',
   },
+  content: props => ({
+    width: `calc(100vw - ${getDrawerWidth(props)}px)`,
+  }),
   spacer: {
     flex: 1,
   },
