@@ -10,8 +10,7 @@
     "eject": "react-scripts eject",
     "generate": "gql-gen",
     "format": "prettier --write \"src/**/*.{tsx,ts}\"",
-    "type-check": "tsc --noEmit",
-    "lint": "tslint \"src/**/*.{tsx,ts}\""
+    "lint": "eslint --ext .tsx --ext .ts src/"
   },
   "dependencies": {
     "@material-ui/core": "4.0.0-beta.0",
@@ -31,7 +30,7 @@
     "react-icons": "3.6.1",
     "react-i18next": "10.9.0",
     "react-router-dom": "5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "type-fest": "0.4.1",
     "use-query-params": "0.3.2",
     "yup": "0.27.0"
@@ -51,11 +50,9 @@
     "@types/react-router-dom": "4.3.2",
     "@types/yup": "0.26.12",
     "prettier": "1.17.0",
-    "tslint": "5.16.0",
-    "tslint-config-prettier": "1.18.0",
-    "tslint-react": "4.0.0",
-    "tslint-react-hooks": "2.1.0",
-    "typescript": "3.4.5"
+    "typescript": "3.4.5",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1"
   },
   "author": {
     "name": "Penta Jelly",

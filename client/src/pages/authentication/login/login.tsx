@@ -9,13 +9,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
-import { useStyles } from './styles';
 import { Formik } from 'formik';
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import * as yup from 'yup';
-import { LoginInput, useLoginMutation } from '../../../graphql';
+
+import { LoginInput, useLoginMutation } from 'app-graphql';
+
+import { useStyles } from './styles';
 
 type DataKeys = keyof LoginInput;
 type Data = { [key in DataKeys]: string };
