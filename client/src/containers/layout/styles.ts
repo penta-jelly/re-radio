@@ -1,5 +1,5 @@
-import { makeStyles, Theme } from '@material-ui/core';
-import { Styles } from '@material-ui/styles/withStyles';
+import { makeStyles } from '@material-ui/styles';
+import { Theme } from '@material-ui/core';
 import { Props } from '.';
 
 const drawerWidth = 200;
@@ -14,16 +14,16 @@ function getDrawerWidth(props: Props): number {
   return drawerWidth;
 }
 
-export const useStyles = makeStyles<Styles<Theme, Props>>(({ palette, typography, spacing }: Theme) => ({
-  root: props => ({
+export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) => ({
+  root: (props: Props) => ({
     height: '100vh',
     display: 'grid',
     gridTemplateColumns: `${getDrawerWidth(props)}px 1fr`,
   }),
-  sidebar: props => ({
+  sidebar: (props: Props) => ({
     width: getDrawerWidth(props),
   }),
-  sidebarPaper: props => ({
+  sidebarPaper: (props: Props) => ({
     width: getDrawerWidth(props),
     backgroundColor: '#f3f3f3',
     borderRight: 'none',
@@ -46,7 +46,7 @@ export const useStyles = makeStyles<Styles<Theme, Props>>(({ palette, typography
     display: 'flex',
     alignItems: 'center',
   },
-  logo: props => ({
+  logo: (props: Props) => ({
     display: 'block',
     width: 40,
     verticalAlign: 'middle',
