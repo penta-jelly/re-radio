@@ -31,7 +31,7 @@
     "react-icons": "3.6.1",
     "react-i18next": "10.9.0",
     "react-router-dom": "5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.0.0",
     "type-fest": "0.4.1",
     "use-query-params": "0.3.2",
     "yup": "0.27.0"
