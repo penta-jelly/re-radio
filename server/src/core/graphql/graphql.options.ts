@@ -40,7 +40,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
     return error.message || error.error;
   }
 
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isHttpExceptionError(object: any): object is { message?: string; error?: string } {
     if (object && (object.message || object.error)) return true;
     return false;
@@ -56,7 +56,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
     return message;
   }
 
-  // tslint:disable-next-line no-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isValidationError(object: any): object is ValidationError[] {
     if (object && Array.isArray(object) && object[0] && object[0].target) {
       return true;

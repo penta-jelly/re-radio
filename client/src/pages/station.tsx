@@ -1,7 +1,8 @@
 import { makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
-import { Layout } from '../containers/layout';
-import { StationContext, StationLayout, useStationContextState } from '../modules';
+
+import { Layout } from 'containers/layout';
+import { StationContext, StationLayout, useStationContextState } from 'modules';
 
 const useStyles = makeStyles(({ spacing }: Theme) => ({
   container: {

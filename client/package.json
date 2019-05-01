@@ -10,6 +10,7 @@
     "eject": "react-scripts eject",
     "generate": "gql-gen",
     "format": "prettier --write \"src/**/*.{tsx,ts}\"",
+    "type-check": "tsc --noEmit",
     "lint": "eslint --ext .tsx --ext .ts src/"
   },
   "dependencies": {

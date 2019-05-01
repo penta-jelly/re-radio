@@ -12,18 +12,24 @@ interface Props extends InputBaseProps {
 export const ReSearch: React.FC<Props> = ({ icon, className, onBlur, onFocus, ...rest }) => {
   const classes = useStyles();
   const [isInputFocused, setIsInputFocused] = useState(false);
-  const handleInputFocus = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    setIsInputFocused(true);
-    if (onFocus) {
-      onFocus(event);
-    }
-  }, []);
-  const handleInputBlur = useCallback((event: React.FocusEvent<HTMLDivElement>) => {
-    setIsInputFocused(false);
-    if (onBlur) {
-      onBlur(event);
-    }
-  }, []);
+  const handleInputFocus = useCallback(
+    (event: React.FocusEvent<HTMLDivElement>) => {
+      setIsInputFocused(true);
+      if (onFocus) {
+        onFocus(event);
+      }
+    },
+    [onFocus],
+  );
+  const handleInputBlur = useCallback(
+    (event: React.FocusEvent<HTMLDivElement>) => {
+      setIsInputFocused(false);
+      if (onBlur) {
+        onBlur(event);
+      }
+    },
+    [onBlur],
+  );
 
   return (
     <div className={[classes.root, isInputFocused ? classes.rootFocused : '', className].join(' ').trim()}>

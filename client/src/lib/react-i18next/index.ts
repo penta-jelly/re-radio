@@ -1,10 +1,10 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import commonEN from '../../translations/en-US/common.json';
-import commonVI from '../../translations/vi-VN/common.json';
-import stationsEN from '../../translations/en-US/stations.json';
-import stationsVI from '../../translations/vi-VN/stations.json';
+import commonEN from 'translations/en-US/common.json';
+import commonVI from 'translations/vi-VN/common.json';
+import stationsEN from 'translations/en-US/stations.json';
+import stationsVI from 'translations/vi-VN/stations.json';
 
 export const initI18n = () =>
   i18n.use(initReactI18next).init({

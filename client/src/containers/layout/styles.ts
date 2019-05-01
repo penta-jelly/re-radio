@@ -6,11 +6,9 @@ const drawerWidth = 200;
 const collapsedDrawerWith = 56;
 
 function getDrawerWidth(props: Props): number {
-  // tslint:disable curly
   if (!props.drawer) return drawerWidth;
   if (!props.drawer.open) return 0;
   if (props.drawer.collapsed) return collapsedDrawerWith;
-  // tslint:enable curly
   return drawerWidth;
 }
 

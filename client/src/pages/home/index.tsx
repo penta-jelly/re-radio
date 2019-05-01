@@ -9,7 +9,7 @@ import { PageLoader } from 'components/page-loader';
 import { ReCard } from 'components/re-card';
 import { ReCardLink } from 'components/re-card/card-link';
 import { Layout } from 'containers/layout';
-import { StationOrderByInput, useStationsQuery } from 'app-graphql';
+import { StationOrderByInput, useStationsQuery } from 'operations';
 
 import { useStyles } from './styles';
 
