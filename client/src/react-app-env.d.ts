@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 /// <reference types="react-scripts" />
 
 declare namespace NodeJS {

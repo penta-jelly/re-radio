@@ -1,16 +1,16 @@
 schema:
   - "http://localhost:8000/graphql"
 overwrite: true
-documents: ./src/graphql/**/*.graphql
+documents: ./src/operations/**/*.graphql
 generates:
-  ./src/graphql/index.tsx:
+  ./src/operations/index.tsx:
     config:
       noNamespaces: true
       withComponent: false
       withHooks: true
       immutableTypes: true
     plugins:
-      - add: "/* tslint:disable */"
+      - add: "/* eslint-disable */"
       - typescript
       - typescript-operations
       - typescript-react-apollo

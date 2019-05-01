@@ -9,13 +9,15 @@ import {
   Typography,
 } from '@material-ui/core';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
-import { useStyles } from './styles';
 import { Formik } from 'formik';
 import React, { useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RouteComponentProps, Link } from 'react-router-dom';
 import * as yup from 'yup';
-import { LoginInput, useLoginMutation } from '../../../graphql';
+
+import { LoginInput, useLoginMutation } from 'operations';
+
+import { useStyles } from './styles';
 
 type DataKeys = keyof LoginInput;
 type Data = { [key in DataKeys]: string };
@@ -26,34 +28,37 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const loginMutation = useLoginMutation();
   const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
   const { t } = useTranslation('common');
-  const onLogin = useCallback(async (values: Data) => {
-    setLoginError(null);
+  const onLogin = useCallback(
+    async (values: Data) => {
+      setLoginError(null);
 
-    try {
-      const loginWithEmailValue = {
-        email: values.email,
-        password: values.password,
-      };
-      const loginWithUsernameValue = {
-        username: values.email,
-        password: values.password,
-      };
-      const response = await loginMutation({
-        variables: { data: values.email.includes('@') ? loginWithEmailValue : loginWithUsernameValue },
-      });
-      if (response.data && response.data.login.token) {
-        localStorage.setItem('token', response.data.login.token);
-        history.replace('/');
-        return;
-      }
+      try {
+        const loginWithEmailValue = {
+          email: values.email,
+          password: values.password,
+        };
+        const loginWithUsernameValue = {
+          username: values.email,
+          password: values.password,
+        };
+        const response = await loginMutation({
+          variables: { data: values.email.includes('@') ? loginWithEmailValue : loginWithUsernameValue },
+        });
+        if (response.data && response.data.login.token) {
+          localStorage.setItem('token', response.data.login.token);
+          history.replace('/');
+          return;
+        }
 
-      if (response.errors) {
-        setLoginError(response.errors[0].message);
+        if (response.errors) {
+          setLoginError(response.errors[0].message);
+        }
+      } catch (error) {
+        setLoginError(error.message);
       }
-    } catch (error) {
-      setLoginError(error.message);
-    }
-  }, []);
+    },
+    [history, loginMutation],
+  );
 
   const handleClickRemember = useCallback(() => {
     setIsRememberMe(!isRememberMe);

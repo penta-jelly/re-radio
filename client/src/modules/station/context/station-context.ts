@@ -1,5 +1,6 @@
 import React from 'react';
-import * as StationLayout from '../../../containers/layout';
+
+import * as StationLayout from 'containers/layout';
 
 export interface StationContext {
   // Mute
@@ -17,7 +18,7 @@ export interface StationContext {
   setDrawerState: React.Dispatch<React.SetStateAction<StationContext['drawer']>>;
 }
 
-const defaultFn = () => {}; // tslint:disable-line
+const defaultFn = () => {};
 const defaultState: StationContext = {
   // Mute
   mute: false,

@@ -3,10 +3,11 @@ import { Formik } from 'formik';
 import * as yup from 'yup';
 import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from 'react-router';
-import { useRegisterMutation, RegisterInput } from '../../../graphql';
 import { Avatar, Typography, TextField, Button, FormHelperText } from '@material-ui/core';
-import { useStyles } from './styles';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+
+import { useRegisterMutation, RegisterInput } from 'operations';
+import { useStyles } from './styles';
 
 type DataKeys = keyof RegisterInput;
 type Data = { [key in DataKeys]: string };
@@ -15,32 +16,32 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
   const registerMutation = useRegisterMutation();
   const [registerError, setRegisterError] = useState<string | null>(null);
-  const { t, i18n } = useTranslation('common');
-  const onRegister = useCallback(async (values: Data) => {
-    setRegisterError(null);
+  const { t } = useTranslation('common');
+  const onRegister = useCallback(
+    async (values: Data) => {
+      setRegisterError(null);
 
-    try {
-      const response = await registerMutation({
-        variables: {
-          data: values,
-        },
-      });
-      if (response.data && response.data.register.token) {
-        localStorage.setItem('token', response.data.register.token);
-        history.replace('/');
-        return;
-      }
+      try {
+        const response = await registerMutation({
+          variables: {
+            data: values,
+          },
+        });
+        if (response.data && response.data.register.token) {
+          localStorage.setItem('token', response.data.register.token);
+          history.replace('/');
+          return;
+        }
 
-      if (response.errors) {
-        setRegisterError(response.errors[0].message);
+        if (response.errors) {
+          setRegisterError(response.errors[0].message);
+        }
+      } catch (error) {
+        setRegisterError(error.message);
       }
-    } catch (error) {
-      setRegisterError(error.message);
-    }
-  }, []);
-  const onChangeLanguage = useCallback(() => {
-    i18n.changeLanguage(i18n.language === 'en-US' ? 'vi-VN' : 'en-US');
-  }, []);
+    },
+    [history, registerMutation],
+  );
 
   return (
     <div className={classNames.container}>

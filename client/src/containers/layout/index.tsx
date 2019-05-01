@@ -3,7 +3,9 @@ import StationIcon from '@material-ui/icons/Radio';
 import LoginIcon from '@material-ui/icons/Fingerprint';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import logoImage from '../../assets/logo.png';
+
+import logoImage from 'assets/logo.png';
+
 import { useStyles } from './styles';
 
 export interface Props {

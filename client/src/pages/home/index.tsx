@@ -3,13 +3,14 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import ShowChartIcon from '@material-ui/icons/ShowChart';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { PrimaryButton } from '../../components/button/primary-button';
-import { ReSearch } from '../../components/input/re-search';
-import { PageLoader } from '../../components/page-loader';
-import { ReCard } from '../../components/re-card';
-import { ReCardLink } from '../../components/re-card/card-link';
-import { Layout } from '../../containers/layout';
-import { StationOrderByInput, useStationsQuery } from '../../graphql';
+import { PrimaryButton } from 'components/button/primary-button';
+import { ReSearch } from 'components/input/re-search';
+import { PageLoader } from 'components/page-loader';
+import { ReCard } from 'components/re-card';
+import { ReCardLink } from 'components/re-card/card-link';
+import { Layout } from 'containers/layout';
+import { StationOrderByInput, useStationsQuery } from 'operations';
+
 import { useStyles } from './styles';
 
 const placeHolderImage =

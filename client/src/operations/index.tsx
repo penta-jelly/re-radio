@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint-disable */
 
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
