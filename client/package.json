@@ -52,8 +52,8 @@
     "@types/yup": "0.26.12",
     "prettier": "1.17.0",
     "typescript": "3.4.5",
-    "eslint-config-prettier": "^4.2.0",
-    "eslint-plugin-prettier": "^3.0.1"
+    "eslint-config-prettier": "4.2.0",
+    "eslint-plugin-prettier": "3.0.1"
   },
   "author": {
     "name": "Penta Jelly",
