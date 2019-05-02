@@ -5,8 +5,8 @@
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
     "type-check": "tsc --project cypress --noEmit",
-    "lint": "eslint --ext .tsx --ext .ts cypress",
-    "format": "prettier --write \"cypress/**/*.ts\""
+    "lint": "eslint --ext .ts cypress",
+    "format": "prettier --write \"cypress/**/*.ts\" && eslint --fix --ext .ts cypress"
   },
   "dependencies": {
     "cypress": "3.2.0",
