@@ -9,7 +9,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "generate": "gql-gen",
-    "format": "prettier --write \"src/**/*.{tsx,ts}\"",
+    "format": "prettier --write \"src/**/*.{tsx,ts}\" && eslint --fix --ext .tsx --ext .ts src/",
     "type-check": "tsc --noEmit",
     "lint": "eslint --ext .tsx --ext .ts src/"
   },
