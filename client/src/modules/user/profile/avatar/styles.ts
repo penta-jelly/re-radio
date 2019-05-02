@@ -1,8 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core';
-import { Styles } from '@material-ui/styles/withStyles';
 
-export const useStyles = makeStyles<Styles<Theme, { editable: boolean }>>(({ spacing, typography, palette }) => ({
-  root: props => ({
+export const useStyles = makeStyles(({ spacing, palette }: Theme) => ({
+  root: (props: { editable: boolean }) => ({
     position: 'relative',
     display: 'block',
     margin: spacing(2),

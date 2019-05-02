@@ -1,13 +1,13 @@
-import React from 'react';
-import { ThemeProvider } from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { ApolloProvider } from 'react-apollo-hooks';
-
-import { initI18n } from 'lib/react-i18next';
+import { ThemeProvider } from '@material-ui/styles';
+import { PageLoader } from 'components/page-loader';
 
 import { theme } from 'lib/@material-ui/theme';
 import { initApollo } from 'lib/apollo/init';
-import { PageLoader } from 'components/page-loader';
+
+import { initI18n } from 'lib/react-i18next';
+import React from 'react';
+import { ApolloProvider } from 'react-apollo-hooks';
 
 import { AppRouter } from './router';
 

@@ -35,7 +35,7 @@ describe('Show user profile page', () => {
       });
     });
 
-    describe('other user\'s profile', () => {
+    describe("other user's profile", () => {
       beforeEach(() => {
         userProfilePage.navigate('pvtri96');
       });

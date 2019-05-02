@@ -1,10 +1,10 @@
 import { Grid } from '@material-ui/core';
+import { PageLoader } from 'components/page-loader';
+import { Layout } from 'containers/layout';
+import { useRouter } from 'hooks/use-router';
+import { DetailUserProfile, UserProfileSongs, UserProfileStations } from 'modules/user';
+import { useCurrentUserQuery } from 'operations';
 import React from 'react';
-import { PageLoader } from '../../components/page-loader';
-import { Layout } from '../../containers/layout';
-import { useCurrentUserQuery } from '../../graphql';
-import { useRouter } from '../../hooks/use-router';
-import { DetailUserProfile, UserProfileSongs, UserProfileStations } from '../../modules/user';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -37,7 +37,7 @@ const UserProfilePage: React.FC = () => {
     if (error && !match.params.username) {
       history.push('/');
     }
-  }, [error, match.params.username]);
+  }, [error, history, match.params.username]);
 
   if (!username) {
     return <PageLoader />;

@@ -3531,6 +3531,7 @@ export type UserProfileQuery = { readonly __typename?: 'Query' } & {
 import gql from 'graphql-tag';
 import * as ReactApollo from 'react-apollo';
 import * as ReactApolloHooks from 'react-apollo-hooks';
+
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export const LoginDocument = gql`

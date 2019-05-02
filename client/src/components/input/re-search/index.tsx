@@ -1,4 +1,4 @@
-import { InputBase, Icon } from '@material-ui/core';
+import { Icon, InputBase } from '@material-ui/core';
 import { InputBaseProps } from '@material-ui/core/InputBase';
 import React, { useCallback, useState } from 'react';
 import { MdSearch as SearchIcon } from 'react-icons/md';

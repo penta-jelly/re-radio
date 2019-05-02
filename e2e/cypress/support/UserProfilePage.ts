@@ -9,7 +9,7 @@ export default (url: string = '/profile') => ({
     countryContainer: '#country-container',
     bioContainer: '#bio-container',
     profileImage: '#profile-image',
-    editUserProfileButton: '#edit-user-profile'
+    editUserProfileButton: '#edit-user-profile',
   },
 
   navigate(username: string = '') {

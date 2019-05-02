@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from 'react';
+import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
 import { Formik } from 'formik';
-import * as yup from 'yup';
-import { useTranslation } from 'react-i18next';
-import { RouteComponentProps } from 'react-router';
-import { Avatar, Typography, TextField, Button, FormHelperText } from '@material-ui/core';
-import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 
-import { useRegisterMutation, RegisterInput } from 'operations';
+import { RegisterInput, useRegisterMutation } from 'operations';
+import React, { useCallback, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { RouteComponentProps } from 'react-router';
+import * as yup from 'yup';
 import { useStyles } from './styles';
 
 type DataKeys = keyof RegisterInput;

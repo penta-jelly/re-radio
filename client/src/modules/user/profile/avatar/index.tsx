@@ -1,7 +1,7 @@
+import { Image } from 'components/image';
+import { CurrentUserDocument, UserProfileDocument, useUpdateUserAvatarMutation } from 'operations';
 import React from 'react';
 import { FaUpload } from 'react-icons/fa';
-import { Image } from '../../../../components/image';
-import { CurrentUserDocument, UserProfileDocument, useUpdateUserAvatarMutation } from '../../../../graphql';
 import { useStyles } from './styles';
 
 const DEFAULT_AVATAR = 'https://cdn1.iconfinder.com/data/icons/ninja-things-1/720/ninja-background-256.png';
@@ -28,7 +28,7 @@ export const ProfileAvatar: React.FC<Props> = ({ id, editable, url, alt, usernam
         await mutate({ variables: { file: files[0], where: { username } } });
       }
     },
-    [mutate],
+    [mutate, username],
   );
   return (
     <label className={[classes.root, classes.label].join(' ')} htmlFor={editable ? id : ''}>

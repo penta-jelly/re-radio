@@ -1,7 +1,7 @@
 import { Card, CircularProgress, Typography } from '@material-ui/core';
-import React from 'react';
+import { useRouter } from 'hooks/use-router';
 import { useStationQuery } from 'operations';
-import { useRouter } from 'hooks/useRouter';
+import React from 'react';
 import { useStyles } from './styles';
 
 interface RouteParams {
