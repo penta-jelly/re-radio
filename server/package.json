@@ -59,7 +59,7 @@
     "eslint-plugin-prettier": "3.0.1",
     "prettier": "1.17.0",
     "ts-node": "8.1.0",
-    "ts-node-dev": "1.0.0-pre.33",
+    "ts-node-dev": "1.0.0-pre.34",
     "typescript": "3.4.5"
   },
   "description": "description",
