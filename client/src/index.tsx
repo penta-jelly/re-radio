@@ -18,7 +18,6 @@ serviceWorker.unregister();
 
 if (module.hot) {
   module.hot.accept('./containers/app', () => {
-    const NextApp = require('./containers/app').App;
-    render(NextApp);
+    render(require('./containers/app').App);
   });
 }

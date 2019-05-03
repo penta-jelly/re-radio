@@ -1,5 +1,5 @@
-import { makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 import { Props } from '.';
 
 const drawerWidth = 200;
@@ -32,6 +32,9 @@ export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) =>
     flexDirection: 'column',
     height: '100%',
   },
+  content: props => ({
+    width: `calc(100vw - ${getDrawerWidth(props)}px)`,
+  }),
   spacer: {
     flex: 1,
   },

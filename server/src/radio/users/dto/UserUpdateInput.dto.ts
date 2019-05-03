@@ -1,5 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsOptional, IsUrl, Length, ValidateNested } from 'class-validator';
+import { FileUpload } from 'graphql-upload';
 import {
   StationUpdateManyWithoutOwnerInput,
   UserRoleUpdateManyWithoutUserInput,
@@ -50,5 +51,10 @@ export class UserUpdateInputDTO {
   @Type(() => UserUpdateDTO)
   data: UserUpdateDTO;
 
+  where: UserWhereUniqueInput;
+}
+
+export interface UserUpdateAvatarDTO {
+  file: Promise<FileUpload>;
   where: UserWhereUniqueInput;
 }

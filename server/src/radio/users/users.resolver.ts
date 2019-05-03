@@ -1,17 +1,23 @@
-import { UseGuards } from '@nestjs/common';
+import { InternalServerErrorException, Logger, NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { BatchPayload, User } from '../../prisma/prisma.binding';
+import { FilesService } from '../../core/files/files.service';
+import { BatchPayload, User, UserWhereInput, UserWhereUniqueInput } from '../../prisma/prisma.binding';
 import { PrismaService } from '../../prisma/prisma.service';
-import { Roles } from '../auth/decorators/Roles.decorator';
+import { RoleDecoratorParam, Roles } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
 import { AuthorizationGuard } from '../auth/guards/Authorization.guard';
 import { UserCreateInputDTO } from './dto/UserCreateInput.dto';
-import { UserUpdateInputDTO } from './dto/UserUpdateInput.dto';
+import { UserUpdateAvatarDTO, UserUpdateInputDTO } from './dto/UserUpdateInput.dto';
 import { UsersService } from './user.service';
 
 @Resolver()
 export class UsersResolver {
-  constructor(private readonly prisma: PrismaService, private readonly usersService: UsersService) {}
+  private readonly logger = new Logger(UsersResolver.name);
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly usersService: UsersService,
+    private readonly filesService: FilesService,
+  ) {}
 
   @Query('users')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
@@ -34,7 +40,7 @@ export class UsersResolver {
 
   @Mutation('updateUser')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
-  @Roles(['ADMIN'])
+  @Roles(['ADMIN', UsersResolver.profileOwner])
   async updateUser(@Args() args: UserUpdateInputDTO, @Info() info): Promise<User> {
     return await this.usersService.updateUser(args, info);
   }
@@ -63,5 +69,27 @@ export class UsersResolver {
   @Subscription('user')
   onUserMutation(@Args() args, @Info() info) {
     return this.prisma.subscription.user(args, info);
+  }
+
+  @Mutation('updateUserAvatar')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
+  @Roles(['ADMIN', UsersResolver.profileOwner])
+  async uploadUserAvatar(@Args() args: UserUpdateAvatarDTO) {
+    const user = await this.prisma.query.user(args);
+    if (!user) throw new NotFoundException();
+
+    const file = await args.file;
+    try {
+      const { hashedFilename } = await this.filesService.storeFile(file.createReadStream(), file.filename);
+      await this.prisma.mutation.updateUser({ where: args.where, data: { avatarUrl: hashedFilename } });
+      return hashedFilename;
+    } catch (e) {
+      this.logger.error(e, e.stack);
+      throw new InternalServerErrorException(`Could not store ${file.filename}.`);
+    }
+  }
+
+  static profileOwner({ user, args: { where } }: RoleDecoratorParam<{ where: UserWhereUniqueInput | UserWhereInput }>) {
+    return user.id === where.id || user.email === where.email || user.username === where.username;
   }
 }

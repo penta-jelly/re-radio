@@ -1,0 +1,3 @@
+mutation UpdateUserAvatar($where: UserWhereUniqueInput!, $file: Upload!) {
+  updateUserAvatar(where: $where, file: $file)
+}

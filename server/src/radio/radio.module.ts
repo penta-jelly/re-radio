@@ -1,5 +1,6 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
+import { FilesModule } from '../core/files/files.module';
 import { GraphqlModule } from '../core/graphql/graphql.module';
 import { RequestsInterceptor } from '../core/request.interceptor';
 import { PrismaModule } from '../prisma/prisma.module';
@@ -11,7 +12,16 @@ import { StationsModule } from './stations/stations.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [GraphqlModule, PrismaModule, UsersModule, AuthModule, StationsModule, SongsModule, SongsExplorerModule],
+  imports: [
+    GraphqlModule,
+    PrismaModule,
+    FilesModule,
+    UsersModule,
+    AuthModule,
+    StationsModule,
+    SongsModule,
+    SongsExplorerModule,
+  ],
   providers: [
     {
       provide: APP_PIPE,

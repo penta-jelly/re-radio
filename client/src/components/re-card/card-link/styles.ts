@@ -1,18 +1,18 @@
-import { makeStyles } from '@material-ui/styles';
 import { Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/styles';
 
-export const useStyles = makeStyles((theme: Theme) => ({
+export const useStyles = makeStyles(({ spacing }: Theme) => ({
   link: {
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
-    '& > svg': {
-      fontSize: '1.125rem',
-      marginRight: 6,
-    },
-    '&:hover > $text': {
+    '&:hover $text': {
       opacity: 1,
     },
+  },
+  icon: {
+    fontSize: '1.125rem',
+    marginRight: spacing(0.5),
   },
   text: {
     color: '#000',

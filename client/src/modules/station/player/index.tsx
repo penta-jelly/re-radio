@@ -1,5 +1,5 @@
+import { Card, Typography } from '@material-ui/core';
 import React from 'react';
-import { Typography, Card } from '@material-ui/core';
 import { useStyles } from './styles';
 
 export const Player: React.FC<{}> = () => {

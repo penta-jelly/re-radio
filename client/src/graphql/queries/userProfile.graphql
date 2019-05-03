@@ -1,0 +1,21 @@
+query UserProfile($where: UserWhereUniqueInput!) {
+	user(where: $where) {
+    id
+    email
+    username
+    avatarUrl
+    coverUrl
+    reputation
+    bio
+    city
+    country
+    googleId
+    facebookId
+    stations {
+      name
+      slug
+      description
+      tags { id name }
+    }
+  }
+}

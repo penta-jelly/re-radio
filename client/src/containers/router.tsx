@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 export const AppRouter = () => (
   <BrowserRouter>
@@ -9,6 +9,7 @@ export const AppRouter = () => (
       <Route path="/register" component={React.lazy(() => import('pages/authentication/register/register'))} />
       <Route path="/login" component={React.lazy(() => import('pages/authentication/login/login'))} />
       <Route path="/station/:slug" component={React.lazy(() => import('pages/station'))} />
+      <Route path="/profile/:username?" component={React.lazy(() => import('pages/profile'))} />
     </Switch>
   </BrowserRouter>
 );

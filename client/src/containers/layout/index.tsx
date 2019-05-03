@@ -1,11 +1,9 @@
-import { Drawer, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
-import StationIcon from '@material-ui/icons/Radio';
-import LoginIcon from '@material-ui/icons/Fingerprint';
-import React from 'react';
-import { Link } from 'react-router-dom';
-
+import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import logoImage from 'assets/logo.png';
-
+import { Image } from 'components/image';
+import React from 'react';
+import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 
 export interface Props {
@@ -35,30 +33,34 @@ export const Layout: React.FC<Props> = props => {
         <List className={classes.sidebarContent}>
           <li className={classes.title}>
             <Link to="/">
-              <img className={classes.logo} src={logoImage} alt="Logo" />
+              <Image className={classes.logo} src={logoImage} alt="Logo" />
             </Link>
             {sidebar.collapsed || 'Re-radio'}
           </li>
           <ListItem button component={Link} to="/">
             <>
               <ListItemIcon>
-                <StationIcon />
+                <Icon>
+                  <StationIcon />
+                </Icon>
               </ListItemIcon>
               {sidebar.collapsed || <ListItemText primary="Stations" />}
             </>
           </ListItem>
           <div className={classes.spacer} />
-          <ListItem button component={Link} to="/register">
+          <ListItem button component={Link} to="/login">
             <>
               <ListItemIcon>
-                <LoginIcon />
+                <Icon>
+                  <LoginIcon />
+                </Icon>
               </ListItemIcon>
               {sidebar.collapsed || <ListItemText primary="Sign In" />}
             </>
           </ListItem>
         </List>
       </Drawer>
-      <div>{props.children}</div>
+      <div className={classes.content}>{props.children}</div>
     </div>
   );
 };

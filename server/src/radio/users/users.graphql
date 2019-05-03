@@ -1,0 +1,3 @@
+extend type Mutation {
+  updateUserAvatar(where: UserWhereUniqueInput!, file: Upload!): String!
+}

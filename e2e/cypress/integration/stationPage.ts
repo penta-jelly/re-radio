@@ -2,7 +2,7 @@ import StationPage from '../support/StationPage';
 import StationsPage from '../support/StationsPage';
 
 describe('Show Station Page', () => {
-  const stationPage = StationPage('/station');
+  const stationPage = StationPage();
   describe('By using page URL', () => {
     it('should open station page', () => {
       stationPage.navigate('station-a');
