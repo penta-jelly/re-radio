@@ -6,10 +6,10 @@
     "lint": "eslint --ext .ts src/",
     "format": "prettier --write \"src/**/*.ts\" --ignore-path src/prisma/prisma.binding.ts && eslint --fix --ext .ts src/",
     "build": "tsc",
-    "start": "node dist/radio.js",
-    "start:real-time-radio": "node dist/real-time-radio.js",
-    "dev": "tsc-watch --noClear --onSuccess \"npm start\"",
-    "dev:real-time-radio": "nodemon -L --watch dist dist/real-time-radio.js",
+    "start": "ts-node src/radio.ts",
+    "start:real-time-radio": "ts-node src/real-time-radio.ts",
+    "dev": "ts-node-dev --no-deps --respawn --poll --interval 1000 src/radio.ts",
+    "dev:real-time-radio": "ts-node-dev --no-deps --respawn --poll --interval 1000 src/real-time-radio.ts",
     "prisma": "cd database && ../node_modules/.bin/prisma",
     "prisma:seed": "npm run prisma -- seed -e ../.env",
     "prisma:deploy": "npm run prisma -- deploy -e ../.env",
@@ -17,7 +17,7 @@
     "prisma:delete": "npm run prisma -- delete -e ../.env",
     "graphql:get-schema": "graphql get-schema --project database",
     "graphql:codegen": "graphql codegen --project database",
-    "worker": "node dist/workers.js",
+    "worker": "ts-node src/workers.ts",
     "worker:seed": "npm run worker -- seed"
   },
   "dependencies": {
@@ -45,7 +45,6 @@
     "prisma-binding": "2.3.10",
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.1",
-    "source-map-support": "0.5.12",
     "wait-on": "3.2.0"
   },
   "devDependencies": {
@@ -53,15 +52,15 @@
     "@types/graphql": "14.2.0",
     "@types/node-fetch": "2.3.3",
     "@types/passport-jwt": "3.0.1",
-    "nodemon": "1.19.0",
-    "prettier": "1.17.0",
-    "tsc-watch": "2.1.2",
-    "typescript": "3.4.5",
     "@typescript-eslint/eslint-plugin": "1.7.0",
     "@typescript-eslint/parser": "1.7.0",
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.2.0",
-    "eslint-plugin-prettier": "3.0.1"
+    "eslint-plugin-prettier": "3.0.1",
+    "prettier": "1.17.0",
+    "ts-node": "8.1.0",
+    "ts-node-dev": "1.0.0-pre.33",
+    "typescript": "3.4.5"
   },
   "description": "description",
   "author": {
