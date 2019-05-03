@@ -2,7 +2,7 @@ version: "3.7"
 services:
   prisma:
     container_name: re-radio_prisma
-    image: prismagraphql/prisma:1.32.0
+    image: prismagraphql/prisma:1.32.2
     restart: "no"
     environment:
       PRISMA_CONFIG: |
