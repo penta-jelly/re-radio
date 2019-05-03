@@ -37,7 +37,7 @@
     "graphql-cli": "3.0.11",
     "graphql-tools": "4.0.4",
     "moment": "2.24.0",
-    "node-fetch": "2.3.0",
+    "node-fetch": "2.5.0",
     "passport": "0.4.0",
     "passport-http-bearer": "1.0.1",
     "passport-jwt": "4.0.0",
