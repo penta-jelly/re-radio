@@ -6,7 +6,7 @@ import {
   SongWhereUniqueInput,
   StationUpdateOneRequiredWithoutSongsInput,
   UserUpdateOneRequiredInput,
-} from '../../../prisma/prisma.binding';
+} from 'prisma/prisma.binding';
 
 export class SongUpdateDTO implements SongUpdateInput {
   title?: string;

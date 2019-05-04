@@ -7,8 +7,8 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../../prisma/prisma.binding';
-import { PrismaService } from '../../prisma/prisma.service';
+import { User } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 import { UsersService } from '../users/user.service';
 import { LoginDTO } from './dto/LoginInput.dto';
 import { RegisterInputDTO } from './dto/RegisterInput.dto';

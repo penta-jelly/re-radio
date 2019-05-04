@@ -1,6 +1,6 @@
+require('tsconfig-paths/register'); // This line must be placed first
 import { NestFactory } from '@nestjs/core';
-import 'source-map-support/register';
-import { RealTimeRadioModule } from './real-time-radio/real-time-radio.module';
+import { RealTimeRadioModule } from 'real-time-radio/real-time-radio.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(RealTimeRadioModule);

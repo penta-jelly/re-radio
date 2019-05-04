@@ -1,5 +1,5 @@
 import { forwardRef, Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { Song, SongPreviousValues } from '../../prisma/prisma.binding';
+import { Song, SongPreviousValues } from 'prisma/prisma.binding';
 import { RealTimeStationService } from '../real-time-stations/real-time-stations.service';
 import { RealTimeSongService } from './real-time-songs.service';
 

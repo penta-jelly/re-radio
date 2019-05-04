@@ -1,7 +1,7 @@
 import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from '../../../prisma/prisma.binding';
+import { User } from 'prisma/prisma.binding';
 
 @Injectable()
 export class AuthenticationGuard extends AuthGuard('jwt') {

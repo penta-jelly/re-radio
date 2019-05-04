@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from 'core/config/config.module';
 import { YoutubeService } from './youtube.service';
-import { ConfigModule } from '../../../core/config/config.module';
 
 @Module({
   imports: [ConfigModule],

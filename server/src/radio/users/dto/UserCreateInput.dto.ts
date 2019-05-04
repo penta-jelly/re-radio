@@ -1,10 +1,10 @@
+import { Type } from 'class-transformer';
+import { IsEmail, IsNotEmpty, IsOptional, IsUrl, Length, ValidateNested } from 'class-validator';
 import {
+  StationCreateManyWithoutOwnerInput,
   UserCreateInput,
   UserRoleCreateManyWithoutUserInput,
-  StationCreateManyWithoutOwnerInput,
-} from '../../../prisma/prisma.binding';
-import { Length, IsOptional, ValidateNested, IsEmail, IsNotEmpty, IsUrl } from 'class-validator';
-import { Type } from 'class-transformer';
+} from 'prisma/prisma.binding';
 
 export class UserCreateDTO implements UserCreateInput {
   @IsNotEmpty()

@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '../config/config.module';
+import { ConfigModule } from 'core/config/config.module';
 import { FilesController } from './files.controller';
 import { FilesService } from './files.service';
 

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as Bcrypt from 'bcrypt-nodejs';
-import { StationCreateInput, UserCreateInput, UserRoleEnum, SongCreateInput } from '../../prisma/prisma.binding';
-import { PrismaService } from '../../prisma/prisma.service';
+import { SongCreateInput, StationCreateInput, UserCreateInput, UserRoleEnum } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class SeederService {

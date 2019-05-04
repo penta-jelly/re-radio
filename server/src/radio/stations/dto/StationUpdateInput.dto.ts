@@ -5,7 +5,7 @@ import {
   StationUpdateInput,
   StationWhereUniqueInput,
   UserUpdateOneRequiredWithoutStationsInput,
-} from '../../../prisma/prisma.binding';
+} from 'prisma/prisma.binding';
 
 export class StationUpdateDTO implements StationUpdateInput {
   @Length(2, 32)

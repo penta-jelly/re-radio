@@ -1,5 +1,5 @@
-import { Length, IsOptional, ValidateNested, IsEmail, IsNotEmpty } from 'class-validator';
 import { Type } from 'class-transformer';
+import { IsEmail, IsNotEmpty, IsOptional, Length, ValidateNested } from 'class-validator';
 
 export class LoginDTO {
   @IsNotEmpty()

@@ -9,8 +9,8 @@ import {
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
-import { User } from '../../../prisma/prisma.binding';
-import { PrismaService } from '../../../prisma/prisma.service';
+import { User } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 import { UsersService } from '../../users/user.service';
 import { AllowedRoles, ROLE_KEY } from '../decorators/Roles.decorator';
 

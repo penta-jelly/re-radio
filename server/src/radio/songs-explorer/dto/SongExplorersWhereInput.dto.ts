@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { ValidateNested, IsIn, IsNumber, IsOptional, Min, Max } from 'class-validator';
+import { IsIn, IsNumber, IsOptional, Max, Min, ValidateNested } from 'class-validator';
 import { Order, orders } from '../youtube/interfaces/YouTubeVideo';
 
 export class SongExplorersWhereDTO {

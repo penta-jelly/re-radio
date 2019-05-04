@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from '../core/config/config.service';
-import { EnvVariables } from '../core/config/config.variables';
+import { ConfigService } from 'core/config/config.service';
+import { EnvVariables } from 'core/config/config.variables';
 import { Prisma } from './prisma.binding';
 
 @Injectable()

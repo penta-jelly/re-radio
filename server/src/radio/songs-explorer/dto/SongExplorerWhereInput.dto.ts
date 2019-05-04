@@ -1,5 +1,5 @@
 import { Type } from 'class-transformer';
-import { IsUrl, ValidateNested, IsOptional } from 'class-validator';
+import { IsOptional, IsUrl, ValidateNested } from 'class-validator';
 
 export class SongExplorerWhereDTO {
   @IsUrl()

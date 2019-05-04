@@ -1,7 +1,7 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Args, Query } from '@nestjs/graphql';
-import { SongExplorerWhereInputDTO } from './dto/SongExplorerWhereInput.dto';
 import { SongExplorersWhereInputDTO } from './dto/SongExplorersWhereInput.dto';
+import { SongExplorerWhereInputDTO } from './dto/SongExplorerWhereInput.dto';
 import { YoutubeService } from './youtube/youtube.service';
 
 @Injectable()

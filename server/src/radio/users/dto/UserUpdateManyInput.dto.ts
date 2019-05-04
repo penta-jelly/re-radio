@@ -5,7 +5,7 @@ import {
   UserRoleUpdateManyWithoutUserInput,
   UserUpdateInput,
   UserWhereInput,
-} from '../../../prisma/prisma.binding';
+} from 'prisma/prisma.binding';
 
 export class UserUpdateManyDTO implements UserUpdateInput {
   @IsEmail()

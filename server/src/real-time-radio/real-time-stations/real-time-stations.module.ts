@@ -1,5 +1,5 @@
 import { forwardRef, Module } from '@nestjs/common';
-import { PrismaModule } from '../../prisma/prisma.module';
+import { PrismaModule } from 'prisma/prisma.module';
 import { RealTimeSongsModule } from '../real-time-songs/real-time-songs.module';
 import { RealTimeStationsWorkerService } from './real-time-stations-worker.service';
 import { RealTimeStationService } from './real-time-stations.service';

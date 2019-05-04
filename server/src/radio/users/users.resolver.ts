@@ -1,8 +1,8 @@
 import { InternalServerErrorException, Logger, NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { FilesService } from '../../core/files/files.service';
-import { BatchPayload, User, UserWhereInput, UserWhereUniqueInput } from '../../prisma/prisma.binding';
-import { PrismaService } from '../../prisma/prisma.service';
+import { FilesService } from 'core/files/files.service';
+import { BatchPayload, User, UserWhereInput, UserWhereUniqueInput } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 import { RoleDecoratorParam, Roles } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
 import { AuthorizationGuard } from '../auth/guards/Authorization.guard';
