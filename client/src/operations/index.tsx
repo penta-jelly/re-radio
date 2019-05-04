@@ -70,13 +70,8 @@ export type MiniSnippet = {
 };
 
 export type MiniSongExplorer = {
-  readonly id: MiniSongExplorerId;
+  readonly id: Scalars['String'];
   readonly snippet: Snippet;
-};
-
-export type MiniSongExplorerId = {
-  readonly kind: Scalars['String'];
-  readonly videoId: Scalars['String'];
 };
 
 export type Mutation = {
@@ -319,10 +314,10 @@ export type Query = {
   readonly usersConnection: UserConnection;
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
+  readonly temp__?: Maybe<Scalars['Boolean']>;
   readonly currentUser: User;
   readonly songExplorer: SongExplorer;
   readonly songExplorers: ReadonlyArray<MiniSongExplorer>;
-  readonly temp__?: Maybe<Scalars['Boolean']>;
 };
 
 export type QueryUserRolesArgs = {
@@ -3444,23 +3439,26 @@ export type SongExplorersQueryVariables = {
 
 export type SongExplorersQuery = { readonly __typename?: 'Query' } & {
   readonly songExplorers: ReadonlyArray<
-    { readonly __typename?: 'MiniSongExplorer' } & {
-      readonly id: { readonly __typename?: 'MiniSongExplorerId' } & Pick<MiniSongExplorerId, 'kind' | 'videoId'>;
-      readonly snippet: { readonly __typename?: 'Snippet' } & Pick<
-        Snippet,
-        'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'
-      > & {
-          readonly thumbnails: { readonly __typename?: 'Thumbnails' } & {
-            readonly default: { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>;
-            readonly medium: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
-            readonly high: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
-            readonly standard: Maybe<
-              { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>
-            >;
-            readonly maxres: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+    { readonly __typename?: 'MiniSongExplorer' } & Pick<MiniSongExplorer, 'id'> & {
+        readonly snippet: { readonly __typename?: 'Snippet' } & Pick<
+          Snippet,
+          'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'
+        > & {
+            readonly thumbnails: { readonly __typename?: 'Thumbnails' } & {
+              readonly default: { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>;
+              readonly medium: Maybe<
+                { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>
+              >;
+              readonly high: Maybe<{ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>>;
+              readonly standard: Maybe<
+                { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>
+              >;
+              readonly maxres: Maybe<
+                { readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>
+              >;
+            };
           };
-        };
-    }
+      }
   >;
 };
 
@@ -3531,7 +3529,6 @@ export type UserProfileQuery = { readonly __typename?: 'Query' } & {
 import gql from 'graphql-tag';
 import * as ReactApollo from 'react-apollo';
 import * as ReactApolloHooks from 'react-apollo-hooks';
-
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export const LoginDocument = gql`
@@ -3541,9 +3538,9 @@ export const LoginDocument = gql`
     }
   }
 `;
+export type LoginMutationFn = ReactApollo.MutationFn<LoginMutation, LoginMutationVariables>;
 export type LoginProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<LoginMutation, LoginMutationVariables>> &
   TChildProps;
-export type LoginMutationFn = ReactApollo.MutationFn<LoginMutation, LoginMutationVariables>;
 export function withLogin<TProps, TChildProps = {}>(
   operationOptions?: ReactApollo.OperationOption<
     TProps,
@@ -3554,7 +3551,10 @@ export function withLogin<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>(
     LoginDocument,
-    operationOptions,
+    {
+      alias: 'withLogin',
+      ...operationOptions,
+    },
   );
 }
 
@@ -3570,11 +3570,11 @@ export const RegisterDocument = gql`
     }
   }
 `;
+export type RegisterMutationFn = ReactApollo.MutationFn<RegisterMutation, RegisterMutationVariables>;
 export type RegisterProps<TChildProps = {}> = Partial<
   ReactApollo.MutateProps<RegisterMutation, RegisterMutationVariables>
 > &
   TChildProps;
-export type RegisterMutationFn = ReactApollo.MutationFn<RegisterMutation, RegisterMutationVariables>;
 export function withRegister<TProps, TChildProps = {}>(
   operationOptions?: ReactApollo.OperationOption<
     TProps,
@@ -3585,7 +3585,10 @@ export function withRegister<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>(
     RegisterDocument,
-    operationOptions,
+    {
+      alias: 'withRegister',
+      ...operationOptions,
+    },
   );
 }
 
@@ -3599,14 +3602,14 @@ export const UpdateUserAvatarDocument = gql`
     updateUserAvatar(where: $where, file: $file)
   }
 `;
-export type UpdateUserAvatarProps<TChildProps = {}> = Partial<
-  ReactApollo.MutateProps<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>
-> &
-  TChildProps;
 export type UpdateUserAvatarMutationFn = ReactApollo.MutationFn<
   UpdateUserAvatarMutation,
   UpdateUserAvatarMutationVariables
 >;
+export type UpdateUserAvatarProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>
+> &
+  TChildProps;
 export function withUpdateUserAvatar<TProps, TChildProps = {}>(
   operationOptions?: ReactApollo.OperationOption<
     TProps,
@@ -3620,7 +3623,10 @@ export function withUpdateUserAvatar<TProps, TChildProps = {}>(
     UpdateUserAvatarMutation,
     UpdateUserAvatarMutationVariables,
     UpdateUserAvatarProps<TChildProps>
-  >(UpdateUserAvatarDocument, operationOptions);
+  >(UpdateUserAvatarDocument, {
+    alias: 'withUpdateUserAvatar',
+    ...operationOptions,
+  });
 }
 
 export function useUpdateUserAvatarMutation(
@@ -3657,7 +3663,10 @@ export function withCurrentUser<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withQuery<TProps, CurrentUserQuery, CurrentUserQueryVariables, CurrentUserProps<TChildProps>>(
     CurrentUserDocument,
-    operationOptions,
+    {
+      alias: 'withCurrentUser',
+      ...operationOptions,
+    },
   );
 }
 
@@ -3729,7 +3738,10 @@ export function withSongExplorer<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withQuery<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>(
     SongExplorerDocument,
-    operationOptions,
+    {
+      alias: 'withSongExplorer',
+      ...operationOptions,
+    },
   );
 }
 
@@ -3739,10 +3751,7 @@ export function useSongExplorerQuery(baseOptions?: ReactApolloHooks.QueryHookOpt
 export const SongExplorersDocument = gql`
   query songExplorers($where: SongExplorersInput!) {
     songExplorers(where: $where) {
-      id {
-        kind
-        videoId
-      }
+      id
       snippet {
         publishedAt
         channelId
@@ -3797,7 +3806,10 @@ export function withSongExplorers<TProps, TChildProps = {}>(
     SongExplorersQuery,
     SongExplorersQueryVariables,
     SongExplorersProps<TChildProps>
-  >(SongExplorersDocument, operationOptions);
+  >(SongExplorersDocument, {
+    alias: 'withSongExplorers',
+    ...operationOptions,
+  });
 }
 
 export function useSongExplorersQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorersQueryVariables>) {
@@ -3831,7 +3843,10 @@ export function withStation<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(
     StationDocument,
-    operationOptions,
+    {
+      alias: 'withStation',
+      ...operationOptions,
+    },
   );
 }
 
@@ -3866,7 +3881,10 @@ export function withStations<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withQuery<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>(
     StationsDocument,
-    operationOptions,
+    {
+      alias: 'withStations',
+      ...operationOptions,
+    },
   );
 }
 
@@ -3913,7 +3931,10 @@ export function withUserProfile<TProps, TChildProps = {}>(
 ) {
   return ReactApollo.withQuery<TProps, UserProfileQuery, UserProfileQueryVariables, UserProfileProps<TChildProps>>(
     UserProfileDocument,
-    operationOptions,
+    {
+      alias: 'withUserProfile',
+      ...operationOptions,
+    },
   );
 }
 

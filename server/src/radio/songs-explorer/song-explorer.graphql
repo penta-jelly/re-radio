@@ -5,13 +5,8 @@ type SongExplorer {
 }
 
 type MiniSongExplorer {
-  id: MiniSongExplorerId!
+  id: String!
   snippet: Snippet!
-}
-
-type MiniSongExplorerId {
-  kind: String!
-  videoId: String!
 }
 
 type Snippet {
