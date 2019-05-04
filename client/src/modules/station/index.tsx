@@ -23,7 +23,7 @@ export const StationLayout: React.FC<{}> = () => {
           <Grid item xs={3}>
             <ChatBox />
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={3} className={classes.playlist}>
             <Playlist />
           </Grid>
           <Grid item xs={6} className={classes.rightLayout}>

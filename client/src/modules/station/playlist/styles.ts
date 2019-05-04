@@ -1,6 +1,7 @@
+import { Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(theme => ({
+export const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: '100%',
     display: 'flex',
@@ -13,7 +14,7 @@ export const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
   },
   tabItem: {
-    fontSize: theme.typography.pxToRem(theme.typography.fontBase / 1.3),
+    fontSize: theme.typography.pxToRem(theme.typography.fontSize / 1.3),
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing(1),
     minWidth: 100,

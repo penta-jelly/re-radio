@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Typography, Tabs, Tab, Card } from '@material-ui/core';
+import { Tabs, Tab } from '@material-ui/core';
 import { useStyles } from './styles';
 import { useTranslation } from 'react-i18next';
 

@@ -15,4 +15,7 @@ export const useStyles = makeStyles(() => ({
     height: '100%',
     margin: '0 -8px',
   },
+  playlist: {
+    height: '100%',
+  },
 }));

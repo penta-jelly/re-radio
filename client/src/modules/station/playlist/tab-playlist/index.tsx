@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useStyles } from './styles';
 import { useTranslation } from 'react-i18next';
 
 import { PlaylistItem } from './playlist-item';
-import { PageLoader } from '../../../../components/page-loader';
+import { PageLoader } from 'components/page-loader';
 
-import { items } from './data';
-import { useSongsQuery, SongOrderByInput } from '../../../../graphql';
+// import { items } from './data';
+import { useSongsQuery, SongOrderByInput } from 'operations';
 
 export const TabPlaylist: React.FC<{}> = props => {
   const classes = useStyles();
@@ -19,7 +19,6 @@ export const TabPlaylist: React.FC<{}> = props => {
       orderBy: SongOrderByInput.CreatedAtDesc,
     },
   });
-  console.log(data);
 
   return (
     <div className={classes.container}>

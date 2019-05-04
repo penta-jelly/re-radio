@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Typography, Card, CardMedia, CardContent, CardActions, IconButton } from '@material-ui/core';
 import { useStyles } from './styles';
-
-import UpvoteIcon from '@material-ui/icons/ThumbUpOutlined';
-import DownvoteIcon from '@material-ui/icons/ThumbDownOutlined';
-import FavouritesIcon from '@material-ui/icons/StarOutlined';
+import { FaStar, FaThumbsUp, FaThumbsDown } from 'react-icons/fa';
 
 interface IItemProps {
   id: string;
@@ -37,18 +34,34 @@ export const PlaylistItem: React.FC<IPlayListItemProps> = ({
 }) => {
   const classes = useStyles();
 
-  const [upVote, setUpVote] = useState<boolean>(false);
-  const [downVote, setDownVote] = useState<boolean>(false);
-  const [, setFavourite] = useState<boolean>(isFavourite || false);
+  const [localUpVote, setUpVote] = useState<boolean>(false);
+  const [localDownVote, setDownVote] = useState<boolean>(false);
+  const [localIsFavourite, setFavourite] = useState<boolean>(isFavourite || false);
   const [, setUpVoteCount] = useState<number>(upVoteCount || 0);
   const [, setDownVoteCount] = useState<number>(downVoteCount || 0);
 
-  const handleUpvote = () => setUpVote(!upVote);
-  const handleDownvote = () => setDownVote(!downVote);
+  const [favouriteIconColor, setFavouriteIconColor] = useState<string>('grey');
+  const [upVoteIconColor, setUpVoteIconColor] = useState<string>('grey');
+  const [downVoteIconColor, setDownVoteIconColor] = useState<string>('grey');
+
+  const handleUpvote = () => {
+    setUpVoteIconColor(localUpVote ? 'red' : 'grey');
+    setUpVote(!localUpVote);
+  };
+
+  const handleDownvote = () => {
+    setDownVoteIconColor(localDownVote ? 'red' : 'grey');
+    setDownVote(!localDownVote);
+  };
+
+  const handleFavourite = () => {
+    setFavouriteIconColor(localIsFavourite ? 'red' : 'grey');
+    setFavourite(!localIsFavourite);
+  };
 
   return (
     <Card className={classes.card}>
-      <CardMedia className={classes.cover} image={thumbnail} title={title} />
+      <CardMedia component="img" className={classes.cover} image={thumbnail} title={title} />
 
       <div className={classes.actionArea}>
         <CardContent className={classes.heading}>
@@ -66,18 +79,23 @@ export const PlaylistItem: React.FC<IPlayListItemProps> = ({
         <CardActions className={classes.mainActions}>
           <CardActions className={classes.leftActions}>
             <IconButton className={classes.button} aria-label="Upvote song" onClick={handleUpvote}>
-              <UpvoteIcon className={classes.icon} />
+              <FaThumbsUp className={classes.icon} style={{ color: upVoteIconColor }} />
             </IconButton>
             <Typography className={classes.smallText}>{upVoteCount || 0}</Typography>
             <IconButton disableRipple className={classes.button} aria-label="Downvote song" onClick={handleDownvote}>
-              <DownvoteIcon className={classes.icon} />
+              <FaThumbsDown className={classes.icon} style={{ color: downVoteIconColor }} />
             </IconButton>
             <Typography className={classes.smallText}>{downVoteCount || 0}</Typography>
           </CardActions>
 
           <CardActions className={classes.rightActions}>
-            <IconButton disableRipple className={classes.button} aria-label="Favourite to list">
-              <FavouritesIcon className={classes.icon} />
+            <IconButton
+              disableRipple
+              className={classes.button}
+              aria-label="Favourite to list"
+              onClick={handleFavourite}
+            >
+              <FaStar className={classes.icon} style={{ color: favouriteIconColor }} />
             </IconButton>
           </CardActions>
         </CardActions>
