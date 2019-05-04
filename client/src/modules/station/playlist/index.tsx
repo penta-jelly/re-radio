@@ -18,12 +18,9 @@ export const Playlist: React.FC<{}> = () => {
     { tabName: t('station:tabHistory') },
   ];
 
-  const handleChange = useCallback(
-    (_, value: number) => {
-      setTab(value);
-    },
-    [tab],
-  );
+  const handleChange = useCallback((_, value: number) => {
+    setTab(value);
+  }, []);
 
   return (
     <div className={classes.container}>

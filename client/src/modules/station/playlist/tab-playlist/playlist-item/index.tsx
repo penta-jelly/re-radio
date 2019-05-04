@@ -37,8 +37,8 @@ export const PlaylistItem: React.FC<IPlayListItemProps> = ({
   const [localUpVote, setUpVote] = useState<boolean>(false);
   const [localDownVote, setDownVote] = useState<boolean>(false);
   const [localIsFavourite, setFavourite] = useState<boolean>(isFavourite || false);
-  const [, setUpVoteCount] = useState<number>(upVoteCount || 0);
-  const [, setDownVoteCount] = useState<number>(downVoteCount || 0);
+  const [,] = useState<number>(upVoteCount || 0);
+  const [,] = useState<number>(downVoteCount || 0);
 
   const [favouriteIconColor, setFavouriteIconColor] = useState<string>('grey');
   const [upVoteIconColor, setUpVoteIconColor] = useState<string>('grey');
