@@ -1,7 +1,7 @@
 import { Logger, UnprocessableEntityException, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver, Info } from '@nestjs/graphql';
-import { User } from '../../prisma/prisma.binding';
-import { PrismaService } from '../../prisma/prisma.service';
+import { Args, Info, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { User } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/CurrentUser.decorator';
 import { LoginInputDTO } from './dto/LoginInput.dto';

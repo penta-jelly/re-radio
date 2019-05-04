@@ -1,8 +1,8 @@
+require('tsconfig-paths/register'); // This line must be placed first
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import 'source-map-support/register';
-import { WorkersModule } from './workers/workers.module';
-import { SeederService } from './workers/seeder/seeder.service';
+import { SeederService } from 'workers/seeder/seeder.service';
+import { WorkersModule } from 'workers/workers.module';
 
 async function bootstrap() {
   const logger = new Logger('Workers');

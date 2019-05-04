@@ -5,7 +5,7 @@ import {
   SongStatusEnum,
   StationCreateOneWithoutSongsInput,
   UserCreateOneInput,
-} from '../../../prisma/prisma.binding';
+} from 'prisma/prisma.binding';
 
 export class SongCreateDTO implements SongCreateInput {
   title: string;

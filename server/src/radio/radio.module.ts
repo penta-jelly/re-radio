@@ -1,9 +1,9 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
-import { FilesModule } from '../core/files/files.module';
-import { GraphqlModule } from '../core/graphql/graphql.module';
-import { RequestsInterceptor } from '../core/request.interceptor';
-import { PrismaModule } from '../prisma/prisma.module';
+import { FilesModule } from 'core/files/files.module';
+import { GraphqlModule } from 'core/graphql/graphql.module';
+import { RequestsInterceptor } from 'core/request.interceptor';
+import { PrismaModule } from 'prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { RadioController } from './radio.controller';
 import { SongsExplorerModule } from './songs-explorer/songs-explorer.module';

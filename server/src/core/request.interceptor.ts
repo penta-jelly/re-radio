@@ -1,4 +1,4 @@
-import { ExecutionContext, Injectable, Logger, NestInterceptor, CallHandler } from '@nestjs/common';
+import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
 import { Observable } from 'rxjs';

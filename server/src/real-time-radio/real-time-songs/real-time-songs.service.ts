@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { Song, SongSubscriptionPayload, SongSubscriptionWhereInput } from '../../prisma/prisma.binding';
-import { PrismaService } from '../../prisma/prisma.service';
+import { Song, SongSubscriptionPayload, SongSubscriptionWhereInput } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
 export class RealTimeSongService {

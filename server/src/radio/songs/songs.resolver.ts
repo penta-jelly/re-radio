@@ -1,7 +1,7 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { BatchPayload, Song, SongWhereInput, SongWhereUniqueInput } from '../../prisma/prisma.binding';
-import { PrismaService } from '../../prisma/prisma.service';
+import { BatchPayload, Song, SongWhereInput, SongWhereUniqueInput } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 import { RoleDecoratorParam, Roles } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
 import { AuthorizationGuard } from '../auth/guards/Authorization.guard';

@@ -1,7 +1,7 @@
 import { Injectable, NotAcceptableException } from '@nestjs/common';
-import { PrismaService } from '../../prisma/prisma.service';
+import { Song } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 import { SongCreateInputDTO } from './dto/SongCreateInput.dto';
-import { Song } from '../../prisma/prisma.binding';
 
 @Injectable()
 export class SongsService {

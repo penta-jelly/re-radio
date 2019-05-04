@@ -1,7 +1,7 @@
 import { SetMetadata } from '@nestjs/common';
 import { GraphQLResolveInfo } from 'graphql';
-import { User } from '../../../prisma/prisma.binding';
-import { PrismaService } from '../../../prisma/prisma.service';
+import { User } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
 
 export const ROLE_KEY = 'roles';
 

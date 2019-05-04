@@ -1,8 +1,8 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { BatchPayload, Station, StationWhereInput, StationWhereUniqueInput } from '../../prisma/prisma.binding';
-import { PrismaService } from '../../prisma/prisma.service';
-import { Roles, RoleDecoratorParam } from '../auth/decorators/Roles.decorator';
+import { BatchPayload, Station, StationWhereInput, StationWhereUniqueInput } from 'prisma/prisma.binding';
+import { PrismaService } from 'prisma/prisma.service';
+import { RoleDecoratorParam, Roles } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
 import { AuthorizationGuard } from '../auth/guards/Authorization.guard';
 import { StationCreateInputDTO } from './dto/StationCreateInput.dto';

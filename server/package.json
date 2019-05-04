@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "lint": "eslint --ext .ts src/",
+    "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.ts\" --ignore-path src/prisma/prisma.binding.ts && eslint --fix --ext .ts src/",
-    "build": "tsc",
     "start": "ts-node src/radio.ts",
     "start:real-time-radio": "ts-node src/real-time-radio.ts",
     "dev": "ts-node-dev --no-deps --respawn --poll --interval 1000 src/radio.ts",
@@ -60,6 +60,7 @@
     "prettier": "1.17.0",
     "ts-node": "8.1.0",
     "ts-node-dev": "1.0.0-pre.35",
+    "tsconfig-paths": "3.8.0",
     "typescript": "3.4.5"
   },
   "description": "description",

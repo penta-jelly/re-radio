@@ -1,10 +1,10 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-import { ConfigModule } from '../../core/config/config.module';
-import { ConfigService } from '../../core/config/config.service';
-import { EnvVariables } from '../../core/config/config.variables';
-import { PrismaModule } from '../../prisma/prisma.module';
+import { ConfigModule } from 'core/config/config.module';
+import { ConfigService } from 'core/config/config.service';
+import { EnvVariables } from 'core/config/config.variables';
+import { PrismaModule } from 'prisma/prisma.module';
 import { UsersModule } from '../users/users.module';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';

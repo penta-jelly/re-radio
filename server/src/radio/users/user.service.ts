@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import * as Bcrypt from 'bcrypt-nodejs';
 import { GraphQLResolveInfo } from 'graphql';
-import { PrismaService } from '../../prisma/prisma.service';
+import { PrismaService } from 'prisma/prisma.service';
 import { UserCreateInputDTO } from './dto/UserCreateInput.dto';
 import { UserUpdateInputDTO } from './dto/UserUpdateInput.dto';
 import { UserUpdateManyInputDTO } from './dto/UserUpdateManyInput.dto';

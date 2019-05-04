@@ -4,7 +4,7 @@ import {
   StationCreateInput,
   StationTagCreateManyWithoutStationsInput,
   UserCreateOneWithoutStationsInput,
-} from '../../../prisma/prisma.binding';
+} from 'prisma/prisma.binding';
 
 export class StationCreateDTO implements StationCreateInput {
   @Length(2, 32)

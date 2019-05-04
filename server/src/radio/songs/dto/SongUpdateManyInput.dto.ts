@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsInt, IsOptional, IsUrl, ValidateNested } from 'class-validator';
-import { SongStatusEnum, SongUpdateManyDataInput, SongWhereInput } from '../../../prisma/prisma.binding';
+import { SongStatusEnum, SongUpdateManyDataInput, SongWhereInput } from 'prisma/prisma.binding';
 
 export class SongUpdateManyDTO implements SongUpdateManyDataInput {
   title?: string;
