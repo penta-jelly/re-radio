@@ -1,9 +1,6 @@
 query songExplorers($where: SongExplorersInput!){
   songExplorers(where: $where) {
-    id {
-      kind
-      videoId
-    }
+    id
     snippet {
       publishedAt
       channelId

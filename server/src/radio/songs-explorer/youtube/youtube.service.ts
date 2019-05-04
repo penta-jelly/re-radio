@@ -47,7 +47,10 @@ export class YoutubeService {
     const serviceUrl = `${apiUrl}/search?key=${apiKey}&type=${type}&part=${part}&q=${q}&maxResults=${maxResults}&order=${order}`;
     const data = await fetch(serviceUrl).then(res => res.json());
     if (data && Array.isArray(data.items)) {
-      return data.items;
+      return data.items.map(item => ({
+        ...item,
+        id: item.id && item.id.videoId,
+      }));
     }
     throw new InternalServerErrorException(`Could not find any videos with this request URL: ${serviceUrl}`);
   }
