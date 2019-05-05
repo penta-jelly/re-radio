@@ -1,6 +1,6 @@
-import RegisterPage from '../../support/authentication/RegisterPage';
-import LoginPage from '../../support/authentication/LoginPage';
-import StationsPage from '../../support/StationsPage';
+import LoginPage from 'support/authentication/LoginPage';
+import RegisterPage from 'support/authentication/RegisterPage';
+import StationsPage from 'support/StationsPage';
 
 describe('Login', () => {
   const loginPage = LoginPage();
