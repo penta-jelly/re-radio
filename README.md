@@ -2,6 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/penta-jelly/re-radio.svg?style=svg)](https://circleci.com/gh/penta-jelly/re-radio)
 [![Renovate](https://badges.renovateapi.com/github/penta-jelly/re-radio)](https://renovatebot.com/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio?ref=badge_shield)
 
 ## Introduction
 
@@ -70,3 +71,7 @@ sh dev.sh up
 ```sh
 sh dev.sh down
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio?ref=badge_large)
