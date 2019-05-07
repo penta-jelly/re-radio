@@ -27,7 +27,7 @@
     "@nestjs/jwt": "6.0.0",
     "@nestjs/passport": "6.0.0",
     "@nestjs/platform-express": "6.1.1",
-    "apollo-server-express": "2.4.8",
+    "apollo-server-express": "2.5.0",
     "bcrypt-nodejs": "0.0.3",
     "class-transformer": "0.2.0",
     "class-validator": "0.9.1",
