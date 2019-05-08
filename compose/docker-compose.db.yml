@@ -4,6 +4,7 @@ services:
     container_name: re-radio_prisma
     image: prismagraphql/prisma:1.32.2
     restart: "no"
+    depends_on: [db]
     environment:
       PRISMA_CONFIG: |
         port: ${PRISMA_PORT}
