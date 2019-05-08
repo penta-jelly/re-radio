@@ -2,5 +2,6 @@
   "integrationFolder": "cypress/integration",
   "chromeWebSecurity": false,
   "viewportWidth": 1020,
-  "viewportHeight": 800
+  "viewportHeight": 800,
+  "baseUrl": "http://localhost:3000"
 }

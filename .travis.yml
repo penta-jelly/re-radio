@@ -1,0 +1,26 @@
+language: node_js
+node_js:
+  - "10"
+addons:
+  apt:
+    packages: [libgconf-2-4]
+cache:
+  npm: true
+  directories: [~/.cache]
+services:
+  - docker
+env:
+  - DOCKER_COMPOSE_VERSION=1.24.0
+
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install:
+  - cd e2e && npm ci && cd ..
+  - bash start.sh build
+
+script:
+  - cd e2e && npx start-server-and-test "cd .. && bash start.sh" "3000|8000/status" cypress:run && cd ..
