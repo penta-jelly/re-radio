@@ -1,6 +1,6 @@
 # re-radio
 
-[![CircleCI](https://circleci.com/gh/penta-jelly/re-radio.svg?style=svg)](https://circleci.com/gh/penta-jelly/re-radio)
+[![Build Status](https://travis-ci.org/penta-jelly/re-radio.svg?branch=master)](https://travis-ci.org/penta-jelly/re-radio)
 [![Renovate](https://badges.renovateapi.com/github/penta-jelly/re-radio)](https://renovatebot.com/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio?ref=badge_shield)
 
