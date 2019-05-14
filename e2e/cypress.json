@@ -1,4 +1,5 @@
 {
+  "projectId": "nn2y5c",
   "integrationFolder": "cypress/integration",
   "chromeWebSecurity": false,
   "viewportWidth": 1020,
