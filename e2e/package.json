@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "cypress:run": "cypress run",
+    "cypress:run:ci": "cypress run --record --parallel",
     "cypress:open": "cypress open",
     "type-check": "tsc --noEmit",
     "lint": "eslint --ext .ts cypress",
