@@ -1,21 +1,20 @@
+import LoginPage from 'support/authentication/LoginPage';
+
 export default (url: string = '/station') => ({
   elements: {
     headerText: /(.*)/,
     chatBoxText: 'Chat Box',
     playlistText: 'Playlist',
-    playerText: 'Player',
+    playerContainer: '#station-player',
     addSongText: 'Add Song',
   },
 
-  navigate(slug: string) {
+  navigate(slug: string, withCredential?: boolean) {
+    cy.clearLocalStorage();
+    if (withCredential) {
+      const loginPage = LoginPage();
+      loginPage.login({});
+    }
     cy.visit(`${url}/${slug}`);
-  },
-
-  checkStationLayout() {
-    cy.contains(this.elements.headerText).should('exist');
-    cy.contains(this.elements.chatBoxText).should('exist');
-    cy.contains(this.elements.playlistText).should('exist');
-    cy.contains(this.elements.playerText).should('exist');
-    cy.contains(this.elements.addSongText).should('exist');
   },
 });

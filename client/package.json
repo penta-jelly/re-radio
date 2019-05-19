@@ -18,6 +18,7 @@
     "@material-ui/styles": "4.0.0-beta.2",
     "apollo-boost": "0.3.1",
     "apollo-link-context": "1.0.17",
+    "apollo-link-ws": "1.0.17",
     "apollo-upload-client": "10.0.1",
     "formik": "1.5.7",
     "graphql": "14.3.0",
@@ -32,6 +33,7 @@
     "react-icons": "3.7.0",
     "react-router-dom": "5.0.0",
     "react-scripts": "3.0.1",
+    "subscriptions-transport-ws": "0.9.16",
     "type-fest": "0.5.1",
     "use-query-params": "0.3.2",
     "yup": "0.27.0"

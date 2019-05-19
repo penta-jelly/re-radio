@@ -1,10 +1,14 @@
 query CurrentUser {
   user: currentUser {
-    id
-    email
-    username
-    avatarUrl
-    coverUrl
-    reputation
+    ...UserBaseInformation
   }
+}
+
+fragment UserBaseInformation on User {
+  id
+  email
+  username
+  avatarUrl
+  coverUrl
+  reputation
 }

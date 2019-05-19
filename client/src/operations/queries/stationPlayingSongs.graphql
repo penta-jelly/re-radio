@@ -1,0 +1,25 @@
+query StationPlayer($stationSlug: String!) {
+  playingSongs: songs(where: { station: { slug: $stationSlug }, status: PLAYING }) {
+    ...PlayingSong
+  }
+}
+
+subscription OnStationPlayerChanged($stationSlug: String!) {
+  onPlayingSongChanged: song(where: { node: { station: { slug: $stationSlug }, status_in: [PLAYING, PLAYED, SKIPPED] } }) {
+    mutation
+    node { ...PlayingSong }
+  }
+}
+
+fragment PlayingSong on Song {
+  id
+  title
+  url
+  thumbnail
+  duration
+  startedAt
+  status
+  creator { ...UserBaseInformation }
+  upVotes { ...UserBaseInformation }
+  downVotes { ...UserBaseInformation }
+}

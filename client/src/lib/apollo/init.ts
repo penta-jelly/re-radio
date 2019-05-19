@@ -1,5 +1,7 @@
 import { ApolloClient, ApolloLink, InMemoryCache } from 'apollo-boost';
+import { WebSocketLink } from 'apollo-link-ws';
 import { createUploadLink } from 'apollo-upload-client';
+import { getMainDefinition } from 'apollo-utilities';
 
 export function initApollo() {
   let uri = '';
@@ -10,6 +12,20 @@ export function initApollo() {
   const httpLink = createUploadLink({
     uri: `${uri}/graphql`,
   });
+
+  const wsLink = new WebSocketLink({
+    uri: `ws://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
+    options: { reconnect: true },
+  });
+
+  const link = ApolloLink.split(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
+    },
+    wsLink,
+    httpLink,
+  );
 
   const authLink = new ApolloLink((operation, next) => {
     const token = localStorage.getItem('token');
@@ -25,7 +41,7 @@ export function initApollo() {
     return next ? next(operation) : null;
   });
 
-  return new ApolloClient({ link: authLink.concat(httpLink), cache: new InMemoryCache() });
+  return new ApolloClient({ link: ApolloLink.from([authLink, link]), cache: new InMemoryCache() });
 }
 
 interface Context {
