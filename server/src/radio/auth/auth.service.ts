@@ -53,8 +53,9 @@ export class AuthService {
 
   async validateUserFromJWTPayload(payload: JwtPayload): Promise<User> {
     const { username, email, password } = payload;
+    let users: User[];
     try {
-      const user = await this.prisma.query.user(
+      users = await this.prisma.query.users(
         { where: { username, email } },
         `{
           id createdAt updatedAt email username password name country city bio avatarUrl coverUrl reputation facebookId googleId
@@ -62,11 +63,17 @@ export class AuthService {
           roles { id  role }
         }`,
       );
-      if (user.password !== password) throw new UnauthorizedException();
-      return user;
     } catch (error) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException(error.message);
     }
+    if (users.length === 0) {
+      throw new UnauthorizedException('User not found');
+    }
+    if (users.length > 1)
+      throw new InternalServerErrorException('JWT is broken due to duplicated query results for 1 unique user');
+    const [user] = users;
+    if (user.password !== password) throw new UnauthorizedException();
+    return user;
   }
 
   private async generateUsername(email: string) {
