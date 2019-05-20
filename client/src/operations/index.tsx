@@ -1,5 +1,7 @@
 /* eslint-disable */
-
+import gql from 'graphql-tag';
+import * as ReactApollo from 'react-apollo';
+import * as ReactApolloHooks from 'react-apollo-hooks';
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -18,31 +20,38 @@ export type Scalars = {
 };
 
 export type AggregateSong = {
+  __typename?: 'AggregateSong';
   readonly count: Scalars['Int'];
 };
 
 export type AggregateStation = {
+  __typename?: 'AggregateStation';
   readonly count: Scalars['Int'];
 };
 
 export type AggregateStationTag = {
+  __typename?: 'AggregateStationTag';
   readonly count: Scalars['Int'];
 };
 
 export type AggregateUser = {
+  __typename?: 'AggregateUser';
   readonly count: Scalars['Int'];
 };
 
 export type AggregateUserRole = {
+  __typename?: 'AggregateUserRole';
   readonly count: Scalars['Int'];
 };
 
 export type BatchPayload = {
+  __typename?: 'BatchPayload';
   /** The number of nodes that have been affected by the Batch operation. */
   readonly count: Scalars['Long'];
 };
 
 export type ContentDetail = {
+  __typename?: 'ContentDetail';
   readonly duration: Scalars['Int'];
   readonly dimension: Scalars['String'];
   readonly definition: Scalars['String'];
@@ -57,10 +66,12 @@ export type LoginInput = {
 };
 
 export type LoginOrRegisterReturnType = {
+  __typename?: 'LoginOrRegisterReturnType';
   readonly token?: Maybe<Scalars['String']>;
 };
 
 export type MiniSnippet = {
+  __typename?: 'MiniSnippet';
   readonly publishedAt: Scalars['DateTime'];
   readonly channelId: Scalars['String'];
   readonly title: Scalars['String'];
@@ -70,11 +81,13 @@ export type MiniSnippet = {
 };
 
 export type MiniSongExplorer = {
+  __typename?: 'MiniSongExplorer';
   readonly id: Scalars['String'];
   readonly snippet: Snippet;
 };
 
 export type Mutation = {
+  __typename?: 'Mutation';
   readonly createUserRole: UserRole;
   readonly createStationTag: StationTag;
   readonly createSong: Song;
@@ -271,6 +284,7 @@ export enum MutationType {
 
 /** An object with an ID */
 export type Node = {
+  __typename?: 'Node';
   /** The id of the object. */
   readonly id: Scalars['ID'];
 };
@@ -286,6 +300,7 @@ export enum Order {
 
 /** Information about pagination in a connection. */
 export type PageInfo = {
+  __typename?: 'PageInfo';
   /** When paginating forwards, are there more items? */
   readonly hasNextPage: Scalars['Boolean'];
   /** When paginating backwards, are there more items? */
@@ -297,6 +312,7 @@ export type PageInfo = {
 };
 
 export type Query = {
+  __typename?: 'Query';
   readonly userRoles: ReadonlyArray<Maybe<UserRole>>;
   readonly stationTags: ReadonlyArray<Maybe<StationTag>>;
   readonly songs: ReadonlyArray<Maybe<Song>>;
@@ -314,7 +330,6 @@ export type Query = {
   readonly usersConnection: UserConnection;
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
-  readonly temp__?: Maybe<Scalars['Boolean']>;
   readonly currentUser: User;
   readonly songExplorer: SongExplorer;
   readonly songExplorers: ReadonlyArray<MiniSongExplorer>;
@@ -459,6 +474,7 @@ export type RegisterInput = {
 };
 
 export type Snippet = {
+  __typename?: 'Snippet';
   readonly publishedAt: Scalars['DateTime'];
   readonly channelId: Scalars['String'];
   readonly title: Scalars['String'];
@@ -472,6 +488,7 @@ export type Snippet = {
 };
 
 export type Song = Node & {
+  __typename?: 'Song';
   readonly id: Scalars['ID'];
   readonly createdAt: Scalars['DateTime'];
   readonly updatedAt: Scalars['DateTime'];
@@ -509,6 +526,7 @@ export type SongDownVotesArgs = {
 
 /** A connection to a list of items. */
 export type SongConnection = {
+  __typename?: 'SongConnection';
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo;
   /** A list of edges. */
@@ -550,6 +568,7 @@ export type SongCreateWithoutStationInput = {
 
 /** An edge in a connection. */
 export type SongEdge = {
+  __typename?: 'SongEdge';
   /** The item at the end of the edge. */
   readonly node: Song;
   /** A cursor for use in pagination. */
@@ -557,6 +576,7 @@ export type SongEdge = {
 };
 
 export type SongExplorer = {
+  __typename?: 'SongExplorer';
   readonly id: Scalars['String'];
   readonly snippet: Snippet;
   readonly contentDetails: ContentDetail;
@@ -595,6 +615,7 @@ export enum SongOrderByInput {
 }
 
 export type SongPreviousValues = {
+  __typename?: 'SongPreviousValues';
   readonly id: Scalars['ID'];
   readonly createdAt: Scalars['DateTime'];
   readonly updatedAt: Scalars['DateTime'];
@@ -798,6 +819,7 @@ export enum SongStatusEnum {
 }
 
 export type SongSubscriptionPayload = {
+  __typename?: 'SongSubscriptionPayload';
   readonly mutation: MutationType;
   readonly node?: Maybe<Song>;
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
@@ -1090,6 +1112,7 @@ export type SongWhereUniqueInput = {
 };
 
 export type Station = Node & {
+  __typename?: 'Station';
   readonly id: Scalars['ID'];
   readonly createdAt: Scalars['DateTime'];
   readonly updatedAt: Scalars['DateTime'];
@@ -1134,6 +1157,7 @@ export type StationSongsArgs = {
 
 /** A connection to a list of items. */
 export type StationConnection = {
+  __typename?: 'StationConnection';
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo;
   /** A list of edges. */
@@ -1204,6 +1228,7 @@ export type StationCreateWithoutTagsInput = {
 
 /** An edge in a connection. */
 export type StationEdge = {
+  __typename?: 'StationEdge';
   /** The item at the end of the edge. */
   readonly node: Station;
   /** A cursor for use in pagination. */
@@ -1226,6 +1251,7 @@ export enum StationOrderByInput {
 }
 
 export type StationPreviousValues = {
+  __typename?: 'StationPreviousValues';
   readonly id: Scalars['ID'];
   readonly createdAt: Scalars['DateTime'];
   readonly updatedAt: Scalars['DateTime'];
@@ -1382,6 +1408,7 @@ export type StationScalarWhereInput = {
 };
 
 export type StationSubscriptionPayload = {
+  __typename?: 'StationSubscriptionPayload';
   readonly mutation: MutationType;
   readonly node?: Maybe<Station>;
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
@@ -1407,6 +1434,7 @@ export type StationSubscriptionWhereInput = {
 };
 
 export type StationTag = Node & {
+  __typename?: 'StationTag';
   readonly id: Scalars['ID'];
   readonly name: Scalars['String'];
   readonly stations?: Maybe<ReadonlyArray<Station>>;
@@ -1424,6 +1452,7 @@ export type StationTagStationsArgs = {
 
 /** A connection to a list of items. */
 export type StationTagConnection = {
+  __typename?: 'StationTagConnection';
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo;
   /** A list of edges. */
@@ -1449,6 +1478,7 @@ export type StationTagCreateWithoutStationsInput = {
 
 /** An edge in a connection. */
 export type StationTagEdge = {
+  __typename?: 'StationTagEdge';
   /** The item at the end of the edge. */
   readonly node: StationTag;
   /** A cursor for use in pagination. */
@@ -1463,6 +1493,7 @@ export enum StationTagOrderByInput {
 }
 
 export type StationTagPreviousValues = {
+  __typename?: 'StationTagPreviousValues';
   readonly id: Scalars['ID'];
   readonly name: Scalars['String'];
 };
@@ -1531,6 +1562,7 @@ export type StationTagScalarWhereInput = {
 };
 
 export type StationTagSubscriptionPayload = {
+  __typename?: 'StationTagSubscriptionPayload';
   readonly mutation: MutationType;
   readonly node?: Maybe<StationTag>;
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
@@ -1970,6 +2002,7 @@ export type StationWhereUniqueInput = {
 };
 
 export type Subscription = {
+  __typename?: 'Subscription';
   readonly userRole?: Maybe<UserRoleSubscriptionPayload>;
   readonly stationTag?: Maybe<StationTagSubscriptionPayload>;
   readonly song?: Maybe<SongSubscriptionPayload>;
@@ -1998,12 +2031,14 @@ export type SubscriptionUserArgs = {
 };
 
 export type Thumbnail = {
+  __typename?: 'Thumbnail';
   readonly url: Scalars['String'];
   readonly width: Scalars['Int'];
   readonly height: Scalars['Int'];
 };
 
 export type Thumbnails = {
+  __typename?: 'Thumbnails';
   readonly default: Thumbnail;
   readonly medium?: Maybe<Thumbnail>;
   readonly high?: Maybe<Thumbnail>;
@@ -2012,6 +2047,7 @@ export type Thumbnails = {
 };
 
 export type User = Node & {
+  __typename?: 'User';
   readonly id: Scalars['ID'];
   readonly createdAt: Scalars['DateTime'];
   readonly updatedAt: Scalars['DateTime'];
@@ -2053,6 +2089,7 @@ export type UserStationsArgs = {
 
 /** A connection to a list of items. */
 export type UserConnection = {
+  __typename?: 'UserConnection';
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo;
   /** A list of edges. */
@@ -2134,6 +2171,7 @@ export type UserCreateWithoutStationsInput = {
 
 /** An edge in a connection. */
 export type UserEdge = {
+  __typename?: 'UserEdge';
   /** The item at the end of the edge. */
   readonly node: User;
   /** A cursor for use in pagination. */
@@ -2174,6 +2212,7 @@ export enum UserOrderByInput {
 }
 
 export type UserPreviousValues = {
+  __typename?: 'UserPreviousValues';
   readonly id: Scalars['ID'];
   readonly createdAt: Scalars['DateTime'];
   readonly updatedAt: Scalars['DateTime'];
@@ -2192,6 +2231,7 @@ export type UserPreviousValues = {
 };
 
 export type UserRole = Node & {
+  __typename?: 'UserRole';
   readonly id: Scalars['ID'];
   readonly role: UserRoleEnum;
   readonly user: User;
@@ -2200,6 +2240,7 @@ export type UserRole = Node & {
 
 /** A connection to a list of items. */
 export type UserRoleConnection = {
+  __typename?: 'UserRoleConnection';
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo;
   /** A list of edges. */
@@ -2227,6 +2268,7 @@ export type UserRoleCreateWithoutUserInput = {
 
 /** An edge in a connection. */
 export type UserRoleEdge = {
+  __typename?: 'UserRoleEdge';
   /** The item at the end of the edge. */
   readonly node: UserRole;
   /** A cursor for use in pagination. */
@@ -2246,6 +2288,7 @@ export enum UserRoleOrderByInput {
 }
 
 export type UserRolePreviousValues = {
+  __typename?: 'UserRolePreviousValues';
   readonly id: Scalars['ID'];
   readonly role: UserRoleEnum;
 };
@@ -2294,6 +2337,7 @@ export type UserRoleScalarWhereInput = {
 };
 
 export type UserRoleSubscriptionPayload = {
+  __typename?: 'UserRoleSubscriptionPayload';
   readonly mutation: MutationType;
   readonly node?: Maybe<UserRole>;
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
@@ -2793,6 +2837,7 @@ export type UserScalarWhereInput = {
 };
 
 export type UserSubscriptionPayload = {
+  __typename?: 'UserSubscriptionPayload';
   readonly mutation: MutationType;
   readonly node?: Maybe<User>;
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>;
@@ -3525,11 +3570,6 @@ export type UserProfileQuery = { readonly __typename?: 'Query' } & {
       }
   >;
 };
-
-import gql from 'graphql-tag';
-import * as ReactApollo from 'react-apollo';
-import * as ReactApolloHooks from 'react-apollo-hooks';
-export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export const LoginDocument = gql`
   mutation login($data: LoginInput!) {
