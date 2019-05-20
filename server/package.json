@@ -50,7 +50,7 @@
   "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.30",
     "@types/graphql": "14.2.0",
-    "@types/node-fetch": "2.3.3",
+    "@types/node-fetch": "2.3.4",
     "@types/passport-jwt": "3.0.1",
     "@typescript-eslint/eslint-plugin": "1.9.0",
     "@typescript-eslint/parser": "1.9.0",
