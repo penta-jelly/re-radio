@@ -19,7 +19,7 @@
     "apollo-boost": "0.3.1",
     "apollo-link-context": "1.0.17",
     "apollo-upload-client": "10.0.1",
-    "formik": "1.5.4",
+    "formik": "1.5.7",
     "graphql": "14.3.0",
     "i18next": "15.1.1",
     "jss": "10.0.0-alpha.16",
