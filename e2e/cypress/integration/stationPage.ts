@@ -9,12 +9,16 @@ describe('Show Station Page', () => {
     });
 
     it('should have layout texts', () => {
-      stationPage.checkStationLayout();
+      cy.get(stationPage.elements.playerContainer).should('exist');
+      cy.contains(stationPage.elements.headerText).should('exist');
+      cy.contains(stationPage.elements.chatBoxText).should('exist');
+      cy.contains(stationPage.elements.playlistText).should('exist');
+      cy.contains(stationPage.elements.addSongText).should('exist');
     });
   });
 
   describe('By navigating from other pages', () => {
-    const stationsPage = StationsPage('/');
+    const stationsPage = StationsPage();
 
     function navigateFromStationsPage(slug: string) {
       stationsPage.navigate();
@@ -24,6 +28,21 @@ describe('Show Station Page', () => {
     it('should navigable from stations page', () => {
       navigateFromStationsPage('station-a');
       cy.contains('Station A').should('exist');
+    });
+  });
+});
+
+describe('Station Page components', () => {
+  const stationPage = StationPage();
+  beforeEach(() => {
+    stationPage.navigate('station-a');
+  });
+  describe('Player', () => {
+    it('should render player container', () => {
+      cy.get(stationPage.elements.playerContainer)
+        .should('be.visible')
+        .find('h4, h6')
+        .should('be.visible');
     });
   });
 });

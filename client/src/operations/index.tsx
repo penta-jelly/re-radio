@@ -3437,11 +3437,13 @@ export type UpdateUserAvatarMutation = { readonly __typename?: 'Mutation' } & Pi
 export type CurrentUserQueryVariables = {};
 
 export type CurrentUserQuery = { readonly __typename?: 'Query' } & {
-  readonly user: { readonly __typename?: 'User' } & Pick<
-    User,
-    'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'
-  >;
+  readonly user: { readonly __typename?: 'User' } & UserBaseInformationFragment;
 };
+
+export type UserBaseInformationFragment = { readonly __typename?: 'User' } & Pick<
+  User,
+  'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'
+>;
 
 export type SongExplorerQueryVariables = {
   where: SongExplorerInput;
@@ -3520,6 +3522,35 @@ export type StationQuery = { readonly __typename?: 'Query' } & {
   >;
 };
 
+export type StationPlayerQueryVariables = {
+  stationSlug: Scalars['String'];
+};
+
+export type StationPlayerQuery = { readonly __typename?: 'Query' } & {
+  readonly playingSongs: ReadonlyArray<Maybe<{ readonly __typename?: 'Song' } & PlayingSongFragment>>;
+};
+
+export type OnStationPlayerChangedSubscriptionVariables = {
+  stationSlug: Scalars['String'];
+};
+
+export type OnStationPlayerChangedSubscription = { readonly __typename?: 'Subscription' } & {
+  readonly onPlayingSongChanged: Maybe<
+    { readonly __typename?: 'SongSubscriptionPayload' } & Pick<SongSubscriptionPayload, 'mutation'> & {
+        readonly node: Maybe<{ readonly __typename?: 'Song' } & PlayingSongFragment>;
+      }
+  >;
+};
+
+export type PlayingSongFragment = { readonly __typename?: 'Song' } & Pick<
+  Song,
+  'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status'
+> & {
+    readonly creator: { readonly __typename?: 'User' } & UserBaseInformationFragment;
+    readonly upVotes: Maybe<ReadonlyArray<{ readonly __typename?: 'User' } & UserBaseInformationFragment>>;
+    readonly downVotes: Maybe<ReadonlyArray<{ readonly __typename?: 'User' } & UserBaseInformationFragment>>;
+  };
+
 export type StationsQueryVariables = {
   first?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
@@ -3570,7 +3601,37 @@ export type UserProfileQuery = { readonly __typename?: 'Query' } & {
       }
   >;
 };
-
+export const UserBaseInformationFragmentDoc = gql`
+  fragment UserBaseInformation on User {
+    id
+    email
+    username
+    avatarUrl
+    coverUrl
+    reputation
+  }
+`;
+export const PlayingSongFragmentDoc = gql`
+  fragment PlayingSong on Song {
+    id
+    title
+    url
+    thumbnail
+    duration
+    startedAt
+    status
+    creator {
+      ...UserBaseInformation
+    }
+    upVotes {
+      ...UserBaseInformation
+    }
+    downVotes {
+      ...UserBaseInformation
+    }
+  }
+  ${UserBaseInformationFragmentDoc}
+`;
 export const LoginDocument = gql`
   mutation login($data: LoginInput!) {
     login(data: $data) {
@@ -3680,14 +3741,10 @@ export function useUpdateUserAvatarMutation(
 export const CurrentUserDocument = gql`
   query CurrentUser {
     user: currentUser {
-      id
-      email
-      username
-      avatarUrl
-      coverUrl
-      reputation
+      ...UserBaseInformation
     }
   }
+  ${UserBaseInformationFragmentDoc}
 `;
 export type CurrentUserProps<TChildProps = {}> = Partial<
   ReactApollo.DataProps<CurrentUserQuery, CurrentUserQueryVariables>
@@ -3892,6 +3949,87 @@ export function withStation<TProps, TChildProps = {}>(
 
 export function useStationQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationQueryVariables>) {
   return ReactApolloHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+}
+export const StationPlayerDocument = gql`
+  query StationPlayer($stationSlug: String!) {
+    playingSongs: songs(where: { station: { slug: $stationSlug }, status: PLAYING }) {
+      ...PlayingSong
+    }
+  }
+  ${PlayingSongFragmentDoc}
+`;
+export type StationPlayerProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<StationPlayerQuery, StationPlayerQueryVariables>
+> &
+  TChildProps;
+export function withStationPlayer<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    StationPlayerQuery,
+    StationPlayerQueryVariables,
+    StationPlayerProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withQuery<
+    TProps,
+    StationPlayerQuery,
+    StationPlayerQueryVariables,
+    StationPlayerProps<TChildProps>
+  >(StationPlayerDocument, {
+    alias: 'withStationPlayer',
+    ...operationOptions,
+  });
+}
+
+export function useStationPlayerQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationPlayerQueryVariables>) {
+  return ReactApolloHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+}
+export const OnStationPlayerChangedDocument = gql`
+  subscription OnStationPlayerChanged($stationSlug: String!) {
+    onPlayingSongChanged: song(
+      where: { node: { station: { slug: $stationSlug }, status_in: [PLAYING, PLAYED, SKIPPED] } }
+    ) {
+      mutation
+      node {
+        ...PlayingSong
+      }
+    }
+  }
+  ${PlayingSongFragmentDoc}
+`;
+export type OnStationPlayerChangedProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>
+> &
+  TChildProps;
+export function withOnStationPlayerChanged<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    OnStationPlayerChangedSubscription,
+    OnStationPlayerChangedSubscriptionVariables,
+    OnStationPlayerChangedProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withSubscription<
+    TProps,
+    OnStationPlayerChangedSubscription,
+    OnStationPlayerChangedSubscriptionVariables,
+    OnStationPlayerChangedProps<TChildProps>
+  >(OnStationPlayerChangedDocument, {
+    alias: 'withOnStationPlayerChanged',
+    ...operationOptions,
+  });
+}
+
+export function useOnStationPlayerChangedSubscription(
+  baseOptions?: ReactApolloHooks.SubscriptionHookOptions<
+    OnStationPlayerChangedSubscription,
+    OnStationPlayerChangedSubscriptionVariables
+  >,
+) {
+  return ReactApolloHooks.useSubscription<
+    OnStationPlayerChangedSubscription,
+    OnStationPlayerChangedSubscriptionVariables
+  >(OnStationPlayerChangedDocument, baseOptions);
 }
 export const StationsDocument = gql`
   query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {
