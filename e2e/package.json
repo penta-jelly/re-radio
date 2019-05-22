@@ -26,7 +26,7 @@
     "ts-loader": "6.0.1",
     "tsconfig-paths-webpack-plugin": "3.2.0",
     "typescript": "3.4.5",
-    "webpack": "4.32.1"
+    "webpack": "4.32.2"
   },
   "author": "@dungle1811",
   "license": "ISC",
