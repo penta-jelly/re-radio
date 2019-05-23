@@ -14,8 +14,8 @@
     "lint": "eslint --ext .tsx --ext .ts src/"
   },
   "dependencies": {
-    "@material-ui/core": "4.0.0-rc.0",
-    "@material-ui/styles": "4.0.0-rc.0",
+    "@material-ui/core": "4.0.0",
+    "@material-ui/styles": "4.0.0",
     "apollo-boost": "0.4.0",
     "apollo-link-context": "1.0.17",
     "apollo-link-ws": "1.0.17",
