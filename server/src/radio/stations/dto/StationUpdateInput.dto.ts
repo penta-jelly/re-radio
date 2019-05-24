@@ -4,7 +4,7 @@ import {
   StationTagUpdateManyWithoutStationsInput,
   StationUpdateInput,
   StationWhereUniqueInput,
-  UserUpdateOneRequiredWithoutStationsInput,
+  UserRoleUpdateManyWithoutStationInput,
 } from 'prisma/prisma.binding';
 
 export class StationUpdateDTO implements StationUpdateInput {
@@ -18,10 +18,10 @@ export class StationUpdateDTO implements StationUpdateInput {
   slug?: string;
 
   @IsOptional()
-  description?: string | null;
+  description?: string;
 
-  owner?: UserUpdateOneRequiredWithoutStationsInput;
   tags?: StationTagUpdateManyWithoutStationsInput;
+  userRoles?: UserRoleUpdateManyWithoutStationInput;
 }
 
 export class StationUpdateInputDTO {

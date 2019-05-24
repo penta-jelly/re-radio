@@ -1,12 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsOptional, IsUrl, Length, ValidateNested } from 'class-validator';
 import { FileUpload } from 'graphql-upload';
-import {
-  StationUpdateManyWithoutOwnerInput,
-  UserRoleUpdateManyWithoutUserInput,
-  UserUpdateInput,
-  UserWhereUniqueInput,
-} from 'prisma/prisma.binding';
+import { UserRoleUpdateManyWithoutUserInput, UserUpdateInput, UserWhereUniqueInput } from 'prisma/prisma.binding';
 
 export class UserUpdateDTO implements UserUpdateInput {
   @IsEmail()
@@ -43,7 +38,6 @@ export class UserUpdateDTO implements UserUpdateInput {
   reputation?: number;
 
   roles?: UserRoleUpdateManyWithoutUserInput | null;
-  stations?: StationUpdateManyWithoutOwnerInput | null;
 }
 
 export class UserUpdateInputDTO {

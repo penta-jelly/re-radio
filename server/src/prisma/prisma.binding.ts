@@ -5,69 +5,69 @@ import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
 
 export interface Query {
     userRoles: <T = Array<UserRole | null>>(args: { where?: UserRoleWhereInput | null, orderBy?: UserRoleOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    stations: <T = Array<Station | null>>(args: { where?: StationWhereInput | null, orderBy?: StationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     stationTags: <T = Array<StationTag | null>>(args: { where?: StationTagWhereInput | null, orderBy?: StationTagOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     songs: <T = Array<Song | null>>(args: { where?: SongWhereInput | null, orderBy?: SongOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    stations: <T = Array<Station | null>>(args: { where?: StationWhereInput | null, orderBy?: StationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     users: <T = Array<User | null>>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     userRole: <T = UserRole | null>(args: { where: UserRoleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    station: <T = Station | null>(args: { where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     stationTag: <T = StationTag | null>(args: { where: StationTagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     song: <T = Song | null>(args: { where: SongWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    station: <T = Station | null>(args: { where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     user: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     userRolesConnection: <T = UserRoleConnection>(args: { where?: UserRoleWhereInput | null, orderBy?: UserRoleOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    stationsConnection: <T = StationConnection>(args: { where?: StationWhereInput | null, orderBy?: StationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     stationTagsConnection: <T = StationTagConnection>(args: { where?: StationTagWhereInput | null, orderBy?: StationTagOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     songsConnection: <T = SongConnection>(args: { where?: SongWhereInput | null, orderBy?: SongOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    stationsConnection: <T = StationConnection>(args: { where?: StationWhereInput | null, orderBy?: StationOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
   }
 
 export interface Mutation {
     createUserRole: <T = UserRole>(args: { data: UserRoleCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    createStation: <T = Station>(args: { data: StationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createStationTag: <T = StationTag>(args: { data: StationTagCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createSong: <T = Song>(args: { data: SongCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    createStation: <T = Station>(args: { data: StationCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     createUser: <T = User>(args: { data: UserCreateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateUserRole: <T = UserRole | null>(args: { data: UserRoleUpdateInput, where: UserRoleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    updateStation: <T = Station | null>(args: { data: StationUpdateInput, where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateStationTag: <T = StationTag | null>(args: { data: StationTagUpdateInput, where: StationTagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateSong: <T = Song | null>(args: { data: SongUpdateInput, where: SongWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    updateStation: <T = Station | null>(args: { data: StationUpdateInput, where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     updateUser: <T = User | null>(args: { data: UserUpdateInput, where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUserRole: <T = UserRole | null>(args: { where: UserRoleWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
+    deleteStation: <T = Station | null>(args: { where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteStationTag: <T = StationTag | null>(args: { where: StationTagWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteSong: <T = Song | null>(args: { where: SongWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
-    deleteStation: <T = Station | null>(args: { where: StationWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     deleteUser: <T = User | null>(args: { where: UserWhereUniqueInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> ,
     upsertUserRole: <T = UserRole>(args: { where: UserRoleWhereUniqueInput, create: UserRoleCreateInput, update: UserRoleUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    upsertStation: <T = Station>(args: { where: StationWhereUniqueInput, create: StationCreateInput, update: StationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertStationTag: <T = StationTag>(args: { where: StationTagWhereUniqueInput, create: StationTagCreateInput, update: StationTagUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertSong: <T = Song>(args: { where: SongWhereUniqueInput, create: SongCreateInput, update: SongUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    upsertStation: <T = Station>(args: { where: StationWhereUniqueInput, create: StationCreateInput, update: StationUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     upsertUser: <T = User>(args: { where: UserWhereUniqueInput, create: UserCreateInput, update: UserUpdateInput }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUserRoles: <T = BatchPayload>(args: { data: UserRoleUpdateManyMutationInput, where?: UserRoleWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    updateManyStations: <T = BatchPayload>(args: { data: StationUpdateManyMutationInput, where?: StationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyStationTags: <T = BatchPayload>(args: { data: StationTagUpdateManyMutationInput, where?: StationTagWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManySongs: <T = BatchPayload>(args: { data: SongUpdateManyMutationInput, where?: SongWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    updateManyStations: <T = BatchPayload>(args: { data: StationUpdateManyMutationInput, where?: StationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     updateManyUsers: <T = BatchPayload>(args: { data: UserUpdateManyMutationInput, where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUserRoles: <T = BatchPayload>(args: { where?: UserRoleWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
+    deleteManyStations: <T = BatchPayload>(args: { where?: StationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyStationTags: <T = BatchPayload>(args: { where?: StationTagWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManySongs: <T = BatchPayload>(args: { where?: SongWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyStations: <T = BatchPayload>(args: { where?: StationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
   }
 
 export interface Subscription {
     userRole: <T = UserRoleSubscriptionPayload | null>(args: { where?: UserRoleSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
+    station: <T = StationSubscriptionPayload | null>(args: { where?: StationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     stationTag: <T = StationTagSubscriptionPayload | null>(args: { where?: StationTagSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     song: <T = SongSubscriptionPayload | null>(args: { where?: SongSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    station: <T = StationSubscriptionPayload | null>(args: { where?: StationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
   }
 
 export interface Exists {
   UserRole: (where?: UserRoleWhereInput) => Promise<boolean>
+  Station: (where?: StationWhereInput) => Promise<boolean>
   StationTag: (where?: StationTagWhereInput) => Promise<boolean>
   Song: (where?: SongWhereInput) => Promise<boolean>
-  Station: (where?: StationWhereInput) => Promise<boolean>
   User: (where?: UserWhereInput) => Promise<boolean>
 }
 
@@ -128,34 +128,34 @@ scalar Long
 
 type Mutation {
   createUserRole(data: UserRoleCreateInput!): UserRole!
+  createStation(data: StationCreateInput!): Station!
   createStationTag(data: StationTagCreateInput!): StationTag!
   createSong(data: SongCreateInput!): Song!
-  createStation(data: StationCreateInput!): Station!
   createUser(data: UserCreateInput!): User!
   updateUserRole(data: UserRoleUpdateInput!, where: UserRoleWhereUniqueInput!): UserRole
+  updateStation(data: StationUpdateInput!, where: StationWhereUniqueInput!): Station
   updateStationTag(data: StationTagUpdateInput!, where: StationTagWhereUniqueInput!): StationTag
   updateSong(data: SongUpdateInput!, where: SongWhereUniqueInput!): Song
-  updateStation(data: StationUpdateInput!, where: StationWhereUniqueInput!): Station
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   deleteUserRole(where: UserRoleWhereUniqueInput!): UserRole
+  deleteStation(where: StationWhereUniqueInput!): Station
   deleteStationTag(where: StationTagWhereUniqueInput!): StationTag
   deleteSong(where: SongWhereUniqueInput!): Song
-  deleteStation(where: StationWhereUniqueInput!): Station
   deleteUser(where: UserWhereUniqueInput!): User
   upsertUserRole(where: UserRoleWhereUniqueInput!, create: UserRoleCreateInput!, update: UserRoleUpdateInput!): UserRole!
+  upsertStation(where: StationWhereUniqueInput!, create: StationCreateInput!, update: StationUpdateInput!): Station!
   upsertStationTag(where: StationTagWhereUniqueInput!, create: StationTagCreateInput!, update: StationTagUpdateInput!): StationTag!
   upsertSong(where: SongWhereUniqueInput!, create: SongCreateInput!, update: SongUpdateInput!): Song!
-  upsertStation(where: StationWhereUniqueInput!, create: StationCreateInput!, update: StationUpdateInput!): Station!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   updateManyUserRoles(data: UserRoleUpdateManyMutationInput!, where: UserRoleWhereInput): BatchPayload!
+  updateManyStations(data: StationUpdateManyMutationInput!, where: StationWhereInput): BatchPayload!
   updateManyStationTags(data: StationTagUpdateManyMutationInput!, where: StationTagWhereInput): BatchPayload!
   updateManySongs(data: SongUpdateManyMutationInput!, where: SongWhereInput): BatchPayload!
-  updateManyStations(data: StationUpdateManyMutationInput!, where: StationWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   deleteManyUserRoles(where: UserRoleWhereInput): BatchPayload!
+  deleteManyStations(where: StationWhereInput): BatchPayload!
   deleteManyStationTags(where: StationTagWhereInput): BatchPayload!
   deleteManySongs(where: SongWhereInput): BatchPayload!
-  deleteManyStations(where: StationWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
 }
 
@@ -188,19 +188,19 @@ type PageInfo {
 
 type Query {
   userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole]!
+  stations(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Station]!
   stationTags(where: StationTagWhereInput, orderBy: StationTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StationTag]!
   songs(where: SongWhereInput, orderBy: SongOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Song]!
-  stations(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Station]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   userRole(where: UserRoleWhereUniqueInput!): UserRole
+  station(where: StationWhereUniqueInput!): Station
   stationTag(where: StationTagWhereUniqueInput!): StationTag
   song(where: SongWhereUniqueInput!): Song
-  station(where: StationWhereUniqueInput!): Station
   user(where: UserWhereUniqueInput!): User
   userRolesConnection(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserRoleConnection!
+  stationsConnection(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StationConnection!
   stationTagsConnection(where: StationTagWhereInput, orderBy: StationTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StationTagConnection!
   songsConnection(where: SongWhereInput, orderBy: SongOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SongConnection!
-  stationsConnection(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): StationConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
 
   """Fetches an object given its ID"""
@@ -982,7 +982,7 @@ type Station implements Node {
   name: String!
   slug: String!
   description: String
-  owner: User!
+  userRoles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
   tags(where: StationTagWhereInput, orderBy: StationTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [StationTag!]
   onlineUsers(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   songs(where: SongWhereInput, orderBy: SongOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Song!]
@@ -1003,15 +1003,10 @@ input StationCreateInput {
   name: String!
   slug: String!
   description: String
-  owner: UserCreateOneWithoutStationsInput!
+  userRoles: UserRoleCreateManyWithoutStationInput
   tags: StationTagCreateManyWithoutStationsInput
   onlineUsers: UserCreateManyInput
   songs: SongCreateManyWithoutStationInput
-}
-
-input StationCreateManyWithoutOwnerInput {
-  create: [StationCreateWithoutOwnerInput!]
-  connect: [StationWhereUniqueInput!]
 }
 
 input StationCreateManyWithoutTagsInput {
@@ -1019,24 +1014,14 @@ input StationCreateManyWithoutTagsInput {
   connect: [StationWhereUniqueInput!]
 }
 
-input StationCreateOneInput {
-  create: StationCreateInput
-  connect: StationWhereUniqueInput
-}
-
 input StationCreateOneWithoutSongsInput {
   create: StationCreateWithoutSongsInput
   connect: StationWhereUniqueInput
 }
 
-input StationCreateWithoutOwnerInput {
-  id: ID
-  name: String!
-  slug: String!
-  description: String
-  tags: StationTagCreateManyWithoutStationsInput
-  onlineUsers: UserCreateManyInput
-  songs: SongCreateManyWithoutStationInput
+input StationCreateOneWithoutUserRolesInput {
+  create: StationCreateWithoutUserRolesInput
+  connect: StationWhereUniqueInput
 }
 
 input StationCreateWithoutSongsInput {
@@ -1044,7 +1029,7 @@ input StationCreateWithoutSongsInput {
   name: String!
   slug: String!
   description: String
-  owner: UserCreateOneWithoutStationsInput!
+  userRoles: UserRoleCreateManyWithoutStationInput
   tags: StationTagCreateManyWithoutStationsInput
   onlineUsers: UserCreateManyInput
 }
@@ -1054,7 +1039,17 @@ input StationCreateWithoutTagsInput {
   name: String!
   slug: String!
   description: String
-  owner: UserCreateOneWithoutStationsInput!
+  userRoles: UserRoleCreateManyWithoutStationInput
+  onlineUsers: UserCreateManyInput
+  songs: SongCreateManyWithoutStationInput
+}
+
+input StationCreateWithoutUserRolesInput {
+  id: ID
+  name: String!
+  slug: String!
+  description: String
+  tags: StationTagCreateManyWithoutStationsInput
   onlineUsers: UserCreateManyInput
   songs: SongCreateManyWithoutStationInput
 }
@@ -1668,21 +1663,11 @@ input StationTagWhereUniqueInput {
   id: ID
 }
 
-input StationUpdateDataInput {
-  name: String
-  slug: String
-  description: String
-  owner: UserUpdateOneRequiredWithoutStationsInput
-  tags: StationTagUpdateManyWithoutStationsInput
-  onlineUsers: UserUpdateManyInput
-  songs: SongUpdateManyWithoutStationInput
-}
-
 input StationUpdateInput {
   name: String
   slug: String
   description: String
-  owner: UserUpdateOneRequiredWithoutStationsInput
+  userRoles: UserRoleUpdateManyWithoutStationInput
   tags: StationTagUpdateManyWithoutStationsInput
   onlineUsers: UserUpdateManyInput
   songs: SongUpdateManyWithoutStationInput
@@ -1698,18 +1683,6 @@ input StationUpdateManyMutationInput {
   name: String
   slug: String
   description: String
-}
-
-input StationUpdateManyWithoutOwnerInput {
-  create: [StationCreateWithoutOwnerInput!]
-  connect: [StationWhereUniqueInput!]
-  set: [StationWhereUniqueInput!]
-  disconnect: [StationWhereUniqueInput!]
-  delete: [StationWhereUniqueInput!]
-  update: [StationUpdateWithWhereUniqueWithoutOwnerInput!]
-  updateMany: [StationUpdateManyWithWhereNestedInput!]
-  deleteMany: [StationScalarWhereInput!]
-  upsert: [StationUpsertWithWhereUniqueWithoutOwnerInput!]
 }
 
 input StationUpdateManyWithoutTagsInput {
@@ -1729,15 +1702,6 @@ input StationUpdateManyWithWhereNestedInput {
   data: StationUpdateManyDataInput!
 }
 
-input StationUpdateOneInput {
-  create: StationCreateInput
-  connect: StationWhereUniqueInput
-  disconnect: Boolean
-  delete: Boolean
-  update: StationUpdateDataInput
-  upsert: StationUpsertNestedInput
-}
-
 input StationUpdateOneRequiredWithoutSongsInput {
   create: StationCreateWithoutSongsInput
   connect: StationWhereUniqueInput
@@ -1745,20 +1709,20 @@ input StationUpdateOneRequiredWithoutSongsInput {
   upsert: StationUpsertWithoutSongsInput
 }
 
-input StationUpdateWithoutOwnerDataInput {
-  name: String
-  slug: String
-  description: String
-  tags: StationTagUpdateManyWithoutStationsInput
-  onlineUsers: UserUpdateManyInput
-  songs: SongUpdateManyWithoutStationInput
+input StationUpdateOneWithoutUserRolesInput {
+  create: StationCreateWithoutUserRolesInput
+  connect: StationWhereUniqueInput
+  disconnect: Boolean
+  delete: Boolean
+  update: StationUpdateWithoutUserRolesDataInput
+  upsert: StationUpsertWithoutUserRolesInput
 }
 
 input StationUpdateWithoutSongsDataInput {
   name: String
   slug: String
   description: String
-  owner: UserUpdateOneRequiredWithoutStationsInput
+  userRoles: UserRoleUpdateManyWithoutStationInput
   tags: StationTagUpdateManyWithoutStationsInput
   onlineUsers: UserUpdateManyInput
 }
@@ -1767,14 +1731,18 @@ input StationUpdateWithoutTagsDataInput {
   name: String
   slug: String
   description: String
-  owner: UserUpdateOneRequiredWithoutStationsInput
+  userRoles: UserRoleUpdateManyWithoutStationInput
   onlineUsers: UserUpdateManyInput
   songs: SongUpdateManyWithoutStationInput
 }
 
-input StationUpdateWithWhereUniqueWithoutOwnerInput {
-  where: StationWhereUniqueInput!
-  data: StationUpdateWithoutOwnerDataInput!
+input StationUpdateWithoutUserRolesDataInput {
+  name: String
+  slug: String
+  description: String
+  tags: StationTagUpdateManyWithoutStationsInput
+  onlineUsers: UserUpdateManyInput
+  songs: SongUpdateManyWithoutStationInput
 }
 
 input StationUpdateWithWhereUniqueWithoutTagsInput {
@@ -1782,20 +1750,14 @@ input StationUpdateWithWhereUniqueWithoutTagsInput {
   data: StationUpdateWithoutTagsDataInput!
 }
 
-input StationUpsertNestedInput {
-  update: StationUpdateDataInput!
-  create: StationCreateInput!
-}
-
 input StationUpsertWithoutSongsInput {
   update: StationUpdateWithoutSongsDataInput!
   create: StationCreateWithoutSongsInput!
 }
 
-input StationUpsertWithWhereUniqueWithoutOwnerInput {
-  where: StationWhereUniqueInput!
-  update: StationUpdateWithoutOwnerDataInput!
-  create: StationCreateWithoutOwnerInput!
+input StationUpsertWithoutUserRolesInput {
+  update: StationUpdateWithoutUserRolesDataInput!
+  create: StationCreateWithoutUserRolesInput!
 }
 
 input StationUpsertWithWhereUniqueWithoutTagsInput {
@@ -2017,7 +1979,9 @@ input StationWhereInput {
 
   """All values not ending with the given string."""
   description_not_ends_with: String
-  owner: UserWhereInput
+  userRoles_every: UserRoleWhereInput
+  userRoles_some: UserRoleWhereInput
+  userRoles_none: UserRoleWhereInput
   tags_every: StationTagWhereInput
   tags_some: StationTagWhereInput
   tags_none: StationTagWhereInput
@@ -2037,9 +2001,9 @@ input StationWhereUniqueInput {
 
 type Subscription {
   userRole(where: UserRoleSubscriptionWhereInput): UserRoleSubscriptionPayload
+  station(where: StationSubscriptionWhereInput): StationSubscriptionPayload
   stationTag(where: StationTagSubscriptionWhereInput): StationTagSubscriptionPayload
   song(where: SongSubscriptionWhereInput): SongSubscriptionPayload
-  station(where: StationSubscriptionWhereInput): StationSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 
@@ -2060,7 +2024,6 @@ type User implements Node {
   facebookId: String
   googleId: String
   roles(where: UserRoleWhereInput, orderBy: UserRoleOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [UserRole!]
-  stations(where: StationWhereInput, orderBy: StationOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Station!]
 }
 
 """A connection to a list of items."""
@@ -2088,7 +2051,6 @@ input UserCreateInput {
   facebookId: String
   googleId: String
   roles: UserRoleCreateManyWithoutUserInput
-  stations: StationCreateManyWithoutOwnerInput
 }
 
 input UserCreateManyInput {
@@ -2106,11 +2068,6 @@ input UserCreateOneWithoutRolesInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateOneWithoutStationsInput {
-  create: UserCreateWithoutStationsInput
-  connect: UserWhereUniqueInput
-}
-
 input UserCreateWithoutRolesInput {
   id: ID
   email: String!
@@ -2125,24 +2082,6 @@ input UserCreateWithoutRolesInput {
   reputation: Int
   facebookId: String
   googleId: String
-  stations: StationCreateManyWithoutOwnerInput
-}
-
-input UserCreateWithoutStationsInput {
-  id: ID
-  email: String!
-  username: String!
-  password: String!
-  name: String
-  country: String
-  city: String
-  bio: String
-  avatarUrl: String
-  coverUrl: String
-  reputation: Int
-  facebookId: String
-  googleId: String
-  roles: UserRoleCreateManyWithoutUserInput
 }
 
 """An edge in a connection."""
@@ -2207,8 +2146,8 @@ type UserPreviousValues {
 
 type UserRole implements Node {
   id: ID!
-  role: UserRoleEnum!
   user: User!
+  role: UserRoleEnum!
   station: Station
 }
 
@@ -2226,7 +2165,12 @@ input UserRoleCreateInput {
   id: ID
   role: UserRoleEnum!
   user: UserCreateOneWithoutRolesInput!
-  station: StationCreateOneInput
+  station: StationCreateOneWithoutUserRolesInput
+}
+
+input UserRoleCreateManyWithoutStationInput {
+  create: [UserRoleCreateWithoutStationInput!]
+  connect: [UserRoleWhereUniqueInput!]
 }
 
 input UserRoleCreateManyWithoutUserInput {
@@ -2234,10 +2178,16 @@ input UserRoleCreateManyWithoutUserInput {
   connect: [UserRoleWhereUniqueInput!]
 }
 
+input UserRoleCreateWithoutStationInput {
+  id: ID
+  role: UserRoleEnum!
+  user: UserCreateOneWithoutRolesInput!
+}
+
 input UserRoleCreateWithoutUserInput {
   id: ID
   role: UserRoleEnum!
-  station: StationCreateOneInput
+  station: StationCreateOneWithoutUserRolesInput
 }
 
 """An edge in a connection."""
@@ -2252,6 +2202,7 @@ type UserRoleEdge {
 enum UserRoleEnum {
   ADMIN
   STATION_OWNER
+  STATION_ADMIN
 }
 
 enum UserRoleOrderByInput {
@@ -2367,7 +2318,7 @@ input UserRoleSubscriptionWhereInput {
 input UserRoleUpdateInput {
   role: UserRoleEnum
   user: UserUpdateOneRequiredWithoutRolesInput
-  station: StationUpdateOneInput
+  station: StationUpdateOneWithoutUserRolesInput
 }
 
 input UserRoleUpdateManyDataInput {
@@ -2376,6 +2327,18 @@ input UserRoleUpdateManyDataInput {
 
 input UserRoleUpdateManyMutationInput {
   role: UserRoleEnum
+}
+
+input UserRoleUpdateManyWithoutStationInput {
+  create: [UserRoleCreateWithoutStationInput!]
+  connect: [UserRoleWhereUniqueInput!]
+  set: [UserRoleWhereUniqueInput!]
+  disconnect: [UserRoleWhereUniqueInput!]
+  delete: [UserRoleWhereUniqueInput!]
+  update: [UserRoleUpdateWithWhereUniqueWithoutStationInput!]
+  updateMany: [UserRoleUpdateManyWithWhereNestedInput!]
+  deleteMany: [UserRoleScalarWhereInput!]
+  upsert: [UserRoleUpsertWithWhereUniqueWithoutStationInput!]
 }
 
 input UserRoleUpdateManyWithoutUserInput {
@@ -2395,14 +2358,30 @@ input UserRoleUpdateManyWithWhereNestedInput {
   data: UserRoleUpdateManyDataInput!
 }
 
+input UserRoleUpdateWithoutStationDataInput {
+  role: UserRoleEnum
+  user: UserUpdateOneRequiredWithoutRolesInput
+}
+
 input UserRoleUpdateWithoutUserDataInput {
   role: UserRoleEnum
-  station: StationUpdateOneInput
+  station: StationUpdateOneWithoutUserRolesInput
+}
+
+input UserRoleUpdateWithWhereUniqueWithoutStationInput {
+  where: UserRoleWhereUniqueInput!
+  data: UserRoleUpdateWithoutStationDataInput!
 }
 
 input UserRoleUpdateWithWhereUniqueWithoutUserInput {
   where: UserRoleWhereUniqueInput!
   data: UserRoleUpdateWithoutUserDataInput!
+}
+
+input UserRoleUpsertWithWhereUniqueWithoutStationInput {
+  where: UserRoleWhereUniqueInput!
+  update: UserRoleUpdateWithoutStationDataInput!
+  create: UserRoleCreateWithoutStationInput!
 }
 
 input UserRoleUpsertWithWhereUniqueWithoutUserInput {
@@ -3086,7 +3065,6 @@ input UserUpdateDataInput {
   facebookId: String
   googleId: String
   roles: UserRoleUpdateManyWithoutUserInput
-  stations: StationUpdateManyWithoutOwnerInput
 }
 
 input UserUpdateInput {
@@ -3103,7 +3081,6 @@ input UserUpdateInput {
   facebookId: String
   googleId: String
   roles: UserRoleUpdateManyWithoutUserInput
-  stations: StationUpdateManyWithoutOwnerInput
 }
 
 input UserUpdateManyDataInput {
@@ -3167,13 +3144,6 @@ input UserUpdateOneRequiredWithoutRolesInput {
   upsert: UserUpsertWithoutRolesInput
 }
 
-input UserUpdateOneRequiredWithoutStationsInput {
-  create: UserCreateWithoutStationsInput
-  connect: UserWhereUniqueInput
-  update: UserUpdateWithoutStationsDataInput
-  upsert: UserUpsertWithoutStationsInput
-}
-
 input UserUpdateWithoutRolesDataInput {
   email: String
   username: String
@@ -3187,23 +3157,6 @@ input UserUpdateWithoutRolesDataInput {
   reputation: Int
   facebookId: String
   googleId: String
-  stations: StationUpdateManyWithoutOwnerInput
-}
-
-input UserUpdateWithoutStationsDataInput {
-  email: String
-  username: String
-  password: String
-  name: String
-  country: String
-  city: String
-  bio: String
-  avatarUrl: String
-  coverUrl: String
-  reputation: Int
-  facebookId: String
-  googleId: String
-  roles: UserRoleUpdateManyWithoutUserInput
 }
 
 input UserUpdateWithWhereUniqueNestedInput {
@@ -3219,11 +3172,6 @@ input UserUpsertNestedInput {
 input UserUpsertWithoutRolesInput {
   update: UserUpdateWithoutRolesDataInput!
   create: UserCreateWithoutRolesInput!
-}
-
-input UserUpsertWithoutStationsInput {
-  update: UserUpdateWithoutStationsDataInput!
-  create: UserCreateWithoutStationsInput!
 }
 
 input UserUpsertWithWhereUniqueNestedInput {
@@ -3790,9 +3738,6 @@ input UserWhereInput {
   roles_every: UserRoleWhereInput
   roles_some: UserRoleWhereInput
   roles_none: UserRoleWhereInput
-  stations_every: StationWhereInput
-  stations_some: StationWhereInput
-  stations_none: StationWhereInput
 }
 
 input UserWhereUniqueInput {
@@ -3886,7 +3831,8 @@ export type UserOrderByInput =   'id_ASC' |
   'googleId_DESC'
 
 export type UserRoleEnum =   'ADMIN' |
-  'STATION_OWNER'
+  'STATION_OWNER' |
+  'STATION_ADMIN'
 
 export type UserRoleOrderByInput =   'id_ASC' |
   'id_DESC' |
@@ -4220,15 +4166,10 @@ export interface StationCreateInput {
   name: String
   slug: String
   description?: String | null
-  owner: UserCreateOneWithoutStationsInput
+  userRoles?: UserRoleCreateManyWithoutStationInput | null
   tags?: StationTagCreateManyWithoutStationsInput | null
   onlineUsers?: UserCreateManyInput | null
   songs?: SongCreateManyWithoutStationInput | null
-}
-
-export interface StationCreateManyWithoutOwnerInput {
-  create?: StationCreateWithoutOwnerInput[] | StationCreateWithoutOwnerInput | null
-  connect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
 }
 
 export interface StationCreateManyWithoutTagsInput {
@@ -4236,24 +4177,14 @@ export interface StationCreateManyWithoutTagsInput {
   connect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
 }
 
-export interface StationCreateOneInput {
-  create?: StationCreateInput | null
-  connect?: StationWhereUniqueInput | null
-}
-
 export interface StationCreateOneWithoutSongsInput {
   create?: StationCreateWithoutSongsInput | null
   connect?: StationWhereUniqueInput | null
 }
 
-export interface StationCreateWithoutOwnerInput {
-  id?: ID_Input | null
-  name: String
-  slug: String
-  description?: String | null
-  tags?: StationTagCreateManyWithoutStationsInput | null
-  onlineUsers?: UserCreateManyInput | null
-  songs?: SongCreateManyWithoutStationInput | null
+export interface StationCreateOneWithoutUserRolesInput {
+  create?: StationCreateWithoutUserRolesInput | null
+  connect?: StationWhereUniqueInput | null
 }
 
 export interface StationCreateWithoutSongsInput {
@@ -4261,7 +4192,7 @@ export interface StationCreateWithoutSongsInput {
   name: String
   slug: String
   description?: String | null
-  owner: UserCreateOneWithoutStationsInput
+  userRoles?: UserRoleCreateManyWithoutStationInput | null
   tags?: StationTagCreateManyWithoutStationsInput | null
   onlineUsers?: UserCreateManyInput | null
 }
@@ -4271,7 +4202,17 @@ export interface StationCreateWithoutTagsInput {
   name: String
   slug: String
   description?: String | null
-  owner: UserCreateOneWithoutStationsInput
+  userRoles?: UserRoleCreateManyWithoutStationInput | null
+  onlineUsers?: UserCreateManyInput | null
+  songs?: SongCreateManyWithoutStationInput | null
+}
+
+export interface StationCreateWithoutUserRolesInput {
+  id?: ID_Input | null
+  name: String
+  slug: String
+  description?: String | null
+  tags?: StationTagCreateManyWithoutStationsInput | null
   onlineUsers?: UserCreateManyInput | null
   songs?: SongCreateManyWithoutStationInput | null
 }
@@ -4512,21 +4453,11 @@ export interface StationTagWhereUniqueInput {
   id?: ID_Input | null
 }
 
-export interface StationUpdateDataInput {
-  name?: String | null
-  slug?: String | null
-  description?: String | null
-  owner?: UserUpdateOneRequiredWithoutStationsInput | null
-  tags?: StationTagUpdateManyWithoutStationsInput | null
-  onlineUsers?: UserUpdateManyInput | null
-  songs?: SongUpdateManyWithoutStationInput | null
-}
-
 export interface StationUpdateInput {
   name?: String | null
   slug?: String | null
   description?: String | null
-  owner?: UserUpdateOneRequiredWithoutStationsInput | null
+  userRoles?: UserRoleUpdateManyWithoutStationInput | null
   tags?: StationTagUpdateManyWithoutStationsInput | null
   onlineUsers?: UserUpdateManyInput | null
   songs?: SongUpdateManyWithoutStationInput | null
@@ -4542,18 +4473,6 @@ export interface StationUpdateManyMutationInput {
   name?: String | null
   slug?: String | null
   description?: String | null
-}
-
-export interface StationUpdateManyWithoutOwnerInput {
-  create?: StationCreateWithoutOwnerInput[] | StationCreateWithoutOwnerInput | null
-  connect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
-  set?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
-  disconnect?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
-  delete?: StationWhereUniqueInput[] | StationWhereUniqueInput | null
-  update?: StationUpdateWithWhereUniqueWithoutOwnerInput[] | StationUpdateWithWhereUniqueWithoutOwnerInput | null
-  updateMany?: StationUpdateManyWithWhereNestedInput[] | StationUpdateManyWithWhereNestedInput | null
-  deleteMany?: StationScalarWhereInput[] | StationScalarWhereInput | null
-  upsert?: StationUpsertWithWhereUniqueWithoutOwnerInput[] | StationUpsertWithWhereUniqueWithoutOwnerInput | null
 }
 
 export interface StationUpdateManyWithoutTagsInput {
@@ -4573,15 +4492,6 @@ export interface StationUpdateManyWithWhereNestedInput {
   data: StationUpdateManyDataInput
 }
 
-export interface StationUpdateOneInput {
-  create?: StationCreateInput | null
-  connect?: StationWhereUniqueInput | null
-  disconnect?: Boolean | null
-  delete?: Boolean | null
-  update?: StationUpdateDataInput | null
-  upsert?: StationUpsertNestedInput | null
-}
-
 export interface StationUpdateOneRequiredWithoutSongsInput {
   create?: StationCreateWithoutSongsInput | null
   connect?: StationWhereUniqueInput | null
@@ -4589,20 +4499,20 @@ export interface StationUpdateOneRequiredWithoutSongsInput {
   upsert?: StationUpsertWithoutSongsInput | null
 }
 
-export interface StationUpdateWithoutOwnerDataInput {
-  name?: String | null
-  slug?: String | null
-  description?: String | null
-  tags?: StationTagUpdateManyWithoutStationsInput | null
-  onlineUsers?: UserUpdateManyInput | null
-  songs?: SongUpdateManyWithoutStationInput | null
+export interface StationUpdateOneWithoutUserRolesInput {
+  create?: StationCreateWithoutUserRolesInput | null
+  connect?: StationWhereUniqueInput | null
+  disconnect?: Boolean | null
+  delete?: Boolean | null
+  update?: StationUpdateWithoutUserRolesDataInput | null
+  upsert?: StationUpsertWithoutUserRolesInput | null
 }
 
 export interface StationUpdateWithoutSongsDataInput {
   name?: String | null
   slug?: String | null
   description?: String | null
-  owner?: UserUpdateOneRequiredWithoutStationsInput | null
+  userRoles?: UserRoleUpdateManyWithoutStationInput | null
   tags?: StationTagUpdateManyWithoutStationsInput | null
   onlineUsers?: UserUpdateManyInput | null
 }
@@ -4611,14 +4521,18 @@ export interface StationUpdateWithoutTagsDataInput {
   name?: String | null
   slug?: String | null
   description?: String | null
-  owner?: UserUpdateOneRequiredWithoutStationsInput | null
+  userRoles?: UserRoleUpdateManyWithoutStationInput | null
   onlineUsers?: UserUpdateManyInput | null
   songs?: SongUpdateManyWithoutStationInput | null
 }
 
-export interface StationUpdateWithWhereUniqueWithoutOwnerInput {
-  where: StationWhereUniqueInput
-  data: StationUpdateWithoutOwnerDataInput
+export interface StationUpdateWithoutUserRolesDataInput {
+  name?: String | null
+  slug?: String | null
+  description?: String | null
+  tags?: StationTagUpdateManyWithoutStationsInput | null
+  onlineUsers?: UserUpdateManyInput | null
+  songs?: SongUpdateManyWithoutStationInput | null
 }
 
 export interface StationUpdateWithWhereUniqueWithoutTagsInput {
@@ -4626,20 +4540,14 @@ export interface StationUpdateWithWhereUniqueWithoutTagsInput {
   data: StationUpdateWithoutTagsDataInput
 }
 
-export interface StationUpsertNestedInput {
-  update: StationUpdateDataInput
-  create: StationCreateInput
-}
-
 export interface StationUpsertWithoutSongsInput {
   update: StationUpdateWithoutSongsDataInput
   create: StationCreateWithoutSongsInput
 }
 
-export interface StationUpsertWithWhereUniqueWithoutOwnerInput {
-  where: StationWhereUniqueInput
-  update: StationUpdateWithoutOwnerDataInput
-  create: StationCreateWithoutOwnerInput
+export interface StationUpsertWithoutUserRolesInput {
+  update: StationUpdateWithoutUserRolesDataInput
+  create: StationCreateWithoutUserRolesInput
 }
 
 export interface StationUpsertWithWhereUniqueWithoutTagsInput {
@@ -4724,7 +4632,9 @@ export interface StationWhereInput {
   description_not_starts_with?: String | null
   description_ends_with?: String | null
   description_not_ends_with?: String | null
-  owner?: UserWhereInput | null
+  userRoles_every?: UserRoleWhereInput | null
+  userRoles_some?: UserRoleWhereInput | null
+  userRoles_none?: UserRoleWhereInput | null
   tags_every?: StationTagWhereInput | null
   tags_some?: StationTagWhereInput | null
   tags_none?: StationTagWhereInput | null
@@ -4757,7 +4667,6 @@ export interface UserCreateInput {
   facebookId?: String | null
   googleId?: String | null
   roles?: UserRoleCreateManyWithoutUserInput | null
-  stations?: StationCreateManyWithoutOwnerInput | null
 }
 
 export interface UserCreateManyInput {
@@ -4775,11 +4684,6 @@ export interface UserCreateOneWithoutRolesInput {
   connect?: UserWhereUniqueInput | null
 }
 
-export interface UserCreateOneWithoutStationsInput {
-  create?: UserCreateWithoutStationsInput | null
-  connect?: UserWhereUniqueInput | null
-}
-
 export interface UserCreateWithoutRolesInput {
   id?: ID_Input | null
   email: String
@@ -4794,31 +4698,18 @@ export interface UserCreateWithoutRolesInput {
   reputation?: Int | null
   facebookId?: String | null
   googleId?: String | null
-  stations?: StationCreateManyWithoutOwnerInput | null
-}
-
-export interface UserCreateWithoutStationsInput {
-  id?: ID_Input | null
-  email: String
-  username: String
-  password: String
-  name?: String | null
-  country?: String | null
-  city?: String | null
-  bio?: String | null
-  avatarUrl?: String | null
-  coverUrl?: String | null
-  reputation?: Int | null
-  facebookId?: String | null
-  googleId?: String | null
-  roles?: UserRoleCreateManyWithoutUserInput | null
 }
 
 export interface UserRoleCreateInput {
   id?: ID_Input | null
   role: UserRoleEnum
   user: UserCreateOneWithoutRolesInput
-  station?: StationCreateOneInput | null
+  station?: StationCreateOneWithoutUserRolesInput | null
+}
+
+export interface UserRoleCreateManyWithoutStationInput {
+  create?: UserRoleCreateWithoutStationInput[] | UserRoleCreateWithoutStationInput | null
+  connect?: UserRoleWhereUniqueInput[] | UserRoleWhereUniqueInput | null
 }
 
 export interface UserRoleCreateManyWithoutUserInput {
@@ -4826,10 +4717,16 @@ export interface UserRoleCreateManyWithoutUserInput {
   connect?: UserRoleWhereUniqueInput[] | UserRoleWhereUniqueInput | null
 }
 
+export interface UserRoleCreateWithoutStationInput {
+  id?: ID_Input | null
+  role: UserRoleEnum
+  user: UserCreateOneWithoutRolesInput
+}
+
 export interface UserRoleCreateWithoutUserInput {
   id?: ID_Input | null
   role: UserRoleEnum
-  station?: StationCreateOneInput | null
+  station?: StationCreateOneWithoutUserRolesInput | null
 }
 
 export interface UserRoleScalarWhereInput {
@@ -4870,7 +4767,7 @@ export interface UserRoleSubscriptionWhereInput {
 export interface UserRoleUpdateInput {
   role?: UserRoleEnum | null
   user?: UserUpdateOneRequiredWithoutRolesInput | null
-  station?: StationUpdateOneInput | null
+  station?: StationUpdateOneWithoutUserRolesInput | null
 }
 
 export interface UserRoleUpdateManyDataInput {
@@ -4879,6 +4776,18 @@ export interface UserRoleUpdateManyDataInput {
 
 export interface UserRoleUpdateManyMutationInput {
   role?: UserRoleEnum | null
+}
+
+export interface UserRoleUpdateManyWithoutStationInput {
+  create?: UserRoleCreateWithoutStationInput[] | UserRoleCreateWithoutStationInput | null
+  connect?: UserRoleWhereUniqueInput[] | UserRoleWhereUniqueInput | null
+  set?: UserRoleWhereUniqueInput[] | UserRoleWhereUniqueInput | null
+  disconnect?: UserRoleWhereUniqueInput[] | UserRoleWhereUniqueInput | null
+  delete?: UserRoleWhereUniqueInput[] | UserRoleWhereUniqueInput | null
+  update?: UserRoleUpdateWithWhereUniqueWithoutStationInput[] | UserRoleUpdateWithWhereUniqueWithoutStationInput | null
+  updateMany?: UserRoleUpdateManyWithWhereNestedInput[] | UserRoleUpdateManyWithWhereNestedInput | null
+  deleteMany?: UserRoleScalarWhereInput[] | UserRoleScalarWhereInput | null
+  upsert?: UserRoleUpsertWithWhereUniqueWithoutStationInput[] | UserRoleUpsertWithWhereUniqueWithoutStationInput | null
 }
 
 export interface UserRoleUpdateManyWithoutUserInput {
@@ -4898,14 +4807,30 @@ export interface UserRoleUpdateManyWithWhereNestedInput {
   data: UserRoleUpdateManyDataInput
 }
 
+export interface UserRoleUpdateWithoutStationDataInput {
+  role?: UserRoleEnum | null
+  user?: UserUpdateOneRequiredWithoutRolesInput | null
+}
+
 export interface UserRoleUpdateWithoutUserDataInput {
   role?: UserRoleEnum | null
-  station?: StationUpdateOneInput | null
+  station?: StationUpdateOneWithoutUserRolesInput | null
+}
+
+export interface UserRoleUpdateWithWhereUniqueWithoutStationInput {
+  where: UserRoleWhereUniqueInput
+  data: UserRoleUpdateWithoutStationDataInput
 }
 
 export interface UserRoleUpdateWithWhereUniqueWithoutUserInput {
   where: UserRoleWhereUniqueInput
   data: UserRoleUpdateWithoutUserDataInput
+}
+
+export interface UserRoleUpsertWithWhereUniqueWithoutStationInput {
+  where: UserRoleWhereUniqueInput
+  update: UserRoleUpdateWithoutStationDataInput
+  create: UserRoleCreateWithoutStationInput
 }
 
 export interface UserRoleUpsertWithWhereUniqueWithoutUserInput {
@@ -5167,7 +5092,6 @@ export interface UserUpdateDataInput {
   facebookId?: String | null
   googleId?: String | null
   roles?: UserRoleUpdateManyWithoutUserInput | null
-  stations?: StationUpdateManyWithoutOwnerInput | null
 }
 
 export interface UserUpdateInput {
@@ -5184,7 +5108,6 @@ export interface UserUpdateInput {
   facebookId?: String | null
   googleId?: String | null
   roles?: UserRoleUpdateManyWithoutUserInput | null
-  stations?: StationUpdateManyWithoutOwnerInput | null
 }
 
 export interface UserUpdateManyDataInput {
@@ -5248,13 +5171,6 @@ export interface UserUpdateOneRequiredWithoutRolesInput {
   upsert?: UserUpsertWithoutRolesInput | null
 }
 
-export interface UserUpdateOneRequiredWithoutStationsInput {
-  create?: UserCreateWithoutStationsInput | null
-  connect?: UserWhereUniqueInput | null
-  update?: UserUpdateWithoutStationsDataInput | null
-  upsert?: UserUpsertWithoutStationsInput | null
-}
-
 export interface UserUpdateWithoutRolesDataInput {
   email?: String | null
   username?: String | null
@@ -5268,23 +5184,6 @@ export interface UserUpdateWithoutRolesDataInput {
   reputation?: Int | null
   facebookId?: String | null
   googleId?: String | null
-  stations?: StationUpdateManyWithoutOwnerInput | null
-}
-
-export interface UserUpdateWithoutStationsDataInput {
-  email?: String | null
-  username?: String | null
-  password?: String | null
-  name?: String | null
-  country?: String | null
-  city?: String | null
-  bio?: String | null
-  avatarUrl?: String | null
-  coverUrl?: String | null
-  reputation?: Int | null
-  facebookId?: String | null
-  googleId?: String | null
-  roles?: UserRoleUpdateManyWithoutUserInput | null
 }
 
 export interface UserUpdateWithWhereUniqueNestedInput {
@@ -5300,11 +5199,6 @@ export interface UserUpsertNestedInput {
 export interface UserUpsertWithoutRolesInput {
   update: UserUpdateWithoutRolesDataInput
   create: UserCreateWithoutRolesInput
-}
-
-export interface UserUpsertWithoutStationsInput {
-  update: UserUpdateWithoutStationsDataInput
-  create: UserCreateWithoutStationsInput
 }
 
 export interface UserUpsertWithWhereUniqueNestedInput {
@@ -5512,9 +5406,6 @@ export interface UserWhereInput {
   roles_every?: UserRoleWhereInput | null
   roles_some?: UserRoleWhereInput | null
   roles_none?: UserRoleWhereInput | null
-  stations_every?: StationWhereInput | null
-  stations_some?: StationWhereInput | null
-  stations_none?: StationWhereInput | null
 }
 
 export interface UserWhereUniqueInput {
@@ -5627,7 +5518,7 @@ export interface Station extends Node {
   name: String
   slug: String
   description?: String | null
-  owner: User
+  userRoles?: Array<UserRole> | null
   tags?: Array<StationTag> | null
   onlineUsers?: Array<User> | null
   songs?: Array<Song> | null
@@ -5722,7 +5613,6 @@ export interface User extends Node {
   facebookId?: String | null
   googleId?: String | null
   roles?: Array<UserRole> | null
-  stations?: Array<Station> | null
 }
 
 /*
@@ -5764,8 +5654,8 @@ export interface UserPreviousValues {
 
 export interface UserRole extends Node {
   id: ID_Output
-  role: UserRoleEnum
   user: User
+  role: UserRoleEnum
   station?: Station | null
 }
 

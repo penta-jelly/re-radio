@@ -15,19 +15,19 @@ type User {
   facebookId: String
   googleId: String
   roles: [UserRole!]! @relation(name: "UserRole", onDelete: CASCADE)
-  stations: [Station!]! @relation(name: "StationOwner", onDelete: CASCADE)
 }
 
 type UserRole {
   id: ID! @id
-  role: UserRoleEnum!
   user: User! @relation(name: "UserRole")
-  station: Station
+  role: UserRoleEnum!
+  station: Station @relation(name: "StationUserRole")
 }
 
 enum UserRoleEnum {
   ADMIN
   STATION_OWNER
+  STATION_ADMIN
 }
 
 type Station {
@@ -38,7 +38,7 @@ type Station {
   name: String! @unique
   slug: String! @unique
   description: String
-  owner: User! @relation(name: "StationOwner")
+  userRoles: [UserRole!]! @relation(name: "StationUserRole")
   tags: [StationTag!]! @relation(name: "StationsAndTags", onDelete: CASCADE)
   # Realtime part
   onlineUsers: [User!]! @relation(name: "StationOnlineUsers")

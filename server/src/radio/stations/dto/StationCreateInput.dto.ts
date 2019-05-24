@@ -3,7 +3,7 @@ import { IsOptional, Length, NotContains, ValidateNested } from 'class-validator
 import {
   StationCreateInput,
   StationTagCreateManyWithoutStationsInput,
-  UserCreateOneWithoutStationsInput,
+  UserRoleCreateManyWithoutStationInput,
 } from 'prisma/prisma.binding';
 
 export class StationCreateDTO implements StationCreateInput {
@@ -15,10 +15,10 @@ export class StationCreateDTO implements StationCreateInput {
   slug: string;
 
   @IsOptional()
-  description?: string | null;
+  description?: string;
 
-  owner: UserCreateOneWithoutStationsInput;
-  tags?: StationTagCreateManyWithoutStationsInput | null;
+  tags?: StationTagCreateManyWithoutStationsInput;
+  userRoles?: UserRoleCreateManyWithoutStationInput;
 }
 
 export class StationCreateInputDTO {

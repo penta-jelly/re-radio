@@ -1,4 +1,4 @@
-import { UseGuards } from '@nestjs/common';
+import { BadRequestException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { BatchPayload, Station, StationWhereInput, StationWhereUniqueInput } from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
@@ -26,13 +26,24 @@ export class StationsResolver {
   @Mutation('createStation')
   @UseGuards(AuthenticationGuard)
   async createStation(@Args() args: StationCreateInputDTO, @Info() info): Promise<Station> {
+    if (!args.data.userRoles) {
+      throw new BadRequestException('You must specify a user role, e.g.: STATION_OWNER');
+    }
     return await this.prisma.mutation.createStation(args, info);
   }
 
   @Mutation('updateStation')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
-  @Roles(['ADMIN', StationsResolver.stationOwnerChecker])
+  @Roles(['ADMIN', StationsResolver.stationOwnerChecker, StationsResolver.stationAdminChecker])
   async updateStation(@Args() args: StationUpdateInputDTO, @Info() info): Promise<Station> {
+    const { userRoles } = args.data;
+    if (userRoles) {
+      const create = Array.isArray(userRoles.create) ? userRoles.create : [userRoles.create];
+      create.forEach(({ role }) => {
+        if (role !== 'STATION_ADMIN' && role !== 'STATION_OWNER')
+          throw new BadRequestException('Only STATION_ADMIN & STATION_OWNER roles are allowed to be updated.');
+      });
+    }
     return await this.prisma.mutation.updateStation(args, info);
   }
 
@@ -62,13 +73,25 @@ export class StationsResolver {
     return this.prisma.subscription.station(args, info);
   }
 
-  static stationOwnerChecker({
+  static async stationOwnerChecker({
     user,
     args: { where },
   }: RoleDecoratorParam<{ where: StationWhereUniqueInput | StationWhereInput }>) {
-    return (
-      user.roles.some(userRole => userRole.role === 'STATION_OWNER') &&
-      user.stations.some(({ id, name, slug }) => where.id === id || where.name === name || where.slug === slug)
-    );
+    return user.roles.some(userRole => {
+      if (userRole.role !== 'STATION_OWNER' || !userRole.station) return false;
+      const { id, name, slug } = userRole.station;
+      return where.id === id || where.name === name || where.slug === slug;
+    });
+  }
+
+  static async stationAdminChecker({
+    user,
+    args: { where },
+  }: RoleDecoratorParam<{ where: StationWhereUniqueInput | StationWhereInput }>) {
+    return user.roles.some(userRole => {
+      if (userRole.role !== 'STATION_ADMIN' || !userRole.station) return false;
+      const { id, name, slug } = userRole.station;
+      return where.id === id || where.name === name || where.slug === slug;
+    });
   }
 }

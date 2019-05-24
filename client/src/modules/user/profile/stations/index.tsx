@@ -17,7 +17,7 @@ export const UserProfileStations: React.FC<Props> = ({ username, editable }) => 
       first: 25,
       skip: 0,
       orderBy: StationOrderByInput.CreatedAtDesc,
-      where: { owner: { username } },
+      where: { userRoles_some: { user: { username } } },
     },
   });
   if (loading) {
