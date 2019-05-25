@@ -1,6 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import * as Bcrypt from 'bcrypt-nodejs';
-import { SongCreateInput, StationCreateInput, UserCreateInput, UserRoleEnum } from 'prisma/prisma.binding';
+import {
+  SongCreateInput,
+  StationCreateInput,
+  UserCreateInput,
+  UserRoleCreateManyWithoutStationInput,
+  UserRoleEnum,
+} from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
 
 @Injectable()
@@ -39,50 +45,69 @@ export class SeederService {
     this.logger.log('Start seeding stations');
     const qaTag = await this.prisma.mutation.createStationTag({ data: { name: 'qa' } });
     await Promise.all(
-      this.getStationFixtures().map(async dto => {
-        const station = await this.prisma.mutation.createStation({
+      this.getStationFixtures().map(dto =>
+        this.prisma.mutation.createStation({
           data: {
             ...dto,
             tags: { ...dto.tags, connect: { id: qaTag.id } },
           },
-        });
-        const owner = await this.prisma.query.user({ where: { username: dto.owner.connect.username } });
-        await this.prisma.mutation.createUserRole({
-          data: {
-            role: 'STATION_OWNER',
-            station: { connect: { id: station.id } },
-            user: { connect: { id: owner.id } },
-          },
-        });
-      }),
+        }),
+      ),
     );
   }
 
   private getStationFixtures(): StationCreateInput[] {
-    const owner = { connect: { username: 'admin' } };
+    const createRoleFor = (username: string): UserRoleCreateManyWithoutStationInput => ({
+      create: { role: 'STATION_OWNER', user: { connect: { username } } },
+    });
     return [
-      { name: 'Station A', slug: 'station-a', owner, tags: { create: { name: 'a-team' } } },
-      { name: 'Station B', slug: 'station-b', owner, tags: { create: { name: 'b-team' } } },
-      { name: 'Station C', slug: 'station-c', owner, tags: { create: { name: 'c-team' } } },
-      { name: 'Station D', slug: 'station-d', owner, tags: { create: { name: 'd-team' } } },
-      { name: 'Station E', slug: 'station-e', owner, tags: { create: { name: 'e-team' } } },
-      { name: 'Station F', slug: 'station-f', owner, tags: { create: { name: 'f-team' } } },
-      { name: 'Station G', slug: 'station-g', owner, tags: { create: { name: 'g-team' } } },
-      { name: 'Station H', slug: 'station-h', owner, tags: { create: { name: 'h-team' } } },
-      { name: 'Station I', slug: 'station-i', owner, tags: { create: { name: 'i-team' } } },
+      { name: 'Station A', slug: 'station-a', userRoles: createRoleFor('admin'), tags: { create: { name: 'a-team' } } },
+      { name: 'Station B', slug: 'station-b', userRoles: createRoleFor('admin'), tags: { create: { name: 'b-team' } } },
+      { name: 'Station C', slug: 'station-c', userRoles: createRoleFor('admin'), tags: { create: { name: 'c-team' } } },
+      { name: 'Station D', slug: 'station-d', userRoles: createRoleFor('admin'), tags: { create: { name: 'd-team' } } },
+      {
+        name: 'Station E',
+        slug: 'station-e',
+        userRoles: createRoleFor('pvtri96'),
+        tags: { create: { name: 'e-team' } },
+      },
+      {
+        name: 'Station F',
+        slug: 'station-f',
+        userRoles: createRoleFor('dungle1811'),
+        tags: { create: { name: 'f-team' } },
+      },
+      {
+        name: 'Station G',
+        slug: 'station-g',
+        userRoles: createRoleFor('lednhatkhanh'),
+        tags: { create: { name: 'g-team' } },
+      },
+      {
+        name: 'Station H',
+        slug: 'station-h',
+        userRoles: createRoleFor('lybaokhanh'),
+        tags: { create: { name: 'h-team' } },
+      },
+      {
+        name: 'Station I',
+        slug: 'station-i',
+        userRoles: createRoleFor('thanhvinhlu'),
+        tags: { create: { name: 'i-team' } },
+      },
       {
         name: 'Normie station',
         slug: 'normie-station',
-        owner: { connect: { username: 'normie' } },
+        userRoles: createRoleFor('admin'),
         tags: { create: { name: 'i-team' } },
       },
-      ...Array(0)
+      ...Array(5)
         .fill(null)
-        .map((_, index) => ({
+        .map<StationCreateInput>((_, index) => ({
           name: `Station ${index}`,
           slug: `station-${index}`,
-          owner,
-          tags: { create: { name: `${index}-team` } },
+          userRoles: createRoleFor('admin'),
+          tags: { create: { name: `the-${index}-team` } },
         })),
     ];
   }
@@ -117,7 +142,7 @@ export class SeederService {
           title: 'Zedd - I Want You To Know (Official Music Video) ft. Selena Gomez',
           url: 'https://www.youtube.com/watch?v=X46t8ZFqUB4',
           creator: { connect: { username: 'admin' } },
-          duration: 195000,
+          duration: 225000,
           thumbnail: 'https://i.ytimg.com/vi/X46t8ZFqUB4/hqdefault.jpg',
           station: { connect: { slug: station.slug } },
           status: 'PENDING',
@@ -129,8 +154,8 @@ export class SeederService {
     return [
       ...base,
       {
-        title: 'Westlife - My Love (Official Music Video)',
-        url: 'https://www.youtube.com/watch?v=ulOb9gIGGd0',
+        title: 'JUSTATEE x PHUONG LY - CRAZY MAN | OFFICIAL MV',
+        url: 'https://www.youtube.com/watch?v=HXkh7EOqcQ4',
         creator: { connect: { username: 'normie' } },
         duration: 240000,
         thumbnail: 'https://i.ytimg.com/vi/ulOb9gIGGd0/hqdefault.jpg',

@@ -89,34 +89,34 @@ export type MiniSongExplorer = {
 export type Mutation = {
   __typename?: 'Mutation';
   readonly createUserRole: UserRole;
+  readonly createStation: Station;
   readonly createStationTag: StationTag;
   readonly createSong: Song;
-  readonly createStation: Station;
   readonly createUser: User;
   readonly updateUserRole?: Maybe<UserRole>;
+  readonly updateStation?: Maybe<Station>;
   readonly updateStationTag?: Maybe<StationTag>;
   readonly updateSong?: Maybe<Song>;
-  readonly updateStation?: Maybe<Station>;
   readonly updateUser?: Maybe<User>;
   readonly deleteUserRole?: Maybe<UserRole>;
+  readonly deleteStation?: Maybe<Station>;
   readonly deleteStationTag?: Maybe<StationTag>;
   readonly deleteSong?: Maybe<Song>;
-  readonly deleteStation?: Maybe<Station>;
   readonly deleteUser?: Maybe<User>;
   readonly upsertUserRole: UserRole;
+  readonly upsertStation: Station;
   readonly upsertStationTag: StationTag;
   readonly upsertSong: Song;
-  readonly upsertStation: Station;
   readonly upsertUser: User;
   readonly updateManyUserRoles: BatchPayload;
+  readonly updateManyStations: BatchPayload;
   readonly updateManyStationTags: BatchPayload;
   readonly updateManySongs: BatchPayload;
-  readonly updateManyStations: BatchPayload;
   readonly updateManyUsers: BatchPayload;
   readonly deleteManyUserRoles: BatchPayload;
+  readonly deleteManyStations: BatchPayload;
   readonly deleteManyStationTags: BatchPayload;
   readonly deleteManySongs: BatchPayload;
-  readonly deleteManyStations: BatchPayload;
   readonly deleteManyUsers: BatchPayload;
   readonly login: LoginOrRegisterReturnType;
   readonly register: LoginOrRegisterReturnType;
@@ -127,16 +127,16 @@ export type MutationCreateUserRoleArgs = {
   data: UserRoleCreateInput;
 };
 
+export type MutationCreateStationArgs = {
+  data: StationCreateInput;
+};
+
 export type MutationCreateStationTagArgs = {
   data: StationTagCreateInput;
 };
 
 export type MutationCreateSongArgs = {
   data: SongCreateInput;
-};
-
-export type MutationCreateStationArgs = {
-  data: StationCreateInput;
 };
 
 export type MutationCreateUserArgs = {
@@ -146,6 +146,11 @@ export type MutationCreateUserArgs = {
 export type MutationUpdateUserRoleArgs = {
   data: UserRoleUpdateInput;
   where: UserRoleWhereUniqueInput;
+};
+
+export type MutationUpdateStationArgs = {
+  data: StationUpdateInput;
+  where: StationWhereUniqueInput;
 };
 
 export type MutationUpdateStationTagArgs = {
@@ -158,11 +163,6 @@ export type MutationUpdateSongArgs = {
   where: SongWhereUniqueInput;
 };
 
-export type MutationUpdateStationArgs = {
-  data: StationUpdateInput;
-  where: StationWhereUniqueInput;
-};
-
 export type MutationUpdateUserArgs = {
   data: UserUpdateInput;
   where: UserWhereUniqueInput;
@@ -170,6 +170,10 @@ export type MutationUpdateUserArgs = {
 
 export type MutationDeleteUserRoleArgs = {
   where: UserRoleWhereUniqueInput;
+};
+
+export type MutationDeleteStationArgs = {
+  where: StationWhereUniqueInput;
 };
 
 export type MutationDeleteStationTagArgs = {
@@ -180,10 +184,6 @@ export type MutationDeleteSongArgs = {
   where: SongWhereUniqueInput;
 };
 
-export type MutationDeleteStationArgs = {
-  where: StationWhereUniqueInput;
-};
-
 export type MutationDeleteUserArgs = {
   where: UserWhereUniqueInput;
 };
@@ -192,6 +192,12 @@ export type MutationUpsertUserRoleArgs = {
   where: UserRoleWhereUniqueInput;
   create: UserRoleCreateInput;
   update: UserRoleUpdateInput;
+};
+
+export type MutationUpsertStationArgs = {
+  where: StationWhereUniqueInput;
+  create: StationCreateInput;
+  update: StationUpdateInput;
 };
 
 export type MutationUpsertStationTagArgs = {
@@ -206,12 +212,6 @@ export type MutationUpsertSongArgs = {
   update: SongUpdateInput;
 };
 
-export type MutationUpsertStationArgs = {
-  where: StationWhereUniqueInput;
-  create: StationCreateInput;
-  update: StationUpdateInput;
-};
-
 export type MutationUpsertUserArgs = {
   where: UserWhereUniqueInput;
   create: UserCreateInput;
@@ -221,6 +221,11 @@ export type MutationUpsertUserArgs = {
 export type MutationUpdateManyUserRolesArgs = {
   data: UserRoleUpdateManyMutationInput;
   where?: Maybe<UserRoleWhereInput>;
+};
+
+export type MutationUpdateManyStationsArgs = {
+  data: StationUpdateManyMutationInput;
+  where?: Maybe<StationWhereInput>;
 };
 
 export type MutationUpdateManyStationTagsArgs = {
@@ -233,11 +238,6 @@ export type MutationUpdateManySongsArgs = {
   where?: Maybe<SongWhereInput>;
 };
 
-export type MutationUpdateManyStationsArgs = {
-  data: StationUpdateManyMutationInput;
-  where?: Maybe<StationWhereInput>;
-};
-
 export type MutationUpdateManyUsersArgs = {
   data: UserUpdateManyMutationInput;
   where?: Maybe<UserWhereInput>;
@@ -247,16 +247,16 @@ export type MutationDeleteManyUserRolesArgs = {
   where?: Maybe<UserRoleWhereInput>;
 };
 
+export type MutationDeleteManyStationsArgs = {
+  where?: Maybe<StationWhereInput>;
+};
+
 export type MutationDeleteManyStationTagsArgs = {
   where?: Maybe<StationTagWhereInput>;
 };
 
 export type MutationDeleteManySongsArgs = {
   where?: Maybe<SongWhereInput>;
-};
-
-export type MutationDeleteManyStationsArgs = {
-  where?: Maybe<StationWhereInput>;
 };
 
 export type MutationDeleteManyUsersArgs = {
@@ -314,19 +314,19 @@ export type PageInfo = {
 export type Query = {
   __typename?: 'Query';
   readonly userRoles: ReadonlyArray<Maybe<UserRole>>;
+  readonly stations: ReadonlyArray<Maybe<Station>>;
   readonly stationTags: ReadonlyArray<Maybe<StationTag>>;
   readonly songs: ReadonlyArray<Maybe<Song>>;
-  readonly stations: ReadonlyArray<Maybe<Station>>;
   readonly users: ReadonlyArray<Maybe<User>>;
   readonly userRole?: Maybe<UserRole>;
+  readonly station?: Maybe<Station>;
   readonly stationTag?: Maybe<StationTag>;
   readonly song?: Maybe<Song>;
-  readonly station?: Maybe<Station>;
   readonly user?: Maybe<User>;
   readonly userRolesConnection: UserRoleConnection;
+  readonly stationsConnection: StationConnection;
   readonly stationTagsConnection: StationTagConnection;
   readonly songsConnection: SongConnection;
-  readonly stationsConnection: StationConnection;
   readonly usersConnection: UserConnection;
   /** Fetches an object given its ID */
   readonly node?: Maybe<Node>;
@@ -338,6 +338,16 @@ export type Query = {
 export type QueryUserRolesArgs = {
   where?: Maybe<UserRoleWhereInput>;
   orderBy?: Maybe<UserRoleOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryStationsArgs = {
+  where?: Maybe<StationWhereInput>;
+  orderBy?: Maybe<StationOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -365,16 +375,6 @@ export type QuerySongsArgs = {
   last?: Maybe<Scalars['Int']>;
 };
 
-export type QueryStationsArgs = {
-  where?: Maybe<StationWhereInput>;
-  orderBy?: Maybe<StationOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
 export type QueryUsersArgs = {
   where?: Maybe<UserWhereInput>;
   orderBy?: Maybe<UserOrderByInput>;
@@ -389,16 +389,16 @@ export type QueryUserRoleArgs = {
   where: UserRoleWhereUniqueInput;
 };
 
+export type QueryStationArgs = {
+  where: StationWhereUniqueInput;
+};
+
 export type QueryStationTagArgs = {
   where: StationTagWhereUniqueInput;
 };
 
 export type QuerySongArgs = {
   where: SongWhereUniqueInput;
-};
-
-export type QueryStationArgs = {
-  where: StationWhereUniqueInput;
 };
 
 export type QueryUserArgs = {
@@ -408,6 +408,16 @@ export type QueryUserArgs = {
 export type QueryUserRolesConnectionArgs = {
   where?: Maybe<UserRoleWhereInput>;
   orderBy?: Maybe<UserRoleOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
+};
+
+export type QueryStationsConnectionArgs = {
+  where?: Maybe<StationWhereInput>;
+  orderBy?: Maybe<StationOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -428,16 +438,6 @@ export type QueryStationTagsConnectionArgs = {
 export type QuerySongsConnectionArgs = {
   where?: Maybe<SongWhereInput>;
   orderBy?: Maybe<SongOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-export type QueryStationsConnectionArgs = {
-  where?: Maybe<StationWhereInput>;
-  orderBy?: Maybe<StationOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -1119,10 +1119,20 @@ export type Station = Node & {
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
-  readonly owner: User;
+  readonly userRoles?: Maybe<ReadonlyArray<UserRole>>;
   readonly tags?: Maybe<ReadonlyArray<StationTag>>;
   readonly onlineUsers?: Maybe<ReadonlyArray<User>>;
   readonly songs?: Maybe<ReadonlyArray<Song>>;
+};
+
+export type StationUserRolesArgs = {
+  where?: Maybe<UserRoleWhereInput>;
+  orderBy?: Maybe<UserRoleOrderByInput>;
+  skip?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+  before?: Maybe<Scalars['String']>;
+  first?: Maybe<Scalars['Int']>;
+  last?: Maybe<Scalars['Int']>;
 };
 
 export type StationTagsArgs = {
@@ -1170,15 +1180,10 @@ export type StationCreateInput = {
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
-  readonly owner: UserCreateOneWithoutStationsInput;
+  readonly userRoles?: Maybe<UserRoleCreateManyWithoutStationInput>;
   readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
   readonly onlineUsers?: Maybe<UserCreateManyInput>;
   readonly songs?: Maybe<SongCreateManyWithoutStationInput>;
-};
-
-export type StationCreateManyWithoutOwnerInput = {
-  readonly create?: Maybe<ReadonlyArray<StationCreateWithoutOwnerInput>>;
-  readonly connect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
 };
 
 export type StationCreateManyWithoutTagsInput = {
@@ -1186,24 +1191,14 @@ export type StationCreateManyWithoutTagsInput = {
   readonly connect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
 };
 
-export type StationCreateOneInput = {
-  readonly create?: Maybe<StationCreateInput>;
-  readonly connect?: Maybe<StationWhereUniqueInput>;
-};
-
 export type StationCreateOneWithoutSongsInput = {
   readonly create?: Maybe<StationCreateWithoutSongsInput>;
   readonly connect?: Maybe<StationWhereUniqueInput>;
 };
 
-export type StationCreateWithoutOwnerInput = {
-  readonly id?: Maybe<Scalars['ID']>;
-  readonly name: Scalars['String'];
-  readonly slug: Scalars['String'];
-  readonly description?: Maybe<Scalars['String']>;
-  readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
-  readonly onlineUsers?: Maybe<UserCreateManyInput>;
-  readonly songs?: Maybe<SongCreateManyWithoutStationInput>;
+export type StationCreateOneWithoutUserRolesInput = {
+  readonly create?: Maybe<StationCreateWithoutUserRolesInput>;
+  readonly connect?: Maybe<StationWhereUniqueInput>;
 };
 
 export type StationCreateWithoutSongsInput = {
@@ -1211,7 +1206,7 @@ export type StationCreateWithoutSongsInput = {
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
-  readonly owner: UserCreateOneWithoutStationsInput;
+  readonly userRoles?: Maybe<UserRoleCreateManyWithoutStationInput>;
   readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
   readonly onlineUsers?: Maybe<UserCreateManyInput>;
 };
@@ -1221,7 +1216,17 @@ export type StationCreateWithoutTagsInput = {
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
   readonly description?: Maybe<Scalars['String']>;
-  readonly owner: UserCreateOneWithoutStationsInput;
+  readonly userRoles?: Maybe<UserRoleCreateManyWithoutStationInput>;
+  readonly onlineUsers?: Maybe<UserCreateManyInput>;
+  readonly songs?: Maybe<SongCreateManyWithoutStationInput>;
+};
+
+export type StationCreateWithoutUserRolesInput = {
+  readonly id?: Maybe<Scalars['ID']>;
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly tags?: Maybe<StationTagCreateManyWithoutStationsInput>;
   readonly onlineUsers?: Maybe<UserCreateManyInput>;
   readonly songs?: Maybe<SongCreateManyWithoutStationInput>;
 };
@@ -1702,21 +1707,11 @@ export type StationTagWhereUniqueInput = {
   readonly id?: Maybe<Scalars['ID']>;
 };
 
-export type StationUpdateDataInput = {
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
-  readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
-  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
-  readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
-};
-
 export type StationUpdateInput = {
   readonly name?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
-  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+  readonly userRoles?: Maybe<UserRoleUpdateManyWithoutStationInput>;
   readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
   readonly onlineUsers?: Maybe<UserUpdateManyInput>;
   readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
@@ -1732,18 +1727,6 @@ export type StationUpdateManyMutationInput = {
   readonly name?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
-};
-
-export type StationUpdateManyWithoutOwnerInput = {
-  readonly create?: Maybe<ReadonlyArray<StationCreateWithoutOwnerInput>>;
-  readonly connect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
-  readonly set?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
-  readonly disconnect?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
-  readonly delete?: Maybe<ReadonlyArray<StationWhereUniqueInput>>;
-  readonly update?: Maybe<ReadonlyArray<StationUpdateWithWhereUniqueWithoutOwnerInput>>;
-  readonly updateMany?: Maybe<ReadonlyArray<StationUpdateManyWithWhereNestedInput>>;
-  readonly deleteMany?: Maybe<ReadonlyArray<StationScalarWhereInput>>;
-  readonly upsert?: Maybe<ReadonlyArray<StationUpsertWithWhereUniqueWithoutOwnerInput>>;
 };
 
 export type StationUpdateManyWithoutTagsInput = {
@@ -1763,15 +1746,6 @@ export type StationUpdateManyWithWhereNestedInput = {
   readonly data: StationUpdateManyDataInput;
 };
 
-export type StationUpdateOneInput = {
-  readonly create?: Maybe<StationCreateInput>;
-  readonly connect?: Maybe<StationWhereUniqueInput>;
-  readonly disconnect?: Maybe<Scalars['Boolean']>;
-  readonly delete?: Maybe<Scalars['Boolean']>;
-  readonly update?: Maybe<StationUpdateDataInput>;
-  readonly upsert?: Maybe<StationUpsertNestedInput>;
-};
-
 export type StationUpdateOneRequiredWithoutSongsInput = {
   readonly create?: Maybe<StationCreateWithoutSongsInput>;
   readonly connect?: Maybe<StationWhereUniqueInput>;
@@ -1779,20 +1753,20 @@ export type StationUpdateOneRequiredWithoutSongsInput = {
   readonly upsert?: Maybe<StationUpsertWithoutSongsInput>;
 };
 
-export type StationUpdateWithoutOwnerDataInput = {
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-  readonly description?: Maybe<Scalars['String']>;
-  readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
-  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
-  readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
+export type StationUpdateOneWithoutUserRolesInput = {
+  readonly create?: Maybe<StationCreateWithoutUserRolesInput>;
+  readonly connect?: Maybe<StationWhereUniqueInput>;
+  readonly disconnect?: Maybe<Scalars['Boolean']>;
+  readonly delete?: Maybe<Scalars['Boolean']>;
+  readonly update?: Maybe<StationUpdateWithoutUserRolesDataInput>;
+  readonly upsert?: Maybe<StationUpsertWithoutUserRolesInput>;
 };
 
 export type StationUpdateWithoutSongsDataInput = {
   readonly name?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
-  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+  readonly userRoles?: Maybe<UserRoleUpdateManyWithoutStationInput>;
   readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
   readonly onlineUsers?: Maybe<UserUpdateManyInput>;
 };
@@ -1801,14 +1775,18 @@ export type StationUpdateWithoutTagsDataInput = {
   readonly name?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
   readonly description?: Maybe<Scalars['String']>;
-  readonly owner?: Maybe<UserUpdateOneRequiredWithoutStationsInput>;
+  readonly userRoles?: Maybe<UserRoleUpdateManyWithoutStationInput>;
   readonly onlineUsers?: Maybe<UserUpdateManyInput>;
   readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
 };
 
-export type StationUpdateWithWhereUniqueWithoutOwnerInput = {
-  readonly where: StationWhereUniqueInput;
-  readonly data: StationUpdateWithoutOwnerDataInput;
+export type StationUpdateWithoutUserRolesDataInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+  readonly description?: Maybe<Scalars['String']>;
+  readonly tags?: Maybe<StationTagUpdateManyWithoutStationsInput>;
+  readonly onlineUsers?: Maybe<UserUpdateManyInput>;
+  readonly songs?: Maybe<SongUpdateManyWithoutStationInput>;
 };
 
 export type StationUpdateWithWhereUniqueWithoutTagsInput = {
@@ -1816,20 +1794,14 @@ export type StationUpdateWithWhereUniqueWithoutTagsInput = {
   readonly data: StationUpdateWithoutTagsDataInput;
 };
 
-export type StationUpsertNestedInput = {
-  readonly update: StationUpdateDataInput;
-  readonly create: StationCreateInput;
-};
-
 export type StationUpsertWithoutSongsInput = {
   readonly update: StationUpdateWithoutSongsDataInput;
   readonly create: StationCreateWithoutSongsInput;
 };
 
-export type StationUpsertWithWhereUniqueWithoutOwnerInput = {
-  readonly where: StationWhereUniqueInput;
-  readonly update: StationUpdateWithoutOwnerDataInput;
-  readonly create: StationCreateWithoutOwnerInput;
+export type StationUpsertWithoutUserRolesInput = {
+  readonly update: StationUpdateWithoutUserRolesDataInput;
+  readonly create: StationCreateWithoutUserRolesInput;
 };
 
 export type StationUpsertWithWhereUniqueWithoutTagsInput = {
@@ -1983,7 +1955,9 @@ export type StationWhereInput = {
   readonly description_ends_with?: Maybe<Scalars['String']>;
   /** All values not ending with the given string. */
   readonly description_not_ends_with?: Maybe<Scalars['String']>;
-  readonly owner?: Maybe<UserWhereInput>;
+  readonly userRoles_every?: Maybe<UserRoleWhereInput>;
+  readonly userRoles_some?: Maybe<UserRoleWhereInput>;
+  readonly userRoles_none?: Maybe<UserRoleWhereInput>;
   readonly tags_every?: Maybe<StationTagWhereInput>;
   readonly tags_some?: Maybe<StationTagWhereInput>;
   readonly tags_none?: Maybe<StationTagWhereInput>;
@@ -2004,14 +1978,18 @@ export type StationWhereUniqueInput = {
 export type Subscription = {
   __typename?: 'Subscription';
   readonly userRole?: Maybe<UserRoleSubscriptionPayload>;
+  readonly station?: Maybe<StationSubscriptionPayload>;
   readonly stationTag?: Maybe<StationTagSubscriptionPayload>;
   readonly song?: Maybe<SongSubscriptionPayload>;
-  readonly station?: Maybe<StationSubscriptionPayload>;
   readonly user?: Maybe<UserSubscriptionPayload>;
 };
 
 export type SubscriptionUserRoleArgs = {
   where?: Maybe<UserRoleSubscriptionWhereInput>;
+};
+
+export type SubscriptionStationArgs = {
+  where?: Maybe<StationSubscriptionWhereInput>;
 };
 
 export type SubscriptionStationTagArgs = {
@@ -2020,10 +1998,6 @@ export type SubscriptionStationTagArgs = {
 
 export type SubscriptionSongArgs = {
   where?: Maybe<SongSubscriptionWhereInput>;
-};
-
-export type SubscriptionStationArgs = {
-  where?: Maybe<StationSubscriptionWhereInput>;
 };
 
 export type SubscriptionUserArgs = {
@@ -2064,22 +2038,11 @@ export type User = Node & {
   readonly facebookId?: Maybe<Scalars['String']>;
   readonly googleId?: Maybe<Scalars['String']>;
   readonly roles?: Maybe<ReadonlyArray<UserRole>>;
-  readonly stations?: Maybe<ReadonlyArray<Station>>;
 };
 
 export type UserRolesArgs = {
   where?: Maybe<UserRoleWhereInput>;
   orderBy?: Maybe<UserRoleOrderByInput>;
-  skip?: Maybe<Scalars['Int']>;
-  after?: Maybe<Scalars['String']>;
-  before?: Maybe<Scalars['String']>;
-  first?: Maybe<Scalars['Int']>;
-  last?: Maybe<Scalars['Int']>;
-};
-
-export type UserStationsArgs = {
-  where?: Maybe<StationWhereInput>;
-  orderBy?: Maybe<StationOrderByInput>;
   skip?: Maybe<Scalars['Int']>;
   after?: Maybe<Scalars['String']>;
   before?: Maybe<Scalars['String']>;
@@ -2112,7 +2075,6 @@ export type UserCreateInput = {
   readonly facebookId?: Maybe<Scalars['String']>;
   readonly googleId?: Maybe<Scalars['String']>;
   readonly roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
-  readonly stations?: Maybe<StationCreateManyWithoutOwnerInput>;
 };
 
 export type UserCreateManyInput = {
@@ -2130,11 +2092,6 @@ export type UserCreateOneWithoutRolesInput = {
   readonly connect?: Maybe<UserWhereUniqueInput>;
 };
 
-export type UserCreateOneWithoutStationsInput = {
-  readonly create?: Maybe<UserCreateWithoutStationsInput>;
-  readonly connect?: Maybe<UserWhereUniqueInput>;
-};
-
 export type UserCreateWithoutRolesInput = {
   readonly id?: Maybe<Scalars['ID']>;
   readonly email: Scalars['String'];
@@ -2149,24 +2106,6 @@ export type UserCreateWithoutRolesInput = {
   readonly reputation?: Maybe<Scalars['Int']>;
   readonly facebookId?: Maybe<Scalars['String']>;
   readonly googleId?: Maybe<Scalars['String']>;
-  readonly stations?: Maybe<StationCreateManyWithoutOwnerInput>;
-};
-
-export type UserCreateWithoutStationsInput = {
-  readonly id?: Maybe<Scalars['ID']>;
-  readonly email: Scalars['String'];
-  readonly username: Scalars['String'];
-  readonly password: Scalars['String'];
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly reputation?: Maybe<Scalars['Int']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
-  readonly roles?: Maybe<UserRoleCreateManyWithoutUserInput>;
 };
 
 /** An edge in a connection. */
@@ -2233,8 +2172,8 @@ export type UserPreviousValues = {
 export type UserRole = Node & {
   __typename?: 'UserRole';
   readonly id: Scalars['ID'];
-  readonly role: UserRoleEnum;
   readonly user: User;
+  readonly role: UserRoleEnum;
   readonly station?: Maybe<Station>;
 };
 
@@ -2252,7 +2191,12 @@ export type UserRoleCreateInput = {
   readonly id?: Maybe<Scalars['ID']>;
   readonly role: UserRoleEnum;
   readonly user: UserCreateOneWithoutRolesInput;
-  readonly station?: Maybe<StationCreateOneInput>;
+  readonly station?: Maybe<StationCreateOneWithoutUserRolesInput>;
+};
+
+export type UserRoleCreateManyWithoutStationInput = {
+  readonly create?: Maybe<ReadonlyArray<UserRoleCreateWithoutStationInput>>;
+  readonly connect?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
 };
 
 export type UserRoleCreateManyWithoutUserInput = {
@@ -2260,10 +2204,16 @@ export type UserRoleCreateManyWithoutUserInput = {
   readonly connect?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
 };
 
+export type UserRoleCreateWithoutStationInput = {
+  readonly id?: Maybe<Scalars['ID']>;
+  readonly role: UserRoleEnum;
+  readonly user: UserCreateOneWithoutRolesInput;
+};
+
 export type UserRoleCreateWithoutUserInput = {
   readonly id?: Maybe<Scalars['ID']>;
   readonly role: UserRoleEnum;
-  readonly station?: Maybe<StationCreateOneInput>;
+  readonly station?: Maybe<StationCreateOneWithoutUserRolesInput>;
 };
 
 /** An edge in a connection. */
@@ -2278,6 +2228,7 @@ export type UserRoleEdge = {
 export enum UserRoleEnum {
   Admin = 'ADMIN',
   StationOwner = 'STATION_OWNER',
+  StationAdmin = 'STATION_ADMIN',
 }
 
 export enum UserRoleOrderByInput {
@@ -2365,7 +2316,7 @@ export type UserRoleSubscriptionWhereInput = {
 export type UserRoleUpdateInput = {
   readonly role?: Maybe<UserRoleEnum>;
   readonly user?: Maybe<UserUpdateOneRequiredWithoutRolesInput>;
-  readonly station?: Maybe<StationUpdateOneInput>;
+  readonly station?: Maybe<StationUpdateOneWithoutUserRolesInput>;
 };
 
 export type UserRoleUpdateManyDataInput = {
@@ -2374,6 +2325,18 @@ export type UserRoleUpdateManyDataInput = {
 
 export type UserRoleUpdateManyMutationInput = {
   readonly role?: Maybe<UserRoleEnum>;
+};
+
+export type UserRoleUpdateManyWithoutStationInput = {
+  readonly create?: Maybe<ReadonlyArray<UserRoleCreateWithoutStationInput>>;
+  readonly connect?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly set?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly disconnect?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly delete?: Maybe<ReadonlyArray<UserRoleWhereUniqueInput>>;
+  readonly update?: Maybe<ReadonlyArray<UserRoleUpdateWithWhereUniqueWithoutStationInput>>;
+  readonly updateMany?: Maybe<ReadonlyArray<UserRoleUpdateManyWithWhereNestedInput>>;
+  readonly deleteMany?: Maybe<ReadonlyArray<UserRoleScalarWhereInput>>;
+  readonly upsert?: Maybe<ReadonlyArray<UserRoleUpsertWithWhereUniqueWithoutStationInput>>;
 };
 
 export type UserRoleUpdateManyWithoutUserInput = {
@@ -2393,14 +2356,30 @@ export type UserRoleUpdateManyWithWhereNestedInput = {
   readonly data: UserRoleUpdateManyDataInput;
 };
 
+export type UserRoleUpdateWithoutStationDataInput = {
+  readonly role?: Maybe<UserRoleEnum>;
+  readonly user?: Maybe<UserUpdateOneRequiredWithoutRolesInput>;
+};
+
 export type UserRoleUpdateWithoutUserDataInput = {
   readonly role?: Maybe<UserRoleEnum>;
-  readonly station?: Maybe<StationUpdateOneInput>;
+  readonly station?: Maybe<StationUpdateOneWithoutUserRolesInput>;
+};
+
+export type UserRoleUpdateWithWhereUniqueWithoutStationInput = {
+  readonly where: UserRoleWhereUniqueInput;
+  readonly data: UserRoleUpdateWithoutStationDataInput;
 };
 
 export type UserRoleUpdateWithWhereUniqueWithoutUserInput = {
   readonly where: UserRoleWhereUniqueInput;
   readonly data: UserRoleUpdateWithoutUserDataInput;
+};
+
+export type UserRoleUpsertWithWhereUniqueWithoutStationInput = {
+  readonly where: UserRoleWhereUniqueInput;
+  readonly update: UserRoleUpdateWithoutStationDataInput;
+  readonly create: UserRoleCreateWithoutStationInput;
 };
 
 export type UserRoleUpsertWithWhereUniqueWithoutUserInput = {
@@ -2876,7 +2855,6 @@ export type UserUpdateDataInput = {
   readonly facebookId?: Maybe<Scalars['String']>;
   readonly googleId?: Maybe<Scalars['String']>;
   readonly roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
-  readonly stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
 };
 
 export type UserUpdateInput = {
@@ -2893,7 +2871,6 @@ export type UserUpdateInput = {
   readonly facebookId?: Maybe<Scalars['String']>;
   readonly googleId?: Maybe<Scalars['String']>;
   readonly roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
-  readonly stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
 };
 
 export type UserUpdateManyDataInput = {
@@ -2957,13 +2934,6 @@ export type UserUpdateOneRequiredWithoutRolesInput = {
   readonly upsert?: Maybe<UserUpsertWithoutRolesInput>;
 };
 
-export type UserUpdateOneRequiredWithoutStationsInput = {
-  readonly create?: Maybe<UserCreateWithoutStationsInput>;
-  readonly connect?: Maybe<UserWhereUniqueInput>;
-  readonly update?: Maybe<UserUpdateWithoutStationsDataInput>;
-  readonly upsert?: Maybe<UserUpsertWithoutStationsInput>;
-};
-
 export type UserUpdateWithoutRolesDataInput = {
   readonly email?: Maybe<Scalars['String']>;
   readonly username?: Maybe<Scalars['String']>;
@@ -2977,23 +2947,6 @@ export type UserUpdateWithoutRolesDataInput = {
   readonly reputation?: Maybe<Scalars['Int']>;
   readonly facebookId?: Maybe<Scalars['String']>;
   readonly googleId?: Maybe<Scalars['String']>;
-  readonly stations?: Maybe<StationUpdateManyWithoutOwnerInput>;
-};
-
-export type UserUpdateWithoutStationsDataInput = {
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-  readonly password?: Maybe<Scalars['String']>;
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly reputation?: Maybe<Scalars['Int']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
-  readonly roles?: Maybe<UserRoleUpdateManyWithoutUserInput>;
 };
 
 export type UserUpdateWithWhereUniqueNestedInput = {
@@ -3009,11 +2962,6 @@ export type UserUpsertNestedInput = {
 export type UserUpsertWithoutRolesInput = {
   readonly update: UserUpdateWithoutRolesDataInput;
   readonly create: UserCreateWithoutRolesInput;
-};
-
-export type UserUpsertWithoutStationsInput = {
-  readonly update: UserUpdateWithoutStationsDataInput;
-  readonly create: UserCreateWithoutStationsInput;
 };
 
 export type UserUpsertWithWhereUniqueNestedInput = {
@@ -3401,9 +3349,6 @@ export type UserWhereInput = {
   readonly roles_every?: Maybe<UserRoleWhereInput>;
   readonly roles_some?: Maybe<UserRoleWhereInput>;
   readonly roles_none?: Maybe<UserRoleWhereInput>;
-  readonly stations_every?: Maybe<StationWhereInput>;
-  readonly stations_some?: Maybe<StationWhereInput>;
-  readonly stations_none?: Maybe<StationWhereInput>;
 };
 
 export type UserWhereUniqueInput = {
@@ -3517,7 +3462,13 @@ export type StationQuery = { readonly __typename?: 'Query' } & {
   readonly station: Maybe<
     { readonly __typename?: 'Station' } & Pick<Station, 'id' | 'name' | 'slug'> & {
         readonly tags: Maybe<ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>>;
-        readonly owner: { readonly __typename?: 'User' } & Pick<User, 'id'>;
+        readonly userRoles: Maybe<
+          ReadonlyArray<
+            { readonly __typename?: 'UserRole' } & {
+              readonly user: { readonly __typename?: 'User' } & UserBaseInformationFragment;
+            }
+          >
+        >;
       }
   >;
 };
@@ -3563,7 +3514,13 @@ export type StationsQuery = { readonly __typename?: 'Query' } & {
     Maybe<
       { readonly __typename?: 'Station' } & Pick<Station, 'id' | 'name' | 'slug'> & {
           readonly tags: Maybe<ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>>;
-          readonly owner: { readonly __typename?: 'User' } & Pick<User, 'id'>;
+          readonly userRoles: Maybe<
+            ReadonlyArray<
+              { readonly __typename?: 'UserRole' } & {
+                readonly user: { readonly __typename?: 'User' } & UserBaseInformationFragment;
+              }
+            >
+          >;
         }
     >
   >;
@@ -3589,13 +3546,17 @@ export type UserProfileQuery = { readonly __typename?: 'Query' } & {
       | 'googleId'
       | 'facebookId'
     > & {
-        readonly stations: Maybe<
+        readonly roles: Maybe<
           ReadonlyArray<
-            { readonly __typename?: 'Station' } & Pick<Station, 'name' | 'slug' | 'description'> & {
-                readonly tags: Maybe<
-                  ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>
-                >;
-              }
+            { readonly __typename?: 'UserRole' } & {
+              readonly station: Maybe<
+                { readonly __typename?: 'Station' } & Pick<Station, 'name' | 'slug' | 'description'> & {
+                    readonly tags: Maybe<
+                      ReadonlyArray<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>
+                    >;
+                  }
+              >;
+            }
           >
         >;
       }
@@ -3922,11 +3883,14 @@ export const StationDocument = gql`
         id
         name
       }
-      owner {
-        id
+      userRoles(where: { role: STATION_OWNER }) {
+        user {
+          ...UserBaseInformation
+        }
       }
     }
   }
+  ${UserBaseInformationFragmentDoc}
 `;
 export type StationProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationQuery, StationQueryVariables>> &
   TChildProps;
@@ -4041,11 +4005,14 @@ export const StationsDocument = gql`
         id
         name
       }
-      owner {
-        id
+      userRoles(where: { role: STATION_OWNER }) {
+        user {
+          ...UserBaseInformation
+        }
       }
     }
   }
+  ${UserBaseInformationFragmentDoc}
 `;
 export type StationsProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationsQuery, StationsQueryVariables>> &
   TChildProps;
@@ -4083,13 +4050,15 @@ export const UserProfileDocument = gql`
       country
       googleId
       facebookId
-      stations {
-        name
-        slug
-        description
-        tags {
-          id
+      roles(where: { role_in: [STATION_OWNER, STATION_ADMIN] }) {
+        station {
           name
+          slug
+          description
+          tags {
+            id
+            name
+          }
         }
       }
     }

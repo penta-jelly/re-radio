@@ -41,12 +41,10 @@ export class AuthorizationGuard implements CanActivate {
       );
     }
 
-    const [roles, stations] = await Promise.all([
-      this.prisma.query.userRoles({ where: { user: { id: user.id } } }),
-      this.prisma.query.stations({ where: { owner: { id: user.id } } }),
-    ]);
-    user.roles = roles;
-    user.stations = stations;
+    user.roles = await this.prisma.query.userRoles(
+      { where: { user: { id: user.id } } },
+      `{ id  role station { id name slug } }`,
+    );
 
     if (user.roles) {
       const result = await Promise.all(

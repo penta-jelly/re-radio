@@ -1,10 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsEmail, IsNotEmpty, IsOptional, IsUrl, Length, ValidateNested } from 'class-validator';
-import {
-  StationCreateManyWithoutOwnerInput,
-  UserCreateInput,
-  UserRoleCreateManyWithoutUserInput,
-} from 'prisma/prisma.binding';
+import { UserCreateInput, UserRoleCreateManyWithoutUserInput } from 'prisma/prisma.binding';
 
 export class UserCreateDTO implements UserCreateInput {
   @IsNotEmpty()
@@ -34,7 +30,6 @@ export class UserCreateDTO implements UserCreateInput {
   username: string;
 
   roles?: UserRoleCreateManyWithoutUserInput | null;
-  stations?: StationCreateManyWithoutOwnerInput | null;
 }
 
 export class UserCreateInputDTO {

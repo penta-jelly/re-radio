@@ -28,7 +28,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
     if (this.isValidationError(error.message)) {
       formattedError = {
         ...error,
-        message: this.formatValidationError(error.message),
+        message: this.formatValidationError(error.message.message),
       };
     } else if (this.isHttpExceptionError(error.message)) {
       formattedError = {
@@ -61,8 +61,8 @@ export class GraphqlOptions implements GqlOptionsFactory {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private isValidationError(object: any): object is ValidationError[] {
-    if (object && Array.isArray(object) && object[0] && object[0].target) {
+  private isValidationError(object: any): object is { statusCode: number; error: string; message: ValidationError[] } {
+    if (object && object.message && Array.isArray(object.message) && object.message[0] && object.message[0].target) {
       return true;
     }
     return false;

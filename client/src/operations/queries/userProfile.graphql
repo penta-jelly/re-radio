@@ -11,11 +11,16 @@ query UserProfile($where: UserWhereUniqueInput!) {
     country
     googleId
     facebookId
-    stations {
-      name
-      slug
-      description
-      tags { id name }
+    roles(where: { role_in: [STATION_OWNER, STATION_ADMIN] }) {
+      station {
+        name
+        slug
+        description
+        tags {
+          id
+          name
+        }
+      }
     }
   }
 }

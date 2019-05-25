@@ -55,22 +55,16 @@ export class AuthService {
     const { username, email, password } = payload;
     let users: User[];
     try {
-      users = await this.prisma.query.users(
-        { where: { username, email } },
-        `{
-          id createdAt updatedAt email username password name country city bio avatarUrl coverUrl reputation facebookId googleId
-          password
-          roles { id  role }
-        }`,
-      );
+      users = await this.prisma.query.users({ where: { username, email } });
     } catch (error) {
       throw new UnauthorizedException(error.message);
     }
     if (users.length === 0) {
       throw new UnauthorizedException('User not found');
     }
-    if (users.length > 1)
+    if (users.length > 1) {
       throw new InternalServerErrorException('JWT is broken due to duplicated query results for 1 unique user');
+    }
     const [user] = users;
     if (user.password !== password) throw new UnauthorizedException();
     return user;

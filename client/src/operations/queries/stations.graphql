@@ -7,8 +7,8 @@ query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: Sta
       id
       name
     }
-    owner {
-      id
+    userRoles(where: { role: STATION_OWNER }) {
+      user { ...UserBaseInformation }
     }
   }
 }
