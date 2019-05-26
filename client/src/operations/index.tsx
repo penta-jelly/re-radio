@@ -481,7 +481,7 @@ export type Snippet = {
   readonly description: Scalars['String'];
   readonly thumbnails: Thumbnails;
   readonly channelTitle: Scalars['String'];
-  readonly tags: ReadonlyArray<Scalars['String']>;
+  readonly tags?: Maybe<ReadonlyArray<Scalars['String']>>;
   readonly categoryId: Scalars['String'];
   readonly defaultAudioLanguage?: Maybe<Scalars['String']>;
   readonly liveBroadcastContent?: Maybe<Scalars['String']>;
@@ -3356,6 +3356,14 @@ export type UserWhereUniqueInput = {
   readonly email?: Maybe<Scalars['String']>;
   readonly username?: Maybe<Scalars['String']>;
 };
+export type CreateSongMutationVariables = {
+  data: SongCreateInput;
+};
+
+export type CreateSongMutation = { readonly __typename?: 'Mutation' } & {
+  readonly createSong: { readonly __typename?: 'Song' } & Pick<Song, 'id'>;
+};
+
 export type LoginMutationVariables = {
   data: LoginInput;
 };
@@ -3593,6 +3601,42 @@ export const PlayingSongFragmentDoc = gql`
   }
   ${UserBaseInformationFragmentDoc}
 `;
+export const CreateSongDocument = gql`
+  mutation CreateSong($data: SongCreateInput!) {
+    createSong(data: $data) {
+      id
+    }
+  }
+`;
+export type CreateSongMutationFn = ReactApollo.MutationFn<CreateSongMutation, CreateSongMutationVariables>;
+export type CreateSongProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<CreateSongMutation, CreateSongMutationVariables>
+> &
+  TChildProps;
+export function withCreateSong<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    CreateSongMutation,
+    CreateSongMutationVariables,
+    CreateSongProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    CreateSongMutation,
+    CreateSongMutationVariables,
+    CreateSongProps<TChildProps>
+  >(CreateSongDocument, {
+    alias: 'withCreateSong',
+    ...operationOptions,
+  });
+}
+
+export function useCreateSongMutation(
+  baseOptions?: ReactApolloHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>,
+) {
+  return ReactApolloHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
+}
 export const LoginDocument = gql`
   mutation login($data: LoginInput!) {
     login(data: $data) {

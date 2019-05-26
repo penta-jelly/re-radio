@@ -16,7 +16,7 @@ type Snippet {
   description: String!
   thumbnails: Thumbnails!
   channelTitle: String!
-  tags: [String!]!
+  tags: [String!]
   categoryId: String!
   defaultAudioLanguage: String
   liveBroadcastContent: String

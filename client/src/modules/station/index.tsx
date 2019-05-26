@@ -28,10 +28,10 @@ export const StationLayout: React.FC<{}> = () => {
           </Grid>
           <Grid item xs={6} className={classes.rightLayout}>
             <Grid container className={classes.rightContainer} spacing={2}>
-              <Grid item xs={12}>
+              <Grid item xs={12} className={classes.playerContainer}>
                 <Player />
               </Grid>
-              <Grid item xs={12}>
+              <Grid item xs={12} className={classes.addSongContainer}>
                 <AddSong />
               </Grid>
             </Grid>
