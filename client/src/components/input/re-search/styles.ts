@@ -24,7 +24,12 @@ export const useStyles = makeStyles((theme: Theme) => ({
     },
   },
   icon: {
+    padding: theme.spacing(0.75),
+    margin: theme.spacing(-0.75),
     color: 'rgba(0, 0, 0, 0.4)',
     transition: 'color 0.4s ease-in-out',
+  },
+  fullWidth: {
+    width: '100%',
   },
 }));

@@ -1,10 +1,14 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles(({ spacing }: Theme) => ({
+  card: {
+    height: '100%',
+    padding: spacing(2),
+  },
   container: {
     height: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+  },
+  wrapper: {
+    height: '100%',
   },
 }));

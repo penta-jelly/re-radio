@@ -15,4 +15,10 @@ export const useStyles = makeStyles(() => ({
     height: '100%',
     margin: '0 -8px',
   },
+  playerContainer: {
+    height: '60%',
+  },
+  addSongContainer: {
+    height: '40%',
+  },
 }));

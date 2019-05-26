@@ -13,7 +13,6 @@ describe('Show Station Page', () => {
       cy.contains(stationPage.elements.headerText).should('exist');
       cy.contains(stationPage.elements.chatBoxText).should('exist');
       cy.contains(stationPage.elements.playlistText).should('exist');
-      cy.contains(stationPage.elements.addSongText).should('exist');
     });
   });
 
@@ -44,5 +43,21 @@ describe('Station Page components', () => {
         .find('h4, h6')
         .should('be.visible');
     });
+  });
+});
+
+describe('Add a song', () => {
+  const stationPage = StationPage();
+
+  it('should be able to add a song to the playlist', () => {
+    stationPage.navigate('station-a', true);
+
+    stationPage.checkRenderingOfAddSong();
+    stationPage.searchSong('hello');
+
+    stationPage.checkRenderingOfPreviewSong();
+
+    stationPage.addSong();
+    stationPage.checkRenderingOfAddSong();
   });
 });

@@ -20,6 +20,9 @@ export class SongsExplorerResolver {
 
   @Query('songExplorers')
   async exploreSongs(@Args() args: SongExplorersWhereInputDTO) {
+    if (args.where.q.length < 1) {
+      return [];
+    }
     return this.youtubeService.searchVideos(args.where);
   }
 }
