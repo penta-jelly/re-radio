@@ -1,5 +1,24 @@
 {
   "extends": [
     "config:base"
+  ],
+  "automerge": true,
+  "automergeType": "branch",
+  "packageRules": [
+    {
+      "packageNames": ["prismagraphql/prisma", "prisma"],
+      "groupName": "prisma",
+      "automerge": false
+    },
+    {
+      "packagePatterns": ["^eslint", "^prettier"],
+      "groupName": "prettier and eslint",
+      "automerge": false
+    },
+    {
+      "packagePatterns": ["^@graphql-codegen"],
+      "groupName": "@graphql-codegen",
+      "automerge": false
+    }
   ]
 }
