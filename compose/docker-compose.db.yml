@@ -18,7 +18,7 @@ services:
             migrations: true
   db:
     container_name: re-radio_db
-    image: postgres:10-alpine
+    image: postgres:10.8-alpine
     restart: "no"
     environment:
       POSTGRES_USER: ${DB_USER}

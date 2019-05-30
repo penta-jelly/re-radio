@@ -39,7 +39,7 @@ export class RealTimeSongsWorkerService {
       await this.updatePlayedSongAndPlayNextSong(song);
     } else {
       this.logger.debug(`Song [${song.id}] will be timed out in ${duration} milliseconds`);
-      this.playersMap[song.station.id] = setTimeout(() => this.updatePlayedSongAndPlayNextSong(song), duration);
+      this.playersMap[song.station.id] = global.setTimeout(() => this.updatePlayedSongAndPlayNextSong(song), duration);
     }
   }
 
