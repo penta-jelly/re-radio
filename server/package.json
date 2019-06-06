@@ -21,12 +21,12 @@
     "worker:seed": "npm run worker -- seed"
   },
   "dependencies": {
-    "@nestjs/common": "6.3.0",
-    "@nestjs/core": "6.3.0",
+    "@nestjs/common": "6.3.1",
+    "@nestjs/core": "6.3.1",
     "@nestjs/graphql": "6.2.4",
     "@nestjs/jwt": "6.1.1",
     "@nestjs/passport": "6.1.0",
-    "@nestjs/platform-express": "6.3.0",
+    "@nestjs/platform-express": "6.3.1",
     "apollo-server-express": "2.6.1",
     "bcrypt-nodejs": "0.0.3",
     "class-transformer": "0.2.3",
