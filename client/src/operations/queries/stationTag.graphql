@@ -1,0 +1,6 @@
+query StationTags($name: String!) {
+  stationTags(where:{name: $name}) {
+    id
+    name
+  }
+}

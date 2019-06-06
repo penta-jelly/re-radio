@@ -1,0 +1,7 @@
+mutation CreateStation($data: StationCreateInput!) {
+  createStation(data: $data) {
+    id
+    slug
+    name
+  }
+}

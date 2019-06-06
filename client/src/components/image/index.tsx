@@ -14,7 +14,7 @@ export const Image: React.FC<Props> = props => {
 
   const fallBackUrl = React.useMemo(() => fallbackSrc || defaultSrc, [fallbackSrc]);
 
-  const isUrl = React.useCallback((input: string) => /(http|data:image)/.test(input), []);
+  const isUrl = React.useCallback((input: string) => /(http|data:image|\/asset\/)/.test(input), []);
 
   const url: string = React.useMemo(() => {
     if (!props.src) {
