@@ -9,7 +9,7 @@ interface Props extends InputBaseProps {
   onIconClick?(): void;
 }
 
-export const ReSearch: React.FC<Props> = ({ icon, className, onBlur, onFocus, onIconClick, ...rest }) => {
+export const ReSearch: React.FC<Props> = ({ icon, onBlur, onFocus, onIconClick, ...rest }) => {
   const classes = useStyles();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const handleInputFocus = useCallback(
@@ -31,18 +31,18 @@ export const ReSearch: React.FC<Props> = ({ icon, className, onBlur, onFocus, on
     [onBlur],
   );
 
-  const classNames = useMemo(
+  const className = useMemo(
     () =>
-      [classes.root, isInputFocused ? classes.rootFocused : '', rest.fullWidth ? classes.fullWidth : '', className]
+      [classes.root, isInputFocused ? classes.rootFocused : '', rest.fullWidth ? classes.fullWidth : '', rest.className]
         .join(' ')
         .trim(),
-    [className, classes.fullWidth, classes.root, classes.rootFocused, isInputFocused, rest.fullWidth],
+    [classes.fullWidth, classes.root, classes.rootFocused, isInputFocused, rest.fullWidth, rest.className],
   );
 
   const isNotEmpty = useMemo(() => !!rest.value, [rest.value]);
 
   return (
-    <div className={[classes.root, isInputFocused ? classes.rootFocused : '', className].join(' ').trim()}>
+    <div className={className}>
       <InputBase type="text" {...rest} onFocus={handleInputFocus} onBlur={handleInputBlur} />
       {icon || (
         <IconButton onClick={onIconClick} className={classes.icon} id={isNotEmpty ? 'close-button' : 'search-button'}>

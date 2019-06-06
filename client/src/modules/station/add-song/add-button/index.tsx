@@ -68,7 +68,15 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
         console.error(e);
       }
     }
-  }, [currentUserQuery, songExplorerQuery, match, postSubmit]);
+  }, [
+    currentUserQuery.loading,
+    currentUserQuery.data,
+    songExplorerQuery.loading,
+    songExplorerQuery.data,
+    addSong,
+    match.params.slug,
+    postSubmit,
+  ]);
 
   return (
     <Grid item xs={12} className={classes.submitButtonContainer}>

@@ -1,8 +1,7 @@
 import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
 import { Formik, FormikActions } from 'formik';
-
 import { RegisterInput, useRegisterMutation } from 'operations';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { RouteComponentProps } from 'react-router';

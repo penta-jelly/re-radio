@@ -1,4 +1,4 @@
-import { BadRequestException, UseGuards } from '@nestjs/common';
+import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { BatchPayload, StationTag } from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
