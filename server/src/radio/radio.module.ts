@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { RadioController } from './radio.controller';
 import { SongsExplorerModule } from './songs-explorer/songs-explorer.module';
 import { SongsModule } from './songs/songs.module';
+import { StationTagsModule } from './station-tags/station-tags.module';
 import { StationsModule } from './stations/stations.module';
 import { UsersModule } from './users/users.module';
 
@@ -19,6 +20,7 @@ import { UsersModule } from './users/users.module';
     UsersModule,
     AuthModule,
     StationsModule,
+    StationTagsModule,
     SongsModule,
     SongsExplorerModule,
   ],

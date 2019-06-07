@@ -3364,6 +3364,14 @@ export type CreateSongMutation = { readonly __typename?: 'Mutation' } & {
   readonly createSong: { readonly __typename?: 'Song' } & Pick<Song, 'id'>;
 };
 
+export type CreateStationMutationVariables = {
+  data: StationCreateInput;
+};
+
+export type CreateStationMutation = { readonly __typename?: 'Mutation' } & {
+  readonly createStation: { readonly __typename?: 'Station' } & Pick<Station, 'id' | 'slug' | 'name'>;
+};
+
 export type LoginMutationVariables = {
   data: LoginInput;
 };
@@ -3534,6 +3542,14 @@ export type StationsQuery = { readonly __typename?: 'Query' } & {
   >;
 };
 
+export type StationTagsQueryVariables = {
+  name: Scalars['String'];
+};
+
+export type StationTagsQuery = { readonly __typename?: 'Query' } & {
+  readonly stationTags: ReadonlyArray<Maybe<{ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>>>;
+};
+
 export type UserProfileQueryVariables = {
   where: UserWhereUniqueInput;
 };
@@ -3636,6 +3652,47 @@ export function useCreateSongMutation(
   baseOptions?: ReactApolloHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>,
 ) {
   return ReactApolloHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
+}
+export const CreateStationDocument = gql`
+  mutation CreateStation($data: StationCreateInput!) {
+    createStation(data: $data) {
+      id
+      slug
+      name
+    }
+  }
+`;
+export type CreateStationMutationFn = ReactApollo.MutationFn<CreateStationMutation, CreateStationMutationVariables>;
+export type CreateStationProps<TChildProps = {}> = Partial<
+  ReactApollo.MutateProps<CreateStationMutation, CreateStationMutationVariables>
+> &
+  TChildProps;
+export function withCreateStation<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    CreateStationMutation,
+    CreateStationMutationVariables,
+    CreateStationProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withMutation<
+    TProps,
+    CreateStationMutation,
+    CreateStationMutationVariables,
+    CreateStationProps<TChildProps>
+  >(CreateStationDocument, {
+    alias: 'withCreateStation',
+    ...operationOptions,
+  });
+}
+
+export function useCreateStationMutation(
+  baseOptions?: ReactApolloHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>,
+) {
+  return ReactApolloHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(
+    CreateStationDocument,
+    baseOptions,
+  );
 }
 export const LoginDocument = gql`
   mutation login($data: LoginInput!) {
@@ -4079,6 +4136,38 @@ export function withStations<TProps, TChildProps = {}>(
 
 export function useStationsQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationsQueryVariables>) {
   return ReactApolloHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+}
+export const StationTagsDocument = gql`
+  query StationTags($name: String!) {
+    stationTags(where: { name: $name }) {
+      id
+      name
+    }
+  }
+`;
+export type StationTagsProps<TChildProps = {}> = Partial<
+  ReactApollo.DataProps<StationTagsQuery, StationTagsQueryVariables>
+> &
+  TChildProps;
+export function withStationTags<TProps, TChildProps = {}>(
+  operationOptions?: ReactApollo.OperationOption<
+    TProps,
+    StationTagsQuery,
+    StationTagsQueryVariables,
+    StationTagsProps<TChildProps>
+  >,
+) {
+  return ReactApollo.withQuery<TProps, StationTagsQuery, StationTagsQueryVariables, StationTagsProps<TChildProps>>(
+    StationTagsDocument,
+    {
+      alias: 'withStationTags',
+      ...operationOptions,
+    },
+  );
+}
+
+export function useStationTagsQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationTagsQueryVariables>) {
+  return ReactApolloHooks.useQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
 }
 export const UserProfileDocument = gql`
   query UserProfile($where: UserWhereUniqueInput!) {

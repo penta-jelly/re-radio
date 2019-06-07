@@ -38,7 +38,7 @@ export default (url: string = '/login') => ({
       throw new Error('Either user or email is required');
     }
 
-    cy.get(this.elements.emailInput).type(email || username || '');
+    cy.get(this.elements.emailInput).type(username || email || '');
     cy.get(this.elements.passwordInput).type(password);
   },
 

@@ -1,5 +1,5 @@
 import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
-import { Formik } from 'formik';
+import { Formik, FormikActions } from 'formik';
 
 import { RegisterInput, useRegisterMutation } from 'operations';
 import React, { useCallback, useState } from 'react';
@@ -15,12 +15,9 @@ type Data = { [key in DataKeys]: string };
 const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
   const registerMutation = useRegisterMutation();
-  const [registerError, setRegisterError] = useState<string | null>(null);
   const { t } = useTranslation('common');
   const onRegister = useCallback(
-    async (values: Data) => {
-      setRegisterError(null);
-
+    async (values: Data, formik: FormikActions<Data>) => {
       try {
         const response = await registerMutation({
           variables: {
@@ -32,12 +29,10 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
           history.replace('/');
           return;
         }
-
-        if (response.errors) {
-          setRegisterError(response.errors[0].message);
-        }
       } catch (error) {
-        setRegisterError(error.message);
+        formik.setStatus(error.message);
+      } finally {
+        formik.setSubmitting(false);
       }
     },
     [history, registerMutation],
@@ -57,12 +52,12 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
         })}
         onSubmit={onRegister}
       >
-        {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
+        {({ values, isSubmitting, handleSubmit, handleChange, handleBlur, touched, errors, status }) => (
           <form noValidate onSubmit={handleSubmit} className={classNames.form} method="POST">
             <Typography variant="h3" gutterBottom align="center">
               {t('register')}
             </Typography>
-            {registerError && <FormHelperText error>{registerError}</FormHelperText>}
+            {status && <FormHelperText error>{status}</FormHelperText>}
             <TextField
               variant="outlined"
               value={values.email}
@@ -111,6 +106,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
               type="submit"
               id="register-button"
               className={classNames.button}
+              disabled={isSubmitting}
             >
               Register
             </Button>
