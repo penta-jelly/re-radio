@@ -5,7 +5,7 @@
   "scripts": {
     "lint": "eslint --ext .ts src/",
     "type-check": "tsc --noEmit",
-    "format": "prettier --write \"src/**/*.ts\" --ignore-path src/prisma/prisma.binding.ts && eslint --fix --ext .ts src/",
+    "format": "prettier --write \"src/**/*.ts\" && eslint --fix --ext .ts src/",
     "start": "ts-node src/radio.ts",
     "start:real-time-radio": "ts-node src/real-time-radio.ts",
     "dev": "ts-node-dev --no-deps --respawn --poll --interval 1000 src/radio.ts",
@@ -58,7 +58,7 @@
     "eslint": "5.16.0",
     "eslint-config-prettier": "4.3.0",
     "eslint-plugin-prettier": "3.1.0",
-    "prettier": "1.17.1",
+    "prettier": "1.18.0",
     "ts-node": "8.2.0",
     "ts-node-dev": "1.0.0-pre.39",
     "tsconfig-paths": "3.8.0",
