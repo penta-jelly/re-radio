@@ -60,7 +60,7 @@
     "eslint-plugin-prettier": "3.1.0",
     "prettier": "1.18.0",
     "ts-node": "8.2.0",
-    "ts-node-dev": "1.0.0-pre.39",
+    "ts-node-dev": "1.0.0-pre.40",
     "tsconfig-paths": "3.8.0",
     "typescript": "3.5.1"
   },
