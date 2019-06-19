@@ -1,0 +1,39 @@
+{
+  "name": "re-radio",
+  "scripts": {
+    "preinstall": "bash preinstall.sh",
+    "postinstall": "lerna bootstrap",
+    "postci": "lerna bootstrap --ci",
+    "format": "lerna run format",
+    "prestart": "bash prestart.sh",
+    "start": "run-p start:server start:client",
+    "start:server": "run-p start:server:**",
+    "start:server:deploy": "cd server && npm run prisma -- deploy",
+    "start:server:graphql": "cd server && npm run start:graphql",
+    "start:server:real-time": "cd server && npm run start:real-time",
+    "start:client": "cd client && npm start",
+    "predev": "bash prestart.sh",
+    "dev": "run-p dev:server dev:client",
+    "dev:server": "run-p dev:server:**",
+    "dev:server:deploy": "cd server && npm run prisma -- deploy --force",
+    "dev:server:graphql": "cd server && npm run dev:graphql",
+    "dev:server:real-time": "cd server && npm run dev:real-time",
+    "dev:client": "cd client && npm start",
+    "prisma": "docker-compose -f ./compose/docker-compose.db.yml -f ./compose/docker-compose.dev.yml --project-directory . up"
+  },
+  "devDependencies": {
+    "lerna": "3.15.0",
+    "npm-run-all": "4.1.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penta-jelly/re-radio.git"
+  },
+  "description": "[![Build Status](https://travis-ci.org/penta-jelly/re-radio.svg?branch=master)](https://travis-ci.org/penta-jelly/re-radio)\r [![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/nn2y5c/runs)\r [![Renovate](https://badges.renovateapi.com/github/penta-jelly/re-radio)](https://renovatebot.com/)\r [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio?ref=badge_shield)",
+  "author": "@penta-jelly",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/penta-jelly/re-radio/issues"
+  },
+  "homepage": "https://github.com/penta-jelly/re-radio#readme"
+}

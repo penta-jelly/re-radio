@@ -2,38 +2,4 @@ version: "3.7"
 services:
   prisma:
     ports:
-      - "${PRISMA_PORT}:${PRISMA_PORT}"
-  graphql_service:
-    container_name: re-radio_graphql_service
-    build:
-      context: ./server
-      dockerfile: Dockerfile.dev
-    ports:
-      - "8000:8000"
-    command: >
-      sh -c "npx wait-on http://prisma:${PRISMA_PORT} && npm run prisma:deploy --force && npm run dev"
-    volumes:
-      - ./server:/user/app
-      - ./server/node_modules:/user/app/node_modules
-  real-time_service:
-    container_name: re-radio_real-time_service
-    build:
-      context: ./server
-      dockerfile: Dockerfile.dev
-    volumes:
-      - ./server:/user/app
-      - ./server/node_modules:/user/app/node_modules
-    command: >
-      sh -c "npx wait-on http://graphql_service:8000/status && npm run dev:real-time-radio"
-  client:
-    container_name: re-radio_client
-    build:
-      context: ./client
-      dockerfile: Dockerfile.dev
-    ports:
-      - "3000:3000"
-    environment:
-      - "CHOKIDAR_USEPOLLING=true"
-    volumes:
-      - ./client:/usr/src/app
-      - ./client/node_modules:/usr/src/app/node_modules
+      - "4466:4466"

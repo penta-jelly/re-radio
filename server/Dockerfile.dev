@@ -1,7 +1,0 @@
-FROM node:10.16.0-alpine
-
-WORKDIR /user/app
-
-COPY .env.example .env
-
-CMD [ "npm", "start" ]

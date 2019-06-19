@@ -1,22 +1,5 @@
 #!/bin/bash
 
-function installDepedencies () {
-  echo "Start installing NPM dependencies"
-
-  cd server
-  npm ci
-
-  cd ..
-  cd client
-  npm ci
-
-  cd ..
-  cd e2e
-  npm ci
-
-  echo "Finish installing NPM dependencies"
-}
-
 function configEnvValues () {
   result="n"
   read -p "Do you want to config the environment variables? (y/n) " result
@@ -34,6 +17,7 @@ function configEnvValues () {
     cp server/.env.example server/.env
     
     # Specify which environment variable has to be defined
+    replaceEnvValue "PRISMA_ENDPOINT" ./server/.env
     replaceEnvValue "YOUTUBE_API_KEY" ./server/.env
 
     cp client/.env.example client/.env
@@ -42,9 +26,9 @@ function configEnvValues () {
   fi
 }
 
-if [ "$1" != "--no-config" ]
+if [ -z "$CI" ]
 then
   configEnvValues  
+else
+  echo "Running hook on CI environment, skip environment variables configuration."
 fi
-
-installDepedencies

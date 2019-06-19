@@ -1,10 +1,8 @@
 {
   "name": "re-radio-client",
-  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "react-scripts start",
-    "stop": "docker-compose stop",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -59,10 +57,7 @@
     "prettier": "1.18.0",
     "typescript": "3.5.2"
   },
-  "author": {
-    "name": "Penta Jelly",
-    "email": "lednhatkhanh@gmail.com"
-  },
+  "license": "MIT",
   "browserslist": [
     ">1%",
     "not dead",

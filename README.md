@@ -17,14 +17,18 @@ TODO: This section need to be updated
 
 * Docker: 18.x
 * Docker Compose: 1.24
+* NodeJS: 10.x
+* Npm: 6.x
 
 ### Build & start
 
 ```sh
-sh start.sh
+npm ci
 ```
 
-**Note**: To stop and clean up all services: run `sh start.sh down`.
+```sh
+npm start
+```
 
 ## All services
 
@@ -48,31 +52,39 @@ Assume there is no customized configuration and we are talking about *localhost*
 ### Install dependencies
 
 ```sh
-sh install.sh
+npm ci
 ```
 
 P/S: This command should be executed every merge or rebase that includes any changes in `package-lock.json`.
 
 P/S: `npm install` is not safe to use on fresh install. Use it if you know what you are doing.
 
-### Start services under development environment
+### Start development server
+
+```sh
+npm run dev
+```
 
 Development environment means that every code changes under project directory will trigger a restart to start the service with the new code.
 There will also be some tools or config that make debugging easier.
 The database under this mode will automatically be wiped up every startup.
 
-#### Start services
+#### Quality of life note
+
+You should run the services in 2 processes: 1 for server, 1 for client. With this, you can easily tracking development logs separately between client and server. There is also an issue with Create React App that it always cleans your console output every time you change the code.
+
+* For the server:
 
 ```sh
-sh dev.sh up
+npm run dev:server
 ```
 
-#### Stop and clean up services
+* For the client:
 
 ```sh
-sh dev.sh down
+npm run dev:client
 ```
-
 
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio?ref=badge_large)

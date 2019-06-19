@@ -14,7 +14,7 @@ async function bootstrap() {
     await app.get(SeederService).seed();
   } else {
     logger.error(
-      `Unknown command "${args.join(' ')}". Follow workers are supported: \n\t` +
+      `Unknown command "${args.join(' ')}". Following workers are supported: \n\t` +
         ` - seed: Seed initial data for to database using Prisma client API`,
     );
     process.exit(1);

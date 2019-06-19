@@ -7,7 +7,7 @@ import { Prisma } from './prisma.binding';
 export class PrismaService extends Prisma {
   constructor(private readonly config: ConfigService) {
     super({
-      endpoint: `http://${config.get(EnvVariables.PRISMA_HOST)}:${config.get(EnvVariables.PRISMA_PORT)}`,
+      endpoint: config.get(EnvVariables.PRISMA_ENDPOINT),
       debug: false,
     });
   }
