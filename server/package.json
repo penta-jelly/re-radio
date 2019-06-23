@@ -2,6 +2,7 @@
   "name": "re-radio-server",
   "private": true,
   "scripts": {
+    "preinstall": "cp -n .env.example .env",
     "lint": "eslint --ext .ts src/",
     "type-check": "tsc --noEmit",
     "format": "prettier --write \"src/**/*.ts\" && eslint --fix --ext .ts src/",
@@ -9,8 +10,8 @@
     "start:graphql": "ts-node src/radio.ts",
     "start:real-time": "ts-node src/real-time-radio.ts",
     "dev": "run-p dev:**",
-    "dev:graphql": "ts-node-dev --no-deps --respawn --poll --interval 1000 src/radio.ts",
-    "dev:real-time": "ts-node-dev --no-deps --respawn --poll --interval 1000 src/real-time-radio.ts",
+    "dev:graphql": "ts-node-dev --no-deps --respawn --dedupe src/radio.ts",
+    "dev:real-time": "ts-node-dev --no-deps --respawn --dedupe src/real-time-radio.ts",
     "prisma": "ts-node src/prisma.ts",
     "graphql:get-schema": "graphql get-schema --project database",
     "graphql:codegen": "graphql codegen --project database",
