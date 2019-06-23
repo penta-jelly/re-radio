@@ -16,6 +16,14 @@ export class ConfigService {
     return value;
   }
 
+  getOrNull(key: EnvVariables): string | null {
+    try {
+      return this.get(key);
+    } catch (error) {
+      return null;
+    }
+  }
+
   static get(key: EnvVariables): string {
     dotenv.config();
     const value = process.env[EnvVariables[key]];

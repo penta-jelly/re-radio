@@ -24,7 +24,7 @@ concurrently in another process to make sure that every changes in the typescrip
 ### Deploy changed data model
 
 ```sh
-npm run prisma:deploy
+npm run prisma -- deploy
 ```
 
 Sometimes, you will need to force the database to be updated with whole new structure (refer to Prisma [data model documentation](https://www.prisma.io/docs/datamodel-and-migrations/datamodel-MONGO-knun/) for more information). If so, run command with `-- --force` to override the whole structure, which will cause data loss on database.
@@ -32,7 +32,7 @@ Sometimes, you will need to force the database to be updated with whole new stru
 ### Seed initial data
 
 ```sh
-npm run prisma:seed
+npm run prisma -- seed
 ```
 
-This script by default is executed after running `prisma:deploy` command.
+This script by default is executed after running `prisma -- deploy` command.

@@ -7,7 +7,7 @@ services:
     depends_on: [db]
     environment:
       PRISMA_CONFIG: |
-        port: ${PRISMA_PORT}
+        port: 4466
         databases:
           default:
             connector: postgres

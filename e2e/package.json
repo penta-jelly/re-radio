@@ -1,6 +1,6 @@
 {
-  "name": "re-radio",
-  "version": "0.1.0",
+  "name": "re-radio-e2e",
+  "private": true,
   "scripts": {
     "cypress:run": "cypress run",
     "cypress:run:ci": "cypress run --record --parallel",
@@ -28,7 +28,5 @@
     "typescript": "3.5.2",
     "webpack": "4.35.0"
   },
-  "author": "@dungle1811",
-  "license": "ISC",
-  "description": ""
+  "license": "MIT"
 }

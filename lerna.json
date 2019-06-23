@@ -1,0 +1,6 @@
+{
+  "packages": [
+    "client", "server", "e2e"
+  ],
+  "version": "0.1.0"
+}

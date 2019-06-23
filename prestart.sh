@@ -9,20 +9,3 @@ sed -i "s/REACT_APP_SERVICE_HOST=.*/REACT_APP_SERVICE_HOST=$host/g" ./client/.en
 # Merge other mono repository dotenv files into 1 global file
 cat server/.env client/.env > .env
 echo "HOST_NAME=$host" >> .env
-
-# Base executed script
-base="docker-compose \
-  -f ./compose/docker-compose.db.yml \
-  -f ./compose/docker-compose.dev.yml \
-  --project-directory . \
-"
-
-case "$1" in
-'up' | 'down' | 'start' | 'stop' | 'config')
-  eval "$base $1 $2 $3"
-;;
-*)
-  echo $"Incorrect usage: It should be one of start, stop, up, down, config. For example:"
-  echo $"$0 start"
-  exit 1
-esac

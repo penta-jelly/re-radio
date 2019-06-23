@@ -1,8 +1,7 @@
 export enum EnvVariables {
   NODE_ENV,
 
-  PRISMA_HOST,
-  PRISMA_PORT,
+  PRISMA_ENDPOINT,
 
   DB_HOST,
   DB_PORT,

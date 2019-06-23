@@ -1,5 +1,5 @@
 # The endpoint of your Prisma API (deployed to a Prisma Sandbox).
-endpoint: http://${env:PRISMA_HOST}:${env:PRISMA_PORT}
+endpoint: ${env:PRISMA_ENDPOINT}
 
 # The file containing the definition of your data model.
 datamodel: datamodel.prisma

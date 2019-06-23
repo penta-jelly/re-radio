@@ -3,3 +3,6 @@
 # IntelliJ IDEA
 .idea
 .eclipse
+
+# NPM
+/node_modules
