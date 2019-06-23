@@ -2,6 +2,7 @@
   "name": "re-radio-client",
   "private": true,
   "scripts": {
+    "preinstall": "cp -n .env.example .env",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

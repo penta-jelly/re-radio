@@ -15,15 +15,15 @@ TODO: This section need to be updated
 
 ### System requirement
 
-* Docker: 18.x
-* Docker Compose: 1.24
+* Docker: 18.x (Optional)
+* Docker Compose: 1.24 (Optional)
 * NodeJS: 10.x
 * Npm: 6.x
 
 ### Build & start
 
 ```sh
-npm ci
+npm install
 ```
 
 ```sh
@@ -44,15 +44,15 @@ Assume there is no customized configuration and we are talking about *localhost*
 
 ### Development system requirement
 
-* Docker: 18.x [Windows users](https://github.com/penta-jelly/re-radio/wiki/Docker-for-Windows)
-* Docker Compose: 1.24
+* Docker: 18.x (Optional)
+* Docker Compose: 1.24 (Optional)
 * NodeJS: 10.x
 * Npm: 6.x
 
 ### Install dependencies
 
 ```sh
-npm ci
+npm install
 ```
 
 P/S: This command should be executed every merge or rebase that includes any changes in `package-lock.json`.
@@ -84,6 +84,16 @@ npm run dev:server
 ```sh
 npm run dev:client
 ```
+
+## Docker
+
+### For docker lovers
+
+Running `npm run prisma` will bring up the prisma service without any additional configurations except a running Docker host.
+
+### For docker haters
+
+It is fine if you don't want to use docker at all. The only part of the application that requires docker is the Prisma service. To completely ignore docker, you can open <https://app.prisma.io/> dashboard and create your own service. Then you will need to change `PRISMA_ENDPOINT` in server/.env file to the endpoint to your service. The first time running with it will require authentication, so try running `npm run start:prisma:deploy` first before actually start the service to prevent unknown bugs. Happy coding!
 
 ## License
 
