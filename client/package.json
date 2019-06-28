@@ -21,7 +21,7 @@
     "apollo-upload-client": "10.0.1",
     "downshift": "3.2.10",
     "formik": "1.5.7",
-    "graphql": "14.4.0",
+    "graphql": "14.4.1",
     "i18next": "17.0.4",
     "jss": "10.0.0-alpha.21",
     "react": "16.8.6",
