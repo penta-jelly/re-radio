@@ -22,7 +22,7 @@
     "downshift": "3.2.10",
     "formik": "1.5.7",
     "graphql": "14.4.1",
-    "i18next": "17.0.4",
+    "i18next": "17.0.6",
     "jss": "10.0.0-alpha.21",
     "react": "16.8.6",
     "react-apollo": "2.5.8",
