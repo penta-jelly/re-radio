@@ -52,7 +52,7 @@
     "@types/react-dom": "16.8.4",
     "@types/react-helmet": "5.0.8",
     "@types/react-router-dom": "4.3.4",
-    "@types/yup": "0.26.19",
+    "@types/yup": "0.26.20",
     "eslint-config-prettier": "5.0.0",
     "eslint-plugin-prettier": "3.1.0",
     "prettier": "1.18.0",
