@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles(({ zIndex }) => ({
   container: () => ({
     position: 'absolute',
     height: '100%',
@@ -13,5 +13,6 @@ export const useStyles = makeStyles({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    zIndex: zIndex.modal,
   }),
-});
+}));

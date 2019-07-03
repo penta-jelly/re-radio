@@ -44,7 +44,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
           key={index}
           id="search-song-item"
           selected={isHighlighted}
-          component={'div'}
+          component="div"
         >
           <Grid container>
             <Grid item xs={1} className={classes.thumbnailContainer}>

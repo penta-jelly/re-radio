@@ -1,7 +1,7 @@
 import { Grid } from '@material-ui/core';
-import React, { useCallback } from 'react';
 import { PrimaryButton } from 'components/button/primary-button';
-import { useStyles } from './styles';
+import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
+import { useRouter } from 'hooks/use-router';
 import {
   MiniSongExplorer,
   SongStatusEnum,
@@ -9,7 +9,8 @@ import {
   useCurrentUserQuery,
   useSongExplorerQuery,
 } from 'operations';
-import { useRouter } from 'hooks/use-router';
+import React, { useCallback } from 'react';
+import { useStyles } from './styles';
 
 interface Props {
   previewSong?: MiniSongExplorer;
@@ -25,6 +26,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
   const addSong = useCreateSongMutation();
   const { match } = useRouter<RouteParams>();
   const currentUserQuery = useCurrentUserQuery();
+  const notifyUnauthorizedUser = useUnauthorizedNotification();
 
   const songExplorerQuery = useSongExplorerQuery({
     variables: {
@@ -36,36 +38,41 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
 
   // TODO: DO NOT ALLOW TO SUBMIT IF DURATION = 0
   const onSubmit = useCallback(async () => {
-    if (
-      !currentUserQuery.loading &&
-      currentUserQuery.data &&
-      !songExplorerQuery.loading &&
-      songExplorerQuery.data &&
-      songExplorerQuery.data.songExplorer
-    ) {
-      try {
-        await addSong({
-          variables: {
-            data: {
-              title: songExplorerQuery.data.songExplorer.snippet.title,
-              status: SongStatusEnum.Pending,
-              duration: songExplorerQuery.data.songExplorer.contentDetails.duration,
-              url: `https://www.youtube.com/watch?v=${songExplorerQuery.data.songExplorer.id}`,
-              thumbnail: songExplorerQuery.data.songExplorer.snippet.thumbnails.default.url,
-              station: {
-                connect: { slug: match.params.slug },
-              },
-              creator: {
-                connect: { username: currentUserQuery.data.user.username },
+    if (currentUserQuery.data && !currentUserQuery.data.user) {
+      notifyUnauthorizedUser();
+    } else {
+      if (
+        !currentUserQuery.loading &&
+        currentUserQuery.data &&
+        currentUserQuery.data.user &&
+        !songExplorerQuery.loading &&
+        songExplorerQuery.data &&
+        songExplorerQuery.data.songExplorer
+      ) {
+        try {
+          await addSong({
+            variables: {
+              data: {
+                title: songExplorerQuery.data.songExplorer.snippet.title,
+                status: SongStatusEnum.Pending,
+                duration: songExplorerQuery.data.songExplorer.contentDetails.duration,
+                url: `https://www.youtube.com/watch?v=${songExplorerQuery.data.songExplorer.id}`,
+                thumbnail: songExplorerQuery.data.songExplorer.snippet.thumbnails.default.url,
+                station: {
+                  connect: { slug: match.params.slug },
+                },
+                creator: {
+                  connect: { username: currentUserQuery.data.user.username },
+                },
               },
             },
-          },
-        });
-        if (postSubmit) {
-          postSubmit();
+          });
+          if (postSubmit) {
+            postSubmit();
+          }
+        } catch (e) {
+          console.error(e);
         }
-      } catch (e) {
-        console.error(e);
       }
     }
   }, [
