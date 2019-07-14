@@ -58,7 +58,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
               />
             </Grid>
             <Grid item xs={11} className={classes.menuItemRight}>
-              <Typography variant="body1">{suggestion.snippet.title}</Typography>
+              <Typography variant="body1" dangerouslySetInnerHTML={{ __html: suggestion.snippet.title }} />
             </Grid>
           </Grid>
         </MenuItem>

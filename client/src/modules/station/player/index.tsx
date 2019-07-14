@@ -2,7 +2,8 @@ import { Card, Typography } from '@material-ui/core';
 import { PageLoader } from 'components/page-loader';
 import { useRouter } from 'hooks/use-router';
 import { SongStatusEnum, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
+import ReactPlayer from 'react-player';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -10,6 +11,8 @@ interface RouteParams {
 }
 
 export const Player: React.FC = () => {
+  const playerRef = useRef<ReactPlayer>(null);
+
   const classes = useStyles();
   const { match } = useRouter<RouteParams>();
 
@@ -17,6 +20,8 @@ export const Player: React.FC = () => {
     variables: { stationSlug: match.params.slug },
     fetchPolicy: 'network-only',
   });
+
+  // TODO: Handle up-vote/down-vote for player
 
   useOnStationPlayerChangedSubscription({
     variables: { stationSlug: match.params.slug },
@@ -37,17 +42,34 @@ export const Player: React.FC = () => {
     },
   });
 
+  const onStart = useCallback(() => {
+    if (data) {
+      const [playingSong] = data.playingSongs;
+      if (playerRef.current && playingSong) {
+        const currentTime = new Date().getTime();
+        const startPlayerTime = new Date(playingSong.startedAt).getTime();
+        const seekTime = currentTime - startPlayerTime;
+        playerRef.current.seekTo(seekTime / 1000);
+      }
+    }
+  }, [data, playerRef]);
+
   let content: React.ReactNode;
   if (loading) {
     content = <PageLoader />;
   } else if (data) {
     const [playingSong] = data.playingSongs;
     if (playingSong) {
-      // TODO: Render a real youtube player instead of a fixed thumbnail and text
       content = (
-        <div className={classes.wrapper} style={{ backgroundImage: `url(${playingSong.thumbnail})` }}>
-          <Typography variant="h4">{playingSong.title}</Typography>
-        </div>
+        <ReactPlayer
+          onStart={onStart}
+          ref={playerRef}
+          className={classes.wrapper}
+          width="100%"
+          height="100%"
+          url={playingSong.url}
+          playing
+        />
       );
     } else {
       content = (

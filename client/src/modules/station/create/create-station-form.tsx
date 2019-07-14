@@ -4,6 +4,7 @@ import { PrimaryButton } from 'components/button/primary-button';
 import { Formik, FormikActions } from 'formik';
 import { useRouter } from 'hooks/use-router';
 import { useToggle } from 'hooks/use-toggle';
+import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import { useCreateStationMutation, useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { MdRadio as StationIcon } from 'react-icons/md';
@@ -33,13 +34,13 @@ export const CreateStationForm: React.FC<Props> = props => {
   const [isMoreInfo, toggleIsMoreInfo] = useToggle(false);
 
   const [createStationMutation] = useCreateStationMutation();
+  const notifyUnauthorizedUser = useUnauthorizedNotification();
 
   const onCreateStation = React.useCallback(
     async (values: Data, formik: FormikActions<Data>) => {
       try {
-        if (currentUserQuery.error || !currentUserQuery.data || !currentUserQuery.data.user) {
-          console.error(currentUserQuery.error);
-          formik.setStatus('Unauthorized. You need to login to perform this action.');
+        if (currentUserQuery.error) {
+          notifyUnauthorizedUser();
           return;
         }
         const { name, slug, description } = values;

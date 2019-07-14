@@ -38,7 +38,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
 
   // TODO: DO NOT ALLOW TO SUBMIT IF DURATION = 0
   const onSubmit = useCallback(async () => {
-    if (currentUserQuery.data && !currentUserQuery.data.user) {
+    if (currentUserQuery.error) {
       notifyUnauthorizedUser();
     } else {
       if (
