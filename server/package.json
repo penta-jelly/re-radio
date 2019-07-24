@@ -48,7 +48,7 @@
     "@types/bcrypt-nodejs": "0.0.30",
     "@types/graphql": "14.2.3",
     "@types/node": "10.14.7",
-    "@types/node-fetch": "2.3.7",
+    "@types/node-fetch": "2.5.0",
     "@types/passport-jwt": "3.0.1",
     "@typescript-eslint/eslint-plugin": "1.13.0",
     "@typescript-eslint/parser": "1.13.0",
