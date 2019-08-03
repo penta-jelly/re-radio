@@ -35,7 +35,7 @@
     "react-router-dom": "5.0.1",
     "react-scripts": "3.0.1",
     "subscriptions-transport-ws": "0.9.16",
-    "type-fest": "0.6.0",
+    "type-fest": "0.7.1",
     "use-query-params": "0.3.3",
     "yup": "0.27.0"
   },
