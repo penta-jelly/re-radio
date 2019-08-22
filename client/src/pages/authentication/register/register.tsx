@@ -13,7 +13,7 @@ type Data = { [key in DataKeys]: string };
 
 const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
-  const registerMutation = useRegisterMutation();
+  const [registerMutation] = useRegisterMutation();
   const { t } = useTranslation('common');
   const onRegister = useCallback(
     async (values: Data, formik: FormikActions<Data>) => {

@@ -8,7 +8,7 @@ import { initApollo } from 'lib/apollo/init';
 import { initI18n } from 'lib/react-i18next';
 import { SnackbarProvider } from 'notistack';
 import React from 'react';
-import { ApolloProvider } from 'react-apollo-hooks';
+import { ApolloProvider } from 'react-apollo';
 
 import { AppRouter } from './router';
 

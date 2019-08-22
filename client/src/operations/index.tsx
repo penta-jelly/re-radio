@@ -1,7 +1,8 @@
 /* eslint-disable */
 import gql from 'graphql-tag';
-import * as ReactApollo from 'react-apollo';
-import * as ReactApolloHooks from 'react-apollo-hooks';
+import * as ApolloReactCommon from '@apollo/react-common';
+import * as ApolloReactHoc from '@apollo/react-hoc';
+import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -11,9 +12,10 @@ export type Scalars = {
   Int: number,
   Float: number,
   DateTime: any,
-  /** The `Long` scalar type represents non-fractional signed whole numeric values.
+  /** 
+ * The `Long` scalar type represents non-fractional signed whole numeric values.
    * Long can represent values between -(2^63) and 2^63 - 1.
- */
+ **/
   Long: any,
   /** The `Upload` scalar type represents a file upload. */
   Upload: any,
@@ -319,7 +321,6 @@ export enum MutationType {
 
 /** An object with an ID */
 export type Node = {
-  __typename?: 'Node',
   /** The id of the object. */
   readonly id: Scalars['ID'],
 };
@@ -3428,28 +3429,52 @@ export type CreateSongMutationVariables = {
 };
 
 
-export type CreateSongMutation = ({ readonly __typename?: 'Mutation' } & { readonly createSong: ({ readonly __typename?: 'Song' } & Pick<Song, 'id'>) });
+export type CreateSongMutation = (
+  { readonly __typename?: 'Mutation' }
+  & { readonly createSong: (
+    { readonly __typename?: 'Song' }
+    & Pick<Song, 'id'>
+  ) }
+);
 
 export type CreateStationMutationVariables = {
   data: StationCreateInput
 };
 
 
-export type CreateStationMutation = ({ readonly __typename?: 'Mutation' } & { readonly createStation: ({ readonly __typename?: 'Station' } & Pick<Station, 'id' | 'slug' | 'name'>) });
+export type CreateStationMutation = (
+  { readonly __typename?: 'Mutation' }
+  & { readonly createStation: (
+    { readonly __typename?: 'Station' }
+    & Pick<Station, 'id' | 'slug' | 'name'>
+  ) }
+);
 
 export type LoginMutationVariables = {
   data: LoginInput
 };
 
 
-export type LoginMutation = ({ readonly __typename?: 'Mutation' } & { readonly login: ({ readonly __typename?: 'LoginOrRegisterReturnType' } & Pick<LoginOrRegisterReturnType, 'token'>) });
+export type LoginMutation = (
+  { readonly __typename?: 'Mutation' }
+  & { readonly login: (
+    { readonly __typename?: 'LoginOrRegisterReturnType' }
+    & Pick<LoginOrRegisterReturnType, 'token'>
+  ) }
+);
 
 export type RegisterMutationVariables = {
   data: RegisterInput
 };
 
 
-export type RegisterMutation = ({ readonly __typename?: 'Mutation' } & { readonly register: ({ readonly __typename?: 'LoginOrRegisterReturnType' } & Pick<LoginOrRegisterReturnType, 'token'>) });
+export type RegisterMutation = (
+  { readonly __typename?: 'Mutation' }
+  & { readonly register: (
+    { readonly __typename?: 'LoginOrRegisterReturnType' }
+    & Pick<LoginOrRegisterReturnType, 'token'>
+  ) }
+);
 
 export type UpdateUserAvatarMutationVariables = {
   where: UserWhereUniqueInput,
@@ -3457,51 +3482,175 @@ export type UpdateUserAvatarMutationVariables = {
 };
 
 
-export type UpdateUserAvatarMutation = ({ readonly __typename?: 'Mutation' } & Pick<Mutation, 'updateUserAvatar'>);
+export type UpdateUserAvatarMutation = (
+  { readonly __typename?: 'Mutation' }
+  & Pick<Mutation, 'updateUserAvatar'>
+);
 
 export type CurrentUserQueryVariables = {};
 
 
-export type CurrentUserQuery = ({ readonly __typename?: 'Query' } & { readonly user: ({ readonly __typename?: 'User' } & UserBaseInformationFragment) });
+export type CurrentUserQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly user: { readonly __typename?: 'User' }
+    & UserBaseInformationFragment
+   }
+);
 
-export type UserBaseInformationFragment = ({ readonly __typename?: 'User' } & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'>);
+export type UserBaseInformationFragment = (
+  { readonly __typename?: 'User' }
+  & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'>
+);
 
 export type SongExplorerQueryVariables = {
   where: SongExplorerInput
 };
 
 
-export type SongExplorerQuery = ({ readonly __typename?: 'Query' } & { readonly songExplorer: ({ readonly __typename?: 'SongExplorer' } & Pick<SongExplorer, 'id'> & { readonly snippet: ({ readonly __typename?: 'Snippet' } & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'liveBroadcastContent' | 'channelTitle' | 'tags' | 'categoryId' | 'defaultAudioLanguage'> & { readonly thumbnails: ({ readonly __typename?: 'Thumbnails' } & { readonly default: ({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>), readonly medium: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)>, readonly high: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)>, readonly standard: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)>, readonly maxres: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)> }) }), readonly contentDetails: ({ readonly __typename?: 'ContentDetail' } & Pick<ContentDetail, 'duration' | 'dimension' | 'caption' | 'licensedContent'>) }) });
+export type SongExplorerQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly songExplorer: (
+    { readonly __typename?: 'SongExplorer' }
+    & Pick<SongExplorer, 'id'>
+    & { readonly snippet: (
+      { readonly __typename?: 'Snippet' }
+      & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'liveBroadcastContent' | 'channelTitle' | 'tags' | 'categoryId' | 'defaultAudioLanguage'>
+      & { readonly thumbnails: (
+        { readonly __typename?: 'Thumbnails' }
+        & { readonly default: (
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        ), readonly medium: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly high: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly standard: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly maxres: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )> }
+      ) }
+    ), readonly contentDetails: (
+      { readonly __typename?: 'ContentDetail' }
+      & Pick<ContentDetail, 'duration' | 'dimension' | 'caption' | 'licensedContent'>
+    ) }
+  ) }
+);
 
 export type SongExplorersQueryVariables = {
   where: SongExplorersInput
 };
 
 
-export type SongExplorersQuery = ({ readonly __typename?: 'Query' } & { readonly songExplorers: ReadonlyArray<({ readonly __typename?: 'MiniSongExplorer' } & Pick<MiniSongExplorer, 'id'> & { readonly snippet: ({ readonly __typename?: 'Snippet' } & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'> & { readonly thumbnails: ({ readonly __typename?: 'Thumbnails' } & { readonly default: ({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>), readonly medium: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)>, readonly high: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)>, readonly standard: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)>, readonly maxres: Maybe<({ readonly __typename?: 'Thumbnail' } & Pick<Thumbnail, 'url' | 'width' | 'height'>)> }) }) })> });
+export type SongExplorersQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly songExplorers: ReadonlyArray<(
+    { readonly __typename?: 'MiniSongExplorer' }
+    & Pick<MiniSongExplorer, 'id'>
+    & { readonly snippet: (
+      { readonly __typename?: 'Snippet' }
+      & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'>
+      & { readonly thumbnails: (
+        { readonly __typename?: 'Thumbnails' }
+        & { readonly default: (
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        ), readonly medium: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly high: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly standard: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly maxres: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )> }
+      ) }
+    ) }
+  )> }
+);
 
 export type StationQueryVariables = {
   slug: Scalars['String']
 };
 
 
-export type StationQuery = ({ readonly __typename?: 'Query' } & { readonly station: Maybe<({ readonly __typename?: 'Station' } & Pick<Station, 'id' | 'name' | 'slug'> & { readonly tags: Maybe<ReadonlyArray<({ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>)>>, readonly userRoles: Maybe<ReadonlyArray<({ readonly __typename?: 'UserRole' } & { readonly user: ({ readonly __typename?: 'User' } & UserBaseInformationFragment) })>> })> });
+export type StationQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly station: Maybe<(
+    { readonly __typename?: 'Station' }
+    & Pick<Station, 'id' | 'name' | 'slug'>
+    & { readonly tags: Maybe<ReadonlyArray<(
+      { readonly __typename?: 'StationTag' }
+      & Pick<StationTag, 'id' | 'name'>
+    )>>, readonly userRoles: Maybe<ReadonlyArray<(
+      { readonly __typename?: 'UserRole' }
+      & { readonly user: { readonly __typename?: 'User' }
+        & UserBaseInformationFragment
+       }
+    )>> }
+  )> }
+);
 
 export type StationPlayerQueryVariables = {
   stationSlug: Scalars['String']
 };
 
 
-export type StationPlayerQuery = ({ readonly __typename?: 'Query' } & { readonly playingSongs: ReadonlyArray<Maybe<({ readonly __typename?: 'Song' } & PlayingSongFragment)>> });
+export type StationPlayerQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly playingSongs: ReadonlyArray<Maybe<{ readonly __typename?: 'Song' }
+    & PlayingSongFragment
+  >> }
+);
 
 export type OnStationPlayerChangedSubscriptionVariables = {
   stationSlug: Scalars['String']
 };
 
 
-export type OnStationPlayerChangedSubscription = ({ readonly __typename?: 'Subscription' } & { readonly onPlayingSongChanged: Maybe<({ readonly __typename?: 'SongSubscriptionPayload' } & Pick<SongSubscriptionPayload, 'mutation'> & { readonly node: Maybe<({ readonly __typename?: 'Song' } & PlayingSongFragment)> })> });
+export type OnStationPlayerChangedSubscription = (
+  { readonly __typename?: 'Subscription' }
+  & { readonly onPlayingSongChanged: Maybe<(
+    { readonly __typename?: 'SongSubscriptionPayload' }
+    & Pick<SongSubscriptionPayload, 'mutation'>
+    & { readonly node: Maybe<{ readonly __typename?: 'Song' }
+      & PlayingSongFragment
+    > }
+  )> }
+);
 
-export type PlayingSongFragment = ({ readonly __typename?: 'Song' } & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status'> & { readonly creator: ({ readonly __typename?: 'User' } & UserBaseInformationFragment), readonly upVotes: Maybe<ReadonlyArray<({ readonly __typename?: 'User' } & UserBaseInformationFragment)>>, readonly downVotes: Maybe<ReadonlyArray<({ readonly __typename?: 'User' } & UserBaseInformationFragment)>> });
+export type PlayingSongFragment = (
+  { readonly __typename?: 'Song' }
+  & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status'>
+  & { readonly creator: { readonly __typename?: 'User' }
+    & UserBaseInformationFragment
+  , readonly upVotes: Maybe<ReadonlyArray<{ readonly __typename?: 'User' }
+    & UserBaseInformationFragment
+  >>, readonly downVotes: Maybe<ReadonlyArray<{ readonly __typename?: 'User' }
+    & UserBaseInformationFragment
+  >> }
+);
+
+export type StationTagsQueryVariables = {
+  name: Scalars['String']
+};
+
+
+export type StationTagsQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly stationTags: ReadonlyArray<Maybe<(
+    { readonly __typename?: 'StationTag' }
+    & Pick<StationTag, 'id' | 'name'>
+  )>> }
+);
 
 export type StationsQueryVariables = {
   first?: Maybe<Scalars['Int']>,
@@ -3511,21 +3660,46 @@ export type StationsQueryVariables = {
 };
 
 
-export type StationsQuery = ({ readonly __typename?: 'Query' } & { readonly stations: ReadonlyArray<Maybe<({ readonly __typename?: 'Station' } & Pick<Station, 'id' | 'name' | 'slug'> & { readonly tags: Maybe<ReadonlyArray<({ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>)>>, readonly userRoles: Maybe<ReadonlyArray<({ readonly __typename?: 'UserRole' } & { readonly user: ({ readonly __typename?: 'User' } & UserBaseInformationFragment) })>> })>> });
-
-export type StationTagsQueryVariables = {
-  name: Scalars['String']
-};
-
-
-export type StationTagsQuery = ({ readonly __typename?: 'Query' } & { readonly stationTags: ReadonlyArray<Maybe<({ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>)>> });
+export type StationsQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly stations: ReadonlyArray<Maybe<(
+    { readonly __typename?: 'Station' }
+    & Pick<Station, 'id' | 'name' | 'slug'>
+    & { readonly tags: Maybe<ReadonlyArray<(
+      { readonly __typename?: 'StationTag' }
+      & Pick<StationTag, 'id' | 'name'>
+    )>>, readonly userRoles: Maybe<ReadonlyArray<(
+      { readonly __typename?: 'UserRole' }
+      & { readonly user: { readonly __typename?: 'User' }
+        & UserBaseInformationFragment
+       }
+    )>> }
+  )>> }
+);
 
 export type UserProfileQueryVariables = {
   where: UserWhereUniqueInput
 };
 
 
-export type UserProfileQuery = ({ readonly __typename?: 'Query' } & { readonly user: Maybe<({ readonly __typename?: 'User' } & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation' | 'bio' | 'city' | 'country' | 'googleId' | 'facebookId'> & { readonly roles: Maybe<ReadonlyArray<({ readonly __typename?: 'UserRole' } & { readonly station: Maybe<({ readonly __typename?: 'Station' } & Pick<Station, 'name' | 'slug' | 'description'> & { readonly tags: Maybe<ReadonlyArray<({ readonly __typename?: 'StationTag' } & Pick<StationTag, 'id' | 'name'>)>> })> })>> })> });
+export type UserProfileQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly user: Maybe<(
+    { readonly __typename?: 'User' }
+    & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation' | 'bio' | 'city' | 'country' | 'googleId' | 'facebookId'>
+    & { readonly roles: Maybe<ReadonlyArray<(
+      { readonly __typename?: 'UserRole' }
+      & { readonly station: Maybe<(
+        { readonly __typename?: 'Station' }
+        & Pick<Station, 'name' | 'slug' | 'description'>
+        & { readonly tags: Maybe<ReadonlyArray<(
+          { readonly __typename?: 'StationTag' }
+          & Pick<StationTag, 'id' | 'name'>
+        )>> }
+      )> }
+    )>> }
+  )> }
+);
 export const UserBaseInformationFragmentDoc = gql`
     fragment UserBaseInformation on User {
   id
@@ -3563,22 +3737,25 @@ export const CreateSongDocument = gql`
   }
 }
     `;
-export type CreateSongMutationFn = ReactApollo.MutationFn<CreateSongMutation, CreateSongMutationVariables>;
-export type CreateSongProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<CreateSongMutation, CreateSongMutationVariables>> & TChildProps;
-export function withCreateSong<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type CreateSongMutationFn = ApolloReactCommon.MutationFunction<CreateSongMutation, CreateSongMutationVariables>;
+export type CreateSongProps<TChildProps = {}> = ApolloReactHoc.MutateProps<CreateSongMutation, CreateSongMutationVariables> & TChildProps;
+export function withCreateSong<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   CreateSongMutation,
   CreateSongMutationVariables,
   CreateSongProps<TChildProps>>) {
-    return ReactApollo.withMutation<TProps, CreateSongMutation, CreateSongMutationVariables, CreateSongProps<TChildProps>>(CreateSongDocument, {
+    return ApolloReactHoc.withMutation<TProps, CreateSongMutation, CreateSongMutationVariables, CreateSongProps<TChildProps>>(CreateSongDocument, {
       alias: 'withCreateSong',
       ...operationOptions
     });
 };
 
-export function useCreateSongMutation(baseOptions?: ReactApolloHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
-  return ReactApolloHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
-};
+    export function useCreateSongMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
+      return ApolloReactHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
+    };
+export type CreateSongMutationHookResult = ReturnType<typeof useCreateSongMutation>;
+export type CreateSongMutationResult = ApolloReactCommon.MutationResult<CreateSongMutation>;
+export type CreateSongMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateSongMutation, CreateSongMutationVariables>;
 export const CreateStationDocument = gql`
     mutation CreateStation($data: StationCreateInput!) {
   createStation(data: $data) {
@@ -3588,22 +3765,25 @@ export const CreateStationDocument = gql`
   }
 }
     `;
-export type CreateStationMutationFn = ReactApollo.MutationFn<CreateStationMutation, CreateStationMutationVariables>;
-export type CreateStationProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<CreateStationMutation, CreateStationMutationVariables>> & TChildProps;
-export function withCreateStation<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type CreateStationMutationFn = ApolloReactCommon.MutationFunction<CreateStationMutation, CreateStationMutationVariables>;
+export type CreateStationProps<TChildProps = {}> = ApolloReactHoc.MutateProps<CreateStationMutation, CreateStationMutationVariables> & TChildProps;
+export function withCreateStation<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   CreateStationMutation,
   CreateStationMutationVariables,
   CreateStationProps<TChildProps>>) {
-    return ReactApollo.withMutation<TProps, CreateStationMutation, CreateStationMutationVariables, CreateStationProps<TChildProps>>(CreateStationDocument, {
+    return ApolloReactHoc.withMutation<TProps, CreateStationMutation, CreateStationMutationVariables, CreateStationProps<TChildProps>>(CreateStationDocument, {
       alias: 'withCreateStation',
       ...operationOptions
     });
 };
 
-export function useCreateStationMutation(baseOptions?: ReactApolloHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
-  return ReactApolloHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
-};
+    export function useCreateStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
+      return ApolloReactHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
+    };
+export type CreateStationMutationHookResult = ReturnType<typeof useCreateStationMutation>;
+export type CreateStationMutationResult = ApolloReactCommon.MutationResult<CreateStationMutation>;
+export type CreateStationMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateStationMutation, CreateStationMutationVariables>;
 export const LoginDocument = gql`
     mutation login($data: LoginInput!) {
   login(data: $data) {
@@ -3611,22 +3791,25 @@ export const LoginDocument = gql`
   }
 }
     `;
-export type LoginMutationFn = ReactApollo.MutationFn<LoginMutation, LoginMutationVariables>;
-export type LoginProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<LoginMutation, LoginMutationVariables>> & TChildProps;
-export function withLogin<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
+export type LoginProps<TChildProps = {}> = ApolloReactHoc.MutateProps<LoginMutation, LoginMutationVariables> & TChildProps;
+export function withLogin<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   LoginMutation,
   LoginMutationVariables,
   LoginProps<TChildProps>>) {
-    return ReactApollo.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>(LoginDocument, {
+    return ApolloReactHoc.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>(LoginDocument, {
       alias: 'withLogin',
       ...operationOptions
     });
 };
 
-export function useLoginMutation(baseOptions?: ReactApolloHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-  return ReactApolloHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
-};
+    export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+      return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+    };
+export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
+export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
+export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const RegisterDocument = gql`
     mutation Register($data: RegisterInput!) {
   register(data: $data) {
@@ -3634,43 +3817,49 @@ export const RegisterDocument = gql`
   }
 }
     `;
-export type RegisterMutationFn = ReactApollo.MutationFn<RegisterMutation, RegisterMutationVariables>;
-export type RegisterProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<RegisterMutation, RegisterMutationVariables>> & TChildProps;
-export function withRegister<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+export type RegisterProps<TChildProps = {}> = ApolloReactHoc.MutateProps<RegisterMutation, RegisterMutationVariables> & TChildProps;
+export function withRegister<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   RegisterMutation,
   RegisterMutationVariables,
   RegisterProps<TChildProps>>) {
-    return ReactApollo.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>(RegisterDocument, {
+    return ApolloReactHoc.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>(RegisterDocument, {
       alias: 'withRegister',
       ...operationOptions
     });
 };
 
-export function useRegisterMutation(baseOptions?: ReactApolloHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-  return ReactApolloHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
-};
+    export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+      return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+    };
+export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
+export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const UpdateUserAvatarDocument = gql`
     mutation UpdateUserAvatar($where: UserWhereUniqueInput!, $file: Upload!) {
   updateUserAvatar(where: $where, file: $file)
 }
     `;
-export type UpdateUserAvatarMutationFn = ReactApollo.MutationFn<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>;
-export type UpdateUserAvatarProps<TChildProps = {}> = Partial<ReactApollo.MutateProps<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>> & TChildProps;
-export function withUpdateUserAvatar<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type UpdateUserAvatarMutationFn = ApolloReactCommon.MutationFunction<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>;
+export type UpdateUserAvatarProps<TChildProps = {}> = ApolloReactHoc.MutateProps<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables> & TChildProps;
+export function withUpdateUserAvatar<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   UpdateUserAvatarMutation,
   UpdateUserAvatarMutationVariables,
   UpdateUserAvatarProps<TChildProps>>) {
-    return ReactApollo.withMutation<TProps, UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables, UpdateUserAvatarProps<TChildProps>>(UpdateUserAvatarDocument, {
+    return ApolloReactHoc.withMutation<TProps, UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables, UpdateUserAvatarProps<TChildProps>>(UpdateUserAvatarDocument, {
       alias: 'withUpdateUserAvatar',
       ...operationOptions
     });
 };
 
-export function useUpdateUserAvatarMutation(baseOptions?: ReactApolloHooks.MutationHookOptions<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>) {
-  return ReactApolloHooks.useMutation<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>(UpdateUserAvatarDocument, baseOptions);
-};
+    export function useUpdateUserAvatarMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>) {
+      return ApolloReactHooks.useMutation<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>(UpdateUserAvatarDocument, baseOptions);
+    };
+export type UpdateUserAvatarMutationHookResult = ReturnType<typeof useUpdateUserAvatarMutation>;
+export type UpdateUserAvatarMutationResult = ApolloReactCommon.MutationResult<UpdateUserAvatarMutation>;
+export type UpdateUserAvatarMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>;
 export const CurrentUserDocument = gql`
     query CurrentUser {
   user: currentUser {
@@ -3678,21 +3867,27 @@ export const CurrentUserDocument = gql`
   }
 }
     ${UserBaseInformationFragmentDoc}`;
-export type CurrentUserProps<TChildProps = {}> = Partial<ReactApollo.DataProps<CurrentUserQuery, CurrentUserQueryVariables>> & TChildProps;
-export function withCurrentUser<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type CurrentUserProps<TChildProps = {}> = ApolloReactHoc.DataProps<CurrentUserQuery, CurrentUserQueryVariables> & TChildProps;
+export function withCurrentUser<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   CurrentUserQuery,
   CurrentUserQueryVariables,
   CurrentUserProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, CurrentUserQuery, CurrentUserQueryVariables, CurrentUserProps<TChildProps>>(CurrentUserDocument, {
+    return ApolloReactHoc.withQuery<TProps, CurrentUserQuery, CurrentUserQueryVariables, CurrentUserProps<TChildProps>>(CurrentUserDocument, {
       alias: 'withCurrentUser',
       ...operationOptions
     });
 };
 
-export function useCurrentUserQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<CurrentUserQueryVariables>) {
-  return ReactApolloHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
-};
+    export function useCurrentUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+      return ApolloReactHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+    };
+      export function useCurrentUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+      };
+      
+export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
+export type CurrentUserQueryResult = ApolloReactCommon.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const SongExplorerDocument = gql`
     query songExplorer($where: SongExplorerInput!) {
   songExplorer(where: $where) {
@@ -3744,21 +3939,27 @@ export const SongExplorerDocument = gql`
   }
 }
     `;
-export type SongExplorerProps<TChildProps = {}> = Partial<ReactApollo.DataProps<SongExplorerQuery, SongExplorerQueryVariables>> & TChildProps;
-export function withSongExplorer<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type SongExplorerProps<TChildProps = {}> = ApolloReactHoc.DataProps<SongExplorerQuery, SongExplorerQueryVariables> & TChildProps;
+export function withSongExplorer<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   SongExplorerQuery,
   SongExplorerQueryVariables,
   SongExplorerProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>(SongExplorerDocument, {
+    return ApolloReactHoc.withQuery<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>(SongExplorerDocument, {
       alias: 'withSongExplorer',
       ...operationOptions
     });
 };
 
-export function useSongExplorerQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorerQueryVariables>) {
-  return ReactApolloHooks.useQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
-};
+    export function useSongExplorerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SongExplorerQuery, SongExplorerQueryVariables>) {
+      return ApolloReactHooks.useQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
+    };
+      export function useSongExplorerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SongExplorerQuery, SongExplorerQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
+      };
+      
+export type SongExplorerQueryHookResult = ReturnType<typeof useSongExplorerQuery>;
+export type SongExplorerQueryResult = ApolloReactCommon.QueryResult<SongExplorerQuery, SongExplorerQueryVariables>;
 export const SongExplorersDocument = gql`
     query songExplorers($where: SongExplorersInput!) {
   songExplorers(where: $where) {
@@ -3800,21 +4001,27 @@ export const SongExplorersDocument = gql`
   }
 }
     `;
-export type SongExplorersProps<TChildProps = {}> = Partial<ReactApollo.DataProps<SongExplorersQuery, SongExplorersQueryVariables>> & TChildProps;
-export function withSongExplorers<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type SongExplorersProps<TChildProps = {}> = ApolloReactHoc.DataProps<SongExplorersQuery, SongExplorersQueryVariables> & TChildProps;
+export function withSongExplorers<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   SongExplorersQuery,
   SongExplorersQueryVariables,
   SongExplorersProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, SongExplorersQuery, SongExplorersQueryVariables, SongExplorersProps<TChildProps>>(SongExplorersDocument, {
+    return ApolloReactHoc.withQuery<TProps, SongExplorersQuery, SongExplorersQueryVariables, SongExplorersProps<TChildProps>>(SongExplorersDocument, {
       alias: 'withSongExplorers',
       ...operationOptions
     });
 };
 
-export function useSongExplorersQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<SongExplorersQueryVariables>) {
-  return ReactApolloHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
-};
+    export function useSongExplorersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SongExplorersQuery, SongExplorersQueryVariables>) {
+      return ApolloReactHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
+    };
+      export function useSongExplorersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SongExplorersQuery, SongExplorersQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
+      };
+      
+export type SongExplorersQueryHookResult = ReturnType<typeof useSongExplorersQuery>;
+export type SongExplorersQueryResult = ApolloReactCommon.QueryResult<SongExplorersQuery, SongExplorersQueryVariables>;
 export const StationDocument = gql`
     query Station($slug: String!) {
   station(where: {slug: $slug}) {
@@ -3833,21 +4040,27 @@ export const StationDocument = gql`
   }
 }
     ${UserBaseInformationFragmentDoc}`;
-export type StationProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationQuery, StationQueryVariables>> & TChildProps;
-export function withStation<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type StationProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationQuery, StationQueryVariables> & TChildProps;
+export function withStation<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   StationQuery,
   StationQueryVariables,
   StationProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(StationDocument, {
+    return ApolloReactHoc.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(StationDocument, {
       alias: 'withStation',
       ...operationOptions
     });
 };
 
-export function useStationQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationQueryVariables>) {
-  return ReactApolloHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
-};
+    export function useStationQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
+      return ApolloReactHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+    };
+      export function useStationLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+      };
+      
+export type StationQueryHookResult = ReturnType<typeof useStationQuery>;
+export type StationQueryResult = ApolloReactCommon.QueryResult<StationQuery, StationQueryVariables>;
 export const StationPlayerDocument = gql`
     query StationPlayer($stationSlug: String!) {
   playingSongs: songs(where: {station: {slug: $stationSlug}, status: PLAYING}) {
@@ -3855,21 +4068,27 @@ export const StationPlayerDocument = gql`
   }
 }
     ${PlayingSongFragmentDoc}`;
-export type StationPlayerProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationPlayerQuery, StationPlayerQueryVariables>> & TChildProps;
-export function withStationPlayer<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type StationPlayerProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationPlayerQuery, StationPlayerQueryVariables> & TChildProps;
+export function withStationPlayer<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   StationPlayerQuery,
   StationPlayerQueryVariables,
   StationPlayerProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, StationPlayerQuery, StationPlayerQueryVariables, StationPlayerProps<TChildProps>>(StationPlayerDocument, {
+    return ApolloReactHoc.withQuery<TProps, StationPlayerQuery, StationPlayerQueryVariables, StationPlayerProps<TChildProps>>(StationPlayerDocument, {
       alias: 'withStationPlayer',
       ...operationOptions
     });
 };
 
-export function useStationPlayerQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationPlayerQueryVariables>) {
-  return ReactApolloHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
-};
+    export function useStationPlayerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
+      return ApolloReactHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+    };
+      export function useStationPlayerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+      };
+      
+export type StationPlayerQueryHookResult = ReturnType<typeof useStationPlayerQuery>;
+export type StationPlayerQueryResult = ApolloReactCommon.QueryResult<StationPlayerQuery, StationPlayerQueryVariables>;
 export const OnStationPlayerChangedDocument = gql`
     subscription OnStationPlayerChanged($stationSlug: String!) {
   onPlayingSongChanged: song(where: {node: {station: {slug: $stationSlug}, status_in: [PLAYING, PLAYED, SKIPPED]}}) {
@@ -3880,21 +4099,52 @@ export const OnStationPlayerChangedDocument = gql`
   }
 }
     ${PlayingSongFragmentDoc}`;
-export type OnStationPlayerChangedProps<TChildProps = {}> = Partial<ReactApollo.DataProps<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>> & TChildProps;
-export function withOnStationPlayerChanged<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type OnStationPlayerChangedProps<TChildProps = {}> = ApolloReactHoc.DataProps<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables> & TChildProps;
+export function withOnStationPlayerChanged<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   OnStationPlayerChangedSubscription,
   OnStationPlayerChangedSubscriptionVariables,
   OnStationPlayerChangedProps<TChildProps>>) {
-    return ReactApollo.withSubscription<TProps, OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables, OnStationPlayerChangedProps<TChildProps>>(OnStationPlayerChangedDocument, {
+    return ApolloReactHoc.withSubscription<TProps, OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables, OnStationPlayerChangedProps<TChildProps>>(OnStationPlayerChangedDocument, {
       alias: 'withOnStationPlayerChanged',
       ...operationOptions
     });
 };
 
-export function useOnStationPlayerChangedSubscription(baseOptions?: ReactApolloHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
-  return ReactApolloHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
+    export function useOnStationPlayerChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
+      return ApolloReactHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
+    };
+export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
+export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
+export const StationTagsDocument = gql`
+    query StationTags($name: String!) {
+  stationTags(where: {name: $name}) {
+    id
+    name
+  }
+}
+    `;
+export type StationTagsProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationTagsQuery, StationTagsQueryVariables> & TChildProps;
+export function withStationTags<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  StationTagsQuery,
+  StationTagsQueryVariables,
+  StationTagsProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, StationTagsQuery, StationTagsQueryVariables, StationTagsProps<TChildProps>>(StationTagsDocument, {
+      alias: 'withStationTags',
+      ...operationOptions
+    });
 };
+
+    export function useStationTagsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationTagsQuery, StationTagsQueryVariables>) {
+      return ApolloReactHooks.useQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
+    };
+      export function useStationTagsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationTagsQuery, StationTagsQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
+      };
+      
+export type StationTagsQueryHookResult = ReturnType<typeof useStationTagsQuery>;
+export type StationTagsQueryResult = ApolloReactCommon.QueryResult<StationTagsQuery, StationTagsQueryVariables>;
 export const StationsDocument = gql`
     query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {
   stations(first: $first, skip: $skip, where: $where, orderBy: $orderBy) {
@@ -3913,44 +4163,27 @@ export const StationsDocument = gql`
   }
 }
     ${UserBaseInformationFragmentDoc}`;
-export type StationsProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationsQuery, StationsQueryVariables>> & TChildProps;
-export function withStations<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type StationsProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationsQuery, StationsQueryVariables> & TChildProps;
+export function withStations<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   StationsQuery,
   StationsQueryVariables,
   StationsProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>(StationsDocument, {
+    return ApolloReactHoc.withQuery<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>(StationsDocument, {
       alias: 'withStations',
       ...operationOptions
     });
 };
 
-export function useStationsQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationsQueryVariables>) {
-  return ReactApolloHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
-};
-export const StationTagsDocument = gql`
-    query StationTags($name: String!) {
-  stationTags(where: {name: $name}) {
-    id
-    name
-  }
-}
-    `;
-export type StationTagsProps<TChildProps = {}> = Partial<ReactApollo.DataProps<StationTagsQuery, StationTagsQueryVariables>> & TChildProps;
-export function withStationTags<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
-  TProps,
-  StationTagsQuery,
-  StationTagsQueryVariables,
-  StationTagsProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, StationTagsQuery, StationTagsQueryVariables, StationTagsProps<TChildProps>>(StationTagsDocument, {
-      alias: 'withStationTags',
-      ...operationOptions
-    });
-};
-
-export function useStationTagsQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<StationTagsQueryVariables>) {
-  return ReactApolloHooks.useQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
-};
+    export function useStationsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
+      return ApolloReactHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+    };
+      export function useStationsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+      };
+      
+export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
+export type StationsQueryResult = ApolloReactCommon.QueryResult<StationsQuery, StationsQueryVariables>;
 export const UserProfileDocument = gql`
     query UserProfile($where: UserWhereUniqueInput!) {
   user(where: $where) {
@@ -3979,18 +4212,24 @@ export const UserProfileDocument = gql`
   }
 }
     `;
-export type UserProfileProps<TChildProps = {}> = Partial<ReactApollo.DataProps<UserProfileQuery, UserProfileQueryVariables>> & TChildProps;
-export function withUserProfile<TProps, TChildProps = {}>(operationOptions?: ReactApollo.OperationOption<
+export type UserProfileProps<TChildProps = {}> = ApolloReactHoc.DataProps<UserProfileQuery, UserProfileQueryVariables> & TChildProps;
+export function withUserProfile<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
   TProps,
   UserProfileQuery,
   UserProfileQueryVariables,
   UserProfileProps<TChildProps>>) {
-    return ReactApollo.withQuery<TProps, UserProfileQuery, UserProfileQueryVariables, UserProfileProps<TChildProps>>(UserProfileDocument, {
+    return ApolloReactHoc.withQuery<TProps, UserProfileQuery, UserProfileQueryVariables, UserProfileProps<TChildProps>>(UserProfileDocument, {
       alias: 'withUserProfile',
       ...operationOptions
     });
 };
 
-export function useUserProfileQuery(baseOptions?: ReactApolloHooks.QueryHookOptions<UserProfileQueryVariables>) {
-  return ReactApolloHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
-};
+    export function useUserProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
+      return ApolloReactHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+    };
+      export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+      };
+      
+export type UserProfileQueryHookResult = ReturnType<typeof useUserProfileQuery>;
+export type UserProfileQueryResult = ApolloReactCommon.QueryResult<UserProfileQuery, UserProfileQueryVariables>;

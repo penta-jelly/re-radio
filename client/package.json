@@ -27,7 +27,6 @@
     "notistack": "0.8.9",
     "react": "16.9.0",
     "react-apollo": "3.0.1",
-    "react-apollo-hooks": "0.4.5",
     "react-dom": "16.9.0",
     "react-helmet": "5.2.1",
     "react-i18next": "10.12.2",
