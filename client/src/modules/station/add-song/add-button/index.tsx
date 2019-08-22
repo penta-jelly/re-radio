@@ -23,7 +23,7 @@ interface RouteParams {
 
 export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
   const classes = useStyles();
-  const addSong = useCreateSongMutation();
+  const [addSong] = useCreateSongMutation();
   const { match } = useRouter<RouteParams>();
   const currentUserQuery = useCurrentUserQuery();
   const notifyUnauthorizedUser = useUnauthorizedNotification();
@@ -83,6 +83,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
     addSong,
     match.params.slug,
     postSubmit,
+    notifyUnauthorizedUser,
   ]);
 
   return (

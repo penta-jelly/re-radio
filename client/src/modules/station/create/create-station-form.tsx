@@ -16,7 +16,7 @@ import {
   UserRoleEnum,
 } from 'operations';
 import React from 'react';
-import { useApolloClient } from 'react-apollo-hooks';
+import { useApolloClient } from 'react-apollo';
 import { MdRadio as StationIcon } from 'react-icons/md';
 import * as yup from 'yup';
 import { useStyles } from './styles';
@@ -44,7 +44,7 @@ export const CreateStationForm: React.FC<Props> = props => {
 
   const [isMoreInfo, toggleIsMoreInfo] = useToggle(false);
 
-  const createStationMutation = useCreateStationMutation();
+  const [createStationMutation] = useCreateStationMutation();
 
   const onCreateStation = React.useCallback(
     async (values: Data, formik: FormikActions<Data>) => {

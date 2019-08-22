@@ -25,7 +25,7 @@ type Data = { [key in DataKeys]: string };
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
   const [loginError, setLoginError] = useState<string | null>(null);
-  const loginMutation = useLoginMutation();
+  const [loginMutation] = useLoginMutation();
   const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
   const { t } = useTranslation('common');
   const onLogin = useCallback(

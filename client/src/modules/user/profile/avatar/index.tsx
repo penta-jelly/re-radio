@@ -16,7 +16,7 @@ interface Props {
 
 export const ProfileAvatar: React.FC<Props> = ({ id, editable, url, alt, username }) => {
   const classes = useStyles({ editable });
-  const mutate = useUpdateUserAvatarMutation({
+  const [updateAvatar] = useUpdateUserAvatarMutation({
     refetchQueries: () => [
       { query: CurrentUserDocument },
       { query: UserProfileDocument, variables: { where: { username } } },
@@ -25,10 +25,10 @@ export const ProfileAvatar: React.FC<Props> = ({ id, editable, url, alt, usernam
   const callback = React.useCallback<React.ChangeEventHandler<HTMLInputElement>>(
     async ({ target: { validity, files } }) => {
       if (validity.valid && files) {
-        await mutate({ variables: { file: files[0], where: { username } } });
+        await updateAvatar({ variables: { file: files[0], where: { username } } });
       }
     },
-    [mutate, username],
+    [updateAvatar, username],
   );
   return (
     <label className={[classes.root, classes.label].join(' ')} htmlFor={editable ? id : ''}>
