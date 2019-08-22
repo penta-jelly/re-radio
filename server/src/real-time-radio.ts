@@ -13,6 +13,7 @@ async function bootstrap() {
   try {
     const graphqlResource = `http://localhost:8000/status`;
     logger.log(`Waiting for ${configService.get(EnvVariables.PRISMA_ENDPOINT)} and ${graphqlResource} to response.`);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     await require('wait-on')({
       resources: [configService.get(EnvVariables.PRISMA_ENDPOINT), graphqlResource],
       timeout: 60000,

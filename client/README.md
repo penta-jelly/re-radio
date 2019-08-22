@@ -10,8 +10,8 @@ Client project for re-radio
 
 ## Note
 
-- All `.graphql` files must go `src/graphql`
-- Files `src/graphql/index.tsx` and `schema.json` will be auto generated, **please don't modify them**!
+- All `.graphql` files must go `src/operations`
+- Files `src/operations/index.tsx` will be auto generated, **please don't modify them**!
 
 ## Translation
 

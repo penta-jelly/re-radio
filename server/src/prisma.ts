@@ -14,6 +14,7 @@ async function bootstrap() {
   const args = process.argv.slice(2);
 
   logger.log(`Waiting for ${configService.get(EnvVariables.PRISMA_ENDPOINT)} to response.`);
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   await require('wait-on')({ resources: [configService.get(EnvVariables.PRISMA_ENDPOINT)], timeout: 30000 });
 
   const script = `npx prisma ${args.join(' ')}`;

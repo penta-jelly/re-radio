@@ -13,6 +13,7 @@ async function bootstrap() {
 
   try {
     logger.log(`Waiting for ${configService.get(EnvVariables.PRISMA_ENDPOINT)} to response.`);
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     await require('wait-on')({ resources: [configService.get(EnvVariables.PRISMA_ENDPOINT)], timeout: 60000 });
   } catch (error) {
     logger.error(error);
