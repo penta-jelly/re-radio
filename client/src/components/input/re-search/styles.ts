@@ -8,28 +8,23 @@ export const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     border: `2px solid rgba(0, 0, 0, 0.4)`,
     borderRadius: '100px',
-    padding: '0.25rem 0.75rem',
+    padding: theme.spacing(0.5, 1.5),
     transition: 'border-color 0.4s ease-in-out',
     '&:hover': {
       borderColor: theme.palette.primary.main,
-      '& > $icon': {
-        color: theme.palette.primary.main,
-      },
     },
   },
   rootFocused: {
     borderColor: theme.palette.primary.main,
-    '& > $icon': {
+    '& #close-button, & #search-button': {
       color: theme.palette.primary.main,
     },
   },
-  icon: {
-    padding: theme.spacing(0.75),
-    margin: theme.spacing(-0.75),
-    color: 'rgba(0, 0, 0, 0.4)',
-    transition: 'color 0.4s ease-in-out',
-  },
   fullWidth: {
     width: '100%',
+  },
+  icon: {
+    fontSize: '1.50rem',
+    color: theme.palette.grey['600'],
   },
 }));

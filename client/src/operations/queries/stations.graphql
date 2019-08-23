@@ -10,5 +10,29 @@ query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: Sta
     userRoles(where: { role: STATION_OWNER }) {
       user { ...UserBaseInformation }
     }
+    songs(where: { status: PLAYING }) {
+      title
+      thumbnail
+      url
+    }
+  }
+}
+
+subscription OnStationPlayingSongChanged($stationSlug: String!) {
+  onPlayingSongChanged: song(
+    where: {
+      mutation_in: [UPDATED]
+      node: {
+        station: { slug: $stationSlug }
+        status_in: [PLAYING, PLAYED, SKIPPED]
+      }
+    }
+  ) {
+    node {
+      title
+      thumbnail
+      duration
+      status
+    }
   }
 }

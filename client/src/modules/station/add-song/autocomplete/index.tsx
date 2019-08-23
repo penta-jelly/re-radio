@@ -2,11 +2,11 @@ import { CircularProgress, Grid, MenuItem, Paper, Typography } from '@material-u
 import { InputBaseProps } from '@material-ui/core/InputBase';
 import { ReSearch } from 'components/input/re-search';
 import Downshift, { Actions, DownshiftState, PropGetters, StateChangeOptions } from 'downshift';
-import { AddButton } from 'modules/station/add-song/add-button';
-import { useStyles } from 'modules/station/add-song/autocomplete/styles';
-import { Preview } from 'modules/station/add-song/preview';
 import { MiniSongExplorer, SongExplorersQuery } from 'operations';
 import React, { useCallback, useState } from 'react';
+import { AddButton } from '../add-button';
+import { Preview } from '../preview';
+import { useStyles } from './styles';
 
 type DropdownItem = SongExplorersQuery['songExplorers'][0];
 
@@ -16,6 +16,7 @@ export interface AutocompleteProps {
   placeholder?: string;
   loading?: boolean;
   onChangeInputValue?: InputBaseProps['onChange'];
+  error?: string;
 }
 
 type AutocompleteWithDownshiftType = PropGetters<DropdownItem> & Actions<DropdownItem> & DownshiftState<DropdownItem>;
@@ -86,18 +87,28 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
 
       return (
         <div className={classes.downShiftContentContainer}>
-          <ReSearch
-            {..._inputProps}
-            id="search-song-input"
-            className={classes.researchContainer}
-            placeholder={`Type song's name e.g "When you believe"`}
-            fullWidth
-            icon={props.loading && <CircularProgress size={24} />}
-            onIconClick={() => {
-              reset();
-              clearSelection();
-            }}
-          />
+          <div className={classes.formContainer}>
+            <ReSearch
+              {..._inputProps}
+              id="search-song-input"
+              className={classes.researchContainer}
+              placeholder={`Type song's name e.g "When you believe"`}
+              fullWidth
+              icon={props.loading && <CircularProgress size={24} />}
+              iconButton={!!_inputProps.value}
+              onIconClick={() => {
+                reset();
+                clearSelection();
+              }}
+            />
+            <AddButton
+              previewSong={previewSong}
+              postSubmit={() => {
+                reset();
+                clearSelection();
+              }}
+            />
+          </div>
           <div {...getMenuProps()}>
             {isOpen && props.items.length > 0 ? (
               <Paper className={classes.paper} id="search-song-menu">
@@ -106,17 +117,18 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
             ) : null}
           </div>
           <Preview previewSong={previewSong} />
-          <AddButton
-            previewSong={previewSong}
-            postSubmit={() => {
-              reset();
-              clearSelection();
-            }}
-          />
         </div>
       );
     },
-    [props, classes.downShiftContentContainer, classes.researchContainer, classes.paper, renderSuggestion, previewSong],
+    [
+      props,
+      classes.downShiftContentContainer,
+      classes.formContainer,
+      classes.researchContainer,
+      classes.paper,
+      previewSong,
+      renderSuggestion,
+    ],
   );
 
   const handleStateReducer = (

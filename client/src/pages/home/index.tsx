@@ -25,7 +25,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
     [],
   );
 
-  const { loading, error, data } = useStationsQuery({ variables: queryVariables });
+  const { loading, error, data } = useStationsQuery({ variables: queryVariables, fetchPolicy: 'network-only' });
 
   const { match, history } = useRouter();
   const openCreateStationModal = React.useCallback(() => {

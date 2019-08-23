@@ -1,7 +1,6 @@
-import { Grid } from '@material-ui/core';
-import { PrimaryButton } from 'components/button/primary-button';
-import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
+import { Fab } from '@material-ui/core';
 import { useRouter } from 'hooks/use-router';
+import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import {
   MiniSongExplorer,
   SongStatusEnum,
@@ -10,7 +9,7 @@ import {
   useSongExplorerQuery,
 } from 'operations';
 import React, { useCallback } from 'react';
-import { useStyles } from './styles';
+import { MdSend } from 'react-icons/md';
 
 interface Props {
   previewSong?: MiniSongExplorer;
@@ -22,8 +21,7 @@ interface RouteParams {
 }
 
 export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
-  const classes = useStyles();
-  const [addSong] = useCreateSongMutation();
+  const [addSong, createSongMutation] = useCreateSongMutation();
   const { match } = useRouter<RouteParams>();
   const currentUserQuery = useCurrentUserQuery();
   const notifyUnauthorizedUser = useUnauthorizedNotification();
@@ -50,6 +48,11 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
         songExplorerQuery.data.songExplorer
       ) {
         try {
+          const thumbnail =
+            songExplorerQuery.data.songExplorer.snippet.thumbnails.high ||
+            songExplorerQuery.data.songExplorer.snippet.thumbnails.medium ||
+            songExplorerQuery.data.songExplorer.snippet.thumbnails.default;
+
           await addSong({
             variables: {
               data: {
@@ -57,13 +60,9 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
                 status: SongStatusEnum.Pending,
                 duration: songExplorerQuery.data.songExplorer.contentDetails.duration,
                 url: `https://www.youtube.com/watch?v=${songExplorerQuery.data.songExplorer.id}`,
-                thumbnail: songExplorerQuery.data.songExplorer.snippet.thumbnails.default.url,
-                station: {
-                  connect: { slug: match.params.slug },
-                },
-                creator: {
-                  connect: { username: currentUserQuery.data.user.username },
-                },
+                thumbnail: thumbnail.url,
+                station: { connect: { slug: match.params.slug } },
+                creator: { connect: { username: currentUserQuery.data.user.username } },
               },
             },
           });
@@ -87,10 +86,14 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
   ]);
 
   return (
-    <Grid item xs={12} className={classes.submitButtonContainer}>
-      <PrimaryButton id="submit-song-button" disabled={!previewSong} onClick={onSubmit}>
-        Add to playlist
-      </PrimaryButton>
-    </Grid>
+    <Fab
+      id="submit-song-button"
+      size="medium"
+      color="primary"
+      disabled={!previewSong || createSongMutation.loading || songExplorerQuery.loading}
+      onClick={onSubmit}
+    >
+      <MdSend />
+    </Fab>
   );
 };

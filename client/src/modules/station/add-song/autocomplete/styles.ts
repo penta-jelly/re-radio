@@ -5,8 +5,12 @@ export const useStyles = makeStyles(({ spacing }: Theme) => ({
     position: 'relative',
     height: '100%',
   },
+  formContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
   researchContainer: {
-    width: '100%',
+    width: `calc(100% - 56px)`,
   },
   paper: {
     height: 200,

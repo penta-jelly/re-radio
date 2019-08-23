@@ -5,9 +5,18 @@ query StationPlayer($stationSlug: String!) {
 }
 
 subscription OnStationPlayerChanged($stationSlug: String!) {
-  onPlayingSongChanged: song(where: { node: { station: { slug: $stationSlug }, status_in: [PLAYING, PLAYED, SKIPPED] } }) {
-    mutation
-    node { ...PlayingSong }
+  onPlayingSongChanged: song(
+    where: {
+      mutation_in: [UPDATED]
+      node: {
+        station: { slug: $stationSlug }
+        status_in: [PLAYING, PLAYED, SKIPPED]
+      }
+    }
+  ) {
+    node {
+      ...PlayingSong
+    }
   }
 }
 

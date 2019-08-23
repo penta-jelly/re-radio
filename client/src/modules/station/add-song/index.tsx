@@ -1,27 +1,31 @@
 import { Card, Grid } from '@material-ui/core';
-import React, { useCallback, useState } from 'react';
-import { useStyles } from './styles';
-import { Autocomplete } from 'modules/station/add-song/autocomplete';
+import { useDebounce } from 'hooks/use-debounce';
 import { useSongExplorersQuery } from 'operations';
+import React, { useCallback, useState } from 'react';
+import { Autocomplete } from './autocomplete';
+import { useStyles } from './styles';
 
 export const AddSong: React.FC<{}> = () => {
   const classes = useStyles();
-  const [value, setValue] = useState<string>('');
+  const [query, setQuery] = useState<string>('');
+  // Must debounce to prevent firing fetch request every input changed event
+  const debouncedQuery = useDebounce(query, 300);
   const { data, loading } = useSongExplorersQuery({
     variables: {
-      where: { q: value },
+      where: { q: debouncedQuery },
     },
+    fetchPolicy: 'network-only',
   });
 
   const onChangeInputValue = useCallback<React.ChangeEventHandler<HTMLInputElement>>(event => {
     if (event && event.target) {
-      setValue(event.target.value);
+      setQuery(event.target.value);
     }
   }, []);
 
   return (
     <Card className={classes.card}>
-      <Grid container className={classes.container} spacing={2}>
+      <Grid container className={classes.container} spacing={0}>
         <Grid item xs={12} className={classes.wrapper}>
           <Autocomplete
             items={data && data.songExplorers ? data.songExplorers : []}

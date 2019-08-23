@@ -1,7 +1,7 @@
 import { Card, Typography } from '@material-ui/core';
 import { PageLoader } from 'components/page-loader';
 import { useRouter } from 'hooks/use-router';
-import { MutationType, SongStatusEnum, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
+import { SongStatusEnum, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
 import React from 'react';
 import { useStyles } from './styles';
 
@@ -15,6 +15,7 @@ export const Player: React.FC = () => {
 
   const { loading, data, updateQuery } = useStationPlayerQuery({
     variables: { stationSlug: match.params.slug },
+    fetchPolicy: 'network-only',
   });
 
   useOnStationPlayerChangedSubscription({
@@ -23,16 +24,16 @@ export const Player: React.FC = () => {
       if (!data) return;
       const { onPlayingSongChanged } = data;
       if (!onPlayingSongChanged) return;
-      const { node, mutation } = onPlayingSongChanged;
+      const { node } = onPlayingSongChanged;
       if (!node) return;
       updateQuery(prev => {
-        // Remove the updated node from the current list first
+        // Remove the updated node from the current list first, including played and skipped node
         let playingSongs = prev.playingSongs.filter(song => song!.id !== node.id);
         // Then only add the updated node if the status is playing. Played/skipped status will be ignore.
-        if (mutation === MutationType.Updated && node.status === SongStatusEnum.Playing) {
+        if (node.status === SongStatusEnum.Playing) {
           playingSongs = [...playingSongs, node];
         }
-        return prev ? { ...prev, playingSongs } : prev;
+        return { ...prev, playingSongs };
       });
     },
   });
