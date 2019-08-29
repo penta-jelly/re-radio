@@ -2,7 +2,7 @@ version: "3.7"
 services:
   prisma:
     container_name: re-radio_prisma
-    image: prismagraphql/prisma:1.34.7
+    image: prismagraphql/prisma:1.34.8
     restart: "no"
     depends_on: [db]
     environment:
