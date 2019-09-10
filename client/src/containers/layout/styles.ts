@@ -32,9 +32,7 @@ export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) =>
     flexDirection: 'column',
     height: '100%',
   },
-  content: props => ({
-    width: `calc(100vw - ${getDrawerWidth(props)}px)`,
-  }),
+  content: {},
   spacer: {
     flex: 1,
   },
@@ -52,5 +50,8 @@ export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) =>
     width: 40,
     verticalAlign: 'middle',
     marginRight: props.drawer && props.drawer.collapsed ? 0 : 28,
+  }),
+  listItemIcon: (props: Props) => ({
+    minWidth: props.drawer && props.drawer.collapsed ? 0 : undefined,
   }),
 }));

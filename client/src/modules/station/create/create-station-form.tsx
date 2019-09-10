@@ -116,7 +116,7 @@ export const CreateStationForm: React.FC<Props> = props => {
   );
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.root} square>
       <CardContent className={classes.cardContent}>
         <Formik<Data>
           initialValues={{ name: '', slug: '', description: '', tags: '' }}

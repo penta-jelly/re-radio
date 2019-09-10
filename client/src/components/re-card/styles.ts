@@ -3,8 +3,8 @@ import { makeStyles } from '@material-ui/styles';
 
 export const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    width: 'auto',
-    height: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
     borderRadius: 15,
     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)',
   },
@@ -28,6 +28,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
   },
   contentContainer: {
     padding: '10px !important',
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
   },
   title: {
     fontSize: '1.25rem',
@@ -40,6 +43,7 @@ export const useStyles = makeStyles((theme: Theme) => ({
     marginBottom: 8,
   },
   divider: {
+    marginTop: 'auto',
     display: 'block',
     height: 2,
     width: '100%',
