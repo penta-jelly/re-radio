@@ -49,7 +49,7 @@
     "@types/graphql": "14.2.3",
     "@types/node": "10.14.7",
     "@types/node-fetch": "2.5.0",
-    "@types/passport-jwt": "3.0.1",
+    "@types/passport-jwt": "3.0.2",
     "@typescript-eslint/eslint-plugin": "2.2.0",
     "@typescript-eslint/parser": "2.2.0",
     "eslint": "6.0.0",
