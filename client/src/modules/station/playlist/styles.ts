@@ -7,4 +7,8 @@ export const useStyles = makeStyles(() => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  list: {
+    height: '100%',
+    width: '100%',
+  },
 }));

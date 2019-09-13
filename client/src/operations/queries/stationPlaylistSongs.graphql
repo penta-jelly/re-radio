@@ -1,0 +1,35 @@
+query StationPlayist($stationSlug: String!) {
+  playlist: songs(where: { station: { slug: $stationSlug }, status_in: [PENDING, PLAYING] }) {
+    ...PlaylistSong
+  }
+}
+
+subscription OnStationPlalistChanged($stationSlug: String!) {
+  onPlaylistSongChanged: song(
+    where: {
+      mutation_in: [UPDATED, CREATED]
+      node: {
+        station: { slug: $stationSlug }
+        status_in: [PENDING, PLAYING, PLAYED, SKIPPED]
+      }
+    }
+  ) {
+    node {
+      ...PlayingSong
+    }
+  }
+}
+
+
+fragment PlaylistSong on Song {
+  id
+  title
+  url
+  thumbnail
+  duration
+  startedAt
+  status
+  creator { ...UserBaseInformation }
+  upVotes { ...UserBaseInformation }
+  downVotes { ...UserBaseInformation }
+}

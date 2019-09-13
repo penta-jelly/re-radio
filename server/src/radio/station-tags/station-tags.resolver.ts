@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { BatchPayload, StationTag } from 'prisma/prisma.binding';
+import { BatchPayload, StationTag, StationTagConnection } from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
 import { StationTagsService } from 'radio/station-tags/station-tags.service';
 import { Roles } from '../auth/decorators/Roles.decorator';
@@ -10,6 +10,11 @@ import { AuthorizationGuard } from '../auth/guards/Authorization.guard';
 @Resolver()
 export class StationTagsResolver {
   constructor(private readonly prisma: PrismaService, private readonly stationTagsService: StationTagsService) {}
+
+  @Query('stationTagsConnection')
+  async getStationTagConnection(@Args() args, @Info() info): Promise<StationTagConnection[]> {
+    return await this.prisma.query.stationTagsConnection(args, info);
+  }
 
   @Query('stationTags')
   async getStations(@Args() args, @Info() info): Promise<StationTag[]> {

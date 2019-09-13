@@ -38,7 +38,7 @@ export const Layout: React.FC<Props> = props => {
           </li>
           <ListItem button component={Link} to="/">
             <>
-              <ListItemIcon>
+              <ListItemIcon className={classes.listItemIcon}>
                 <Icon>
                   <StationIcon />
                 </Icon>
@@ -49,7 +49,7 @@ export const Layout: React.FC<Props> = props => {
           <div className={classes.spacer} />
           <ListItem button component={Link} to="/login">
             <>
-              <ListItemIcon>
+              <ListItemIcon className={classes.listItemIcon}>
                 <Icon>
                   <LoginIcon />
                 </Icon>

@@ -4,7 +4,6 @@ export default (url: string = '/station') => ({
   elements: {
     headerText: /(.*)/,
     chatBoxText: 'Chat Box',
-    playlistText: 'Playlist',
     playerContainer: '#station-player',
     searchSongInput: '#search-song-input',
     closeIconButton: '#close-button',

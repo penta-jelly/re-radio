@@ -1,6 +1,6 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { BatchPayload, Song, SongWhereInput, SongWhereUniqueInput } from 'prisma/prisma.binding';
+import { BatchPayload, Song, SongConnection, SongWhereInput, SongWhereUniqueInput } from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
 import { RoleDecoratorParam, Roles } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
@@ -12,6 +12,11 @@ import { SongsService } from './songs.service';
 @Resolver()
 export class SongsResolver {
   constructor(private readonly prisma: PrismaService, private readonly songsService: SongsService) {}
+
+  @Query('songsConnection')
+  async getSongConnection(@Args() args, @Info() info): Promise<SongConnection[]> {
+    return await this.prisma.query.songsConnection(args, info);
+  }
 
   @Query('songs')
   async getSongs(@Args() args, @Info() info): Promise<Song[]> {
