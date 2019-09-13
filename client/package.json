@@ -35,7 +35,7 @@
     "react-scripts": "3.1.1",
     "subscriptions-transport-ws": "0.9.16",
     "type-fest": "0.7.1",
-    "use-query-params": "0.3.3",
+    "use-query-params": "0.4.0",
     "yup": "0.27.0"
   },
   "devDependencies": {
