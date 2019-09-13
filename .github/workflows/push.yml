@@ -1,0 +1,24 @@
+name: Integration testing
+on: push
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install libgconf
+        run: sudo apt-get update && sudo apt-get install -yq libgconf-2-4
+      - name: Install NodeJS
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10.x
+      - name: Check out code
+        uses: actions/checkout@master
+      - name: Build
+        run: bash start.sh build
+      - name: Test
+        env:
+          CI: true
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+        run: cd e2e && npm ci && npx start-server-and-test "cd .. && bash start.sh" "3000|8000/status" cypress:run:ci && cd ..
+
