@@ -12,7 +12,6 @@ describe('Show Station Page', () => {
       cy.get(stationPage.elements.playerContainer).should('exist');
       cy.contains(stationPage.elements.headerText).should('exist');
       cy.contains(stationPage.elements.chatBoxText).should('exist');
-      cy.contains(stationPage.elements.playlistText).should('exist');
     });
   });
 

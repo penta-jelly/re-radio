@@ -1,8 +1,9 @@
 /* eslint-disable */
-import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHoc from '@apollo/react-hoc';
 import * as ApolloReactHooks from '@apollo/react-hooks';
+import gql from 'graphql-tag';
+
 export type Maybe<T> = T | null;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -12,7 +13,7 @@ export type Scalars = {
   Int: number,
   Float: number,
   DateTime: any,
-  /** 
+  /**
  * The `Long` scalar type represents non-fractional signed whole numeric values.
    * Long can represent values between -(2^63) and 2^63 - 1.
  **/
@@ -3638,6 +3639,45 @@ export type PlayingSongFragment = (
   >> }
 );
 
+export type StationPlayistQueryVariables = {
+  stationSlug: Scalars['String']
+};
+
+
+export type StationPlayistQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly playlist: ReadonlyArray<Maybe<{ readonly __typename?: 'Song' }
+    & PlaylistSongFragment
+  >> }
+);
+
+export type OnStationPlalistChangedSubscriptionVariables = {
+  stationSlug: Scalars['String']
+};
+
+
+export type OnStationPlalistChangedSubscription = (
+  { readonly __typename?: 'Subscription' }
+  & { readonly onPlaylistSongChanged: Maybe<(
+    { readonly __typename?: 'SongSubscriptionPayload' }
+    & { readonly node: Maybe<{ readonly __typename?: 'Song' }
+      & PlayingSongFragment
+    > }
+  )> }
+);
+
+export type PlaylistSongFragment = (
+  { readonly __typename?: 'Song' }
+  & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status'>
+  & { readonly creator: { readonly __typename?: 'User' }
+    & UserBaseInformationFragment
+  , readonly upVotes: Maybe<ReadonlyArray<{ readonly __typename?: 'User' }
+    & UserBaseInformationFragment
+  >>, readonly downVotes: Maybe<ReadonlyArray<{ readonly __typename?: 'User' }
+    & UserBaseInformationFragment
+  >> }
+);
+
 export type StationTagsQueryVariables = {
   name: Scalars['String']
 };
@@ -3730,6 +3770,26 @@ export const UserBaseInformationFragmentDoc = gql`
     `;
 export const PlayingSongFragmentDoc = gql`
     fragment PlayingSong on Song {
+  id
+  title
+  url
+  thumbnail
+  duration
+  startedAt
+  status
+  creator {
+    ...UserBaseInformation
+  }
+  upVotes {
+    ...UserBaseInformation
+  }
+  downVotes {
+    ...UserBaseInformation
+  }
+}
+    ${UserBaseInformationFragmentDoc}`;
+export const PlaylistSongFragmentDoc = gql`
+    fragment PlaylistSong on Song {
   id
   title
   url
@@ -3903,7 +3963,7 @@ export function withCurrentUser<TProps, TChildProps = {}>(operationOptions?: Apo
       export function useCurrentUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
       };
-      
+
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserQueryResult = ApolloReactCommon.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const SongExplorerDocument = gql`
@@ -3975,7 +4035,7 @@ export function withSongExplorer<TProps, TChildProps = {}>(operationOptions?: Ap
       export function useSongExplorerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SongExplorerQuery, SongExplorerQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
       };
-      
+
 export type SongExplorerQueryHookResult = ReturnType<typeof useSongExplorerQuery>;
 export type SongExplorerQueryResult = ApolloReactCommon.QueryResult<SongExplorerQuery, SongExplorerQueryVariables>;
 export const SongExplorersDocument = gql`
@@ -4037,7 +4097,7 @@ export function withSongExplorers<TProps, TChildProps = {}>(operationOptions?: A
       export function useSongExplorersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SongExplorersQuery, SongExplorersQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
       };
-      
+
 export type SongExplorersQueryHookResult = ReturnType<typeof useSongExplorersQuery>;
 export type SongExplorersQueryResult = ApolloReactCommon.QueryResult<SongExplorersQuery, SongExplorersQueryVariables>;
 export const StationDocument = gql`
@@ -4076,7 +4136,7 @@ export function withStation<TProps, TChildProps = {}>(operationOptions?: ApolloR
       export function useStationLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
       };
-      
+
 export type StationQueryHookResult = ReturnType<typeof useStationQuery>;
 export type StationQueryResult = ApolloReactCommon.QueryResult<StationQuery, StationQueryVariables>;
 export const StationPlayerDocument = gql`
@@ -4104,7 +4164,7 @@ export function withStationPlayer<TProps, TChildProps = {}>(operationOptions?: A
       export function useStationPlayerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
       };
-      
+
 export type StationPlayerQueryHookResult = ReturnType<typeof useStationPlayerQuery>;
 export type StationPlayerQueryResult = ApolloReactCommon.QueryResult<StationPlayerQuery, StationPlayerQueryVariables>;
 export const OnStationPlayerChangedDocument = gql`
@@ -4133,6 +4193,60 @@ export function withOnStationPlayerChanged<TProps, TChildProps = {}>(operationOp
     };
 export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
 export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
+export const StationPlayistDocument = gql`
+    query StationPlayist($stationSlug: String!) {
+  playlist: songs(where: {station: {slug: $stationSlug}, status_in: [PENDING, PLAYING]}) {
+    ...PlaylistSong
+  }
+}
+    ${PlaylistSongFragmentDoc}`;
+export type StationPlayistProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationPlayistQuery, StationPlayistQueryVariables> & TChildProps;
+export function withStationPlayist<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  StationPlayistQuery,
+  StationPlayistQueryVariables,
+  StationPlayistProps<TChildProps>>) {
+    return ApolloReactHoc.withQuery<TProps, StationPlayistQuery, StationPlayistQueryVariables, StationPlayistProps<TChildProps>>(StationPlayistDocument, {
+      alias: 'withStationPlayist',
+      ...operationOptions
+    });
+};
+
+    export function useStationPlayistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
+      return ApolloReactHooks.useQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
+    };
+      export function useStationPlayistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
+        return ApolloReactHooks.useLazyQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
+      };
+
+export type StationPlayistQueryHookResult = ReturnType<typeof useStationPlayistQuery>;
+export type StationPlayistQueryResult = ApolloReactCommon.QueryResult<StationPlayistQuery, StationPlayistQueryVariables>;
+export const OnStationPlalistChangedDocument = gql`
+    subscription OnStationPlalistChanged($stationSlug: String!) {
+  onPlaylistSongChanged: song(where: {mutation_in: [UPDATED, CREATED], node: {station: {slug: $stationSlug}, status_in: [PENDING, PLAYING, PLAYED, SKIPPED]}}) {
+    node {
+      ...PlayingSong
+    }
+  }
+}
+    ${PlayingSongFragmentDoc}`;
+export type OnStationPlalistChangedProps<TChildProps = {}> = ApolloReactHoc.DataProps<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables> & TChildProps;
+export function withOnStationPlalistChanged<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
+  TProps,
+  OnStationPlalistChangedSubscription,
+  OnStationPlalistChangedSubscriptionVariables,
+  OnStationPlalistChangedProps<TChildProps>>) {
+    return ApolloReactHoc.withSubscription<TProps, OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables, OnStationPlalistChangedProps<TChildProps>>(OnStationPlalistChangedDocument, {
+      alias: 'withOnStationPlalistChanged',
+      ...operationOptions
+    });
+};
+
+    export function useOnStationPlalistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>) {
+      return ApolloReactHooks.useSubscription<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>(OnStationPlalistChangedDocument, baseOptions);
+    };
+export type OnStationPlalistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlalistChangedSubscription>;
+export type OnStationPlalistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlalistChangedSubscription>;
 export const StationTagsDocument = gql`
     query StationTags($name: String!) {
   stationTags(where: {name: $name}) {
@@ -4159,7 +4273,7 @@ export function withStationTags<TProps, TChildProps = {}>(operationOptions?: Apo
       export function useStationTagsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationTagsQuery, StationTagsQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
       };
-      
+
 export type StationTagsQueryHookResult = ReturnType<typeof useStationTagsQuery>;
 export type StationTagsQueryResult = ApolloReactCommon.QueryResult<StationTagsQuery, StationTagsQueryVariables>;
 export const StationsDocument = gql`
@@ -4203,7 +4317,7 @@ export function withStations<TProps, TChildProps = {}>(operationOptions?: Apollo
       export function useStationsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
       };
-      
+
 export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
 export type StationsQueryResult = ApolloReactCommon.QueryResult<StationsQuery, StationsQueryVariables>;
 export const OnStationPlayingSongChangedDocument = gql`
@@ -4281,6 +4395,6 @@ export function withUserProfile<TProps, TChildProps = {}>(operationOptions?: Apo
       export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
       };
-      
+
 export type UserProfileQueryHookResult = ReturnType<typeof useUserProfileQuery>;
 export type UserProfileQueryResult = ApolloReactCommon.QueryResult<UserProfileQuery, UserProfileQueryVariables>;

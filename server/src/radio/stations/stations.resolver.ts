@@ -1,6 +1,12 @@
 import { BadRequestException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
-import { BatchPayload, Station, StationWhereInput, StationWhereUniqueInput } from 'prisma/prisma.binding';
+import {
+  BatchPayload,
+  Station,
+  StationConnection,
+  StationWhereInput,
+  StationWhereUniqueInput,
+} from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
 import { RoleDecoratorParam, Roles } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
@@ -12,6 +18,11 @@ import { StationsService } from './stations.service';
 @Resolver()
 export class StationsResolver {
   constructor(private readonly prisma: PrismaService, private readonly stationsService: StationsService) {}
+
+  @Query('stationsConnection')
+  async getStationConnection(@Args() args, @Info() info): Promise<StationConnection[]> {
+    return await this.prisma.query.stationsConnection(args, info);
+  }
 
   @Query('stations')
   async getStations(@Args() args, @Info() info): Promise<Station[]> {

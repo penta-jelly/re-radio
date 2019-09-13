@@ -1,7 +1,7 @@
 import { InternalServerErrorException, Logger, NotFoundException, UseGuards } from '@nestjs/common';
 import { Args, Info, Mutation, Query, Resolver, Subscription } from '@nestjs/graphql';
 import { FilesService } from 'core/files/files.service';
-import { BatchPayload, User, UserWhereInput, UserWhereUniqueInput } from 'prisma/prisma.binding';
+import { BatchPayload, User, UserConnection, UserWhereInput, UserWhereUniqueInput } from 'prisma/prisma.binding';
 import { PrismaService } from 'prisma/prisma.service';
 import { RoleDecoratorParam, Roles } from '../auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from '../auth/guards/Authentication.guard';
@@ -18,6 +18,13 @@ export class UsersResolver {
     private readonly usersService: UsersService,
     private readonly filesService: FilesService,
   ) {}
+
+  @Query('usersConnection')
+  @UseGuards(AuthenticationGuard, AuthorizationGuard)
+  @Roles(['ADMIN'])
+  async getUserConnection(@Args() args, @Info() info): Promise<UserConnection[]> {
+    return await this.prisma.query.usersConnection(args, info);
+  }
 
   @Query('users')
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
