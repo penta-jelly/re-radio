@@ -23,4 +23,4 @@ install:
   - bash start.sh build
 
 script:
-  - cd e2e && npx start-server-and-test "cd .. && bash start.sh" "3000|8000/status" cypress:run:ci && cd ..
+  - cd e2e && npx start-server-and-test "cd .. && bash start.sh" "3000|8000/status" "npm run cypress:run:ci -- --parallel"
