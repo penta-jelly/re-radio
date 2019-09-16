@@ -23,38 +23,38 @@ export type Scalars = {
 };
 
 export type AggregateSong = {
-  __typename?: 'AggregateSong',
+  readonly __typename?: 'AggregateSong',
   readonly count: Scalars['Int'],
 };
 
 export type AggregateStation = {
-  __typename?: 'AggregateStation',
+  readonly __typename?: 'AggregateStation',
   readonly count: Scalars['Int'],
 };
 
 export type AggregateStationTag = {
-  __typename?: 'AggregateStationTag',
+  readonly __typename?: 'AggregateStationTag',
   readonly count: Scalars['Int'],
 };
 
 export type AggregateUser = {
-  __typename?: 'AggregateUser',
+  readonly __typename?: 'AggregateUser',
   readonly count: Scalars['Int'],
 };
 
 export type AggregateUserRole = {
-  __typename?: 'AggregateUserRole',
+  readonly __typename?: 'AggregateUserRole',
   readonly count: Scalars['Int'],
 };
 
 export type BatchPayload = {
-  __typename?: 'BatchPayload',
+  readonly __typename?: 'BatchPayload',
   /** The number of nodes that have been affected by the Batch operation. */
   readonly count: Scalars['Long'],
 };
 
 export type ContentDetail = {
-  __typename?: 'ContentDetail',
+  readonly __typename?: 'ContentDetail',
   readonly duration: Scalars['Int'],
   readonly dimension: Scalars['String'],
   readonly definition: Scalars['String'],
@@ -70,13 +70,13 @@ export type LoginInput = {
 };
 
 export type LoginOrRegisterReturnType = {
-  __typename?: 'LoginOrRegisterReturnType',
+  readonly __typename?: 'LoginOrRegisterReturnType',
   readonly token?: Maybe<Scalars['String']>,
 };
 
 
 export type MiniSnippet = {
-  __typename?: 'MiniSnippet',
+  readonly __typename?: 'MiniSnippet',
   readonly publishedAt: Scalars['DateTime'],
   readonly channelId: Scalars['String'],
   readonly title: Scalars['String'],
@@ -86,13 +86,13 @@ export type MiniSnippet = {
 };
 
 export type MiniSongExplorer = {
-  __typename?: 'MiniSongExplorer',
+  readonly __typename?: 'MiniSongExplorer',
   readonly id: Scalars['String'],
   readonly snippet: Snippet,
 };
 
 export type Mutation = {
-  __typename?: 'Mutation',
+  readonly __typename?: 'Mutation',
   readonly createUserRole: UserRole,
   readonly createStation: Station,
   readonly createStationTag: StationTag,
@@ -337,7 +337,7 @@ export enum Order {
 
 /** Information about pagination in a connection. */
 export type PageInfo = {
-  __typename?: 'PageInfo',
+  readonly __typename?: 'PageInfo',
   /** When paginating forwards, are there more items? */
   readonly hasNextPage: Scalars['Boolean'],
   /** When paginating backwards, are there more items? */
@@ -349,7 +349,7 @@ export type PageInfo = {
 };
 
 export type Query = {
-  __typename?: 'Query',
+  readonly __typename?: 'Query',
   readonly userRoles: ReadonlyArray<Maybe<UserRole>>,
   readonly stations: ReadonlyArray<Maybe<Station>>,
   readonly stationTags: ReadonlyArray<Maybe<StationTag>>,
@@ -529,7 +529,7 @@ export type RegisterInput = {
 };
 
 export type Snippet = {
-  __typename?: 'Snippet',
+  readonly __typename?: 'Snippet',
   readonly publishedAt: Scalars['DateTime'],
   readonly channelId: Scalars['String'],
   readonly title: Scalars['String'],
@@ -543,7 +543,7 @@ export type Snippet = {
 };
 
 export type Song = Node & {
-  __typename?: 'Song',
+  readonly __typename?: 'Song',
   readonly id: Scalars['ID'],
   readonly createdAt: Scalars['DateTime'],
   readonly updatedAt: Scalars['DateTime'],
@@ -583,7 +583,7 @@ export type SongDownVotesArgs = {
 
 /** A connection to a list of items. */
 export type SongConnection = {
-  __typename?: 'SongConnection',
+  readonly __typename?: 'SongConnection',
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo,
   /** A list of edges. */
@@ -625,7 +625,7 @@ export type SongCreateWithoutStationInput = {
 
 /** An edge in a connection. */
 export type SongEdge = {
-  __typename?: 'SongEdge',
+  readonly __typename?: 'SongEdge',
   /** The item at the end of the edge. */
   readonly node: Song,
   /** A cursor for use in pagination. */
@@ -633,7 +633,7 @@ export type SongEdge = {
 };
 
 export type SongExplorer = {
-  __typename?: 'SongExplorer',
+  readonly __typename?: 'SongExplorer',
   readonly id: Scalars['String'],
   readonly snippet: Snippet,
   readonly contentDetails: ContentDetail,
@@ -672,7 +672,7 @@ export enum SongOrderByInput {
 }
 
 export type SongPreviousValues = {
-  __typename?: 'SongPreviousValues',
+  readonly __typename?: 'SongPreviousValues',
   readonly id: Scalars['ID'],
   readonly createdAt: Scalars['DateTime'],
   readonly updatedAt: Scalars['DateTime'],
@@ -876,7 +876,7 @@ export enum SongStatusEnum {
 }
 
 export type SongSubscriptionPayload = {
-  __typename?: 'SongSubscriptionPayload',
+  readonly __typename?: 'SongSubscriptionPayload',
   readonly mutation: MutationType,
   readonly node?: Maybe<Song>,
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>,
@@ -1169,7 +1169,7 @@ export type SongWhereUniqueInput = {
 };
 
 export type Station = Node & {
-  __typename?: 'Station',
+  readonly __typename?: 'Station',
   readonly id: Scalars['ID'],
   readonly createdAt: Scalars['DateTime'],
   readonly updatedAt: Scalars['DateTime'],
@@ -1228,7 +1228,7 @@ export type StationSongsArgs = {
 
 /** A connection to a list of items. */
 export type StationConnection = {
-  __typename?: 'StationConnection',
+  readonly __typename?: 'StationConnection',
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo,
   /** A list of edges. */
@@ -1294,7 +1294,7 @@ export type StationCreateWithoutUserRolesInput = {
 
 /** An edge in a connection. */
 export type StationEdge = {
-  __typename?: 'StationEdge',
+  readonly __typename?: 'StationEdge',
   /** The item at the end of the edge. */
   readonly node: Station,
   /** A cursor for use in pagination. */
@@ -1317,7 +1317,7 @@ export enum StationOrderByInput {
 }
 
 export type StationPreviousValues = {
-  __typename?: 'StationPreviousValues',
+  readonly __typename?: 'StationPreviousValues',
   readonly id: Scalars['ID'],
   readonly createdAt: Scalars['DateTime'],
   readonly updatedAt: Scalars['DateTime'],
@@ -1474,7 +1474,7 @@ export type StationScalarWhereInput = {
 };
 
 export type StationSubscriptionPayload = {
-  __typename?: 'StationSubscriptionPayload',
+  readonly __typename?: 'StationSubscriptionPayload',
   readonly mutation: MutationType,
   readonly node?: Maybe<Station>,
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>,
@@ -1500,7 +1500,7 @@ export type StationSubscriptionWhereInput = {
 };
 
 export type StationTag = Node & {
-  __typename?: 'StationTag',
+  readonly __typename?: 'StationTag',
   readonly id: Scalars['ID'],
   readonly name: Scalars['String'],
   readonly stations?: Maybe<ReadonlyArray<Station>>,
@@ -1519,7 +1519,7 @@ export type StationTagStationsArgs = {
 
 /** A connection to a list of items. */
 export type StationTagConnection = {
-  __typename?: 'StationTagConnection',
+  readonly __typename?: 'StationTagConnection',
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo,
   /** A list of edges. */
@@ -1545,7 +1545,7 @@ export type StationTagCreateWithoutStationsInput = {
 
 /** An edge in a connection. */
 export type StationTagEdge = {
-  __typename?: 'StationTagEdge',
+  readonly __typename?: 'StationTagEdge',
   /** The item at the end of the edge. */
   readonly node: StationTag,
   /** A cursor for use in pagination. */
@@ -1560,7 +1560,7 @@ export enum StationTagOrderByInput {
 }
 
 export type StationTagPreviousValues = {
-  __typename?: 'StationTagPreviousValues',
+  readonly __typename?: 'StationTagPreviousValues',
   readonly id: Scalars['ID'],
   readonly name: Scalars['String'],
 };
@@ -1629,7 +1629,7 @@ export type StationTagScalarWhereInput = {
 };
 
 export type StationTagSubscriptionPayload = {
-  __typename?: 'StationTagSubscriptionPayload',
+  readonly __typename?: 'StationTagSubscriptionPayload',
   readonly mutation: MutationType,
   readonly node?: Maybe<StationTag>,
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>,
@@ -2038,7 +2038,7 @@ export type StationWhereUniqueInput = {
 };
 
 export type Subscription = {
-  __typename?: 'Subscription',
+  readonly __typename?: 'Subscription',
   readonly userRole?: Maybe<UserRoleSubscriptionPayload>,
   readonly station?: Maybe<StationSubscriptionPayload>,
   readonly stationTag?: Maybe<StationTagSubscriptionPayload>,
@@ -2072,14 +2072,14 @@ export type SubscriptionUserArgs = {
 };
 
 export type Thumbnail = {
-  __typename?: 'Thumbnail',
+  readonly __typename?: 'Thumbnail',
   readonly url: Scalars['String'],
   readonly width: Scalars['Int'],
   readonly height: Scalars['Int'],
 };
 
 export type Thumbnails = {
-  __typename?: 'Thumbnails',
+  readonly __typename?: 'Thumbnails',
   readonly default: Thumbnail,
   readonly medium?: Maybe<Thumbnail>,
   readonly high?: Maybe<Thumbnail>,
@@ -2089,7 +2089,7 @@ export type Thumbnails = {
 
 
 export type User = Node & {
-  __typename?: 'User',
+  readonly __typename?: 'User',
   readonly id: Scalars['ID'],
   readonly createdAt: Scalars['DateTime'],
   readonly updatedAt: Scalars['DateTime'],
@@ -2121,7 +2121,7 @@ export type UserRolesArgs = {
 
 /** A connection to a list of items. */
 export type UserConnection = {
-  __typename?: 'UserConnection',
+  readonly __typename?: 'UserConnection',
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo,
   /** A list of edges. */
@@ -2179,7 +2179,7 @@ export type UserCreateWithoutRolesInput = {
 
 /** An edge in a connection. */
 export type UserEdge = {
-  __typename?: 'UserEdge',
+  readonly __typename?: 'UserEdge',
   /** The item at the end of the edge. */
   readonly node: User,
   /** A cursor for use in pagination. */
@@ -2220,7 +2220,7 @@ export enum UserOrderByInput {
 }
 
 export type UserPreviousValues = {
-  __typename?: 'UserPreviousValues',
+  readonly __typename?: 'UserPreviousValues',
   readonly id: Scalars['ID'],
   readonly createdAt: Scalars['DateTime'],
   readonly updatedAt: Scalars['DateTime'],
@@ -2239,7 +2239,7 @@ export type UserPreviousValues = {
 };
 
 export type UserRole = Node & {
-  __typename?: 'UserRole',
+  readonly __typename?: 'UserRole',
   readonly id: Scalars['ID'],
   readonly user: User,
   readonly role: UserRoleEnum,
@@ -2248,7 +2248,7 @@ export type UserRole = Node & {
 
 /** A connection to a list of items. */
 export type UserRoleConnection = {
-  __typename?: 'UserRoleConnection',
+  readonly __typename?: 'UserRoleConnection',
   /** Information to aid in pagination. */
   readonly pageInfo: PageInfo,
   /** A list of edges. */
@@ -2287,7 +2287,7 @@ export type UserRoleCreateWithoutUserInput = {
 
 /** An edge in a connection. */
 export type UserRoleEdge = {
-  __typename?: 'UserRoleEdge',
+  readonly __typename?: 'UserRoleEdge',
   /** The item at the end of the edge. */
   readonly node: UserRole,
   /** A cursor for use in pagination. */
@@ -2308,7 +2308,7 @@ export enum UserRoleOrderByInput {
 }
 
 export type UserRolePreviousValues = {
-  __typename?: 'UserRolePreviousValues',
+  readonly __typename?: 'UserRolePreviousValues',
   readonly id: Scalars['ID'],
   readonly role: UserRoleEnum,
 };
@@ -2357,7 +2357,7 @@ export type UserRoleScalarWhereInput = {
 };
 
 export type UserRoleSubscriptionPayload = {
-  __typename?: 'UserRoleSubscriptionPayload',
+  readonly __typename?: 'UserRoleSubscriptionPayload',
   readonly mutation: MutationType,
   readonly node?: Maybe<UserRole>,
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>,
@@ -2885,7 +2885,7 @@ export type UserScalarWhereInput = {
 };
 
 export type UserSubscriptionPayload = {
-  __typename?: 'UserSubscriptionPayload',
+  readonly __typename?: 'UserSubscriptionPayload',
   readonly mutation: MutationType,
   readonly node?: Maybe<User>,
   readonly updatedFields?: Maybe<ReadonlyArray<Scalars['String']>>,
@@ -3823,14 +3823,14 @@ export function withCreateSong<TProps, TChildProps = {}>(operationOptions?: Apol
   CreateSongMutationVariables,
   CreateSongProps<TChildProps>>) {
     return ApolloReactHoc.withMutation<TProps, CreateSongMutation, CreateSongMutationVariables, CreateSongProps<TChildProps>>(CreateSongDocument, {
-      alias: 'withCreateSong',
+      alias: 'createSong',
       ...operationOptions
     });
 };
 
     export function useCreateSongMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
       return ApolloReactHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
-    };
+    }
 export type CreateSongMutationHookResult = ReturnType<typeof useCreateSongMutation>;
 export type CreateSongMutationResult = ApolloReactCommon.MutationResult<CreateSongMutation>;
 export type CreateSongMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateSongMutation, CreateSongMutationVariables>;
@@ -3851,14 +3851,14 @@ export function withCreateStation<TProps, TChildProps = {}>(operationOptions?: A
   CreateStationMutationVariables,
   CreateStationProps<TChildProps>>) {
     return ApolloReactHoc.withMutation<TProps, CreateStationMutation, CreateStationMutationVariables, CreateStationProps<TChildProps>>(CreateStationDocument, {
-      alias: 'withCreateStation',
+      alias: 'createStation',
       ...operationOptions
     });
 };
 
     export function useCreateStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
       return ApolloReactHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
-    };
+    }
 export type CreateStationMutationHookResult = ReturnType<typeof useCreateStationMutation>;
 export type CreateStationMutationResult = ApolloReactCommon.MutationResult<CreateStationMutation>;
 export type CreateStationMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateStationMutation, CreateStationMutationVariables>;
@@ -3877,14 +3877,14 @@ export function withLogin<TProps, TChildProps = {}>(operationOptions?: ApolloRea
   LoginMutationVariables,
   LoginProps<TChildProps>>) {
     return ApolloReactHoc.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>(LoginDocument, {
-      alias: 'withLogin',
+      alias: 'login',
       ...operationOptions
     });
 };
 
     export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
       return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
-    };
+    }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
 export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
@@ -3903,14 +3903,14 @@ export function withRegister<TProps, TChildProps = {}>(operationOptions?: Apollo
   RegisterMutationVariables,
   RegisterProps<TChildProps>>) {
     return ApolloReactHoc.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>(RegisterDocument, {
-      alias: 'withRegister',
+      alias: 'register',
       ...operationOptions
     });
 };
 
     export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
       return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
-    };
+    }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
@@ -3927,14 +3927,14 @@ export function withUpdateUserAvatar<TProps, TChildProps = {}>(operationOptions?
   UpdateUserAvatarMutationVariables,
   UpdateUserAvatarProps<TChildProps>>) {
     return ApolloReactHoc.withMutation<TProps, UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables, UpdateUserAvatarProps<TChildProps>>(UpdateUserAvatarDocument, {
-      alias: 'withUpdateUserAvatar',
+      alias: 'updateUserAvatar',
       ...operationOptions
     });
 };
 
     export function useUpdateUserAvatarMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>) {
       return ApolloReactHooks.useMutation<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>(UpdateUserAvatarDocument, baseOptions);
-    };
+    }
 export type UpdateUserAvatarMutationHookResult = ReturnType<typeof useUpdateUserAvatarMutation>;
 export type UpdateUserAvatarMutationResult = ApolloReactCommon.MutationResult<UpdateUserAvatarMutation>;
 export type UpdateUserAvatarMutationOptions = ApolloReactCommon.BaseMutationOptions<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>;
@@ -3952,17 +3952,17 @@ export function withCurrentUser<TProps, TChildProps = {}>(operationOptions?: Apo
   CurrentUserQueryVariables,
   CurrentUserProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, CurrentUserQuery, CurrentUserQueryVariables, CurrentUserProps<TChildProps>>(CurrentUserDocument, {
-      alias: 'withCurrentUser',
+      alias: 'currentUser',
       ...operationOptions
     });
 };
 
     export function useCurrentUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
       return ApolloReactHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
-    };
+    }
       export function useCurrentUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
-      };
+      }
 
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserQueryResult = ApolloReactCommon.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
@@ -4024,17 +4024,17 @@ export function withSongExplorer<TProps, TChildProps = {}>(operationOptions?: Ap
   SongExplorerQueryVariables,
   SongExplorerProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>(SongExplorerDocument, {
-      alias: 'withSongExplorer',
+      alias: 'songExplorer',
       ...operationOptions
     });
 };
 
     export function useSongExplorerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SongExplorerQuery, SongExplorerQueryVariables>) {
       return ApolloReactHooks.useQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
-    };
+    }
       export function useSongExplorerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SongExplorerQuery, SongExplorerQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
-      };
+      }
 
 export type SongExplorerQueryHookResult = ReturnType<typeof useSongExplorerQuery>;
 export type SongExplorerQueryResult = ApolloReactCommon.QueryResult<SongExplorerQuery, SongExplorerQueryVariables>;
@@ -4086,17 +4086,17 @@ export function withSongExplorers<TProps, TChildProps = {}>(operationOptions?: A
   SongExplorersQueryVariables,
   SongExplorersProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, SongExplorersQuery, SongExplorersQueryVariables, SongExplorersProps<TChildProps>>(SongExplorersDocument, {
-      alias: 'withSongExplorers',
+      alias: 'songExplorers',
       ...operationOptions
     });
 };
 
     export function useSongExplorersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SongExplorersQuery, SongExplorersQueryVariables>) {
       return ApolloReactHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
-    };
+    }
       export function useSongExplorersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SongExplorersQuery, SongExplorersQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
-      };
+      }
 
 export type SongExplorersQueryHookResult = ReturnType<typeof useSongExplorersQuery>;
 export type SongExplorersQueryResult = ApolloReactCommon.QueryResult<SongExplorersQuery, SongExplorersQueryVariables>;
@@ -4125,17 +4125,17 @@ export function withStation<TProps, TChildProps = {}>(operationOptions?: ApolloR
   StationQueryVariables,
   StationProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(StationDocument, {
-      alias: 'withStation',
+      alias: 'station',
       ...operationOptions
     });
 };
 
     export function useStationQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
       return ApolloReactHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
-    };
+    }
       export function useStationLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
-      };
+      }
 
 export type StationQueryHookResult = ReturnType<typeof useStationQuery>;
 export type StationQueryResult = ApolloReactCommon.QueryResult<StationQuery, StationQueryVariables>;
@@ -4153,17 +4153,17 @@ export function withStationPlayer<TProps, TChildProps = {}>(operationOptions?: A
   StationPlayerQueryVariables,
   StationPlayerProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, StationPlayerQuery, StationPlayerQueryVariables, StationPlayerProps<TChildProps>>(StationPlayerDocument, {
-      alias: 'withStationPlayer',
+      alias: 'stationPlayer',
       ...operationOptions
     });
 };
 
     export function useStationPlayerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
       return ApolloReactHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
-    };
+    }
       export function useStationPlayerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
-      };
+      }
 
 export type StationPlayerQueryHookResult = ReturnType<typeof useStationPlayerQuery>;
 export type StationPlayerQueryResult = ApolloReactCommon.QueryResult<StationPlayerQuery, StationPlayerQueryVariables>;
@@ -4183,14 +4183,14 @@ export function withOnStationPlayerChanged<TProps, TChildProps = {}>(operationOp
   OnStationPlayerChangedSubscriptionVariables,
   OnStationPlayerChangedProps<TChildProps>>) {
     return ApolloReactHoc.withSubscription<TProps, OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables, OnStationPlayerChangedProps<TChildProps>>(OnStationPlayerChangedDocument, {
-      alias: 'withOnStationPlayerChanged',
+      alias: 'onStationPlayerChanged',
       ...operationOptions
     });
 };
 
     export function useOnStationPlayerChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
       return ApolloReactHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
-    };
+    }
 export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
 export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
 export const StationPlayistDocument = gql`
@@ -4207,17 +4207,17 @@ export function withStationPlayist<TProps, TChildProps = {}>(operationOptions?: 
   StationPlayistQueryVariables,
   StationPlayistProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, StationPlayistQuery, StationPlayistQueryVariables, StationPlayistProps<TChildProps>>(StationPlayistDocument, {
-      alias: 'withStationPlayist',
+      alias: 'stationPlayist',
       ...operationOptions
     });
 };
 
     export function useStationPlayistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
       return ApolloReactHooks.useQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
-    };
+    }
       export function useStationPlayistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
-      };
+      }
 
 export type StationPlayistQueryHookResult = ReturnType<typeof useStationPlayistQuery>;
 export type StationPlayistQueryResult = ApolloReactCommon.QueryResult<StationPlayistQuery, StationPlayistQueryVariables>;
@@ -4237,14 +4237,14 @@ export function withOnStationPlalistChanged<TProps, TChildProps = {}>(operationO
   OnStationPlalistChangedSubscriptionVariables,
   OnStationPlalistChangedProps<TChildProps>>) {
     return ApolloReactHoc.withSubscription<TProps, OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables, OnStationPlalistChangedProps<TChildProps>>(OnStationPlalistChangedDocument, {
-      alias: 'withOnStationPlalistChanged',
+      alias: 'onStationPlalistChanged',
       ...operationOptions
     });
 };
 
     export function useOnStationPlalistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>) {
       return ApolloReactHooks.useSubscription<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>(OnStationPlalistChangedDocument, baseOptions);
-    };
+    }
 export type OnStationPlalistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlalistChangedSubscription>;
 export type OnStationPlalistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlalistChangedSubscription>;
 export const StationTagsDocument = gql`
@@ -4262,17 +4262,17 @@ export function withStationTags<TProps, TChildProps = {}>(operationOptions?: Apo
   StationTagsQueryVariables,
   StationTagsProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, StationTagsQuery, StationTagsQueryVariables, StationTagsProps<TChildProps>>(StationTagsDocument, {
-      alias: 'withStationTags',
+      alias: 'stationTags',
       ...operationOptions
     });
 };
 
     export function useStationTagsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationTagsQuery, StationTagsQueryVariables>) {
       return ApolloReactHooks.useQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
-    };
+    }
       export function useStationTagsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationTagsQuery, StationTagsQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
-      };
+      }
 
 export type StationTagsQueryHookResult = ReturnType<typeof useStationTagsQuery>;
 export type StationTagsQueryResult = ApolloReactCommon.QueryResult<StationTagsQuery, StationTagsQueryVariables>;
@@ -4306,17 +4306,17 @@ export function withStations<TProps, TChildProps = {}>(operationOptions?: Apollo
   StationsQueryVariables,
   StationsProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>(StationsDocument, {
-      alias: 'withStations',
+      alias: 'stations',
       ...operationOptions
     });
 };
 
     export function useStationsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
       return ApolloReactHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
-    };
+    }
       export function useStationsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
-      };
+      }
 
 export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
 export type StationsQueryResult = ApolloReactCommon.QueryResult<StationsQuery, StationsQueryVariables>;
@@ -4339,14 +4339,14 @@ export function withOnStationPlayingSongChanged<TProps, TChildProps = {}>(operat
   OnStationPlayingSongChangedSubscriptionVariables,
   OnStationPlayingSongChangedProps<TChildProps>>) {
     return ApolloReactHoc.withSubscription<TProps, OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables, OnStationPlayingSongChangedProps<TChildProps>>(OnStationPlayingSongChangedDocument, {
-      alias: 'withOnStationPlayingSongChanged',
+      alias: 'onStationPlayingSongChanged',
       ...operationOptions
     });
 };
 
     export function useOnStationPlayingSongChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables>) {
       return ApolloReactHooks.useSubscription<OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables>(OnStationPlayingSongChangedDocument, baseOptions);
-    };
+    }
 export type OnStationPlayingSongChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayingSongChangedSubscription>;
 export type OnStationPlayingSongChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayingSongChangedSubscription>;
 export const UserProfileDocument = gql`
@@ -4384,17 +4384,17 @@ export function withUserProfile<TProps, TChildProps = {}>(operationOptions?: Apo
   UserProfileQueryVariables,
   UserProfileProps<TChildProps>>) {
     return ApolloReactHoc.withQuery<TProps, UserProfileQuery, UserProfileQueryVariables, UserProfileProps<TChildProps>>(UserProfileDocument, {
-      alias: 'withUserProfile',
+      alias: 'userProfile',
       ...operationOptions
     });
 };
 
     export function useUserProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
       return ApolloReactHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
-    };
+    }
       export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
         return ApolloReactHooks.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
-      };
+      }
 
 export type UserProfileQueryHookResult = ReturnType<typeof useUserProfileQuery>;
 export type UserProfileQueryResult = ApolloReactCommon.QueryResult<UserProfileQuery, UserProfileQueryVariables>;
