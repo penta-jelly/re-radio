@@ -1,7 +1,7 @@
-import React, { useCallback, useState, useMemo } from 'react';
-import { InputBase, IconButton, Icon } from '@material-ui/core';
+import { Icon, IconButton, InputBase } from '@material-ui/core';
 import { InputBaseProps } from '@material-ui/core/InputBase';
-import { MdSearch as SearchIcon, MdClose as CloseIcon } from 'react-icons/md';
+import React, { useCallback, useMemo, useState } from 'react';
+import { MdClose as CloseIcon, MdSearch as SearchIcon } from 'react-icons/md';
 import { useStyles } from './styles';
 
 interface Props extends InputBaseProps {
@@ -14,7 +14,7 @@ export const ReSearch: React.FC<Props> = ({ icon, onBlur, onFocus, onIconClick, 
   const classes = useStyles();
   const [isInputFocused, setIsInputFocused] = useState(false);
   const handleInputFocus = useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
+    (event: React.FocusEvent<HTMLInputElement>) => {
       setIsInputFocused(true);
       if (onFocus) {
         onFocus(event);
@@ -23,7 +23,7 @@ export const ReSearch: React.FC<Props> = ({ icon, onBlur, onFocus, onIconClick, 
     [onFocus],
   );
   const handleInputBlur = useCallback(
-    (event: React.FocusEvent<HTMLDivElement>) => {
+    (event: React.FocusEvent<HTMLInputElement>) => {
       setIsInputFocused(false);
       if (onBlur) {
         onBlur(event);
