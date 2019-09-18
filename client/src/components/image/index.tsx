@@ -1,6 +1,5 @@
+import { useServerImageResource } from 'hooks/use-server-image-resource';
 import React from 'react';
-
-const defaultSrc = 'https://www.emyspot.com/medias/images/page404.png';
 
 type ImgAttributes = React.ImgHTMLAttributes<HTMLImageElement>;
 
@@ -10,24 +9,9 @@ interface Props extends Pick<ImgAttributes, Exclude<keyof ImgAttributes, 'src' |
 }
 
 export const Image: React.FC<Props> = props => {
-  const { fallbackSrc, alt, ...imgProps } = props;
+  const { fallbackSrc, alt, children, ...imgProps } = props;
 
-  const fallBackUrl = React.useMemo(() => fallbackSrc || defaultSrc, [fallbackSrc]);
-
-  const isUrl = React.useCallback((input: string) => /(http|data:image|\/asset\/)/.test(input), []);
-
-  const url: string = React.useMemo(() => {
-    if (!props.src) {
-      return fallBackUrl;
-    }
-    if (isUrl(props.src)) {
-      return props.src;
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      return `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/images/${props.src}`;
-    }
-    return `/images/${props.src}`;
-  }, [isUrl, props.src, fallBackUrl]);
+  const { url, fallBackUrl } = useServerImageResource(props.src, fallbackSrc);
 
   /**
    * @see: https://stackoverflow.com/questions/34097560/react-js-replace-img-src-onerror

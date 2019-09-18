@@ -3,15 +3,15 @@ import { IsEmail, IsNotEmpty, IsOptional, Length, ValidateNested } from 'class-v
 
 export class LoginDTO {
   @IsNotEmpty()
-  @Length(6, 32)
+  @Length(4, 32)
   password: string;
 
   @IsEmail()
-  @Length(6, 64)
+  @Length(4, 64)
   @IsOptional()
   email?: string;
 
-  @Length(6, 32)
+  @Length(4, 32)
   @IsOptional()
   username?: string;
 }

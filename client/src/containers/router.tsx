@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
-export const AppRouter = () => (
+export const AppRouter: React.FC = () => (
   <BrowserRouter>
     <Switch>
       <Route path="/about" component={React.lazy(() => import('pages/about'))} />

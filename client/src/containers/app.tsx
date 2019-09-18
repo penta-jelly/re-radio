@@ -15,7 +15,7 @@ import { AppRouter } from './router';
 initI18n();
 const apolloClient = initApollo();
 
-export const App: React.FunctionComponent<{}> = (): React.ReactElement<{}> => (
+export const App: React.FC = () => (
   <ThemeProvider theme={theme}>
     <ApolloProvider client={apolloClient}>
       <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'top' }}>

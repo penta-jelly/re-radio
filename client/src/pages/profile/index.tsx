@@ -3,6 +3,7 @@ import { PageLoader } from 'components/page-loader';
 import { Layout } from 'containers/layout';
 import { useRouter } from 'hooks/use-router';
 import { DetailUserProfile, UserProfileSongs, UserProfileStations } from 'modules/user';
+import { useSnackbar } from 'notistack';
 import { useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { useStyles } from './styles';
@@ -15,6 +16,7 @@ const UserProfilePage: React.FC = () => {
   const { match, history } = useRouter<RouteParams>();
   const classes = useStyles();
 
+  const { enqueueSnackbar } = useSnackbar();
   const { data, loading, error } = useCurrentUserQuery();
   const username = React.useMemo<string | undefined>(() => {
     //  tslint:disable curly
@@ -36,8 +38,9 @@ const UserProfilePage: React.FC = () => {
   React.useEffect(() => {
     if (error && !match.params.username) {
       history.push('/');
+      enqueueSnackbar('You need to login to access this page', { variant: 'warning', preventDuplicate: true });
     }
-  }, [error, history, match.params.username]);
+  }, [error, history, match.params.username, enqueueSnackbar]);
 
   if (!username) {
     return <PageLoader />;
