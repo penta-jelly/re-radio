@@ -5,6 +5,7 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "schedule": ["before 6am on Monday", "after 10pm on Sunday"],
   "automerge": true,
   "automergeType": "branch",
   "packageRules": [

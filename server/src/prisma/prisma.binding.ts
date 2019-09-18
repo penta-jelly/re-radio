@@ -1,7 +1,7 @@
-import { GraphQLResolveInfo, GraphQLSchema } from 'graphql'
-import { IResolvers } from 'graphql-tools/dist/Interfaces'
-import { Options } from 'graphql-binding'
-import { makePrismaBindingClass, BasePrismaOptions } from 'prisma-binding'
+import { GraphQLResolveInfo, GraphQLSchema } from 'graphql';
+import { Options } from 'graphql-binding';
+import { IResolvers } from 'graphql-tools/dist/Interfaces';
+import { BasePrismaOptions, makePrismaBindingClass } from 'prisma-binding';
 
 export interface Query {
     userRoles: <T = Array<UserRole | null>>(args: { where?: UserRoleWhereInput | null, orderBy?: UserRoleOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
@@ -19,7 +19,7 @@ export interface Query {
     stationTagsConnection: <T = StationTagConnection>(args: { where?: StationTagWhereInput | null, orderBy?: StationTagOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     songsConnection: <T = SongConnection>(args: { where?: SongWhereInput | null, orderBy?: SongOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     usersConnection: <T = UserConnection>(args: { where?: UserWhereInput | null, orderBy?: UserOrderByInput | null, skip?: Int | null, after?: String | null, before?: String | null, first?: Int | null, last?: Int | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null> 
+    node: <T = Node | null>(args: { id: ID_Output }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T | null>
   }
 
 export interface Mutation {
@@ -52,7 +52,7 @@ export interface Mutation {
     deleteManyStations: <T = BatchPayload>(args: { where?: StationWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManyStationTags: <T = BatchPayload>(args: { where?: StationTagWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
     deleteManySongs: <T = BatchPayload>(args: { where?: SongWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> ,
-    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T> 
+    deleteManyUsers: <T = BatchPayload>(args: { where?: UserWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<T>
   }
 
 export interface Subscription {
@@ -60,7 +60,7 @@ export interface Subscription {
     station: <T = StationSubscriptionPayload | null>(args: { where?: StationSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     stationTag: <T = StationTagSubscriptionPayload | null>(args: { where?: StationTagSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
     song: <T = SongSubscriptionPayload | null>(args: { where?: SongSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> ,
-    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>> 
+    user: <T = UserSubscriptionPayload | null>(args: { where?: UserSubscriptionWhereInput | null }, info?: GraphQLResolveInfo | string, options?: Options) => Promise<AsyncIterator<T | null>>
   }
 
 export interface Exists {
