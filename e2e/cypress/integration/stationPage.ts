@@ -1,5 +1,5 @@
-import StationPage from 'support/StationPage';
-import StationsPage from 'support/StationsPage';
+import StationPage from '../support/StationPage';
+import StationsPage from '../support/StationsPage';
 
 describe('Show Station Page', () => {
   const stationPage = StationPage();

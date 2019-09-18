@@ -1,7 +1,7 @@
 {
   "name": "re-radio",
   "scripts": {
-    "postinstall": "lerna bootstrap",
+    "postinstall": "lerna bootstrap --hoist",
     "format": "lerna run format",
     "prestart": "bash prestart.sh",
     "start": "run-p start:server start:client",

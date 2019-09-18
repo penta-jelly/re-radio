@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const wp = require('@cypress/webpack-preprocessor');
+const browserify = require('@cypress/browserify-preprocessor');
 
 module.exports = on => {
   const options = {
-    webpackOptions: require('../../webpack.config'),
+    browserifyOptions: {
+      extensions: ['.js', '.ts'],
+      plugin: [['tsify']],
+    },
   };
-  on('file:preprocessor', wp(options));
+  on('file:preprocessor', browserify(options));
 };

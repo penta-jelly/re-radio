@@ -1,6 +1,6 @@
-import StationsPage from 'support/StationsPage';
-import LoginPage from 'support/authentication/LoginPage';
-import UserProfilePage from 'support/UserProfilePage';
+import LoginPage from '../support/authentication/LoginPage';
+import StationsPage from '../support/StationsPage';
+import UserProfilePage from '../support/UserProfilePage';
 
 describe('Show user profile page', () => {
   const userProfilePage = UserProfilePage();
