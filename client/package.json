@@ -53,9 +53,9 @@
     "@types/react-helmet": "5.0.10",
     "@types/react-router-dom": "4.3.5",
     "@types/yup": "0.26.24",
-    "eslint-config-prettier": "5.0.0",
-    "eslint-plugin-prettier": "3.1.0",
-    "prettier": "1.18.0",
+    "eslint-config-prettier": "5.1.0",
+    "eslint-plugin-prettier": "3.1.1",
+    "prettier": "1.18.2",
     "typescript": "3.6.3"
   },
   "license": "MIT",
