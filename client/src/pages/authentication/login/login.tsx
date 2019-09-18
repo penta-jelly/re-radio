@@ -1,16 +1,8 @@
-import {
-  Avatar,
-  Button,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  FormHelperText,
-  TextField,
-  Typography,
-} from '@material-ui/core';
+import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
+import { PageLoader } from 'components/page-loader';
 import { Formik } from 'formik';
-
-import { LoginInput, useLoginMutation } from 'operations';
+import { useSnackbar } from 'notistack';
+import { LoginInput, useCurrentUserQuery, useLoginMutation } from 'operations';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
@@ -26,7 +18,6 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
   const [loginError, setLoginError] = useState<string | null>(null);
   const [loginMutation] = useLoginMutation();
-  const [isRememberMe, setIsRememberMe] = useState<boolean>(false);
   const { t } = useTranslation('common');
   const onLogin = useCallback(
     async (values: Data) => {
@@ -60,10 +51,17 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     [history, loginMutation],
   );
 
-  const handleClickRemember = useCallback(() => {
-    setIsRememberMe(!isRememberMe);
-  }, [isRememberMe]);
-
+  const currentUserQuery = useCurrentUserQuery();
+  const { enqueueSnackbar } = useSnackbar();
+  React.useEffect(() => {
+    if (currentUserQuery.data) {
+      history.push('/');
+      enqueueSnackbar('You have to logout first to access this page.', { preventDuplicate: true, variant: 'warning' });
+    }
+  }, [enqueueSnackbar, history, currentUserQuery]);
+  if (currentUserQuery.loading) {
+    return <PageLoader />;
+  }
   return (
     <div className={classNames.container}>
       <Formik<Data>
@@ -76,7 +74,7 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
       >
         {({ values, handleSubmit, handleChange, handleBlur, touched, errors }) => (
           <form noValidate onSubmit={handleSubmit} method="POST" className={classNames.form}>
-            <Typography variant="h3" gutterBottom align="center">
+            <Typography variant="h5" gutterBottom align="center">
               {t('Login')}
             </Typography>
             {loginError && (
@@ -112,14 +110,6 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
               helperText={touched.password && !!errors.password && errors.password}
               error={touched.password && !!errors.password}
             />
-            <div className={classNames.rememberRow}>
-              <FormGroup row>
-                <FormControlLabel
-                  control={<Checkbox checked={isRememberMe} onChange={handleClickRemember} color="primary" />}
-                  label="Remember me"
-                />
-              </FormGroup>
-            </div>
             <Button
               variant="contained"
               color="primary"

@@ -54,4 +54,11 @@ export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) =>
   listItemIcon: (props: Props) => ({
     minWidth: props.drawer && props.drawer.collapsed ? 0 : undefined,
   }),
+  avatar: (props: Props) => ({
+    cursor: 'pointer',
+    width: props.drawer && props.drawer.collapsed ? 28 : 40,
+    height: props.drawer && props.drawer.collapsed ? 28 : 40,
+    borderRadius: '50%',
+    display: 'block',
+  }),
 }));

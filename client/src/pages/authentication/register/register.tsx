@@ -1,6 +1,8 @@
 import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
+import { PageLoader } from 'components/page-loader';
 import { Formik, FormikActions } from 'formik';
-import { RegisterInput, useRegisterMutation } from 'operations';
+import { useSnackbar } from 'notistack';
+import { RegisterInput, useCurrentUserQuery, useRegisterMutation } from 'operations';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
@@ -37,6 +39,17 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
     [history, registerMutation],
   );
 
+  const currentUserQuery = useCurrentUserQuery();
+  const { enqueueSnackbar } = useSnackbar();
+  React.useEffect(() => {
+    if (currentUserQuery.data) {
+      history.push('/');
+      enqueueSnackbar('You have to logout first to access this page.', { preventDuplicate: true, variant: 'warning' });
+    }
+  }, [enqueueSnackbar, history, currentUserQuery]);
+  if (currentUserQuery.loading) {
+    return <PageLoader />;
+  }
   return (
     <div className={classNames.container}>
       <Formik<Data>

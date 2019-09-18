@@ -1,7 +1,6 @@
-import { Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles((theme: Theme) => ({
+export const useStyles = makeStyles(theme => ({
   container: {
     height: '100vh',
     display: 'flex',
@@ -12,19 +11,11 @@ export const useStyles = makeStyles((theme: Theme) => ({
     width: theme.spacing(53.3),
     padding: theme.spacing(8),
     height: '100vh',
-    background: '#f2f2f2',
+    background: theme.palette.grey['50'],
   },
   button: {
     width: '100%',
     margin: theme.spacing(3, 0, 2, 0),
-  },
-  rememberRow: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  rememberCheckbox: {
-    color: 'black',
   },
   forgotPassRow: {
     display: 'flex',
