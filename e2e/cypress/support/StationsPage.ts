@@ -1,6 +1,6 @@
 import LoginPage from 'support/authentication/LoginPage';
 
-export default (url: string = '/') => ({
+export default (url = '/') => ({
   elements: {
     searchInput: '#search',
     createStationButton: '#create-station',

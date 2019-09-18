@@ -1,4 +1,4 @@
-export default (url: string = '/login') => ({
+export default (url = '/login') => ({
   elements: {
     emailInput: '#email',
     passwordInput: '#password',

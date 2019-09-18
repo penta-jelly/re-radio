@@ -3,8 +3,8 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { ConfigService } from 'core/config/config.service';
-import { RadioModule } from 'radio/radio.module';
 import { EnvVariables } from 'core/config/config.variables';
+import { RadioModule } from 'radio/radio.module';
 
 async function bootstrap() {
   const logger = new Logger('RadioGraphQLService');

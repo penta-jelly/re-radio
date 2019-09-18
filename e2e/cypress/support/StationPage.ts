@@ -1,6 +1,6 @@
 import LoginPage from 'support/authentication/LoginPage';
 
-export default (url: string = '/station') => ({
+export default (url = '/station') => ({
   elements: {
     headerText: /(.*)/,
     chatBoxText: 'Chat Box',

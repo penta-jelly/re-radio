@@ -1,4 +1,4 @@
-export default (url: string = '/register') => ({
+export default (url = '/register') => ({
   elements: {
     emailInput: '#email',
     usernameInput: '#username',
@@ -10,7 +10,7 @@ export default (url: string = '/register') => ({
     cy.visit(url);
   },
 
-  register(email: string = '', username: string = '', password: string = '') {
+  register(email = '', username = '', password = '') {
     cy.get(this.elements.emailInput).type(email);
     cy.get(this.elements.usernameInput).type(username);
     cy.get(this.elements.passwordInput).type(password);

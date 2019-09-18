@@ -1,4 +1,4 @@
-export default (url: string = '/profile') => ({
+export default (url = '/profile') => ({
   elements: {
     emailContainer: '#email-container',
     usernameContainer: '#username-container',
@@ -12,7 +12,7 @@ export default (url: string = '/profile') => ({
     editUserProfileButton: '#edit-user-profile',
   },
 
-  navigate(username: string = '') {
+  navigate(username = '') {
     cy.visit(`${url}/${username}`);
   },
 

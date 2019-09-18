@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@material-ui/core';
+import { MiniSongExplorer, useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { useStyles } from './styles';
-import { MiniSongExplorer, useCurrentUserQuery } from 'operations';
 
 interface Props {
   previewSong?: MiniSongExplorer;
