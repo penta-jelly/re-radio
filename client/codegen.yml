@@ -8,6 +8,7 @@ generates:
       noNamespaces: true
       withComponent: false
       withHooks: true
+      withHOC: false
       immutableTypes: true
     plugins:
       - add: "/* eslint-disable */"

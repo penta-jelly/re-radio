@@ -1,4 +1,4 @@
-import LoginPage from 'support/authentication/LoginPage';
+import LoginPage from './authentication/LoginPage';
 
 export default (url = '/') => ({
   elements: {

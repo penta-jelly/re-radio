@@ -1,6 +1,5 @@
 /* eslint-disable */
 import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHoc from '@apollo/react-hoc';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
@@ -3816,17 +3815,6 @@ export const CreateSongDocument = gql`
 }
     `;
 export type CreateSongMutationFn = ApolloReactCommon.MutationFunction<CreateSongMutation, CreateSongMutationVariables>;
-export type CreateSongProps<TChildProps = {}> = ApolloReactHoc.MutateProps<CreateSongMutation, CreateSongMutationVariables> & TChildProps;
-export function withCreateSong<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  CreateSongMutation,
-  CreateSongMutationVariables,
-  CreateSongProps<TChildProps>>) {
-    return ApolloReactHoc.withMutation<TProps, CreateSongMutation, CreateSongMutationVariables, CreateSongProps<TChildProps>>(CreateSongDocument, {
-      alias: 'createSong',
-      ...operationOptions
-    });
-};
 
     export function useCreateSongMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
       return ApolloReactHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
@@ -3844,17 +3832,6 @@ export const CreateStationDocument = gql`
 }
     `;
 export type CreateStationMutationFn = ApolloReactCommon.MutationFunction<CreateStationMutation, CreateStationMutationVariables>;
-export type CreateStationProps<TChildProps = {}> = ApolloReactHoc.MutateProps<CreateStationMutation, CreateStationMutationVariables> & TChildProps;
-export function withCreateStation<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  CreateStationMutation,
-  CreateStationMutationVariables,
-  CreateStationProps<TChildProps>>) {
-    return ApolloReactHoc.withMutation<TProps, CreateStationMutation, CreateStationMutationVariables, CreateStationProps<TChildProps>>(CreateStationDocument, {
-      alias: 'createStation',
-      ...operationOptions
-    });
-};
 
     export function useCreateStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
       return ApolloReactHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
@@ -3870,17 +3847,6 @@ export const LoginDocument = gql`
 }
     `;
 export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
-export type LoginProps<TChildProps = {}> = ApolloReactHoc.MutateProps<LoginMutation, LoginMutationVariables> & TChildProps;
-export function withLogin<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  LoginMutation,
-  LoginMutationVariables,
-  LoginProps<TChildProps>>) {
-    return ApolloReactHoc.withMutation<TProps, LoginMutation, LoginMutationVariables, LoginProps<TChildProps>>(LoginDocument, {
-      alias: 'login',
-      ...operationOptions
-    });
-};
 
     export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
       return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
@@ -3896,17 +3862,6 @@ export const RegisterDocument = gql`
 }
     `;
 export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
-export type RegisterProps<TChildProps = {}> = ApolloReactHoc.MutateProps<RegisterMutation, RegisterMutationVariables> & TChildProps;
-export function withRegister<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  RegisterMutation,
-  RegisterMutationVariables,
-  RegisterProps<TChildProps>>) {
-    return ApolloReactHoc.withMutation<TProps, RegisterMutation, RegisterMutationVariables, RegisterProps<TChildProps>>(RegisterDocument, {
-      alias: 'register',
-      ...operationOptions
-    });
-};
 
     export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
       return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
@@ -3920,17 +3875,6 @@ export const UpdateUserAvatarDocument = gql`
 }
     `;
 export type UpdateUserAvatarMutationFn = ApolloReactCommon.MutationFunction<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>;
-export type UpdateUserAvatarProps<TChildProps = {}> = ApolloReactHoc.MutateProps<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables> & TChildProps;
-export function withUpdateUserAvatar<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  UpdateUserAvatarMutation,
-  UpdateUserAvatarMutationVariables,
-  UpdateUserAvatarProps<TChildProps>>) {
-    return ApolloReactHoc.withMutation<TProps, UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables, UpdateUserAvatarProps<TChildProps>>(UpdateUserAvatarDocument, {
-      alias: 'updateUserAvatar',
-      ...operationOptions
-    });
-};
 
     export function useUpdateUserAvatarMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>) {
       return ApolloReactHooks.useMutation<UpdateUserAvatarMutation, UpdateUserAvatarMutationVariables>(UpdateUserAvatarDocument, baseOptions);
@@ -3945,17 +3889,6 @@ export const CurrentUserDocument = gql`
   }
 }
     ${UserBaseInformationFragmentDoc}`;
-export type CurrentUserProps<TChildProps = {}> = ApolloReactHoc.DataProps<CurrentUserQuery, CurrentUserQueryVariables> & TChildProps;
-export function withCurrentUser<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  CurrentUserQuery,
-  CurrentUserQueryVariables,
-  CurrentUserProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, CurrentUserQuery, CurrentUserQueryVariables, CurrentUserProps<TChildProps>>(CurrentUserDocument, {
-      alias: 'currentUser',
-      ...operationOptions
-    });
-};
 
     export function useCurrentUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
       return ApolloReactHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
@@ -4017,17 +3950,6 @@ export const SongExplorerDocument = gql`
   }
 }
     `;
-export type SongExplorerProps<TChildProps = {}> = ApolloReactHoc.DataProps<SongExplorerQuery, SongExplorerQueryVariables> & TChildProps;
-export function withSongExplorer<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  SongExplorerQuery,
-  SongExplorerQueryVariables,
-  SongExplorerProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, SongExplorerQuery, SongExplorerQueryVariables, SongExplorerProps<TChildProps>>(SongExplorerDocument, {
-      alias: 'songExplorer',
-      ...operationOptions
-    });
-};
 
     export function useSongExplorerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SongExplorerQuery, SongExplorerQueryVariables>) {
       return ApolloReactHooks.useQuery<SongExplorerQuery, SongExplorerQueryVariables>(SongExplorerDocument, baseOptions);
@@ -4079,17 +4001,6 @@ export const SongExplorersDocument = gql`
   }
 }
     `;
-export type SongExplorersProps<TChildProps = {}> = ApolloReactHoc.DataProps<SongExplorersQuery, SongExplorersQueryVariables> & TChildProps;
-export function withSongExplorers<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  SongExplorersQuery,
-  SongExplorersQueryVariables,
-  SongExplorersProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, SongExplorersQuery, SongExplorersQueryVariables, SongExplorersProps<TChildProps>>(SongExplorersDocument, {
-      alias: 'songExplorers',
-      ...operationOptions
-    });
-};
 
     export function useSongExplorersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SongExplorersQuery, SongExplorersQueryVariables>) {
       return ApolloReactHooks.useQuery<SongExplorersQuery, SongExplorersQueryVariables>(SongExplorersDocument, baseOptions);
@@ -4118,17 +4029,6 @@ export const StationDocument = gql`
   }
 }
     ${UserBaseInformationFragmentDoc}`;
-export type StationProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationQuery, StationQueryVariables> & TChildProps;
-export function withStation<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  StationQuery,
-  StationQueryVariables,
-  StationProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, StationQuery, StationQueryVariables, StationProps<TChildProps>>(StationDocument, {
-      alias: 'station',
-      ...operationOptions
-    });
-};
 
     export function useStationQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
       return ApolloReactHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
@@ -4146,17 +4046,6 @@ export const StationPlayerDocument = gql`
   }
 }
     ${PlayingSongFragmentDoc}`;
-export type StationPlayerProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationPlayerQuery, StationPlayerQueryVariables> & TChildProps;
-export function withStationPlayer<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  StationPlayerQuery,
-  StationPlayerQueryVariables,
-  StationPlayerProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, StationPlayerQuery, StationPlayerQueryVariables, StationPlayerProps<TChildProps>>(StationPlayerDocument, {
-      alias: 'stationPlayer',
-      ...operationOptions
-    });
-};
 
     export function useStationPlayerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
       return ApolloReactHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
@@ -4176,17 +4065,6 @@ export const OnStationPlayerChangedDocument = gql`
   }
 }
     ${PlayingSongFragmentDoc}`;
-export type OnStationPlayerChangedProps<TChildProps = {}> = ApolloReactHoc.DataProps<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables> & TChildProps;
-export function withOnStationPlayerChanged<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  OnStationPlayerChangedSubscription,
-  OnStationPlayerChangedSubscriptionVariables,
-  OnStationPlayerChangedProps<TChildProps>>) {
-    return ApolloReactHoc.withSubscription<TProps, OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables, OnStationPlayerChangedProps<TChildProps>>(OnStationPlayerChangedDocument, {
-      alias: 'onStationPlayerChanged',
-      ...operationOptions
-    });
-};
 
     export function useOnStationPlayerChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
       return ApolloReactHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
@@ -4200,17 +4078,6 @@ export const StationPlayistDocument = gql`
   }
 }
     ${PlaylistSongFragmentDoc}`;
-export type StationPlayistProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationPlayistQuery, StationPlayistQueryVariables> & TChildProps;
-export function withStationPlayist<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  StationPlayistQuery,
-  StationPlayistQueryVariables,
-  StationPlayistProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, StationPlayistQuery, StationPlayistQueryVariables, StationPlayistProps<TChildProps>>(StationPlayistDocument, {
-      alias: 'stationPlayist',
-      ...operationOptions
-    });
-};
 
     export function useStationPlayistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
       return ApolloReactHooks.useQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
@@ -4230,17 +4097,6 @@ export const OnStationPlalistChangedDocument = gql`
   }
 }
     ${PlayingSongFragmentDoc}`;
-export type OnStationPlalistChangedProps<TChildProps = {}> = ApolloReactHoc.DataProps<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables> & TChildProps;
-export function withOnStationPlalistChanged<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  OnStationPlalistChangedSubscription,
-  OnStationPlalistChangedSubscriptionVariables,
-  OnStationPlalistChangedProps<TChildProps>>) {
-    return ApolloReactHoc.withSubscription<TProps, OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables, OnStationPlalistChangedProps<TChildProps>>(OnStationPlalistChangedDocument, {
-      alias: 'onStationPlalistChanged',
-      ...operationOptions
-    });
-};
 
     export function useOnStationPlalistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>) {
       return ApolloReactHooks.useSubscription<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>(OnStationPlalistChangedDocument, baseOptions);
@@ -4255,17 +4111,6 @@ export const StationTagsDocument = gql`
   }
 }
     `;
-export type StationTagsProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationTagsQuery, StationTagsQueryVariables> & TChildProps;
-export function withStationTags<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  StationTagsQuery,
-  StationTagsQueryVariables,
-  StationTagsProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, StationTagsQuery, StationTagsQueryVariables, StationTagsProps<TChildProps>>(StationTagsDocument, {
-      alias: 'stationTags',
-      ...operationOptions
-    });
-};
 
     export function useStationTagsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationTagsQuery, StationTagsQueryVariables>) {
       return ApolloReactHooks.useQuery<StationTagsQuery, StationTagsQueryVariables>(StationTagsDocument, baseOptions);
@@ -4299,17 +4144,6 @@ export const StationsDocument = gql`
   }
 }
     ${UserBaseInformationFragmentDoc}`;
-export type StationsProps<TChildProps = {}> = ApolloReactHoc.DataProps<StationsQuery, StationsQueryVariables> & TChildProps;
-export function withStations<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  StationsQuery,
-  StationsQueryVariables,
-  StationsProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, StationsQuery, StationsQueryVariables, StationsProps<TChildProps>>(StationsDocument, {
-      alias: 'stations',
-      ...operationOptions
-    });
-};
 
     export function useStationsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
       return ApolloReactHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
@@ -4332,17 +4166,6 @@ export const OnStationPlayingSongChangedDocument = gql`
   }
 }
     `;
-export type OnStationPlayingSongChangedProps<TChildProps = {}> = ApolloReactHoc.DataProps<OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables> & TChildProps;
-export function withOnStationPlayingSongChanged<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  OnStationPlayingSongChangedSubscription,
-  OnStationPlayingSongChangedSubscriptionVariables,
-  OnStationPlayingSongChangedProps<TChildProps>>) {
-    return ApolloReactHoc.withSubscription<TProps, OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables, OnStationPlayingSongChangedProps<TChildProps>>(OnStationPlayingSongChangedDocument, {
-      alias: 'onStationPlayingSongChanged',
-      ...operationOptions
-    });
-};
 
     export function useOnStationPlayingSongChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables>) {
       return ApolloReactHooks.useSubscription<OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables>(OnStationPlayingSongChangedDocument, baseOptions);
@@ -4377,17 +4200,6 @@ export const UserProfileDocument = gql`
   }
 }
     `;
-export type UserProfileProps<TChildProps = {}> = ApolloReactHoc.DataProps<UserProfileQuery, UserProfileQueryVariables> & TChildProps;
-export function withUserProfile<TProps, TChildProps = {}>(operationOptions?: ApolloReactHoc.OperationOption<
-  TProps,
-  UserProfileQuery,
-  UserProfileQueryVariables,
-  UserProfileProps<TChildProps>>) {
-    return ApolloReactHoc.withQuery<TProps, UserProfileQuery, UserProfileQueryVariables, UserProfileProps<TChildProps>>(UserProfileDocument, {
-      alias: 'userProfile',
-      ...operationOptions
-    });
-};
 
     export function useUserProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
       return ApolloReactHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);

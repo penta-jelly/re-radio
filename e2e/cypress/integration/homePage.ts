@@ -1,4 +1,4 @@
-import homePage from 'support/HomePage';
+import homePage from '../support/HomePage';
 
 describe('Show Home Page', () => {
   const HomePage = homePage();

@@ -1,4 +1,4 @@
-import StationsPage from 'support/StationsPage';
+import StationsPage from '../support/StationsPage';
 
 describe('Show Stations Page', () => {
   const stationsPage = StationsPage();
