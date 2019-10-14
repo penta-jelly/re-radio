@@ -60,7 +60,7 @@
     "ts-node": "8.4.1",
     "ts-node-dev": "1.0.0-pre.43",
     "tsconfig-paths": "3.9.0",
-    "typescript": "3.6.3",
+    "typescript": "3.6.4",
     "wait-on": "3.3.0"
   },
   "license": "MIT"
