@@ -2,6 +2,7 @@ require('tsconfig-paths/register'); // This line must be placed first
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { SeederService } from 'workers/seeder/seeder.service';
+import { StressTestSeederService } from 'workers/seeder/seeder.stress-test.service';
 import { WorkersModule } from 'workers/workers.module';
 
 async function bootstrap() {
@@ -11,7 +12,11 @@ async function bootstrap() {
   const args = process.argv.slice(2);
 
   if (args.includes('seed')) {
-    await app.get(SeederService).seed();
+    if (args.includes('stress-test')) {
+      await app.get(StressTestSeederService).seed();
+    } else {
+      await app.get(SeederService).seed();
+    }
   } else {
     logger.error(
       `Unknown command "${args.join(' ')}". Following workers are supported: \n\t` +
