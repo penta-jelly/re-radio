@@ -1,0 +1,14 @@
+export enum EnvVariables {
+  NODE_ENV,
+
+  DB_HOST,
+  DB_PORT,
+  DB_USER,
+  DB_PASSWORD,
+  DB_NAME,
+
+  JWT_TOKEN_EXPIRES_IN,
+
+  YOUTUBE_API_URL,
+  YOUTUBE_API_KEY,
+}

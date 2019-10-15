@@ -1,0 +1,12 @@
+version: "3.7"
+services:
+  db:
+    container_name: re-radio_postgresql
+    image: postgres:10.8-alpine
+    restart: "no"
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}

@@ -10,5 +10,5 @@
   "emmet.includeLanguages": {
     "typescript": "typescriptreact"
   },
-  "typescript.tsdk": "server/node_modules/typescript/lib"
+  "typescript.tsdk": "./node_modules/typescript/lib"
 }
