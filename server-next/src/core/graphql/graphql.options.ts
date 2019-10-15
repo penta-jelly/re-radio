@@ -8,7 +8,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
   createGqlOptions(): GqlModuleOptions {
     return {
       path: '/graphql',
-      autoSchemaFile: 'schema.gql',
+      autoSchemaFile: 'schema.graphql',
       installSubscriptionHandlers: true,
       buildSchemaOptions: { dateScalarMode: 'timestamp' },
       context: context => context,
