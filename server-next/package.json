@@ -14,8 +14,8 @@
     "typeorm": "ts-node src/typeorm-cli.ts --config src/typeorm-options.ts",
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "worker": "ts-node src/workers.ts",
-    "worker:seed": "npm run worker -- seed",
-    "worker:seed:reset": "npm run worker -- seed:reset"
+    "seed": "npm run worker -- seed",
+    "seed:reset": "npm run worker -- seed:reset"
   },
   "dependencies": {
     "@nestjs/common": "6.7.1",

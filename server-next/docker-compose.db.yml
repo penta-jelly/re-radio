@@ -1,7 +1,7 @@
 version: "3.7"
 services:
-  db:
-    container_name: re-radio_postgresql
+  postgres:
+    container_name: re-radio_postgres
     image: postgres:10.8-alpine
     restart: "no"
     ports:
@@ -10,3 +10,13 @@ services:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  pgadmin:
+    container_name: re-radio_pgadmin
+    image: dpage/pgadmin4:4.13
+    restart: "no"
+    ports:
+      - "${PGADMIN_PORT}:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
