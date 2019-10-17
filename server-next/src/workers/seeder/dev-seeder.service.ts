@@ -1,9 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as Bcrypt from 'bcrypt-nodejs';
+import { StationTag } from 'radio/station/entities/station-tag.entity';
+import { Station } from 'radio/station/entities/station.entity';
 import { UserRole, UserRoleEnum } from 'radio/user/entities/user-role.entity';
 import { User } from 'radio/user/entities/user.entity';
-import { Repository } from 'typeorm';
+import { DeepPartial, Repository } from 'typeorm';
 
 @Injectable()
 export class DevSeederService {
@@ -14,17 +16,23 @@ export class DevSeederService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(UserRole)
     private readonly userRoleRepository: Repository<UserRole>,
+    @InjectRepository(Station)
+    private readonly stationRepository: Repository<Station>,
+    @InjectRepository(StationTag)
+    private readonly stationTagRepository: Repository<StationTag>,
   ) {}
 
   public async seed() {
     this.logger.log('Start seeder service');
     await this.seedUsers();
     await this.seedUserRoles();
+    await this.seedStations();
     this.logger.log('Finish seeder service');
   }
 
   public async reset() {
     this.logger.log('Start resetting seeder service');
+    await this.resetStations();
     await this.resetUserRoles();
     await this.resetUsers();
     this.logger.log('Finish resetting seeder service');
@@ -92,5 +100,63 @@ export class DevSeederService {
       }),
     );
     return result;
+  }
+
+  public async seedStations() {
+    this.logger.log('Seeding stations');
+    const defaultTags = await this.stationTagRepository.save([
+      this.stationTagRepository.create({ name: 'Test' }),
+      this.stationTagRepository.create({ name: 'QA' }),
+    ]);
+    await Promise.all(
+      this.getStationFixtures().map(async data => {
+        const { name, slug } = data;
+        let station = this.stationRepository.create({ name, slug, tags: defaultTags });
+        station = await this.stationRepository.save(station);
+        if (!data.owner) {
+          data.owner = { username: 'admin' };
+        }
+        const owner = await this.userRepository.findOneOrFail({ where: { username: data.owner.username } });
+        const ownerRole = this.userRoleRepository.create({ role: UserRoleEnum.STATION_OWNER, station, user: owner });
+        await this.userRoleRepository.save(ownerRole);
+      }),
+    );
+  }
+
+  public async resetStations() {
+    this.logger.log('Resetting stations');
+    await Promise.all(
+      this.getStationFixtures().map(async data => {
+        const { name, slug } = data;
+        const station = await this.stationRepository.findOne({ where: { name, slug } });
+        if (!data.owner) {
+          data.owner = { username: 'admin' };
+        }
+        const owner = await this.userRepository.findOneOrFail({ where: { username: data.owner.username } });
+
+        await this.userRoleRepository.delete({ role: UserRoleEnum.STATION_OWNER, station, user: owner });
+        station && (await this.stationRepository.remove(station));
+      }),
+    );
+    await this.stationTagRepository.delete({ name: 'Test' });
+    await this.stationTagRepository.delete({ name: 'QA' });
+  }
+
+  private getStationFixtures(): DeepPartial<Station & { owner: User }>[] {
+    return [
+      { name: 'Station A', slug: 'station-a' },
+      { name: 'Station B', slug: 'station-b', owner: { username: 'pvtri96' } },
+      { name: 'Station C', slug: 'station-c', owner: { username: 'dungle1811' } },
+      { name: 'Station D', slug: 'station-d', owner: { username: 'lednhatkhanh' } },
+      { name: 'Station E', slug: 'station-e', owner: { username: 'lybaokhanh' } },
+      { name: 'Station F', slug: 'station-f', owner: { username: 'thanhvinhlu' } },
+      { name: 'Station G', slug: 'station-g' },
+      { name: 'Station H', slug: 'station-h' },
+      { name: 'Station I', slug: 'station-i' },
+      { name: 'Normie station', slug: 'normie-station', owner: { username: 'normie' } },
+      ...Array(5)
+        .fill(null)
+        .map<Partial<Station>>((_, index) => ({ name: `Station ${index}`, slug: `station-${index}` })),
+    ];
   }
 }

@@ -17,7 +17,7 @@ export class RequestsInterceptor implements NestInterceptor {
     if (context.getArgs().length === 4) {
       const ctx = GqlExecutionContext.create(context);
       const info = ctx.getInfo<GraphQLResolveInfo>();
-      const operation = info.operation.operation;
+      const operation = info.operation.operation.toUpperCase();
       const before = Date.now();
       const rawArgs = JSON.stringify(ctx.getArgs());
       return next

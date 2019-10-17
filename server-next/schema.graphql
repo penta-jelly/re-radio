@@ -26,6 +26,8 @@ type Mutation {
   deleteUser(where: UserFindOneWhereInput): Boolean!
   login(data: LoginInput!): AuthenticationDTO!
   register(data: RegisterInput!): AuthenticationDTO!
+  createStation(data: StationCreateInput): StationDTO!
+  deleteStation(where: StationFindOneWhereInput): Boolean!
 }
 
 enum OrderEnum {
@@ -34,10 +36,12 @@ enum OrderEnum {
 }
 
 input PaginationInput {
-  """Offset (paginated) where from entities should be taken."""
+  """Offset (paginated) where from entities should be taken. Default: 0"""
   skip: Int = 0
 
-  """Limit (paginated) - max number of entities should be taken."""
+  """
+  Limit (paginated) - max number of entities should be taken. Default: 10
+  """
   take: Int = 10
 }
 
@@ -47,6 +51,8 @@ type Query {
   currentUser: UserDTO!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetailDTO!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideoDTO!]!
+  stations(order: StationFindAllOrderInput, where: StationFindAllWhereInput, pagination: PaginationInput): [StationDTO!]!
+  station(where: StationFindOneWhereInput): StationDTO!
 }
 
 input RegisterInput {
@@ -71,6 +77,60 @@ enum SongExplorerOrderEnum {
   TITLE
   VIEW_COUNT
   VIDEO_COUNT
+}
+
+input StationCreateInput {
+  name: String!
+  slug: String!
+  description: String
+  tags: [StationTagCreateInput!]
+}
+
+type StationDTO {
+  id: Float!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  name: String!
+  slug: String!
+  description: String
+  userRoles: [UserRoleDTO!]!
+  tags: [StationTagDTO!]!
+  onlineUsers: [UserDTO!]!
+}
+
+input StationFindAllOrderInput {
+  id: OrderEnum
+  name: OrderEnum
+  slug: OrderEnum
+  createdAt: OrderEnum
+  updatedAt: OrderEnum
+}
+
+input StationFindAllWhereInput {
+  name: String
+  slug: String
+}
+
+input StationFindOneWhereInput {
+  id: Int
+  name: String
+  slug: String
+}
+
+input StationTagCreateInput {
+  name: String!
+}
+
+type StationTagDTO {
+  id: Float!
+  name: String!
+  stations: [StationDTO!]!
+}
+
+input StationUpdateInput {
+  name: String
+  slug: String
+  description: String
 }
 
 type Thumbnail {
@@ -137,7 +197,6 @@ input UserFindAllOrderInput {
 }
 
 input UserFindAllWhereInput {
-  id: Int
   email: String
   username: String
 }

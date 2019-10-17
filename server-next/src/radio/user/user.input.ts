@@ -34,9 +34,6 @@ export class UserFindAllOrderInput {
 
 @InputType()
 export class UserFindAllWhereInput {
-  @Field(type => Int, { nullable: true })
-  id?: number;
-
   @Field({ nullable: true })
   @IsEmail()
   @MaxLength(64)
