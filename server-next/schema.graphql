@@ -21,13 +21,19 @@ input LoginInput {
 }
 
 type Mutation {
+  createStation(data: StationCreateInput): StationDTO!
+  deleteStation(where: StationFindOneWhereInput): Boolean!
   createUser(data: UserCreateInput): UserDTO!
   updateUser(data: UserUpdateInput, where: UserFindOneWhereInput): Boolean!
   deleteUser(where: UserFindOneWhereInput): Boolean!
   login(data: LoginInput!): AuthenticationDTO!
   register(data: RegisterInput!): AuthenticationDTO!
-  createStation(data: StationCreateInput): StationDTO!
-  deleteStation(where: StationFindOneWhereInput): Boolean!
+}
+
+enum MutationEnum {
+  CREATED
+  UPDATED
+  DELETED
 }
 
 enum OrderEnum {
@@ -46,13 +52,13 @@ input PaginationInput {
 }
 
 type Query {
+  stations(order: StationFindAllOrderInput, where: StationFindAllWhereInput, pagination: PaginationInput): [StationDTO!]!
+  station(where: StationFindOneWhereInput): StationDTO!
   users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [UserDTO!]!
   user(where: UserFindOneWhereInput): UserDTO!
   currentUser: UserDTO!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetailDTO!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideoDTO!]!
-  stations(order: StationFindAllOrderInput, where: StationFindAllWhereInput, pagination: PaginationInput): [StationDTO!]!
-  station(where: StationFindOneWhereInput): StationDTO!
 }
 
 input RegisterInput {
@@ -87,7 +93,7 @@ input StationCreateInput {
 }
 
 type StationDTO {
-  id: Float!
+  id: Int!
   createdAt: Timestamp!
   updatedAt: Timestamp!
   name: String!
@@ -122,7 +128,7 @@ input StationTagCreateInput {
 }
 
 type StationTagDTO {
-  id: Float!
+  id: Int!
   name: String!
   stations: [StationDTO!]!
 }
@@ -131,6 +137,10 @@ input StationUpdateInput {
   name: String
   slug: String
   description: String
+}
+
+type Subscription {
+  user(where: UserFindOneWhereInput): UserSubscriptionDTO!
 }
 
 type Thumbnail {
@@ -167,7 +177,7 @@ input UserCreateInput {
 }
 
 type UserDTO {
-  id: Float!
+  id: Int!
   createdAt: Timestamp!
   updatedAt: Timestamp!
   email: String!
@@ -208,15 +218,30 @@ input UserFindOneWhereInput {
 }
 
 type UserRoleDTO {
-  id: Float!
+  id: Int!
   role: UserRoleEnum!
   user: UserDTO!
+  station: StationDTO
 }
 
 enum UserRoleEnum {
   ADMIN
   STATION_OWNER
   STATION_ADMIN
+}
+
+type UserSubscriptionDTO {
+  mutation: MutationEnum!
+
+  """
+  Return null when mutation is "DELETED"
+  """
+  entity: UserDTO
+
+  """
+  Return null when mutation is "CREATED or "UPDATED"
+  """
+  entityId: Int
 }
 
 input UserUpdateInput {

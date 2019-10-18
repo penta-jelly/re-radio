@@ -11,7 +11,9 @@ export class GraphqlOptions implements GqlOptionsFactory {
       autoSchemaFile: 'schema.graphql',
       installSubscriptionHandlers: true,
       buildSchemaOptions: { dateScalarMode: 'timestamp' },
-      context: context => context,
+      context: ({ req, connection }) => {
+        return connection ? { req: { headers: connection.context } } : { req };
+      },
       formatError: this.formatError.bind(this),
     };
   }

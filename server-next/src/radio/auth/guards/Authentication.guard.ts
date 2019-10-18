@@ -14,7 +14,7 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
     return ctx.getContext().req;
   }
 
-  handleRequest<IUser = User>(err: Error, user?: IUser) {
+  handleRequest<T = User>(err: Error, user?: T): T {
     if (err || !user) {
       throw err || new UnauthorizedException();
     }

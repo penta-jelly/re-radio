@@ -48,7 +48,7 @@ export class DevSeederService {
     await Promise.all(
       this.getUserFixtures().map(async data => {
         const user = await this.userRepository.findOne({ where: { email: data.email } });
-        return user && this.userRepository.remove(user);
+        return user && (await this.userRepository.remove(user));
       }),
     );
   }
@@ -78,7 +78,7 @@ export class DevSeederService {
         const userRole = await this.userRoleRepository.findOne({
           where: { user: { id: data.user.id }, role: data.role },
         });
-        return userRole && this.userRoleRepository.remove(userRole);
+        return userRole && (await this.userRoleRepository.remove(userRole));
       }),
     );
   }
@@ -116,9 +116,11 @@ export class DevSeederService {
         if (!data.owner) {
           data.owner = { username: 'admin' };
         }
-        const owner = await this.userRepository.findOneOrFail({ where: { username: data.owner.username } });
-        const ownerRole = this.userRoleRepository.create({ role: UserRoleEnum.STATION_OWNER, station, user: owner });
-        await this.userRoleRepository.save(ownerRole);
+        const owner = await this.userRepository.findOne({ where: { username: data.owner.username } });
+        if (owner) {
+          const ownerRole = this.userRoleRepository.create({ role: UserRoleEnum.STATION_OWNER, station, user: owner });
+          await this.userRoleRepository.save(ownerRole);
+        }
       }),
     );
   }
@@ -132,10 +134,12 @@ export class DevSeederService {
         if (!data.owner) {
           data.owner = { username: 'admin' };
         }
-        const owner = await this.userRepository.findOneOrFail({ where: { username: data.owner.username } });
+        const owner = await this.userRepository.findOne({ where: { username: data.owner.username } });
 
-        await this.userRoleRepository.delete({ role: UserRoleEnum.STATION_OWNER, station, user: owner });
-        station && (await this.stationRepository.remove(station));
+        if (owner) {
+          await this.userRoleRepository.delete({ role: UserRoleEnum.STATION_OWNER, station, user: owner });
+          station && (await this.stationRepository.remove(station));
+        }
       }),
     );
     await this.stationTagRepository.delete({ name: 'Test' });

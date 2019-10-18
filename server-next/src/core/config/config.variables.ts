@@ -7,6 +7,10 @@ export enum EnvVariables {
   DB_PASSWORD,
   DB_NAME,
 
+  REDIS_HOST,
+  REDIS_PORT,
+
+  JWT_SECRET,
   JWT_TOKEN_EXPIRES_IN,
 
   YOUTUBE_API_URL,

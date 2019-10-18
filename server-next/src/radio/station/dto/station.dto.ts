@@ -1,11 +1,11 @@
 import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
 import { UserDTO } from 'radio/user/dto/user.dto';
-import { Field, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from 'type-graphql';
 import { StationTagDTO } from './station-tag.dto';
 
 @ObjectType()
 export class StationDTO {
-  @Field()
+  @Field(type => Int)
   id: number;
 
   @Field()

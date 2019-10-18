@@ -1,9 +1,10 @@
+import { MutationEnum } from 'core/typeorm/entity-subscription.interface';
 import { Field, Int, ObjectType } from 'type-graphql';
 import { UserRoleDTO } from './user-role.dto';
 
 @ObjectType()
 export class UserDTO {
-  @Field()
+  @Field(type => Int)
   id: number;
 
   @Field()
@@ -47,4 +48,22 @@ export class UserDTO {
 
   @Field(type => [UserRoleDTO])
   roles: UserRoleDTO[];
+}
+
+@ObjectType()
+export class UserSubscriptionDTO {
+  @Field(type => MutationEnum)
+  mutation: MutationEnum;
+
+  @Field(type => UserDTO, {
+    nullable: true,
+    description: `Return null when mutation is "${MutationEnum.DELETED}"`,
+  })
+  entity?: UserDTO;
+
+  @Field(type => Int, {
+    nullable: true,
+    description: `Return null when mutation is "${MutationEnum.CREATED} or "${MutationEnum.UPDATED}"`,
+  })
+  entityId?: number;
 }

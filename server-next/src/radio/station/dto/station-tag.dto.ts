@@ -1,9 +1,9 @@
 import { StationDTO } from 'radio/station/dto/station.dto';
-import { Field, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from 'type-graphql';
 
 @ObjectType()
 export class StationTagDTO {
-  @Field()
+  @Field(type => Int)
   id: number;
 
   @Field()

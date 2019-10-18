@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from 'radio/user/user.module';
 import { StationTag } from './entities/station-tag.entity';
@@ -9,7 +9,7 @@ import { StationTagService } from './services/station-tag.service';
 import { StationService } from './services/station.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Station, StationTag]), UserModule],
+  imports: [TypeOrmModule.forFeature([Station, StationTag]), forwardRef(() => UserModule)],
   providers: [StationService, StationTagService, StationResolver, StationTagResolver],
   exports: [StationService, StationTagService],
 })

@@ -20,3 +20,10 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+
+  redis:
+    container_name: re-radio_redis
+    image: redis:5.0.6-alpine
+    restart: "no"
+    ports:
+      - "${REDIS_PORT}:6379"

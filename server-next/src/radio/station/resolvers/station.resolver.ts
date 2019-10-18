@@ -1,4 +1,4 @@
-import { UseGuards } from '@nestjs/common';
+import { forwardRef, Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, ResolveProperty, Resolver, Root } from '@nestjs/graphql';
 import { PaginationInput } from 'core/graphql/input/pagination';
 import { CurrentUser } from 'radio/auth/decorators/CurrentUser.decorator';
@@ -27,7 +27,9 @@ export class StationResolver {
   constructor(
     private readonly stationService: StationService,
     private readonly stationTagService: StationTagService,
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
+    @Inject(forwardRef(() => UserRoleService))
     private readonly userRoleService: UserRoleService,
   ) {}
 

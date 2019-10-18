@@ -1,6 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as Bcrypt from 'bcrypt-nodejs';
+import { StationService } from 'radio/station/services/station.service';
 import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
 import { UserRole } from '../entities/user-role.entity';
 import { User } from '../entities/user.entity';
@@ -12,6 +13,8 @@ export class UserService {
     private readonly userRepository: Repository<User>,
     @InjectRepository(UserRole)
     private readonly userRoleRepository: Repository<UserRole>,
+    @Inject(forwardRef(() => StationService))
+    private readonly stationService: StationService,
   ) {}
 
   async find(options?: FindManyOptions<User>): Promise<User[]> {
@@ -37,13 +40,22 @@ export class UserService {
   }
 
   async update(criteria: FindConditions<User>, payload: Partial<User>): Promise<void> {
-    await this.userRepository.update(criteria, payload);
+    const user = await this.findOneOrFail({ where: criteria });
+    await this.userRepository.save({ ...user, ...payload });
   }
 
   async delete(criteria: FindConditions<User>): Promise<void> {
     const user = await this.findOneOrFail({ where: criteria, relations: ['roles'] });
-    await Promise.all(user.roles.map(role => this.userRoleRepository.remove(role)));
-    await this.userRepository.delete(criteria);
+    await Promise.all(
+      user.roles.map(async role => {
+        role = await this.userRoleRepository.findOneOrFail({ where: { id: role.id }, relations: ['station'] });
+        if (role.station) {
+          await this.stationService.delete({ id: role.station.id });
+        }
+        await this.userRoleRepository.remove(role);
+      }),
+    );
+    await this.userRepository.remove(user);
   }
 
   generateEncryptedPassword(rawPassword: string) {

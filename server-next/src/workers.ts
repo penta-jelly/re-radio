@@ -10,16 +10,22 @@ async function bootstrap() {
 
   const args = process.argv.slice(2);
 
-  if (args.includes('seed')) {
-    await app.get(DevSeederService).seed();
-  } else if (args.includes('seed:reset')) {
-    await app.get(DevSeederService).reset();
-  } else {
-    logger.error(
-      `Unknown command "${args.join(' ')}". Following workers are supported: \n\t` +
-        ` - seed: Seed initial data for to database`,
-    );
+  try {
+    if (args.includes('seed')) {
+      await app.get(DevSeederService).seed();
+    } else if (args.includes('seed:reset')) {
+      await app.get(DevSeederService).reset();
+    } else {
+      logger.error(
+        `Unknown command "${args.join(' ')}". Following workers are supported: \n\t` +
+          ` - seed: Seed initial data for to database`,
+      );
+      process.exit(1);
+    }
+  } catch (e) {
+    console.error(e);
     process.exit(1);
   }
+  process.exit(0);
 }
 bootstrap();

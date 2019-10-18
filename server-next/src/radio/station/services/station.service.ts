@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
 import { User } from 'radio/user/entities/user.entity';
@@ -15,6 +15,7 @@ export class StationService {
     private readonly stationRepository: Repository<Station>,
     @InjectRepository(StationTag)
     private readonly stationTagRepository: Repository<StationTag>,
+    @Inject(forwardRef(() => UserRoleService))
     private readonly userRoleService: UserRoleService,
   ) {}
 
@@ -54,12 +55,13 @@ export class StationService {
   }
 
   async update(criteria: FindConditions<Station>, payload: Partial<Station>): Promise<void> {
-    await this.stationRepository.update(criteria, payload);
+    const station = await this.findOneOrFail({ where: criteria });
+    await this.stationRepository.save({ ...station, ...payload });
   }
 
   async delete(criteria: FindConditions<Station>): Promise<void> {
-    const { userRoles } = await this.stationRepository.findOneOrFail({ where: criteria, relations: ['userRoles'] });
-    await this.userRoleService.remove(userRoles);
-    await this.stationRepository.delete(criteria);
+    const station = await this.stationRepository.findOneOrFail({ where: criteria, relations: ['userRoles'] });
+    await this.userRoleService.remove(station.userRoles);
+    await this.stationRepository.remove(station);
   }
 }
