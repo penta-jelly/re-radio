@@ -29,10 +29,14 @@ export class UserSubscriber implements EntitySubscriberInterface {
     });
   }
 
-  async afterRemove(event: RemoveEvent<User>) {
+  async beforeRemove(event: RemoveEvent<User>) {
+    if (!event.entity) {
+      throw new Error(`Could not find entity with-in event. Do you miss something?`);
+    }
+
     await this.pubSub.publish<EntitySubscription<User>>(USER_SUBSCRIPTION, {
       mutation: MutationEnum.DELETED,
-      entityId: event.entityId,
+      entity: event.entity,
     });
   }
 }

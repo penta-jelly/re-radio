@@ -55,15 +55,6 @@ export class UserSubscriptionDTO {
   @Field(type => MutationEnum)
   mutation: MutationEnum;
 
-  @Field(type => UserDTO, {
-    nullable: true,
-    description: `Return null when mutation is "${MutationEnum.DELETED}"`,
-  })
-  entity?: UserDTO;
-
-  @Field(type => Int, {
-    nullable: true,
-    description: `Return null when mutation is "${MutationEnum.CREATED} or "${MutationEnum.UPDATED}"`,
-  })
-  entityId?: number;
+  @Field(type => UserDTO)
+  entity: UserDTO;
 }

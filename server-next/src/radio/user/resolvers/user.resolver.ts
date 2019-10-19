@@ -44,14 +44,14 @@ export class UserResolver {
   }
 
   @Query(returns => UserDTO)
-  async user(@Args({ name: 'where', nullable: true, type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput) {
+  async user(@Args({ name: 'where', type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput) {
     return this.userService.findOneOrFail({ where });
   }
 
   @Mutation(returns => UserDTO)
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
-  async createUser(@Args({ name: 'data', nullable: true, type: () => UserCreateInput }) data: UserCreateInput) {
+  async createUser(@Args({ name: 'data', type: () => UserCreateInput }) data: UserCreateInput) {
     return this.userService.create(data);
   }
 
@@ -59,8 +59,8 @@ export class UserResolver {
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
   async updateUser(
-    @Args({ name: 'where', nullable: true, type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput,
-    @Args({ name: 'data', nullable: true, type: () => UserUpdateInput }) data: UserUpdateInput,
+    @Args({ name: 'where', type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput,
+    @Args({ name: 'data', type: () => UserUpdateInput }) data: UserUpdateInput,
   ) {
     await this.userService.update(where, data);
     return true;
@@ -69,30 +69,28 @@ export class UserResolver {
   @Mutation(returns => Boolean)
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
-  async deleteUser(
-    @Args({ name: 'where', nullable: true, type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput,
-  ) {
+  async deleteUser(@Args({ name: 'where', type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput) {
     await this.userService.delete(where);
     return true;
   }
 
-  @Subscription(returns => UserSubscriptionDTO, {
-    name: 'user',
-    filter: (payload: EntitySubscription<User>, variables: { where: UserFindOneWhereInput }) => {
-      // if(variables.where) {
-      // if(payload.mutation === )
-      // }
-      console.log(variables);
-      return true;
-    },
-  })
+  @Subscription(returns => UserSubscriptionDTO, { name: 'user' })
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
   async *userSubscription(
-    @Args({ name: 'where', nullable: true, type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput,
+    @Args({ name: 'where', nullable: true, type: () => UserFindOneWhereInput }) where?: UserFindOneWhereInput,
   ) {
-    for await (const result of this.pubSub.asyncIterable<EntitySubscription<User>>(USER_SUBSCRIPTION)) {
-      yield { user: result };
+    for await (const payload of this.pubSub.asyncIterable<EntitySubscription<User>>(USER_SUBSCRIPTION)) {
+      if (where) {
+        if (
+          where.username !== payload.entity.username &&
+          where.email !== payload.entity.email &&
+          where.id !== payload.entity.id
+        ) {
+          continue;
+        }
+      }
+      yield { user: payload };
     }
   }
 }

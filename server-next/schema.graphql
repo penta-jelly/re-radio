@@ -21,11 +21,11 @@ input LoginInput {
 }
 
 type Mutation {
-  createStation(data: StationCreateInput): StationDTO!
-  deleteStation(where: StationFindOneWhereInput): Boolean!
-  createUser(data: UserCreateInput): UserDTO!
-  updateUser(data: UserUpdateInput, where: UserFindOneWhereInput): Boolean!
-  deleteUser(where: UserFindOneWhereInput): Boolean!
+  createStation(data: StationCreateInput!): StationDTO!
+  deleteStation(where: StationFindOneWhereInput!): Boolean!
+  createUser(data: UserCreateInput!): UserDTO!
+  updateUser(data: UserUpdateInput!, where: UserFindOneWhereInput!): Boolean!
+  deleteUser(where: UserFindOneWhereInput!): Boolean!
   login(data: LoginInput!): AuthenticationDTO!
   register(data: RegisterInput!): AuthenticationDTO!
 }
@@ -53,9 +53,9 @@ input PaginationInput {
 
 type Query {
   stations(order: StationFindAllOrderInput, where: StationFindAllWhereInput, pagination: PaginationInput): [StationDTO!]!
-  station(where: StationFindOneWhereInput): StationDTO!
+  station(where: StationFindOneWhereInput!): StationDTO!
   users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [UserDTO!]!
-  user(where: UserFindOneWhereInput): UserDTO!
+  user(where: UserFindOneWhereInput!): UserDTO!
   currentUser: UserDTO!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetailDTO!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideoDTO!]!
@@ -232,16 +232,7 @@ enum UserRoleEnum {
 
 type UserSubscriptionDTO {
   mutation: MutationEnum!
-
-  """
-  Return null when mutation is "DELETED"
-  """
-  entity: UserDTO
-
-  """
-  Return null when mutation is "CREATED or "UPDATED"
-  """
-  entityId: Int
+  entity: UserDTO!
 }
 
 input UserUpdateInput {

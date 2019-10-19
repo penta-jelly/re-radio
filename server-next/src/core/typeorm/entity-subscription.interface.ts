@@ -12,21 +12,7 @@ export interface BaseEntity {
   id: number;
 }
 
-export type EntitySubscription<T extends BaseEntity> =
-  | CreatedEntitySubscription<T>
-  | UpdatedEntitySubscription<T>
-  | DeletedEntitySubscription<T>;
-
-export interface CreatedEntitySubscription<T extends BaseEntity> {
-  mutation: MutationEnum.CREATED;
+export interface EntitySubscription<T extends BaseEntity> {
+  mutation: MutationEnum;
   entity: T;
-}
-export interface UpdatedEntitySubscription<T extends BaseEntity> {
-  mutation: MutationEnum.UPDATED;
-  entity: T;
-}
-
-export interface DeletedEntitySubscription<T extends BaseEntity> {
-  mutation: MutationEnum.DELETED;
-  entityId: Pick<T, 'id'>;
 }
