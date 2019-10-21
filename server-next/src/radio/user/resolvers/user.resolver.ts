@@ -1,16 +1,13 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, ResolveProperty, Resolver, Root, Subscription } from '@nestjs/graphql';
+import { Args, Mutation, Query, ResolveProperty, Resolver, Root } from '@nestjs/graphql';
 import { PaginationInput } from 'core/graphql/input/pagination';
 import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { EntitySubscription } from 'core/typeorm/entity-subscription.interface';
 import { Roles } from 'radio/auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from 'radio/auth/guards/Authentication.guard';
 import { AuthorizationGuard } from 'radio/auth/guards/Authorization.guard';
 import { UserRoleDTO } from '../dto/user-role.dto';
-import { UserDTO, UserSubscriptionDTO } from '../dto/user.dto';
+import { UserDTO } from '../dto/user.dto';
 import { UserRoleEnum } from '../entities/user-role.entity';
-import { User } from '../entities/user.entity';
-import { USER_SUBSCRIPTION } from '../entities/user.subscriber';
 import { UserRoleService } from '../services/user-role.service';
 import { UserService } from '../services/user.service';
 import {
@@ -72,25 +69,5 @@ export class UserResolver {
   async deleteUser(@Args({ name: 'where', type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput) {
     await this.userService.delete(where);
     return true;
-  }
-
-  @Subscription(returns => UserSubscriptionDTO, { name: 'user' })
-  @UseGuards(AuthenticationGuard, AuthorizationGuard)
-  @Roles([UserRoleEnum.ADMIN])
-  async *userSubscription(
-    @Args({ name: 'where', nullable: true, type: () => UserFindOneWhereInput }) where?: UserFindOneWhereInput,
-  ) {
-    for await (const payload of this.pubSub.asyncIterable<EntitySubscription<User>>(USER_SUBSCRIPTION)) {
-      if (where) {
-        if (
-          where.username !== payload.entity.username &&
-          where.email !== payload.entity.email &&
-          where.id !== payload.entity.id
-        ) {
-          continue;
-        }
-      }
-      yield { user: payload };
-    }
   }
 }

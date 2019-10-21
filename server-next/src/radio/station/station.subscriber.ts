@@ -3,38 +3,38 @@ import { InjectConnection } from '@nestjs/typeorm';
 import { PubSub } from 'core/pub-sub/pub-sub.service';
 import { EntitySubscription, MutationEnum } from 'core/typeorm/entity-subscription.interface';
 import { Connection, EntitySubscriberInterface, InsertEvent, RemoveEvent, UpdateEvent } from 'typeorm';
-import { User } from './user.entity';
+import { Station } from './entities/station.entity';
 
-export const USER_SUBSCRIPTION = 'USER_SUBSCRIPTION';
+export const STATION_SUBSCRIPTION = 'STATION_SUBSCRIPTION';
 
 @Injectable()
-export class UserSubscriber implements EntitySubscriberInterface {
+export class StationSubscriber implements EntitySubscriberInterface {
   constructor(@InjectConnection() private readonly connection: Connection, private readonly pubSub: PubSub) {
     connection.subscribers.push(this);
   }
 
-  listenTo = () => User;
+  listenTo = () => Station;
 
-  async afterInsert(event: InsertEvent<User>) {
-    await this.pubSub.publish<EntitySubscription<User>>(USER_SUBSCRIPTION, {
+  async afterInsert(event: InsertEvent<Station>) {
+    await this.pubSub.publish<EntitySubscription<Station>>(STATION_SUBSCRIPTION, {
       mutation: MutationEnum.CREATED,
       entity: event.entity,
     });
   }
 
-  async afterUpdate(event: UpdateEvent<User>) {
-    await this.pubSub.publish<EntitySubscription<User>>(USER_SUBSCRIPTION, {
+  async afterUpdate(event: UpdateEvent<Station>) {
+    await this.pubSub.publish<EntitySubscription<Station>>(STATION_SUBSCRIPTION, {
       mutation: MutationEnum.UPDATED,
       entity: event.entity,
     });
   }
 
-  async beforeRemove(event: RemoveEvent<User>) {
+  async beforeRemove(event: RemoveEvent<Station>) {
     if (!event.entity) {
       throw new Error(`Could not find entity with-in event. Do you miss something?`);
     }
 
-    await this.pubSub.publish<EntitySubscription<User>>(USER_SUBSCRIPTION, {
+    await this.pubSub.publish<EntitySubscription<Station>>(STATION_SUBSCRIPTION, {
       mutation: MutationEnum.DELETED,
       entity: event.entity,
     });

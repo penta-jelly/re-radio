@@ -3,7 +3,7 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-type AuthenticationDTO {
+type Authentication {
   token: String!
 }
 
@@ -21,13 +21,13 @@ input LoginInput {
 }
 
 type Mutation {
-  createStation(data: StationCreateInput!): StationDTO!
+  createStation(data: StationCreateInput!): Station!
   deleteStation(where: StationFindOneWhereInput!): Boolean!
-  createUser(data: UserCreateInput!): UserDTO!
+  createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserFindOneWhereInput!): Boolean!
   deleteUser(where: UserFindOneWhereInput!): Boolean!
-  login(data: LoginInput!): AuthenticationDTO!
-  register(data: RegisterInput!): AuthenticationDTO!
+  login(data: LoginInput!): Authentication!
+  register(data: RegisterInput!): Authentication!
 }
 
 enum MutationEnum {
@@ -52,13 +52,13 @@ input PaginationInput {
 }
 
 type Query {
-  stations(order: StationFindAllOrderInput, where: StationFindAllWhereInput, pagination: PaginationInput): [StationDTO!]!
-  station(where: StationFindOneWhereInput!): StationDTO!
-  users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [UserDTO!]!
-  user(where: UserFindOneWhereInput!): UserDTO!
-  currentUser: UserDTO!
-  youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetailDTO!
-  youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideoDTO!]!
+  stations(order: StationFindAllOrderInput, where: StationFindAllWhereInput, pagination: PaginationInput): [Station!]!
+  station(where: StationFindOneWhereInput!): Station!
+  users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
+  user(where: UserFindOneWhereInput!): User!
+  currentUser: User!
+  youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
+  youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
 }
 
 input RegisterInput {
@@ -85,23 +85,23 @@ enum SongExplorerOrderEnum {
   VIDEO_COUNT
 }
 
-input StationCreateInput {
-  name: String!
-  slug: String!
-  description: String
-  tags: [StationTagCreateInput!]
-}
-
-type StationDTO {
+type Station {
   id: Int!
   createdAt: Timestamp!
   updatedAt: Timestamp!
   name: String!
   slug: String!
   description: String
-  userRoles: [UserRoleDTO!]!
-  tags: [StationTagDTO!]!
-  onlineUsers: [UserDTO!]!
+  userRoles: [UserRole!]!
+  tags: [StationTag!]!
+  onlineUsers: [User!]!
+}
+
+input StationCreateInput {
+  name: String!
+  slug: String!
+  description: String
+  tags: [StationTagCreateInput!]
 }
 
 input StationFindAllOrderInput {
@@ -123,14 +123,28 @@ input StationFindOneWhereInput {
   slug: String
 }
 
-input StationTagCreateInput {
-  name: String!
+type StationSubscription {
+  mutation: MutationEnum!
+  entity: StationSubscriptionEntity!
 }
 
-type StationTagDTO {
+type StationSubscriptionEntity {
+  id: Int!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  name: String!
+  slug: String!
+  description: String
+}
+
+type StationTag {
   id: Int!
   name: String!
-  stations: [StationDTO!]!
+  stations: [Station!]!
+}
+
+input StationTagCreateInput {
+  name: String!
 }
 
 input StationUpdateInput {
@@ -140,7 +154,8 @@ input StationUpdateInput {
 }
 
 type Subscription {
-  user(where: UserFindOneWhereInput): UserSubscriptionDTO!
+  station(where: StationFindOneWhereInput): StationSubscription!
+  user(where: UserFindOneWhereInput): UserSubscription!
 }
 
 type Thumbnail {
@@ -162,21 +177,7 @@ The javascript `Date` as integer. Type represents date and time as number of mil
 """
 scalar Timestamp
 
-input UserCreateInput {
-  email: String!
-  username: String!
-  password: String!
-  name: String
-  country: String
-  city: String
-  bio: String
-  avatarUrl: String
-  coverUrl: String
-  facebookId: String
-  googleId: String
-}
-
-type UserDTO {
+type User {
   id: Int!
   createdAt: Timestamp!
   updatedAt: Timestamp!
@@ -191,7 +192,21 @@ type UserDTO {
   reputation: Int
   facebookId: String
   googleId: String
-  roles: [UserRoleDTO!]!
+  roles: [UserRole!]!
+}
+
+input UserCreateInput {
+  email: String!
+  username: String!
+  password: String!
+  name: String
+  country: String
+  city: String
+  bio: String
+  avatarUrl: String
+  coverUrl: String
+  facebookId: String
+  googleId: String
 }
 
 input UserFindAllOrderInput {
@@ -217,11 +232,11 @@ input UserFindOneWhereInput {
   username: String
 }
 
-type UserRoleDTO {
+type UserRole {
   id: Int!
   role: UserRoleEnum!
-  user: UserDTO!
-  station: StationDTO
+  user: User!
+  station: Station
 }
 
 enum UserRoleEnum {
@@ -230,9 +245,26 @@ enum UserRoleEnum {
   STATION_ADMIN
 }
 
-type UserSubscriptionDTO {
+type UserSubscription {
   mutation: MutationEnum!
-  entity: UserDTO!
+  entity: UserSubscriptionEntity!
+}
+
+type UserSubscriptionEntity {
+  id: Int!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  email: String!
+  username: String!
+  name: String
+  country: String
+  city: String
+  bio: String
+  avatarUrl: String
+  coverUrl: String
+  reputation: Int
+  facebookId: String
+  googleId: String
 }
 
 input UserUpdateInput {
@@ -248,15 +280,15 @@ input UserUpdateInput {
   googleId: String
 }
 
-type YoutubeVideoDetailDTO {
+type YoutubeVideo {
+  id: String!
+  snippet: Snippet!
+}
+
+type YoutubeVideoDetail {
   id: String!
   snippet: Snippet!
   contentDetails: ContentDetails!
-}
-
-type YoutubeVideoDTO {
-  id: String!
-  snippet: Snippet!
 }
 
 input YoutubeVideoFindAllInput {

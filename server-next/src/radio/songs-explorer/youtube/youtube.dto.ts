@@ -52,7 +52,7 @@ export class ContentDetails {
   caption: string;
 }
 
-@ObjectType()
+@ObjectType('YoutubeVideoDetail')
 export class YoutubeVideoDetailDTO {
   @Field()
   id: string;
@@ -77,7 +77,7 @@ export interface Response extends BaseItem {
   items: YoutubeVideoDetailDTO[];
 }
 
-@ObjectType()
+@ObjectType('YoutubeVideo')
 export class YoutubeVideoDTO {
   @Field()
   id: string;

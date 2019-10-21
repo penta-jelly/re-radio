@@ -3,7 +3,7 @@ import { Field, Int, ObjectType } from 'type-graphql';
 import { UserRoleEnum } from '../entities/user-role.entity';
 import { UserDTO } from './user.dto';
 
-@ObjectType()
+@ObjectType('UserRole')
 export class UserRoleDTO {
   @Field(type => Int)
   id: number;

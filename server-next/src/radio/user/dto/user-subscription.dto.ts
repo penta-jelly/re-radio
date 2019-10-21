@@ -1,8 +1,8 @@
+import { MutationEnum } from 'core/typeorm/entity-subscription.interface';
 import { Field, Int, ObjectType } from 'type-graphql';
-import { UserRoleDTO } from './user-role.dto';
 
-@ObjectType('User')
-export class UserDTO {
+@ObjectType('UserSubscriptionEntity')
+export class UserSubscriptionDTOEntity {
   @Field(type => Int)
   id: number;
 
@@ -44,7 +44,13 @@ export class UserDTO {
 
   @Field({ nullable: true })
   googleId?: string;
+}
 
-  @Field(type => [UserRoleDTO])
-  roles: UserRoleDTO[];
+@ObjectType('UserSubscription')
+export class UserSubscriptionDTO {
+  @Field(type => MutationEnum)
+  mutation: MutationEnum;
+
+  @Field(type => UserSubscriptionDTOEntity)
+  entity: UserSubscriptionDTOEntity;
 }
