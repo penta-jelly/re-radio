@@ -48,7 +48,7 @@ export class AuthService {
   async validateUserFromJWTPayload(payload: JwtPayload): Promise<User> {
     const { username, email, password } = payload;
     const user = await this.userService.findOneOrFail({ where: { username, email } });
-    if (user.password !== password) throw new UnauthorizedException();
+    if (this.userService.isValidPassword(user.password, password)) throw new UnauthorizedException();
     return user;
   }
 

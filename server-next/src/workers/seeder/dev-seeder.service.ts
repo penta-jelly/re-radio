@@ -73,13 +73,36 @@ export class DevSeederService {
 
   public async resetUserRoles() {
     this.logger.log('Resetting user roles');
+    const toBeRemovedTags: string[] = [];
     await Promise.all(
       (await this.getUserRoleFixtures()).map(async data => {
         const userRole = await this.userRoleRepository.findOne({
           where: { user: { id: data.user.id }, role: data.role },
         });
-        return userRole && (await this.userRoleRepository.remove(userRole));
+        userRole && (await this.userRoleRepository.remove(userRole));
+        const ownerRoles = await this.userRoleRepository.find({
+          where: { user: { id: data.user.id }, role: UserRoleEnum.STATION_OWNER },
+          relations: ['station'],
+        });
+        const ownedStations = ownerRoles
+          .map(({ station }) => station)
+          .filter((station): station is Station => !!station);
+
+        for (const station of ownedStations) {
+          const { tags } = await this.stationRepository.findOneOrFail({
+            where: { id: station.id },
+            relations: ['tags'],
+          });
+          toBeRemovedTags.push(...tags.map(tag => tag.name));
+        }
+        await this.userRoleRepository.remove(ownerRoles);
+        await this.stationRepository.remove(ownedStations);
       }),
+    );
+    await Promise.all(
+      toBeRemovedTags
+        .filter((tagName, index) => toBeRemovedTags.indexOf(tagName) === index)
+        .map(tagName => this.stationTagRepository.delete({ name: tagName })),
     );
   }
 
