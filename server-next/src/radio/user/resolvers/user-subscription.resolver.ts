@@ -23,14 +23,8 @@ export class UserSubscriptionResolver {
     @Args({ name: 'where', nullable: true, type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput,
   ) {
     for await (const payload of this.pubSub.asyncIterable<EntitySubscription<User>>(USER_SUBSCRIPTION)) {
-      if (Object.keys(where).length > 0) {
-        if (
-          where.username !== payload.entity.username &&
-          where.email !== payload.entity.email &&
-          where.id !== payload.entity.id
-        ) {
-          continue;
-        }
+      if (!Object.keys(where).every(key => where[key] === payload.entity[key])) {
+        continue;
       }
       yield { user: payload };
     }

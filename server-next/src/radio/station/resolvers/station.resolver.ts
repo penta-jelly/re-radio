@@ -1,7 +1,6 @@
 import { forwardRef, Inject, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, ResolveProperty, Resolver, Root } from '@nestjs/graphql';
 import { PaginationInput } from 'core/graphql/input/pagination';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
 import { CurrentUser } from 'radio/auth/decorators/CurrentUser.decorator';
 import { Roles } from 'radio/auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from 'radio/auth/guards/Authentication.guard';
@@ -26,7 +25,6 @@ import {
 @Resolver(of => StationDTO)
 export class StationResolver {
   constructor(
-    private readonly pubSub: PubSub,
     private readonly stationService: StationService,
     private readonly stationTagService: StationTagService,
     @Inject(forwardRef(() => UserService))
@@ -42,13 +40,20 @@ export class StationResolver {
 
   @ResolveProperty(returns => [StationTagDTO])
   async tags(@Root() station: StationDTO) {
-    const { tags } = await this.stationService.findOneOrFail({ where: { id: station.id }, relations: ['tags'] });
+    const { tags } = await this.stationService.findOneOrFail({
+      where: { id: station.id },
+      relations: ['tags'],
+    });
     return tags;
   }
 
   @ResolveProperty(returns => [UserDTO])
   async onlineUsers(@Root() station: StationDTO) {
-    return this.userService.find({ where: { currentStation: { id: station.id } } });
+    const { onlineUsers } = await this.stationService.findOneOrFail({
+      where: { id: station.id },
+      relations: ['onlineUsers'],
+    });
+    return onlineUsers;
   }
 
   @Query(returns => [StationDTO])

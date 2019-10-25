@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as Bcrypt from 'bcrypt-nodejs';
+import { Song, SongStatusEnum } from 'radio/song/entities/song.entity';
 import { StationTag } from 'radio/station/entities/station-tag.entity';
 import { Station } from 'radio/station/entities/station.entity';
 import { UserRole, UserRoleEnum } from 'radio/user/entities/user-role.entity';
@@ -20,6 +21,8 @@ export class DevSeederService {
     private readonly stationRepository: Repository<Station>,
     @InjectRepository(StationTag)
     private readonly stationTagRepository: Repository<StationTag>,
+    @InjectRepository(Song)
+    private readonly songRepository: Repository<Song>,
   ) {}
 
   public async seed() {
@@ -27,11 +30,13 @@ export class DevSeederService {
     await this.seedUsers();
     await this.seedUserRoles();
     await this.seedStations();
+    await this.seedSongs();
     this.logger.log('Finish seeder service');
   }
 
   public async reset() {
     this.logger.log('Start resetting seeder service');
+    await this.resetSongs();
     await this.resetStations();
     await this.resetUserRoles();
     await this.resetUsers();
@@ -153,15 +158,18 @@ export class DevSeederService {
     await Promise.all(
       this.getStationFixtures().map(async data => {
         const { name, slug } = data;
-        const station = await this.stationRepository.findOne({ where: { name, slug } });
+        const station = await this.stationRepository.findOne({ where: { name, slug }, relations: ['songs'] });
+        if (!station) return;
+
+        await Promise.all(station.songs.map(song => this.songRepository.remove(song)));
+
         if (!data.owner) {
           data.owner = { username: 'admin' };
         }
         const owner = await this.userRepository.findOne({ where: { username: data.owner.username } });
-
         if (owner) {
           await this.userRoleRepository.delete({ role: UserRoleEnum.STATION_OWNER, station, user: owner });
-          station && (await this.stationRepository.remove(station));
+          await this.stationRepository.remove(station);
         }
       }),
     );
@@ -185,5 +193,77 @@ export class DevSeederService {
         .fill(null)
         .map<Partial<Station>>((_, index) => ({ name: `Station ${index}`, slug: `station-${index}` })),
     ];
+  }
+
+  public async seedSongs() {
+    this.logger.log('Seeding songs');
+    await Promise.all(
+      this.getSongFixtures().map(async data => {
+        if (!data.creator) data.creator = { username: 'admin' };
+        if (!data.station) data.station = { slug: 'station-a' };
+        if (!data.status) data.status = SongStatusEnum.PENDING;
+        if (!data.upVoteUserIds) data.upVoteUserIds = [];
+        if (!data.downVoteUserIds) data.downVoteUserIds = [];
+        const creator = await this.userRepository.findOne({ where: { username: data.creator.username } });
+        const station = await this.stationRepository.findOne({ where: { slug: data.station.slug } });
+        if (creator && station) {
+          const song = this.songRepository.create(data);
+          song.creator = creator;
+          song.station = station;
+          await this.songRepository.save(song);
+        }
+      }),
+    );
+  }
+
+  public async resetSongs() {
+    this.logger.log('Resetting songs');
+    await Promise.all(
+      this.getSongFixtures().map(async data => {
+        if (!data.creator) data.creator = { username: 'admin' };
+        if (!data.station) data.station = { slug: 'station-a' };
+        const creator = await this.userRepository.findOne({ where: { username: data.creator.username } });
+        const station = await this.stationRepository.findOne({ where: { slug: data.station.slug } });
+        if (creator && station) {
+          const { title, url, duration, thumbnail } = data;
+          const song = await this.songRepository.findOne({
+            where: { creator: { id: creator.id }, station: { id: station.id }, title, url, duration, thumbnail },
+          });
+          song && (await this.songRepository.remove(song));
+        }
+      }),
+    );
+  }
+
+  private getSongFixtures(): DeepPartial<Song & { creator: User; station: Station }>[] {
+    return this.getStationFixtures().reduce<DeepPartial<Song & { creator: User; station: Station }>[]>(
+      (songs, station) => {
+        return [
+          ...songs,
+          {
+            title: 'Westlife - My Love (Official Music Video)',
+            url: 'https://www.youtube.com/watch?v=ulOb9gIGGd0',
+            duration: 240000,
+            thumbnail: 'https://i.ytimg.com/vi/ulOb9gIGGd0/hqdefault.jpg',
+            station: { slug: station.slug },
+          },
+          {
+            title: 'TWICE "Heart Shaker" M/V',
+            url: 'https://www.youtube.com/watch?v=rRzxEiBLQCA',
+            duration: 195000,
+            thumbnail: 'https://i.ytimg.com/vi/rRzxEiBLQCA/hqdefault.jpg',
+            station: { slug: station.slug },
+          },
+          {
+            title: 'Zedd - I Want You To Know (Official Music Video) ft. Selena Gomez',
+            url: 'https://www.youtube.com/watch?v=X46t8ZFqUB4',
+            duration: 225000,
+            thumbnail: 'https://i.ytimg.com/vi/X46t8ZFqUB4/hqdefault.jpg',
+            station: { slug: station.slug },
+          },
+        ];
+      },
+      [],
+    );
   }
 }

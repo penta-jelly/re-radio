@@ -28,6 +28,8 @@ type Mutation {
   deleteUser(where: UserFindOneWhereInput!): Boolean!
   login(data: LoginInput!): Authentication!
   register(data: RegisterInput!): Authentication!
+  createSong(data: SongCreateInput!): Song!
+  deleteSong(where: SongFindOneWhereInput!): Boolean!
 }
 
 enum MutationEnum {
@@ -57,6 +59,8 @@ type Query {
   users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
   user(where: UserFindOneWhereInput!): User!
   currentUser: User!
+  songs(order: SongFindAllOrderInput, where: SongFindAllWhereInput, pagination: PaginationInput): [Song!]!
+  song(where: SongFindOneWhereInput!): Song!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
 }
@@ -76,6 +80,31 @@ type Snippet {
   channelTitle: String!
 }
 
+type Song {
+  id: Int!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  status: SongStatusEnum!
+  creator: User!
+  station: Station!
+  stationSlug: String!
+  upVoteUserIds: [Int!]!
+  downVoteUserIds: [Int!]!
+}
+
+input SongCreateInput {
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  status: SongStatusEnum
+  stationId: String!
+}
+
 enum SongExplorerOrderEnum {
   DATE
   RATING
@@ -83,6 +112,63 @@ enum SongExplorerOrderEnum {
   TITLE
   VIEW_COUNT
   VIDEO_COUNT
+}
+
+input SongFindAllOrderInput {
+  id: OrderEnum
+  createdAt: OrderEnum
+  updatedAt: OrderEnum
+  title: OrderEnum
+  url: OrderEnum
+  thumbnail: OrderEnum
+  duration: OrderEnum
+}
+
+input SongFindAllWhereInput {
+  stationSlug: String
+  title: String
+  url: String
+  thumbnail: String
+  duration: Int
+  status: SongStatusEnum
+}
+
+input SongFindOneWhereInput {
+  id: Int!
+}
+
+enum SongStatusEnum {
+  PENDING
+  PLAYING
+  PLAYED
+  SKIPPED
+}
+
+type SongSubscription {
+  mutation: MutationEnum!
+  entity: SongSubscriptionEntity!
+}
+
+type SongSubscriptionEntity {
+  id: Int!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  status: SongStatusEnum!
+  stationSlug: String!
+  upVoteUserIds: [Int!]!
+  downVoteUserIds: [Int!]!
+}
+
+input SongUpdateInput {
+  title: String
+  url: String
+  thumbnail: String
+  duration: Int
+  status: SongStatusEnum
 }
 
 type Station {
@@ -156,6 +242,7 @@ input StationUpdateInput {
 type Subscription {
   station(where: StationFindOneWhereInput): StationSubscription!
   user(where: UserFindOneWhereInput): UserSubscription!
+  song(where: SongFindAllWhereInput): SongSubscription!
 }
 
 type Thumbnail {

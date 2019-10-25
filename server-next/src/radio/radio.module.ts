@@ -5,10 +5,11 @@ import { FilesModule } from 'core/files/files.module';
 import { RadioGraphqlModule } from 'core/graphql/graphql.module';
 import { RequestsInterceptor } from 'core/request.interceptor';
 import { RadioTypeOrmModule } from 'core/typeorm/typeorm.module';
-import { AuthModule } from 'radio/auth/auth.module';
-import { SongsExplorerModule } from 'radio/songs-explorer/songs-explorer.module';
-import { StationModule } from 'radio/station/station.module';
+import { AuthModule } from './auth/auth.module';
 import { RadioController } from './radio.controller';
+import { SongModule } from './song/song.module';
+import { SongsExplorerModule } from './songs-explorer/songs-explorer.module';
+import { StationModule } from './station/station.module';
 import { UserModule } from './user/user.module';
 
 @Module({
@@ -20,6 +21,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     AuthModule,
     StationModule,
+    SongModule,
   ],
   providers: [
     {

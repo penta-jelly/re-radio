@@ -1,3 +1,4 @@
+import { Song } from 'radio/song/entities/song.entity';
 import { UserRole } from 'radio/user/entities/user-role.entity';
 import { User } from 'radio/user/entities/user.entity';
 import {
@@ -43,5 +44,6 @@ export class Station {
   @JoinTable()
   onlineUsers: User[];
 
-  // songs
+  @OneToMany(type => Song, song => song.station)
+  songs: Song[];
 }

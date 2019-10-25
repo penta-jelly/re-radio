@@ -24,8 +24,11 @@ async function bootstrap() {
     }
   } catch (e) {
     console.error(e);
+    await app.close();
     process.exit(1);
+  } finally {
+    await app.close();
+    process.exit(0);
   }
-  process.exit(0);
 }
 bootstrap();

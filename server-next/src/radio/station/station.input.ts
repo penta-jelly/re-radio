@@ -24,11 +24,9 @@ export class StationFindAllOrderInput {
 @InputType()
 export class StationFindAllWhereInput {
   @Field({ nullable: true })
-  @IsOptional()
   name?: string;
 
   @Field({ nullable: true })
-  @IsOptional()
   slug?: string;
 }
 

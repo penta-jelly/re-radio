@@ -15,14 +15,8 @@ export class StationSubscriptionResolver {
     @Args({ name: 'where', nullable: true, type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput,
   ) {
     for await (const payload of this.pubSub.asyncIterable<EntitySubscription<Station>>(STATION_SUBSCRIPTION)) {
-      if (Object.keys(where).length > 0) {
-        if (
-          where.name !== payload.entity.name &&
-          where.slug !== payload.entity.slug &&
-          where.id !== payload.entity.id
-        ) {
-          continue;
-        }
+      if (!Object.keys(where).every(key => where[key] === payload.entity[key])) {
+        continue;
       }
       yield { station: payload };
     }
