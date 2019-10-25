@@ -1,5 +1,5 @@
-query songExplorer($where: SongExplorerInput!){
-  songExplorer(where: $where) {
+query youtubeVideos($where: YoutubeVideoFindAllInput!){
+  youtubeVideos(where: $where) {
     id
     snippet {
       publishedAt
@@ -33,17 +33,7 @@ query songExplorer($where: SongExplorerInput!){
           height
         }
       }
-      liveBroadcastContent
       channelTitle
-      tags
-      categoryId
-      defaultAudioLanguage
-    }
-    contentDetails {
-      duration
-      dimension
-      caption
-      licensedContent
     }
   }
 }

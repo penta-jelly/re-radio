@@ -13,7 +13,7 @@ import {
   FaInfoCircle,
   FaUser,
 } from 'react-icons/fa';
-import { ProfileAvatar } from '../avatar';
+// import { ProfileAvatar } from '../avatar';
 import { useStyles } from './styles';
 
 interface Props {
@@ -37,13 +37,13 @@ export const DetailUserProfile: React.FC<Props> = ({ username, editable }) => {
         data.user && (
           <Grid container spacing={2} className={classes.container}>
             <Grid item xs={12}>
-              <ProfileAvatar
-                id="profile-image"
-                alt={data.user.username}
-                url={data.user.avatarUrl}
-                username={data.user.username}
-                editable={editable}
-              />
+              {/*<ProfileAvatar*/}
+              {/*  id="profile-image"*/}
+              {/*  alt={data.user.username}*/}
+              {/*  url={data.user.avatarUrl}*/}
+              {/*  username={data.user.username}*/}
+              {/*  editable={editable}*/}
+              {/*/>*/}
             </Grid>
             <Grid item xs={12}>
               <InfoSection id="email-container" placeholder="Email" value={data.user.email} Icon={FaEnvelope} />

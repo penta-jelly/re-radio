@@ -4,19 +4,8 @@ import { PrimaryButton } from 'components/button/primary-button';
 import { Formik, FormikActions } from 'formik';
 import { useRouter } from 'hooks/use-router';
 import { useToggle } from 'hooks/use-toggle';
-import {
-  StationTag,
-  StationTagCreateManyWithoutStationsInput,
-  StationTagsDocument,
-  StationTagsQuery,
-  StationTagsQueryVariables,
-  useCreateStationMutation,
-  useCurrentUserQuery,
-  UserRoleCreateManyWithoutStationInput,
-  UserRoleEnum,
-} from 'operations';
+import { useCreateStationMutation, useCurrentUserQuery } from 'operations';
 import React from 'react';
-import { useApolloClient } from 'react-apollo';
 import { MdRadio as StationIcon } from 'react-icons/md';
 import * as yup from 'yup';
 import { useStyles } from './styles';
@@ -38,7 +27,6 @@ interface Data {
 export const CreateStationForm: React.FC<Props> = props => {
   const classes = useStyles();
 
-  const apolloClient = useApolloClient();
   const { history } = useRouter();
   const currentUserQuery = useCurrentUserQuery();
 
@@ -54,53 +42,13 @@ export const CreateStationForm: React.FC<Props> = props => {
           formik.setStatus('Unauthorized. You need to login to perform this action.');
           return;
         }
-        const { user } = currentUserQuery.data;
         const { name, slug, description } = values;
 
-        // Start resolving tags
-        let rawTags = values.tags ? values.tags.split(' ') : [];
-        rawTags = rawTags.map(tag => tag.replace('#', ''));
-
-        const nonExistedTags: string[] = [];
-        const existedTags: Pick<StationTag, 'id' | 'name'>[] = [];
-        const failedTags: string[] = [];
-
-        await Promise.all(
-          rawTags.map(async tag => {
-            try {
-              const { data } = await apolloClient.query<StationTagsQuery, StationTagsQueryVariables>({
-                query: StationTagsDocument,
-                variables: { name: tag },
-                fetchPolicy: 'no-cache',
-              });
-              if (data.stationTags.length > 0) {
-                existedTags.push(data.stationTags[0]!);
-              } else {
-                nonExistedTags.push(tag);
-              }
-            } catch (e) {
-              failedTags.push(tag);
-            }
-          }),
-        );
-        if (failedTags.length > 0) {
-          formik.setStatus(`Can not create these tag #${failedTags.join(', #')}`);
-          return;
-        }
-        const tags: StationTagCreateManyWithoutStationsInput = {
-          create: nonExistedTags.map(name => ({ name })),
-          connect: existedTags.map(({ id }) => ({ id })),
-        };
-        // Finish resolving tags
-
-        // Start resolving user roles
-        const userRoles: UserRoleCreateManyWithoutStationInput = {
-          create: [{ role: UserRoleEnum.StationOwner, user: { connect: { id: user.id } } }],
-        };
-        // Finish resolving user roles
+        const rawTags = values.tags ? values.tags.split(' ') : [];
+        const tags = rawTags.map(tag => tag.replace('#', '')).map(name => ({ name }));
 
         await createStationMutation({
-          variables: { data: { name, slug, description, tags, userRoles } },
+          variables: { data: { name, slug, description, tags } },
           refetchQueries: props.postSubmit && props.postSubmit.refetchQueries,
         });
         if (props.postSubmit && props.postSubmit.redirectTo) {
@@ -112,7 +60,7 @@ export const CreateStationForm: React.FC<Props> = props => {
         formik.setSubmitting(false);
       }
     },
-    [props.postSubmit, history, apolloClient, createStationMutation, currentUserQuery],
+    [props.postSubmit, history, createStationMutation, currentUserQuery],
   );
 
   return (

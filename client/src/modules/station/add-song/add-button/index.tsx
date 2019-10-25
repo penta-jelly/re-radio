@@ -2,17 +2,17 @@ import { Fab } from '@material-ui/core';
 import { useRouter } from 'hooks/use-router';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import {
-  MiniSongExplorer,
   SongStatusEnum,
   useCreateSongMutation,
   useCurrentUserQuery,
-  useSongExplorerQuery,
+  useYoutubeVideoQuery,
+  YoutubeVideo,
 } from 'operations';
 import React, { useCallback } from 'react';
 import { MdSend } from 'react-icons/md';
 
 interface Props {
-  previewSong?: MiniSongExplorer;
+  previewSong?: YoutubeVideo;
   postSubmit?(): void;
 }
 
@@ -26,7 +26,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
   const currentUserQuery = useCurrentUserQuery();
   const notifyUnauthorizedUser = useUnauthorizedNotification();
 
-  const songExplorerQuery = useSongExplorerQuery({
+  const youtubeVideoQuery = useYoutubeVideoQuery({
     variables: {
       where: {
         videoId: previewSong && previewSong.id,
@@ -43,26 +43,25 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
         !currentUserQuery.loading &&
         currentUserQuery.data &&
         currentUserQuery.data.user &&
-        !songExplorerQuery.loading &&
-        songExplorerQuery.data &&
-        songExplorerQuery.data.songExplorer
+        !youtubeVideoQuery.loading &&
+        youtubeVideoQuery.data &&
+        youtubeVideoQuery.data.youtubeVideo
       ) {
         try {
           const thumbnail =
-            songExplorerQuery.data.songExplorer.snippet.thumbnails.high ||
-            songExplorerQuery.data.songExplorer.snippet.thumbnails.medium ||
-            songExplorerQuery.data.songExplorer.snippet.thumbnails.default;
+            youtubeVideoQuery.data.youtubeVideo.snippet.thumbnails.high ||
+            youtubeVideoQuery.data.youtubeVideo.snippet.thumbnails.medium ||
+            youtubeVideoQuery.data.youtubeVideo.snippet.thumbnails.default;
 
           await addSong({
             variables: {
               data: {
-                title: songExplorerQuery.data.songExplorer.snippet.title,
+                title: youtubeVideoQuery.data.youtubeVideo.snippet.title,
                 status: SongStatusEnum.Pending,
-                duration: songExplorerQuery.data.songExplorer.contentDetails.duration,
-                url: `https://www.youtube.com/watch?v=${songExplorerQuery.data.songExplorer.id}`,
+                duration: youtubeVideoQuery.data.youtubeVideo.contentDetails.duration,
+                url: `https://www.youtube.com/watch?v=${youtubeVideoQuery.data.youtubeVideo.id}`,
                 thumbnail: thumbnail.url,
-                station: { connect: { slug: match.params.slug } },
-                creator: { connect: { username: currentUserQuery.data.user.username } },
+                stationSlug: match.params.slug,
               },
             },
           });
@@ -77,8 +76,8 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
   }, [
     currentUserQuery.loading,
     currentUserQuery.data,
-    songExplorerQuery.loading,
-    songExplorerQuery.data,
+    youtubeVideoQuery.loading,
+    youtubeVideoQuery.data,
     addSong,
     match.params.slug,
     postSubmit,
@@ -90,7 +89,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
       id="submit-song-button"
       size="medium"
       color="primary"
-      disabled={!previewSong || createSongMutation.loading || songExplorerQuery.loading}
+      disabled={!previewSong || createSongMutation.loading || youtubeVideoQuery.loading}
       onClick={onSubmit}
     >
       <MdSend />

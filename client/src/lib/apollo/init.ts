@@ -34,7 +34,7 @@ export function initApollo() {
       ...context,
       headers: {
         ...context.headers,
-        Authorization: token ? `Bearer ${token}` : '',
+        Authorization: token,
       },
     }));
 

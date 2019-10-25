@@ -1,5 +1,5 @@
 {
-  "name": "re-radio-server",
+  "name": "re-radio-server-next",
   "private": true,
   "scripts": {
     "preinstall": "cp -n .env.example .env",
@@ -8,15 +8,14 @@
     "format": "prettier --write \"src/**/*.ts\" && eslint --fix --ext .ts src/",
     "start": "run-p start:**",
     "start:graphql": "ts-node src/radio.ts",
-    "start:real-time": "ts-node src/real-time-radio.ts",
     "dev": "run-p dev:**",
     "dev:graphql": "ts-node-dev --no-deps --respawn --dedupe src/radio.ts",
-    "dev:real-time": "ts-node-dev --no-deps --respawn --dedupe src/real-time-radio.ts",
-    "prisma": "ts-node src/prisma.ts",
-    "graphql:get-schema": "graphql get-schema --project database",
-    "graphql:codegen": "graphql codegen --project database",
+    "db": "docker-compose -f ./docker-compose.db.yml --project-directory . up",
+    "typeorm": "ts-node src/typeorm-cli.ts --config src/typeorm-options.ts",
+    "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "worker": "ts-node src/workers.ts",
-    "worker:seed": "npm run worker -- seed"
+    "seed": "npm run worker -- seed",
+    "seed:reset": "npm run worker -- seed:reset"
   },
   "dependencies": {
     "@nestjs/common": "6.7.1",
@@ -25,6 +24,7 @@
     "@nestjs/jwt": "6.1.1",
     "@nestjs/passport": "6.1.0",
     "@nestjs/platform-express": "6.7.1",
+    "@nestjs/typeorm": "6.2.0",
     "apollo-server-express": "2.9.3",
     "bcrypt-nodejs": "0.0.3",
     "class-transformer": "0.2.3",
@@ -32,17 +32,18 @@
     "dotenv": "8.1.0",
     "get-video-id": "3.1.4",
     "graphql": "14.5.7",
-    "graphql-cli": "3.0.14",
-    "graphql-tools": "4.0.5",
+    "graphql-redis-subscriptions": "2.1.1",
+    "graphql-subscriptions": "1.1.0",
     "moment": "2.24.0",
     "node-fetch": "2.6.0",
     "passport": "0.4.0",
     "passport-http-bearer": "1.0.1",
     "passport-jwt": "4.0.0",
-    "prisma": "1.34.8",
-    "prisma-binding": "2.3.16",
+    "pg": "7.12.1",
     "reflect-metadata": "0.1.13",
-    "rxjs": "6.5.3"
+    "rxjs": "6.5.3",
+    "type-graphql": "0.17.5",
+    "typeorm": "0.2.19"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.30",

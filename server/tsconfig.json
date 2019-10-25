@@ -15,7 +15,9 @@
     "outDir": "./dist",
     "lib": ["es2018", "esnext"],
     "incremental": true,
-    "baseUrl": "src"
+    "baseUrl": "src",
+    "strict": true,
+    "strictPropertyInitialization": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

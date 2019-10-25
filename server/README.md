@@ -2,38 +2,45 @@
 
 ## Requirement
 
-* Docker: 18.x
-* Docker Compose: 1.x
 * NodeJS: 10.x
 * Npm: 6.x
-
-* Allow docker-users group to have Full Control access to project files because there is a need of using mounted driver for development.
+* Docker: 18.x (Optional)
+* Docker Compose: 1.x (Optional)
 
 ## Development guideline
 
-### Requirement
+### Database
 
-* NodeJS: 10.x
-* Npm: 6.x
+You can either use your own database instance (by configuring environment variable, see `.env.example` file) or using dedicated database container specified in `docker-compose.db.yml` file. If you want to use local development database, run: 
+
+```sh
+npm run db
+```
+
+It will include a Postgres database instance (at port `5432` or `$DB_PORT`) and PG Admin 4 instance (at port `2996` or `$PGADMIN_PORT`). To config the PG Admin 4 instance, follow these steps:
+
+* Access port `2996` or `$PGADMIN_PORT` on your local machine then login with:
+    
+    ```
+    username: admin@reradio.com (or $PGADMIN_DEFAULT_EMAIL)
+    password: 123456 (or $PGADMIN_DEFAULT_PASSWORD)
+    ```
+  
+* Create a server with these **Connection** properties:
+
+    ```
+    Host name/address: re-radio_postgres
+    Port: 5432
+    Username: reradio (or $DB_USER)
+    Password: reradio (or $DB_PASSWORD)
+    ```
+
+**Note**: any value that contains `or $RANDOM_STRING` can be configured via environment variables. see `.env.example` file for more information.
 
 ### Start development server
+
+* Start development server
 
 ```sh
 npm run dev
 ```
-
-#### Deploy changed data model
-
-```sh
-npm run prisma -- deploy
-```
-
-Sometimes, you will need to force the database to be updated with whole new structure (refer to Prisma [data model documentation](https://www.prisma.io/docs/datamodel-and-migrations/datamodel-MONGO-knun/) for more information). If so, run command with `-- --force` to override the whole structure, which will cause data loss on database.
-
-#### Seed initial data
-
-```sh
-npm run prisma -- seed
-```
-
-This script by default is executed after running `prisma -- deploy` command.

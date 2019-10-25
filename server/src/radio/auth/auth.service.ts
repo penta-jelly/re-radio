@@ -7,74 +7,56 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from 'prisma/prisma.binding';
-import { PrismaService } from 'prisma/prisma.service';
-import { UsersService } from '../users/user.service';
-import { LoginDTO } from './dto/LoginInput.dto';
-import { RegisterInputDTO } from './dto/RegisterInput.dto';
+import { LoginInput, RegisterInput } from 'radio/auth/auth.input';
+import { User } from 'radio/user/entities/user.entity';
+import { UserService } from 'radio/user/services/user.service';
 import { JwtPayload } from './interfaces/JwtPayload.interface';
-import { LoginOrRegisterReturnType } from './interfaces/LoginOrRegisterReturnType.interface';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly jwtService: JwtService,
-    private readonly prisma: PrismaService,
-    @Inject(forwardRef(() => UsersService)) private readonly usersService: UsersService,
+    @Inject(forwardRef(() => UserService)) private readonly userService: UserService,
   ) {}
 
-  async createUser(args: RegisterInputDTO) {
-    let username = args.data.username;
+  async createUser(data: RegisterInput): Promise<User> {
+    let username = data.username;
     // Generate username based on email address
-    if (args.data.email && !args.data.username) {
-      username = await this.generateUsername(args.data.email);
+    if (data.email && !data.username) {
+      username = await this.generateUsername(data.email);
     }
-    return this.usersService.createUser({ data: { ...args.data, username } });
+    return this.userService.create({ ...data, username });
   }
 
-  async verifyUser(loginDTO: LoginDTO) {
+  async verifyUser(loginDTO: LoginInput): Promise<User> {
     const { username, email, password: rawPassword } = loginDTO;
     if (!username && !email) throw new BadRequestException();
-    const user = await this.prisma.query.user({ where: { username, email } });
-    if (!user || !this.usersService.isValidPassword(rawPassword, user.password)) {
+    const condition = username ? { username } : { email };
+    const user = await this.userService.findOneOrFail({ where: condition });
+    if (!this.userService.isValidPassword(rawPassword, user.password)) {
       throw new UnauthorizedException();
     }
     return user;
   }
 
-  async createToken(user: User): Promise<LoginOrRegisterReturnType> {
+  async createToken(user: User): Promise<string> {
     const { username, email, password } = user;
     const jwtPayload: JwtPayload = { username, email, password };
-    const token = this.jwtService.sign(jwtPayload);
-    return {
-      token,
-    };
+    return this.jwtService.sign(jwtPayload);
   }
 
   async validateUserFromJWTPayload(payload: JwtPayload): Promise<User> {
     const { username, email, password } = payload;
-    let users: User[];
-    try {
-      users = await this.prisma.query.users({ where: { username, email } });
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
-    if (users.length === 0) {
-      throw new UnauthorizedException('User not found');
-    }
-    if (users.length > 1) {
-      throw new InternalServerErrorException('JWT is broken due to duplicated query results for 1 unique user');
-    }
-    const [user] = users;
-    if (user.password !== password) throw new UnauthorizedException();
+    const user = await this.userService.findOneOrFail({ where: { username, email } });
+    if (this.userService.isValidPassword(user.password, password)) throw new UnauthorizedException();
     return user;
   }
 
   private async generateUsername(email: string) {
     let username: string = email.split('@')[0];
     if (!username) throw new InternalServerErrorException(`Can not generate user for email: ${email}`);
-    let existedUser = await this.prisma.query.user({ where: { username } });
-    while (existedUser) {
+    let numberOfExistedUsers = await this.userService.count({ where: { username } });
+    while (numberOfExistedUsers > 0) {
       if (Number(username.substr(-1))) {
         // If username ending with a number character,
         // increased the value by 1
@@ -85,7 +67,7 @@ export class AuthService {
       } else {
         username += '1';
       }
-      existedUser = await this.prisma.query.user({ where: { username } });
+      numberOfExistedUsers = await this.userService.count({ where: { username } });
     }
     return username;
   }

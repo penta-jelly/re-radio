@@ -2,16 +2,16 @@ import { CircularProgress, Grid, MenuItem, Paper, Typography } from '@material-u
 import { InputBaseProps } from '@material-ui/core/InputBase';
 import { ReSearch } from 'components/input/re-search';
 import Downshift, { Actions, DownshiftState, PropGetters, StateChangeOptions } from 'downshift';
-import { MiniSongExplorer, SongExplorersQuery } from 'operations';
+import { YoutubeVideo, YoutubeVideosQuery } from 'operations';
 import React, { useCallback, useState } from 'react';
 import { AddButton } from '../add-button';
 import { Preview } from '../preview';
 import { useStyles } from './styles';
 
-type DropdownItem = SongExplorersQuery['songExplorers'][0];
+type DropdownItem = YoutubeVideosQuery['youtubeVideos'][0];
 
 export interface AutocompleteProps {
-  items: SongExplorersQuery['songExplorers'];
+  items: YoutubeVideosQuery['youtubeVideos'];
   label?: string;
   placeholder?: string;
   loading?: boolean;
@@ -24,7 +24,7 @@ type AutocompleteWithDownshiftType = PropGetters<DropdownItem> & Actions<Dropdow
 export const Autocomplete: React.FC<AutocompleteProps> = props => {
   const classes = useStyles();
 
-  const [previewSong, setPreviewSong] = useState<MiniSongExplorer>();
+  const [previewSong, setPreviewSong] = useState<YoutubeVideo>();
 
   const renderSuggestion = useCallback(
     ({

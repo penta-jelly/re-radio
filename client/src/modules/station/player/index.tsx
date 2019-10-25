@@ -24,14 +24,14 @@ export const Player: React.FC = () => {
       if (!data) return;
       const { onPlayingSongChanged } = data;
       if (!onPlayingSongChanged) return;
-      const { node } = onPlayingSongChanged;
-      if (!node) return;
+      const { entity } = onPlayingSongChanged;
+      if (!entity) return;
       updateQuery(prev => {
-        // Remove the updated node from the current list first, including played and skipped node
-        let playingSongs = prev.playingSongs.filter(song => song!.id !== node.id);
-        // Then only add the updated node if the status is playing. Played/skipped status will be ignore.
-        if (node.status === SongStatusEnum.Playing) {
-          playingSongs = [...playingSongs, node];
+        // Remove the updated entity from the current list first, including played and skipped entity
+        let playingSongs = prev.playingSongs.filter(song => song!.id !== entity.id);
+        // Then only add the updated entity if the status is playing. Played/skipped status will be ignore.
+        if (entity.status === SongStatusEnum.Playing) {
+          playingSongs = [...playingSongs, entity];
         }
         return { ...prev, playingSongs };
       });

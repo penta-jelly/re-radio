@@ -5,7 +5,7 @@ import { PageLoader } from 'components/page-loader';
 import { Layout } from 'containers/layout';
 import { useRouter } from 'hooks/use-router';
 import { CreateStationForm, StationsList } from 'modules';
-import { StationOrderByInput, StationsDocument, StationsQueryVariables, useStationsQuery } from 'operations';
+import { OrderEnum, StationsDocument, StationsQueryVariables, useStationsQuery } from 'operations';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdRadio as StationIcon } from 'react-icons/md';
@@ -16,14 +16,12 @@ const HomePage: React.FunctionComponent<{}> = () => {
   const classes = useStyles();
   const { t } = useTranslation(['stations', 'common']);
 
-  const queryVariables = React.useMemo<StationsQueryVariables>(
-    () => ({
-      first: 25,
-      skip: 0,
-      orderBy: StationOrderByInput.CreatedAtDesc,
-    }),
-    [],
-  );
+  const queryVariables = React.useMemo<StationsQueryVariables>(() => {
+    return {
+      pagination: { take: 25 },
+      order: { createdAt: OrderEnum.Desc },
+    };
+  }, []);
 
   const { loading, error, data } = useStationsQuery({
     variables: queryVariables,

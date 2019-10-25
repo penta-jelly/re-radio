@@ -84,6 +84,7 @@ type Song {
   id: Int!
   createdAt: Timestamp!
   updatedAt: Timestamp!
+  startedAt: Timestamp
   title: String!
   url: String!
   thumbnail: String!
@@ -102,7 +103,7 @@ input SongCreateInput {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum
-  stationId: String!
+  stationSlug: String!
 }
 
 enum SongExplorerOrderEnum {
@@ -153,6 +154,7 @@ type SongSubscriptionEntity {
   id: Int!
   createdAt: Timestamp!
   updatedAt: Timestamp!
+  startedAt: Timestamp
   title: String!
   url: String!
   thumbnail: String!

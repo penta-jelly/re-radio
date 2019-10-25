@@ -2,22 +2,18 @@ import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { ValidationError } from 'class-validator';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
-import { GraphQLUpload } from 'graphql-upload';
 
 @Injectable()
 export class GraphqlOptions implements GqlOptionsFactory {
   createGqlOptions(): GqlModuleOptions {
     return {
-      typePaths: ['**/*.graphql'],
       path: '/graphql',
+      autoSchemaFile: 'schema.graphql',
       installSubscriptionHandlers: true,
-      resolverValidationOptions: {
-        requireResolversForResolveType: false,
+      buildSchemaOptions: { dateScalarMode: 'timestamp' },
+      context: ({ req, connection }) => {
+        return connection ? { req: { headers: connection.context } } : { req };
       },
-      resolvers: {
-        Upload: GraphQLUpload,
-      },
-      context: context => context,
       formatError: this.formatError.bind(this),
     };
   }
@@ -30,29 +26,14 @@ export class GraphqlOptions implements GqlOptionsFactory {
         ...error,
         message: this.formatValidationError(error.message.message),
       };
-    } else if (this.isHttpExceptionError(error.message)) {
-      formattedError = {
-        ...error,
-        message: this.formatHttpExceptionError(error.message),
-      };
     }
 
     return formattedError;
   }
 
-  private formatHttpExceptionError(error: { message?: string; error?: string }): string {
-    return error.message || error.error;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private isHttpExceptionError(object: any): object is { message?: string; error?: string } {
-    if (object && (object.message || object.error)) return true;
-    return false;
-  }
-
   private formatValidationError(errors: ValidationError[]): string {
     let message = 'Unknown validation message';
-    let children = errors[0].children;
+    let children = errors;
     while (children[0].children.length > 0) {
       children = children[0].children;
     }

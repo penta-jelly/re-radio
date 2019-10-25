@@ -1,5 +1,5 @@
-query UserProfile($where: UserWhereUniqueInput!) {
-	user(where: $where) {
+query UserProfile($where: UserFindOneWhereInput!) {
+  user(where: $where) {
     id
     email
     username
@@ -11,7 +11,8 @@ query UserProfile($where: UserWhereUniqueInput!) {
     country
     googleId
     facebookId
-    roles(where: { role_in: [STATION_OWNER, STATION_ADMIN] }) {
+    roles {
+      role
       station {
         name
         slug

@@ -4,10 +4,10 @@ import { GraphQLResolveInfo } from 'graphql';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-const COLOR_RED = '\x1b[31m';
-const COLOR_GREEN = '\x1b[32m';
-const COLOR_YELLOW = '\x1b[33m';
-const COLOR_RESET = '\x1b[0m';
+export const COLOR_RED = '\x1b[31m';
+export const COLOR_GREEN = '\x1b[32m';
+export const COLOR_YELLOW = '\x1b[33m';
+export const COLOR_RESET = '\x1b[0m';
 
 @Injectable()
 export class RequestsInterceptor implements NestInterceptor {
@@ -15,10 +15,9 @@ export class RequestsInterceptor implements NestInterceptor {
 
   intercept(context: ExecutionContext, next: CallHandler<unknown>): Observable<unknown> {
     if (context.getArgs().length === 4) {
-      // GraphQL request
       const ctx = GqlExecutionContext.create(context);
       const info = ctx.getInfo<GraphQLResolveInfo>();
-      const operation = info.operation.operation;
+      const operation = info.operation.operation.toUpperCase();
       const before = Date.now();
       const rawArgs = JSON.stringify(ctx.getArgs());
       return next
@@ -26,7 +25,7 @@ export class RequestsInterceptor implements NestInterceptor {
         .pipe(
           tap(() =>
             this.logger.log(
-              `[GRAPHQL] ${operation} ${info.fieldName} ${this.colorizeDiffTime(before)} [Args: ${rawArgs}]`,
+              `${COLOR_RESET}${operation} ${info.fieldName} ${this.colorizeDiffTime(before)} [Args: ${rawArgs}]`,
             ),
           ),
         );

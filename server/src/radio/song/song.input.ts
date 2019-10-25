@@ -74,7 +74,7 @@ export class SongCreateInput {
   status?: SongStatusEnum;
 
   @Field()
-  stationId: string;
+  stationSlug: string;
 }
 
 @InputType()

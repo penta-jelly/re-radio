@@ -21,8 +21,10 @@ export const StationItem: React.FC<Props> = ({ data, className }) => {
   }, [data]);
 
   const [thumbnail, setThumbnail] = React.useState<string | null>(() => {
-    const playingSong = data.songs && data.songs[0];
-    return playingSong && playingSong.thumbnail;
+    // TODO: revive thumbnail
+    // const playingSong = data.songs && data.songs[0];
+    // return playingSong && playingSong.thumbnail;
+    return '';
   });
 
   useOnStationPlayingSongChangedSubscription({
@@ -31,10 +33,10 @@ export const StationItem: React.FC<Props> = ({ data, className }) => {
       if (!data) return;
       const { onPlayingSongChanged } = data;
       if (!onPlayingSongChanged) return;
-      const { node } = onPlayingSongChanged;
-      if (!node) return;
-      if (node.status === SongStatusEnum.Playing) {
-        setThumbnail(node.thumbnail);
+      const { entity } = onPlayingSongChanged;
+      if (!entity) return;
+      if (entity.status === SongStatusEnum.Playing) {
+        setThumbnail(entity.thumbnail);
       } else {
         setThumbnail(null);
       }

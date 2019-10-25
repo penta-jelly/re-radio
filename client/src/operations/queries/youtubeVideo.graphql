@@ -1,5 +1,5 @@
-query songExplorers($where: SongExplorersInput!){
-  songExplorers(where: $where) {
+query youtubeVideo($where: YoutubeVideoFindOneInput!){
+  youtubeVideo(where: $where) {
     id
     snippet {
       publishedAt
@@ -34,6 +34,11 @@ query songExplorers($where: SongExplorersInput!){
         }
       }
       channelTitle
+    }
+    contentDetails {
+      duration
+      dimension
+      caption
     }
   }
 }

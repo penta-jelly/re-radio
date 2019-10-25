@@ -14,6 +14,9 @@ export class SongDTO {
   @Field()
   updatedAt: Date;
 
+  @Field({ nullable: true })
+  startedAt?: Date;
+
   @Field()
   title: string;
 

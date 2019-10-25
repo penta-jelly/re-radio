@@ -13,6 +13,9 @@ export class SongSubscriptionDTOEntity {
   @Field()
   updatedAt: Date;
 
+  @Field({ nullable: true })
+  startedAt?: Date;
+
   @Field()
   title: string;
 
