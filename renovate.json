@@ -5,15 +5,11 @@
   "lockFileMaintenance": {
     "enabled": true
   },
-  "schedule": ["before 6am on Monday", "after 10pm on Sunday"],
+  "schedule": ["before 9am", "after 1am"],
+  "timezone": "Asia/Ho_Chi_Minh",
   "automerge": true,
   "automergeType": "branch",
   "packageRules": [
-    {
-      "packageNames": ["prismagraphql/prisma", "prisma"],
-      "groupName": "prisma",
-      "automerge": false
-    },
     {
       "packagePatterns": ["^eslint", "^prettier"],
       "groupName": "prettier and eslint",
