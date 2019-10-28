@@ -1,4 +1,4 @@
-query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: StationFindAllWhereInput) {
+query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: [StationFindAllWhereInput]) {
   stations(pagination: $pagination, order: $order, where: $where) {
     id
     name
@@ -11,18 +11,28 @@ query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $
       role
       user { ...UserBaseInformation }
     }
+    playingSong {
+      id
+      title
+      thumbnail
+      startedAt
+    }
   }
 }
 
-subscription OnStationPlayingSongChanged($stationSlug: String!) {
-  onPlayingSongChanged: song(
-    where: { stationSlug: $stationSlug }
-  ) {
+subscription OnStationChanged {
+  onStationChanged: station {
+    mutation
     entity {
-      title
-      thumbnail
-      duration
-      status
+      id
+      name
+      slug
+      playingSong {
+        id
+        title
+        thumbnail
+        startedAt
+      }
     }
   }
 }

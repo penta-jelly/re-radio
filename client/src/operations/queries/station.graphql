@@ -11,5 +11,11 @@ query Station($slug: String!) {
       role
       user { ...UserBaseInformation }
     }
+    playingSong {
+      id
+      title
+      thumbnail
+      startedAt
+    }
   }
 }

@@ -12,11 +12,12 @@ async function bootstrap() {
 
   const args = process.argv.slice(2);
 
+  const radioServerUrl = `http://localhost:${app.get(ConfigService).get(EnvVariables.RADIO_SERVER_PORT)}/status`;
+  logger.log(`Wait until URL ${radioServerUrl} response.`);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  await require('wait-on')({
-    resources: [`http://localhost:${app.get(ConfigService).get(EnvVariables.RADIO_SERVER_PORT)}/status`],
-    timeout: 60000,
-  });
+  await require('wait-on')({ resources: [radioServerUrl], timeout: 120000 });
+  logger.log(`URL ${radioServerUrl} responded.`);
+
   try {
     if (args.includes('seed')) {
       (await app.get(DevSeederService).shouldSeed()) && (await app.get(DevSeederService).seed());

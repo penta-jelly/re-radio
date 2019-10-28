@@ -35,7 +35,8 @@ export class SongResolver {
   @Query(returns => [SongDTO])
   async songs(
     @Args({ name: 'pagination', nullable: true, type: () => PaginationInput }) pagination: PaginationInput,
-    @Args({ name: 'where', nullable: true, type: () => SongFindAllWhereInput }) where: SongFindAllWhereInput,
+    @Args({ name: 'where', nullable: 'itemsAndList', type: () => [SongFindAllWhereInput] })
+    where: SongFindAllWhereInput[],
     @Args({ name: 'order', nullable: true, type: () => SongFindAllOrderInput }) order: SongFindAllOrderInput,
   ) {
     return this.songService.find({ ...pagination, where, order });

@@ -240,9 +240,9 @@ export class DevSeederService {
         const creator = await this.userRepository.findOne({ where: { username: data.creator.username } });
         const station = await this.stationRepository.findOne({ where: { slug: data.station.slug } });
         if (creator && station) {
-          const { title, url, duration, thumbnail } = data;
+          const { title, url, thumbnail } = data;
           const song = await this.songRepository.findOne({
-            where: { creator: { id: creator.id }, station: { id: station.id }, title, url, duration, thumbnail },
+            where: { creator: { id: creator.id }, station: { id: station.id }, title, url, thumbnail },
           });
           song && (await this.songRepository.remove(song));
         }
@@ -253,30 +253,30 @@ export class DevSeederService {
   private getSongFixtures(): DeepPartial<Song & { creator: User; station: Station }>[] {
     return this.getStationFixtures().reduce<DeepPartial<Song & { creator: User; station: Station }>[]>(
       (songs, station) => {
-        return [
-          ...songs,
+        const songsByStation = [
           {
             title: 'Westlife - My Love (Official Music Video)',
             url: 'https://www.youtube.com/watch?v=ulOb9gIGGd0',
-            duration: 240000,
+            duration: 10000,
             thumbnail: 'https://i.ytimg.com/vi/ulOb9gIGGd0/hqdefault.jpg',
             station: { slug: station.slug },
           },
           {
             title: 'TWICE "Heart Shaker" M/V',
             url: 'https://www.youtube.com/watch?v=rRzxEiBLQCA',
-            duration: 195000,
+            duration: 10000,
             thumbnail: 'https://i.ytimg.com/vi/rRzxEiBLQCA/hqdefault.jpg',
             station: { slug: station.slug },
           },
           {
             title: 'Zedd - I Want You To Know (Official Music Video) ft. Selena Gomez',
             url: 'https://www.youtube.com/watch?v=X46t8ZFqUB4',
-            duration: 225000,
+            duration: 10000,
             thumbnail: 'https://i.ytimg.com/vi/X46t8ZFqUB4/hqdefault.jpg',
             station: { slug: station.slug },
           },
         ];
+        return [...songs, ...songsByStation, ...songsByStation, ...songsByStation];
       },
       [],
     );

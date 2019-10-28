@@ -5,8 +5,18 @@ import { PageLoader } from 'components/page-loader';
 import { Layout } from 'containers/layout';
 import { useRouter } from 'hooks/use-router';
 import { CreateStationForm, StationsList } from 'modules';
-import { OrderEnum, StationsDocument, StationsQueryVariables, useStationsQuery } from 'operations';
+import {
+  MutationEnum,
+  OrderEnum,
+  StationDocument,
+  StationQuery,
+  StationsDocument,
+  StationsQueryVariables,
+  useOnStationChangedSubscription,
+  useStationsQuery,
+} from 'operations';
 import React from 'react';
+import { useApolloClient } from 'react-apollo';
 import { useTranslation } from 'react-i18next';
 import { MdRadio as StationIcon } from 'react-icons/md';
 import { Route } from 'react-router-dom';
@@ -23,10 +33,41 @@ const HomePage: React.FunctionComponent<{}> = () => {
     };
   }, []);
 
-  const { loading, error, data } = useStationsQuery({
+  const { loading, error, data, updateQuery } = useStationsQuery({
     variables: queryVariables,
     fetchPolicy: 'network-only',
     pollInterval: 1800000, // 3 minutes
+  });
+
+  const client = useApolloClient();
+
+  useOnStationChangedSubscription({
+    onSubscriptionData: async ({ subscriptionData: { data } }) => {
+      if (!data) return;
+      const { onStationChanged } = data;
+      if (!onStationChanged) return;
+      const { entity, mutation } = onStationChanged;
+
+      if (mutation === MutationEnum.Updated) {
+        updateQuery(prev => ({
+          ...prev,
+          stations: prev.stations.map(station => {
+            const { __typename, ...entityWithoutTypename } = entity;
+            if (station.slug === entity.slug) return { ...station, ...entityWithoutTypename };
+            return station;
+          }),
+        }));
+      }
+      if (mutation === MutationEnum.Deleted) {
+        updateQuery(prev => ({ ...prev, stations: prev.stations.filter(station => station.slug !== entity.slug) }));
+      }
+      if (mutation === MutationEnum.Created) {
+        const {
+          data: { station },
+        } = await client.query<StationQuery>({ query: StationDocument, variables: { slug: entity.slug } });
+        updateQuery(prev => ({ ...prev, stations: [...prev.stations, station] }));
+      }
+    },
   });
 
   const { match, history } = useRouter();

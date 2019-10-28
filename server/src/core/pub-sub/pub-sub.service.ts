@@ -34,6 +34,10 @@ export class PubSub {
     };
   }
 
+  asyncIterator<T>(triggers: string | string[], options?: object): AsyncIterator<T> {
+    return this.instance.asyncIterator<T>(triggers, options);
+  }
+
   private dateReviver(key, value) {
     const isISO8601Z = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}(?:\.\d*)?)Z$/;
     if (typeof value === 'string' && isISO8601Z.test(value)) {

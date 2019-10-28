@@ -12,12 +12,12 @@ export class RealTimeStationsWorkerService {
   ) {}
 
   async scanAllStationsOnInitialization() {
-    const stations = await this.realTimeStationService.findAllAvailableStations(`{ id }`);
+    const stations = await this.realTimeStationService.findAllAvailableStations();
     await Promise.all(
       stations.map(async station => {
-        if (await this.realTimeStationService.isStationReadyToPlayNextSong(station.id)) {
-          const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(station.id);
-          await this.realTimeSongService.updateSongStatusToPlaying(nextPlayingSong.id);
+        if (await this.realTimeStationService.isStationReadyToPlayNextSong(station.slug)) {
+          const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(station.slug);
+          nextPlayingSong && (await this.realTimeSongService.updateSongStatusToPlaying(nextPlayingSong.id));
         }
       }),
     );

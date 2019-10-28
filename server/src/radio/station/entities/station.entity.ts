@@ -5,9 +5,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -46,4 +48,8 @@ export class Station {
 
   @OneToMany(type => Song, song => song.station)
   songs: Song[];
+
+  @OneToOne(type => Song, { nullable: true, onDelete: 'SET NULL' })
+  @JoinColumn()
+  playingSong: Song | null;
 }

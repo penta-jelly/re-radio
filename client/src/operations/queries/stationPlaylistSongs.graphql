@@ -1,5 +1,10 @@
 query StationPlayist($stationSlug: String!) {
-  playlist: songs(where: { stationSlug: $stationSlug, status: PENDING }) {
+  playlist: songs(
+    where: [
+      { stationSlug: $stationSlug, status: PENDING }
+      { stationSlug: $stationSlug, status: PLAYING }
+    ]
+  ) {
     id
     title
     url
@@ -13,9 +18,7 @@ query StationPlayist($stationSlug: String!) {
 }
 
 subscription OnStationPlalistChanged($stationSlug: String!) {
-  onPlaylistSongChanged: song(
-    where: { stationSlug: $stationSlug }
-  ) {
+  onPlaylistSongChanged: song(where: { stationSlug: $stationSlug }) {
     entity {
       id
       title

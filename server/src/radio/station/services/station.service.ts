@@ -31,6 +31,10 @@ export class StationService {
     return this.stationRepository.findAndCount(options);
   }
 
+  async findOne(options?: FindOneOptions<Station>): Promise<Station | undefined> {
+    return this.stationRepository.findOne(options);
+  }
+
   async findOneOrFail(options: FindOneOptions<Station>): Promise<Station> {
     return this.stationRepository.findOneOrFail(options);
   }

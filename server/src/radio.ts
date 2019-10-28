@@ -11,6 +11,6 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(RadioModule);
   const port = app.get(ConfigService).get(EnvVariables.RADIO_SERVER_PORT);
   await app.listen(port);
-  logger.log(`Radio GraphQL Service successfully started at port ${port}.`);
+  logger.log(`Radio GraphQL service successfully started at port ${port}.`);
 }
 bootstrap();

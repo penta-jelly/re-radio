@@ -1,3 +1,4 @@
+import { SongDTO } from 'radio/song/dto/song.dto';
 import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
 import { UserDTO } from 'radio/user/dto/user.dto';
 import { Field, Int, ObjectType } from 'type-graphql';
@@ -22,6 +23,9 @@ export class StationDTO {
 
   @Field({ nullable: true })
   description?: string;
+
+  @Field(type => SongDTO, { nullable: true })
+  playingSong?: SongDTO;
 
   @Field(type => [UserRoleDTO])
   userRoles: UserRoleDTO[];

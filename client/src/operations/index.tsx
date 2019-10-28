@@ -127,7 +127,7 @@ export type Query = {
 
 export type QueryStationsArgs = {
   order?: Maybe<StationFindAllOrderInput>,
-  where?: Maybe<StationFindAllWhereInput>,
+  where?: Maybe<ReadonlyArray<Maybe<StationFindAllWhereInput>>>,
   pagination?: Maybe<PaginationInput>
 };
 
@@ -151,7 +151,7 @@ export type QueryUserArgs = {
 
 export type QuerySongsArgs = {
   order?: Maybe<SongFindAllOrderInput>,
-  where?: Maybe<SongFindAllWhereInput>,
+  where?: Maybe<ReadonlyArray<Maybe<SongFindAllWhereInput>>>,
   pagination?: Maybe<PaginationInput>
 };
 
@@ -290,6 +290,7 @@ export type Station = {
   readonly name: Scalars['String'],
   readonly slug: Scalars['String'],
   readonly description?: Maybe<Scalars['String']>,
+  readonly playingSong?: Maybe<Song>,
   readonly userRoles: ReadonlyArray<UserRole>,
   readonly tags: ReadonlyArray<StationTag>,
   readonly onlineUsers: ReadonlyArray<User>,
@@ -335,6 +336,7 @@ export type StationSubscriptionEntity = {
   readonly name: Scalars['String'],
   readonly slug: Scalars['String'],
   readonly description?: Maybe<Scalars['String']>,
+  readonly playingSong?: Maybe<Song>,
 };
 
 export type StationTag = {
@@ -609,6 +611,9 @@ export type StationQuery = (
       & { readonly user: { readonly __typename?: 'User' }
         & UserBaseInformationFragment
        }
+    )>, readonly playingSong: Maybe<(
+      { readonly __typename?: 'Song' }
+      & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
     )> }
   ) }
 );
@@ -674,7 +679,7 @@ export type OnStationPlalistChangedSubscription = (
 export type StationsQueryVariables = {
   pagination?: Maybe<PaginationInput>,
   order?: Maybe<StationFindAllOrderInput>,
-  where?: Maybe<StationFindAllWhereInput>
+  where?: Maybe<ReadonlyArray<Maybe<StationFindAllWhereInput>>>
 };
 
 
@@ -692,22 +697,28 @@ export type StationsQuery = (
       & { readonly user: { readonly __typename?: 'User' }
         & UserBaseInformationFragment
        }
+    )>, readonly playingSong: Maybe<(
+      { readonly __typename?: 'Song' }
+      & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
     )> }
   )> }
 );
 
-export type OnStationPlayingSongChangedSubscriptionVariables = {
-  stationSlug: Scalars['String']
-};
+export type OnStationChangedSubscriptionVariables = {};
 
 
-export type OnStationPlayingSongChangedSubscription = (
+export type OnStationChangedSubscription = (
   { readonly __typename?: 'Subscription' }
-  & { readonly onPlayingSongChanged: (
-    { readonly __typename?: 'SongSubscription' }
+  & { readonly onStationChanged: (
+    { readonly __typename?: 'StationSubscription' }
+    & Pick<StationSubscription, 'mutation'>
     & { readonly entity: (
-      { readonly __typename?: 'SongSubscriptionEntity' }
-      & Pick<SongSubscriptionEntity, 'title' | 'thumbnail' | 'duration' | 'status'>
+      { readonly __typename?: 'StationSubscriptionEntity' }
+      & Pick<StationSubscriptionEntity, 'id' | 'name' | 'slug'>
+      & { readonly playingSong: Maybe<(
+        { readonly __typename?: 'Song' }
+        & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
+      )> }
     ) }
   ) }
 );
@@ -916,6 +927,12 @@ export const StationDocument = gql`
         ...UserBaseInformation
       }
     }
+    playingSong {
+      id
+      title
+      thumbnail
+      startedAt
+    }
   }
 }
     ${UserBaseInformationFragmentDoc}`;
@@ -979,7 +996,7 @@ export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof use
 export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
 export const StationPlayistDocument = gql`
     query StationPlayist($stationSlug: String!) {
-  playlist: songs(where: {stationSlug: $stationSlug, status: PENDING}) {
+  playlist: songs(where: [{stationSlug: $stationSlug, status: PENDING}, {stationSlug: $stationSlug, status: PLAYING}]) {
     id
     title
     url
@@ -1026,7 +1043,7 @@ export const OnStationPlalistChangedDocument = gql`
 export type OnStationPlalistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlalistChangedSubscription>;
 export type OnStationPlalistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlalistChangedSubscription>;
 export const StationsDocument = gql`
-    query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: StationFindAllWhereInput) {
+    query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: [StationFindAllWhereInput]) {
   stations(pagination: $pagination, order: $order, where: $where) {
     id
     name
@@ -1041,6 +1058,12 @@ export const StationsDocument = gql`
         ...UserBaseInformation
       }
     }
+    playingSong {
+      id
+      title
+      thumbnail
+      startedAt
+    }
   }
 }
     ${UserBaseInformationFragmentDoc}`;
@@ -1054,24 +1077,30 @@ export const StationsDocument = gql`
 
 export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
 export type StationsQueryResult = ApolloReactCommon.QueryResult<StationsQuery, StationsQueryVariables>;
-export const OnStationPlayingSongChangedDocument = gql`
-    subscription OnStationPlayingSongChanged($stationSlug: String!) {
-  onPlayingSongChanged: song(where: {stationSlug: $stationSlug}) {
+export const OnStationChangedDocument = gql`
+    subscription OnStationChanged {
+  onStationChanged: station {
+    mutation
     entity {
-      title
-      thumbnail
-      duration
-      status
+      id
+      name
+      slug
+      playingSong {
+        id
+        title
+        thumbnail
+        startedAt
+      }
     }
   }
 }
     `;
 
-    export function useOnStationPlayingSongChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables>) {
-      return ApolloReactHooks.useSubscription<OnStationPlayingSongChangedSubscription, OnStationPlayingSongChangedSubscriptionVariables>(OnStationPlayingSongChangedDocument, baseOptions);
+    export function useOnStationChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>) {
+      return ApolloReactHooks.useSubscription<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>(OnStationChangedDocument, baseOptions);
     }
-export type OnStationPlayingSongChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayingSongChangedSubscription>;
-export type OnStationPlayingSongChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayingSongChangedSubscription>;
+export type OnStationChangedSubscriptionHookResult = ReturnType<typeof useOnStationChangedSubscription>;
+export type OnStationChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationChangedSubscription>;
 export const UserProfileDocument = gql`
     query UserProfile($where: UserFindOneWhereInput!) {
   user(where: $where) {

@@ -1,4 +1,4 @@
-import { forwardRef, Inject, Injectable, InternalServerErrorException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Song } from 'radio/song/entities/song.entity';
 import { SongCreateInput } from 'radio/song/song.input';
@@ -27,6 +27,10 @@ export class SongService {
     return this.songRepository.findAndCount(options);
   }
 
+  async findOne(options?: FindOneOptions<Song>): Promise<Song | undefined> {
+    return this.songRepository.findOne(options);
+  }
+
   async findOneOrFail(options: FindOneOptions<Song>): Promise<Song> {
     return this.songRepository.findOneOrFail(options);
   }
@@ -39,10 +43,10 @@ export class SongService {
     return song;
   }
 
-  async update(criteria: FindConditions<Song>, payload: Partial<Song>): Promise<void> {
-    throw new InternalServerErrorException(`Not ready yet`);
-    // const song = await this.findOneOrFail({ where: criteria });
-    // await this.songRepository.save({ ...song, ...payload });
+  async update(criteria: FindConditions<Song>, payload: Partial<Song>): Promise<Song> {
+    const song = await this.findOneOrFail({ where: criteria });
+    await this.songRepository.save({ ...song, ...payload });
+    return await this.findOneOrFail({ where: criteria });
   }
 
   async delete(criteria: FindConditions<Song>): Promise<void> {

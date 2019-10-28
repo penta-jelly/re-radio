@@ -25,7 +25,6 @@ export const Player: React.FC = () => {
       const { onPlayingSongChanged } = data;
       if (!onPlayingSongChanged) return;
       const { entity } = onPlayingSongChanged;
-      if (!entity) return;
       updateQuery(prev => {
         // Remove the updated entity from the current list first, including played and skipped entity
         let playingSongs = prev.playingSongs.filter(song => song!.id !== entity.id);

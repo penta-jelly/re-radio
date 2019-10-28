@@ -1,11 +1,14 @@
 import { forwardRef, Module, OnModuleInit } from '@nestjs/common';
-import { PrismaModule } from 'prisma/prisma.module';
+import { PubSubModule } from 'core/pub-sub/pub-sub.module';
+import { RadioTypeOrmModule } from 'core/typeorm/typeorm.module';
+import { SongModule } from 'radio/song/song.module';
+import { StationModule } from 'radio/station/station.module';
 import { RealTimeStationsModule } from '../real-time-stations/real-time-stations.module';
 import { RealTimeSongsWorkerService } from './real-time-songs-worker.service';
 import { RealTimeSongService } from './real-time-songs.service';
 
 @Module({
-  imports: [PrismaModule, forwardRef(() => RealTimeStationsModule)],
+  imports: [RadioTypeOrmModule, PubSubModule, StationModule, SongModule, forwardRef(() => RealTimeStationsModule)],
   providers: [RealTimeSongsWorkerService, RealTimeSongService],
   exports: [RealTimeSongService],
 })

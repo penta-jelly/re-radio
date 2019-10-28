@@ -5,6 +5,7 @@ import { CurrentUser } from 'radio/auth/decorators/CurrentUser.decorator';
 import { Roles } from 'radio/auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from 'radio/auth/guards/Authentication.guard';
 import { AuthorizationGuard } from 'radio/auth/guards/Authorization.guard';
+import { SongDTO } from 'radio/song/dto/song.dto';
 import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
 import { UserDTO } from 'radio/user/dto/user.dto';
 import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
@@ -38,6 +39,15 @@ export class StationResolver {
     return this.userRoleService.find({ where: { station: { id: station.id } } });
   }
 
+  @ResolveProperty(returns => [SongDTO])
+  async playingSong(@Root() station: StationDTO) {
+    const { playingSong } = await this.stationService.findOneOrFail({
+      where: { id: station.id },
+      relations: ['playingSong'],
+    });
+    return playingSong;
+  }
+
   @ResolveProperty(returns => [StationTagDTO])
   async tags(@Root() station: StationDTO) {
     const { tags } = await this.stationService.findOneOrFail({
@@ -59,7 +69,8 @@ export class StationResolver {
   @Query(returns => [StationDTO])
   async stations(
     @Args({ name: 'pagination', nullable: true, type: () => PaginationInput }) pagination: PaginationInput,
-    @Args({ name: 'where', nullable: true, type: () => StationFindAllWhereInput }) where: StationFindAllWhereInput,
+    @Args({ name: 'where', nullable: 'itemsAndList', type: () => [StationFindAllWhereInput] })
+    where: StationFindAllWhereInput[],
     @Args({ name: 'order', nullable: true, type: () => StationFindAllOrderInput }) order: StationFindAllOrderInput,
   ) {
     return this.stationService.find({ ...pagination, where, order });

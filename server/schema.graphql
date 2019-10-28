@@ -54,12 +54,12 @@ input PaginationInput {
 }
 
 type Query {
-  stations(order: StationFindAllOrderInput, where: StationFindAllWhereInput, pagination: PaginationInput): [Station!]!
+  stations(order: StationFindAllOrderInput, where: [StationFindAllWhereInput], pagination: PaginationInput): [Station!]!
   station(where: StationFindOneWhereInput!): Station!
   users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
   user(where: UserFindOneWhereInput!): User!
   currentUser: User!
-  songs(order: SongFindAllOrderInput, where: SongFindAllWhereInput, pagination: PaginationInput): [Song!]!
+  songs(order: SongFindAllOrderInput, where: [SongFindAllWhereInput], pagination: PaginationInput): [Song!]!
   song(where: SongFindOneWhereInput!): Song!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
@@ -180,6 +180,7 @@ type Station {
   name: String!
   slug: String!
   description: String
+  playingSong: Song
   userRoles: [UserRole!]!
   tags: [StationTag!]!
   onlineUsers: [User!]!
@@ -223,6 +224,7 @@ type StationSubscriptionEntity {
   name: String!
   slug: String!
   description: String
+  playingSong: Song
 }
 
 type StationTag {
