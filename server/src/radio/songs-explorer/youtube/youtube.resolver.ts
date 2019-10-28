@@ -20,6 +20,7 @@ export class YoutubeResolver {
 
   @Query(returns => [YoutubeVideoDTO])
   async youtubeVideos(@Args({ name: 'where', type: () => YoutubeVideoFindAllInput }) where: YoutubeVideoFindAllInput) {
+    if (!where.q.trim()) return [];
     return this.youtubeService.searchVideos(where);
   }
 }
