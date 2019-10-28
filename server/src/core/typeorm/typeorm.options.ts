@@ -20,10 +20,10 @@ export class TypeormOptions implements TypeOrmOptionsFactory {
       username: ConfigService.get(EnvVariables.DB_USER),
       password: ConfigService.get(EnvVariables.DB_PASSWORD),
       database: ConfigService.get(EnvVariables.DB_NAME),
-      entities: [process.cwd() + '/src/**/*.entity.ts'],
-      migrations: [process.cwd() + '/migrations/*.ts'],
+      entities: [__dirname + '../../../**/*.entity.{ts,js}'],
+      migrations: [__dirname + '../../../migrations/*.{ts,js}'],
       cli: {
-        migrationsDir: 'migrations',
+        migrationsDir: 'src/migrations',
       },
       migrationsRun: true,
     };

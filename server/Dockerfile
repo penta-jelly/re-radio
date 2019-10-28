@@ -9,7 +9,7 @@ RUN npm ci
 COPY .env.example .env
 COPY . .
 
-RUN npm run type-check
+RUN npm run compile
 RUN npm run lint
 
 CMD [ "npm", "start" ]
