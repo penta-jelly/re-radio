@@ -39,8 +39,4 @@ export class StationSubscriber implements EntitySubscriberInterface {
       entity: event.entity,
     });
   }
-
-  private async sleep() {
-    return new Promise(resolve => setTimeout(resolve, 500));
-  }
 }

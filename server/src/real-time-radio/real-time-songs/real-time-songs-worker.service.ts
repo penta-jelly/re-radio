@@ -55,7 +55,7 @@ export class RealTimeSongsWorkerService {
     setTimeout(async () => {
       const nextSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
       nextSong && (await this.realTimeSongService.updateSongStatusToPlaying(nextSong.id));
-    }, 3000);
+    }, 5000);
   }
 
   async subscribeSong() {
