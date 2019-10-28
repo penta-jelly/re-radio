@@ -1,6 +1,8 @@
 import {
   CanActivate,
   ExecutionContext,
+  forwardRef,
+  Inject,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -9,9 +11,9 @@ import {
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
-import { User } from 'prisma/prisma.binding';
-import { PrismaService } from 'prisma/prisma.service';
-import { UsersService } from '../../users/user.service';
+import { User } from 'radio/user/entities/user.entity';
+import { UserRoleService } from 'radio/user/services/user-role.service';
+import { UserService } from 'radio/user/services/user.service';
 import { AllowedRoles, ROLE_KEY } from '../decorators/Roles.decorator';
 
 @Injectable()
@@ -20,8 +22,8 @@ export class AuthorizationGuard implements CanActivate {
 
   constructor(
     private readonly reflector: Reflector,
-    private readonly usersService: UsersService,
-    private readonly prisma: PrismaService,
+    @Inject(forwardRef(() => UserService)) private readonly usersService: UserService,
+    @Inject(forwardRef(() => UserRoleService)) private readonly userRoleService: UserRoleService,
   ) {}
 
   async canActivate(context: ExecutionContext) {
@@ -41,16 +43,13 @@ export class AuthorizationGuard implements CanActivate {
       );
     }
 
-    user.roles = await this.prisma.query.userRoles(
-      { where: { user: { id: user.id } } },
-      `{ id  role station { id name slug } }`,
-    );
+    user.roles = await this.userRoleService.find({ where: { user: { id: user.id } } });
 
     if (user.roles) {
       const result = await Promise.all(
         allowedRoles.map(role => {
           if (typeof role === 'function') {
-            return role({ user, args, info, services: { prisma: this.prisma } });
+            return role({ user, args, info });
           } else {
             return user.roles.some(userRole => userRole.role === role);
           }

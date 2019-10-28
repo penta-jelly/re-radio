@@ -1,34 +1,31 @@
 query StationPlayer($stationSlug: String!) {
-  playingSongs: songs(where: { station: { slug: $stationSlug }, status: PLAYING }) {
-    ...PlayingSong
+  playingSongs: songs(where: { stationSlug: $stationSlug, status: PLAYING }) {
+    id
+    title
+    url
+    thumbnail
+    duration
+    startedAt
+    status
+    upVoteUserIds
+    downVoteUserIds
   }
 }
 
 subscription OnStationPlayerChanged($stationSlug: String!) {
   onPlayingSongChanged: song(
-    where: {
-      mutation_in: [UPDATED]
-      node: {
-        station: { slug: $stationSlug }
-        status_in: [PLAYING, PLAYED, SKIPPED]
-      }
-    }
+    where: { stationSlug: $stationSlug }
   ) {
-    node {
-      ...PlayingSong
+    entity {
+      id
+      title
+      url
+      thumbnail
+      duration
+      startedAt
+      status
+      upVoteUserIds
+      downVoteUserIds
     }
   }
-}
-
-fragment PlayingSong on Song {
-  id
-  title
-  url
-  thumbnail
-  duration
-  startedAt
-  status
-  creator { ...UserBaseInformation }
-  upVotes { ...UserBaseInformation }
-  downVotes { ...UserBaseInformation }
 }

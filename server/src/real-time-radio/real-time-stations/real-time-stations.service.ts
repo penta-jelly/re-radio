@@ -1,28 +1,31 @@
 import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from 'prisma/prisma.service';
+import { SongStatusEnum } from 'radio/song/entities/song.entity';
+import { SongService } from 'radio/song/services/song.service';
+import { StationService } from 'radio/station/services/station.service';
 import { RealTimeSongService } from '../real-time-songs/real-time-songs.service';
 
 @Injectable()
 export class RealTimeStationService {
   private readonly logger = new Logger(RealTimeStationService.name);
   constructor(
-    private readonly prisma: PrismaService,
+    private readonly stationService: StationService,
+    private readonly songService: SongService,
     @Inject(forwardRef(() => RealTimeSongService))
     private readonly realTimeSongService: RealTimeSongService,
   ) {}
 
-  async findAllAvailableStations(query?: string) {
-    return this.prisma.query.stations({}, query || `{ id name slug description createdAt updatedAt }`);
+  async findAllAvailableStations() {
+    return this.stationService.find({});
   }
 
-  async isStationReadyToPlayNextSong(stationId: string) {
-    const playingSong = await this.realTimeSongService.findPlayingSongInStation(stationId);
+  async isStationReadyToPlayNextSong(stationSlug: string) {
+    const playingSong = await this.realTimeSongService.findPlayingSongInStation(stationSlug);
     if (playingSong) {
       return false;
     }
 
-    const pendingSongs = await this.prisma.query.songs({ where: { station: { id: stationId }, status: 'PENDING' } });
-    if (pendingSongs.length === 0) {
+    const count = await this.songService.count({ where: { stationSlug, status: SongStatusEnum.PENDING } });
+    if (count === 0) {
       return false;
     }
     return true;

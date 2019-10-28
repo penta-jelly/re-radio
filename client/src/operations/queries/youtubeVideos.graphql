@@ -1,0 +1,39 @@
+query youtubeVideos($where: YoutubeVideoFindAllInput!){
+  youtubeVideos(where: $where) {
+    id
+    snippet {
+      publishedAt
+      channelId
+      title
+      description
+      thumbnails {
+        default {
+          url
+          width
+          height
+        }
+        medium {
+          url
+          width
+          height
+        }
+        high {
+          url
+          width
+          height
+        }
+        standard {
+          url
+          width
+          height
+        }
+        maxres {
+          url
+          width
+          height
+        }
+      }
+      channelTitle
+    }
+  }
+}

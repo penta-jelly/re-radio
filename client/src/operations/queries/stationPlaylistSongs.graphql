@@ -1,35 +1,34 @@
 query StationPlayist($stationSlug: String!) {
-  playlist: songs(where: { station: { slug: $stationSlug }, status_in: [PENDING, PLAYING] }) {
-    ...PlaylistSong
+  playlist: songs(
+    where: [
+      { stationSlug: $stationSlug, status: PENDING }
+      { stationSlug: $stationSlug, status: PLAYING }
+    ]
+  ) {
+    id
+    title
+    url
+    thumbnail
+    duration
+    startedAt
+    status
+    upVoteUserIds
+    downVoteUserIds
   }
 }
 
 subscription OnStationPlalistChanged($stationSlug: String!) {
-  onPlaylistSongChanged: song(
-    where: {
-      mutation_in: [UPDATED, CREATED]
-      node: {
-        station: { slug: $stationSlug }
-        status_in: [PENDING, PLAYING, PLAYED, SKIPPED]
-      }
-    }
-  ) {
-    node {
-      ...PlayingSong
+  onPlaylistSongChanged: song(where: { stationSlug: $stationSlug }) {
+    entity {
+      id
+      title
+      url
+      thumbnail
+      duration
+      startedAt
+      status
+      upVoteUserIds
+      downVoteUserIds
     }
   }
-}
-
-
-fragment PlaylistSong on Song {
-  id
-  title
-  url
-  thumbnail
-  duration
-  startedAt
-  status
-  creator { ...UserBaseInformation }
-  upVotes { ...UserBaseInformation }
-  downVotes { ...UserBaseInformation }
 }

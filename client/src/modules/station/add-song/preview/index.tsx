@@ -1,10 +1,10 @@
 import { Grid, Typography } from '@material-ui/core';
-import { MiniSongExplorer, useCurrentUserQuery } from 'operations';
+import { useCurrentUserQuery, YoutubeVideo } from 'operations';
 import React from 'react';
 import { useStyles } from './styles';
 
 interface Props {
-  previewSong?: MiniSongExplorer;
+  previewSong?: YoutubeVideo;
 }
 export const Preview: React.FC<Props> = ({ previewSong }) => {
   const classes = useStyles();

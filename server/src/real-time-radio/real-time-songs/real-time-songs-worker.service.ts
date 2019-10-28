@@ -1,5 +1,8 @@
 import { forwardRef, Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { Song, SongPreviousValues } from 'prisma/prisma.binding';
+import { PubSub } from 'core/pub-sub/pub-sub.service';
+import { EntitySubscription, MutationEnum } from 'core/typeorm/entity-subscription.interface';
+import { Song, SongStatusEnum } from 'radio/song/entities/song.entity';
+import { SONG_SUBSCRIPTION } from 'radio/song/song.subscriber';
 import { RealTimeStationService } from '../real-time-stations/real-time-stations.service';
 import { RealTimeSongService } from './real-time-songs.service';
 
@@ -9,10 +12,11 @@ export class RealTimeSongsWorkerService {
    * @description A hash map store the current timeout instance of a station.
    * This will be use to interrupt the current playing song of station
    */
-  private playersMap: { [key: string]: NodeJS.Timeout } = {};
+  private playersMap: { [key: string]: { timer: NodeJS.Timeout; song: Song } | undefined } = {};
 
   private readonly logger = new Logger(RealTimeSongsWorkerService.name);
   constructor(
+    private readonly pubSub: PubSub,
     private readonly realTimeSongService: RealTimeSongService,
     @Inject(forwardRef(() => RealTimeStationService))
     private readonly realTimeStationService: RealTimeStationService,
@@ -31,73 +35,77 @@ export class RealTimeSongsWorkerService {
       throw new InternalServerErrorException(`Song does not include property startedAt`);
     }
 
-    const startedAtDate = song.startedAt instanceof Date ? song.startedAt : new Date(song.startedAt);
-    const startedAt = startedAtDate.getTime();
+    const startedAt = song.startedAt.getTime();
     const now = Date.now();
     const duration = song.duration - (now - startedAt);
     if (duration <= 0) {
       await this.updatePlayedSongAndPlayNextSong(song);
     } else {
-      this.logger.debug(`Song [${song.id}] will be timed out in ${duration} milliseconds`);
-      this.playersMap[song.station.id] = global.setTimeout(() => this.updatePlayedSongAndPlayNextSong(song), duration);
+      this.logger.debug(`Song [${song.id}] "${song.title}" will be timed out in ${duration} milliseconds`);
+      this.playersMap[song.stationSlug] = {
+        timer: global.setTimeout(() => this.updatePlayedSongAndPlayNextSong(song), duration),
+        song,
+      };
     }
   }
 
   protected async updatePlayedSongAndPlayNextSong(song: Song) {
     await this.realTimeSongService.updateSongStatusToPlayed(song.id);
-    delete this.playersMap[song.station.id];
-    let nextSong = await this.realTimeSongService.findNextPlayingSongInStation(song.station.id);
-    if (nextSong) {
-      nextSong = await this.realTimeSongService.updateSongStatusToPlaying(nextSong.id);
-    }
+    delete this.playersMap[song.stationSlug];
+    setTimeout(async () => {
+      const nextSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
+      nextSong && (await this.realTimeSongService.updateSongStatusToPlaying(nextSong.id));
+    }, 5000);
   }
 
-  /**
-   * @description: Subscribe song event from Prisma to decide what is the next action
-   */
   async subscribeSong() {
-    const subscription = await this.realTimeSongService.getSongSubscription();
-    while (true) {
-      const { value } = await subscription.next();
-      const { song } = value;
-      switch (song.mutation) {
-        case 'CREATED':
-          await this.onSongCreated(song.node);
+    await this.pubSub.subscribe(SONG_SUBSCRIPTION, async (payload: EntitySubscription<Song>) => {
+      const { entity, mutation } = payload;
+      switch (mutation) {
+        case MutationEnum.CREATED:
+          await this.onSongCreated(entity);
           break;
-        case 'UPDATED':
-          await this.onSongUpdated(song.node, song.previousValues);
+        case MutationEnum.UPDATED:
+          await this.onSongUpdated(entity);
           break;
-        case 'DELETED':
-          await this.onSongDeleted(song.node);
+        case MutationEnum.DELETED:
+          await this.onSongDeleted(entity);
           break;
+      }
+    });
+  }
+
+  protected async onSongCreated(song: Song) {
+    this.logger.debug(`Song [${song.id}] "${song.title}" in station [${song.stationSlug}] has been created`);
+    if (await this.realTimeStationService.isStationReadyToPlayNextSong(song.stationSlug)) {
+      const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
+      if (nextPlayingSong) {
+        await this.realTimeSongService.updateSongStatusToPlaying(nextPlayingSong.id);
       }
     }
   }
 
-  protected async onSongCreated(song: Song) {
-    this.logger.debug(`Song [${song.id}] "${song.title}" in station [${song.station.id}] has been created`);
-    if (await this.realTimeStationService.isStationReadyToPlayNextSong(song.station.id)) {
-      const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(song.station.id);
-      await this.realTimeSongService.updateSongStatusToPlaying(nextPlayingSong.id);
-    }
-  }
-
-  protected async onSongUpdated(song: Song, previousValues: SongPreviousValues) {
+  protected async onSongUpdated(song: Song) {
     this.logger.debug(
-      `Song [${song.id}] "${song.title}" in station [${song.station.id}] has been updated with status ${song.status}`,
+      `Song [${song.id}] "${song.title}" in station [${song.stationSlug}] has been updated with status ${song.status}`,
     );
-    if (song.status === 'PLAYING' && previousValues.status !== song.status) {
-      clearTimeout(this.playersMap[song.station.id]);
-      delete this.playersMap[song.station.id];
+    const playerInstance = this.playersMap[song.stationSlug];
+    if (!playerInstance) {
+      await this.playSong(song);
+    } else if (song.status === SongStatusEnum.PLAYING && playerInstance.song.id !== song.id) {
+      clearTimeout(playerInstance.timer);
+      delete this.playersMap[song.stationSlug];
       await this.playSong(song);
     }
   }
 
   protected async onSongDeleted(song: Song) {
-    this.logger.debug(`Song [${song.id}] "${song.title}" in station [${song.station.id}] has been deleted`);
-    if (song.status === 'PLAYING') {
-      clearTimeout(this.playersMap[song.station.id]);
-      delete this.playersMap[song.station.id];
+    this.logger.debug(`Song [${song.id}] "${song.title}" in station [${song.stationSlug}] has been deleted`);
+    const playerInstance = this.playersMap[song.stationSlug];
+    if (!playerInstance) return;
+    if (song.status === SongStatusEnum.PLAYING) {
+      clearTimeout(playerInstance.timer);
+      delete this.playersMap[song.stationSlug];
     }
   }
 }

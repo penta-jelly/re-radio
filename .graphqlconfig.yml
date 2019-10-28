@@ -1,6 +1,8 @@
 projects:
   app:
-    schemaPath: schema.graphql
+    schemaPath: ./server/schema.graphql
+    excludes:
+      - node_modules/**/*
     extensions:
       endpoints:
-        default: http://${env:REACT_APP_SERVICE_HOST}:${env:REACT_APP_SERVICE_PORT}/graphql
+        default: http://localhost:8000/graphql

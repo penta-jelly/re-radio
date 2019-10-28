@@ -1,5 +1,5 @@
-query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: StationOrderByInput) {
-  stations(first: $first, skip: $skip, where: $where, orderBy: $orderBy) {
+query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: [StationFindAllWhereInput]) {
+  stations(pagination: $pagination, order: $order, where: $where) {
     id
     name
     slug
@@ -7,32 +7,32 @@ query Stations($first: Int, $skip: Int, $where: StationWhereInput, $orderBy: Sta
       id
       name
     }
-    userRoles(where: { role: STATION_OWNER }) {
+    userRoles {
+      role
       user { ...UserBaseInformation }
     }
-    songs(where: { status: PLAYING }) {
+    playingSong {
+      id
       title
       thumbnail
-      url
+      startedAt
     }
   }
 }
 
-subscription OnStationPlayingSongChanged($stationSlug: String!) {
-  onPlayingSongChanged: song(
-    where: {
-      mutation_in: [UPDATED]
-      node: {
-        station: { slug: $stationSlug }
-        status_in: [PLAYING, PLAYED, SKIPPED]
+subscription OnStationChanged {
+  onStationChanged: station {
+    mutation
+    entity {
+      id
+      name
+      slug
+      playingSong {
+        id
+        title
+        thumbnail
+        startedAt
       }
-    }
-  ) {
-    node {
-      title
-      thumbnail
-      duration
-      status
     }
   }
 }

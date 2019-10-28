@@ -1,6 +1,6 @@
 import { ReCard } from 'components/re-card';
 import { ReCardLink } from 'components/re-card/card-link';
-import { SongStatusEnum, StationsQuery, useOnStationPlayingSongChangedSubscription } from 'operations';
+import { StationsQuery } from 'operations';
 import React from 'react';
 import { MdFiberManualRecord as FiberManualRecordIcon, MdShowChart as ShowChartIcon } from 'react-icons/md';
 
@@ -9,10 +9,11 @@ const placeHolderImage =
 
 interface Props {
   data: NonNullable<StationsQuery['stations'][0]>;
+  placeHolderThumbnail?: string;
   className?: string;
 }
 
-export const StationItem: React.FC<Props> = ({ data, className }) => {
+export const StationItem: React.FC<Props> = ({ data, className, placeHolderThumbnail = placeHolderImage }) => {
   const content = React.useMemo<string | null>(() => {
     if (data.tags) {
       return data.tags.map(tag => `#${tag.name}`).join(' ');
@@ -20,32 +21,16 @@ export const StationItem: React.FC<Props> = ({ data, className }) => {
     return null;
   }, [data]);
 
-  const [thumbnail, setThumbnail] = React.useState<string | null>(() => {
-    const playingSong = data.songs && data.songs[0];
-    return playingSong && playingSong.thumbnail;
-  });
-
-  useOnStationPlayingSongChangedSubscription({
-    variables: { stationSlug: data.slug },
-    onSubscriptionData: ({ subscriptionData: { data } }) => {
-      if (!data) return;
-      const { onPlayingSongChanged } = data;
-      if (!onPlayingSongChanged) return;
-      const { node } = onPlayingSongChanged;
-      if (!node) return;
-      if (node.status === SongStatusEnum.Playing) {
-        setThumbnail(node.thumbnail);
-      } else {
-        setThumbnail(null);
-      }
-    },
-  });
+  const thumbnail = React.useMemo(() => {
+    if (!data.playingSong) return placeHolderThumbnail;
+    return data.playingSong.thumbnail;
+  }, [data.playingSong, placeHolderThumbnail]);
 
   return (
     <ReCard
       key={data.id}
       title={data.name}
-      media={{ image: thumbnail || placeHolderImage, alt: data.name, linkTo: `/station/${data.slug}` }}
+      media={{ image: thumbnail, alt: data.name, linkTo: `/station/${data.slug}` }}
       content={content}
       id={`station-${data.slug}`}
       className={className}

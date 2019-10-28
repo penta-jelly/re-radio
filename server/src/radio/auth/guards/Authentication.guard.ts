@@ -1,7 +1,7 @@
 import { ExecutionContext, Injectable, UnauthorizedException } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { AuthGuard } from '@nestjs/passport';
-import { User } from 'prisma/prisma.binding';
+import { User } from 'radio/user/entities/user.entity';
 
 @Injectable()
 export class AuthenticationGuard extends AuthGuard('jwt') {
@@ -14,7 +14,7 @@ export class AuthenticationGuard extends AuthGuard('jwt') {
     return ctx.getContext().req;
   }
 
-  handleRequest<IUser = User>(err: Error, user?: IUser) {
+  handleRequest<T = User>(err: Error, user?: T): T {
     if (err || !user) {
       throw err || new UnauthorizedException();
     }

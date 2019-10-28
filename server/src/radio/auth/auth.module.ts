@@ -2,10 +2,8 @@ import { forwardRef, Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { ConfigModule } from 'core/config/config.module';
-import { ConfigService } from 'core/config/config.service';
-import { EnvVariables } from 'core/config/config.variables';
-import { PrismaModule } from 'prisma/prisma.module';
-import { UsersModule } from '../users/users.module';
+import { JwtConfig } from 'radio/auth/jwt.config';
+import { UserModule } from 'radio/user/user.module';
 import { AuthResolver } from './auth.resolver';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
@@ -13,15 +11,12 @@ import { JwtStrategy } from './jwt.strategy';
 @Module({
   imports: [
     ConfigModule,
-    PrismaModule,
     PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secretOrPrivateKey: 'secretKey',
-      signOptions: {
-        expiresIn: ConfigService.get(EnvVariables.JWT_TOKEN_EXPIRES_IN),
-      },
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useClass: JwtConfig,
     }),
-    forwardRef(() => UsersModule),
+    forwardRef(() => UserModule),
   ],
   providers: [AuthService, JwtStrategy, AuthResolver],
   exports: [AuthService],

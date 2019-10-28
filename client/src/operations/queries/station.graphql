@@ -7,8 +7,15 @@ query Station($slug: String!) {
       id
       name
     }
-    userRoles(where: { role: STATION_OWNER }) {
+    userRoles {
+      role
       user { ...UserBaseInformation }
+    }
+    playingSong {
+      id
+      title
+      thumbnail
+      startedAt
     }
   }
 }

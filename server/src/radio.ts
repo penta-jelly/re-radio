@@ -9,17 +9,8 @@ import { RadioModule } from 'radio/radio.module';
 async function bootstrap() {
   const logger = new Logger('RadioGraphQLService');
   const app = await NestFactory.create<NestExpressApplication>(RadioModule);
-  const configService = app.get(ConfigService);
-
-  try {
-    logger.log(`Waiting for ${configService.get(EnvVariables.PRISMA_ENDPOINT)} to response.`);
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    await require('wait-on')({ resources: [configService.get(EnvVariables.PRISMA_ENDPOINT)], timeout: 60000 });
-  } catch (error) {
-    logger.error(error);
-    process.exit(1);
-  }
-
-  await app.listen(8000);
+  const port = app.get(ConfigService).get(EnvVariables.RADIO_SERVER_PORT);
+  await app.listen(port);
+  logger.log(`Radio GraphQL service successfully started at port ${port}.`);
 }
 bootstrap();

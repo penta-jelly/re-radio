@@ -24,12 +24,11 @@ export const Playlist: React.FC = () => {
       if (!data) return;
       const { onPlaylistSongChanged } = data;
       if (!onPlaylistSongChanged) return;
-      const { node } = onPlaylistSongChanged;
-      if (!node) return;
+      const { entity } = onPlaylistSongChanged;
       updateQuery(prev => {
-        let playlist = prev.playlist.filter(song => song && song.id !== node.id);
-        if (node.status === SongStatusEnum.Playing || node.status === SongStatusEnum.Pending) {
-          playlist = [...playlist, node];
+        let playlist = prev.playlist.filter(song => song && song.id !== entity.id);
+        if (entity.status === SongStatusEnum.Playing || entity.status === SongStatusEnum.Pending) {
+          playlist = [...playlist, entity];
         }
         return { ...prev, playlist };
       });

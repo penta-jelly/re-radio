@@ -4,7 +4,8 @@ import { EnvVariables } from 'core/config/config.variables';
 import * as getVideoId from 'get-video-id';
 import * as Moment from 'moment';
 import fetch from 'node-fetch';
-import { VideoReturnType, YoutubeVideo } from './interfaces';
+import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from 'radio/songs-explorer/youtube/youtube.dto';
+import { YoutubeVideoFindAllInput, YoutubeVideoOrderEnum } from 'radio/songs-explorer/youtube/youtube.input';
 
 @Injectable()
 export class YoutubeService {
@@ -17,7 +18,7 @@ export class YoutubeService {
     return { id, service };
   }
 
-  public async fetchVideoDetail(videoId: string): Promise<YoutubeVideo.Video> {
+  public async fetchVideoDetail(videoId: string): Promise<YoutubeVideoDetailDTO> {
     const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
     const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
     const part = 'id,snippet,contentDetails';
@@ -34,12 +35,8 @@ export class YoutubeService {
   public async searchVideos({
     q,
     maxResults = 5,
-    order = 'relevance',
-  }: {
-    q: string;
-    maxResults?: number;
-    order?: YoutubeVideo.Order;
-  }): Promise<YoutubeVideo.Video[]> {
+    order = YoutubeVideoOrderEnum.RELEVANCE,
+  }: YoutubeVideoFindAllInput): Promise<YoutubeVideoDTO[]> {
     const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
     const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
     const part = 'id,snippet';
@@ -58,4 +55,9 @@ export class YoutubeService {
   public parseDuration(duration: string) {
     return Moment.duration(duration).asMilliseconds();
   }
+}
+
+export interface VideoReturnType {
+  id: string;
+  service: 'youtube';
 }

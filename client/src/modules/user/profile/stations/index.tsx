@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@material-ui/core';
 import { PageLoader } from 'components/page-loader';
 import { StationsList } from 'modules/station';
-import { StationOrderByInput, useStationsQuery } from 'operations';
+import { OrderEnum, useStationsQuery } from 'operations';
 import React from 'react';
 import { useStyles } from './styles';
 
@@ -12,12 +12,11 @@ interface Props {
 
 export const UserProfileStations: React.FC<Props> = ({ username, editable }) => {
   const classes = useStyles();
+  // TODO: query by user role
   const { loading, error, data } = useStationsQuery({
     variables: {
-      first: 25,
-      skip: 0,
-      orderBy: StationOrderByInput.CreatedAtDesc,
-      where: { userRoles_some: { user: { username } } },
+      pagination: { take: 25 },
+      order: { createdAt: OrderEnum.Desc },
     },
   });
   if (loading) {
