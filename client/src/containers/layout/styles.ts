@@ -2,14 +2,14 @@ import { Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/styles';
 import { Props } from '.';
 
-const drawerWidth = 200;
-const collapsedDrawerWith = 56;
+export const DRAWER_WIDTH = 200;
+export const COLLAPSED_DRAWER_WIDTH = 56;
 
 function getDrawerWidth(props: Props): number {
-  if (!props.drawer) return drawerWidth;
+  if (!props.drawer) return DRAWER_WIDTH;
   if (!props.drawer.open) return 0;
-  if (props.drawer.collapsed) return collapsedDrawerWith;
-  return drawerWidth;
+  if (props.drawer.collapsed) return COLLAPSED_DRAWER_WIDTH;
+  return DRAWER_WIDTH;
 }
 
 export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) => ({

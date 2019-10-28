@@ -51,7 +51,7 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
     }
 
     this.logger.log(`${COLOR_RED}[ERROR]${COLOR_RESET} ${operation} ${info.fieldName} "${message}" [Args: ${rawArgs}]`);
-    console.trace(exception.stack);
+    this.logger.debug(exception.stack);
     return message;
   }
 }

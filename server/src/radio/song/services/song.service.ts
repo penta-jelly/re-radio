@@ -32,13 +32,11 @@ export class SongService {
   }
 
   async create(payload: SongCreateInput, owner: User): Promise<Song> {
-    throw new InternalServerErrorException(`Not ready yet`);
-    // const { duration, stationId, ...rawSong } = payload;
-    // const song = this.songRepository.create(rawSong);
-    // song.station = await this.stationService.findOneOrFail({ where: { id: stationId } });
-    // // TODO: parse duration
-    // song.duration = Number(duration);
-    // await this.songRepository.save(song);
+    const { stationSlug, ...rawSong } = payload;
+    const song = this.songRepository.create(rawSong);
+    song.station = await this.stationService.findOneOrFail({ where: { slug: stationSlug } });
+    await this.songRepository.save(song);
+    return song;
   }
 
   async update(criteria: FindConditions<Song>, payload: Partial<Song>): Promise<void> {

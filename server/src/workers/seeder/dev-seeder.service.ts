@@ -43,12 +43,27 @@ export class DevSeederService {
     this.logger.log('Finish resetting seeder service');
   }
 
-  public async seedUsers() {
+  public async shouldSeed(): Promise<boolean> {
+    this.logger.log('Check whether the database has already been seeded before.');
+    const rawUsers = this.getUserFixtures();
+    const existedUser = await Promise.all(
+      rawUsers.map(({ username, email }) => this.userRepository.findOne({ where: { username, email } })),
+    );
+    const result = existedUser.every(user => !user);
+    if (result) {
+      this.logger.log('The database is empty, ready to seed.');
+    } else {
+      this.logger.log('The database has already been seeded before.');
+    }
+    return result;
+  }
+
+  private async seedUsers() {
     this.logger.log('Seeding users');
     await Promise.all(this.getUserFixtures().map(user => this.userRepository.save(user)));
   }
 
-  public async resetUsers() {
+  private async resetUsers() {
     this.logger.log('Resetting users');
     await Promise.all(
       this.getUserFixtures().map(async data => {
@@ -71,12 +86,12 @@ export class DevSeederService {
     ];
   }
 
-  public async seedUserRoles() {
+  private async seedUserRoles() {
     this.logger.log('Seeding user roles');
     await Promise.all((await this.getUserRoleFixtures()).map(role => this.userRoleRepository.save(role)));
   }
 
-  public async resetUserRoles() {
+  private async resetUserRoles() {
     this.logger.log('Resetting user roles');
     const toBeRemovedTags: string[] = [];
     await Promise.all(
@@ -130,7 +145,7 @@ export class DevSeederService {
     return result;
   }
 
-  public async seedStations() {
+  private async seedStations() {
     this.logger.log('Seeding stations');
     const defaultTags = await this.stationTagRepository.save([
       this.stationTagRepository.create({ name: 'Test' }),
@@ -153,7 +168,7 @@ export class DevSeederService {
     );
   }
 
-  public async resetStations() {
+  private async resetStations() {
     this.logger.log('Resetting stations');
     await Promise.all(
       this.getStationFixtures().map(async data => {
@@ -195,7 +210,7 @@ export class DevSeederService {
     ];
   }
 
-  public async seedSongs() {
+  private async seedSongs() {
     this.logger.log('Seeding songs');
     await Promise.all(
       this.getSongFixtures().map(async data => {
@@ -216,7 +231,7 @@ export class DevSeederService {
     );
   }
 
-  public async resetSongs() {
+  private async resetSongs() {
     this.logger.log('Resetting songs');
     await Promise.all(
       this.getSongFixtures().map(async data => {

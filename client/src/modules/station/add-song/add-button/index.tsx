@@ -5,7 +5,7 @@ import {
   SongStatusEnum,
   useCreateSongMutation,
   useCurrentUserQuery,
-  useYoutubeVideoQuery,
+  useYoutubeVideoLazyQuery,
   YoutubeVideo,
 } from 'operations';
 import React, { useCallback } from 'react';
@@ -26,13 +26,13 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
   const currentUserQuery = useCurrentUserQuery();
   const notifyUnauthorizedUser = useUnauthorizedNotification();
 
-  const youtubeVideoQuery = useYoutubeVideoQuery({
-    variables: {
-      where: {
-        videoId: previewSong && previewSong.id,
-      },
-    },
-  });
+  const [queryYoutubeVideo, youtubeVideoQuery] = useYoutubeVideoLazyQuery();
+
+  React.useEffect(() => {
+    if (previewSong && previewSong.id) {
+      queryYoutubeVideo({ variables: { where: { videoId: previewSong.id } } });
+    }
+  }, [previewSong, queryYoutubeVideo]);
 
   // TODO: DO NOT ALLOW TO SUBMIT IF DURATION = 0
   const onSubmit = useCallback(async () => {

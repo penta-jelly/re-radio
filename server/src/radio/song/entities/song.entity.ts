@@ -60,10 +60,10 @@ export class Song {
   stationSlug: string;
 
   @Column('simple-array')
-  upVoteUserIds: number[];
+  upVoteUserIds: number[] = [];
 
   @Column('simple-array')
-  downVoteUserIds: number[];
+  downVoteUserIds: number[] = [];
 
   @BeforeInsert()
   @BeforeUpdate()
