@@ -1,7 +1,7 @@
 #!/bin/bash
 
-cp ./server/.env.example ./server/.env
-cp ./client/.env.example ./client/.env
+cp -n ./server/.env.example ./server/.env
+cp -n ./client/.env.example ./client/.env
 
 # Merge other mono repository dotenv files into 1 global file
 cat server/.env client/.env > .env
