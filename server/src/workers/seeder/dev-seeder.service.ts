@@ -210,7 +210,7 @@ export class DevSeederService {
     ];
   }
 
-  private async seedSongs() {
+  public async seedSongs() {
     this.logger.log('Seeding songs');
     await Promise.all(
       this.getSongFixtures().map(async data => {
@@ -241,10 +241,10 @@ export class DevSeederService {
         const station = await this.stationRepository.findOne({ where: { slug: data.station.slug } });
         if (creator && station) {
           const { title, url, thumbnail } = data;
-          const song = await this.songRepository.findOne({
+          const songs = await this.songRepository.find({
             where: { creator: { id: creator.id }, station: { id: station.id }, title, url, thumbnail },
           });
-          song && (await this.songRepository.remove(song));
+          songs.length > 0 && (await this.songRepository.remove(songs));
         }
       }),
     );
@@ -257,26 +257,26 @@ export class DevSeederService {
           {
             title: 'Westlife - My Love (Official Music Video)',
             url: 'https://www.youtube.com/watch?v=ulOb9gIGGd0',
-            duration: 10000,
+            duration: Math.round(Math.random() * 180000),
             thumbnail: 'https://i.ytimg.com/vi/ulOb9gIGGd0/hqdefault.jpg',
             station: { slug: station.slug },
           },
           {
             title: 'TWICE "Heart Shaker" M/V',
             url: 'https://www.youtube.com/watch?v=rRzxEiBLQCA',
-            duration: 10000,
+            duration: Math.round(Math.random() * 180000),
             thumbnail: 'https://i.ytimg.com/vi/rRzxEiBLQCA/hqdefault.jpg',
             station: { slug: station.slug },
           },
           {
             title: 'Zedd - I Want You To Know (Official Music Video) ft. Selena Gomez',
             url: 'https://www.youtube.com/watch?v=X46t8ZFqUB4',
-            duration: 10000,
+            duration: Math.round(Math.random() * 180000),
             thumbnail: 'https://i.ytimg.com/vi/X46t8ZFqUB4/hqdefault.jpg',
             station: { slug: station.slug },
           },
         ];
-        return [...songs, ...songsByStation, ...songsByStation, ...songsByStation];
+        return [...songs, ...songsByStation];
       },
       [],
     );

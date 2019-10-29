@@ -4,6 +4,7 @@ import {
   HttpException,
   Logger,
   NotFoundException,
+  UnauthorizedException,
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { GqlArgumentsHost, GqlExceptionFilter } from '@nestjs/graphql';
@@ -42,8 +43,7 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
     let message = 'Unknown';
     if (exception instanceof QueryFailedError) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      exception.message = (exception as any).detail || exception.message;
-      message = exception.message;
+      message = (exception as any).detail || exception.message;
     } else if (exception instanceof EntityNotFoundError) {
       message = exception.message;
     } else if (exception instanceof HttpException) {
@@ -51,7 +51,11 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
     }
 
     this.logger.log(`${COLOR_RED}[ERROR]${COLOR_RESET} ${operation} ${info.fieldName} "${message}" [Args: ${rawArgs}]`);
-    this.logger.debug(exception.stack);
+    if (exception instanceof UnauthorizedException) {
+      this.logger.verbose(exception.stack);
+    } else {
+      this.logger.debug(exception.stack);
+    }
     return message;
   }
 }
