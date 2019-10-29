@@ -30,7 +30,6 @@ export class DevSeederService {
     await this.seedUsers();
     await this.seedUserRoles();
     await this.seedStations();
-    await this.seedSongs();
     this.logger.log('Finish seeder service');
   }
 
@@ -210,7 +209,7 @@ export class DevSeederService {
     ];
   }
 
-  private async seedSongs() {
+  public async seedSongs() {
     this.logger.log('Seeding songs');
     await Promise.all(
       this.getSongFixtures().map(async data => {
@@ -241,10 +240,10 @@ export class DevSeederService {
         const station = await this.stationRepository.findOne({ where: { slug: data.station.slug } });
         if (creator && station) {
           const { title, url, thumbnail } = data;
-          const song = await this.songRepository.findOne({
+          const songs = await this.songRepository.find({
             where: { creator: { id: creator.id }, station: { id: station.id }, title, url, thumbnail },
           });
-          song && (await this.songRepository.remove(song));
+          songs.length > 0 && (await this.songRepository.remove(songs));
         }
       }),
     );

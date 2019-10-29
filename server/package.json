@@ -22,6 +22,7 @@
     "typeorm:migrate": "npm run typeorm migration:generate -- -n",
     "worker": "node lib/workers.js",
     "seed": "npm run worker -- seed",
+    "seed:song": "npm run worker -- seed:song",
     "seed:reset": "npm run worker -- seed:reset"
   },
   "dependencies": {

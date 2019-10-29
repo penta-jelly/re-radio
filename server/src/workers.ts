@@ -23,6 +23,8 @@ async function bootstrap() {
   try {
     if (args.includes('seed')) {
       (await app.get(DevSeederService).shouldSeed()) && (await app.get(DevSeederService).seed());
+    } else if (args.includes('seed:song')) {
+      await app.get(DevSeederService).seedSongs();
     } else if (args.includes('seed:reset')) {
       await app.get(DevSeederService).reset();
     } else {
