@@ -30,6 +30,7 @@ export class DevSeederService {
     await this.seedUsers();
     await this.seedUserRoles();
     await this.seedStations();
+    await this.seedSongs();
     this.logger.log('Finish seeder service');
   }
 
