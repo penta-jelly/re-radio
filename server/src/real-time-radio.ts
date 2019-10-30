@@ -18,7 +18,7 @@ async function bootstrap() {
   const radioServerUrl = `http://${serverHost}:${serverPort}/status`;
   logger.log(`Wait until URL ${radioServerUrl} response.`);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  await require('wait-on')({ resources: [radioServerUrl], timeout: 120000 });
+  await require('wait-on')({ resources: [radioServerUrl], timeout: 30000 });
   logger.log(`URL ${radioServerUrl} responded.`);
 
   await app.init();
