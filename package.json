@@ -2,8 +2,11 @@
   "name": "re-radio",
   "scripts": {
     "clean": "lerna run clean && lerna clean -y",
-    "postinstall": "lerna bootstrap --hoist",
+    "install:dependencies": "lerna bootstrap --hoist",
+    "initialize": "lerna run initialize",
     "format": "lerna run format --no-sort --parallel",
+    "compile": "lerna run compile",
+    "lint": "lerna run lint",
     "start": "npm-run-all --parallel lerna:start db",
     "lerna:start": "lerna run start --no-sort --parallel",
     "dev": "npm-run-all --parallel lerna:dev db",

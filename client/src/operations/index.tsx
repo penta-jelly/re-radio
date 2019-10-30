@@ -627,7 +627,7 @@ export type StationPlayerQuery = (
   { readonly __typename?: 'Query' }
   & { readonly playingSongs: ReadonlyArray<(
     { readonly __typename?: 'Song' }
-    & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+    & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
   )> }
 );
 
@@ -642,7 +642,7 @@ export type OnStationPlayerChangedSubscription = (
     { readonly __typename?: 'SongSubscription' }
     & { readonly entity: (
       { readonly __typename?: 'SongSubscriptionEntity' }
-      & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+      & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
     ) }
   ) }
 );
@@ -656,7 +656,7 @@ export type StationPlayistQuery = (
   { readonly __typename?: 'Query' }
   & { readonly playlist: ReadonlyArray<(
     { readonly __typename?: 'Song' }
-    & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+    & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
   )> }
 );
 
@@ -671,7 +671,7 @@ export type OnStationPlalistChangedSubscription = (
     { readonly __typename?: 'SongSubscription' }
     & { readonly entity: (
       { readonly __typename?: 'SongSubscriptionEntity' }
-      & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+      & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
     ) }
   ) }
 );
@@ -954,6 +954,7 @@ export const StationPlayerDocument = gql`
     url
     thumbnail
     duration
+    createdAt
     startedAt
     status
     upVoteUserIds
@@ -980,6 +981,7 @@ export const OnStationPlayerChangedDocument = gql`
       url
       thumbnail
       duration
+      createdAt
       startedAt
       status
       upVoteUserIds
@@ -1002,6 +1004,7 @@ export const StationPlayistDocument = gql`
     url
     thumbnail
     duration
+    createdAt
     startedAt
     status
     upVoteUserIds
@@ -1028,6 +1031,7 @@ export const OnStationPlalistChangedDocument = gql`
       url
       thumbnail
       duration
+      createdAt
       startedAt
       status
       upVoteUserIds

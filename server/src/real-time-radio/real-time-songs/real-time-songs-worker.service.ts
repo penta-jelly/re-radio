@@ -41,7 +41,9 @@ export class RealTimeSongsWorkerService {
     if (duration <= 0) {
       await this.updatePlayedSongAndPlayNextSong(song);
     } else {
-      this.logger.debug(`Song [${song.id}] "${song.title}" will be timed out in ${duration} milliseconds`);
+      this.logger.debug(
+        `Station [${song.stationSlug}] Song [${song.id}] "${song.title}" will be timed out in ${duration} milliseconds.`,
+      );
       this.playersMap[song.stationSlug] = {
         timer: global.setTimeout(() => this.updatePlayedSongAndPlayNextSong(song), duration),
         song,
@@ -76,7 +78,7 @@ export class RealTimeSongsWorkerService {
   }
 
   protected async onSongCreated(song: Song) {
-    this.logger.debug(`Song [${song.id}] "${song.title}" in station [${song.stationSlug}] has been created`);
+    this.logger.debug(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been created.`);
     if (await this.realTimeStationService.isStationReadyToPlayNextSong(song.stationSlug)) {
       const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
       if (nextPlayingSong) {
@@ -87,7 +89,7 @@ export class RealTimeSongsWorkerService {
 
   protected async onSongUpdated(song: Song) {
     this.logger.debug(
-      `Song [${song.id}] "${song.title}" in station [${song.stationSlug}] has been updated with status ${song.status}`,
+      `Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been updated with status ${song.status}.`,
     );
     const playerInstance = this.playersMap[song.stationSlug];
     if (!playerInstance) {
@@ -100,7 +102,7 @@ export class RealTimeSongsWorkerService {
   }
 
   protected async onSongDeleted(song: Song) {
-    this.logger.debug(`Song [${song.id}] "${song.title}" in station [${song.stationSlug}] has been deleted`);
+    this.logger.debug(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been deleted.`);
     const playerInstance = this.playersMap[song.stationSlug];
     if (!playerInstance) return;
     if (song.status === SongStatusEnum.PLAYING) {

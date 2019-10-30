@@ -17,9 +17,9 @@ You can either use your own database instance (by configuring environment variab
 npm run db
 ```
 
-It will include a Postgres database instance (at port `5432` or `$DB_PORT`) and PG Admin 4 instance (at port `2996` or `$PGADMIN_PORT`). To config the PG Admin 4 instance, follow these steps:
+It will include a Postgres database instance (at port `5432` or `$DB_PORT`) and PG Admin 4 instance (at port `3001` or `$PGADMIN_PORT`). To config the PG Admin 4 instance, follow these steps:
 
-* Access port `2996` or `$PGADMIN_PORT` on your local machine then login with:
+* Access port `3001` or `$PGADMIN_PORT` on your local machine then login with:
     
     ```
     username: admin@reradio.com (or $PGADMIN_DEFAULT_EMAIL)

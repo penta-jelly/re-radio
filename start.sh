@@ -7,7 +7,7 @@ cp -n ./client/.env.example ./client/.env
 cat server/.env client/.env > .env
 
 # Default environment variables
-echo "SERVER_PORT=8000" >> .env
+echo "SERVER_PORT=2996" >> .env
 echo "CLIENT_PORT=3000" >> .env
 echo "RESTART_POLICY=no" >> .env
 

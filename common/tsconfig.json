@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": false,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "target": "es6",
+    "skipLibCheck": true,
+    "outDir": "./lib",
+    "inlineSourceMap": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

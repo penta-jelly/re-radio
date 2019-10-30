@@ -2,13 +2,11 @@
   "extends": [
     "config:base"
   ],
-  "lockFileMaintenance": {
-    "enabled": true
-  },
   "schedule": ["before 9am", "after 1am"],
   "timezone": "Asia/Ho_Chi_Minh",
   "automerge": true,
   "automergeType": "branch",
+  "ignoreDeps": ["re-radio-common"],
   "packageRules": [
     {
       "packagePatterns": ["^eslint", "^prettier"],

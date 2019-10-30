@@ -19,8 +19,8 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - cd e2e && npm ci && cd ..
+  - cd e2e && npm install && cd ..
   - bash start.sh build
 
 script:
-  - cd e2e && npx start-server-and-test "cd .. && bash start.sh" "3000|8000/status" "npm run cypress:run:ci -- --parallel"
+  - cd e2e && npx start-server-and-test "cd .. && bash start.sh" "3000|2996/status" "npm run cypress:run:ci -- --parallel"

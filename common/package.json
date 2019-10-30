@@ -1,0 +1,17 @@
+{
+  "name": "re-radio-common",
+  "version": "0.1.0-SNAPSHOT",
+  "private": true,
+  "description": "Common package for sharing code between mono repositories",
+  "main": "lib/index.js",
+  "scripts": {
+    "compile": "tsc",
+    "dev": "run-p dev:**",
+    "dev:typescript": "tsc --watch --preserveWatchOutput"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "3.6.4"
+  }
+}
