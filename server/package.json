@@ -27,12 +27,12 @@
     "seed:reset": "npm run worker -- seed:reset"
   },
   "dependencies": {
-    "@nestjs/common": "6.7.1",
-    "@nestjs/core": "6.7.1",
+    "@nestjs/common": "6.8.5",
+    "@nestjs/core": "6.8.5",
     "@nestjs/graphql": "6.5.3",
     "@nestjs/jwt": "6.1.1",
     "@nestjs/passport": "6.1.0",
-    "@nestjs/platform-express": "6.7.1",
+    "@nestjs/platform-express": "6.8.5",
     "@nestjs/typeorm": "6.2.0",
     "apollo-server-express": "2.9.3",
     "bcrypt-nodejs": "0.0.3",
@@ -53,7 +53,7 @@
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.3",
     "type-graphql": "0.17.5",
-    "typeorm": "0.2.19"
+    "typeorm": "0.2.20"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.30",
