@@ -18,11 +18,19 @@ TODO: This section need to be updated
 
 * Docker: 18.x
 * Docker Compose: 1.24
+* NodeJS: 10.x
+* Npm: 6.x
 
-### Build & start
+### Build
 
 ```sh
-bash start.sh
+npm install && npm run install:dependencies && npm run initialize && npm run compile 
+```
+
+### start
+
+```sh
+npm start
 ```
 
 ## All services
@@ -31,25 +39,14 @@ Assume there is no customized configuration and we are talking about *localhost*
 
 * Database:
   * PostgreSQL (See [.env.example](./server/.env.example))
-  * PG Admin: [http://localhost:2996](http://localhost:2996) (`admin@reradio.com`/`123456`. See [.env.example](./server/.env.example))
+  * PG Admin: [http://localhost:3001](http://localhost:3001) (`admin@reradio.com`/`123456`. See [.env.example](./server/.env.example))
   * Redis (See [.env.example](./server/.env.example))
-* Server: [http://localhost:8000/graphql](http://localhost:8000/graphql)
+* Server: [http://localhost:2996/graphql](http://localhost:8000/graphql)
 * Client: [http://localhost:3000](http://localhost:3000)
 
 ## Development guideline
 
-### System requirement
-
-* Docker: 18.x
-* Docker Compose: 1.24
-* NodeJS: 10.x
-* Npm: 6.x
-
-### Build & start
-
-```sh
-npm install
-```
+### Start all development servers
 
 ```sh
 npm run dev

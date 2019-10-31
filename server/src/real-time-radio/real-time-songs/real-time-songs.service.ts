@@ -2,21 +2,20 @@ import { Injectable, Logger } from '@nestjs/common';
 import { Song, SongStatusEnum } from 'radio/song/entities/song.entity';
 import { SongService } from 'radio/song/services/song.service';
 import { StationService } from 'radio/station/services/station.service';
+import { sortSongs } from 're-radio-common';
 
 @Injectable()
 export class RealTimeSongService {
   private readonly logger = new Logger(RealTimeSongService.name);
   constructor(private readonly songService: SongService, private readonly stationService: StationService) {}
 
-  /**
-   * TODO: Implement an algorithm to figure out which song will be played next
-   */
   async findNextPlayingSongInStation(stationSlug: string): Promise<Song | null> {
     const songs = await this.songService.find({
       where: { stationSlug, status: SongStatusEnum.PENDING },
     });
     if (songs.length > 0) {
-      return songs[0];
+      const sortedSongs = sortSongs(songs);
+      return sortedSongs[0];
     }
     return null;
   }

@@ -1,6 +1,7 @@
 {
   "packages": [
-    "client", "server-next", "server", "e2e"
+    "client", "server", "e2e", "common"
   ],
-  "version": "0.1.0"
+  "version": "0.1.0-SNAPSHOT",
+  "stream": true
 }
