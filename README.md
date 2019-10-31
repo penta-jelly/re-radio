@@ -27,7 +27,7 @@ TODO: This section need to be updated
 npm install && npm run install:dependencies && npm run initialize && npm run compile 
 ```
 
-### start
+### Start
 
 ```sh
 npm start
