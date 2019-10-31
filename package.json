@@ -9,6 +9,9 @@
     "lint": "lerna run lint",
     "start": "npm-run-all --parallel lerna:start db",
     "lerna:start": "lerna run start --no-sort --parallel",
+    "ci:start": "npm-run-all --parallel ci:lerna:start ci:lerna:seed db",
+    "ci:lerna:start": "sleep 30 && lerna run start --no-sort --parallel",
+    "ci:lerna:seed": "sleep 30 && lerna run seed",
     "dev": "npm-run-all --parallel lerna:dev db",
     "lerna:dev": "lerna run dev --no-sort --parallel",
     "db": "npm run db:up",
@@ -17,7 +20,8 @@
   },
   "devDependencies": {
     "lerna": "3.18.3",
-    "npm-run-all": "4.1.5"
+    "npm-run-all": "4.1.5",
+    "start-server-and-test": "1.10.5"
   },
   "repository": {
     "type": "git",

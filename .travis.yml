@@ -19,8 +19,11 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - cd e2e && npm install && cd ..
-  - bash start.sh build
+  - npm install
+  - npm run install:dependencies
+  - npm run initialize
+  - npm run compile
+  - npm run lint
 
 script:
-  - cd e2e && npx start-server-and-test "cd .. && bash start.sh" "3000|2996/status" "npm run cypress:run:ci -- --parallel"
+  - npx start-server-and-test ci:start "3000|2996/status" "cd e2e && npm run cypress:run:ci"

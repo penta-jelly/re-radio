@@ -13,12 +13,12 @@ jobs:
       - name: Check out code
         uses: actions/checkout@master
       - name: Build
-        run: bash start.sh build
+        run: >
+          npm install && npm run install:dependencies && npm run initialize && npm run compile && npm run lint
       - name: Test
         env:
           CI: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: cd e2e && npm install && npx start-server-and-test "cd .. && bash start.sh" "3000|2996/status" cypress:run:ci && cd ..
-
+        run: npx start-server-and-test ci:start "3000|2996/status" "cd e2e && npm run cypress:run:ci"

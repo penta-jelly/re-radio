@@ -18,11 +18,19 @@ TODO: This section need to be updated
 
 * Docker: 18.x
 * Docker Compose: 1.24
+* NodeJS: 10.x
+* Npm: 6.x
 
-### Build & start
+### Build
 
 ```sh
-bash start.sh
+npm install && npm run install:dependencies && npm run initialize && npm run compile 
+```
+
+### start
+
+```sh
+npm start
 ```
 
 ## All services
@@ -38,18 +46,7 @@ Assume there is no customized configuration and we are talking about *localhost*
 
 ## Development guideline
 
-### System requirement
-
-* Docker: 18.x
-* Docker Compose: 1.24
-* NodeJS: 10.x
-* Npm: 6.x
-
-### Build & start
-
-```sh
-npm install && npm run install:dependencies && npm run initialize && npm run compile 
-```
+### Start all development servers
 
 ```sh
 npm run dev
