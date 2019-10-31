@@ -2,6 +2,7 @@ import { Card, CircularProgress, List, Typography } from '@material-ui/core';
 import { useRouter } from 'hooks/use-router';
 import { PlaylistItem } from 'modules/station/playlist/item';
 import { SongStatusEnum, useOnStationPlalistChangedSubscription, useStationPlayistQuery } from 'operations';
+import { sortSongs } from 're-radio-common';
 import React from 'react';
 import { useStyles } from './styles';
 
@@ -41,9 +42,10 @@ export const Playlist: React.FC = () => {
   } else if (error) {
     content = <CircularProgress />;
   } else if (data && data.playlist) {
+    const songs = sortSongs(data.playlist.map(song => ({ ...song, createdAt: new Date(song.createdAt) })));
     content = (
       <List className={classes.list} disablePadding dense>
-        {data.playlist.map(song => song && <PlaylistItem data={song} key={song.id} />)}
+        {songs.map(song => song && <PlaylistItem data={song} key={song.id} />)}
       </List>
     );
   }

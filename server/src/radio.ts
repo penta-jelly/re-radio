@@ -1,4 +1,6 @@
-require('tsconfig-paths/register'); // This line must be placed first
+require('tsconfig-paths').register({ baseUrl: 'lib', paths: {} });
+require('source-map-support/register');
+// Above lines must be placed first
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';

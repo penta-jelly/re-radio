@@ -1,21 +1,15 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "declaration": false,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "removeComments": false,
-    "noLib": false,
+    "declaration": true,
     "allowSyntheticDefaultImports": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
     "strict": true,
-    "strictPropertyInitialization": false,
     "target": "es6",
     "skipLibCheck": true,
     "outDir": "./lib",
-    "lib": ["es2018", "esnext"],
-    "inlineSourceMap": true,
-    "baseUrl": "src"
+    "inlineSourceMap": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

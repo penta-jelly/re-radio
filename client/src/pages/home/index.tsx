@@ -79,6 +79,23 @@ const HomePage: React.FunctionComponent<{}> = () => {
     history.push(`${match.url}`);
   }, [match, history]);
 
+  const formModalComponent = React.useCallback(
+    () => (
+      <Modal open onClose={closeCreateStationModal} id="create-station-modal">
+        <Slide in direction="left">
+          <div className={classes.modal}>
+            <CreateStationForm
+              postSubmit={{
+                refetchQueries: [{ query: StationsDocument, variables: queryVariables }],
+                redirectTo: match.url,
+              }}
+            />
+          </div>
+        </Slide>
+      </Modal>
+    ),
+    [classes.modal, closeCreateStationModal, match.url, queryVariables],
+  );
   return (
     <Layout>
       <div className={classes.root}>
@@ -103,26 +120,10 @@ const HomePage: React.FunctionComponent<{}> = () => {
                 <StationsList data={data} />
               </div>
             </div>
-            <Route
-              path={`${match.url}/create-station`}
-              component={() => (
-                <Modal open onClose={closeCreateStationModal} id="create-station-modal">
-                  <Slide in direction="left">
-                    <div className={classes.modal}>
-                      <CreateStationForm
-                        postSubmit={{
-                          refetchQueries: [{ query: StationsDocument, variables: queryVariables }],
-                          redirectTo: match.url,
-                        }}
-                      />
-                    </div>
-                  </Slide>
-                </Modal>
-              )}
-            />
           </>
         )}
       </div>
+      <Route path={`${match.url}/create-station`} component={formModalComponent} />
     </Layout>
   );
 };

@@ -5,6 +5,7 @@ query StationPlayer($stationSlug: String!) {
     url
     thumbnail
     duration
+    createdAt
     startedAt
     status
     upVoteUserIds
@@ -22,6 +23,7 @@ subscription OnStationPlayerChanged($stationSlug: String!) {
       url
       thumbnail
       duration
+      createdAt
       startedAt
       status
       upVoteUserIds

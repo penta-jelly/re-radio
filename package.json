@@ -2,10 +2,16 @@
   "name": "re-radio",
   "scripts": {
     "clean": "lerna run clean && lerna clean -y",
-    "postinstall": "lerna bootstrap --hoist",
+    "install:dependencies": "lerna bootstrap --hoist",
+    "initialize": "lerna run initialize",
     "format": "lerna run format --no-sort --parallel",
+    "compile": "lerna run compile",
+    "lint": "lerna run lint",
     "start": "npm-run-all --parallel lerna:start db",
     "lerna:start": "lerna run start --no-sort --parallel",
+    "ci:start": "npm-run-all --parallel ci:lerna:start ci:lerna:seed db",
+    "ci:lerna:start": "sleep 30 && lerna run start --no-sort --parallel",
+    "ci:lerna:seed": "sleep 30 && lerna run seed",
     "dev": "npm-run-all --parallel lerna:dev db",
     "lerna:dev": "lerna run dev --no-sort --parallel",
     "db": "npm run db:up",
@@ -13,8 +19,9 @@
     "db:down": "lerna run db:down --no-sort --parallel"
   },
   "devDependencies": {
-    "lerna": "3.17.0",
-    "npm-run-all": "4.1.5"
+    "lerna": "3.18.3",
+    "npm-run-all": "4.1.5",
+    "start-server-and-test": "1.10.6"
   },
   "repository": {
     "type": "git",

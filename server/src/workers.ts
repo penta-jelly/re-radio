@@ -1,4 +1,6 @@
-require('tsconfig-paths/register'); // This line must be placed first
+require('tsconfig-paths').register({ baseUrl: 'lib', paths: {} });
+require('source-map-support/register');
+// Above lines must be placed first
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { ConfigService } from 'core/config/config.service';
@@ -15,12 +17,14 @@ async function bootstrap() {
   const radioServerUrl = `http://localhost:${app.get(ConfigService).get(EnvVariables.RADIO_SERVER_PORT)}/status`;
   logger.log(`Wait until URL ${radioServerUrl} response.`);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
-  await require('wait-on')({ resources: [radioServerUrl], timeout: 120000 });
+  await require('wait-on')({ resources: [radioServerUrl], timeout: 30000 });
   logger.log(`URL ${radioServerUrl} responded.`);
 
   try {
     if (args.includes('seed')) {
       (await app.get(DevSeederService).shouldSeed()) && (await app.get(DevSeederService).seed());
+    } else if (args.includes('seed:song')) {
+      await app.get(DevSeederService).seedSongs();
     } else if (args.includes('seed:reset')) {
       await app.get(DevSeederService).reset();
     } else {
