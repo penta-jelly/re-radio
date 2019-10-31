@@ -4,6 +4,7 @@ import * as ApolloReactHooks from '@apollo/react-hooks';
 import gql from 'graphql-tag';
 
 export type Maybe<T> = T | null;
+
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string,
@@ -525,6 +526,7 @@ export type YoutubeVideoFindOneInput = {
   readonly videoId?: Maybe<Scalars['String']>,
   readonly url?: Maybe<Scalars['String']>,
 };
+
 export type CreateSongMutationVariables = {
   data: SongCreateInput
 };
@@ -582,9 +584,10 @@ export type CurrentUserQueryVariables = {};
 
 export type CurrentUserQuery = (
   { readonly __typename?: 'Query' }
-  & { readonly user: { readonly __typename?: 'User' }
+  & { readonly user: (
+    { readonly __typename?: 'User' }
     & UserBaseInformationFragment
-   }
+  ) }
 );
 
 export type UserBaseInformationFragment = (
@@ -608,9 +611,10 @@ export type StationQuery = (
     )>, readonly userRoles: ReadonlyArray<(
       { readonly __typename?: 'UserRole' }
       & Pick<UserRole, 'role'>
-      & { readonly user: { readonly __typename?: 'User' }
+      & { readonly user: (
+        { readonly __typename?: 'User' }
         & UserBaseInformationFragment
-       }
+      ) }
     )>, readonly playingSong: Maybe<(
       { readonly __typename?: 'Song' }
       & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
@@ -694,9 +698,10 @@ export type StationsQuery = (
     )>, readonly userRoles: ReadonlyArray<(
       { readonly __typename?: 'UserRole' }
       & Pick<UserRole, 'role'>
-      & { readonly user: { readonly __typename?: 'User' }
+      & { readonly user: (
+        { readonly __typename?: 'User' }
         & UserBaseInformationFragment
-       }
+      ) }
     )>, readonly playingSong: Maybe<(
       { readonly __typename?: 'Song' }
       & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
@@ -822,6 +827,7 @@ export type YoutubeVideosQuery = (
     ) }
   )> }
 );
+
 export const UserBaseInformationFragmentDoc = gql`
     fragment UserBaseInformation on User {
   id
@@ -841,9 +847,26 @@ export const CreateSongDocument = gql`
     `;
 export type CreateSongMutationFn = ApolloReactCommon.MutationFunction<CreateSongMutation, CreateSongMutationVariables>;
 
-    export function useCreateSongMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
-      return ApolloReactHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
-    }
+/**
+ * __useCreateSongMutation__
+ *
+ * To run a mutation, you first call `useCreateSongMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateSongMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createSongMutation, { data, loading, error }] = useCreateSongMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateSongMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
+      }
 export type CreateSongMutationHookResult = ReturnType<typeof useCreateSongMutation>;
 export type CreateSongMutationResult = ApolloReactCommon.MutationResult<CreateSongMutation>;
 export type CreateSongMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateSongMutation, CreateSongMutationVariables>;
@@ -858,9 +881,26 @@ export const CreateStationDocument = gql`
     `;
 export type CreateStationMutationFn = ApolloReactCommon.MutationFunction<CreateStationMutation, CreateStationMutationVariables>;
 
-    export function useCreateStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
-      return ApolloReactHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
-    }
+/**
+ * __useCreateStationMutation__
+ *
+ * To run a mutation, you first call `useCreateStationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateStationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createStationMutation, { data, loading, error }] = useCreateStationMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
+        return ApolloReactHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
+      }
 export type CreateStationMutationHookResult = ReturnType<typeof useCreateStationMutation>;
 export type CreateStationMutationResult = ApolloReactCommon.MutationResult<CreateStationMutation>;
 export type CreateStationMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateStationMutation, CreateStationMutationVariables>;
@@ -873,9 +913,26 @@ export const LoginDocument = gql`
     `;
 export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
 
-    export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-      return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
-    }
+/**
+ * __useLoginMutation__
+ *
+ * To run a mutation, you first call `useLoginMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLoginMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [loginMutation, { data, loading, error }] = useLoginMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+      }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
 export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
@@ -888,9 +945,26 @@ export const RegisterDocument = gql`
     `;
 export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
 
-    export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-      return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
-    }
+/**
+ * __useRegisterMutation__
+ *
+ * To run a mutation, you first call `useRegisterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useRegisterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [registerMutation, { data, loading, error }] = useRegisterMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+      }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
@@ -902,14 +976,29 @@ export const CurrentUserDocument = gql`
 }
     ${UserBaseInformationFragmentDoc}`;
 
-    export function useCurrentUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-      return ApolloReactHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
-    }
-      export function useCurrentUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+/**
+ * __useCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrentUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+        return ApolloReactHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
       }
-
+export function useCurrentUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+        }
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
+export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
 export type CurrentUserQueryResult = ApolloReactCommon.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const StationDocument = gql`
     query Station($slug: String!) {
@@ -937,14 +1026,30 @@ export const StationDocument = gql`
 }
     ${UserBaseInformationFragmentDoc}`;
 
-    export function useStationQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
-      return ApolloReactHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
-    }
-      export function useStationLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+/**
+ * __useStationQuery__
+ *
+ * To run a query within a React component, call `useStationQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStationQuery({
+ *   variables: {
+ *      slug: // value for 'slug'
+ *   },
+ * });
+ */
+export function useStationQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
+        return ApolloReactHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
       }
-
+export function useStationLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+        }
 export type StationQueryHookResult = ReturnType<typeof useStationQuery>;
+export type StationLazyQueryHookResult = ReturnType<typeof useStationLazyQuery>;
 export type StationQueryResult = ApolloReactCommon.QueryResult<StationQuery, StationQueryVariables>;
 export const StationPlayerDocument = gql`
     query StationPlayer($stationSlug: String!) {
@@ -963,14 +1068,30 @@ export const StationPlayerDocument = gql`
 }
     `;
 
-    export function useStationPlayerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
-      return ApolloReactHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
-    }
-      export function useStationPlayerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+/**
+ * __useStationPlayerQuery__
+ *
+ * To run a query within a React component, call `useStationPlayerQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStationPlayerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStationPlayerQuery({
+ *   variables: {
+ *      stationSlug: // value for 'stationSlug'
+ *   },
+ * });
+ */
+export function useStationPlayerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
+        return ApolloReactHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
       }
-
+export function useStationPlayerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+        }
 export type StationPlayerQueryHookResult = ReturnType<typeof useStationPlayerQuery>;
+export type StationPlayerLazyQueryHookResult = ReturnType<typeof useStationPlayerLazyQuery>;
 export type StationPlayerQueryResult = ApolloReactCommon.QueryResult<StationPlayerQuery, StationPlayerQueryVariables>;
 export const OnStationPlayerChangedDocument = gql`
     subscription OnStationPlayerChanged($stationSlug: String!) {
@@ -991,9 +1112,25 @@ export const OnStationPlayerChangedDocument = gql`
 }
     `;
 
-    export function useOnStationPlayerChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
-      return ApolloReactHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
-    }
+/**
+ * __useOnStationPlayerChangedSubscription__
+ *
+ * To run a query within a React component, call `useOnStationPlayerChangedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnStationPlayerChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnStationPlayerChangedSubscription({
+ *   variables: {
+ *      stationSlug: // value for 'stationSlug'
+ *   },
+ * });
+ */
+export function useOnStationPlayerChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
+      }
 export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
 export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
 export const StationPlayistDocument = gql`
@@ -1013,14 +1150,30 @@ export const StationPlayistDocument = gql`
 }
     `;
 
-    export function useStationPlayistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
-      return ApolloReactHooks.useQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
-    }
-      export function useStationPlayistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
+/**
+ * __useStationPlayistQuery__
+ *
+ * To run a query within a React component, call `useStationPlayistQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStationPlayistQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStationPlayistQuery({
+ *   variables: {
+ *      stationSlug: // value for 'stationSlug'
+ *   },
+ * });
+ */
+export function useStationPlayistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
+        return ApolloReactHooks.useQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
       }
-
+export function useStationPlayistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
+        }
 export type StationPlayistQueryHookResult = ReturnType<typeof useStationPlayistQuery>;
+export type StationPlayistLazyQueryHookResult = ReturnType<typeof useStationPlayistLazyQuery>;
 export type StationPlayistQueryResult = ApolloReactCommon.QueryResult<StationPlayistQuery, StationPlayistQueryVariables>;
 export const OnStationPlalistChangedDocument = gql`
     subscription OnStationPlalistChanged($stationSlug: String!) {
@@ -1041,9 +1194,25 @@ export const OnStationPlalistChangedDocument = gql`
 }
     `;
 
-    export function useOnStationPlalistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>) {
-      return ApolloReactHooks.useSubscription<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>(OnStationPlalistChangedDocument, baseOptions);
-    }
+/**
+ * __useOnStationPlalistChangedSubscription__
+ *
+ * To run a query within a React component, call `useOnStationPlalistChangedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnStationPlalistChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnStationPlalistChangedSubscription({
+ *   variables: {
+ *      stationSlug: // value for 'stationSlug'
+ *   },
+ * });
+ */
+export function useOnStationPlalistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>(OnStationPlalistChangedDocument, baseOptions);
+      }
 export type OnStationPlalistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlalistChangedSubscription>;
 export type OnStationPlalistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlalistChangedSubscription>;
 export const StationsDocument = gql`
@@ -1072,14 +1241,32 @@ export const StationsDocument = gql`
 }
     ${UserBaseInformationFragmentDoc}`;
 
-    export function useStationsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
-      return ApolloReactHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
-    }
-      export function useStationsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+/**
+ * __useStationsQuery__
+ *
+ * To run a query within a React component, call `useStationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStationsQuery({
+ *   variables: {
+ *      pagination: // value for 'pagination'
+ *      order: // value for 'order'
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useStationsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
+        return ApolloReactHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
       }
-
+export function useStationsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+        }
 export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
+export type StationsLazyQueryHookResult = ReturnType<typeof useStationsLazyQuery>;
 export type StationsQueryResult = ApolloReactCommon.QueryResult<StationsQuery, StationsQueryVariables>;
 export const OnStationChangedDocument = gql`
     subscription OnStationChanged {
@@ -1100,9 +1287,24 @@ export const OnStationChangedDocument = gql`
 }
     `;
 
-    export function useOnStationChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>) {
-      return ApolloReactHooks.useSubscription<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>(OnStationChangedDocument, baseOptions);
-    }
+/**
+ * __useOnStationChangedSubscription__
+ *
+ * To run a query within a React component, call `useOnStationChangedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnStationChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useOnStationChangedSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useOnStationChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>(OnStationChangedDocument, baseOptions);
+      }
 export type OnStationChangedSubscriptionHookResult = ReturnType<typeof useOnStationChangedSubscription>;
 export type OnStationChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationChangedSubscription>;
 export const UserProfileDocument = gql`
@@ -1135,14 +1337,30 @@ export const UserProfileDocument = gql`
 }
     `;
 
-    export function useUserProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
-      return ApolloReactHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
-    }
-      export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+/**
+ * __useUserProfileQuery__
+ *
+ * To run a query within a React component, call `useUserProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserProfileQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useUserProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
+        return ApolloReactHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
       }
-
+export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+        }
 export type UserProfileQueryHookResult = ReturnType<typeof useUserProfileQuery>;
+export type UserProfileLazyQueryHookResult = ReturnType<typeof useUserProfileLazyQuery>;
 export type UserProfileQueryResult = ApolloReactCommon.QueryResult<UserProfileQuery, UserProfileQueryVariables>;
 export const YoutubeVideoDocument = gql`
     query youtubeVideo($where: YoutubeVideoFindOneInput!) {
@@ -1191,14 +1409,30 @@ export const YoutubeVideoDocument = gql`
 }
     `;
 
-    export function useYoutubeVideoQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
-      return ApolloReactHooks.useQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
-    }
-      export function useYoutubeVideoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
+/**
+ * __useYoutubeVideoQuery__
+ *
+ * To run a query within a React component, call `useYoutubeVideoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useYoutubeVideoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useYoutubeVideoQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useYoutubeVideoQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
+        return ApolloReactHooks.useQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
       }
-
+export function useYoutubeVideoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
+        }
 export type YoutubeVideoQueryHookResult = ReturnType<typeof useYoutubeVideoQuery>;
+export type YoutubeVideoLazyQueryHookResult = ReturnType<typeof useYoutubeVideoLazyQuery>;
 export type YoutubeVideoQueryResult = ApolloReactCommon.QueryResult<YoutubeVideoQuery, YoutubeVideoQueryVariables>;
 export const YoutubeVideosDocument = gql`
     query youtubeVideos($where: YoutubeVideoFindAllInput!) {
@@ -1242,12 +1476,28 @@ export const YoutubeVideosDocument = gql`
 }
     `;
 
-    export function useYoutubeVideosQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
-      return ApolloReactHooks.useQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
-    }
-      export function useYoutubeVideosLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
-        return ApolloReactHooks.useLazyQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
+/**
+ * __useYoutubeVideosQuery__
+ *
+ * To run a query within a React component, call `useYoutubeVideosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useYoutubeVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useYoutubeVideosQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useYoutubeVideosQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
+        return ApolloReactHooks.useQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
       }
-
+export function useYoutubeVideosLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
+        }
 export type YoutubeVideosQueryHookResult = ReturnType<typeof useYoutubeVideosQuery>;
+export type YoutubeVideosLazyQueryHookResult = ReturnType<typeof useYoutubeVideosLazyQuery>;
 export type YoutubeVideosQueryResult = ApolloReactCommon.QueryResult<YoutubeVideosQuery, YoutubeVideosQueryVariables>;
