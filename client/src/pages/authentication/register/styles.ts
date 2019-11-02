@@ -5,7 +5,9 @@ export const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: '100vh',
     display: 'flex',
-    backgroundImage: 'url("/asset/image/login-background.jpg")',
+    backgroundImage: 'url("/asset/image/auth-background.jpg")',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
     flexDirection: 'row-reverse',
   },
   form: {

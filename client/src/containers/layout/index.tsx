@@ -1,11 +1,13 @@
-import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
+import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText, Modal, Slide } from '@material-ui/core';
 import { Image } from 'components/image';
 import { PageLoader } from 'components/page-loader';
 import { AuthenticatedListItem } from 'containers/layout/authenticated-list-item';
+import { useRouter } from 'hooks/use-router';
+import { LoginForm } from 'modules/user/authentication/login-form';
 import { useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import { useStyles } from './styles';
 
 export interface Props {
@@ -24,7 +26,36 @@ const defaultProps = {
 export const Layout: React.FC<Props> = props => {
   const classes = useStyles(props);
   const sidebar = React.useMemo<DrawerProps>(() => props.drawer || defaultProps.drawer, [props.drawer]);
+
+  const { match, history } = useRouter();
+  const openLoginModal = React.useCallback(() => {
+    history.push(`${match.url}/login`);
+  }, [match, history]);
+
+  const closeLoginModal = React.useCallback(() => {
+    history.push(`${match.url}`);
+  }, [match, history]);
+
+  const postLogin = React.useCallback(async () => {
+    closeLoginModal();
+    window.location.reload();
+  }, [closeLoginModal]);
+
+  const loginFormComponent = React.useCallback(
+    () => (
+      <Modal open onClose={closeLoginModal} id="login-modal">
+        <Slide in direction="left">
+          <div className={classes.modal}>
+            <LoginForm postLogin={postLogin} />
+          </div>
+        </Slide>
+      </Modal>
+    ),
+    [classes.modal, closeLoginModal, postLogin],
+  );
+
   const currentUserQuery = useCurrentUserQuery();
+
   if (currentUserQuery.loading) {
     return <PageLoader />;
   }
@@ -55,7 +86,7 @@ export const Layout: React.FC<Props> = props => {
           </ListItem>
           <div className={classes.spacer} />
           {currentUserQuery.error && (
-            <ListItem button component={Link} to="/login">
+            <ListItem button onClick={openLoginModal}>
               <>
                 <ListItemIcon className={classes.listItemIcon}>
                   <Icon>
@@ -68,6 +99,7 @@ export const Layout: React.FC<Props> = props => {
           )}
           {currentUserQuery.data && <AuthenticatedListItem user={currentUserQuery.data.user} drawer={sidebar} />}
         </List>
+        {currentUserQuery.error && <Route path={`${match.url}/login`} component={loginFormComponent} />}
       </Drawer>
       <div className={classes.content}>{props.children}</div>
     </div>
