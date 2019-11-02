@@ -1,24 +1,39 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
-  container: {},
+export const useStyles = makeStyles(({ palette, breakpoints, zIndex }) => ({
+  container: {
+    height: '100%',
+  },
   header: {
-    height: 64,
+    height: 48,
+    backgroundColor: palette.primary.main,
+    color: palette.primary.contrastText,
   },
   content: {
-    height: 'calc(100vh - 64px)',
+    height: 'calc(100% - 48px)',
   },
-  rightLayout: {
-    padding: '0 8px !important',
-  },
-  rightContainer: {
+  subContent: {
     height: '100%',
-    margin: '0 -8px',
   },
-  playerContainer: {
-    height: '60%',
+  fabIcon: {
+    '& svg': {
+      width: 24,
+      height: 24,
+    },
   },
   addSongContainer: {
-    height: '40%',
+    position: 'fixed',
+    right: 96,
+    bottom: 16,
+    width: 600,
+    height: 300,
+    zIndex: zIndex.modal,
+    [breakpoints.down('xs')]: {
+      bottom: 96,
+      right: 'auto',
+      left: 72,
+      width: 'calc(100% - 96px)',
+      height: 300,
+    },
   },
 }));

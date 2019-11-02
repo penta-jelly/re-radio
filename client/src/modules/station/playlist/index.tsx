@@ -49,5 +49,9 @@ export const Playlist: React.FC = () => {
       </List>
     );
   }
-  return <Card className={classes.container}>{content}</Card>;
+  return (
+    <Card className={classes.container} elevation={0} square id="playlist-container">
+      {content}
+    </Card>
+  );
 };

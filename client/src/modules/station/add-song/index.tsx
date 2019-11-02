@@ -25,7 +25,7 @@ export const AddSong: React.FC<{}> = () => {
 
   return (
     <Card className={classes.card}>
-      <Grid container className={classes.container} spacing={0}>
+      <Grid container className={classes.container}>
         <Grid item xs={12} className={classes.wrapper}>
           <Autocomplete
             items={data && data.youtubeVideos ? data.youtubeVideos : []}

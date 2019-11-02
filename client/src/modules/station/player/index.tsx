@@ -50,7 +50,9 @@ export const Player: React.FC = () => {
         </div>
       );
     } else {
-      content = <Typography variant="subtitle1">No song, add a new song to playlist first</Typography>;
+      content = (
+        <Typography variant="subtitle1">Press on the Action Button on the bottom right to add some songs.</Typography>
+      );
     }
   } else {
     content = (
@@ -60,7 +62,7 @@ export const Player: React.FC = () => {
     );
   }
   return (
-    <Card id="station-player" className={classes.container}>
+    <Card id="station-player" className={classes.container} elevation={0} square>
       {content}
     </Card>
   );

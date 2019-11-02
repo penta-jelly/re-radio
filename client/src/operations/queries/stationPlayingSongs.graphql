@@ -17,6 +17,7 @@ subscription OnStationPlayerChanged($stationSlug: String!) {
   onPlayingSongChanged: song(
     where: { stationSlug: $stationSlug }
   ) {
+    mutation
     entity {
       id
       title

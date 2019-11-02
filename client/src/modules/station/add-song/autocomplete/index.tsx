@@ -24,6 +24,8 @@ type AutocompleteWithDownshiftType = PropGetters<DropdownItem> & Actions<Dropdow
 export const Autocomplete: React.FC<AutocompleteProps> = props => {
   const classes = useStyles();
 
+  const inputRef = React.useRef<HTMLInputElement>();
+
   const [previewSong, setPreviewSong] = useState<YoutubeVideo>();
 
   const renderSuggestion = useCallback(
@@ -70,6 +72,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
       const { clearSelection, getInputProps, getMenuProps, inputValue, isOpen, openMenu, reset } = options;
 
       const _inputProps = getInputProps<InputBaseProps>({
+        inputRef,
         placeholder: props.placeholder || '',
         value: inputValue,
         onChange: event => {
@@ -106,6 +109,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
               postSubmit={() => {
                 reset();
                 clearSelection();
+                if (inputRef.current) inputRef.current.focus();
               }}
             />
           </div>

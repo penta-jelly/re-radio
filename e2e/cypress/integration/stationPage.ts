@@ -9,9 +9,10 @@ describe('Show Station Page', () => {
     });
 
     it('should have layout texts', () => {
-      cy.get(stationPage.elements.playerContainer).should('exist');
-      cy.contains(stationPage.elements.headerText).should('exist');
-      cy.contains(stationPage.elements.chatBoxText).should('exist');
+      cy.contains('Station A').should('be.visible');
+      cy.contains('Playlist').should('be.exist');
+      cy.contains('History').should('be.exist');
+      cy.contains('Favourite').should('be.exist');
     });
   });
 
@@ -32,15 +33,20 @@ describe('Show Station Page', () => {
 
 describe('Station Page components', () => {
   const stationPage = StationPage();
-  beforeEach(() => {
+  before(() => {
     stationPage.navigate('station-a');
   });
   describe('Player', () => {
     it('should render player container', () => {
-      cy.get(stationPage.elements.playerContainer)
+      cy.get(stationPage.elements.player.container)
         .should('be.visible')
         .find('h4, h6')
         .should('be.visible');
+    });
+  });
+  describe('Playlist', () => {
+    it('should render playlist container', () => {
+      cy.get(stationPage.elements.playlist.container).should('be.visible');
     });
   });
 });
@@ -51,12 +57,20 @@ describe('Add a song', () => {
   it('should be able to add a song to the playlist', () => {
     stationPage.navigate('station-a', true);
 
+    stationPage.clickAddSongFab();
+
     stationPage.checkRenderingOfAddSong();
-    stationPage.searchSong('hello');
+    stationPage.searchSong('Hello');
 
     stationPage.checkRenderingOfPreviewSong();
 
     stationPage.addSong();
-    stationPage.checkRenderingOfAddSong();
+
+    stationPage.clickAddSongFab();
+
+    cy.get(stationPage.elements.playlist.container, { timeout: 10000 }) // The delay for the server to start the newly added song
+      .should('be.visible')
+      .contains('Hello')
+      .should('be.visible');
   });
 });

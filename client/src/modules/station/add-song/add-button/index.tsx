@@ -1,4 +1,5 @@
 import { Fab } from '@material-ui/core';
+import { FabProps as MuiFabProps } from '@material-ui/core/Fab';
 import { useRouter } from 'hooks/use-router';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import {
@@ -14,13 +15,14 @@ import { MdSend } from 'react-icons/md';
 interface Props {
   previewSong?: YoutubeVideo;
   postSubmit?(): void;
+  muiProps?: MuiFabProps;
 }
 
 interface RouteParams {
   slug: string;
 }
 
-export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
+export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }) => {
   const [addSong, createSongMutation] = useCreateSongMutation();
   const { match } = useRouter<RouteParams>();
   const currentUserQuery = useCurrentUserQuery();
@@ -86,6 +88,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit }) => {
 
   return (
     <Fab
+      {...muiProps}
       id="submit-song-button"
       size="medium"
       color="primary"

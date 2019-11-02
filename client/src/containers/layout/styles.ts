@@ -37,7 +37,7 @@ export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) =>
     flex: 1,
   },
   title: {
-    height: '4rem',
+    height: 48,
     padding: spacing(1),
     backgroundColor: palette.primary.main,
     color: palette.common.white,

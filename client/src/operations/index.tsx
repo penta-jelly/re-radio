@@ -644,6 +644,7 @@ export type OnStationPlayerChangedSubscription = (
   { readonly __typename?: 'Subscription' }
   & { readonly onPlayingSongChanged: (
     { readonly __typename?: 'SongSubscription' }
+    & Pick<SongSubscription, 'mutation'>
     & { readonly entity: (
       { readonly __typename?: 'SongSubscriptionEntity' }
       & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
@@ -673,6 +674,7 @@ export type OnStationPlalistChangedSubscription = (
   { readonly __typename?: 'Subscription' }
   & { readonly onPlaylistSongChanged: (
     { readonly __typename?: 'SongSubscription' }
+    & Pick<SongSubscription, 'mutation'>
     & { readonly entity: (
       { readonly __typename?: 'SongSubscriptionEntity' }
       & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
@@ -1096,6 +1098,7 @@ export type StationPlayerQueryResult = ApolloReactCommon.QueryResult<StationPlay
 export const OnStationPlayerChangedDocument = gql`
     subscription OnStationPlayerChanged($stationSlug: String!) {
   onPlayingSongChanged: song(where: {stationSlug: $stationSlug}) {
+    mutation
     entity {
       id
       title
@@ -1178,6 +1181,7 @@ export type StationPlayistQueryResult = ApolloReactCommon.QueryResult<StationPla
 export const OnStationPlalistChangedDocument = gql`
     subscription OnStationPlalistChanged($stationSlug: String!) {
   onPlaylistSongChanged: song(where: {stationSlug: $stationSlug}) {
+    mutation
     entity {
       id
       title

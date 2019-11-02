@@ -17,7 +17,7 @@ export const Preview: React.FC<Props> = ({ previewSong }) => {
           src={previewSong.snippet.thumbnails.default.url}
           className={classes.previewImg}
           id="preview-image"
-          alt=""
+          alt={previewSong.snippet.title}
         />
       </Grid>
       <Grid item xs={9} className={classes.previewContent}>
