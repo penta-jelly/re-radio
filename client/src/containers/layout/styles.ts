@@ -61,4 +61,11 @@ export const useStyles = makeStyles(({ palette, typography, spacing }: Theme) =>
     borderRadius: '50%',
     display: 'block',
   }),
+  modal: {
+    position: 'absolute',
+    width: 300,
+    height: '100%',
+    right: 0,
+    top: 0,
+  },
 }));

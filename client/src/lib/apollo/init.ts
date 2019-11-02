@@ -2,6 +2,7 @@ import { ApolloClient, ApolloLink, InMemoryCache } from 'apollo-boost';
 import { WebSocketLink } from 'apollo-link-ws';
 import { createUploadLink } from 'apollo-upload-client';
 import { getMainDefinition } from 'apollo-utilities';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export function initApollo() {
   let uri = '';
@@ -13,10 +14,11 @@ export function initApollo() {
     uri: `${uri}/graphql`,
   });
 
-  const wsLink = new WebSocketLink({
-    uri: `ws://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
-    options: { reconnect: true },
-  });
+  const subscriptionClient = new SubscriptionClient(
+    `ws://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
+    { reconnect: true },
+  );
+  const wsLink = new WebSocketLink(subscriptionClient);
 
   const link = ApolloLink.split(
     ({ query }) => {
