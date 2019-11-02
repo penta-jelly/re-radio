@@ -20,6 +20,7 @@ query StationPlayist($stationSlug: String!) {
 
 subscription OnStationPlalistChanged($stationSlug: String!) {
   onPlaylistSongChanged: song(where: { stationSlug: $stationSlug }) {
+    mutation
     entity {
       id
       title

@@ -13,6 +13,7 @@ export const useStyles = makeStyles(({ spacing }: Theme) => ({
     width: `calc(100% - 56px)`,
   },
   paper: {
+    marginTop: spacing(1),
     height: 200,
     overflowY: 'auto',
     position: 'absolute',

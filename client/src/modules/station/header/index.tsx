@@ -24,7 +24,7 @@ export const Header: React.FC = props => {
   }, [data, loading, error]);
 
   return (
-    <Card className={classes.container}>
+    <Card className={classes.container} elevation={0} square>
       <Typography variant="subtitle1">{content}</Typography>
     </Card>
   );
