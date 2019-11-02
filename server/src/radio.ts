@@ -10,8 +10,10 @@ import { RadioModule } from 'radio/radio.module';
 
 async function bootstrap() {
   const logger = new Logger('RadioGraphQLService');
-  const app = await NestFactory.create<NestExpressApplication>(RadioModule);
-  const port = app.get(ConfigService).get(EnvVariables.RADIO_SERVER_PORT);
+  const app = await NestFactory.create<NestExpressApplication>(RadioModule, {
+    logger: ConfigService.getLogLevels(),
+  });
+  const port = ConfigService.get(EnvVariables.RADIO_SERVER_PORT);
   await app.listen(port);
   logger.log(`Radio GraphQL service successfully started at port ${port}.`);
 }

@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, LogLevel } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import { EnvVariables } from './config.variables';
 
@@ -51,5 +51,27 @@ export class ConfigService {
 
   isStaging(): boolean {
     return this.get(EnvVariables.NODE_ENV) === 'staging';
+  }
+
+  static getLogLevels(): LogLevel[] {
+    const defaultLogLevels: LogLevel[] = ['error', 'warn', 'log', 'debug', 'verbose'];
+
+    const envLogLevel = ConfigService.get(EnvVariables.LOG_LEVEL);
+    let logLevel: LogLevel = 'log';
+    if (defaultLogLevels.some(level => envLogLevel === level)) {
+      logLevel = envLogLevel as LogLevel;
+    }
+    switch (logLevel) {
+      case 'error':
+        return ['error'];
+      case 'warn':
+        return ['error', 'warn'];
+      case 'log':
+        return ['error', 'warn', 'log'];
+      case 'debug':
+        return ['error', 'warn', 'log', 'debug'];
+      case 'verbose':
+        return ['error', 'warn', 'log', 'debug', 'verbose'];
+    }
   }
 }
