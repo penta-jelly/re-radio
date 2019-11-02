@@ -41,7 +41,7 @@ export class RealTimeSongsWorkerService {
     if (duration <= 0) {
       await this.updatePlayedSongAndPlayNextSong(song);
     } else {
-      this.logger.debug(
+      this.logger.log(
         `Station [${song.stationSlug}] Song [${song.id}] "${song.title}" will be timed out in ${duration} milliseconds.`,
       );
       this.playersMap[song.stationSlug] = {
@@ -78,7 +78,7 @@ export class RealTimeSongsWorkerService {
   }
 
   protected async onSongCreated(song: Song) {
-    this.logger.debug(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been created.`);
+    this.logger.log(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been created.`);
     if (await this.realTimeStationService.isStationReadyToPlayNextSong(song.stationSlug)) {
       const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
       if (nextPlayingSong) {
@@ -88,7 +88,7 @@ export class RealTimeSongsWorkerService {
   }
 
   protected async onSongUpdated(song: Song) {
-    this.logger.debug(
+    this.logger.log(
       `Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been updated with status ${song.status}.`,
     );
     const playerInstance = this.playersMap[song.stationSlug];
@@ -102,7 +102,7 @@ export class RealTimeSongsWorkerService {
   }
 
   protected async onSongDeleted(song: Song) {
-    this.logger.debug(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been deleted.`);
+    this.logger.log(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been deleted.`);
     const playerInstance = this.playersMap[song.stationSlug];
     if (!playerInstance) return;
     if (song.status === SongStatusEnum.PLAYING) {

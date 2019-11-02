@@ -54,7 +54,7 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
     if (exception instanceof UnauthorizedException) {
       this.logger.verbose(exception.stack);
     } else {
-      this.logger.debug(exception.stack);
+      this.logger.log(exception.stack);
     }
     return message;
   }

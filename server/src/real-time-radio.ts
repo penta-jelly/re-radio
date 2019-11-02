@@ -10,11 +10,12 @@ import { RealTimeRadioModule } from 'real-time-radio/real-time-radio.module';
 
 async function bootstrap() {
   const logger = new Logger('RealTimeRadioGraphQLService');
-  const app = await NestFactory.create<NestExpressApplication>(RealTimeRadioModule);
+  const app = await NestFactory.create<NestExpressApplication>(RealTimeRadioModule, {
+    logger: ConfigService.getLogLevels(),
+  });
 
-  const configService = app.get(ConfigService);
-  const serverHost = configService.get(EnvVariables.RADIO_SERVER_HOST);
-  const serverPort = configService.get(EnvVariables.RADIO_SERVER_PORT);
+  const serverHost = ConfigService.get(EnvVariables.RADIO_SERVER_HOST);
+  const serverPort = ConfigService.get(EnvVariables.RADIO_SERVER_PORT);
   const radioServerUrl = `http://${serverHost}:${serverPort}/status`;
   logger.log(`Wait until URL ${radioServerUrl} response.`);
   // eslint-disable-next-line @typescript-eslint/no-var-requires
