@@ -1,10 +1,11 @@
 {
   "name": "re-radio",
+  "private": true,
+  "workspaces": ["client", "server", "e2e", "common"],
   "scripts": {
     "clean": "lerna run clean && lerna clean -y",
-    "install:dependencies": "lerna bootstrap --hoist",
     "initialize": "lerna run initialize",
-    "format": "lerna run format --no-sort --parallel",
+    "format": "lerna run format",
     "compile": "lerna run compile",
     "lint": "lerna run lint",
     "start": "npm-run-all --parallel lerna:start db",
@@ -14,7 +15,7 @@
     "ci:lerna:seed": "sleep 30 && lerna run seed",
     "dev": "npm-run-all --parallel lerna:dev db",
     "lerna:dev": "lerna run dev --no-sort --parallel",
-    "db": "npm run db:up",
+    "db": "yarn db:up",
     "db:up": "lerna run db:up --no-sort --parallel",
     "db:down": "lerna run db:down --no-sort --parallel"
   },

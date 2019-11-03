@@ -61,7 +61,7 @@ export const CreateStationForm: React.FC<Props> = props => {
         formik.setSubmitting(false);
       }
     },
-    [props.postSubmit, history, createStationMutation, currentUserQuery],
+    [currentUserQuery.error, createStationMutation, props.postSubmit, notifyUnauthorizedUser, history],
   );
 
   return (

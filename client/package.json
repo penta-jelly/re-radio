@@ -1,7 +1,6 @@
 {
   "name": "re-radio-client",
   "version": "0.1.0-SNAPSHOT",
-  "private": true,
   "scripts": {
     "initialize": "shx cp -n .env.example .env",
     "start": "react-scripts start | cat -",

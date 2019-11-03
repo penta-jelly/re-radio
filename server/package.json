@@ -1,7 +1,6 @@
 {
   "name": "re-radio-server",
   "version": "0.1.0-SNAPSHOT",
-  "private": true,
   "scripts": {
     "initialize": "shx cp -n .env.example .env",
     "compile": "tsc",
@@ -16,15 +15,15 @@
     "dev:graphql": "wait-on lib/radio.js && nodemon lib/radio.js",
     "dev:real-time": "wait-on lib/real-time-radio.js && nodemon lib/real-time-radio.js",
     "dev:seed": "wait-on lib/workers.js && node lib/workers.js seed",
-    "db": "npm run db:up",
+    "db": "yarn db:up",
     "db:up": "docker-compose -f ./docker-compose.db.yml --project-directory . up",
     "db:down": "docker-compose -f ./docker-compose.db.yml --project-directory . down",
     "typeorm": "node lib/typeorm-cli.js --config lib/typeorm-options.js",
-    "typeorm:migrate": "npm run typeorm migration:generate -- -n",
+    "typeorm:migrate": "yarn typeorm migration:generate -- -n",
     "worker": "node lib/workers.js",
-    "seed": "npm run worker -- seed",
-    "seed:song": "npm run worker -- seed:song",
-    "seed:reset": "npm run worker -- seed:reset"
+    "seed": "yarn worker -- seed",
+    "seed:song": "yarn worker -- seed:song",
+    "seed:reset": "yarn worker -- seed:reset"
   },
   "dependencies": {
     "@nestjs/common": "6.8.5",

@@ -1,6 +1,6 @@
 {
   "name": "re-radio-e2e",
-  "private": true,
+  "version": "0.1.0-SNAPSHOT",
   "scripts": {
     "cypress:run": "cypress run",
     "cypress:run:ci": "cypress run --record",
