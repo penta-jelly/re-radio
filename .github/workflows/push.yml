@@ -13,12 +13,13 @@ jobs:
       - name: Check out code
         uses: actions/checkout@master
       - name: Build
-        run: >
-          npm install && npm run install:dependencies && npm run initialize && npm run compile && npm run lint
+        run: yarn install --frozen-lockfile && yarn run initialize && yarn run compile
+      - name: Lint
+        run: yarn run lint
       - name: Test
         env:
           CI: true
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: npx start-server-and-test ci:start "3000|2996/status" "cd e2e && npm run cypress:run:ci"
+        run: yarn start-server-and-test ci:start "3000|2996/status" "yarn lerna run cypress:run:ci --scope re-radio-e2e"

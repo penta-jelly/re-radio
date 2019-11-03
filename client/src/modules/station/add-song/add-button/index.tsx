@@ -76,14 +76,15 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
       }
     }
   }, [
+    currentUserQuery.error,
     currentUserQuery.loading,
     currentUserQuery.data,
+    notifyUnauthorizedUser,
     youtubeVideoQuery.loading,
     youtubeVideoQuery.data,
     addSong,
     match.params.slug,
     postSubmit,
-    notifyUnauthorizedUser,
   ]);
 
   return (

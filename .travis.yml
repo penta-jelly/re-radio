@@ -4,9 +4,6 @@ node_js:
 addons:
   apt:
     packages: [libgconf-2-4]
-cache:
-  npm: true
-  directories: [~/.cache]
 services:
   - docker
 env:
@@ -19,11 +16,10 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
 
 install:
-  - npm install
-  - npm run install:dependencies
-  - npm run initialize
-  - npm run compile
-  - npm run lint
+  - yarn install --frozen-lockfile
+  - yarn run initialize
+  - yarn run compile
+  - yarn run lint
 
 script:
-  - npx start-server-and-test ci:start "3000|2996/status" "cd e2e && npm run cypress:run:ci"
+  - yarn start-server-and-test ci:start "3000|2996/status" "yarn lerna run cypress:run:ci --scope re-radio-e2e"

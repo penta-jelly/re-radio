@@ -19,18 +19,18 @@ TODO: This section need to be updated
 * Docker: 18.x
 * Docker Compose: 1.24
 * NodeJS: 10.x
-* Npm: 6.x
+* Yarn: 1.x
 
 ### Build
 
 ```sh
-npm install && npm run install:dependencies && npm run initialize && npm run compile 
+yarn install && yarn run initialize && yarn run compile
 ```
 
 ### Start
 
 ```sh
-npm start
+yarn start
 ```
 
 ## All services
@@ -49,7 +49,7 @@ Assume there is no customized configuration and we are talking about *localhost*
 ### Start all development servers
 
 ```sh
-npm run dev
+yarn run dev
 ```
 
 Also, see [re-radio wiki](https://github.com/penta-jelly/re-radio/wiki) for more information.
