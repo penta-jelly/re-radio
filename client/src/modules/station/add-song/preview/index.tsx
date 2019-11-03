@@ -21,9 +21,12 @@ export const Preview: React.FC<Props> = ({ previewSong }) => {
         />
       </Grid>
       <Grid item xs={9} className={classes.previewContent}>
-        <Typography variant="body1" className={classes.songTitle} id="preview-song-title">
-          {previewSong.snippet.title}
-        </Typography>
+        <Typography
+          dangerouslySetInnerHTML={{ __html: previewSong.snippet.title }}
+          variant="body1"
+          className={classes.songTitle}
+          id="preview-song-title"
+        />
         <Typography variant="body2" id="preview-song-channel">
           {previewSong.snippet.channelTitle}
         </Typography>

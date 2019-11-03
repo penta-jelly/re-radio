@@ -38,10 +38,7 @@ describe('Station Page components', () => {
   });
   describe('Player', () => {
     it('should render player container', () => {
-      cy.get(stationPage.elements.player.container)
-        .should('be.visible')
-        .find('h4, h6')
-        .should('be.visible');
+      cy.get(stationPage.elements.player.container).should('be.visible');
     });
   });
   describe('Playlist', () => {
