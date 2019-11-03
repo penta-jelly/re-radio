@@ -12,13 +12,6 @@ jobs:
           node-version: 10.x
       - name: Check out code
         uses: actions/checkout@master
-      - name: Use cache
-        uses: actions/cache@preview
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
       - name: Build
         run: yarn install --frozen-lockfile && yarn run initialize && yarn run compile
       - name: Lint
