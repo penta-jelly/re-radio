@@ -1,7 +1,8 @@
 {
   "recommendations": [
-    "mquandalle.graphql",
-    "peterjausovec.vscode-docker",
+    "dbaeumer.vscode-eslint",
+    "ms-azuretools.vscode-docker",
+    "prisma.vscode-graphql",
     "mikestead.dotenv",
     "editorconfig.editorconfig",
     "esbenp.prettier-vscode"
