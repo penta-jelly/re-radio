@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException, NotAcceptableException } from '@nestjs/common';
-import * as getVideoId from 'get-video-id';
-import * as Moment from 'moment';
+import getVideoId from 'get-video-id';
+import Moment from 'moment';
 import fetch from 'node-fetch';
 import { EnvVariables } from 'core/config/config.variables';
 import { ConfigService } from 'core/config/config.service';
@@ -53,7 +53,6 @@ export class YoutubeService {
   }
 
   public parseDuration(duration: string) {
-    // eslint-disable-next-line import/namespace
     return Moment.duration(duration).asMilliseconds();
   }
 }

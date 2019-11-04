@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as Bcrypt from 'bcrypt-nodejs';
+import Bcrypt from 'bcrypt-nodejs';
 import { DeepPartial, Repository } from 'typeorm';
 import { Song, SongStatusEnum } from 'radio/song/entities/song.entity';
 import { StationTag } from 'radio/station/entities/station-tag.entity';

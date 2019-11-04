@@ -1,5 +1,5 @@
-import * as Fs from 'fs';
-import * as Path from 'path';
+import Fs from 'fs';
+import Path from 'path';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()

@@ -1,5 +1,5 @@
-import * as Fs from 'fs';
-import * as Path from 'path';
+import Fs from 'fs';
+import Path from 'path';
 import { Controller, Get, Logger, NotFoundException, Param, Res } from '@nestjs/common';
 import { Response } from 'express';
 import { FilesService } from './files.service';
