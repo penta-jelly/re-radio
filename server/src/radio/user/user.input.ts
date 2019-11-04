@@ -1,6 +1,6 @@
 import { IsEmail, IsOptional, IsUrl, MaxLength, MinLength } from 'class-validator';
-import { OrderEnum } from 'core/graphql/input/order';
 import { Field, InputType, Int } from 'type-graphql';
+import { OrderEnum } from 'core/graphql/input/order';
 
 @InputType()
 export class UserFindAllOrderInput {

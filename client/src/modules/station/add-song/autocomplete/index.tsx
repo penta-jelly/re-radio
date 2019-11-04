@@ -1,9 +1,9 @@
 import { CircularProgress, Grid, MenuItem, Paper, Typography } from '@material-ui/core';
 import { InputBaseProps } from '@material-ui/core/InputBase';
-import { ReSearch } from 'components/input/re-search';
 import Downshift, { Actions, DownshiftState, PropGetters, StateChangeOptions } from 'downshift';
-import { YoutubeVideo, YoutubeVideosQuery } from 'operations';
 import React, { useCallback, useState } from 'react';
+import { YoutubeVideo, YoutubeVideosQuery } from 'operations';
+import { ReSearch } from 'components/input/re-search';
 import { AddButton } from '../add-button';
 import { Preview } from '../preview';
 import { useStyles } from './styles';

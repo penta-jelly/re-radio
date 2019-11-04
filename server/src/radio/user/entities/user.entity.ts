@@ -1,4 +1,3 @@
-import { Station } from 'radio/station/entities/station.entity';
 import {
   Column,
   CreateDateColumn,
@@ -8,6 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Station } from 'radio/station/entities/station.entity';
 import { UserRole } from './user-role.entity';
 
 @Entity()

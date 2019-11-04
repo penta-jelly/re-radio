@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { TypeOrmOptionsFactory } from '@nestjs/typeorm';
+import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 import { ConfigService } from 'core/config/config.service';
 import { EnvVariables } from 'core/config/config.variables';
-import { PostgresConnectionOptions } from 'typeorm/driver/postgres/PostgresConnectionOptions';
 
 @Injectable()
 export class TypeormOptions implements TypeOrmOptionsFactory {

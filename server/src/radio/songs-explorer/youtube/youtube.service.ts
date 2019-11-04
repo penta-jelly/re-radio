@@ -1,9 +1,9 @@
 import { Injectable, InternalServerErrorException, NotAcceptableException } from '@nestjs/common';
-import { ConfigService } from 'core/config/config.service';
-import { EnvVariables } from 'core/config/config.variables';
-import * as getVideoId from 'get-video-id';
-import * as Moment from 'moment';
+import getVideoId from 'get-video-id';
+import Moment from 'moment';
 import fetch from 'node-fetch';
+import { EnvVariables } from 'core/config/config.variables';
+import { ConfigService } from 'core/config/config.service';
 import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from 'radio/songs-explorer/youtube/youtube.dto';
 import { YoutubeVideoFindAllInput, YoutubeVideoOrderEnum } from 'radio/songs-explorer/youtube/youtube.input';
 

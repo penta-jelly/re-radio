@@ -1,5 +1,5 @@
 import { Injectable, InternalServerErrorException, LogLevel } from '@nestjs/common';
-import * as dotenv from 'dotenv';
+import Dotenv from 'dotenv';
 import { EnvVariables } from './config.variables';
 
 @Injectable()
@@ -7,7 +7,7 @@ export class ConfigService {
   private static loaded = false;
   private static loadDotEnv() {
     if (!ConfigService.loaded) {
-      dotenv.config();
+      Dotenv.config();
       ConfigService.loaded = true;
     }
   }

@@ -1,12 +1,12 @@
 import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
 import { Formik } from 'formik';
-import { LoginInput, useLoginMutation } from 'operations';
 import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
+import { LoginInput, useLoginMutation } from 'operations';
 import { useStyles } from './styles';
 
 type DataKeys = keyof LoginInput;

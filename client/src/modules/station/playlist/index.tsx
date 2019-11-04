@@ -1,9 +1,9 @@
 import { Card, CircularProgress, List, Typography } from '@material-ui/core';
-import { useRouter } from 'hooks/use-router';
-import { PlaylistItem } from 'modules/station/playlist/item';
-import { SongStatusEnum, useOnStationPlalistChangedSubscription, useStationPlayistQuery } from 'operations';
 import { sortSongs } from 're-radio-common';
 import React from 'react';
+import { useRouteMatch } from 'react-router-dom';
+import { SongStatusEnum, useOnStationPlalistChangedSubscription, useStationPlayistQuery } from 'operations';
+import { PlaylistItem } from 'modules/station/playlist/item';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -12,7 +12,11 @@ interface RouteParams {
 
 export const Playlist: React.FC = () => {
   const classes = useStyles();
-  const { match } = useRouter<RouteParams>();
+
+  const match = useRouteMatch<RouteParams>();
+  if (!match) {
+    throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
+  }
 
   const { loading, error, data, updateQuery } = useStationPlayistQuery({
     variables: { stationSlug: match.params.slug },

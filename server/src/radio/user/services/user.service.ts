@@ -1,8 +1,8 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import * as Bcrypt from 'bcrypt-nodejs';
-import { StationService } from 'radio/station/services/station.service';
+import Bcrypt from 'bcrypt-nodejs';
 import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
+import { StationService } from 'radio/station/services/station.service';
 import { UserRole } from '../entities/user-role.entity';
 import { User } from '../entities/user.entity';
 

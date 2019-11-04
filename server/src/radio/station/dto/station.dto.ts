@@ -1,7 +1,7 @@
+import { Field, Int, ObjectType } from 'type-graphql';
 import { SongDTO } from 'radio/song/dto/song.dto';
 import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
 import { UserDTO } from 'radio/user/dto/user.dto';
-import { Field, Int, ObjectType } from 'type-graphql';
 import { StationTagDTO } from './station-tag.dto';
 
 @ObjectType('Station')

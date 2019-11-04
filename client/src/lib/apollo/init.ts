@@ -4,7 +4,12 @@ import { createUploadLink } from 'apollo-upload-client';
 import { getMainDefinition } from 'apollo-utilities';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
-export function initApollo() {
+export interface AppClient {
+  subscription: SubscriptionClient;
+  apollo: ApolloClient<any>;
+}
+
+export function initClient(): AppClient {
   let uri = '';
   if (process.env.NODE_ENV !== 'production') {
     uri = `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
@@ -16,7 +21,13 @@ export function initApollo() {
 
   const subscriptionClient = new SubscriptionClient(
     `ws://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
-    { reconnect: true },
+    {
+      reconnect: true,
+      connectionParams: () => {
+        const token = localStorage.getItem('token');
+        return { Authorization: token };
+      },
+    },
   );
   const wsLink = new WebSocketLink(subscriptionClient);
 
@@ -43,7 +54,10 @@ export function initApollo() {
     return next ? next(operation) : null;
   });
 
-  return new ApolloClient({ link: ApolloLink.from([authLink, link]), cache: new InMemoryCache() });
+  return {
+    apollo: new ApolloClient({ link: ApolloLink.from([authLink, link]), cache: new InMemoryCache() }),
+    subscription: subscriptionClient,
+  };
 }
 
 interface Context {

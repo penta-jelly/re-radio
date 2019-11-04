@@ -1,6 +1,4 @@
 import { CircularProgress, Grid, Icon, Tooltip, Typography } from '@material-ui/core';
-import { PrimaryButton } from 'components/button/primary-button';
-import { useUserProfileQuery } from 'operations';
 import React from 'react';
 import {
   FaBuilding,
@@ -13,6 +11,8 @@ import {
   FaInfoCircle,
   FaUser,
 } from 'react-icons/fa';
+import { useUserProfileQuery } from 'operations';
+import { PrimaryButton } from 'components/button/primary-button';
 import { ProfileAvatar } from '../avatar';
 import { useStyles } from './styles';
 

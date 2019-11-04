@@ -1,7 +1,7 @@
 import { IsUrl } from 'class-validator';
+import { Field, InputType, Int } from 'type-graphql';
 import { OrderEnum } from 'core/graphql/input/order';
 import { SongStatusEnum } from 'radio/song/entities/song.entity';
-import { Field, InputType, Int } from 'type-graphql';
 
 @InputType()
 export class SongFindAllOrderInput {
