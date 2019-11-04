@@ -7,7 +7,7 @@
     "initialize": "lerna run initialize",
     "format": "lerna run format",
     "compile": "lerna run compile",
-    "lint": "lerna run lint",
+    "lint": "lerna run lint --parallel",
     "start": "npm-run-all --parallel lerna:start db",
     "lerna:start": "lerna run start --no-sort --parallel",
     "ci:start": "npm-run-all --parallel ci:lerna:start ci:lerna:seed db",
