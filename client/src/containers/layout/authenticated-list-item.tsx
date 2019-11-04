@@ -5,6 +5,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { DrawerProps } from '.';
 import { useStyles } from './styles';
+import { AppContext } from 'containers/app';
 
 export interface Props {
   user: CurrentUserQuery['user'];
@@ -16,16 +17,20 @@ export const AuthenticatedListItem: React.FC<Props> = ({ user, drawer }) => {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const appContext = React.useContext(AppContext);
+
   const onContainerClicked = React.useCallback(event => {
     setAnchorEl(event.currentTarget);
   }, []);
 
-  const logout = React.useCallback(event => {
-    setAnchorEl(null);
-    localStorage.removeItem('token');
-    // TODO: a better solution is to reset Apollo storage
-    window.location.reload();
-  }, []);
+  const logout = React.useCallback(
+    event => {
+      setAnchorEl(null);
+      localStorage.removeItem('token');
+      appContext.resetClient();
+    },
+    [appContext],
+  );
 
   const onClose = React.useCallback(() => {
     setAnchorEl(null);

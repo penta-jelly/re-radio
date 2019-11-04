@@ -6,6 +6,7 @@ import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
 import { useStyles } from './styles';
+import { AppContext } from 'containers/app';
 
 type DataKeys = keyof LoginInput;
 type Data = { [key in DataKeys]: string };
@@ -21,10 +22,11 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
     }
   }, [enqueueSnackbar, history, currentUserQuery]);
 
-  const postLogin = React.useCallback(async () => {
+  const appContext = React.useContext(AppContext);
+  const postLogin = React.useCallback(() => {
+    appContext.resetClient();
     history.replace('/');
-    window.location.reload();
-  }, [history]);
+  }, [appContext, history]);
 
   if (currentUserQuery.loading) {
     return <PageLoader />;

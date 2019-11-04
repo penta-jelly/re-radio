@@ -8,6 +8,7 @@ import React from 'react';
 import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
 import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { useStyles } from './styles';
+import { AppContext } from 'containers/app';
 
 export interface Props {
   drawer?: DrawerProps;
@@ -31,6 +32,7 @@ export const Layout: React.FC<Props> = props => {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
   const history = useHistory();
+  const appContext = React.useContext(AppContext);
   const openLoginModal = React.useCallback(() => {
     history.push(`${match.url}/login`);
   }, [match, history]);
@@ -39,10 +41,10 @@ export const Layout: React.FC<Props> = props => {
     history.push(`${match.url}`);
   }, [match, history]);
 
-  const postLogin = React.useCallback(async () => {
+  const postLogin = React.useCallback(() => {
     closeLoginModal();
-    window.location.reload();
-  }, [closeLoginModal]);
+    appContext.resetClient();
+  }, [appContext, closeLoginModal]);
 
   const loginFormComponent = React.useCallback(
     () => (

@@ -10,5 +10,17 @@
   "emmet.includeLanguages": {
     "typescript": "typescriptreact"
   },
-  "typescript.tsdk": "./node_modules/typescript/lib"
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "eslint.enable": true,
+  "eslint.autoFixOnSave": true,
+  "eslint.validate": [
+		{ "language": "typescript", "autoFix": true },
+		{ "language": "typescriptreact", "autoFix": true }
+  ],
+  "eslint.workingDirectories": [
+		{ "directory": "./client", "changeProcessCWD": true },
+		{ "directory": "./server", "changeProcessCWD": true },
+		{ "directory": "./common", "changeProcessCWD": true },
+		{ "directory": "./e2e", "changeProcessCWD": true },
+	]
 }
