@@ -1,9 +1,9 @@
 import { Card, Typography } from '@material-ui/core';
 import { PageLoader } from 'components/page-loader';
-import { useRouter } from 'hooks/use-router';
 import { SongStatusEnum, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
 import React, { useCallback, useRef } from 'react';
 import ReactPlayer from 'react-player';
+import { useRouteMatch } from 'react-router-dom';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -14,7 +14,11 @@ export const Player: React.FC = () => {
   const playerRef = useRef<ReactPlayer>(null);
 
   const classes = useStyles();
-  const { match } = useRouter<RouteParams>();
+
+  const match = useRouteMatch<RouteParams>();
+  if (!match) {
+    throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
+  }
 
   const { loading, data, updateQuery } = useStationPlayerQuery({
     variables: { stationSlug: match.params.slug },

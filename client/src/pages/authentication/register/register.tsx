@@ -6,7 +6,7 @@ import { RegisterInput, useCurrentUserQuery, useRegisterMutation } from 'operati
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
-import { RouteComponentProps } from 'react-router';
+import { RouteComponentProps } from 'react-router-dom';
 import * as yup from 'yup';
 import { useStyles } from './styles';
 

@@ -1,16 +1,10 @@
 import { Fab } from '@material-ui/core';
 import { FabProps as MuiFabProps } from '@material-ui/core/Fab';
-import { useRouter } from 'hooks/use-router';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
-import {
-  SongStatusEnum,
-  useCreateSongMutation,
-  useCurrentUserQuery,
-  useYoutubeVideoLazyQuery,
-  YoutubeVideo,
-} from 'operations';
+import { SongStatusEnum, useCreateSongMutation, useCurrentUserQuery, useYoutubeVideoLazyQuery, YoutubeVideo } from 'operations';
 import React, { useCallback } from 'react';
 import { MdSend } from 'react-icons/md';
+import { useRouteMatch } from 'react-router-dom';
 
 interface Props {
   previewSong?: YoutubeVideo;
@@ -24,7 +18,10 @@ interface RouteParams {
 
 export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }) => {
   const [addSong, createSongMutation] = useCreateSongMutation();
-  const { match } = useRouter<RouteParams>();
+  const match = useRouteMatch<RouteParams>();
+  if (!match) {
+    throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
+  }
   const currentUserQuery = useCurrentUserQuery();
   const notifyUnauthorizedUser = useUnauthorizedNotification();
 
@@ -83,7 +80,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
     youtubeVideoQuery.loading,
     youtubeVideoQuery.data,
     addSong,
-    match.params.slug,
+    match,
     postSubmit,
   ]);
 

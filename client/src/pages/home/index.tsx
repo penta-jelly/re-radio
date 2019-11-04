@@ -3,7 +3,6 @@ import { PrimaryButton } from 'components/button/primary-button';
 import { ReSearch } from 'components/input/re-search';
 import { PageLoader } from 'components/page-loader';
 import { Layout } from 'containers/layout';
-import { useRouter } from 'hooks/use-router';
 import { CreateStationForm, StationsList } from 'modules';
 import {
   MutationEnum,
@@ -19,7 +18,7 @@ import React from 'react';
 import { useApolloClient } from 'react-apollo';
 import { useTranslation } from 'react-i18next';
 import { MdRadio as StationIcon } from 'react-icons/md';
-import { Route } from 'react-router-dom';
+import { Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { useStyles } from './styles';
 
 const HomePage: React.FunctionComponent<{}> = () => {
@@ -70,7 +69,11 @@ const HomePage: React.FunctionComponent<{}> = () => {
     },
   });
 
-  const { match, history } = useRouter();
+  const history = useHistory();
+  const match = useRouteMatch();
+  if (!match) {
+    throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
+  }
   const openCreateStationModal = React.useCallback(() => {
     history.push(`${match.url}/create-station`);
   }, [match, history]);
@@ -87,14 +90,14 @@ const HomePage: React.FunctionComponent<{}> = () => {
             <CreateStationForm
               postSubmit={{
                 refetchQueries: [{ query: StationsDocument, variables: queryVariables }],
-                redirectTo: match.url,
+                redirectTo: match ? match.url : undefined,
               }}
             />
           </div>
         </Slide>
       </Modal>
     ),
-    [classes.modal, closeCreateStationModal, match.url, queryVariables],
+    [classes.modal, closeCreateStationModal, match, queryVariables],
   );
   return (
     <Layout>
@@ -123,7 +126,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
           </>
         )}
       </div>
-      <Route path={`${match.url}/create-station`} component={formModalComponent} />
+      <Route path={`${match ? match.url : ''}/create-station`} component={formModalComponent} />
     </Layout>
   );
 };

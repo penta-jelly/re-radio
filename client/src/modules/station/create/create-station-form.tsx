@@ -2,12 +2,12 @@ import { Card, CardContent, Fade, FormHelperText, TextField, Typography } from '
 import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
 import { PrimaryButton } from 'components/button/primary-button';
 import { Formik, FormikActions } from 'formik';
-import { useRouter } from 'hooks/use-router';
 import { useToggle } from 'hooks/use-toggle';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import { useCreateStationMutation, useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { MdRadio as StationIcon } from 'react-icons/md';
+import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
 import { useStyles } from './styles';
 
@@ -28,7 +28,7 @@ interface Data {
 export const CreateStationForm: React.FC<Props> = props => {
   const classes = useStyles();
 
-  const { history } = useRouter();
+  const history = useHistory();
   const currentUserQuery = useCurrentUserQuery();
 
   const [isMoreInfo, toggleIsMoreInfo] = useToggle(false);

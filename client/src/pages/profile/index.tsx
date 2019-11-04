@@ -1,11 +1,11 @@
 import { Grid } from '@material-ui/core';
 import { PageLoader } from 'components/page-loader';
 import { Layout } from 'containers/layout';
-import { useRouter } from 'hooks/use-router';
 import { DetailUserProfile, UserProfileSongs, UserProfileStations } from 'modules/user';
 import { useSnackbar } from 'notistack';
 import { useCurrentUserQuery } from 'operations';
 import React from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -13,34 +13,33 @@ interface RouteParams {
 }
 
 const UserProfilePage: React.FC = () => {
-  const { match, history } = useRouter<RouteParams>();
+  const history = useHistory();
+  const params = useParams<RouteParams>();
   const classes = useStyles();
 
   const { enqueueSnackbar } = useSnackbar();
   const { data, loading, error } = useCurrentUserQuery();
   const username = React.useMemo<string | undefined>(() => {
-    //  tslint:disable curly
-    if (match.params.username) return match.params.username;
+    if (params.username) return params.username;
     if (loading || error) return undefined;
     if (data) return data.user.username;
-    //  tslint:enable curly
-  }, [match.params.username, data, loading, error]);
+  }, [params.username, data, loading, error]);
 
   const ownedProfile = React.useMemo<boolean>(() => {
     //  tslint:disable curly
     if (loading || error) return false;
-    if (!match.params.username) return true;
-    if (data && data.user.username === match.params.username) return true;
+    if (!params.username) return true;
+    if (data && data.user.username === params.username) return true;
     return false;
     //  tslint:enable curly
-  }, [match.params.username, data, loading, error]);
+  }, [params.username, data, loading, error]);
 
   React.useEffect(() => {
-    if (error && !match.params.username) {
+    if (error && !params.username) {
       history.push('/');
       enqueueSnackbar('You need to login to access this page', { variant: 'warning', preventDuplicate: true });
     }
-  }, [error, history, match.params.username, enqueueSnackbar]);
+  }, [error, history, params.username, enqueueSnackbar]);
 
   if (!username) {
     return <PageLoader />;

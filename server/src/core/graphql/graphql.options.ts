@@ -1,15 +1,34 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { ValidationError } from 'class-validator';
+import { WsEvent } from 'core/graphql/ws.event';
+import { PubSub } from 'core/pub-sub/pub-sub.service';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
+import { ConnectionContext } from 'subscriptions-transport-ws';
 
 @Injectable()
 export class GraphqlOptions implements GqlOptionsFactory {
+  constructor(private readonly pubSub: PubSub) {}
+
   createGqlOptions(): GqlModuleOptions {
+    type RadioWsConnectionContext = ConnectionContext & { connectionParams?: object };
+
     return {
       path: '/graphql',
       autoSchemaFile: 'schema.graphql',
       installSubscriptionHandlers: true,
+      subscriptions: {
+        onConnect: async (connectionParams, _, context: RadioWsConnectionContext) => {
+          context.connectionParams = connectionParams;
+          await this.pubSub.publish<WsEvent.ConnectedPayload>(WsEvent.Type.CONNECTED, { connectionParams });
+        },
+        onDisconnect: async (_, context: RadioWsConnectionContext) => {
+          const { connectionParams } = context;
+          if (connectionParams) {
+            await this.pubSub.publish<WsEvent.DisconnectedPayload>(WsEvent.Type.DISCONNECTED, { connectionParams });
+          }
+        },
+      },
       buildSchemaOptions: { dateScalarMode: 'timestamp' },
       context: ({ req, connection }) => {
         return connection ? { req: { headers: connection.context } } : { req };

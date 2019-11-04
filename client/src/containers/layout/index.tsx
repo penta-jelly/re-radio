@@ -2,12 +2,11 @@ import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText, Modal, Slide 
 import { Image } from 'components/image';
 import { PageLoader } from 'components/page-loader';
 import { AuthenticatedListItem } from 'containers/layout/authenticated-list-item';
-import { useRouter } from 'hooks/use-router';
 import { LoginForm } from 'modules/user/authentication/login-form';
 import { useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { useStyles } from './styles';
 
 export interface Props {
@@ -27,7 +26,11 @@ export const Layout: React.FC<Props> = props => {
   const classes = useStyles(props);
   const sidebar = React.useMemo<DrawerProps>(() => props.drawer || defaultProps.drawer, [props.drawer]);
 
-  const { match, history } = useRouter();
+  const match = useRouteMatch();
+  if (!match) {
+    throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
+  }
+  const history = useHistory();
   const openLoginModal = React.useCallback(() => {
     history.push(`${match.url}/login`);
   }, [match, history]);
@@ -99,7 +102,7 @@ export const Layout: React.FC<Props> = props => {
           )}
           {currentUserQuery.data && <AuthenticatedListItem user={currentUserQuery.data.user} drawer={sidebar} />}
         </List>
-        {currentUserQuery.error && <Route path={`${match.url}/login`} component={loginFormComponent} />}
+        {currentUserQuery.error && <Route path={`${match ? match.url : ''}/login`} component={loginFormComponent} />}
       </Drawer>
       <div className={classes.content}>{props.children}</div>
     </div>
