@@ -1,9 +1,9 @@
 import { Card, Typography } from '@material-ui/core';
-import { PageLoader } from 'components/page-loader';
-import { SongStatusEnum, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
 import React, { useCallback, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import { useRouteMatch } from 'react-router-dom';
+import { SongStatusEnum, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
+import { PageLoader } from 'components/page-loader';
 import { useStyles } from './styles';
 
 interface RouteParams {

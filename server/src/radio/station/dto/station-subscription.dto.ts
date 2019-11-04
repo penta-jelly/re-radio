@@ -1,6 +1,6 @@
+import { Field, Int, ObjectType } from 'type-graphql';
 import { MutationEnum } from 'core/typeorm/entity-subscription.interface';
 import { SongDTO } from 'radio/song/dto/song.dto';
-import { Field, Int, ObjectType } from 'type-graphql';
 
 @ObjectType('StationSubscriptionEntity')
 export class StationSubscriptionDTOEntity {

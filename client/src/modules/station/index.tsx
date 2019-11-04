@@ -1,9 +1,9 @@
 import { Grid, Hidden, Portal, Slide, Tab, Tabs } from '@material-ui/core';
 import { TabProps } from '@material-ui/core/Tab';
-import { Fab } from 'components/button/fab';
-import { useToggle } from 'hooks/use-toggle';
 import React from 'react';
 import { MdClose, MdPlaylistAdd } from 'react-icons/md';
+import { useToggle } from 'hooks/use-toggle';
+import { Fab } from 'components/button/fab';
 import { AddSong } from './add-song';
 import { Header } from './header';
 import { Player } from './player';

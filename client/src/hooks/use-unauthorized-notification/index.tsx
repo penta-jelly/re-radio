@@ -1,8 +1,8 @@
 import { IconButton } from '@material-ui/core';
-import { useStyles } from 'hooks/use-unauthorized-notification/styles';
 import { OptionsObject, useSnackbar } from 'notistack';
 import React from 'react';
 import { MdClose as CloseIcon } from 'react-icons/md';
+import { useStyles } from 'hooks/use-unauthorized-notification/styles';
 
 type ReturnType = () => OptionsObject['key'] | null;
 export const useUnauthorizedNotification = (message: string = 'You need to login first.'): ReturnType => {

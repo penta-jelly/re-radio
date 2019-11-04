@@ -1,5 +1,5 @@
-import { StationDTO } from 'radio/station/dto/station.dto';
 import { Field, Int, ObjectType } from 'type-graphql';
+import { StationDTO } from 'radio/station/dto/station.dto';
 
 @ObjectType('StationTag')
 export class StationTagDTO {

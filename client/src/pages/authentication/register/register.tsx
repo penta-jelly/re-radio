@@ -1,13 +1,13 @@
 import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
-import { PageLoader } from 'components/page-loader';
 import { Formik, FormikActions } from 'formik';
 import { useSnackbar } from 'notistack';
-import { RegisterInput, useCurrentUserQuery, useRegisterMutation } from 'operations';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { RouteComponentProps } from 'react-router-dom';
 import * as yup from 'yup';
+import { RegisterInput, useCurrentUserQuery, useRegisterMutation } from 'operations';
+import { PageLoader } from 'components/page-loader';
 import { useStyles } from './styles';
 
 type DataKeys = keyof RegisterInput;

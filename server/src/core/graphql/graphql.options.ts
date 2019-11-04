@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { ValidationError } from 'class-validator';
-import { WsEvent } from 'core/graphql/ws.event';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { ConnectionContext } from 'subscriptions-transport-ws';
+import { WsEvent } from 'core/graphql/ws.event';
+import { PubSub } from 'core/pub-sub/pub-sub.service';
 
 @Injectable()
 export class GraphqlOptions implements GqlOptionsFactory {

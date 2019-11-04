@@ -1,7 +1,7 @@
-import { Image } from 'components/image';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { FaUpload } from 'react-icons/fa';
+import { Image } from 'components/image';
 import { useStyles } from './styles';
 
 const DEFAULT_AVATAR = 'https://cdn1.iconfinder.com/data/icons/ninja-things-1/720/ninja-background-256.png';

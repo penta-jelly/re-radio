@@ -8,10 +8,10 @@ import {
   UnprocessableEntityException,
 } from '@nestjs/common';
 import { GqlArgumentsHost, GqlExceptionFilter } from '@nestjs/graphql';
-import { COLOR_RED, COLOR_RESET } from 'core/request.interceptor';
 import { GraphQLResolveInfo } from 'graphql';
 import { EntityNotFoundError } from 'typeorm/error/EntityNotFoundError';
 import { QueryFailedError } from 'typeorm/error/QueryFailedError';
+import { COLOR_RED, COLOR_RESET } from 'core/request.interceptor';
 
 export type CatchableException = HttpException | QueryFailedError | EntityNotFoundError;
 

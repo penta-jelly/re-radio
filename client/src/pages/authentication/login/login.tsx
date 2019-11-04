@@ -1,12 +1,12 @@
-import { PageLoader } from 'components/page-loader';
-import { LoginForm } from 'modules';
 import { useSnackbar } from 'notistack';
-import { LoginInput, useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 
-import { useStyles } from './styles';
+import { LoginInput, useCurrentUserQuery } from 'operations';
+import { LoginForm } from 'modules';
+import { PageLoader } from 'components/page-loader';
 import { AppContext } from 'containers/app';
+import { useStyles } from './styles';
 
 type DataKeys = keyof LoginInput;
 type Data = { [key in DataKeys]: string };

@@ -1,12 +1,12 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as Bcrypt from 'bcrypt-nodejs';
+import { DeepPartial, Repository } from 'typeorm';
 import { Song, SongStatusEnum } from 'radio/song/entities/song.entity';
 import { StationTag } from 'radio/station/entities/station-tag.entity';
 import { Station } from 'radio/station/entities/station.entity';
 import { UserRole, UserRoleEnum } from 'radio/user/entities/user-role.entity';
 import { User } from 'radio/user/entities/user.entity';
-import { DeepPartial, Repository } from 'typeorm';
 
 @Injectable()
 export class DevSeederService {

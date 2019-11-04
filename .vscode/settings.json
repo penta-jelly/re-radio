@@ -21,6 +21,9 @@
 		{ "directory": "./client", "changeProcessCWD": true },
 		{ "directory": "./server", "changeProcessCWD": true },
 		{ "directory": "./common", "changeProcessCWD": true },
-		{ "directory": "./e2e", "changeProcessCWD": true },
-	]
+		{ "directory": "./e2e", "changeProcessCWD": true }
+  ],
+  "cSpell.words": [
+    "notistack"
+  ]
 }

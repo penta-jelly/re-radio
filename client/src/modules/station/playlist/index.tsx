@@ -1,9 +1,9 @@
 import { Card, CircularProgress, List, Typography } from '@material-ui/core';
-import { PlaylistItem } from 'modules/station/playlist/item';
-import { SongStatusEnum, useOnStationPlalistChangedSubscription, useStationPlayistQuery } from 'operations';
 import { sortSongs } from 're-radio-common';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
+import { SongStatusEnum, useOnStationPlalistChangedSubscription, useStationPlayistQuery } from 'operations';
+import { PlaylistItem } from 'modules/station/playlist/item';
 import { useStyles } from './styles';
 
 interface RouteParams {

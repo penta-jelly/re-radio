@@ -1,11 +1,11 @@
 import { ListItem, ListItemAvatar, ListItemText, Menu, MenuItem } from '@material-ui/core';
-import { Image } from 'components/image';
-import { CurrentUserQuery } from 'operations';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { DrawerProps } from '.';
-import { useStyles } from './styles';
+import { CurrentUserQuery } from 'operations';
+import { Image } from 'components/image';
 import { AppContext } from 'containers/app';
+import { useStyles } from './styles';
+import { DrawerProps } from '.';
 
 export interface Props {
   user: CurrentUserQuery['user'];

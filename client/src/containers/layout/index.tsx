@@ -1,14 +1,14 @@
 import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText, Modal, Slide } from '@material-ui/core';
+import React from 'react';
+import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
+import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { Image } from 'components/image';
 import { PageLoader } from 'components/page-loader';
 import { AuthenticatedListItem } from 'containers/layout/authenticated-list-item';
 import { LoginForm } from 'modules/user/authentication/login-form';
 import { useCurrentUserQuery } from 'operations';
-import React from 'react';
-import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
-import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom';
-import { useStyles } from './styles';
 import { AppContext } from 'containers/app';
+import { useStyles } from './styles';
 
 export interface Props {
   drawer?: DrawerProps;

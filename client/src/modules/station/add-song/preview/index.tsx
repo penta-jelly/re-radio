@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@material-ui/core';
-import { useCurrentUserQuery, YoutubeVideo } from 'operations';
 import React from 'react';
+import { useCurrentUserQuery, YoutubeVideo } from 'operations';
 import { useStyles } from './styles';
 
 interface Props {

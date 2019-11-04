@@ -1,6 +1,6 @@
-import { Station } from 'radio/station/entities/station.entity';
 import { registerEnumType } from 'type-graphql';
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Station } from 'radio/station/entities/station.entity';
 import { User } from './user.entity';
 
 export enum UserRoleEnum {

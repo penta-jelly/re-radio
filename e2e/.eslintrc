@@ -4,7 +4,10 @@
     "plugin:@typescript-eslint/recommended",
     "prettier",
     "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript"
   ],
   "rules": {
     "prettier/prettier": ["error", {
@@ -12,6 +15,14 @@
     }],
     "@typescript-eslint/explicit-function-return-type": 0,
     "@typescript-eslint/explicit-member-accessibility": 0,
-    "@typescript-eslint/no-parameter-properties": 0
+    "@typescript-eslint/no-parameter-properties": 0,
+    "import/order": [
+      "error",
+      { "groups": ["builtin", "external", "internal", "unknown", "parent", "sibling", "index"] }
+    ],
+    "import/first": ["error"],
+    "import/no-unassigned-import": ["error"],
+    "import/no-duplicates": ["error"],
+    "import/newline-after-import": ["error"]
   }
 }

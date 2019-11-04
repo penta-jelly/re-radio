@@ -1,5 +1,5 @@
-import * as StationLayout from 'containers/layout';
 import React from 'react';
+import * as StationLayout from 'containers/layout';
 
 export interface StationContext {
   // Mute

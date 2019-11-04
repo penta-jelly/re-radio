@@ -1,14 +1,14 @@
 import { Card, CardContent, Fade, FormHelperText, TextField, Typography } from '@material-ui/core';
 import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
-import { PrimaryButton } from 'components/button/primary-button';
 import { Formik, FormikActions } from 'formik';
-import { useToggle } from 'hooks/use-toggle';
-import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
-import { useCreateStationMutation, useCurrentUserQuery } from 'operations';
 import React from 'react';
 import { MdRadio as StationIcon } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
+import { useCreateStationMutation, useCurrentUserQuery } from 'operations';
+import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
+import { useToggle } from 'hooks/use-toggle';
+import { PrimaryButton } from 'components/button/primary-button';
 import { useStyles } from './styles';
 
 interface Props {

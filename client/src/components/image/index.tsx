@@ -1,5 +1,5 @@
-import { useServerImageResource } from 'hooks/use-server-image-resource';
 import React from 'react';
+import { useServerImageResource } from 'hooks/use-server-image-resource';
 
 type ImgAttributes = React.ImgHTMLAttributes<HTMLImageElement>;
 

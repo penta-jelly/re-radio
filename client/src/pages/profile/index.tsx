@@ -1,11 +1,11 @@
 import { Grid } from '@material-ui/core';
+import { useSnackbar } from 'notistack';
+import React from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import { PageLoader } from 'components/page-loader';
 import { Layout } from 'containers/layout';
 import { DetailUserProfile, UserProfileSongs, UserProfileStations } from 'modules/user';
-import { useSnackbar } from 'notistack';
 import { useCurrentUserQuery } from 'operations';
-import React from 'react';
-import { useHistory, useParams } from 'react-router-dom';
 import { useStyles } from './styles';
 
 interface RouteParams {

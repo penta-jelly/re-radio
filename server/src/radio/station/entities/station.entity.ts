@@ -1,6 +1,3 @@
-import { Song } from 'radio/song/entities/song.entity';
-import { UserRole } from 'radio/user/entities/user-role.entity';
-import { User } from 'radio/user/entities/user.entity';
 import {
   Column,
   CreateDateColumn,
@@ -13,6 +10,9 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Song } from 'radio/song/entities/song.entity';
+import { UserRole } from 'radio/user/entities/user-role.entity';
+import { User } from 'radio/user/entities/user.entity';
 import { StationTag } from './station-tag.entity';
 
 @Entity()

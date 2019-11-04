@@ -1,7 +1,7 @@
 import { ListItem, ListItemText } from '@material-ui/core';
-import { SongStatusEnum, StationPlayistQuery } from 'operations';
 import { computeSongScore } from 're-radio-common';
 import React from 'react';
+import { SongStatusEnum, StationPlayistQuery } from 'operations';
 import { useStyles } from './styles';
 
 interface Props {

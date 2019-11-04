@@ -1,4 +1,9 @@
 import { Modal, Slide, Typography } from '@material-ui/core';
+import React from 'react';
+import { useApolloClient } from 'react-apollo';
+import { useTranslation } from 'react-i18next';
+import { MdRadio as StationIcon } from 'react-icons/md';
+import { Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { PrimaryButton } from 'components/button/primary-button';
 import { ReSearch } from 'components/input/re-search';
 import { PageLoader } from 'components/page-loader';
@@ -14,11 +19,6 @@ import {
   useOnStationChangedSubscription,
   useStationsQuery,
 } from 'operations';
-import React from 'react';
-import { useApolloClient } from 'react-apollo';
-import { useTranslation } from 'react-i18next';
-import { MdRadio as StationIcon } from 'react-icons/md';
-import { Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { useStyles } from './styles';
 
 const HomePage: React.FunctionComponent<{}> = () => {

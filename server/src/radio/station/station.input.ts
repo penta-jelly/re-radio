@@ -1,7 +1,7 @@
 import { Type } from 'class-transformer';
 import { IsOptional, MaxLength, NotContains, ValidateNested } from 'class-validator';
-import { OrderEnum } from 'core/graphql/input/order';
 import { Field, InputType, Int } from 'type-graphql';
+import { OrderEnum } from 'core/graphql/input/order';
 
 @InputType()
 export class StationFindAllOrderInput {

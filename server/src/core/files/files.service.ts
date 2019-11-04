@@ -1,6 +1,6 @@
-import { Injectable } from '@nestjs/common';
 import * as Fs from 'fs';
 import * as Path from 'path';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class FilesService {
