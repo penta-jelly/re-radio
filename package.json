@@ -5,9 +5,9 @@
   "scripts": {
     "clean": "lerna run clean && lerna clean -y",
     "initialize": "lerna run initialize",
-    "format": "lerna run format",
+    "format": "lerna run format --parallel --no-bail",
     "compile": "lerna run compile",
-    "lint": "lerna run lint --parallel",
+    "lint": "lerna run lint --parallel --no-bail",
     "start": "npm-run-all --parallel lerna:start db",
     "lerna:start": "lerna run start --no-sort --parallel",
     "ci:start": "npm-run-all --parallel ci:lerna:start ci:lerna:seed db",
