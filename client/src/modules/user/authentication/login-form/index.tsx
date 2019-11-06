@@ -78,7 +78,6 @@ export const LoginForm: React.FC<Props> = ({ postLogin }) => {
             label="Email or Username"
             margin="normal"
             fullWidth
-            autoFocus
             type="text"
             id="email"
             name="email"

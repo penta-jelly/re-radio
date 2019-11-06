@@ -110,5 +110,3 @@ export const Layout: React.FC<Props> = props => {
     </div>
   );
 };
-
-Layout.defaultProps = defaultProps;

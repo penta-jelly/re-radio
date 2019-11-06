@@ -1,15 +1,11 @@
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-
-import { LoginInput, useCurrentUserQuery } from 'operations';
-import { LoginForm } from 'modules';
 import { PageLoader } from 'components/page-loader';
 import { AppContext } from 'containers/app';
+import { LoginForm } from 'modules';
+import { useCurrentUserQuery } from 'operations';
 import { useStyles } from './styles';
-
-type DataKeys = keyof LoginInput;
-type Data = { [key in DataKeys]: string };
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
