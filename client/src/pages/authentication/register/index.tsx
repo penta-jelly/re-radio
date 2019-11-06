@@ -123,7 +123,7 @@ const Register: React.FC<RouteComponentProps> = ({ history }) => {
               Register
             </Button>
             <div className={classNames.iconRow}>
-              <Typography variant="caption">or signup using</Typography>
+              <Typography variant="caption">or login with</Typography>
             </div>
             <div className={classNames.iconRow}>
               <Avatar className={classNames.facebookIcon}>
