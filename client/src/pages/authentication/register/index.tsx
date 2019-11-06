@@ -1,18 +1,15 @@
 import { useSnackbar } from 'notistack';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
-
-import { LoginInput, useCurrentUserQuery } from 'operations';
-import { LoginForm } from 'modules';
 import { PageLoader } from 'components/page-loader';
-import { AppContext } from 'containers/app';
+import { RegisterForm } from 'modules';
+import { useCurrentUserQuery } from 'operations';
 import { useStyles } from './styles';
 
-type DataKeys = keyof LoginInput;
-type Data = { [key in DataKeys]: string };
-
-const Login: React.FC<RouteComponentProps> = ({ history }) => {
+const Register: React.FC<RouteComponentProps> = ({ history }) => {
   const classNames = useStyles();
+  const postRegister = useCallback(() => history.replace('/'), [history]);
+
   const currentUserQuery = useCurrentUserQuery();
   const { enqueueSnackbar } = useSnackbar();
   React.useEffect(() => {
@@ -21,22 +18,14 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
       enqueueSnackbar('You have to logout first to access this page.', { preventDuplicate: true, variant: 'warning' });
     }
   }, [enqueueSnackbar, history, currentUserQuery]);
-
-  const appContext = React.useContext(AppContext);
-  const postLogin = React.useCallback(() => {
-    appContext.resetClient();
-    history.replace('/');
-  }, [appContext, history]);
-
   if (currentUserQuery.loading) {
     return <PageLoader />;
   }
-
   return (
     <div className={classNames.container}>
-      <LoginForm postLogin={postLogin} />
+      <RegisterForm postRegister={postRegister} />
     </div>
   );
 };
 
-export default Login;
+export default Register;
