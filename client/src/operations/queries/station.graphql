@@ -17,5 +17,6 @@ query Station($slug: String!) {
       thumbnail
       startedAt
     }
+    onlineUserIds
   }
 }

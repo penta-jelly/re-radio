@@ -4,7 +4,7 @@ import { SnackbarProvider } from 'notistack';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
 import { theme } from 'lib/@material-ui/theme';
-import { initClient, AppClient } from 'lib/apollo/init';
+import { AppClient, initClient } from 'lib/apollo/init';
 import { initI18n } from 'lib/react-i18next';
 import { AppRouter } from './router';
 
@@ -12,24 +12,70 @@ initI18n();
 const initialClient = initClient();
 
 interface IAppContext {
+  disconnected: boolean;
   client: AppClient;
   resetClient(): void;
 }
 
-export const AppContext = React.createContext<IAppContext>({ client: initialClient, resetClient() {} });
+export const AppContext = React.createContext<IAppContext>({
+  client: initialClient,
+  disconnected: false,
+  resetClient() {},
+});
 
 export const App: React.FC = () => {
   const [client, setClient] = React.useState(initialClient);
+  const subscribedOnDisconnectedRef = React.useRef(false);
+  const isDisconnectedByServerRef = React.useRef(true);
+  const [suspended, setSuspendedState] = React.useState(false);
+
   const resetClient = React.useCallback(() => {
+    isDisconnectedByServerRef.current = false;
     setClient(client => {
       client.subscription.close(true);
       client.apollo.stop();
-      return initClient();
+      subscribedOnDisconnectedRef.current = false;
+      const newClient = initClient();
+      isDisconnectedByServerRef.current = true;
+      return newClient;
     });
   }, []);
 
+  const retry = React.useCallback(async (endpoint: string, success: () => void, error?: () => void) => {
+    const ping = () => fetch(endpoint);
+    const postpone = (delay: number) => new Promise(resolve => setTimeout(resolve, delay));
+    let isSuccess = false;
+    let delay = 1000;
+    while (!isSuccess) {
+      try {
+        await postpone(delay);
+        delay *= 2;
+        const { status } = await ping();
+        if (status < 400) {
+          isSuccess = true;
+          success();
+        }
+      } catch {}
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (!subscribedOnDisconnectedRef.current) {
+      subscribedOnDisconnectedRef.current = true;
+      client.subscription.onDisconnected(() => {
+        if (isDisconnectedByServerRef.current) {
+          setSuspendedState(true);
+          retry(client.healthEndpoint, () => {
+            resetClient();
+            setSuspendedState(false);
+          });
+        }
+      });
+    }
+  }, [client, resetClient, retry]);
+
   return (
-    <AppContext.Provider value={{ client, resetClient }}>
+    <AppContext.Provider value={{ client, resetClient, disconnected: suspended }}>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client.apollo}>
           <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'top' }}>

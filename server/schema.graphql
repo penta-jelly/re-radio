@@ -23,6 +23,8 @@ input LoginInput {
 type Mutation {
   createStation(data: StationCreateInput!): Station!
   deleteStation(where: StationFindOneWhereInput!): Boolean!
+  joinStation(where: StationFindOneWhereInput!): Boolean!
+  leaveStation(where: StationFindOneWhereInput!): Boolean!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserFindOneWhereInput!): Boolean!
   deleteUser(where: UserFindOneWhereInput!): Boolean!
@@ -183,7 +185,7 @@ type Station {
   playingSong: Song
   userRoles: [UserRole!]!
   tags: [StationTag!]!
-  onlineUsers: [User!]!
+  onlineUserIds: [Int!]!
 }
 
 input StationCreateInput {
@@ -225,6 +227,7 @@ type StationSubscriptionEntity {
   slug: String!
   description: String
   playingSong: Song
+  onlineUserIds: [Int!]!
 }
 
 type StationTag {
@@ -245,7 +248,7 @@ input StationUpdateInput {
 
 type Subscription {
   station(where: StationFindOneWhereInput): StationSubscription!
-  user(where: UserFindOneWhereInput): UserSubscription!
+  user(where: UserFindOneWhereInput!): UserSubscription!
   song(where: SongFindAllWhereInput): SongSubscription!
 }
 
@@ -284,6 +287,7 @@ type User {
   facebookId: String
   googleId: String
   roles: [UserRole!]!
+  currentStationId: Float
 }
 
 input UserCreateInput {
@@ -356,6 +360,7 @@ type UserSubscriptionEntity {
   reputation: Int
   facebookId: String
   googleId: String
+  currentStationId: Float
 }
 
 input UserUpdateInput {

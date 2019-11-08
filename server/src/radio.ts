@@ -14,6 +14,8 @@ async function bootstrap() {
   const logger = new Logger('RadioGraphQLService');
   const app = await NestFactory.create<NestExpressApplication>(RadioModule, {
     logger: ConfigService.getLogLevels(),
+    // TODO: Production environment???
+    cors: { origin: [/localhost:(.*)/] },
   });
   const port = ConfigService.get(EnvVariables.RADIO_SERVER_PORT);
   await app.listen(port);

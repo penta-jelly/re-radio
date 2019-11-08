@@ -1,0 +1,3 @@
+mutation LeaveStation($where: StationFindOneWhereInput!) {
+  leaveStation(where: $where)
+}

@@ -5,6 +5,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export interface AppClient {
+  healthEndpoint: string;
   subscription: SubscriptionClient;
   apollo: ApolloClient<any>;
 }
@@ -15,14 +16,14 @@ export function initClient(): AppClient {
     uri = `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
   }
 
-  const httpLink = createUploadLink({
-    uri: `${uri}/graphql`,
-  });
+  const healthEndpoint = `${uri}/status`;
+
+  const httpLink = createUploadLink({ uri: `${uri}/graphql` });
 
   const subscriptionClient = new SubscriptionClient(
     `ws://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
     {
-      reconnect: true,
+      reconnect: false,
       connectionParams: () => {
         const token = localStorage.getItem('token');
         return { Authorization: token };
@@ -55,6 +56,7 @@ export function initClient(): AppClient {
   });
 
   return {
+    healthEndpoint,
     apollo: new ApolloClient({ link: ApolloLink.from([authLink, link]), cache: new InMemoryCache() }),
     subscription: subscriptionClient,
   };

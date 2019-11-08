@@ -8,12 +8,13 @@ type ReturnType = () => OptionsObject['key'] | null;
 export const useUnauthorizedNotification = (message: string = 'You need to login first.'): ReturnType => {
   const classes = useStyles();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-
+  const key = 'UnauthorizedNotification';
   return () =>
     enqueueSnackbar(message, {
+      key,
       variant: 'warning',
-      persist: true,
       preventDuplicate: true,
+      onClose: () => closeSnackbar(key),
       action: key => (
         <IconButton
           className={classes.closeNotificationButton}

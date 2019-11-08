@@ -1,9 +1,13 @@
-import { Card, Typography } from '@material-ui/core';
+import { Card, Typography, CircularProgress } from '@material-ui/core';
 import React, { useCallback, useRef } from 'react';
 import ReactPlayer from 'react-player';
 import { useRouteMatch } from 'react-router-dom';
-import { SongStatusEnum, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
-import { PageLoader } from 'components/page-loader';
+import {
+  SongStatusEnum,
+  useOnStationPlayerChangedSubscription,
+  useStationPlayerQuery,
+  StationPlayerQuery,
+} from 'operations';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -11,8 +15,6 @@ interface RouteParams {
 }
 
 export const Player: React.FC = () => {
-  const playerRef = useRef<ReactPlayer>(null);
-
   const classes = useStyles();
 
   const match = useRouteMatch<RouteParams>();
@@ -24,8 +26,6 @@ export const Player: React.FC = () => {
     variables: { stationSlug: match.params.slug },
     fetchPolicy: 'network-only',
   });
-
-  // TODO: Handle up-vote/down-vote for player
 
   useOnStationPlayerChangedSubscription({
     variables: { stationSlug: match.params.slug },
@@ -46,40 +46,65 @@ export const Player: React.FC = () => {
     },
   });
 
-  const onStart = useCallback(() => {
-    if (data) {
-      const [playingSong] = data.playingSongs;
-      if (playerRef.current && playingSong) {
-        const currentTime = new Date().getTime();
-        const startPlayerTime = new Date(playingSong.startedAt).getTime();
-        const seekTime = currentTime - startPlayerTime;
+  const playingSong = React.useMemo<StationPlayerQuery['playingSongs'][0] | undefined>(() => {
+    if (data && data.playingSongs[0]) return data.playingSongs[0];
+    return undefined;
+  }, [data]);
+
+  const playerRef = useRef<ReactPlayer>(null);
+  const syncPlayer = useCallback(() => {
+    if (playerRef.current && playingSong) {
+      const currentTime = new Date().getTime();
+      const startPlayerTime = new Date(playingSong.startedAt).getTime();
+      const seekTime = currentTime - startPlayerTime;
+      const seekToSeconds = seekTime / 1000;
+      // Only sync when the client player time and server player time mismatched more than 5 seconds
+      if (Math.abs(playerRef.current.getCurrentTime() - seekToSeconds) > 5) {
         playerRef.current.seekTo(seekTime / 1000);
       }
     }
-  }, [data, playerRef]);
+  }, [playingSong, playerRef]);
+
+  const prevUrlRef = React.useRef<string | undefined>(undefined);
+  const prevIdlRef = React.useRef<number | undefined>(undefined);
+
+  // This variable is mean to keep the previous URL so that the player will not be unmounted on down time between playing songs
+  const url = React.useMemo<string | undefined>(() => {
+    if (playingSong) return playingSong.url;
+    if (prevUrlRef.current) return prevUrlRef.current;
+    return undefined;
+  }, [playingSong]);
+
+  React.useEffect(() => {
+    if (playingSong && url === prevUrlRef.current && playingSong.id !== prevIdlRef.current) syncPlayer();
+  }, [data, playingSong, syncPlayer, url]);
+
+  React.useEffect(() => {
+    if (playingSong) prevIdlRef.current = playingSong.id;
+  }, [data, playingSong]);
+
+  React.useEffect(() => {
+    prevUrlRef.current = url;
+  }, [url]);
 
   let content: React.ReactNode;
-  if (loading) {
-    content = <PageLoader />;
-  } else if (data) {
-    const [playingSong] = data.playingSongs;
-    if (playingSong) {
-      content = (
-        <ReactPlayer
-          onStart={onStart}
-          ref={playerRef}
-          className={classes.wrapper}
-          width="100%"
-          height="100%"
-          url={playingSong.url}
-          playing
-        />
-      );
-    } else {
-      content = (
-        <Typography variant="subtitle1">Press on the Action Button on the bottom right to add some songs.</Typography>
-      );
-    }
+  if (url) {
+    // Always try to render the ReactPlayer when url is available
+    content = (
+      <ReactPlayer
+        onPlay={syncPlayer}
+        ref={playerRef}
+        className={classes.wrapper}
+        youtubeConfig={{ playerVars: { controls: 0 }, preload: true }}
+        width="100%"
+        height="100%"
+        url={url}
+      />
+    );
+  } else if (loading) {
+    content = <CircularProgress />;
+  } else if (!playingSong) {
+    content = <Typography variant="subtitle1">TODO: Render something cool!</Typography>;
   } else {
     content = (
       <Typography variant="subtitle1" color="error">

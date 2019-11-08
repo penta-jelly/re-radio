@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { PageLoader } from 'components/page-loader';
 
-export const AppRouter: React.FC = () => (
+export const AppRouter: React.FC = React.memo(() => (
   <React.Suspense fallback={<PageLoader />}>
     <BrowserRouter>
       <Switch>
@@ -15,4 +15,4 @@ export const AppRouter: React.FC = () => (
       </Switch>
     </BrowserRouter>
   </React.Suspense>
-);
+));

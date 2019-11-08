@@ -19,11 +19,11 @@
     "db:up": "docker-compose -f ./docker-compose.db.yml --project-directory . up",
     "db:down": "docker-compose -f ./docker-compose.db.yml --project-directory . down",
     "typeorm": "node lib/typeorm-cli.js --config lib/typeorm-options.js",
-    "typeorm:migrate": "yarn typeorm migration:generate -- -n",
+    "typeorm:migrate": "yarn typeorm migration:generate -n",
     "worker": "node lib/workers.js",
-    "seed": "yarn worker -- seed",
-    "seed:song": "yarn worker -- seed:song",
-    "seed:reset": "yarn worker -- seed:reset"
+    "seed": "yarn worker seed",
+    "seed:song": "yarn worker seed:song",
+    "seed:reset": "yarn worker seed:reset"
   },
   "dependencies": {
     "@nestjs/common": "6.9.0",

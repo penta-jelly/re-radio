@@ -12,7 +12,6 @@ import {
 } from 'typeorm';
 import { Song } from 'radio/song/entities/song.entity';
 import { UserRole } from 'radio/user/entities/user-role.entity';
-import { User } from 'radio/user/entities/user.entity';
 import { StationTag } from './station-tag.entity';
 
 @Entity()
@@ -32,8 +31,8 @@ export class Station {
   @Column({ unique: true })
   slug: string;
 
-  @Column({ nullable: true })
-  description?: string;
+  @Column('character varying', { nullable: true })
+  description: string | null;
 
   @OneToMany(type => UserRole, role => role.station)
   userRoles: UserRole[];
@@ -42,9 +41,8 @@ export class Station {
   @JoinTable()
   tags: StationTag[];
 
-  @OneToMany(type => User, user => user.currentStation)
-  @JoinTable()
-  onlineUsers: User[];
+  @Column('int', { array: true, default: '{}' })
+  onlineUserIds: number[];
 
   @OneToMany(type => Song, song => song.station)
   songs: Song[];

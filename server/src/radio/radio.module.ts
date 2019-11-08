@@ -1,4 +1,4 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import { Module, ValidationPipe, Logger } from '@nestjs/common';
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { RadioExceptionFilter } from 'core/exception.filter';
 import { FilesModule } from 'core/files/files.module';
@@ -11,6 +11,7 @@ import { SongModule } from './song/song.module';
 import { SongsExplorerModule } from './songs-explorer/songs-explorer.module';
 import { StationModule } from './station/station.module';
 import { UserModule } from './user/user.module';
+import { StationService } from './station/services/station.service';
 
 @Module({
   imports: [
@@ -39,4 +40,13 @@ import { UserModule } from './user/user.module';
   ],
   controllers: [RadioController],
 })
-export class RadioModule {}
+export class RadioModule {
+  private readonly logger = new Logger(StationModule.name);
+  constructor(private readonly stationService: StationService) {}
+
+  async onModuleInit() {
+    this.logger.log('Start cleaning online users.');
+    await this.stationService.cleanStationOnlineUsers();
+    this.logger.log('Finish cleaning online users.');
+  }
+}
