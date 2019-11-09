@@ -17,11 +17,12 @@ query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $
       thumbnail
       startedAt
     }
+    onlineUserIds
   }
 }
 
-subscription OnStationChanged {
-  onStationChanged: station {
+subscription OnStationChanged($where: StationFindOneWhereInput) {
+  onStationChanged: station(where: $where) {
     mutation
     entity {
       id
@@ -33,6 +34,7 @@ subscription OnStationChanged {
         thumbnail
         startedAt
       }
+      onlineUserIds
     }
   }
 }

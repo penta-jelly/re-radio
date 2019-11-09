@@ -1,7 +1,6 @@
 import { Field, Int, ObjectType } from 'type-graphql';
 import { SongDTO } from 'radio/song/dto/song.dto';
 import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
-import { UserDTO } from 'radio/user/dto/user.dto';
 import { StationTagDTO } from './station-tag.dto';
 
 @ObjectType('Station')
@@ -33,6 +32,6 @@ export class StationDTO {
   @Field(type => [StationTagDTO])
   tags: StationTagDTO[];
 
-  @Field(type => [UserDTO])
-  onlineUsers: UserDTO[];
+  @Field(type => [Int])
+  onlineUserIds: number[];
 }

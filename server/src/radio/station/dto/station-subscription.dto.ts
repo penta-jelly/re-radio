@@ -24,6 +24,9 @@ export class StationSubscriptionDTOEntity {
 
   @Field(type => SongDTO, { nullable: true })
   playingSong?: SongDTO;
+
+  @Field(type => [Int])
+  onlineUserIds: number[];
 }
 
 @ObjectType('StationSubscription')

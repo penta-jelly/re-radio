@@ -30,8 +30,8 @@ export class GraphqlOptions implements GqlOptionsFactory {
         },
       },
       buildSchemaOptions: { dateScalarMode: 'timestamp' },
-      context: ({ req, connection }) => {
-        return connection ? { req: { headers: connection.context } } : { req };
+      context: ({ req }) => {
+        return { req };
       },
       formatError: this.formatError.bind(this),
     };

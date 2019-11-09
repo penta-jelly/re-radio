@@ -7,11 +7,12 @@ import { AuthenticationGuard } from 'radio/auth/guards/Authentication.guard';
 import { AuthorizationGuard } from 'radio/auth/guards/Authorization.guard';
 import { SongDTO } from 'radio/song/dto/song.dto';
 import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
-import { UserDTO } from 'radio/user/dto/user.dto';
 import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
 import { User } from 'radio/user/entities/user.entity';
 import { UserRoleService } from 'radio/user/services/user-role.service';
 import { UserService } from 'radio/user/services/user.service';
+import { PubSub } from 'core/pub-sub/pub-sub.service';
+import { RealTimeStationEvent } from 'real-time-radio/real-time-stations/real-time-station.event';
 import { StationTagDTO } from '../dto/station-tag.dto';
 import { StationDTO } from '../dto/station.dto';
 import { StationTagService } from '../services/station-tag.service';
@@ -32,6 +33,7 @@ export class StationResolver {
     private readonly userService: UserService,
     @Inject(forwardRef(() => UserRoleService))
     private readonly userRoleService: UserRoleService,
+    private readonly pubSub: PubSub,
   ) {}
 
   @ResolveProperty(returns => [UserRoleDTO])
@@ -55,15 +57,6 @@ export class StationResolver {
       relations: ['tags'],
     });
     return tags;
-  }
-
-  @ResolveProperty(returns => [UserDTO])
-  async onlineUsers(@Root() station: StationDTO) {
-    const { onlineUsers } = await this.stationService.findOneOrFail({
-      where: { id: station.id },
-      relations: ['onlineUsers'],
-    });
-    return onlineUsers;
   }
 
   @Query(returns => [StationDTO])
@@ -96,5 +89,35 @@ export class StationResolver {
   async deleteStation(@Args({ name: 'where', type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput) {
     await this.stationService.delete(where);
     return true;
+  }
+
+  @Mutation(returns => Boolean)
+  @UseGuards(AuthenticationGuard)
+  async joinStation(
+    @Args({ name: 'where', type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput,
+    @CurrentUser() user: User,
+  ) {
+    const station = await this.stationService.findOneOrFail({ where });
+    const success = await this.stationService.addOnlineUser(station, user);
+    await this.pubSub.publish<RealTimeStationEvent.UserJoinPayload>(RealTimeStationEvent.USER_JOINED, {
+      user,
+      station,
+    });
+    return success;
+  }
+
+  @Mutation(returns => Boolean)
+  @UseGuards(AuthenticationGuard)
+  async leaveStation(
+    @Args({ name: 'where', type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput,
+    @CurrentUser() user: User,
+  ) {
+    const station = await this.stationService.findOneOrFail({ where });
+    const success = await this.stationService.removeOnlineUser(station, user);
+    await this.pubSub.publish<RealTimeStationEvent.UserLeftPayload>(RealTimeStationEvent.USER_LEFT, {
+      user,
+      station,
+    });
+    return success;
   }
 }

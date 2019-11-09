@@ -8,7 +8,5 @@ export const useStyles = makeStyles(({ spacing, palette }) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  wrapper: {
-    pointerEvents: 'none',
-  },
+  wrapper: {},
 }));

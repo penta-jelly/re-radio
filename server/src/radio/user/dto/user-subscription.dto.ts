@@ -44,6 +44,9 @@ export class UserSubscriptionDTOEntity {
 
   @Field({ nullable: true })
   googleId?: string;
+
+  @Field({ nullable: true })
+  currentStationId?: number;
 }
 
 @ObjectType('UserSubscription')

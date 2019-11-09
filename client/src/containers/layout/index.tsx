@@ -1,13 +1,23 @@
-import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText, Modal, Slide } from '@material-ui/core';
+import {
+  Drawer,
+  Icon,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Modal,
+  Slide,
+  CircularProgress,
+} from '@material-ui/core';
+import { useSnackbar } from 'notistack';
 import React from 'react';
 import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
 import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { Image } from 'components/image';
-import { PageLoader } from 'components/page-loader';
+import { AppContext } from 'containers/app';
 import { AuthenticatedListItem } from 'containers/layout/authenticated-list-item';
 import { LoginForm } from 'modules/user/authentication/login-form';
 import { useCurrentUserQuery } from 'operations';
-import { AppContext } from 'containers/app';
 import { useStyles } from './styles';
 
 export interface Props {
@@ -59,11 +69,27 @@ export const Layout: React.FC<Props> = props => {
     [classes.modal, closeLoginModal, postLogin],
   );
 
-  const currentUserQuery = useCurrentUserQuery();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const suspendedSnackbarId = 'SuspendedSnackbar';
+  React.useEffect(() => {
+    if (appContext.disconnected === true) {
+      enqueueSnackbar(
+        <>
+          <CircularProgress size={16} color="inherit" style={{ marginRight: 8 }} /> Cannot connect to the server.
+          Reconnecting...
+        </>,
+        {
+          key: suspendedSnackbarId,
+          persist: true,
+          anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
+        },
+      );
+    } else {
+      closeSnackbar(suspendedSnackbarId);
+    }
+  }, [appContext.disconnected, closeSnackbar, enqueueSnackbar]);
 
-  if (currentUserQuery.loading) {
-    return <PageLoader />;
-  }
+  const currentUserQuery = useCurrentUserQuery();
   return (
     <div className={classes.root}>
       <Drawer

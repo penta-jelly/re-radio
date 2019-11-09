@@ -1,13 +1,4 @@
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  UpdateDateColumn,
-} from 'typeorm';
-import { Station } from 'radio/station/entities/station.entity';
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { UserRole } from './user-role.entity';
 
 @Entity()
@@ -30,36 +21,36 @@ export class User {
   @Column({})
   password: string;
 
-  @Column({ nullable: true })
-  name?: string;
+  @Column('character varying', { nullable: true })
+  name: string | null;
 
-  @Column({ nullable: true })
-  country?: string;
+  @Column('character varying', { nullable: true })
+  country: string | null;
 
-  @Column({ nullable: true })
-  city?: string;
+  @Column('character varying', { nullable: true })
+  city: string | null;
 
-  @Column({ nullable: true })
-  bio?: string;
+  @Column('character varying', { nullable: true })
+  bio: string | null;
 
-  @Column({ nullable: true })
-  avatarUrl?: string;
+  @Column('character varying', { nullable: true })
+  avatarUrl: string | null;
 
-  @Column({ nullable: true })
-  coverUrl?: string;
+  @Column('character varying', { nullable: true })
+  coverUrl: string | null;
 
-  @Column({ nullable: true, default: 0 })
+  @Column({ default: 0 })
   reputation: number = 0;
 
-  @Column({ nullable: true })
-  facebookId?: string;
+  @Column('character varying', { nullable: true })
+  facebookId: string | null;
 
-  @Column({ nullable: true })
-  googleId?: string;
+  @Column('character varying', { nullable: true })
+  googleId: string | null;
 
   @OneToMany(type => UserRole, role => role.user)
   roles: UserRole[];
 
-  @ManyToOne(type => Station, station => station.onlineUsers)
-  currentStation: Station;
+  @Column('int', { nullable: true })
+  currentStationId: number | null;
 }

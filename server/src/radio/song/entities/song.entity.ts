@@ -59,11 +59,11 @@ export class Song {
   @Column()
   stationSlug: string;
 
-  @Column('simple-array')
-  upVoteUserIds: number[] = [];
+  @Column('int', { array: true, default: '{}' })
+  upVoteUserIds: number[];
 
-  @Column('simple-array')
-  downVoteUserIds: number[] = [];
+  @Column('int', { array: true, default: '{}' })
+  downVoteUserIds: number[];
 
   @BeforeInsert()
   @BeforeUpdate()

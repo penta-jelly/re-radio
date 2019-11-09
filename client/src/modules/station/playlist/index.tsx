@@ -1,7 +1,8 @@
-import { Card, CircularProgress, List, Typography } from '@material-ui/core';
+import { Card, CircularProgress, List, Typography, Icon } from '@material-ui/core';
 import { sortSongs } from 're-radio-common';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
+import { MdPlaylistAdd } from 'react-icons/md';
 import { SongStatusEnum, useOnStationPlalistChangedSubscription, useStationPlayistQuery } from 'operations';
 import { PlaylistItem } from 'modules/station/playlist/item';
 import { useStyles } from './styles';
@@ -46,12 +47,24 @@ export const Playlist: React.FC = () => {
   } else if (error) {
     content = <CircularProgress />;
   } else if (data && data.playlist) {
-    const songs = sortSongs(data.playlist.map(song => ({ ...song, createdAt: new Date(song.createdAt) })));
-    content = (
-      <List className={classes.list} disablePadding dense>
-        {songs.map(song => song && <PlaylistItem data={song} key={song.id} />)}
-      </List>
-    );
+    if (data.playlist.length === 0) {
+      content = (
+        <Typography variant="subtitle1">
+          Press button{' '}
+          <Icon fontSize="inherit">
+            <MdPlaylistAdd />
+          </Icon>{' '}
+          to add a new song
+        </Typography>
+      );
+    } else {
+      const songs = sortSongs(data.playlist.map(song => ({ ...song, createdAt: new Date(song.createdAt) })));
+      content = (
+        <List className={classes.list} disablePadding dense>
+          {songs.map(song => song && <PlaylistItem data={song} key={song.id} />)}
+        </List>
+      );
+    }
   }
   return (
     <Card className={classes.container} elevation={0} square id="playlist-container">

@@ -47,4 +47,7 @@ export class UserDTO {
 
   @Field(type => [UserRoleDTO])
   roles: UserRoleDTO[];
+
+  @Field({ nullable: true })
+  currentStationId?: number;
 }

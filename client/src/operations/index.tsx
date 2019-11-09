@@ -1,8 +1,7 @@
 /* eslint-disable */
+import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
 export type Maybe<T> = T | null;
 
 /** All built-in and custom scalars, mapped to their actual values */
@@ -39,6 +38,8 @@ export type Mutation = {
   readonly __typename?: 'Mutation',
   readonly createStation: Station,
   readonly deleteStation: Scalars['Boolean'],
+  readonly joinStation: Scalars['Boolean'],
+  readonly leaveStation: Scalars['Boolean'],
   readonly createUser: User,
   readonly updateUser: Scalars['Boolean'],
   readonly deleteUser: Scalars['Boolean'],
@@ -55,6 +56,16 @@ export type MutationCreateStationArgs = {
 
 
 export type MutationDeleteStationArgs = {
+  where: StationFindOneWhereInput
+};
+
+
+export type MutationJoinStationArgs = {
+  where: StationFindOneWhereInput
+};
+
+
+export type MutationLeaveStationArgs = {
   where: StationFindOneWhereInput
 };
 
@@ -294,7 +305,7 @@ export type Station = {
   readonly playingSong?: Maybe<Song>,
   readonly userRoles: ReadonlyArray<UserRole>,
   readonly tags: ReadonlyArray<StationTag>,
-  readonly onlineUsers: ReadonlyArray<User>,
+  readonly onlineUserIds: ReadonlyArray<Scalars['Int']>,
 };
 
 export type StationCreateInput = {
@@ -338,6 +349,7 @@ export type StationSubscriptionEntity = {
   readonly slug: Scalars['String'],
   readonly description?: Maybe<Scalars['String']>,
   readonly playingSong?: Maybe<Song>,
+  readonly onlineUserIds: ReadonlyArray<Scalars['Int']>,
 };
 
 export type StationTag = {
@@ -371,7 +383,7 @@ export type SubscriptionStationArgs = {
 
 
 export type SubscriptionUserArgs = {
-  where?: Maybe<UserFindOneWhereInput>
+  where: UserFindOneWhereInput
 };
 
 
@@ -413,6 +425,7 @@ export type User = {
   readonly facebookId?: Maybe<Scalars['String']>,
   readonly googleId?: Maybe<Scalars['String']>,
   readonly roles: ReadonlyArray<UserRole>,
+  readonly currentStationId?: Maybe<Scalars['Float']>,
 };
 
 export type UserCreateInput = {
@@ -488,6 +501,7 @@ export type UserSubscriptionEntity = {
   readonly reputation?: Maybe<Scalars['Int']>,
   readonly facebookId?: Maybe<Scalars['String']>,
   readonly googleId?: Maybe<Scalars['String']>,
+  readonly currentStationId?: Maybe<Scalars['Float']>,
 };
 
 export type UserUpdateInput = {
@@ -553,6 +567,26 @@ export type CreateStationMutation = (
   ) }
 );
 
+export type JoinStationMutationVariables = {
+  where: StationFindOneWhereInput
+};
+
+
+export type JoinStationMutation = (
+  { readonly __typename?: 'Mutation' }
+  & Pick<Mutation, 'joinStation'>
+);
+
+export type LeaveStationMutationVariables = {
+  where: StationFindOneWhereInput
+};
+
+
+export type LeaveStationMutation = (
+  { readonly __typename?: 'Mutation' }
+  & Pick<Mutation, 'leaveStation'>
+);
+
 export type LoginMutationVariables = {
   data: LoginInput
 };
@@ -604,7 +638,7 @@ export type StationQuery = (
   { readonly __typename?: 'Query' }
   & { readonly station: (
     { readonly __typename?: 'Station' }
-    & Pick<Station, 'id' | 'name' | 'slug'>
+    & Pick<Station, 'id' | 'name' | 'slug' | 'onlineUserIds'>
     & { readonly tags: ReadonlyArray<(
       { readonly __typename?: 'StationTag' }
       & Pick<StationTag, 'id' | 'name'>
@@ -693,7 +727,7 @@ export type StationsQuery = (
   { readonly __typename?: 'Query' }
   & { readonly stations: ReadonlyArray<(
     { readonly __typename?: 'Station' }
-    & Pick<Station, 'id' | 'name' | 'slug'>
+    & Pick<Station, 'id' | 'name' | 'slug' | 'onlineUserIds'>
     & { readonly tags: ReadonlyArray<(
       { readonly __typename?: 'StationTag' }
       & Pick<StationTag, 'id' | 'name'>
@@ -711,7 +745,9 @@ export type StationsQuery = (
   )> }
 );
 
-export type OnStationChangedSubscriptionVariables = {};
+export type OnStationChangedSubscriptionVariables = {
+  where?: Maybe<StationFindOneWhereInput>
+};
 
 
 export type OnStationChangedSubscription = (
@@ -721,7 +757,7 @@ export type OnStationChangedSubscription = (
     & Pick<StationSubscription, 'mutation'>
     & { readonly entity: (
       { readonly __typename?: 'StationSubscriptionEntity' }
-      & Pick<StationSubscriptionEntity, 'id' | 'name' | 'slug'>
+      & Pick<StationSubscriptionEntity, 'id' | 'name' | 'slug' | 'onlineUserIds'>
       & { readonly playingSong: Maybe<(
         { readonly __typename?: 'Song' }
         & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
@@ -906,6 +942,66 @@ export function useCreateStationMutation(baseOptions?: ApolloReactHooks.Mutation
 export type CreateStationMutationHookResult = ReturnType<typeof useCreateStationMutation>;
 export type CreateStationMutationResult = ApolloReactCommon.MutationResult<CreateStationMutation>;
 export type CreateStationMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateStationMutation, CreateStationMutationVariables>;
+export const JoinStationDocument = gql`
+    mutation JoinStation($where: StationFindOneWhereInput!) {
+  joinStation(where: $where)
+}
+    `;
+export type JoinStationMutationFn = ApolloReactCommon.MutationFunction<JoinStationMutation, JoinStationMutationVariables>;
+
+/**
+ * __useJoinStationMutation__
+ *
+ * To run a mutation, you first call `useJoinStationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useJoinStationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [joinStationMutation, { data, loading, error }] = useJoinStationMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useJoinStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<JoinStationMutation, JoinStationMutationVariables>) {
+        return ApolloReactHooks.useMutation<JoinStationMutation, JoinStationMutationVariables>(JoinStationDocument, baseOptions);
+      }
+export type JoinStationMutationHookResult = ReturnType<typeof useJoinStationMutation>;
+export type JoinStationMutationResult = ApolloReactCommon.MutationResult<JoinStationMutation>;
+export type JoinStationMutationOptions = ApolloReactCommon.BaseMutationOptions<JoinStationMutation, JoinStationMutationVariables>;
+export const LeaveStationDocument = gql`
+    mutation LeaveStation($where: StationFindOneWhereInput!) {
+  leaveStation(where: $where)
+}
+    `;
+export type LeaveStationMutationFn = ApolloReactCommon.MutationFunction<LeaveStationMutation, LeaveStationMutationVariables>;
+
+/**
+ * __useLeaveStationMutation__
+ *
+ * To run a mutation, you first call `useLeaveStationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useLeaveStationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [leaveStationMutation, { data, loading, error }] = useLeaveStationMutation({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useLeaveStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LeaveStationMutation, LeaveStationMutationVariables>) {
+        return ApolloReactHooks.useMutation<LeaveStationMutation, LeaveStationMutationVariables>(LeaveStationDocument, baseOptions);
+      }
+export type LeaveStationMutationHookResult = ReturnType<typeof useLeaveStationMutation>;
+export type LeaveStationMutationResult = ApolloReactCommon.MutationResult<LeaveStationMutation>;
+export type LeaveStationMutationOptions = ApolloReactCommon.BaseMutationOptions<LeaveStationMutation, LeaveStationMutationVariables>;
 export const LoginDocument = gql`
     mutation login($data: LoginInput!) {
   login(data: $data) {
@@ -982,7 +1078,7 @@ export const CurrentUserDocument = gql`
  * __useCurrentUserQuery__
  *
  * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1024,6 +1120,7 @@ export const StationDocument = gql`
       thumbnail
       startedAt
     }
+    onlineUserIds
   }
 }
     ${UserBaseInformationFragmentDoc}`;
@@ -1032,7 +1129,7 @@ export const StationDocument = gql`
  * __useStationQuery__
  *
  * To run a query within a React component, call `useStationQuery` and pass it any options that fit your needs.
- * When your component renders, `useStationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useStationQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1074,7 +1171,7 @@ export const StationPlayerDocument = gql`
  * __useStationPlayerQuery__
  *
  * To run a query within a React component, call `useStationPlayerQuery` and pass it any options that fit your needs.
- * When your component renders, `useStationPlayerQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useStationPlayerQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1119,7 +1216,7 @@ export const OnStationPlayerChangedDocument = gql`
  * __useOnStationPlayerChangedSubscription__
  *
  * To run a query within a React component, call `useOnStationPlayerChangedSubscription` and pass it any options that fit your needs.
- * When your component renders, `useOnStationPlayerChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useOnStationPlayerChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1157,7 +1254,7 @@ export const StationPlayistDocument = gql`
  * __useStationPlayistQuery__
  *
  * To run a query within a React component, call `useStationPlayistQuery` and pass it any options that fit your needs.
- * When your component renders, `useStationPlayistQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useStationPlayistQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1202,7 +1299,7 @@ export const OnStationPlalistChangedDocument = gql`
  * __useOnStationPlalistChangedSubscription__
  *
  * To run a query within a React component, call `useOnStationPlalistChangedSubscription` and pass it any options that fit your needs.
- * When your component renders, `useOnStationPlalistChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useOnStationPlalistChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1241,6 +1338,7 @@ export const StationsDocument = gql`
       thumbnail
       startedAt
     }
+    onlineUserIds
   }
 }
     ${UserBaseInformationFragmentDoc}`;
@@ -1249,7 +1347,7 @@ export const StationsDocument = gql`
  * __useStationsQuery__
  *
  * To run a query within a React component, call `useStationsQuery` and pass it any options that fit your needs.
- * When your component renders, `useStationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useStationsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1273,8 +1371,8 @@ export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
 export type StationsLazyQueryHookResult = ReturnType<typeof useStationsLazyQuery>;
 export type StationsQueryResult = ApolloReactCommon.QueryResult<StationsQuery, StationsQueryVariables>;
 export const OnStationChangedDocument = gql`
-    subscription OnStationChanged {
-  onStationChanged: station {
+    subscription OnStationChanged($where: StationFindOneWhereInput) {
+  onStationChanged: station(where: $where) {
     mutation
     entity {
       id
@@ -1286,6 +1384,7 @@ export const OnStationChangedDocument = gql`
         thumbnail
         startedAt
       }
+      onlineUserIds
     }
   }
 }
@@ -1295,7 +1394,7 @@ export const OnStationChangedDocument = gql`
  * __useOnStationChangedSubscription__
  *
  * To run a query within a React component, call `useOnStationChangedSubscription` and pass it any options that fit your needs.
- * When your component renders, `useOnStationChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useOnStationChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1303,6 +1402,7 @@ export const OnStationChangedDocument = gql`
  * @example
  * const { data, loading, error } = useOnStationChangedSubscription({
  *   variables: {
+ *      where: // value for 'where'
  *   },
  * });
  */
@@ -1345,7 +1445,7 @@ export const UserProfileDocument = gql`
  * __useUserProfileQuery__
  *
  * To run a query within a React component, call `useUserProfileQuery` and pass it any options that fit your needs.
- * When your component renders, `useUserProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useUserProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1417,7 +1517,7 @@ export const YoutubeVideoDocument = gql`
  * __useYoutubeVideoQuery__
  *
  * To run a query within a React component, call `useYoutubeVideoQuery` and pass it any options that fit your needs.
- * When your component renders, `useYoutubeVideoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useYoutubeVideoQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
@@ -1484,7 +1584,7 @@ export const YoutubeVideosDocument = gql`
  * __useYoutubeVideosQuery__
  *
  * To run a query within a React component, call `useYoutubeVideosQuery` and pass it any options that fit your needs.
- * When your component renders, `useYoutubeVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * When your component renders, `useYoutubeVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;

@@ -4,6 +4,7 @@ import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typ
 import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
 import { User } from 'radio/user/entities/user.entity';
 import { UserRoleService } from 'radio/user/services/user-role.service';
+import { UserService } from 'radio/user/services/user.service';
 import { StationTag } from '../entities/station-tag.entity';
 import { Station } from '../entities/station.entity';
 import { StationCreateInput } from '../station.input';
@@ -17,6 +18,8 @@ export class StationService {
     private readonly stationTagRepository: Repository<StationTag>,
     @Inject(forwardRef(() => UserRoleService))
     private readonly userRoleService: UserRoleService,
+    @Inject(forwardRef(() => UserService))
+    private readonly userService: UserService,
   ) {}
 
   async find(options?: FindManyOptions<Station>): Promise<Station[]> {
@@ -67,5 +70,35 @@ export class StationService {
     const station = await this.stationRepository.findOneOrFail({ where: criteria, relations: ['userRoles'] });
     await this.userRoleService.remove(station.userRoles);
     await this.stationRepository.remove(station);
+  }
+
+  async cleanStationOnlineUsers() {
+    return this.stationRepository.update({}, { onlineUserIds: [] });
+  }
+
+  async addOnlineUser(station: Station, user: User): Promise<boolean> {
+    const userIndex = station.onlineUserIds.findIndex(id => id === user.id);
+    if (userIndex === -1) {
+      station.onlineUserIds.push(user.id);
+      await Promise.all([
+        this.stationRepository.save(station),
+        this.userService.update({ id: user.id }, { currentStationId: station.id }),
+      ]);
+      return true;
+    }
+    return false;
+  }
+
+  async removeOnlineUser(station: Station, user: User): Promise<boolean> {
+    const userIndex = station.onlineUserIds.findIndex(id => id === user.id);
+    if (userIndex !== -1) {
+      station.onlineUserIds.splice(userIndex, 1);
+      await Promise.all([
+        this.stationRepository.save(station),
+        this.userService.update({ id: user.id }, { currentStationId: null }),
+      ]);
+      return true;
+    }
+    return false;
   }
 }

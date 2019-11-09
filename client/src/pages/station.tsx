@@ -1,29 +1,39 @@
-import { makeStyles, Theme } from '@material-ui/core';
-
 import React from 'react';
+import { useParams } from 'react-router';
 import { Layout } from 'containers/layout';
 import { StationContext, StationLayout, useStationContextState } from 'modules';
-
-const useStyles = makeStyles(({ spacing }: Theme) => ({
-  container: {
-    width: '100%',
-    height: '100%',
-  },
-}));
+import { useCurrentUserQuery, useJoinStationMutation, useLeaveStationMutation } from 'operations';
+import { useInterval } from 'hooks/use-interval';
 
 interface RouteParams {
   slug: string;
 }
 
-const Station: React.FC = props => {
-  const classes = useStyles();
+const Station: React.FC = () => {
   const contextState = useStationContextState();
+
+  const params = useParams<RouteParams>();
+  const currentUserQuery = useCurrentUserQuery();
+  const [joinStation] = useJoinStationMutation();
+  const [leaveStation] = useLeaveStationMutation();
+
+  React.useEffect(() => {
+    if (currentUserQuery.data) {
+      joinStation({ variables: { where: { slug: params.slug } } });
+      return () => {
+        leaveStation({ variables: { where: { slug: params.slug } } });
+      };
+    }
+  }, [currentUserQuery.data, joinStation, leaveStation, params]);
+
+  useInterval(() => {
+    if (currentUserQuery.data) joinStation({ variables: { where: { slug: params.slug } } });
+  }, parseInt(process.env.REACT_APP_JOIN_STATION_INTERVAL));
+
   return (
     <StationContext.Provider value={contextState}>
       <Layout drawer={contextState.drawer}>
-        <div className={classes.container}>
-          <StationLayout />
-        </div>
+        <StationLayout />
       </Layout>
     </StationContext.Provider>
   );

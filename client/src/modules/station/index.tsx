@@ -14,13 +14,13 @@ export * from './context';
 export * from './list';
 export * from './create';
 
-export const StationLayout: React.FC<{}> = () => {
+export const StationLayout: React.FC = () => {
   const classes = useStyles();
 
   const [showAddSong, toggleShowAddSong] = useToggle(false);
 
   const tabs = React.useMemo<TabProps[]>(
-    () => [{ value: 'Playlist' }, { value: 'History' }, { value: 'Favourite' }],
+    () => [{ value: 'Playlist' }, { value: 'History' }, { value: 'Favorite' }],
     [],
   );
 

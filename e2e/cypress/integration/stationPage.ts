@@ -12,7 +12,7 @@ describe('Show Station Page', () => {
       cy.contains('Station A').should('be.visible');
       cy.contains('Playlist').should('be.exist');
       cy.contains('History').should('be.exist');
-      cy.contains('Favourite').should('be.exist');
+      cy.contains('Favorite').should('be.exist');
     });
   });
 
