@@ -24,7 +24,7 @@
     "eslint-plugin-prettier": "3.1.1",
     "prettier": "1.18.2",
     "tsify": "4.0.1",
-    "typescript": "3.6.4"
+    "typescript": "3.7.2"
   },
   "license": "MIT"
 }
