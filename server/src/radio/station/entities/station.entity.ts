@@ -34,7 +34,10 @@ export class Station {
   @Column('character varying', { nullable: true })
   description: string | null;
 
-  @OneToMany(type => UserRole, role => role.station)
+  @OneToMany(
+    type => UserRole,
+    role => role.station,
+  )
   userRoles: UserRole[];
 
   @ManyToMany(type => StationTag)
@@ -44,7 +47,10 @@ export class Station {
   @Column('int', { array: true, default: '{}' })
   onlineUserIds: number[];
 
-  @OneToMany(type => Song, song => song.station)
+  @OneToMany(
+    type => Song,
+    song => song.station,
+  )
   songs: Song[];
 
   @OneToOne(type => Song, { nullable: true, onDelete: 'SET NULL' })

@@ -48,7 +48,10 @@ export class User {
   @Column('character varying', { nullable: true })
   googleId: string | null;
 
-  @OneToMany(type => UserRole, role => role.user)
+  @OneToMany(
+    type => UserRole,
+    role => role.user,
+  )
   roles: UserRole[];
 
   @Column('int', { nullable: true })
