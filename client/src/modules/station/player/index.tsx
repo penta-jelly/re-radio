@@ -39,7 +39,7 @@ export const Player: React.FC = () => {
         let playingSongs = prev.playingSongs.filter(song => song!.id !== entity.id);
         // Then only add the updated entity if the status is playing. Played/skipped status will be ignore.
         if (entity.status === SongStatusEnum.Playing) {
-          playingSongs = [...playingSongs, entity];
+          playingSongs = [...playingSongs, { ...entity, __typename: 'Song' }];
         }
         return { ...prev, playingSongs };
       });
@@ -66,7 +66,7 @@ export const Player: React.FC = () => {
   }, [playingSong, playerRef]);
 
   const prevUrlRef = React.useRef<string | undefined>(undefined);
-  const prevIdlRef = React.useRef<number | undefined>(undefined);
+  const prevIdRef = React.useRef<number | undefined>(undefined);
 
   // This variable is mean to keep the previous URL so that the player will not be unmounted on down time between playing songs
   const url = React.useMemo<string | undefined>(() => {
@@ -76,11 +76,11 @@ export const Player: React.FC = () => {
   }, [playingSong]);
 
   React.useEffect(() => {
-    if (playingSong && url === prevUrlRef.current && playingSong.id !== prevIdlRef.current) syncPlayer();
+    if (playingSong && url === prevUrlRef.current && playingSong.id !== prevIdRef.current) syncPlayer();
   }, [data, playingSong, syncPlayer, url]);
 
   React.useEffect(() => {
-    if (playingSong) prevIdlRef.current = playingSong.id;
+    if (playingSong) prevIdRef.current = playingSong.id;
   }, [data, playingSong]);
 
   React.useEffect(() => {

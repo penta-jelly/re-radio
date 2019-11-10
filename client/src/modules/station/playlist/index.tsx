@@ -34,7 +34,7 @@ export const Playlist: React.FC = () => {
       updateQuery(prev => {
         let playlist = prev.playlist.filter(song => song && song.id !== entity.id);
         if (entity.status === SongStatusEnum.Playing || entity.status === SongStatusEnum.Pending) {
-          playlist = [...playlist, entity];
+          playlist = [...playlist, { ...entity, __typename: 'Song' }];
         }
         return { ...prev, playlist };
       });
