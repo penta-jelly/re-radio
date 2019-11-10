@@ -1,6 +1,6 @@
 import { Card, CardContent, Fade, FormHelperText, TextField, Typography } from '@material-ui/core';
 import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
-import { Formik, FormikActions } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import React from 'react';
 import { MdRadio as StationIcon } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
@@ -37,7 +37,7 @@ export const CreateStationForm: React.FC<Props> = props => {
   const notifyUnauthorizedUser = useUnauthorizedNotification();
 
   const onCreateStation = React.useCallback(
-    async (values: Data, formik: FormikActions<Data>) => {
+    async (values: Data, formik: FormikHelpers<Data>) => {
       try {
         if (currentUserQuery.error) {
           notifyUnauthorizedUser();

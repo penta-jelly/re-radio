@@ -1,5 +1,5 @@
 import { Avatar, Button, FormHelperText, TextField, Typography } from '@material-ui/core';
-import { Formik, FormikActions } from 'formik';
+import { Formik, FormikHelpers } from 'formik';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
@@ -19,7 +19,7 @@ export const RegisterForm: React.FC<Props> = props => {
   const [registerMutation] = useRegisterMutation();
   const { t } = useTranslation('common');
   const onRegister = useCallback(
-    async (values: Data, formik: FormikActions<Data>) => {
+    async (values: Data, formik: FormikHelpers<Data>) => {
       try {
         const response = await registerMutation({
           variables: {
