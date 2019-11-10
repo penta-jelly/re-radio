@@ -53,7 +53,10 @@ export class Song {
   @ManyToOne(type => User, { onDelete: 'SET NULL' })
   creator: User;
 
-  @ManyToOne(type => Station, station => station.songs)
+  @ManyToOne(
+    type => Station,
+    station => station.songs,
+  )
   station: Station;
 
   @Column()

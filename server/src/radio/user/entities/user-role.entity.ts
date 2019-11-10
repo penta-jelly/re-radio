@@ -25,9 +25,16 @@ export class UserRole {
   @Column({ enum: [UserRoleEnum.ADMIN, UserRoleEnum.STATION_ADMIN, UserRoleEnum.STATION_OWNER] })
   role: UserRoleEnum;
 
-  @ManyToOne(type => User, user => user.roles)
+  @ManyToOne(
+    type => User,
+    user => user.roles,
+  )
   user: User;
 
-  @ManyToOne(type => Station, station => station.userRoles, { nullable: true })
+  @ManyToOne(
+    type => Station,
+    station => station.userRoles,
+    { nullable: true },
+  )
   station?: Station;
 }
