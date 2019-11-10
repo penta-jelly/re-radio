@@ -2,6 +2,7 @@
   "extends": [
     "config:base"
   ],
+  "lockFileMaintenance": { "enabled": true },
   "automerge": true,
   "automergeType": "branch",
   "ignoreDeps": ["re-radio-common"],
