@@ -14,7 +14,10 @@
     "ci:lerna:start": "sleep 30 && lerna run start --no-sort --parallel",
     "ci:lerna:seed": "sleep 30 && lerna run seed",
     "dev": "npm-run-all --parallel lerna:dev db",
-    "lerna:dev": "lerna run dev --no-sort --parallel",
+    "lerna:dev": "npm-run-all --parallel lerna:dev:*",
+    "lerna:dev:server": "lerna run dev --scope re-radio-server",
+    "lerna:dev:client": "lerna run dev --scope re-radio-client",
+    "lerna:dev:common": "lerna run dev --scope re-radio-common",
     "db": "yarn db:up",
     "db:up": "lerna run db:up --no-sort --parallel",
     "db:down": "lerna run db:down --no-sort --parallel"
