@@ -23,7 +23,7 @@
     "graphql": "14.5.8",
     "i18next": "19.0.0",
     "jss": "10.0.0",
-    "notistack": "0.9.5",
+    "notistack": "0.9.6",
     "re-radio-common": "^0.1.0-SNAPSHOT",
     "react": "16.11.0",
     "react-apollo": "3.1.3",
