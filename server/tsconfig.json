@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "sourceMap": true,
     "module": "commonjs",
     "declaration": false,
     "noImplicitAny": false,
@@ -15,7 +16,6 @@
     "outDir": "./lib",
     "esModuleInterop": true,
     "lib": ["es2018", "esnext"],
-    "inlineSourceMap": true,
     "baseUrl": "src"
   },
   "include": ["src/**/*"],

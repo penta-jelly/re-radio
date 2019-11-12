@@ -1,4 +1,4 @@
 {
   "ignore": ["**/*.ts"],
-  "watch": ["lib"]
+  "watch": ["lib", ".env"]
 }
