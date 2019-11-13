@@ -5,6 +5,7 @@ import { FilesModule } from 'core/files/files.module';
 import { RadioGraphqlModule } from 'core/graphql/graphql.module';
 import { RequestsInterceptor } from 'core/request.interceptor';
 import { RadioTypeOrmModule } from 'core/typeorm/typeorm.module';
+import { StaticModule } from 'core/static/static.module';
 import { AuthModule } from './auth/auth.module';
 import { RadioController } from './radio.controller';
 import { SongModule } from './song/song.module';
@@ -15,6 +16,7 @@ import { StationService } from './station/services/station.service';
 
 @Module({
   imports: [
+    StaticModule,
     RadioTypeOrmModule,
     RadioGraphqlModule,
     FilesModule,
