@@ -1,11 +1,10 @@
 name: Google Cloud Platform deployment
-on:
-  schedule:
-    - cron: "0 1 * * *"
+on: 
+  push:
+    branches: [production]
 jobs:
   deployment:
     runs-on: ubuntu-latest
-    if: github.ref == 'master'
     steps:
       - name: Check out code
         uses: actions/checkout@master
