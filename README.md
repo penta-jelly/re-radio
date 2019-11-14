@@ -24,7 +24,7 @@ TODO: This section need to be updated
 ### Build
 
 ```sh
-yarn install && yarn run initialize && yarn run compile
+yarn install && yarn initialize && yarn compile
 ```
 
 ### Start

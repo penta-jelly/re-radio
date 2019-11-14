@@ -1,8 +1,13 @@
 .env
 
+lib
+build
+
 # IntelliJ IDEA
 .idea
 .eclipse
 
+.vscode
+
 # NPM/Yarn
-/node_modules
+node_modules
