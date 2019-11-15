@@ -30,7 +30,7 @@ jobs:
           VM_INSTANCE: ${{ secrets.GCP_VM_INSTANCE }}
           VM_USER: ${{ secrets.GCP_VM_USER }}
           VM_ZONE: ${{ secrets.GCP_VM_ZONE }}
-        run: >
-          gcloud config set project ${PROJECT_ID} &&
-          gcloud compute scp .gcloud/docker-compose.yml ${VM_USER}@${VM_INSTANCE}:~ --zone=${VM_ZONE} &&
+        run: |
+          gcloud config set project ${PROJECT_ID}
+          gcloud compute scp .gcloud/docker-compose.yml ${VM_USER}@${VM_INSTANCE}:~ --zone=${VM_ZONE}
           gcloud compute ssh ${VM_USER}@${VM_INSTANCE} --zone=${VM_ZONE} --command="docker-compose down && docker-compose pull -q && docker image prune -f && docker-compose up -d"
