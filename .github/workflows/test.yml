@@ -20,7 +20,7 @@ jobs:
         run: yarn lint
       - name: Build
         run: yarn build
-      - name: Install e2e testing environment
+      - name: Install e2e test environment
         run: sudo apt-get update && sudo apt-get install -yq libgconf-2-4
       - name: Run e2e test
         env:
