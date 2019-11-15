@@ -4,8 +4,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Install libgconf
-        run: sudo apt-get update && sudo apt-get install -yq libgconf-2-4
       - name: Install NodeJS
         uses: actions/setup-node@v1
         with:
@@ -22,7 +20,9 @@ jobs:
         run: yarn lint
       - name: Build
         run: yarn build
-      - name: Test
+      - name: Install e2e testing environment
+        run: sudo apt-get update && sudo apt-get install -yq libgconf-2-4
+      - name: Run e2e test
         env:
           CI: "true"
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
