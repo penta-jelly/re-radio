@@ -1,25 +1,31 @@
 name: Integration testing
-on: push
+on: [push, pull_request]
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Install libgconf
-        run: sudo apt-get update && sudo apt-get install -yq libgconf-2-4
       - name: Install NodeJS
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
       - name: Check out code
         uses: actions/checkout@master
-      - name: Build
-        run: yarn install --frozen-lockfile && yarn run initialize && yarn run compile
+      - name: Install
+        run: yarn install --frozen-lockfile
+      - name: Initialize
+        run: yarn initialize
+      - name: Compile
+        run: yarn compile
       - name: Lint
-        run: yarn run lint
-      - name: Test
+        run: yarn lint
+      - name: Build
+        run: yarn build
+      - name: Install e2e testing environment
+        run: sudo apt-get update && sudo apt-get install -yq libgconf-2-4
+      - name: Run e2e test
         env:
-          CI: true
+          CI: "true"
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
-        run: yarn start-server-and-test ci:start "3000|2996/status" "yarn lerna run cypress:run:ci --scope re-radio-e2e"
+        run: yarn start-server-and-test ci:start "http://localhost:2996/status" "cd e2e && yarn cypress:run:ci -c baseUrl=http://localhost:2996"

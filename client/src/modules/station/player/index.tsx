@@ -98,6 +98,7 @@ export const Player: React.FC = () => {
         youtubeConfig={{ playerVars: { controls: 0 }, preload: true }}
         width="100%"
         height="100%"
+        playing
         url={url}
       />
     );

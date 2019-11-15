@@ -11,25 +11,22 @@ export interface AppClient {
 }
 
 export function initClient(): AppClient {
-  let uri = '';
+  let host = window.location.host;
   if (process.env.NODE_ENV !== 'production') {
-    uri = `http://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
+    host = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
   }
 
-  const healthEndpoint = `${uri}/status`;
+  const healthEndpoint = `http://${host}/status`;
 
-  const httpLink = createUploadLink({ uri: `${uri}/graphql` });
+  const httpLink = createUploadLink({ uri: `http://${host}/graphql` });
 
-  const subscriptionClient = new SubscriptionClient(
-    `ws://${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}/graphql`,
-    {
-      reconnect: false,
-      connectionParams: () => {
-        const token = localStorage.getItem('token');
-        return { Authorization: token };
-      },
+  const subscriptionClient = new SubscriptionClient(`ws://${host}/graphql`, {
+    reconnect: false,
+    connectionParams: () => {
+      const token = localStorage.getItem('token');
+      return { Authorization: token };
     },
-  );
+  });
   const wsLink = new WebSocketLink(subscriptionClient);
 
   const link = ApolloLink.split(
