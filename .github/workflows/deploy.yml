@@ -1,7 +1,5 @@
 name: Google Cloud Platform deployment
-on: 
-  push:
-    branches: [production]
+on: deployment
 jobs:
   deployment:
     runs-on: ubuntu-latest
