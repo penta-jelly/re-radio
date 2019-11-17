@@ -8,10 +8,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 10.x
-      - name: Check out code
-        uses: actions/checkout@master
-      - name: Install
-        run: yarn install --frozen-lockfile
+      - uses: actions/checkout@master
+      - uses: bahmutov/npm-install@v1
       - name: Initialize
         run: yarn initialize
       - name: Compile
