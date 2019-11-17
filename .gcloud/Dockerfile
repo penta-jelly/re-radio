@@ -10,7 +10,7 @@ COPY client/package.json ./client/package.json
 COPY server/package.json ./server/package.json
 COPY common/package.json ./common/package.json
 
-RUN yarn install
+RUN yarn install --frozen-lockfile
 
 COPY . ./
 RUN yarn initialize && yarn compile && yarn build
