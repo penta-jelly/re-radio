@@ -7,14 +7,14 @@ import { RealTimeStationService } from '../real-time-stations/real-time-stations
 import { RealTimeSongService } from './real-time-songs.service';
 
 @Injectable()
-export class RealTimeSongsWorkerService {
+export class RealTimeSongsWorker {
   /**
    * @description A hash map store the current timeout instance of a station.
    * This will be use to interrupt the current playing song of station
    */
   private playersMap: { [key: string]: { timer: NodeJS.Timeout; song: Song } | undefined } = {};
 
-  private readonly logger = new Logger(RealTimeSongsWorkerService.name);
+  private readonly logger = new Logger(RealTimeSongsWorker.name);
   constructor(
     private readonly pubSub: PubSub,
     private readonly realTimeSongService: RealTimeSongService,

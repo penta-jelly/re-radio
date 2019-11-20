@@ -5,7 +5,7 @@ import { ConfigModule } from 'core/config/config.module';
 import { SongModule } from 'radio/song/song.module';
 import { StationModule } from 'radio/station/station.module';
 import { RealTimeSongsModule } from '../real-time-songs/real-time-songs.module';
-import { RealTimeStationsWorkerService } from './real-time-stations-worker.service';
+import { RealTimeStationsWorker } from './real-time-stations.worker';
 import { RealTimeStationService } from './real-time-stations.service';
 
 @Module({
@@ -17,11 +17,11 @@ import { RealTimeStationService } from './real-time-stations.service';
     SongModule,
     forwardRef(() => RealTimeSongsModule),
   ],
-  providers: [RealTimeStationsWorkerService, RealTimeStationService],
+  providers: [RealTimeStationsWorker, RealTimeStationService],
   exports: [RealTimeStationService],
 })
 export class RealTimeStationsModule implements OnModuleInit {
-  constructor(private readonly realTimeStationsService: RealTimeStationsWorkerService) {}
+  constructor(private readonly realTimeStationsService: RealTimeStationsWorker) {}
   async onModuleInit() {
     await Promise.all([
       this.realTimeStationsService.scanAllStationsOnInitialization(),

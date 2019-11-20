@@ -1,7 +1,7 @@
 import { Card, CircularProgress, Typography } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useStationQuery, useOnStationChangedSubscription } from 'operations';
+import { useStationQuery } from 'operations';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -11,22 +11,7 @@ interface RouteParams {
 export const Header: React.FC = props => {
   const classes = useStyles();
   const params = useParams<RouteParams>();
-  const { data, error, updateQuery } = useStationQuery({ variables: { slug: params.slug } });
-
-  useOnStationChangedSubscription({
-    variables: { where: { slug: params.slug } },
-    onSubscriptionData: ({ subscriptionData: { data } }) => {
-      if (!data) return;
-      const { onStationChanged } = data;
-      if (!onStationChanged) return;
-      const { entity } = onStationChanged;
-      updateQuery(prev => {
-        const { onlineUserIds } = entity;
-        if (!prev || !prev.station) return prev;
-        return { ...prev, station: { ...prev.station, onlineUserIds } };
-      });
-    },
-  });
+  const { data, error } = useStationQuery({ variables: { slug: params.slug } });
 
   const content = React.useMemo<React.ReactNode>(() => {
     if (data && data.station) {

@@ -99,7 +99,7 @@ export class StationResolver {
   ) {
     const station = await this.stationService.findOneOrFail({ where });
     const success = await this.stationService.addOnlineUser(station, user);
-    await this.pubSub.publish<RealTimeStationEvent.UserJoinPayload>(RealTimeStationEvent.USER_JOINED, {
+    await this.pubSub.publish<RealTimeStationEvent.UserJoinedPayload>(RealTimeStationEvent.USER_JOINED, {
       user,
       station,
     });

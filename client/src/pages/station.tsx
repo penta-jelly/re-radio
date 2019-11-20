@@ -2,7 +2,12 @@ import React from 'react';
 import { useParams } from 'react-router';
 import { Layout } from 'containers/layout';
 import { StationContext, StationLayout, useStationContextState } from 'modules';
-import { useCurrentUserQuery, useJoinStationMutation, useLeaveStationMutation } from 'operations';
+import {
+  useCurrentUserQuery,
+  useJoinStationMutation,
+  useStationQuery,
+  useOnStationChangedSubscription,
+} from 'operations';
 import { useInterval } from 'hooks/use-interval';
 
 interface RouteParams {
@@ -15,16 +20,29 @@ const Station: React.FC = () => {
   const params = useParams<RouteParams>();
   const currentUserQuery = useCurrentUserQuery();
   const [joinStation] = useJoinStationMutation();
-  const [leaveStation] = useLeaveStationMutation();
+
+  const { data, updateQuery } = useStationQuery({ variables: { slug: params.slug } });
+
+  useOnStationChangedSubscription({
+    variables: { where: { slug: params.slug } },
+    onSubscriptionData: ({ subscriptionData: { data } }) => {
+      if (!data) return;
+      const { onStationChanged } = data;
+      if (!onStationChanged) return;
+      const { entity } = onStationChanged;
+      updateQuery(prev => {
+        const { onlineUserIds } = entity;
+        if (!prev || !prev.station) return prev;
+        return { ...prev, station: { ...prev.station, onlineUserIds } };
+      });
+    },
+  });
 
   React.useEffect(() => {
-    if (currentUserQuery.data) {
+    if (data && currentUserQuery.data && !data.station.onlineUserIds.includes(currentUserQuery.data.user.id)) {
       joinStation({ variables: { where: { slug: params.slug } } });
-      return () => {
-        leaveStation({ variables: { where: { slug: params.slug } } });
-      };
     }
-  }, [currentUserQuery.data, joinStation, leaveStation, params]);
+  }, [data, currentUserQuery.data, joinStation, params]);
 
   useInterval(() => {
     if (currentUserQuery.data) joinStation({ variables: { where: { slug: params.slug } } });
