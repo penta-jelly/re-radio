@@ -10,7 +10,7 @@ jobs:
         env:
           APP_IMAGE: ${{ secrets.DOCKER_HUB_APP_IMAGE }}
         run: docker build -t ${APP_IMAGE} -f .gcloud/Dockerfile .
-      - name: Login to GitHub Docker Registry
+      - name: Login to Docker Hub Registry
         env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}

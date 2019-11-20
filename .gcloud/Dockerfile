@@ -10,6 +10,7 @@ COPY client/package.json ./client/package.json
 COPY server/package.json ./server/package.json
 COPY common/package.json ./common/package.json
 
+ENV CYPRESS_INSTALL_BINARY 0
 RUN yarn install --frozen-lockfile
 
 COPY . ./
