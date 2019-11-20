@@ -17,8 +17,10 @@ async function bootstrap() {
     // TODO: Production environment???
     cors: { origin: [/localhost:(.*)/] },
   });
+
   const port = ConfigService.get(EnvVariables.RADIO_SERVER_PORT);
   await app.listen(port);
+
   logger.log(`Radio GraphQL service successfully started at port ${port}.`);
 }
 bootstrap();

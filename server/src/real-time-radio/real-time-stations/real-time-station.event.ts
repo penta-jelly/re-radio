@@ -3,7 +3,7 @@ import { Station } from 'radio/station/entities/station.entity';
 
 export namespace RealTimeStationEvent {
   export const USER_JOINED = 'USER_JOINED';
-  export interface UserJoinPayload {
+  export interface UserJoinedPayload {
     user: User;
     station: Station;
   }

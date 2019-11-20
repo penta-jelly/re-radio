@@ -4,16 +4,16 @@ import { RadioTypeOrmModule } from 'core/typeorm/typeorm.module';
 import { SongModule } from 'radio/song/song.module';
 import { StationModule } from 'radio/station/station.module';
 import { RealTimeStationsModule } from '../real-time-stations/real-time-stations.module';
-import { RealTimeSongsWorkerService } from './real-time-songs-worker.service';
+import { RealTimeSongsWorker } from './real-time-songs.worker';
 import { RealTimeSongService } from './real-time-songs.service';
 
 @Module({
   imports: [RadioTypeOrmModule, PubSubModule, StationModule, SongModule, forwardRef(() => RealTimeStationsModule)],
-  providers: [RealTimeSongsWorkerService, RealTimeSongService],
+  providers: [RealTimeSongsWorker, RealTimeSongService],
   exports: [RealTimeSongService],
 })
 export class RealTimeSongsModule implements OnModuleInit {
-  constructor(private readonly songsService: RealTimeSongsWorkerService) {}
+  constructor(private readonly songsService: RealTimeSongsWorker) {}
   async onModuleInit() {
     await this.songsService.scanAllPlayingSongsOnInitialization();
     this.songsService.subscribeSong();

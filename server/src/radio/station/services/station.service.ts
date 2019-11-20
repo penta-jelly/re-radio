@@ -72,6 +72,13 @@ export class StationService {
     await this.stationRepository.remove(station);
   }
 
+  async findStationsByOnlineUser(user: User): Promise<Station[]> {
+    return this.stationRepository
+      .createQueryBuilder()
+      .select('*')
+      .where(`:userId = ANY("onlineUserIds")`, { userId: user.id })
+      .getRawMany();
+  }
   async cleanStationOnlineUsers() {
     return this.stationRepository.update({}, { onlineUserIds: [] });
   }
