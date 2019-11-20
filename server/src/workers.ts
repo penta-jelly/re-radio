@@ -3,24 +3,25 @@
 require('tsconfig-paths').register({ baseUrl: 'lib', paths: {} });
 require('source-map-support/register');
 /* eslint-enable import/no-unassigned-import */
+import Path from 'path';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { ConfigService } from 'core/config/config.service';
-import { EnvVariables } from 'core/config/config.variables';
 import { DevSeederService } from 'workers/seeder/dev-seeder.service';
 import { WorkersModule } from 'workers/workers.module';
 
+const RADIO_READY_STATE_FILE_PATH = Path.join(__dirname, 'radio.ready');
+
 async function bootstrap() {
   const logger = new Logger('Workers');
+
+  logger.log(`Wait until Graphql service response.`);
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  await require('wait-on')({ resources: [RADIO_READY_STATE_FILE_PATH], timeout: 30000 });
+  logger.log(`Graphql service responded.`);
+
   const app = await NestFactory.create(WorkersModule);
 
   const args = process.argv.slice(2);
-
-  const radioServerUrl = `http://localhost:${app.get(ConfigService).get(EnvVariables.RADIO_SERVER_PORT)}/status`;
-  logger.log(`Wait until URL ${radioServerUrl} response.`);
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
-  await require('wait-on')({ resources: [radioServerUrl], timeout: 30000 });
-  logger.log(`URL ${radioServerUrl} responded.`);
 
   try {
     if (args.includes('seed')) {
