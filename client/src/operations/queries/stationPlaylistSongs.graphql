@@ -1,9 +1,10 @@
-query StationPlayist($stationSlug: String!) {
+query StationPlaylist($stationSlug: String!) {
   playlist: songs(
     where: [
       { stationSlug: $stationSlug, status: PENDING }
       { stationSlug: $stationSlug, status: PLAYING }
-    ]
+    ],
+    pagination: { take: 99 }
   ) {
     id
     title
@@ -18,7 +19,7 @@ query StationPlayist($stationSlug: String!) {
   }
 }
 
-subscription OnStationPlalistChanged($stationSlug: String!) {
+subscription OnStationPlaylistChanged($stationSlug: String!) {
   onPlaylistSongChanged: song(where: { stationSlug: $stationSlug }) {
     mutation
     entity {

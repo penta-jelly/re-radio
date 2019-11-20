@@ -47,3 +47,33 @@ export class SongDTO {
   @Field(type => [Int])
   downVoteUserIds: number[];
 }
+
+@ObjectType('HistorySong')
+export class HistorySongDTO {
+  @Field()
+  id: string;
+
+  @Field()
+  title: string;
+
+  @Field()
+  url: string;
+
+  @Field()
+  thumbnail: string;
+
+  @Field(type => Int)
+  duration: number;
+
+  @Field(type => StationDTO)
+  station: StationDTO;
+
+  @Field()
+  stationSlug: string;
+
+  @Field(type => [Int])
+  creatorIds: number[];
+
+  @Field(type => Int)
+  playedTimes: number;
+}

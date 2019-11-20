@@ -3,7 +3,7 @@ import { sortSongs } from 're-radio-common';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { MdPlaylistAdd } from 'react-icons/md';
-import { SongStatusEnum, useOnStationPlalistChangedSubscription, useStationPlayistQuery } from 'operations';
+import { SongStatusEnum, useOnStationPlaylistChangedSubscription, useStationPlaylistQuery } from 'operations';
 import { PlaylistItem } from 'modules/station/playlist/item';
 import { useStyles } from './styles';
 
@@ -19,12 +19,12 @@ export const Playlist: React.FC = () => {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
 
-  const { loading, error, data, updateQuery } = useStationPlayistQuery({
+  const { loading, error, data, updateQuery } = useStationPlaylistQuery({
     variables: { stationSlug: match.params.slug },
     fetchPolicy: 'network-only',
   });
 
-  useOnStationPlalistChangedSubscription({
+  useOnStationPlaylistChangedSubscription({
     variables: { stationSlug: match.params.slug },
     onSubscriptionData: ({ subscriptionData: { data } }) => {
       if (!data) return;
@@ -42,11 +42,7 @@ export const Playlist: React.FC = () => {
   });
 
   let content: React.ReactNode = <Typography variant="subtitle1">Playlist</Typography>;
-  if (loading) {
-    content = <CircularProgress />;
-  } else if (error) {
-    content = <CircularProgress />;
-  } else if (data && data.playlist) {
+  if (data) {
     if (data.playlist.length === 0) {
       content = (
         <Typography variant="subtitle1">
@@ -61,10 +57,16 @@ export const Playlist: React.FC = () => {
       const songs = sortSongs(data.playlist.map(song => ({ ...song, createdAt: new Date(song.createdAt) })));
       content = (
         <List className={classes.list} disablePadding dense>
-          {songs.map(song => song && <PlaylistItem data={song} key={song.id} />)}
+          {songs.map(song => (
+            <PlaylistItem data={song} key={song.id} />
+          ))}
         </List>
       );
     }
+  } else if (loading) {
+    content = <CircularProgress />;
+  } else if (error) {
+    content = <Typography variant="subtitle1">{error.message}</Typography>;
   }
   return (
     <Card className={classes.container} elevation={0} square id="playlist-container">

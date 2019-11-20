@@ -28,6 +28,23 @@ export type ContentDetails = {
   readonly caption: Scalars['String'],
 };
 
+export type HistorySong = {
+  readonly __typename?: 'HistorySong',
+  readonly id: Scalars['String'],
+  readonly title: Scalars['String'],
+  readonly url: Scalars['String'],
+  readonly thumbnail: Scalars['String'],
+  readonly duration: Scalars['Int'],
+  readonly station: Station,
+  readonly stationSlug: Scalars['String'],
+  readonly creatorIds: ReadonlyArray<Scalars['Int']>,
+  readonly playedTimes: Scalars['Int'],
+};
+
+export type HistorySongFindAllWhereInput = {
+  readonly stationSlug: Scalars['String'],
+};
+
 export type LoginInput = {
   readonly password: Scalars['String'],
   readonly email?: Maybe<Scalars['String']>,
@@ -132,6 +149,7 @@ export type Query = {
   readonly currentUser: User,
   readonly songs: ReadonlyArray<Song>,
   readonly song: Song,
+  readonly historySongs: ReadonlyArray<HistorySong>,
   readonly youtubeVideo: YoutubeVideoDetail,
   readonly youtubeVideos: ReadonlyArray<YoutubeVideo>,
 };
@@ -170,6 +188,12 @@ export type QuerySongsArgs = {
 
 export type QuerySongArgs = {
   where: SongFindOneWhereInput
+};
+
+
+export type QueryHistorySongsArgs = {
+  where: HistorySongFindAllWhereInput,
+  pagination?: Maybe<PaginationInput>
 };
 
 
@@ -222,7 +246,7 @@ export type SongCreateInput = {
   readonly thumbnail: Scalars['String'],
   readonly duration: Scalars['Int'],
   readonly status?: Maybe<SongStatusEnum>,
-  readonly stationSlug: Scalars['String'],
+  readonly stationSlug?: Maybe<Scalars['String']>,
 };
 
 export enum SongExplorerOrderEnum {
@@ -629,6 +653,20 @@ export type UserBaseInformationFragment = (
   & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'>
 );
 
+export type HistorySongsQueryVariables = {
+  stationSlug: Scalars['String'],
+  pagination?: Maybe<PaginationInput>
+};
+
+
+export type HistorySongsQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly songs: ReadonlyArray<(
+    { readonly __typename?: 'HistorySong' }
+    & Pick<HistorySong, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'creatorIds' | 'playedTimes'>
+  )> }
+);
+
 export type StationQueryVariables = {
   slug: Scalars['String']
 };
@@ -686,12 +724,12 @@ export type OnStationPlayerChangedSubscription = (
   ) }
 );
 
-export type StationPlayistQueryVariables = {
+export type StationPlaylistQueryVariables = {
   stationSlug: Scalars['String']
 };
 
 
-export type StationPlayistQuery = (
+export type StationPlaylistQuery = (
   { readonly __typename?: 'Query' }
   & { readonly playlist: ReadonlyArray<(
     { readonly __typename?: 'Song' }
@@ -699,12 +737,12 @@ export type StationPlayistQuery = (
   )> }
 );
 
-export type OnStationPlalistChangedSubscriptionVariables = {
+export type OnStationPlaylistChangedSubscriptionVariables = {
   stationSlug: Scalars['String']
 };
 
 
-export type OnStationPlalistChangedSubscription = (
+export type OnStationPlaylistChangedSubscription = (
   { readonly __typename?: 'Subscription' }
   & { readonly onPlaylistSongChanged: (
     { readonly __typename?: 'SongSubscription' }
@@ -1098,6 +1136,46 @@ export function useCurrentUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQuery
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
 export type CurrentUserQueryResult = ApolloReactCommon.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
+export const HistorySongsDocument = gql`
+    query HistorySongs($stationSlug: String!, $pagination: PaginationInput) {
+  songs: historySongs(where: {stationSlug: $stationSlug}, pagination: $pagination) {
+    id
+    title
+    url
+    thumbnail
+    duration
+    creatorIds
+    playedTimes
+  }
+}
+    `;
+
+/**
+ * __useHistorySongsQuery__
+ *
+ * To run a query within a React component, call `useHistorySongsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useHistorySongsQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useHistorySongsQuery({
+ *   variables: {
+ *      stationSlug: // value for 'stationSlug'
+ *      pagination: // value for 'pagination'
+ *   },
+ * });
+ */
+export function useHistorySongsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
+        return ApolloReactHooks.useQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
+      }
+export function useHistorySongsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
+        }
+export type HistorySongsQueryHookResult = ReturnType<typeof useHistorySongsQuery>;
+export type HistorySongsLazyQueryHookResult = ReturnType<typeof useHistorySongsLazyQuery>;
+export type HistorySongsQueryResult = ApolloReactCommon.QueryResult<HistorySongsQuery, HistorySongsQueryVariables>;
 export const StationDocument = gql`
     query Station($slug: String!) {
   station(where: {slug: $slug}) {
@@ -1233,9 +1311,9 @@ export function useOnStationPlayerChangedSubscription(baseOptions?: ApolloReactH
       }
 export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
 export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
-export const StationPlayistDocument = gql`
-    query StationPlayist($stationSlug: String!) {
-  playlist: songs(where: [{stationSlug: $stationSlug, status: PENDING}, {stationSlug: $stationSlug, status: PLAYING}]) {
+export const StationPlaylistDocument = gql`
+    query StationPlaylist($stationSlug: String!) {
+  playlist: songs(where: [{stationSlug: $stationSlug, status: PENDING}, {stationSlug: $stationSlug, status: PLAYING}], pagination: {take: 99}) {
     id
     title
     url
@@ -1251,32 +1329,32 @@ export const StationPlayistDocument = gql`
     `;
 
 /**
- * __useStationPlayistQuery__
+ * __useStationPlaylistQuery__
  *
- * To run a query within a React component, call `useStationPlayistQuery` and pass it any options that fit your needs.
- * When your component renders, `useStationPlayistQuery` returns an object from Apollo Client that contains loading, error, and data properties 
+ * To run a query within a React component, call `useStationPlaylistQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStationPlaylistQuery` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useStationPlayistQuery({
+ * const { data, loading, error } = useStationPlaylistQuery({
  *   variables: {
  *      stationSlug: // value for 'stationSlug'
  *   },
  * });
  */
-export function useStationPlayistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
-        return ApolloReactHooks.useQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
+export function useStationPlaylistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
+        return ApolloReactHooks.useQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
       }
-export function useStationPlayistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayistQuery, StationPlayistQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<StationPlayistQuery, StationPlayistQueryVariables>(StationPlayistDocument, baseOptions);
+export function useStationPlaylistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
         }
-export type StationPlayistQueryHookResult = ReturnType<typeof useStationPlayistQuery>;
-export type StationPlayistLazyQueryHookResult = ReturnType<typeof useStationPlayistLazyQuery>;
-export type StationPlayistQueryResult = ApolloReactCommon.QueryResult<StationPlayistQuery, StationPlayistQueryVariables>;
-export const OnStationPlalistChangedDocument = gql`
-    subscription OnStationPlalistChanged($stationSlug: String!) {
+export type StationPlaylistQueryHookResult = ReturnType<typeof useStationPlaylistQuery>;
+export type StationPlaylistLazyQueryHookResult = ReturnType<typeof useStationPlaylistLazyQuery>;
+export type StationPlaylistQueryResult = ApolloReactCommon.QueryResult<StationPlaylistQuery, StationPlaylistQueryVariables>;
+export const OnStationPlaylistChangedDocument = gql`
+    subscription OnStationPlaylistChanged($stationSlug: String!) {
   onPlaylistSongChanged: song(where: {stationSlug: $stationSlug}) {
     mutation
     entity {
@@ -1296,26 +1374,26 @@ export const OnStationPlalistChangedDocument = gql`
     `;
 
 /**
- * __useOnStationPlalistChangedSubscription__
+ * __useOnStationPlaylistChangedSubscription__
  *
- * To run a query within a React component, call `useOnStationPlalistChangedSubscription` and pass it any options that fit your needs.
- * When your component renders, `useOnStationPlalistChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties 
+ * To run a query within a React component, call `useOnStationPlaylistChangedSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useOnStationPlaylistChangedSubscription` returns an object from Apollo Client that contains loading, error, and data properties 
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useOnStationPlalistChangedSubscription({
+ * const { data, loading, error } = useOnStationPlaylistChangedSubscription({
  *   variables: {
  *      stationSlug: // value for 'stationSlug'
  *   },
  * });
  */
-export function useOnStationPlalistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>) {
-        return ApolloReactHooks.useSubscription<OnStationPlalistChangedSubscription, OnStationPlalistChangedSubscriptionVariables>(OnStationPlalistChangedDocument, baseOptions);
+export function useOnStationPlaylistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>) {
+        return ApolloReactHooks.useSubscription<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>(OnStationPlaylistChangedDocument, baseOptions);
       }
-export type OnStationPlalistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlalistChangedSubscription>;
-export type OnStationPlalistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlalistChangedSubscription>;
+export type OnStationPlaylistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlaylistChangedSubscription>;
+export type OnStationPlaylistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlaylistChangedSubscription>;
 export const StationsDocument = gql`
     query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: [StationFindAllWhereInput]) {
   stations(pagination: $pagination, order: $order, where: $where) {

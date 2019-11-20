@@ -9,6 +9,7 @@ import { Header } from './header';
 import { Player } from './player';
 import { Playlist } from './playlist';
 import { useStyles } from './styles';
+import { HistorySongs } from './history-songs';
 
 export * from './context';
 export * from './list';
@@ -32,13 +33,20 @@ export const StationLayout: React.FC = () => {
         <Grid container className={classes.container}>
           <Grid item xs={12} className={classes.header}>
             <Tabs value={selectedTab} onChange={(_, tab) => setSelectedTab(tab)}>
-              {tabs.map(({ value }) => (
-                <Tab key={value} value={value} label={value} selected={selectedTab === value} />
+              {tabs.map(({ value, ...tabProps }) => (
+                <Tab {...tabProps} key={value} value={value} label={value} selected={selectedTab === value} />
               ))}
             </Tabs>
           </Grid>
           <Grid item xs={12} className={classes.content}>
-            <Playlist />
+            {(() => {
+              switch (selectedTab) {
+                case 'History':
+                  return <HistorySongs />;
+                default:
+                  return <Playlist />;
+              }
+            })()}
           </Grid>
         </Grid>
       </Grid>

@@ -35,7 +35,12 @@ export const StationItem: React.FC<Props> = ({ data, className, placeHolderThumb
       className={className}
       links={
         <>
-          <ReCardLink Icon={FiberManualRecordIcon} iconColor="primary" text="0 online" data-role="online-users-label" />
+          <ReCardLink
+            Icon={FiberManualRecordIcon}
+            iconColor="primary"
+            text={`${data.onlineUserIds.length} online`}
+            data-role="online-users-label"
+          />
           <ReCardLink Icon={ShowChartIcon} iconColor="inherit" text="6 pinned" data-role="pinned-label" />
         </>
       }

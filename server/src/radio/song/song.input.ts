@@ -73,8 +73,8 @@ export class SongCreateInput {
   @Field(type => SongStatusEnum, { nullable: true })
   status?: SongStatusEnum;
 
-  @Field()
-  stationSlug: string;
+  @Field({ nullable: true })
+  stationSlug?: string;
 }
 
 @InputType()
@@ -95,4 +95,10 @@ export class SongUpdateInput {
 
   @Field(type => SongStatusEnum, { nullable: true })
   status?: SongStatusEnum;
+}
+
+@InputType()
+export class HistorySongFindAllWhereInput {
+  @Field()
+  stationSlug: string;
 }

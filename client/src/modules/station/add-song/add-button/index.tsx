@@ -3,13 +3,7 @@ import { FabProps as MuiFabProps } from '@material-ui/core/Fab';
 import React, { useCallback } from 'react';
 import { MdSend } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
-import {
-  SongStatusEnum,
-  useCreateSongMutation,
-  useCurrentUserQuery,
-  useYoutubeVideoLazyQuery,
-  YoutubeVideo,
-} from 'operations';
+import { useCreateSongMutation, useCurrentUserQuery, useYoutubeVideoLazyQuery, YoutubeVideo } from 'operations';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 
 interface Props {
@@ -62,7 +56,6 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
             variables: {
               data: {
                 title: youtubeVideoQuery.data.youtubeVideo.snippet.title,
-                status: SongStatusEnum.Pending,
                 duration: youtubeVideoQuery.data.youtubeVideo.contentDetails.duration,
                 url: `https://www.youtube.com/watch?v=${youtubeVideoQuery.data.youtubeVideo.id}`,
                 thumbnail: thumbnail.url,

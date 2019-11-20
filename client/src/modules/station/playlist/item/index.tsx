@@ -1,11 +1,11 @@
 import { ListItem, ListItemText } from '@material-ui/core';
 import { computeSongScore } from 're-radio-common';
 import React from 'react';
-import { SongStatusEnum, StationPlayistQuery } from 'operations';
+import { SongStatusEnum, StationPlaylistQuery } from 'operations';
 import { useStyles } from './styles';
 
 interface Props {
-  data: NonNullable<StationPlayistQuery['playlist'][0]>;
+  data: NonNullable<StationPlaylistQuery['playlist'][0]>;
 }
 
 export const PlaylistItem: React.FC<Props> = props => {
