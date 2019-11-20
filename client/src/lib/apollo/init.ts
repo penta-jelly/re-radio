@@ -16,11 +16,11 @@ export function initClient(): AppClient {
     host = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
   }
 
-  const healthEndpoint = `http://${host}/status`;
+  const healthEndpoint = `${isSecureProtocol() ? 'https' : 'http'}://${host}/status`;
 
-  const httpLink = createUploadLink({ uri: `http://${host}/graphql` });
+  const httpLink = createUploadLink({ uri: `${isSecureProtocol() ? 'https' : 'http'}://${host}/graphql` });
 
-  const subscriptionClient = new SubscriptionClient(`ws://${host}/graphql`, {
+  const subscriptionClient = new SubscriptionClient(`${isSecureProtocol() ? 'wss' : 'ws'}://${host}/graphql`, {
     reconnect: false,
     connectionParams: () => {
       const token = localStorage.getItem('token');
@@ -63,4 +63,8 @@ interface Context {
   headers: {
     [key: string]: string;
   };
+}
+
+function isSecureProtocol() {
+  return window.location.protocol === 'https:';
 }
