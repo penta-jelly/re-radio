@@ -1,10 +1,11 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
-import { Song } from 'radio/song/entities/song.entity';
-import { SongCreateInput } from 'radio/song/song.input';
 import { StationService } from 'radio/station/services/station.service';
 import { User } from 'radio/user/entities/user.entity';
+import { PaginationInput } from 'core/graphql/input/pagination';
+import { SongCreateInput } from '../song.input';
+import { Song, SongStatusEnum } from '../entities/song.entity';
 
 @Injectable()
 export class SongService {
@@ -35,10 +36,45 @@ export class SongService {
     return this.songRepository.findOneOrFail(options);
   }
 
+  async findHistorySongs(
+    stationSlug: string,
+    { take, skip }: PaginationInput,
+  ): Promise<
+    {
+      title: string;
+      url: string;
+      thumbnail: string;
+      duration: number;
+      stationSlug: string;
+      creatorIds: number[];
+      playedTimes: number;
+      createdAt: Date;
+    }[]
+  > {
+    return this.songRepository
+      .createQueryBuilder()
+      .select(`title, url, thumbnail, duration, "stationSlug"`)
+      .addSelect(`max("createdAt")`, `createdAt`)
+      .addSelect(`count(id)`, `playedTimes`)
+      .addSelect(`array_remove(array_agg(DISTINCT "creatorId"), NULL)`, `creatorIds`)
+      .where(`"stationSlug" = :stationSlug`, { stationSlug })
+      .andWhere(`status = 'PLAYED'`)
+      .groupBy(`title, url, thumbnail, duration, "stationSlug"`)
+      .orderBy(`"createdAt"`, 'DESC')
+      .take(take)
+      .skip(skip)
+      .getRawMany();
+  }
+
   async create(payload: SongCreateInput, owner: User): Promise<Song> {
     const { stationSlug, ...rawSong } = payload;
+    const station = await this.stationService.findOneOrFail({
+      where: stationSlug ? { slug: stationSlug } : { id: owner.currentStationId },
+    });
     const song = this.songRepository.create(rawSong);
-    song.station = await this.stationService.findOneOrFail({ where: { slug: stationSlug } });
+    song.status = song.status || SongStatusEnum.PENDING;
+    song.station = station;
+    song.creator = owner;
     await this.songRepository.save(song);
     return song;
   }

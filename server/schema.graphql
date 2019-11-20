@@ -14,6 +14,22 @@ type ContentDetails {
   caption: String!
 }
 
+type HistorySong {
+  id: String!
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  station: Station!
+  stationSlug: String!
+  creatorIds: [Int!]!
+  playedTimes: Int!
+}
+
+input HistorySongFindAllWhereInput {
+  stationSlug: String!
+}
+
 input LoginInput {
   password: String!
   email: String
@@ -63,6 +79,7 @@ type Query {
   currentUser: User!
   songs(order: SongFindAllOrderInput, where: [SongFindAllWhereInput], pagination: PaginationInput): [Song!]!
   song(where: SongFindOneWhereInput!): Song!
+  historySongs(where: HistorySongFindAllWhereInput!, pagination: PaginationInput): [HistorySong!]!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
 }
@@ -105,7 +122,7 @@ input SongCreateInput {
   thumbnail: String!
   duration: Int!
   status: SongStatusEnum
-  stationSlug: String!
+  stationSlug: String
 }
 
 enum SongExplorerOrderEnum {

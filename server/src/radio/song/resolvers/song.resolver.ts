@@ -5,29 +5,24 @@ import { CurrentUser } from 'radio/auth/decorators/CurrentUser.decorator';
 import { Roles } from 'radio/auth/decorators/Roles.decorator';
 import { AuthenticationGuard } from 'radio/auth/guards/Authentication.guard';
 import { AuthorizationGuard } from 'radio/auth/guards/Authorization.guard';
-import { SongService } from 'radio/song/services/song.service';
-import {
-  SongCreateInput,
-  SongFindAllOrderInput,
-  SongFindAllWhereInput,
-  SongFindOneWhereInput,
-} from 'radio/song/song.input';
 import { StationDTO } from 'radio/station/dto/station.dto';
 import { UserDTO } from 'radio/user/dto/user.dto';
 import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
 import { User } from 'radio/user/entities/user.entity';
+import { SongCreateInput, SongFindAllOrderInput, SongFindAllWhereInput, SongFindOneWhereInput } from '../song.input';
+import { SongService } from '../services/song.service';
 import { SongDTO } from '../dto/song.dto';
 
 @Resolver(of => SongDTO)
 export class SongResolver {
   constructor(private readonly songService: SongService) {}
 
-  @ResolveProperty(returns => [UserDTO])
+  @ResolveProperty(returns => UserDTO)
   async creator(@Root() song: SongDTO) {
     return this.songService.findOneOrFail({ where: { id: song.id }, relations: ['creator'] });
   }
 
-  @ResolveProperty(returns => [StationDTO])
+  @ResolveProperty(returns => StationDTO)
   async station(@Root() song: SongDTO) {
     return this.songService.findOneOrFail({ where: { id: song.id }, relations: ['station'] });
   }

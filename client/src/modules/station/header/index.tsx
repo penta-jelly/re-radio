@@ -22,6 +22,7 @@ export const Header: React.FC = props => {
       const { entity } = onStationChanged;
       updateQuery(prev => {
         const { onlineUserIds } = entity;
+        if (!prev || !prev.station) return prev;
         return { ...prev, station: { ...prev.station, onlineUserIds } };
       });
     },

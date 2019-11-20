@@ -1,0 +1,11 @@
+query HistorySongs($stationSlug: String!, $pagination: PaginationInput) {
+  songs: historySongs(where: { stationSlug: $stationSlug }, pagination: $pagination) {
+    id
+    title
+    url
+    thumbnail
+    duration
+    creatorIds
+    playedTimes
+  }
+}
