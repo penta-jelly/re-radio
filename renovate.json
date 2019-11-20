@@ -8,11 +8,6 @@
   "ignoreDeps": ["re-radio-common"],
   "packageRules": [
     {
-      "packagePatterns": ["^eslint", "^prettier"],
-      "groupName": "prettier and eslint",
-      "automerge": false
-    },
-    {
       "packagePatterns": ["^@graphql-codegen"],
       "groupName": "@graphql-codegen",
       "automerge": false
