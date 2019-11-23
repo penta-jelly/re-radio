@@ -1,6 +1,6 @@
 import { Card, Typography, CircularProgress } from '@material-ui/core';
 import React, { useCallback, useRef } from 'react';
-import ReactPlayer from 'react-player';
+import ReactPlayer, { Config as ReactPlayerConfig } from 'react-player';
 import { useRouteMatch } from 'react-router-dom';
 import {
   SongStatusEnum,
@@ -8,6 +8,7 @@ import {
   useStationPlayerQuery,
   StationPlayerQuery,
 } from 'operations';
+import { useMemorizedValue } from 'hooks/use-memorized-value';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -58,48 +59,37 @@ export const Player: React.FC = () => {
       const startPlayerTime = new Date(playingSong.startedAt).getTime();
       const seekTime = currentTime - startPlayerTime;
       const seekToSeconds = seekTime / 1000;
-      // Only sync when the client player time and server player time mismatched more than 5 seconds
+      // Only sync when the client player time and server player time is out of sync for more than 5 seconds
       if (Math.abs(playerRef.current.getCurrentTime() - seekToSeconds) > 5) {
-        playerRef.current.seekTo(seekTime / 1000);
+        playerRef.current.seekTo(seekToSeconds);
       }
     }
   }, [playingSong, playerRef]);
 
-  const prevUrlRef = React.useRef<string | undefined>(undefined);
-  const prevIdRef = React.useRef<number | undefined>(undefined);
-
   // This variable is mean to keep the previous URL so that the player will not be unmounted on down time between playing songs
-  const url = React.useMemo<string | undefined>(() => {
-    if (playingSong) return playingSong.url;
-    if (prevUrlRef.current) return prevUrlRef.current;
-    return undefined;
-  }, [playingSong]);
+  const [url] = useMemorizedValue(playingSong && playingSong.url);
+  const [id] = useMemorizedValue(playingSong && playingSong.id);
 
-  React.useEffect(() => {
-    if (playingSong && url === prevUrlRef.current && playingSong.id !== prevIdRef.current) syncPlayer();
-  }, [data, playingSong, syncPlayer, url]);
-
-  React.useEffect(() => {
-    if (playingSong) prevIdRef.current = playingSong.id;
-  }, [data, playingSong]);
-
-  React.useEffect(() => {
-    prevUrlRef.current = url;
-  }, [url]);
+  const playerConfig = React.useMemo<ReactPlayerConfig>(
+    () => ({ youtube: { playerVars: { controls: 0 }, preload: true } }),
+    [],
+  );
 
   let content: React.ReactNode;
+  // Always try to render the ReactPlayer when url is available
   if (url) {
-    // Always try to render the ReactPlayer when url is available
     content = (
       <ReactPlayer
+        // A cheat to workaround the memorized url value
+        // this will make sure re-playability of the same song URL will always have a difference URL
+        url={`${url}&re-radio-song-id=${id}`}
         onPlay={syncPlayer}
         ref={playerRef}
         className={classes.wrapper}
-        youtubeConfig={{ playerVars: { controls: 0 }, preload: true }}
+        config={playerConfig}
         width="100%"
         height="100%"
         playing
-        url={url}
       />
     );
   } else if (loading) {

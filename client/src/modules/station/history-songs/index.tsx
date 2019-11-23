@@ -3,6 +3,7 @@ import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useHistorySongsQuery } from 'operations';
 import { useScrollMonitor } from 'hooks/use-scroll-monitor';
+import { useMemorizedValue } from 'hooks/use-memorized-value';
 import { HistorySongItem } from './item';
 import { useStyles } from './styles';
 
@@ -29,14 +30,16 @@ export const HistorySongs: React.FC = () => {
   const onBottomReached = React.useCallback(() => !loading && setTake(value => value + baseIncrement), [loading]);
   const [, ref] = useScrollMonitor({ onBottomReached }, [data]);
 
+  const [songs] = useMemorizedValue(data && data.songs);
+
   let content: React.ReactNode = <Typography variant="subtitle1">History</Typography>;
-  if (data) {
-    if (data.songs.length === 0) {
+  if (songs) {
+    if (songs.length === 0) {
       content = <Typography variant="subtitle1">No songs in the history</Typography>;
     } else {
       content = (
         <List className={classes.list} disablePadding dense innerRef={ref}>
-          {data.songs.map(song => (
+          {songs.map(song => (
             <HistorySongItem data={song} key={song.title} />
           ))}
           {loading && (
