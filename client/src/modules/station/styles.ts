@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(({ palette, breakpoints, zIndex }) => ({
+export const useStyles = makeStyles(({ palette, breakpoints, zIndex, spacing }) => ({
   container: {
     height: '100%',
   },
@@ -11,6 +11,10 @@ export const useStyles = makeStyles(({ palette, breakpoints, zIndex }) => ({
   },
   content: {
     height: 'calc(100vh - 48px)',
+    padding: spacing(0.5),
+  },
+  songsList: {
+    paddingRight: 0,
   },
   subContent: {
     height: '100%',
