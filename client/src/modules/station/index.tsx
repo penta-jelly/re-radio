@@ -38,7 +38,7 @@ export const StationLayout: React.FC = () => {
               ))}
             </Tabs>
           </Grid>
-          <Grid item xs={12} className={classes.content}>
+          <Grid item xs={12} className={[classes.content, classes.songsList].join(' ')}>
             {(() => {
               switch (selectedTab) {
                 case 'History':
@@ -68,6 +68,7 @@ export const StationLayout: React.FC = () => {
           className: classes.fabIcon,
           onClick: toggleShowAddSong,
           id: 'add-song-fab',
+          title: 'Add a song',
         }}
       >
         {showAddSong ? <MdClose /> : <MdPlaylistAdd />}
