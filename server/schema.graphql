@@ -166,22 +166,7 @@ enum SongStatusEnum {
 
 type SongSubscription {
   mutation: MutationEnum!
-  entity: SongSubscriptionEntity!
-}
-
-type SongSubscriptionEntity {
-  id: Int!
-  createdAt: Timestamp!
-  updatedAt: Timestamp!
-  startedAt: Timestamp
-  title: String!
-  url: String!
-  thumbnail: String!
-  duration: Int!
-  status: SongStatusEnum!
-  stationSlug: String!
-  upVoteUserIds: [Int!]!
-  downVoteUserIds: [Int!]!
+  entity: Song!
 }
 
 input SongUpdateInput {
@@ -233,18 +218,7 @@ input StationFindOneWhereInput {
 
 type StationSubscription {
   mutation: MutationEnum!
-  entity: StationSubscriptionEntity!
-}
-
-type StationSubscriptionEntity {
-  id: Int!
-  createdAt: Timestamp!
-  updatedAt: Timestamp!
-  name: String!
-  slug: String!
-  description: String
-  playingSong: Song
-  onlineUserIds: [Int!]!
+  entity: Station!
 }
 
 type StationTag {
@@ -359,25 +333,7 @@ enum UserRoleEnum {
 
 type UserSubscription {
   mutation: MutationEnum!
-  entity: UserSubscriptionEntity!
-}
-
-type UserSubscriptionEntity {
-  id: Int!
-  createdAt: Timestamp!
-  updatedAt: Timestamp!
-  email: String!
-  username: String!
-  name: String
-  country: String
-  city: String
-  bio: String
-  avatarUrl: String
-  coverUrl: String
-  reputation: Int
-  facebookId: String
-  googleId: String
-  currentStationId: Float
+  entity: User!
 }
 
 input UserUpdateInput {

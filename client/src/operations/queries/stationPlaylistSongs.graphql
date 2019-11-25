@@ -16,6 +16,9 @@ query StationPlaylist($stationSlug: String!) {
     status
     upVoteUserIds
     downVoteUserIds
+    creator { 
+      ...UserBaseInformation
+    }
   }
 }
 
@@ -33,6 +36,9 @@ subscription OnStationPlaylistChanged($stationSlug: String!) {
       status
       upVoteUserIds
       downVoteUserIds
+      creator { 
+        ...UserBaseInformation
+      }
     }
   }
 }

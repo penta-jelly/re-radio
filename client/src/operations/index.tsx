@@ -291,23 +291,7 @@ export enum SongStatusEnum {
 export type SongSubscription = {
   readonly __typename?: 'SongSubscription',
   readonly mutation: MutationEnum,
-  readonly entity: SongSubscriptionEntity,
-};
-
-export type SongSubscriptionEntity = {
-  readonly __typename?: 'SongSubscriptionEntity',
-  readonly id: Scalars['Int'],
-  readonly createdAt: Scalars['Timestamp'],
-  readonly updatedAt: Scalars['Timestamp'],
-  readonly startedAt?: Maybe<Scalars['Timestamp']>,
-  readonly title: Scalars['String'],
-  readonly url: Scalars['String'],
-  readonly thumbnail: Scalars['String'],
-  readonly duration: Scalars['Int'],
-  readonly status: SongStatusEnum,
-  readonly stationSlug: Scalars['String'],
-  readonly upVoteUserIds: ReadonlyArray<Scalars['Int']>,
-  readonly downVoteUserIds: ReadonlyArray<Scalars['Int']>,
+  readonly entity: Song,
 };
 
 export type SongUpdateInput = {
@@ -361,19 +345,7 @@ export type StationFindOneWhereInput = {
 export type StationSubscription = {
   readonly __typename?: 'StationSubscription',
   readonly mutation: MutationEnum,
-  readonly entity: StationSubscriptionEntity,
-};
-
-export type StationSubscriptionEntity = {
-  readonly __typename?: 'StationSubscriptionEntity',
-  readonly id: Scalars['Int'],
-  readonly createdAt: Scalars['Timestamp'],
-  readonly updatedAt: Scalars['Timestamp'],
-  readonly name: Scalars['String'],
-  readonly slug: Scalars['String'],
-  readonly description?: Maybe<Scalars['String']>,
-  readonly playingSong?: Maybe<Song>,
-  readonly onlineUserIds: ReadonlyArray<Scalars['Int']>,
+  readonly entity: Station,
 };
 
 export type StationTag = {
@@ -506,26 +478,7 @@ export enum UserRoleEnum {
 export type UserSubscription = {
   readonly __typename?: 'UserSubscription',
   readonly mutation: MutationEnum,
-  readonly entity: UserSubscriptionEntity,
-};
-
-export type UserSubscriptionEntity = {
-  readonly __typename?: 'UserSubscriptionEntity',
-  readonly id: Scalars['Int'],
-  readonly createdAt: Scalars['Timestamp'],
-  readonly updatedAt: Scalars['Timestamp'],
-  readonly email: Scalars['String'],
-  readonly username: Scalars['String'],
-  readonly name?: Maybe<Scalars['String']>,
-  readonly country?: Maybe<Scalars['String']>,
-  readonly city?: Maybe<Scalars['String']>,
-  readonly bio?: Maybe<Scalars['String']>,
-  readonly avatarUrl?: Maybe<Scalars['String']>,
-  readonly coverUrl?: Maybe<Scalars['String']>,
-  readonly reputation?: Maybe<Scalars['Int']>,
-  readonly facebookId?: Maybe<Scalars['String']>,
-  readonly googleId?: Maybe<Scalars['String']>,
-  readonly currentStationId?: Maybe<Scalars['Float']>,
+  readonly entity: User,
 };
 
 export type UserUpdateInput = {
@@ -718,8 +671,8 @@ export type OnStationPlayerChangedSubscription = (
     { readonly __typename?: 'SongSubscription' }
     & Pick<SongSubscription, 'mutation'>
     & { readonly entity: (
-      { readonly __typename?: 'SongSubscriptionEntity' }
-      & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+      { readonly __typename?: 'Song' }
+      & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
     ) }
   ) }
 );
@@ -734,6 +687,10 @@ export type StationPlaylistQuery = (
   & { readonly playlist: ReadonlyArray<(
     { readonly __typename?: 'Song' }
     & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+    & { readonly creator: (
+      { readonly __typename?: 'User' }
+      & UserBaseInformationFragment
+    ) }
   )> }
 );
 
@@ -748,8 +705,12 @@ export type OnStationPlaylistChangedSubscription = (
     { readonly __typename?: 'SongSubscription' }
     & Pick<SongSubscription, 'mutation'>
     & { readonly entity: (
-      { readonly __typename?: 'SongSubscriptionEntity' }
-      & Pick<SongSubscriptionEntity, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+      { readonly __typename?: 'Song' }
+      & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+      & { readonly creator: (
+        { readonly __typename?: 'User' }
+        & UserBaseInformationFragment
+      ) }
     ) }
   ) }
 );
@@ -794,8 +755,8 @@ export type OnStationChangedSubscription = (
     { readonly __typename?: 'StationSubscription' }
     & Pick<StationSubscription, 'mutation'>
     & { readonly entity: (
-      { readonly __typename?: 'StationSubscriptionEntity' }
-      & Pick<StationSubscriptionEntity, 'id' | 'name' | 'slug' | 'onlineUserIds'>
+      { readonly __typename?: 'Station' }
+      & Pick<Station, 'id' | 'name' | 'slug' | 'onlineUserIds'>
       & { readonly playingSong: Maybe<(
         { readonly __typename?: 'Song' }
         & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
@@ -1324,9 +1285,12 @@ export const StationPlaylistDocument = gql`
     status
     upVoteUserIds
     downVoteUserIds
+    creator {
+      ...UserBaseInformation
+    }
   }
 }
-    `;
+    ${UserBaseInformationFragmentDoc}`;
 
 /**
  * __useStationPlaylistQuery__
@@ -1368,10 +1332,13 @@ export const OnStationPlaylistChangedDocument = gql`
       status
       upVoteUserIds
       downVoteUserIds
+      creator {
+        ...UserBaseInformation
+      }
     }
   }
 }
-    `;
+    ${UserBaseInformationFragmentDoc}`;
 
 /**
  * __useOnStationPlaylistChangedSubscription__

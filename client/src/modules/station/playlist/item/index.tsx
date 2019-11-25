@@ -12,9 +12,8 @@ interface Props {
 
 export const PlaylistItem: React.FC<Props> = props => {
   const classes = useStyles();
-  const { title, status, thumbnail, duration } = props.data;
+  const { title, status, thumbnail, duration, creator } = props.data;
 
-  // TODO: Render creator's avatar and username
   // TODO: upVote & downVote mutations
   return (
     <ListItem selected={status === SongStatusEnum.Playing} dense>
@@ -40,9 +39,9 @@ export const PlaylistItem: React.FC<Props> = props => {
               <Typography variant="caption" className={classes.creator}>
                 Added by
                 <Image
-                  alt="username"
-                  title="username"
-                  src={'/asset/avatar/female.png'}
+                  alt={creator.username}
+                  title={creator.username}
+                  src={creator.avatarUrl || '/asset/avatar/female.png'}
                   className={classes.creatorAvatar}
                 />
               </Typography>

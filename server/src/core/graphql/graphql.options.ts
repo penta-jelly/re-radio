@@ -18,6 +18,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
       autoSchemaFile: 'schema.graphql',
       installSubscriptionHandlers: true,
       subscriptions: {
+        keepAlive: 30000,
         onConnect: async (connectionParams, _, context: RadioWsConnectionContext) => {
           context.connectionParams = connectionParams;
           await this.pubSub.publish<WsEvent.ConnectedPayload>(WsEvent.Type.CONNECTED, { connectionParams });

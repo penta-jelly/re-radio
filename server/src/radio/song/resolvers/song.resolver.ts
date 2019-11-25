@@ -19,12 +19,14 @@ export class SongResolver {
 
   @ResolveProperty(returns => UserDTO)
   async creator(@Root() song: SongDTO) {
-    return this.songService.findOneOrFail({ where: { id: song.id }, relations: ['creator'] });
+    const { creator } = await this.songService.findOneOrFail({ where: { id: song.id }, relations: ['creator'] });
+    return creator;
   }
 
   @ResolveProperty(returns => StationDTO)
   async station(@Root() song: SongDTO) {
-    return this.songService.findOneOrFail({ where: { id: song.id }, relations: ['station'] });
+    const { station } = await this.songService.findOneOrFail({ where: { id: song.id }, relations: ['station'] });
+    return station;
   }
 
   @Query(returns => [SongDTO])
