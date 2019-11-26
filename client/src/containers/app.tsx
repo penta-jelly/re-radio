@@ -27,7 +27,7 @@ export const App: React.FC = () => {
   const [client, setClient] = React.useState(initialClient);
   const subscribedOnDisconnectedRef = React.useRef(false);
   const isDisconnectedByServerRef = React.useRef(true);
-  const [suspended, setSuspendedState] = React.useState(false);
+  const [disconnected, setDisconnected] = React.useState(false);
 
   const resetClient = React.useCallback(() => {
     isDisconnectedByServerRef.current = false;
@@ -45,7 +45,7 @@ export const App: React.FC = () => {
     const ping = () => fetch(endpoint);
     const postpone = (delay: number) => new Promise(resolve => setTimeout(resolve, delay));
     let isSuccess = false;
-    let delay = 1000;
+    let delay = 2000;
     while (!isSuccess) {
       try {
         await postpone(delay);
@@ -64,10 +64,11 @@ export const App: React.FC = () => {
       subscribedOnDisconnectedRef.current = true;
       client.subscription.onDisconnected(() => {
         if (isDisconnectedByServerRef.current) {
-          setSuspendedState(true);
+          const timeout = setTimeout(() => setDisconnected(true), 5000);
           retry(client.healthEndpoint, () => {
+            clearTimeout(timeout);
             resetClient();
-            setSuspendedState(false);
+            setDisconnected(false);
           });
         }
       });
@@ -75,7 +76,7 @@ export const App: React.FC = () => {
   }, [client, resetClient, retry]);
 
   return (
-    <AppContext.Provider value={{ client, resetClient, disconnected: suspended }}>
+    <AppContext.Provider value={{ client, resetClient, disconnected }}>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client.apollo}>
           <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'top' }}>

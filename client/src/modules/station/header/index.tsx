@@ -2,6 +2,7 @@ import { Card, CircularProgress, Typography } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useStationQuery } from 'operations';
+import { useMemorizedValue } from 'hooks/use-memorized-value';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -13,18 +14,20 @@ export const Header: React.FC = props => {
   const params = useParams<RouteParams>();
   const { data, error } = useStationQuery({ variables: { slug: params.slug } });
 
+  const [station] = useMemorizedValue(data && data.station);
+
   const content = React.useMemo<React.ReactNode>(() => {
-    if (data && data.station) {
+    if (station) {
       return (
         <>
-          {data.station.name} - Online users: {data.station.onlineUserIds.length}
+          {station.name} - Online users: {station.onlineUserIds.length}
         </>
       );
     } else if (error) {
       return error.message;
     }
     return <CircularProgress />;
-  }, [data, error]);
+  }, [station, error]);
 
   return (
     <Card className={classes.container} elevation={0} square>
