@@ -8,6 +8,7 @@ import {
   Modal,
   Slide,
   CircularProgress,
+  Button,
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import React from 'react';
@@ -78,16 +79,38 @@ export const Layout: React.FC<Props> = props => {
           <CircularProgress size={16} color="inherit" style={{ marginRight: 8 }} /> Cannot connect to the server.
           Reconnecting...
         </>,
-        {
-          key: suspendedSnackbarId,
-          persist: true,
-          anchorOrigin: { vertical: 'bottom', horizontal: 'left' },
-        },
+        { key: suspendedSnackbarId, persist: true, anchorOrigin: { vertical: 'bottom', horizontal: 'left' } },
       );
+      return () => {
+        closeSnackbar(suspendedSnackbarId);
+      };
     } else {
       closeSnackbar(suspendedSnackbarId);
     }
   }, [appContext.disconnected, closeSnackbar, enqueueSnackbar]);
+
+  React.useEffect(() => {
+    const id = appContext.serviceWorker.onUpdate(() => {
+      enqueueSnackbar(
+        <>
+          A new version of your app is available. Reload the page to apply.
+          <Button
+            variant="outlined"
+            color="inherit"
+            size="small"
+            style={{ marginLeft: 8 }}
+            onClick={() => window.location.reload(true)}
+          >
+            Reload
+          </Button>
+        </>,
+        { persist: true, anchorOrigin: { vertical: 'bottom', horizontal: 'left' } },
+      );
+    });
+    return () => {
+      appContext.serviceWorker.offUpdate(id);
+    };
+  }, [appContext.serviceWorker, enqueueSnackbar]);
 
   const currentUserQuery = useCurrentUserQuery();
   return (

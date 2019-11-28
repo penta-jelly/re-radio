@@ -19,6 +19,7 @@ import {
   useOnStationChangedSubscription,
   useStationsQuery,
 } from 'operations';
+import { NotFoundError } from 'components/error';
 import { useStyles } from './styles';
 
 const HomePage: React.FunctionComponent<{}> = () => {
@@ -99,36 +100,35 @@ const HomePage: React.FunctionComponent<{}> = () => {
     ),
     [classes.modal, closeCreateStationModal, match, queryVariables],
   );
-  return (
-    <Layout>
+
+  let content: React.ReactNode;
+  if (data) {
+    content = (
       <div className={classes.root}>
-        {loading ? (
-          <PageLoader />
-        ) : error || !data ? (
-          <div>{t('common:error')}</div>
-        ) : (
-          <>
-            <div className={classes.header}>
-              <ReSearch placeholder={t('common:search')} id="search" />
-              <PrimaryButton id="create-station" onClick={openCreateStationModal}>
-                <StationIcon className={classes.iconButton} />
-                {t('stations:createStation')}
-              </PrimaryButton>
-            </div>
-            <div className={classes.section}>
-              <Typography gutterBottom component="h3" variant="h5" className={classes.sectionTitle}>
-                {t('stations:discoverStations')}
-              </Typography>
-              <div className={classes.stationsList}>
-                <StationsList data={data} />
-              </div>
-            </div>
-          </>
-        )}
+        <div className={classes.header}>
+          <ReSearch placeholder={t('common:search')} id="search" />
+          <PrimaryButton id="create-station" onClick={openCreateStationModal}>
+            <StationIcon className={classes.iconButton} />
+            {t('stations:createStation')}
+          </PrimaryButton>
+        </div>
+        <div className={classes.section}>
+          <Typography gutterBottom component="h3" variant="h5" className={classes.sectionTitle}>
+            {t('stations:discoverStations')}
+          </Typography>
+          <div className={classes.stationsList}>
+            <StationsList data={data} />
+          </div>
+        </div>
+        <Route path={`${match ? match.url : ''}/create-station`} component={formModalComponent} />
       </div>
-      <Route path={`${match ? match.url : ''}/create-station`} component={formModalComponent} />
-    </Layout>
-  );
+    );
+  } else if (loading) {
+    content = <PageLoader />;
+  } else if (error) {
+    content = <NotFoundError />;
+  }
+  return <Layout>{content}</Layout>;
 };
 
 export default HomePage;
