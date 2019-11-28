@@ -25,19 +25,13 @@ export const AppContext = React.createContext<IAppContext>({
 
 export const App: React.FC = () => {
   const [client, setClient] = React.useState(initialClient);
-  const subscribedOnDisconnectedRef = React.useRef(false);
-  const isDisconnectedByServerRef = React.useRef(true);
   const [disconnected, setDisconnected] = React.useState(false);
 
   const resetClient = React.useCallback(() => {
-    isDisconnectedByServerRef.current = false;
     setClient(client => {
       client.subscription.close(true);
       client.apollo.stop();
-      subscribedOnDisconnectedRef.current = false;
-      const newClient = initClient();
-      isDisconnectedByServerRef.current = true;
-      return newClient;
+      return initClient();
     });
   }, []);
 
@@ -59,21 +53,30 @@ export const App: React.FC = () => {
     }
   }, []);
 
+  const reconnectingTimeoutRef = React.useRef<number | undefined>(undefined);
+
   React.useEffect(() => {
-    if (!subscribedOnDisconnectedRef.current) {
-      subscribedOnDisconnectedRef.current = true;
-      client.subscription.onDisconnected(() => {
-        if (isDisconnectedByServerRef.current) {
-          const timeout = setTimeout(() => setDisconnected(true), 5000);
+    client.subscription.onDisconnected(() => {
+      if (!reconnectingTimeoutRef.current) {
+        reconnectingTimeoutRef.current = window.setTimeout(() => {
+          setDisconnected(true);
           retry(client.healthEndpoint, () => {
-            clearTimeout(timeout);
             resetClient();
             setDisconnected(false);
           });
-        }
-      });
-    }
-  }, [client, resetClient, retry]);
+        }, 5000);
+      }
+    });
+
+    client.subscription.onReconnected(() => {
+      clearTimeout(reconnectingTimeoutRef.current);
+      reconnectingTimeoutRef.current = undefined;
+    });
+
+    return () => {
+      client.subscription.unsubscribeAll();
+    };
+  }, [client.subscription, client.healthEndpoint, resetClient, retry]);
 
   return (
     <AppContext.Provider value={{ client, resetClient, disconnected }}>

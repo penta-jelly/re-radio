@@ -5,7 +5,6 @@ import { MdPlaylistAdd } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
 import { SongStatusEnum, useOnStationPlaylistChangedSubscription, useStationPlaylistQuery } from 'operations';
 import { PlaylistItem } from 'modules/station/playlist/item';
-import { useMemorizedValue } from 'hooks/use-memorized-value';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -42,11 +41,9 @@ export const Playlist: React.FC = () => {
     },
   });
 
-  const [playlist] = useMemorizedValue(data && data.playlist);
-
   let content: React.ReactNode = <Typography variant="subtitle1">Playlist</Typography>;
-  if (playlist) {
-    if (playlist.length === 0) {
+  if (data) {
+    if (data.playlist.length === 0) {
       content = (
         <Typography variant="subtitle1">
           Press button{' '}
@@ -57,7 +54,7 @@ export const Playlist: React.FC = () => {
         </Typography>
       );
     } else {
-      const songs = sortSongs(playlist.map(song => ({ ...song, createdAt: new Date(song.createdAt) })));
+      const songs = sortSongs(data.playlist.map(song => ({ ...song, createdAt: new Date(song.createdAt) })));
       content = (
         <List className={classes.list} disablePadding dense>
           {songs.map(song => (

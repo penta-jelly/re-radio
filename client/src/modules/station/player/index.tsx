@@ -2,13 +2,13 @@ import { Card, Typography, CircularProgress } from '@material-ui/core';
 import React, { useCallback, useRef } from 'react';
 import ReactPlayer, { Config as ReactPlayerConfig } from 'react-player';
 import { useRouteMatch } from 'react-router-dom';
+import { usePreviousNonNullableValue } from 'hooks/use-previous-non-nullable-value';
 import {
   SongStatusEnum,
   useOnStationPlayerChangedSubscription,
   useStationPlayerQuery,
   StationPlayerQuery,
 } from 'operations';
-import { useMemorizedValue } from 'hooks/use-memorized-value';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -67,8 +67,8 @@ export const Player: React.FC = () => {
   }, [playingSong, playerRef]);
 
   // This variable is mean to keep the previous URL so that the player will not be unmounted on down time between playing songs
-  const [url] = useMemorizedValue(playingSong && playingSong.url);
-  const [id] = useMemorizedValue(playingSong && playingSong.id);
+  const [url] = usePreviousNonNullableValue(playingSong && playingSong.url);
+  const [id] = usePreviousNonNullableValue(playingSong && playingSong.id);
 
   const playerConfig = React.useMemo<ReactPlayerConfig>(
     () => ({ youtube: { playerVars: { controls: 0 }, preload: true } }),

@@ -7,7 +7,7 @@ export function useServerImageResource(
   fallbackSrc: string | null | undefined = defaultSrc,
 ) {
   const fallBackUrl = React.useMemo(() => fallbackSrc || defaultSrc, [fallbackSrc]);
-  const isUrl = React.useCallback((input: string) => /(http|data:image|\/asset\/)/.test(input), []);
+  const isUrl = React.useCallback((input: string) => /(http|https|data:image|\/asset\/)/.test(input), []);
   const url = React.useMemo(() => {
     if (!src) {
       return fallBackUrl;

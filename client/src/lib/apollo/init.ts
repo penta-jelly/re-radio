@@ -21,7 +21,7 @@ export function initClient(): AppClient {
   const httpLink = createUploadLink({ uri: `${isSecureProtocol() ? 'https' : 'http'}://${host}/graphql` });
 
   const subscriptionClient = new SubscriptionClient(`${isSecureProtocol() ? 'wss' : 'ws'}://${host}/graphql`, {
-    reconnect: false,
+    reconnect: true,
     connectionParams: () => {
       const token = localStorage.getItem('token');
       return { Authorization: token };
@@ -52,6 +52,7 @@ export function initClient(): AppClient {
     return next ? next(operation) : null;
   });
 
+  (window as any).subscription = subscriptionClient;
   return {
     healthEndpoint,
     apollo: new ApolloClient({ link: ApolloLink.from([authLink, link]), cache: new InMemoryCache() }),
