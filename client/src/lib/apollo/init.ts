@@ -1,7 +1,7 @@
 import { ApolloClient, ApolloLink, InMemoryCache } from 'apollo-boost';
 import { WebSocketLink } from 'apollo-link-ws';
-import { createUploadLink } from 'apollo-upload-client';
 import { getMainDefinition } from 'apollo-utilities';
+import { BatchHttpLink } from 'apollo-link-batch-http';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export interface AppClient {
@@ -10,6 +10,7 @@ export interface AppClient {
   apollo: ApolloClient<any>;
 }
 
+// TODO: setup apollo-upload-client
 export function initClient(): AppClient {
   let host = window.location.host;
   if (process.env.NODE_ENV !== 'production') {
@@ -18,7 +19,21 @@ export function initClient(): AppClient {
 
   const healthEndpoint = `${isSecureProtocol() ? 'https' : 'http'}://${host}/status`;
 
-  const httpLink = createUploadLink({ uri: `${isSecureProtocol() ? 'https' : 'http'}://${host}/graphql` });
+  const batchLink = new BatchHttpLink({ uri: `${isSecureProtocol() ? 'https' : 'http'}://${host}/graphql` });
+  const authLink = new ApolloLink((operation, next) => {
+    const token = localStorage.getItem('token');
+
+    operation.setContext((context: Context) => ({
+      ...context,
+      headers: {
+        ...context.headers,
+        Authorization: token,
+      },
+    }));
+
+    return next ? next(operation) : null;
+  });
+  const httpLink = ApolloLink.from([authLink, batchLink]);
 
   const subscriptionClient = new SubscriptionClient(`${isSecureProtocol() ? 'wss' : 'ws'}://${host}/graphql`, {
     reconnect: true,
@@ -38,24 +53,10 @@ export function initClient(): AppClient {
     httpLink,
   );
 
-  const authLink = new ApolloLink((operation, next) => {
-    const token = localStorage.getItem('token');
-
-    operation.setContext((context: Context) => ({
-      ...context,
-      headers: {
-        ...context.headers,
-        Authorization: token,
-      },
-    }));
-
-    return next ? next(operation) : null;
-  });
-
   (window as any).subscription = subscriptionClient;
   return {
     healthEndpoint,
-    apollo: new ApolloClient({ link: ApolloLink.from([authLink, link]), cache: new InMemoryCache() }),
+    apollo: new ApolloClient({ link, cache: new InMemoryCache() }),
     subscription: subscriptionClient,
   };
 }
