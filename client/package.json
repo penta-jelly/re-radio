@@ -18,7 +18,7 @@
     "apollo-link-batch-http": "1.2.13",
     "apollo-link-context": "1.0.19",
     "apollo-link-ws": "1.0.19",
-    "downshift": "3.4.3",
+    "downshift": "3.4.5",
     "formik": "2.0.6",
     "graphql": "14.5.8",
     "i18next": "19.0.1",
