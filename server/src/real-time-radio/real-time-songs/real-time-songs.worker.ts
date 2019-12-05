@@ -12,7 +12,12 @@ export class RealTimeSongsWorker {
    * @description A hash map store the current timeout instance of a station.
    * This will be use to interrupt the current playing song of station
    */
-  private playersMap: { [key: string]: { timer: NodeJS.Timeout; song: Song } | undefined } = {};
+  private playersMap: { [stationSlug: string]: { timer: NodeJS.Timeout; song: Song } | undefined } = {};
+  /**
+   * @description A hash map store the current sleep timeout instance of a station.
+   * Start any next song should check this hash first
+   */
+  private sleepersMap: { [stationSlug: string]: { timer: NodeJS.Timeout } | undefined } = {};
 
   private readonly logger = new Logger(RealTimeSongsWorker.name);
   constructor(
@@ -54,10 +59,15 @@ export class RealTimeSongsWorker {
   protected async updatePlayedSongAndPlayNextSong(song: Song) {
     await this.realTimeSongService.updateSongStatusToPlayed(song.id);
     delete this.playersMap[song.stationSlug];
-    setTimeout(async () => {
-      const nextSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
-      nextSong && (await this.realTimeSongService.updateSongStatusToPlaying(nextSong.id));
-    }, 5000);
+
+    const nextSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
+    if (!nextSong || this.sleepersMap[nextSong.stationSlug]) return;
+    this.sleepersMap[song.stationSlug] = {
+      timer: setTimeout(() => {
+        delete this.sleepersMap[nextSong.stationSlug];
+        this.realTimeSongService.updateSongStatusToPlaying(nextSong.id);
+      }, 10000),
+    };
   }
 
   async subscribeSong() {
@@ -80,10 +90,9 @@ export class RealTimeSongsWorker {
   protected async onSongCreated(song: Song) {
     this.logger.log(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been created.`);
     if (await this.realTimeStationService.isStationReadyToPlayNextSong(song.stationSlug)) {
-      const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
-      if (nextPlayingSong) {
-        await this.realTimeSongService.updateSongStatusToPlaying(nextPlayingSong.id);
-      }
+      const nextSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
+      if (!nextSong || this.sleepersMap[nextSong.stationSlug]) return;
+      await this.realTimeSongService.updateSongStatusToPlaying(nextSong.id);
     }
   }
 
@@ -104,7 +113,7 @@ export class RealTimeSongsWorker {
   protected async onSongDeleted(song: Song) {
     this.logger.log(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been deleted.`);
     const playerInstance = this.playersMap[song.stationSlug];
-    if (!playerInstance) return;
+    if (!playerInstance || playerInstance.song.id !== song.id) return;
     if (song.status === SongStatusEnum.PLAYING) {
       clearTimeout(playerInstance.timer);
       delete this.playersMap[song.stationSlug];
