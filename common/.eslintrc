@@ -17,6 +17,7 @@
         "classes": true
       }
     ],
+    "@typescript-eslint/prefer-optional-chain": "error",
     "prettier/prettier": [
       "error",
       {

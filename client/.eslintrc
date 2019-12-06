@@ -24,6 +24,7 @@
       }
     ],
     "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+    "@typescript-eslint/prefer-optional-chain": "error",
     "import/order": [
       "error",
       { "groups": ["builtin", "external", "internal", "unknown", "parent", "sibling", "index"] }

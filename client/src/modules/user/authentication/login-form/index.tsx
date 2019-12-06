@@ -39,7 +39,7 @@ export const LoginForm: React.FC<Props> = ({ postLogin }) => {
         });
         if (response.data && response.data.login.token) {
           localStorage.setItem('token', response.data.login.token);
-          postLogin && postLogin();
+          postLogin?.();
           return;
         }
 

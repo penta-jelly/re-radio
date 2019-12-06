@@ -18,7 +18,7 @@ export const AddSong: React.FC<{}> = () => {
   });
 
   const onChangeInputValue = useCallback<React.ChangeEventHandler<HTMLInputElement>>(event => {
-    if (event && event.target) {
+    if (event?.target) {
       setQuery(event.target.value);
     }
   }, []);
@@ -28,7 +28,7 @@ export const AddSong: React.FC<{}> = () => {
       <Grid container className={classes.container}>
         <Grid item xs={12} className={classes.wrapper}>
           <Autocomplete
-            items={data && data.youtubeVideos ? data.youtubeVideos : []}
+            items={data?.youtubeVideos || []}
             placeholder={`Type song's name e.g "When you believe"`}
             loading={loading}
             onChangeInputValue={onChangeInputValue}
