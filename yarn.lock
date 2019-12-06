@@ -6811,14 +6811,13 @@ dotenv@^6.2.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-6.2.0.tgz#941c0410535d942c8becf28d3f357dbd9d476064"
   integrity sha512-HygQCKUBSFl8wKQZBSemMywRWcEDNidvNbjGVyZu3nbZ8qq9ubiPoGLMdRDpfSrpkkm9BXYFkpKxxFX38o/76w==
 
-downshift@3.4.5:
-  version "3.4.5"
-  resolved "https://registry.yarnpkg.com/downshift/-/downshift-3.4.5.tgz#f0d0e12fcf3de41c465ee8b8d5a1dcc6a252a0ea"
-  integrity sha512-PKihuyHOPYQNe14azMlwhwSAtRKDPyOySj/CKeXAm0/iuORUURzfxhcyKdfInUEEKswpU4TODyPxhBhwiVR5jA==
+downshift@3.4.7:
+  version "3.4.7"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-3.4.7.tgz#f8910fee736f10f11920715c26e6c3211da4cf6b"
+  integrity sha512-Nkig2NenS+BlwpA+gFlUCYfR5HyUFyxitmkISilNzvfLfGV1lYSKaUnAQ9aBegqXm3XmavGd9sxV5Ly7fBhSQg==
   dependencies:
     "@babel/runtime" "^7.4.5"
     compute-scroll-into-view "^1.0.9"
-    fast-memoize "^2.5.1"
     prop-types "^15.7.2"
     react-is "^16.9.0"
 
@@ -7612,11 +7611,6 @@ fast-levenshtein@~2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/fast-levenshtein/-/fast-levenshtein-2.0.6.tgz#3d8a5c66883a16a30ca8643e851f19baa7797917"
   integrity sha1-PYpcZog6FqMMqGQ+hR8Zuqd5eRc=
-
-fast-memoize@^2.5.1:
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/fast-memoize/-/fast-memoize-2.5.1.tgz#c3519241e80552ce395e1a32dcdde8d1fd680f5d"
-  integrity sha512-xdmw296PCL01tMOXx9mdJSmWY29jQgxyuZdq0rEHMu+Tpe1eOEtCycoG6chzlcrWsNgpZP7oL8RiQr7+G6Bl6g==
 
 fast-safe-stringify@2.0.7, fast-safe-stringify@^2.0.7:
   version "2.0.7"
