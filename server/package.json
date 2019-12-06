@@ -53,7 +53,7 @@
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.3",
     "type-graphql": "0.17.5",
-    "typeorm": "0.2.20"
+    "typeorm": "0.2.21"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.30",
