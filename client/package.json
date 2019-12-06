@@ -57,7 +57,7 @@
     "eslint-plugin-import": "2.18.2",
     "eslint-plugin-prettier": "3.1.1",
     "prettier": "1.19.1",
-    "react-scripts": "3.2.0",
+    "react-scripts": "3.3.0",
     "shx": "0.3.2",
     "typescript": "3.7.3"
   },
