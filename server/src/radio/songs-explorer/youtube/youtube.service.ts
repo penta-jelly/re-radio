@@ -24,8 +24,8 @@ export class YoutubeService {
     const part = 'id,snippet,contentDetails';
     const serviceUrl = `${apiUrl}/videos?id=${videoId}&key=${apiKey}&part=${part}`;
     const data = await fetch(serviceUrl).then(res => res.json());
-    if (data && data.items && data.items[0]) {
-      const video = data.items[0];
+    const video = data?.items?.[0];
+    if (video) {
       video.contentDetails.duration = this.parseDuration(video.contentDetails.duration);
       return video;
     }

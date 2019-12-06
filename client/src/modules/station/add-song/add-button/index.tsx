@@ -28,7 +28,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
   const [queryYoutubeVideo, youtubeVideoQuery] = useYoutubeVideoLazyQuery();
 
   React.useEffect(() => {
-    if (previewSong && previewSong.id) {
+    if (previewSong?.id) {
       queryYoutubeVideo({ variables: { where: { videoId: previewSong.id } } });
     }
   }, [previewSong, queryYoutubeVideo]);

@@ -30,7 +30,7 @@ export const ReCard: React.FC<Props> = ({ id, media, title, content, icon, onIco
   const cardMedia = React.useMemo(
     () => (
       <CardActionAreaDiv component="div" className={classes.imageContainer}>
-        <Image className={classes.image} alt={media && media.alt} src={media && media.image} data-role="card-media" />
+        <Image className={classes.image} alt={media?.alt} src={media?.image} data-role="card-media" />
         {icon && (
           <button className={classes.iconButton} onClick={onIconButtonClick}>
             {icon}
@@ -43,7 +43,7 @@ export const ReCard: React.FC<Props> = ({ id, media, title, content, icon, onIco
 
   return (
     <MaterialCard className={[classes.root, className || ''].join(' ').trim()} id={id}>
-      {media && media.linkTo ? <Link to={media.linkTo}>{cardMedia}</Link> : cardMedia}
+      {media?.linkTo ? <Link to={media.linkTo}>{cardMedia}</Link> : cardMedia}
       <CardContent className={classes.contentContainer}>
         <Typography component="h5" className={classes.title} data-role="card-title">
           {title}

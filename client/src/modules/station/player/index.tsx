@@ -48,7 +48,7 @@ export const Player: React.FC = () => {
   });
 
   const playingSong = React.useMemo<StationPlayerQuery['playingSongs'][0] | undefined>(() => {
-    if (data && data.playingSongs[0]) return data.playingSongs[0];
+    if (data?.playingSongs[0]) return data.playingSongs[0];
     return undefined;
   }, [data]);
 
@@ -67,8 +67,8 @@ export const Player: React.FC = () => {
   }, [playingSong, playerRef]);
 
   // This variable is mean to keep the previous URL so that the player will not be unmounted on down time between playing songs
-  const [url] = usePreviousNonNullableValue(playingSong && playingSong.url);
-  const [id] = usePreviousNonNullableValue(playingSong && playingSong.id);
+  const [url] = usePreviousNonNullableValue(playingSong?.url);
+  const [id] = usePreviousNonNullableValue(playingSong?.id);
 
   const playerConfig = React.useMemo<ReactPlayerConfig>(
     () => ({ youtube: { playerVars: { controls: 0 }, preload: true } }),

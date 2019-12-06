@@ -33,8 +33,7 @@ export const DetailUserProfile: React.FC<Props> = ({ username, editable }) => {
           <CircularProgress />
         </Grid>
       ) : (
-        data &&
-        data.user && (
+        data?.user && (
           <Grid container spacing={2} className={classes.container}>
             <Grid item xs={12}>
               <ProfileAvatar

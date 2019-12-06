@@ -63,7 +63,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private isValidationError(object: any): object is { statusCode: number; error: string; message: ValidationError[] } {
-    if (object && object.message && Array.isArray(object.message) && object.message[0] && object.message[0].target) {
+    if (object?.message && Array.isArray(object.message) && object.message[0] && object.message[0].target) {
       return true;
     }
     return false;
