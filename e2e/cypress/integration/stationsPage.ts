@@ -30,8 +30,6 @@ describe('Show Stations Page', () => {
 describe('Create a Station', () => {
   const stationsPage = StationsPage();
 
-  beforeEach(() => {});
-
   it('should open & close create station form popup when click on create button', () => {
     stationsPage.navigate(true);
     cy.get(stationsPage.elements.createStationButton).click();
