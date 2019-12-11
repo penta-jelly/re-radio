@@ -26,12 +26,12 @@
     "seed:reset": "yarn worker seed:reset"
   },
   "dependencies": {
-    "@nestjs/common": "6.10.2",
-    "@nestjs/core": "6.10.2",
+    "@nestjs/common": "6.10.9",
+    "@nestjs/core": "6.10.9",
     "@nestjs/graphql": "6.5.3",
     "@nestjs/jwt": "6.1.1",
     "@nestjs/passport": "6.1.1",
-    "@nestjs/platform-express": "6.10.2",
+    "@nestjs/platform-express": "6.10.9",
     "@nestjs/typeorm": "6.2.0",
     "@nestjs/serve-static": "1.0.2",
     "apollo-server-express": "2.9.13",
