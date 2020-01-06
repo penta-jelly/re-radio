@@ -51,7 +51,7 @@
     "pg": "7.15.0",
     "re-radio-common": "^0.1.0-SNAPSHOT",
     "reflect-metadata": "0.1.13",
-    "rxjs": "6.5.3",
+    "rxjs": "6.5.4",
     "type-graphql": "0.17.5",
     "typeorm": "0.2.21"
   },
