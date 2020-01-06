@@ -40,7 +40,7 @@ export default (url = '/') => ({
     cy.get(this.elements.stationCardMedia(slug)).should('be.visible');
 
     if (name) {
-      cy.get(this.elements.stationCardTitle(slug)).should('have.text', name);
+      cy.get(this.elements.stationCardTitle(slug)).should('contain', name);
     }
     if (tags) {
       cy.get(this.elements.stationCardContent(slug)).should(element => {
