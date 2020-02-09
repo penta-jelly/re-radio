@@ -19,7 +19,7 @@
     "apollo-link-context": "1.0.19",
     "apollo-link-ws": "1.0.19",
     "downshift": "4.0.10",
-    "formik": "2.1.2",
+    "formik": "2.1.4",
     "graphql": "14.6.0",
     "i18next": "19.1.0",
     "jss": "10.0.3",
