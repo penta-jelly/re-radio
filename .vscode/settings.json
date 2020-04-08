@@ -15,11 +15,6 @@
   ],
   "typescript.tsdk": "./node_modules/typescript/lib",
   "eslint.enable": true,
-  "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-		{ "language": "typescript", "autoFix": true },
-		{ "language": "typescriptreact", "autoFix": true }
-  ],
   "eslint.workingDirectories": [
 		{ "directory": "./client", "changeProcessCWD": true },
 		{ "directory": "./server", "changeProcessCWD": true },
@@ -28,5 +23,8 @@
   ],
   "cSpell.words": [
     "notistack"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
