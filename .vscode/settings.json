@@ -22,7 +22,10 @@
 		{ "directory": "./e2e", "changeProcessCWD": true }
   ],
   "cSpell.words": [
-    "notistack"
+    "Catchable",
+    "maxsize",
+    "notistack",
+    "uncolorize"
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true

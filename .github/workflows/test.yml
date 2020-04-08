@@ -34,3 +34,8 @@ jobs:
           working-directory: e2e
           wait-on: "http://localhost:2996/status"
           wait-on-timeout: 120
+      - name: Store the server log file
+        uses: actions/upload-artifact@v1
+        with:
+          name: homework
+          path: server/storage/log/server.log

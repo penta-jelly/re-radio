@@ -6,6 +6,7 @@ require('source-map-support/register');
 import Path from 'path';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { DevSeederService } from 'workers/seeder/dev-seeder.service';
 import { WorkersModule } from 'workers/workers.module';
 
@@ -20,6 +21,7 @@ async function bootstrap() {
   logger.log(`Graphql service responded.`);
 
   const app = await NestFactory.create(WorkersModule);
+  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
   const args = process.argv.slice(2);
 

@@ -6,6 +6,7 @@ import { RadioGraphqlModule } from 'core/graphql/graphql.module';
 import { RequestsInterceptor } from 'core/request.interceptor';
 import { RadioTypeOrmModule } from 'core/typeorm/typeorm.module';
 import { StaticModule } from 'core/static/static.module';
+import { LoggerModule } from 'core/logger/logger.module';
 import { AuthModule } from './auth/auth.module';
 import { RadioController } from './radio.controller';
 import { SongModule } from './song/song.module';
@@ -15,6 +16,7 @@ import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
+    LoggerModule,
     StaticModule,
     RadioTypeOrmModule,
     RadioGraphqlModule,
