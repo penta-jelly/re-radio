@@ -10,10 +10,7 @@ jobs:
           node-version: 10.x
       - uses: actions/checkout@master
       - name: Install dependencies
-        uses: cypress-io/github-action@v1
-        with:
-          install: true
-          runTests: false
+        uses: bahmutov/npm-install@v1
       - name: Initialize
         run: yarn initialize
       - name: Compile
@@ -22,17 +19,25 @@ jobs:
         run: yarn lint
       - name: Build
         run: yarn build
+      - name: Start e2e server [background]
+        run: yarn ci:start &
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
       - name: Run e2e tests
         uses: cypress-io/github-action@v1
         env:
           CYPRESS_baseUrl: "http://localhost:2996"
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         with:
           record: true
           install: false
           runTests: true
           working-directory: e2e
-          start: yarn ci:start
           wait-on: "http://localhost:2996/status"
           wait-on-timeout: 120
+      - name: Persist the log file
+        if: failure()
+        uses: actions/upload-artifact@v1
+        with:
+          name: log.zip
+          path: server/storage/log

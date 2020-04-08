@@ -8,6 +8,7 @@ import Path from 'path';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { ConfigService } from 'core/config/config.service';
 import { EnvVariables } from 'core/config/config.variables';
 import { RadioModule } from 'radio/radio.module';
@@ -25,10 +26,10 @@ async function bootstrap() {
   logger.log(`Real time radio service responded.`);
 
   const app = await NestFactory.create<NestExpressApplication>(RadioModule, {
-    logger: ConfigService.getLogLevels(),
     // TODO: Production environment???
     cors: { origin: [/localhost:(.*)/] },
   });
+  app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
 
   const port = ConfigService.get(EnvVariables.RADIO_SERVER_PORT);
   await app.listen(port);

@@ -153,14 +153,14 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
     }
   };
 
-  const itemToString = (item: DropdownItem) => (item ? item.snippet.title : '');
+  const itemToString = (item: DropdownItem | null) => (item ? item.snippet.title : '');
 
   return (
-    <Downshift
+    <Downshift<DropdownItem>
       stateReducer={handleStateReducer}
       itemToString={itemToString}
       onSelect={selectedItem => {
-        setPreviewSong(selectedItem);
+        selectedItem && setPreviewSong(selectedItem);
       }}
     >
       {autocompleteContents}

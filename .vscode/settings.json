@@ -15,11 +15,6 @@
   ],
   "typescript.tsdk": "./node_modules/typescript/lib",
   "eslint.enable": true,
-  "eslint.autoFixOnSave": true,
-  "eslint.validate": [
-		{ "language": "typescript", "autoFix": true },
-		{ "language": "typescriptreact", "autoFix": true }
-  ],
   "eslint.workingDirectories": [
 		{ "directory": "./client", "changeProcessCWD": true },
 		{ "directory": "./server", "changeProcessCWD": true },
@@ -27,6 +22,12 @@
 		{ "directory": "./e2e", "changeProcessCWD": true }
   ],
   "cSpell.words": [
-    "notistack"
-  ]
+    "Catchable",
+    "maxsize",
+    "notistack",
+    "uncolorize"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }
