@@ -36,5 +36,3 @@ export class LoggerModule implements OnModuleDestroy {
     Fs.renameSync(Path.join(logFilePath, logFileName), Path.join(logFilePath, newLogFileName));
   }
 }
-
-console.log('2');
