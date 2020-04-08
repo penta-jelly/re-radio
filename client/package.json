@@ -5,8 +5,8 @@
     "initialize": "shx cp -n .env.example .env",
     "start": "react-scripts start | cat -",
     "dev": "react-scripts start | cat -",
-    "build": "react-scripts build | cat -",
-    "test": "react-scripts test | cat -",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "generate": "gql-gen",
     "format": "prettier --write \"src/**/*.{tsx,ts}\" && eslint --fix --ext .tsx --ext .ts src/",
     "lint": "eslint --ext .tsx --ext .ts src/ && prettier --check src/**/*.ts"
