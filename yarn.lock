@@ -2665,10 +2665,12 @@
     multer "1.4.2"
     tslib "1.10.0"
 
-"@nestjs/serve-static@1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@nestjs/serve-static/-/serve-static-1.0.2.tgz#8baa1a20fa39457186be4ec3e29b446d83d3fcb0"
-  integrity sha512-PRTrmytKXGSDYJn8i0I/XiSV01tygh4L0SR5bq1/zxIT5HHK/edmlULKfHeeA2pHQV7YLxMH33al/TPlcn4tXQ==
+"@nestjs/serve-static@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/serve-static/-/serve-static-2.1.0.tgz#fe2955d8d176674046d2eb16724803ca409384d3"
+  integrity sha512-syC7x3vacNYOAqpITqiPd7NS0gAc3IbzexyMOpUu00mVt/8NZc3zXNEV5r4DeatRKUwc11tt1TRlMEsmTLTQIA==
+  dependencies:
+    path-to-regexp "0.1.7"
 
 "@nestjs/typeorm@6.3.1":
   version "6.3.1"
