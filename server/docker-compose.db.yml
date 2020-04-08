@@ -16,7 +16,7 @@ services:
 
   pgadmin:
     container_name: re-radio_pgadmin
-    image: dpage/pgadmin4:4.18
+    image: dpage/pgadmin4:4.20
     restart: ${RESTART_POLICY}
     ports:
       - "${PGADMIN_PORT}:80"
