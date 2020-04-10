@@ -12,15 +12,15 @@ jobs:
       - name: Install dependencies
         uses: bahmutov/npm-install@v1
       - name: Initialize
-        run: yarn initialize
+        run: npm run initialize
       - name: Compile
-        run: yarn compile
+        run: npm run compile
       - name: Lint
-        run: yarn lint
+        run: npm run lint
       - name: Build
-        run: yarn build
+        run: npm run build
       - name: Start e2e server [background]
-        run: yarn ci:start &
+        run: npm run ci:start &
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
       - name: Run e2e tests

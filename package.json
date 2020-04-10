@@ -1,8 +1,8 @@
 {
   "name": "re-radio",
   "private": true,
-  "workspaces": ["client", "server", "e2e", "common"],
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "clean": "lerna run clean && lerna clean -y",
     "initialize": "lerna run initialize",
     "format": "lerna run format --parallel --no-bail",
@@ -19,7 +19,7 @@
     "lerna:dev:server": "lerna run dev --scope re-radio-server",
     "lerna:dev:client": "lerna run dev --scope re-radio-client",
     "lerna:dev:common": "lerna run dev --scope re-radio-common",
-    "db": "yarn db:up",
+    "db": "npm run db:up",
     "db:up": "lerna run db:up --no-sort --parallel",
     "db:down": "lerna run db:down --no-sort --parallel"
   },

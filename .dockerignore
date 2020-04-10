@@ -1,13 +1,17 @@
-.env
+**/*.env
 
-lib
-build
+**/*build
+**/*storage
+
+server/lib
 
 # IntelliJ IDEA
 .idea
 .eclipse
 
 .vscode
+.gcloud
+.github
 
 # NPM/Yarn
-node_modules
+**/*node_modules
