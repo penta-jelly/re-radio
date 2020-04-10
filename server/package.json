@@ -28,7 +28,7 @@
   "dependencies": {
     "@nestjs/common": "6.11.7",
     "@nestjs/core": "6.11.7",
-    "@nestjs/graphql": "6.5.4",
+    "@nestjs/graphql": "7.2.1",
     "@nestjs/jwt": "7.0.0",
     "@nestjs/passport": "7.0.0",
     "@nestjs/platform-express": "6.11.7",
