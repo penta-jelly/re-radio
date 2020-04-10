@@ -1,4 +1,4 @@
-import { ResolveProperty, Resolver, Root } from '@nestjs/graphql';
+import { ResolveField, Resolver, Root } from '@nestjs/graphql';
 import { UserRoleService } from 'radio/user/services/user-role.service';
 import { UserService } from 'radio/user/services/user.service';
 import { StationTagDTO } from '../dto/station-tag.dto';
@@ -15,7 +15,7 @@ export class StationTagResolver {
     private readonly userRoleService: UserRoleService,
   ) {}
 
-  @ResolveProperty(returns => [StationDTO])
+  @ResolveField(returns => [StationDTO])
   async stations(@Root() stationTag: StationTagDTO) {
     const { stations } = await this.stationTagService.findOneOrFail({
       where: { id: stationTag.id },

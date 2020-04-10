@@ -1,5 +1,5 @@
 import { IsOptional, IsPositive, IsUrl, Max } from 'class-validator';
-import { Field, InputType, registerEnumType } from 'type-graphql';
+import { Field, InputType, registerEnumType } from '@nestjs/graphql';
 
 export enum YoutubeVideoOrderEnum {
   DATE = 'date',

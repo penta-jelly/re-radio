@@ -11,7 +11,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** The javascript `Date` as integer. Type represents date and time as number of milliseconds from start of UNIX epoch. */
+  /** `Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch. */
   Timestamp: any;
 };
 
@@ -294,14 +294,6 @@ export type SongSubscription = {
   readonly entity: Song;
 };
 
-export type SongUpdateInput = {
-  readonly title?: Maybe<Scalars['String']>;
-  readonly url?: Maybe<Scalars['String']>;
-  readonly thumbnail?: Maybe<Scalars['String']>;
-  readonly duration?: Maybe<Scalars['Int']>;
-  readonly status?: Maybe<SongStatusEnum>;
-};
-
 export type Station = {
   readonly __typename?: 'Station';
   readonly id: Scalars['Int'];
@@ -357,12 +349,6 @@ export type StationTag = {
 
 export type StationTagCreateInput = {
   readonly name: Scalars['String'];
-};
-
-export type StationUpdateInput = {
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-  readonly description?: Maybe<Scalars['String']>;
 };
 
 export type Subscription = {

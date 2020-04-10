@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { UserRoleDTO } from './user-role.dto';
 
 @ObjectType('User')

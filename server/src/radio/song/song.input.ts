@@ -1,5 +1,5 @@
 import { IsUrl } from 'class-validator';
-import { Field, InputType, Int } from 'type-graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { OrderEnum } from 'core/graphql/input/order';
 import { SongStatusEnum } from 'radio/song/entities/song.entity';
 

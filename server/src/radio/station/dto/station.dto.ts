@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { SongDTO } from 'radio/song/dto/song.dto';
 import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
 import { StationTagDTO } from './station-tag.dto';
