@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, ResolveProperty, Resolver, Root } from '@nestjs/graphql';
+import { Args, Mutation, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
 import { PaginationInput } from 'core/graphql/input/pagination';
 import { PubSub } from 'core/pub-sub/pub-sub.service';
 import { Roles } from 'radio/auth/decorators/Roles.decorator';
@@ -26,7 +26,7 @@ export class UserResolver {
     private readonly pubSub: PubSub,
   ) {}
 
-  @ResolveProperty(returns => [UserRoleDTO])
+  @ResolveField(returns => [UserRoleDTO])
   async roles(@Root() user: UserDTO) {
     return this.userRoleService.find({ where: { user: { id: user.id } } });
   }

@@ -1,5 +1,5 @@
 import { UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, ResolveProperty, Resolver, Root } from '@nestjs/graphql';
+import { Args, Mutation, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
 import { PaginationInput } from 'core/graphql/input/pagination';
 import { CurrentUser } from 'radio/auth/decorators/CurrentUser.decorator';
 import { Roles } from 'radio/auth/decorators/Roles.decorator';
@@ -17,13 +17,13 @@ import { SongDTO } from '../dto/song.dto';
 export class SongResolver {
   constructor(private readonly songService: SongService) {}
 
-  @ResolveProperty(returns => UserDTO)
+  @ResolveField(returns => UserDTO)
   async creator(@Root() song: SongDTO) {
     const { creator } = await this.songService.findOneOrFail({ where: { id: song.id }, relations: ['creator'] });
     return creator;
   }
 
-  @ResolveProperty(returns => StationDTO)
+  @ResolveField(returns => StationDTO)
   async station(@Root() song: SongDTO) {
     const { station } = await this.songService.findOneOrFail({ where: { id: song.id }, relations: ['station'] });
     return station;

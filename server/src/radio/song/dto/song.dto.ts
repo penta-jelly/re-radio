@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from 'type-graphql';
+import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { SongStatusEnum } from 'radio/song/entities/song.entity';
 import { StationDTO } from 'radio/station/dto/station.dto';
 import { UserDTO } from 'radio/user/dto/user.dto';

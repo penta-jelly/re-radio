@@ -1,5 +1,5 @@
-import { Args, Query, Resolver, ResolveProperty } from '@nestjs/graphql';
-import { Root } from 'type-graphql';
+import { Args, Query, Resolver, ResolveField, Root } from '@nestjs/graphql';
+
 import { PaginationInput } from 'core/graphql/input/pagination';
 import { StationService } from 'radio/station/services/station.service';
 import { StationDTO } from 'radio/station/dto/station.dto';
@@ -11,7 +11,7 @@ import { HistorySongDTO } from '../dto/song.dto';
 export class HistorySongResolver {
   constructor(private readonly songService: SongService, private readonly stationService: StationService) {}
 
-  @ResolveProperty(returns => StationDTO)
+  @ResolveField(returns => StationDTO)
   async station(@Root() song: HistorySongDTO) {
     return this.stationService.findOneOrFail({ where: { slug: song.stationSlug } });
   }

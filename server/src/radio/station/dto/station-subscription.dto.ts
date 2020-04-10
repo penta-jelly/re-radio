@@ -1,4 +1,4 @@
-import { Field, ObjectType } from 'type-graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { MutationEnum } from 'core/typeorm/entity-subscription.interface';
 import { StationDTO } from './station.dto';
 

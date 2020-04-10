@@ -1,6 +1,6 @@
 import { Type } from 'class-transformer';
 import { IsOptional, MaxLength, NotContains, ValidateNested } from 'class-validator';
-import { Field, InputType, Int } from 'type-graphql';
+import { Field, InputType, Int } from '@nestjs/graphql';
 import { OrderEnum } from 'core/graphql/input/order';
 
 @InputType()
@@ -67,7 +67,7 @@ export class StationCreateInput {
   @IsOptional()
   description?: string;
 
-  @Field(type => StationTagCreateInput, { nullable: true })
+  @Field(type => [StationTagCreateInput], { nullable: true })
   @ValidateNested({ each: true })
   @Type(() => StationTagCreateInput)
   tags?: StationTagCreateInput[];
