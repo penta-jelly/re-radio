@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { PubSubModule } from 'core/pub-sub/pub-sub.module';
-import { StationModule } from 'radio/station/station.module';
+import { PubSubModule } from '../../core/pub-sub/pub-sub.module';
+import { StationModule } from '../station/station.module';
 import { UserRole } from './entities/user-role.entity';
 import { User } from './entities/user.entity';
 import { UserRoleResolver } from './resolvers/user-role.resolver';

@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { SongStatusEnum } from 'radio/song/entities/song.entity';
-import { StationDTO } from 'radio/station/dto/station.dto';
-import { UserDTO } from 'radio/user/dto/user.dto';
+import { StationDTO } from '../../station/dto/station.dto';
+import { UserDTO } from '../../user/dto/user.dto';
+import { SongStatusEnum } from '../entities/song.entity';
 
 @ObjectType('Song')
 export class SongDTO {

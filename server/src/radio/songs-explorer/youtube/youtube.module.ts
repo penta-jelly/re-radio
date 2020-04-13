@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from 'core/config/config.module';
+import { ConfigModule } from '../../../core/config/config.module';
 import { YoutubeResolver } from './youtube.resolver';
 import { YoutubeService } from './youtube.service';
 

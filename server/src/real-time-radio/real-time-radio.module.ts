@@ -1,12 +1,14 @@
 import { Logger, Module, OnModuleInit } from '@nestjs/common';
-import { StationService } from 'radio/station/services/station.service';
-import { StationModule } from 'radio/station/station.module';
-import { LoggerModule } from 'core/logger/logger.module';
+import { LoggerModule } from '../core/logger/logger.module';
+import { StationService } from '../radio/station/services/station.service';
+import { StationModule } from '../radio/station/station.module';
+import { RealTimeRadioController } from './real-time-radio.controller';
 import { RealTimeSongsModule } from './real-time-songs/real-time-songs.module';
 import { RealTimeStationsModule } from './real-time-stations/real-time-stations.module';
 
 @Module({
   imports: [LoggerModule, StationModule, RealTimeSongsModule, RealTimeStationsModule],
+  controllers: [RealTimeRadioController],
 })
 export class RealTimeRadioModule implements OnModuleInit {
   private readonly logger: Logger = new Logger(RealTimeRadioModule.name);

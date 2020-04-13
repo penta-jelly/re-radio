@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
 import { Connection, EntitySubscriberInterface, InsertEvent, RemoveEvent, UpdateEvent } from 'typeorm';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { EntitySubscription, MutationEnum } from 'core/typeorm/entity-subscription.interface';
-import { Song } from 'radio/song/entities/song.entity';
+import { PubSub } from '../../core/pub-sub/pub-sub.service';
+import { EntitySubscription, MutationEnum } from '../../core/typeorm/entity-subscription.interface';
+import { Song } from './entities/song.entity';
 
 export const SONG_SUBSCRIPTION = 'SONG_SUBSCRIPTION';
 

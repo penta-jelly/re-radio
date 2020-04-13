@@ -1,11 +1,11 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
-import { StationService } from 'radio/station/services/station.service';
-import { User } from 'radio/user/entities/user.entity';
-import { PaginationInput } from 'core/graphql/input/pagination';
-import { SongCreateInput } from '../song.input';
+import { PaginationInput } from '../../../core/graphql/input/pagination';
+import { StationService } from '../../station/services/station.service';
+import { User } from '../../user/entities/user.entity';
 import { Song, SongStatusEnum } from '../entities/song.entity';
+import { SongCreateInput } from '../song.input';
 
 @Injectable()
 export class SongService {

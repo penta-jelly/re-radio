@@ -1,6 +1,6 @@
 import { ResolveField, Resolver, Root } from '@nestjs/graphql';
-import { UserRoleService } from 'radio/user/services/user-role.service';
-import { UserService } from 'radio/user/services/user.service';
+import { UserRoleService } from '../../user/services/user-role.service';
+import { UserService } from '../../user/services/user.service';
 import { StationTagDTO } from '../dto/station-tag.dto';
 import { StationDTO } from '../dto/station.dto';
 import { StationTagService } from '../services/station-tag.service';

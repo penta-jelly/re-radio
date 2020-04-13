@@ -1,10 +1,10 @@
 import { forwardRef, Inject, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { FindConditions, FindManyOptions, FindOneOptions, Repository } from 'typeorm';
-import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
-import { User } from 'radio/user/entities/user.entity';
-import { UserRoleService } from 'radio/user/services/user-role.service';
-import { UserService } from 'radio/user/services/user.service';
+import { UserRoleEnum } from '../../user/entities/user-role.entity';
+import { User } from '../../user/entities/user.entity';
+import { UserRoleService } from '../../user/services/user-role.service';
+import { UserService } from '../../user/services/user.service';
 import { StationTag } from '../entities/station-tag.entity';
 import { Station } from '../entities/station.entity';
 import { StationCreateInput } from '../station.input';

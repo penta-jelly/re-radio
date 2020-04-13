@@ -1,6 +1,6 @@
 import { BadRequestException } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from 'radio/songs-explorer/youtube/youtube.dto';
+import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from './youtube.dto';
 import { YoutubeVideoFindAllInput, YoutubeVideoFindOneInput } from './youtube.input';
 import { YoutubeService } from './youtube.service';
 

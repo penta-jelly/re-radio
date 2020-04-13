@@ -24,7 +24,7 @@ services:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
     volumes:
-      - pgadmin:/var/lib/pgadmin
+      - pgadmin:/root/.pgadmin
 
   redis:
     container_name: re-radio_redis

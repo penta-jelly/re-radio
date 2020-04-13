@@ -10,8 +10,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Song } from 'radio/song/entities/song.entity';
-import { UserRole } from 'radio/user/entities/user-role.entity';
+import { Song } from '../../song/entities/song.entity';
+import { UserRole } from '../../user/entities/user-role.entity';
 import { StationTag } from './station-tag.entity';
 
 @Entity()

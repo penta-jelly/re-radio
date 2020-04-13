@@ -97,6 +97,8 @@ typings/
 .history
 
 
+# End of https://www.gitignore.io/api/node,macos,visualstudiocode
+
 # Target Folder
 lib/
 *.deb
@@ -104,4 +106,5 @@ lib/
 # Storage folder
 storage/
 
-# End of https://www.gitignore.io/api/node,macos,visualstudiocode
+# Distribution
+dist/

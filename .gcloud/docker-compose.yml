@@ -27,12 +27,18 @@ services:
     restart: ${RESTART_POLICY}
     ports: 
       - "${MAIN_HOST_PORT}:2996"
+    depends_on:
+      - postgres
+      - redis
     environment: 
       REDIS_HOST: re-radio_redis
-      DB_HOST: re-radio_postgres      
+      REDIS_PORT: 6379
+      DB_HOST: re-radio_postgres
+      DB_PORT: 5432
       DB_USER: ${DB_USER}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_NAME: ${DB_NAME}
+      WAIT_HOSTS: re-radio_postgres:5432, re-radio_redis:6379
       JWT_SECRET: ${JWT_SECRET}
       JWT_TOKEN_EXPIRES_IN: ${JWT_TOKEN_EXPIRES_IN}
       YOUTUBE_API_KEY: ${YOUTUBE_API_KEY}

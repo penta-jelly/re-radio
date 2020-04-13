@@ -1,13 +1,13 @@
 import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
-import { StationService } from 'radio/station/services/station.service';
-import { User } from 'radio/user/entities/user.entity';
-import { ConfigService } from 'core/config/config.service';
-import { EnvVariables } from 'core/config/config.variables';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { Station } from 'radio/station/entities/station.entity';
+import { ConfigService } from '../../core/config/config.service';
+import { EnvVariables } from '../../core/config/config.variables';
+import { PubSub } from '../../core/pub-sub/pub-sub.service';
+import { Station } from '../../radio/station/entities/station.entity';
+import { StationService } from '../../radio/station/services/station.service';
+import { User } from '../../radio/user/entities/user.entity';
 import { RealTimeSongService } from '../real-time-songs/real-time-songs.service';
-import { RealTimeStationService } from './real-time-stations.service';
 import { RealTimeStationEvent } from './real-time-station.event';
+import { RealTimeStationService } from './real-time-stations.service';
 
 @Injectable()
 export class RealTimeStationsWorker {

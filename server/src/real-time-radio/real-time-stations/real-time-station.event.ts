@@ -1,5 +1,5 @@
-import { User } from 'radio/user/entities/user.entity';
-import { Station } from 'radio/station/entities/station.entity';
+import { User } from '../../radio/user/entities/user.entity';
+import { Station } from '../../radio/station/entities/station.entity';
 
 export namespace RealTimeStationEvent {
   export const USER_JOINED = 'USER_JOINED';

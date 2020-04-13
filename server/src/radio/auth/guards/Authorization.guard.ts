@@ -11,9 +11,9 @@ import {
 import { Reflector } from '@nestjs/core';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
-import { User } from 'radio/user/entities/user.entity';
-import { UserRoleService } from 'radio/user/services/user-role.service';
-import { UserService } from 'radio/user/services/user.service';
+import { User } from '../../user/entities/user.entity';
+import { UserRoleService } from '../../user/services/user-role.service';
+import { UserService } from '../../user/services/user.service';
 import { AllowedRoles, ROLE_KEY } from '../decorators/Roles.decorator';
 
 @Injectable()

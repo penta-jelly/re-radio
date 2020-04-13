@@ -15,8 +15,7 @@
     "skipLibCheck": true,
     "outDir": "./lib",
     "esModuleInterop": true,
-    "lib": ["es2018", "esnext"],
-    "baseUrl": "src"
+    "lib": ["es2018", "esnext"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "**/*.spec.ts"]

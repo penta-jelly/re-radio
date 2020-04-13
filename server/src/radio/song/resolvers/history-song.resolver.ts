@@ -1,11 +1,10 @@
-import { Args, Query, Resolver, ResolveField, Root } from '@nestjs/graphql';
-
-import { PaginationInput } from 'core/graphql/input/pagination';
-import { StationService } from 'radio/station/services/station.service';
-import { StationDTO } from 'radio/station/dto/station.dto';
+import { Args, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
+import { PaginationInput } from '../../../core/graphql/input/pagination';
+import { StationDTO } from '../../station/dto/station.dto';
+import { StationService } from '../../station/services/station.service';
+import { HistorySongDTO } from '../dto/song.dto';
 import { SongService } from '../services/song.service';
 import { HistorySongFindAllWhereInput } from '../song.input';
-import { HistorySongDTO } from '../dto/song.dto';
 
 @Resolver(of => HistorySongDTO)
 export class HistorySongResolver {

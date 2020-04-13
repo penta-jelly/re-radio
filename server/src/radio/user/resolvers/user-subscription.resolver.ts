@@ -1,7 +1,7 @@
 import { Args, Resolver, Subscription } from '@nestjs/graphql';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { EntitySubscription } from 'core/typeorm/entity-subscription.interface';
-import { StationSubscriptionDTO } from 'radio/station/dto/station-subscription.dto';
+import { PubSub } from '../../../core/pub-sub/pub-sub.service';
+import { EntitySubscription } from '../../../core/typeorm/entity-subscription.interface';
+import { StationSubscriptionDTO } from '../../station/dto/station-subscription.dto';
 import { UserSubscriptionDTO } from '../dto/user-subscription.dto';
 import { User } from '../entities/user.entity';
 import { UserFindOneWhereInput } from '../user.input';

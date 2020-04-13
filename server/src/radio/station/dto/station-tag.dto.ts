@@ -1,5 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { StationDTO } from 'radio/station/dto/station.dto';
+import { StationDTO } from './station.dto';
 
 @ObjectType('StationTag')
 export class StationTagDTO {

@@ -1,10 +1,10 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
-import { PaginationInput } from 'core/graphql/input/pagination';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { Roles } from 'radio/auth/decorators/Roles.decorator';
-import { AuthenticationGuard } from 'radio/auth/guards/Authentication.guard';
-import { AuthorizationGuard } from 'radio/auth/guards/Authorization.guard';
+import { PaginationInput } from '../../../core/graphql/input/pagination';
+import { PubSub } from '../../../core/pub-sub/pub-sub.service';
+import { Roles } from '../../auth/decorators/Roles.decorator';
+import { AuthenticationGuard } from '../../auth/guards/Authentication.guard';
+import { AuthorizationGuard } from '../../auth/guards/Authorization.guard';
 import { UserRoleDTO } from '../dto/user-role.dto';
 import { UserDTO } from '../dto/user.dto';
 import { UserRoleEnum } from '../entities/user-role.entity';

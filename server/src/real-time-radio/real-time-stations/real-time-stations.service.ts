@@ -1,7 +1,7 @@
 import { forwardRef, Inject, Injectable, Logger } from '@nestjs/common';
-import { SongStatusEnum } from 'radio/song/entities/song.entity';
-import { SongService } from 'radio/song/services/song.service';
-import { StationService } from 'radio/station/services/station.service';
+import { SongStatusEnum } from '../../radio/song/entities/song.entity';
+import { SongService } from '../../radio/song/services/song.service';
+import { StationService } from '../../radio/station/services/station.service';
 import { RealTimeSongService } from '../real-time-songs/real-time-songs.service';
 
 @Injectable()

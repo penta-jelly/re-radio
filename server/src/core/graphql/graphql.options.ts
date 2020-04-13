@@ -3,8 +3,8 @@ import { GqlModuleOptions, GqlOptionsFactory } from '@nestjs/graphql';
 import { ValidationError } from 'class-validator';
 import { GraphQLError, GraphQLFormattedError } from 'graphql';
 import { ConnectionContext } from 'subscriptions-transport-ws';
-import { WsEvent } from 'core/graphql/ws.event';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
+import { PubSub } from '../pub-sub/pub-sub.service';
+import { WsEvent } from './ws.event';
 
 @Injectable()
 export class GraphqlOptions implements GqlOptionsFactory {
@@ -14,7 +14,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
     type RadioWsConnectionContext = ConnectionContext & { connectionParams?: object };
 
     return {
-      path: '/graphql',
+      path: 'graphql',
       autoSchemaFile: 'schema.graphql',
       installSubscriptionHandlers: true,
       subscriptions: {
