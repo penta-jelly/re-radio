@@ -10,7 +10,7 @@
     "format": "prettier --write \"cypress/**/*.ts\" && eslint --fix --ext .ts cypress"
   },
   "dependencies": {
-    "cypress": "4.3.0"
+    "cypress": "4.4.0"
   },
   "devDependencies": {
     "@cypress/browserify-preprocessor": "2.2.1",
