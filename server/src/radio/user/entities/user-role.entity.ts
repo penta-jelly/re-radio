@@ -1,6 +1,6 @@
 import { registerEnumType } from '@nestjs/graphql';
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
-import { Station } from 'radio/station/entities/station.entity';
+import { Station } from '../../station/entities/station.entity';
 import { User } from './user.entity';
 
 export enum UserRoleEnum {

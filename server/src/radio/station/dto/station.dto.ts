@@ -1,6 +1,6 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { SongDTO } from 'radio/song/dto/song.dto';
-import { UserRoleDTO } from 'radio/user/dto/user-role.dto';
+import { SongDTO } from '../../song/dto/song.dto';
+import { UserRoleDTO } from '../../user/dto/user-role.dto';
 import { StationTagDTO } from './station-tag.dto';
 
 @ObjectType('Station')

@@ -4,7 +4,6 @@
   "scripts": {
     "initialize": "shx cp -n .env.example .env",
     "start": "react-scripts start | cat -",
-    "dev": "react-scripts start | cat -",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "generate": "gql-gen",

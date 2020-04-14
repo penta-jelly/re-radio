@@ -1,7 +1,7 @@
 import { SetMetadata } from '@nestjs/common';
 import { GraphQLResolveInfo } from 'graphql';
-import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
-import { User } from 'radio/user/entities/user.entity';
+import { UserRoleEnum } from '../../user/entities/user-role.entity';
+import { User } from '../../user/entities/user.entity';
 
 export const ROLE_KEY = 'roles';
 

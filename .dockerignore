@@ -4,14 +4,18 @@
 **/*storage
 
 server/lib
+server/dist
 
 # IntelliJ IDEA
 .idea
 .eclipse
 
 .vscode
+
 .gcloud
 .github
+
+.git
 
 # NPM/Yarn
 **/*node_modules

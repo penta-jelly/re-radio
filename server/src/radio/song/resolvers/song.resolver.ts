@@ -1,17 +1,17 @@
 import { UseGuards } from '@nestjs/common';
 import { Args, Mutation, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
-import { PaginationInput } from 'core/graphql/input/pagination';
-import { CurrentUser } from 'radio/auth/decorators/CurrentUser.decorator';
-import { Roles } from 'radio/auth/decorators/Roles.decorator';
-import { AuthenticationGuard } from 'radio/auth/guards/Authentication.guard';
-import { AuthorizationGuard } from 'radio/auth/guards/Authorization.guard';
-import { StationDTO } from 'radio/station/dto/station.dto';
-import { UserDTO } from 'radio/user/dto/user.dto';
-import { UserRoleEnum } from 'radio/user/entities/user-role.entity';
-import { User } from 'radio/user/entities/user.entity';
-import { SongCreateInput, SongFindAllOrderInput, SongFindAllWhereInput, SongFindOneWhereInput } from '../song.input';
-import { SongService } from '../services/song.service';
+import { PaginationInput } from '../../../core/graphql/input/pagination';
+import { CurrentUser } from '../../auth/decorators/CurrentUser.decorator';
+import { Roles } from '../../auth/decorators/Roles.decorator';
+import { AuthenticationGuard } from '../../auth/guards/Authentication.guard';
+import { AuthorizationGuard } from '../../auth/guards/Authorization.guard';
+import { StationDTO } from '../../station/dto/station.dto';
+import { UserDTO } from '../../user/dto/user.dto';
+import { UserRoleEnum } from '../../user/entities/user-role.entity';
+import { User } from '../../user/entities/user.entity';
 import { SongDTO } from '../dto/song.dto';
+import { SongService } from '../services/song.service';
+import { SongCreateInput, SongFindAllOrderInput, SongFindAllWhereInput, SongFindOneWhereInput } from '../song.input';
 
 @Resolver(of => SongDTO)
 export class SongResolver {

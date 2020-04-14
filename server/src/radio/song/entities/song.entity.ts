@@ -9,8 +9,8 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Station } from 'radio/station/entities/station.entity';
-import { User } from 'radio/user/entities/user.entity';
+import { Station } from '../../station/entities/station.entity';
+import { User } from '../../user/entities/user.entity';
 
 export enum SongStatusEnum {
   PENDING = 'PENDING',

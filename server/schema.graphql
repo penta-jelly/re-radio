@@ -2,250 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type Authentication {
-  token: String!
-}
-
-type ContentDetails {
-  duration: Float!
-  dimension: String!
-  definition: String!
-  caption: String!
-}
-
-type HistorySong {
-  id: String!
-  title: String!
-  url: String!
-  thumbnail: String!
-  duration: Int!
-  station: Station!
-  stationSlug: String!
-  creatorIds: [Int!]!
-  playedTimes: Int!
-}
-
-input HistorySongFindAllWhereInput {
-  stationSlug: String!
-}
-
-input LoginInput {
-  password: String!
-  email: String
-  username: String
-}
-
-type Mutation {
-  createStation(data: StationCreateInput!): Station!
-  deleteStation(where: StationFindOneWhereInput!): Boolean!
-  joinStation(where: StationFindOneWhereInput!): Boolean!
-  leaveStation(where: StationFindOneWhereInput!): Boolean!
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserFindOneWhereInput!): Boolean!
-  deleteUser(where: UserFindOneWhereInput!): Boolean!
-  login(data: LoginInput!): Authentication!
-  register(data: RegisterInput!): Authentication!
-  createSong(data: SongCreateInput!): Song!
-  deleteSong(where: SongFindOneWhereInput!): Boolean!
-}
-
-enum MutationEnum {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-enum OrderEnum {
-  ASC
-  DESC
-}
-
-input PaginationInput {
-  """Offset (paginated) where from entities should be taken. Default: 0"""
-  skip: Int = 0
-
-  """
-  Limit (paginated) - max number of entities should be taken. Default: 10
-  """
-  take: Int = 10
-}
-
-type Query {
-  stations(order: StationFindAllOrderInput, where: [StationFindAllWhereInput], pagination: PaginationInput): [Station!]!
-  station(where: StationFindOneWhereInput!): Station!
-  users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
-  user(where: UserFindOneWhereInput!): User!
-  currentUser: User!
-  songs(order: SongFindAllOrderInput, where: [SongFindAllWhereInput], pagination: PaginationInput): [Song!]!
-  song(where: SongFindOneWhereInput!): Song!
-  historySongs(where: HistorySongFindAllWhereInput!, pagination: PaginationInput): [HistorySong!]!
-  youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
-  youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
-}
-
-input RegisterInput {
-  password: String!
-  email: String
-  username: String
-}
-
-type Snippet {
-  publishedAt: String!
-  channelId: String!
-  title: String!
-  description: String!
-  thumbnails: Thumbnails!
-  channelTitle: String!
-}
-
-type Song {
+type UserRole {
   id: Int!
-  createdAt: Timestamp!
-  updatedAt: Timestamp!
-  startedAt: Timestamp
-  title: String!
-  url: String!
-  thumbnail: String!
-  duration: Int!
-  status: SongStatusEnum!
-  creator: User!
-  station: Station!
-  stationSlug: String!
-  upVoteUserIds: [Int!]!
-  downVoteUserIds: [Int!]!
+  role: UserRoleEnum!
+  user: User!
+  station: Station
 }
 
-input SongCreateInput {
-  title: String!
-  url: String!
-  thumbnail: String!
-  duration: Int!
-  status: SongStatusEnum
-  stationSlug: String
+enum UserRoleEnum {
+  ADMIN
+  STATION_OWNER
+  STATION_ADMIN
 }
-
-enum SongExplorerOrderEnum {
-  DATE
-  RATING
-  RELEVANCE
-  TITLE
-  VIEW_COUNT
-  VIDEO_COUNT
-}
-
-input SongFindAllOrderInput {
-  id: OrderEnum
-  createdAt: OrderEnum
-  updatedAt: OrderEnum
-  title: OrderEnum
-  url: OrderEnum
-  thumbnail: OrderEnum
-  duration: OrderEnum
-}
-
-input SongFindAllWhereInput {
-  stationSlug: String
-  title: String
-  url: String
-  thumbnail: String
-  duration: Int
-  status: SongStatusEnum
-}
-
-input SongFindOneWhereInput {
-  id: Int!
-}
-
-enum SongStatusEnum {
-  PENDING
-  PLAYING
-  PLAYED
-  SKIPPED
-}
-
-type SongSubscription {
-  mutation: MutationEnum!
-  entity: Song!
-}
-
-type Station {
-  id: Int!
-  createdAt: Timestamp!
-  updatedAt: Timestamp!
-  name: String!
-  slug: String!
-  description: String
-  playingSong: Song
-  userRoles: [UserRole!]!
-  tags: [StationTag!]!
-  onlineUserIds: [Int!]!
-}
-
-input StationCreateInput {
-  name: String!
-  slug: String!
-  description: String
-  tags: [StationTagCreateInput!]
-}
-
-input StationFindAllOrderInput {
-  id: OrderEnum
-  name: OrderEnum
-  slug: OrderEnum
-  createdAt: OrderEnum
-  updatedAt: OrderEnum
-}
-
-input StationFindAllWhereInput {
-  name: String
-  slug: String
-}
-
-input StationFindOneWhereInput {
-  id: Int
-  name: String
-  slug: String
-}
-
-type StationSubscription {
-  mutation: MutationEnum!
-  entity: Station!
-}
-
-type StationTag {
-  id: Int!
-  name: String!
-  stations: [Station!]!
-}
-
-input StationTagCreateInput {
-  name: String!
-}
-
-type Subscription {
-  station(where: StationFindOneWhereInput): StationSubscription!
-  user(where: UserFindOneWhereInput!): UserSubscription!
-  song(where: SongFindAllWhereInput): SongSubscription!
-}
-
-type Thumbnail {
-  url: String!
-  width: Float!
-  height: Float!
-}
-
-type Thumbnails {
-  default: Thumbnail!
-  medium: Thumbnail
-  high: Thumbnail
-  standard: Thumbnail
-  maxres: Thumbnail
-}
-
-"""
-`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
-"""
-scalar Timestamp
 
 type User {
   id: Int!
@@ -266,18 +34,177 @@ type User {
   currentStationId: Float
 }
 
-input UserCreateInput {
-  email: String!
-  username: String!
-  password: String!
+"""
+`Date` type as integer. Type represents date and time as number of milliseconds from start of UNIX epoch.
+"""
+scalar Timestamp
+
+type Song {
+  id: Int!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  startedAt: Timestamp
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  status: SongStatusEnum!
+  creator: User!
+  station: Station!
+  stationSlug: String!
+  upVoteUserIds: [Int!]!
+  downVoteUserIds: [Int!]!
+}
+
+enum SongStatusEnum {
+  PENDING
+  PLAYING
+  PLAYED
+  SKIPPED
+}
+
+type HistorySong {
+  id: String!
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  station: Station!
+  stationSlug: String!
+  creatorIds: [Int!]!
+  playedTimes: Int!
+}
+
+type StationTag {
+  id: Int!
+  name: String!
+  stations: [Station!]!
+}
+
+type Station {
+  id: Int!
+  createdAt: Timestamp!
+  updatedAt: Timestamp!
+  name: String!
+  slug: String!
+  description: String
+  playingSong: Song
+  userRoles: [UserRole!]!
+  tags: [StationTag!]!
+  onlineUserIds: [Int!]!
+}
+
+type StationSubscription {
+  mutation: MutationEnum!
+  entity: Station!
+}
+
+enum MutationEnum {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+type UserSubscription {
+  mutation: MutationEnum!
+  entity: User!
+}
+
+type Authentication {
+  token: String!
+}
+
+type SongSubscription {
+  mutation: MutationEnum!
+  entity: Song!
+}
+
+type Thumbnail {
+  url: String!
+  width: Float!
+  height: Float!
+}
+
+type Thumbnails {
+  default: Thumbnail!
+  medium: Thumbnail
+  high: Thumbnail
+  standard: Thumbnail
+  maxres: Thumbnail
+}
+
+type Snippet {
+  publishedAt: String!
+  channelId: String!
+  title: String!
+  description: String!
+  thumbnails: Thumbnails!
+  channelTitle: String!
+}
+
+type ContentDetails {
+  duration: Float!
+  dimension: String!
+  definition: String!
+  caption: String!
+}
+
+type YoutubeVideoDetail {
+  id: String!
+  snippet: Snippet!
+  contentDetails: ContentDetails!
+}
+
+type YoutubeVideo {
+  id: String!
+  snippet: Snippet!
+}
+
+type Query {
+  stations(order: StationFindAllOrderInput, where: [StationFindAllWhereInput], pagination: PaginationInput): [Station!]!
+  station(where: StationFindOneWhereInput!): Station!
+  users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
+  user(where: UserFindOneWhereInput!): User!
+  currentUser: User!
+  historySongs(where: HistorySongFindAllWhereInput!, pagination: PaginationInput): [HistorySong!]!
+  songs(order: SongFindAllOrderInput, where: [SongFindAllWhereInput], pagination: PaginationInput): [Song!]!
+  song(where: SongFindOneWhereInput!): Song!
+  youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
+  youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
+}
+
+input StationFindAllOrderInput {
+  id: OrderEnum
+  name: OrderEnum
+  slug: OrderEnum
+  createdAt: OrderEnum
+  updatedAt: OrderEnum
+}
+
+enum OrderEnum {
+  ASC
+  DESC
+}
+
+input StationFindAllWhereInput {
   name: String
-  country: String
-  city: String
-  bio: String
-  avatarUrl: String
-  coverUrl: String
-  facebookId: String
-  googleId: String
+  slug: String
+}
+
+input PaginationInput {
+  """Offset (paginated) where from entities should be taken. Default: 0"""
+  skip: Int = 0
+
+  """
+  Limit (paginated) - max number of entities should be taken. Default: 10
+  """
+  take: Int = 10
+}
+
+input StationFindOneWhereInput {
+  id: Int
+  name: String
+  slug: String
 }
 
 input UserFindAllOrderInput {
@@ -303,22 +230,90 @@ input UserFindOneWhereInput {
   username: String
 }
 
-type UserRole {
+input HistorySongFindAllWhereInput {
+  stationSlug: String!
+}
+
+input SongFindAllOrderInput {
+  id: OrderEnum
+  createdAt: OrderEnum
+  updatedAt: OrderEnum
+  title: OrderEnum
+  url: OrderEnum
+  thumbnail: OrderEnum
+  duration: OrderEnum
+}
+
+input SongFindAllWhereInput {
+  stationSlug: String
+  title: String
+  url: String
+  thumbnail: String
+  duration: Int
+  status: SongStatusEnum
+}
+
+input SongFindOneWhereInput {
   id: Int!
-  role: UserRoleEnum!
-  user: User!
-  station: Station
 }
 
-enum UserRoleEnum {
-  ADMIN
-  STATION_OWNER
-  STATION_ADMIN
+input YoutubeVideoFindOneInput {
+  videoId: String
+  url: String
 }
 
-type UserSubscription {
-  mutation: MutationEnum!
-  entity: User!
+input YoutubeVideoFindAllInput {
+  q: String!
+  maxResults: Float
+  order: SongExplorerOrderEnum
+}
+
+enum SongExplorerOrderEnum {
+  DATE
+  RATING
+  RELEVANCE
+  TITLE
+  VIEW_COUNT
+  VIDEO_COUNT
+}
+
+type Mutation {
+  createStation(data: StationCreateInput!): Station!
+  deleteStation(where: StationFindOneWhereInput!): Boolean!
+  joinStation(where: StationFindOneWhereInput!): Boolean!
+  leaveStation(where: StationFindOneWhereInput!): Boolean!
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserFindOneWhereInput!): Boolean!
+  deleteUser(where: UserFindOneWhereInput!): Boolean!
+  login(data: LoginInput!): Authentication!
+  register(data: RegisterInput!): Authentication!
+  createSong(data: SongCreateInput!): Song!
+  deleteSong(where: SongFindOneWhereInput!): Boolean!
+}
+
+input StationCreateInput {
+  name: String!
+  slug: String!
+  description: String
+  tags: [StationTagCreateInput!]
+}
+
+input StationTagCreateInput {
+  name: String!
+}
+
+input UserCreateInput {
+  email: String!
+  username: String!
+  password: String!
+  name: String
+  country: String
+  city: String
+  bio: String
+  avatarUrl: String
+  coverUrl: String
+  facebookId: String
+  googleId: String
 }
 
 input UserUpdateInput {
@@ -334,24 +329,29 @@ input UserUpdateInput {
   googleId: String
 }
 
-type YoutubeVideo {
-  id: String!
-  snippet: Snippet!
+input LoginInput {
+  password: String!
+  email: String
+  username: String
 }
 
-type YoutubeVideoDetail {
-  id: String!
-  snippet: Snippet!
-  contentDetails: ContentDetails!
+input RegisterInput {
+  password: String!
+  email: String
+  username: String
 }
 
-input YoutubeVideoFindAllInput {
-  q: String!
-  maxResults: Float
-  order: SongExplorerOrderEnum
+input SongCreateInput {
+  title: String!
+  url: String!
+  thumbnail: String!
+  duration: Int!
+  status: SongStatusEnum
+  stationSlug: String
 }
 
-input YoutubeVideoFindOneInput {
-  videoId: String
-  url: String
+type Subscription {
+  station(where: StationFindOneWhereInput): StationSubscription!
+  user(where: UserFindOneWhereInput!): UserSubscription!
+  song(where: SongFindAllWhereInput): SongSubscription!
 }

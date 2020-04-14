@@ -7,10 +7,10 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { LoginInput, RegisterInput } from 'radio/auth/auth.input';
-import { User } from 'radio/user/entities/user.entity';
-import { UserService } from 'radio/user/services/user.service';
+import { UserService } from '../user/services/user.service';
+import { User } from '../user/entities/user.entity';
 import { JwtPayload } from './interfaces/JwtPayload.interface';
+import { RegisterInput, LoginInput } from './auth.input';
 
 @Injectable()
 export class AuthService {

@@ -29,6 +29,8 @@ npm install && npm run initialize && npm run compile
 
 ### Start
 
+#### Run the application
+
 ```sh
 npm start
 ```

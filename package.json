@@ -11,28 +11,21 @@
     "lint": "lerna run lint --parallel --no-bail",
     "start": "npm-run-all --parallel lerna:start db",
     "lerna:start": "lerna run start --no-sort --parallel",
-    "ci:start": "npm-run-all --parallel ci:lerna:start ci:lerna:seed db",
-    "ci:lerna:start": "sleep 30 && lerna run start --scope re-radio-server",
-    "ci:lerna:seed": "sleep 30 && lerna run seed --scope re-radio-server",
-    "dev": "npm-run-all --parallel lerna:dev db",
-    "lerna:dev": "npm-run-all --parallel lerna:dev:*",
-    "lerna:dev:server": "lerna run dev --scope re-radio-server",
-    "lerna:dev:client": "lerna run dev --scope re-radio-client",
-    "lerna:dev:common": "lerna run dev --scope re-radio-common",
+    "ci:start": "npm-run-all --parallel ci:lerna:start db",
+    "ci:lerna:start": "sleep 30 && lerna run ci:start --scope re-radio-server",
     "db": "npm run db:up",
     "db:up": "lerna run db:up --no-sort --parallel",
     "db:down": "lerna run db:down --no-sort --parallel"
   },
   "devDependencies": {
     "lerna": "3.20.2",
-    "npm-run-all": "4.1.5",
-    "start-server-and-test": "1.10.11"
+    "npm-run-all": "4.1.5"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/penta-jelly/re-radio.git"
   },
-  "description": "[![Build Status](https://travis-ci.org/penta-jelly/re-radio.svg?branch=master)](https://travis-ci.org/penta-jelly/re-radio)\r [![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/nn2y5c/runs)\r [![Renovate](https://badges.renovateapi.com/github/penta-jelly/re-radio)](https://renovatebot.com/)\r [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio?ref=badge_shield)",
+  "description": "",
   "author": "@penta-jelly",
   "license": "MIT",
   "bugs": {

@@ -1,6 +1,6 @@
 import { Args, Resolver, Subscription } from '@nestjs/graphql';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { EntitySubscription } from 'core/typeorm/entity-subscription.interface';
+import { PubSub } from '../../../core/pub-sub/pub-sub.service';
+import { EntitySubscription } from '../../../core/typeorm/entity-subscription.interface';
 import { SongSubscriptionDTO } from '../dto/song-subscription.dto';
 import { Song } from '../entities/song.entity';
 import { SongService } from '../services/song.service';

@@ -1,8 +1,8 @@
 import { forwardRef, Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { EntitySubscription, MutationEnum } from 'core/typeorm/entity-subscription.interface';
-import { Song, SongStatusEnum } from 'radio/song/entities/song.entity';
-import { SONG_SUBSCRIPTION } from 'radio/song/song.subscriber';
+import { PubSub } from '../../core/pub-sub/pub-sub.service';
+import { EntitySubscription, MutationEnum } from '../../core/typeorm/entity-subscription.interface';
+import { Song, SongStatusEnum } from '../../radio/song/entities/song.entity';
+import { SONG_SUBSCRIPTION } from '../../radio/song/song.subscriber';
 import { RealTimeStationService } from '../real-time-stations/real-time-stations.service';
 import { RealTimeSongService } from './real-time-songs.service';
 

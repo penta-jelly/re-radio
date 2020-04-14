@@ -1,6 +1,6 @@
 import { Args, Resolver, Subscription } from '@nestjs/graphql';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { EntitySubscription, MutationEnum } from 'core/typeorm/entity-subscription.interface';
+import { PubSub } from '../../../core/pub-sub/pub-sub.service';
+import { EntitySubscription, MutationEnum } from '../../../core/typeorm/entity-subscription.interface';
 import { StationSubscriptionDTO } from '../dto/station-subscription.dto';
 import { Station } from '../entities/station.entity';
 import { StationService } from '../services/station.service';

@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectConnection } from '@nestjs/typeorm';
 import { Connection, EntitySubscriberInterface, InsertEvent, RemoveEvent, UpdateEvent } from 'typeorm';
-import { PubSub } from 'core/pub-sub/pub-sub.service';
-import { EntitySubscription, MutationEnum } from 'core/typeorm/entity-subscription.interface';
+import { PubSub } from '../../core/pub-sub/pub-sub.service';
+import { EntitySubscription, MutationEnum } from '../../core/typeorm/entity-subscription.interface';
 import { User } from './entities/user.entity';
 
 export const USER_SUBSCRIPTION = 'USER_SUBSCRIPTION';

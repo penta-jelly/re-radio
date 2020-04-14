@@ -2,10 +2,10 @@ import { Injectable, InternalServerErrorException, NotAcceptableException } from
 import getVideoId from 'get-video-id';
 import Moment from 'moment';
 import fetch from 'node-fetch';
-import { EnvVariables } from 'core/config/config.variables';
-import { ConfigService } from 'core/config/config.service';
-import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from 'radio/songs-explorer/youtube/youtube.dto';
-import { YoutubeVideoFindAllInput, YoutubeVideoOrderEnum } from 'radio/songs-explorer/youtube/youtube.input';
+import { ConfigService } from '../../../core/config/config.service';
+import { EnvVariables } from '../../../core/config/config.variables';
+import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from './youtube.dto';
+import { YoutubeVideoFindAllInput, YoutubeVideoOrderEnum } from './youtube.input';
 
 @Injectable()
 export class YoutubeService {
