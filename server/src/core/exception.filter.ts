@@ -23,7 +23,7 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
   catch(exception: CatchableException, host: ArgumentsHost) {
     const ctx = GqlArgumentsHost.create(host);
     const info = ctx.getInfo<GraphQLResolveInfo>();
-    const rawArgs = Util.inspect(ctx.getArgs(), { colors: true, depth: 5 });
+    const rawArgs = Util.inspect(ctx.getArgs(), { depth: 5, breakLength: 120 });
     this.log(exception, info, rawArgs);
     return this.transformException(exception);
   }
@@ -51,7 +51,9 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
       message = exception.toString();
     }
 
-    this.logger.log(`${COLOR_RED}[ERROR]${COLOR_RESET} ${operation} ${info.fieldName} "${message}" [Args: ${rawArgs}]`);
+    this.logger.log(
+      `${COLOR_RED}[ERROR]${COLOR_RESET} ${operation} ${info.fieldName} "${message}"\n[Args: ${rawArgs}]`,
+    );
     if (exception instanceof UnauthorizedException) {
       this.logger.verbose(exception.stack);
     } else {

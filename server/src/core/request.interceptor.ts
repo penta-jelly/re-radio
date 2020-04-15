@@ -20,13 +20,13 @@ export class RequestsInterceptor implements NestInterceptor {
       const info = ctx.getInfo<GraphQLResolveInfo>();
       const operation = info.operation.operation.toUpperCase();
       const before = Date.now();
-      const rawArgs = Util.inspect(ctx.getArgs(), { colors: true, depth: 5 });
+      const rawArgs = Util.inspect(ctx.getArgs(), { depth: 5, breakLength: 120 });
       return next
         .handle()
         .pipe(
           tap(() =>
             this.logger.log(
-              `${COLOR_RESET}${operation} ${info.fieldName} ${this.colorizeDiffTime(before)} [Args: ${rawArgs}]`,
+              `${COLOR_RESET}${operation} ${info.fieldName} ${this.colorizeDiffTime(before)}\n[Args: ${rawArgs}]`,
             ),
           ),
         );
