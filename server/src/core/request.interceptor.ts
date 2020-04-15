@@ -1,3 +1,4 @@
+import Util from 'util';
 import { CallHandler, ExecutionContext, Injectable, Logger, NestInterceptor } from '@nestjs/common';
 import { GqlExecutionContext } from '@nestjs/graphql';
 import { GraphQLResolveInfo } from 'graphql';
@@ -19,7 +20,7 @@ export class RequestsInterceptor implements NestInterceptor {
       const info = ctx.getInfo<GraphQLResolveInfo>();
       const operation = info.operation.operation.toUpperCase();
       const before = Date.now();
-      const rawArgs = JSON.stringify(ctx.getArgs());
+      const rawArgs = Util.inspect(ctx.getArgs(), { colors: true, depth: 5 });
       return next
         .handle()
         .pipe(

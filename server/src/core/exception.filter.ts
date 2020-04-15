@@ -1,3 +1,4 @@
+import Util from 'util';
 import {
   ArgumentsHost,
   Catch,
@@ -22,7 +23,7 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
   catch(exception: CatchableException, host: ArgumentsHost) {
     const ctx = GqlArgumentsHost.create(host);
     const info = ctx.getInfo<GraphQLResolveInfo>();
-    const rawArgs = JSON.stringify(ctx.getArgs());
+    const rawArgs = Util.inspect(ctx.getArgs(), { colors: true, depth: 5 });
     this.log(exception, info, rawArgs);
     return this.transformException(exception);
   }
