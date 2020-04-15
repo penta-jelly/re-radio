@@ -25,7 +25,7 @@ export async function bootstrap(worker: Worker) {
   };
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   await require('wait-on')({
-    resources: [`http://${radioServer.host}:${radioServer.port}/status`],
+    resources: [`tcp:${radioServer.host}:${radioServer.port}`],
     timeout: 30000,
   });
   logger.log(`Graphql service responded.`);

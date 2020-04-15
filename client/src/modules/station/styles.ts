@@ -11,7 +11,6 @@ export const useStyles = makeStyles(({ palette, breakpoints, zIndex, spacing }) 
   },
   content: {
     height: 'calc(100vh - 48px)',
-    padding: spacing(0.5),
   },
   songsList: {
     paddingRight: 0,

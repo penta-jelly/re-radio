@@ -25,7 +25,7 @@ export async function bootstrap() {
   };
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   await require('wait-on')({
-    resources: [`http://${realTimeServer.host}:${realTimeServer.port}/status`],
+    resources: [`tcp:${realTimeServer.host}:${realTimeServer.port}`],
     timeout: 30000,
   });
   logger.log(`Real time radio service responded.`);
