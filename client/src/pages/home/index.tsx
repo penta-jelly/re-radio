@@ -106,7 +106,7 @@ const HomePage: React.FunctionComponent<{}> = () => {
     content = (
       <div className={classes.root}>
         <div className={classes.header}>
-          <ReSearch placeholder={t('common:search')} id="search" />
+          <ReSearch placeholder={t('common:search')} id="search" iconButton />
           <PrimaryButton id="create-station" onClick={openCreateStationModal}>
             <StationIcon className={classes.iconButton} />
             {t('stations:createStation')}
