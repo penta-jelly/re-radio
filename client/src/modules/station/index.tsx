@@ -1,19 +1,20 @@
-import { Grid, Hidden, Portal, Slide, Tab, Tabs } from '@material-ui/core';
+import { Grid, Hidden, Portal, Slide } from '@material-ui/core';
 import { TabProps } from '@material-ui/core/Tab';
 import React from 'react';
 import { MdClose, MdPlaylistAdd } from 'react-icons/md';
-import { useToggle } from 'hooks/use-toggle';
 import { Fab } from 'components/button/fab';
+import { RadioTab, RadioTabs } from 'components/tabs/tabs';
+import { useToggle } from 'hooks/use-toggle';
 import { AddSong } from './add-song';
 import { Header } from './header';
+import { HistorySongs } from './history-songs';
 import { Player } from './player';
 import { Playlist } from './playlist';
 import { useStyles } from './styles';
-import { HistorySongs } from './history-songs';
 
 export * from './context';
-export * from './list';
 export * from './create';
+export * from './list';
 
 export const StationLayout: React.FC = () => {
   const classes = useStyles();
@@ -32,11 +33,11 @@ export const StationLayout: React.FC = () => {
       <Grid item xs={12} md={4} lg={3}>
         <Grid container className={classes.container}>
           <Grid item xs={12} className={classes.header}>
-            <Tabs value={selectedTab} onChange={(_, tab) => setSelectedTab(tab)}>
+            <RadioTabs value={selectedTab} onChange={(_, tab) => setSelectedTab(tab)}>
               {tabs.map(({ value, ...tabProps }) => (
-                <Tab {...tabProps} key={value} value={value} label={value} selected={selectedTab === value} />
+                <RadioTab {...tabProps} key={value} value={value} label={value} selected={selectedTab === value} />
               ))}
-            </Tabs>
+            </RadioTabs>
           </Grid>
           <Grid item xs={12} className={[classes.content, classes.songsList].join(' ')}>
             {(() => {

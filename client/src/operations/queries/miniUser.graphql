@@ -1,0 +1,10 @@
+query MiniUser ($where: UserFindOneWhereInput!) {
+  user(where: $where) {
+    id
+    email
+    username
+    avatarUrl
+    coverUrl
+    reputation
+  }
+}

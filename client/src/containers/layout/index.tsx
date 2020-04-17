@@ -37,13 +37,16 @@ const defaultProps = {
 export const Layout: React.FC<Props> = props => {
   const classes = useStyles(props);
   const sidebar = React.useMemo<DrawerProps>(() => props.drawer || defaultProps.drawer, [props.drawer]);
+  const currentUserQuery = useCurrentUserQuery();
 
   const match = useRouteMatch();
   if (!match) {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
+
   const history = useHistory();
   const appContext = React.useContext(AppContext);
+
   const openLoginModal = React.useCallback(() => {
     history.push(`${match.url}/login`);
   }, [match, history]);
@@ -112,7 +115,6 @@ export const Layout: React.FC<Props> = props => {
     };
   }, [appContext.serviceWorker, enqueueSnackbar]);
 
-  const currentUserQuery = useCurrentUserQuery();
   return (
     <div className={classes.root}>
       <Drawer
