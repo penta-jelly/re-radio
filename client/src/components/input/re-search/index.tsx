@@ -36,9 +36,33 @@ export const ReSearch: React.FC<Props> = ({ icon, onBlur, onFocus, onIconClick, 
     () => [classes.root, isInputFocused ? classes.rootFocused : '', className].join(' ').trim(),
     [classes.root, classes.rootFocused, isInputFocused, className],
   );
+  const isNotEmpty = !!rest.value;
 
-  const isNotEmpty = useMemo(() => !!rest.value, [rest.value]);
-  const IconComponent = useMemo(() => (iconButton ? IconButton : Icon), [iconButton]);
+  let endAdornment: React.ReactNode = null;
+  if (iconButton) {
+    endAdornment = (
+      <IconButton
+        size="small"
+        onClick={onIconClick}
+        className={classes.icon}
+        id={isNotEmpty ? 'close-button' : 'search-button'}
+      >
+        {icon || (isNotEmpty ? <CloseIcon /> : <SearchIcon />)}
+      </IconButton>
+    );
+  } else {
+    endAdornment = (
+      <Icon
+        fontSize="small"
+        onClick={onIconClick}
+        className={classes.icon}
+        id={isNotEmpty ? 'close-button' : 'search-button'}
+      >
+        {icon || (isNotEmpty ? <CloseIcon /> : <SearchIcon />)}
+      </Icon>
+    );
+  }
+
   return (
     <div className={enhancedClassName}>
       <InputBase
@@ -46,18 +70,7 @@ export const ReSearch: React.FC<Props> = ({ icon, onBlur, onFocus, onIconClick, 
         {...rest}
         onFocus={handleInputFocus}
         onBlur={handleInputBlur}
-        endAdornment={
-          icon || (
-            <IconComponent
-              size="small"
-              onClick={onIconClick}
-              className={classes.icon}
-              id={isNotEmpty ? 'close-button' : 'search-button'}
-            >
-              {isNotEmpty ? <CloseIcon /> : <SearchIcon />}
-            </IconComponent>
-          )
-        }
+        endAdornment={endAdornment}
       />
     </div>
   );
