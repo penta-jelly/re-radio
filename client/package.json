@@ -2,6 +2,7 @@
   "name": "re-radio-client",
   "version": "0.1.0-SNAPSHOT",
   "scripts": {
+    "postinstall": "patch-package",
     "initialize": "shx cp -n .env.example .env",
     "start": "react-scripts start | cat -",
     "build": "react-scripts build",
@@ -55,6 +56,7 @@
     "eslint-config-react-app": "5.2.1",
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-prettier": "3.1.3",
+    "patch-package": "6.2.2",
     "prettier": "1.19.1",
     "react-scripts": "3.4.1",
     "shx": "0.3.2",
