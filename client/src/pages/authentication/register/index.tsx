@@ -2,7 +2,7 @@ import { useSnackbar } from 'notistack';
 import React, { useCallback } from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { PageLoader } from 'components/page-loader';
-import { RegisterForm } from 'modules';
+import { RegisterForm } from 'modules/user';
 import { useCurrentUserQuery } from 'operations';
 import { useStyles } from './styles';
 

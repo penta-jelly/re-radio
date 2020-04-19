@@ -1,7 +1,9 @@
-import { CircularProgress, Typography } from '@material-ui/core';
+import { CircularProgress, Typography, IconButton } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { MdVolumeOff, MdVolumeUp } from 'react-icons/md';
 import { useStationQuery } from 'operations';
+import { useStationContextState } from '../context';
 import { useStyles } from './styles';
 import { OnlineUser } from './online-user';
 import { UserInvitation } from './user-invitation';
@@ -32,14 +34,21 @@ export const Header: React.FC = props => {
     [],
   );
 
+  const { muted, setMuted } = useStationContextState();
+
   const content = React.useMemo<React.ReactNode>(() => {
     if (data) {
       return (
         <>
-          <div>
+          <div className={classes.content}>
             <Typography variant="subtitle1">{data.station.name}</Typography>
           </div>
-          <div className={classes.users}>
+          <div className={`${classes.content} ${classes.buttonGroup}`}>
+            <IconButton color="inherit" size="medium" className={classes.iconButton} onClick={() => setMuted(!muted)}>
+              {muted ? <MdVolumeOff /> : <MdVolumeUp />}
+            </IconButton>
+          </div>
+          <div className={`${classes.content} ${classes.rightContent}`}>
             {data.station.onlineUserIds.slice(0, 5).map(id => (
               <OnlineUser key={id} userId={id} />
             ))}
@@ -51,7 +60,7 @@ export const Header: React.FC = props => {
       return error.message;
     }
     return <CircularProgress color="inherit" />;
-  }, [classes.users, data, error]);
+  }, [classes, data, error, muted, setMuted]);
 
   return <div className={classes.container}>{content}</div>;
 };

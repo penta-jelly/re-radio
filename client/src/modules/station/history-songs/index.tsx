@@ -18,7 +18,7 @@ export const HistorySongs: React.FC = () => {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
 
-  const baseIncrement = 15;
+  const baseIncrement = 25;
   const [take, setTake] = React.useState(baseIncrement);
 
   const { loading, error, data } = useHistorySongsQuery({

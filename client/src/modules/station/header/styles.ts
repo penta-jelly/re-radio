@@ -5,15 +5,24 @@ export const useStyles = makeStyles(({ palette, spacing }) => ({
     width: '100%',
     height: '100%',
     display: 'flex',
-    justifyContent: 'space-between',
+    // justifyContent: 'center',
     alignItems: 'center',
     padding: spacing(1, 2),
   },
   onlineButton: {
     color: '#74ca98',
   },
-  users: {
+  content: {
     display: 'flex',
+  },
+  rightContent: {
+    marginLeft: 'auto',
+  },
+  buttonGroup: {
+    marginLeft: spacing(2),
+  },
+  iconButton: {
+    fontSize: 24,
   },
   userAvatar: {
     marginLeft: spacing(0.5),

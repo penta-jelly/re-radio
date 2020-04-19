@@ -1,4 +1,7 @@
 {
   "createStation": "Create Station",
-  "discoverStations": "Discover Stations"
+  "discoverStations": "Discover Stations",
+  "playlist": "Playlist",
+  "history": "History",
+  "favorite": "Favorite"
 }

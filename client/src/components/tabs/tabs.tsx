@@ -10,7 +10,6 @@ export const RadioTab = withStyles(theme => ({
     textTransform: 'none',
     minWidth: 64,
     fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(4),
   },
   selected: {},
 }))(Tab);
