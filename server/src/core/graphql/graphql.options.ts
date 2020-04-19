@@ -52,13 +52,12 @@ export class GraphqlOptions implements GqlOptionsFactory {
   }
 
   private formatValidationError(errors: ValidationError[]): string {
-    let message = 'Unknown validation message';
     let children = errors;
     while (children[0].children.length > 0) {
       children = children[0].children;
     }
-    message = children[0].constraints[Object.keys(children[0].constraints)[0]];
-    return message;
+    const message = children[0].constraints?.[Object.keys(children[0].constraints)[0]];
+    return message || 'Unknown validation message';
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
