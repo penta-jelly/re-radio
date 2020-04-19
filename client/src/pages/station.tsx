@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { Layout } from 'containers/layout';
-import { StationContext, StationLayout, useStationContextState } from 'modules';
+import { StationContext, StationLayout, useStationContextStateProvider } from 'modules/station';
 import {
   useCurrentUserQuery,
   useJoinStationMutation,
@@ -15,7 +15,7 @@ interface RouteParams {
 }
 
 const Station: React.FC = () => {
-  const contextState = useStationContextState();
+  const contextState = useStationContextStateProvider();
 
   const params = useParams<RouteParams>();
   const currentUserQuery = useCurrentUserQuery();

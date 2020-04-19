@@ -9,6 +9,7 @@ import {
   useStationPlayerQuery,
   StationPlayerQuery,
 } from 'operations';
+import { useStationContextState } from '../context';
 import { useStyles } from './styles';
 
 interface RouteParams {
@@ -22,6 +23,8 @@ export const Player: React.FC = () => {
   if (!match) {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
+
+  const { muted } = useStationContextState();
 
   const { loading, data, updateQuery } = useStationPlayerQuery({
     variables: { stationSlug: match.params.slug },
@@ -89,13 +92,14 @@ export const Player: React.FC = () => {
         config={playerConfig}
         width="100%"
         height="100%"
+        muted={muted}
         playing
       />
     );
   } else if (loading) {
     content = <CircularProgress />;
   } else if (!playingSong) {
-    content = <Typography variant="subtitle1">TODO: Render something cool!</Typography>;
+    content = null;
   } else {
     content = (
       <Typography variant="subtitle1" color="error">

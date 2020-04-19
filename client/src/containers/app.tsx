@@ -8,6 +8,7 @@ import { AppClient, initClient } from 'lib/apollo/init';
 import { initI18n } from 'lib/react-i18next';
 import { ServiceWorkerContext } from '..';
 import { AppRouter } from './router';
+import { useStyles } from './styles';
 
 initI18n();
 const initialClient = initClient();
@@ -31,6 +32,7 @@ export const AppContext = React.createContext<IAppContext>({
 });
 
 export const App: React.FC<Props> = ({ serviceWorker }) => {
+  const classes = useStyles();
   const [client, setClient] = React.useState(initialClient);
   const [disconnected, setDisconnected] = React.useState(false);
 
@@ -100,7 +102,10 @@ export const App: React.FC<Props> = ({ serviceWorker }) => {
     <AppContext.Provider value={{ client, resetClient, disconnected, serviceWorker }}>
       <ThemeProvider theme={theme}>
         <ApolloProvider client={client.apollo}>
-          <SnackbarProvider anchorOrigin={{ horizontal: 'right', vertical: 'top' }}>
+          <SnackbarProvider
+            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+            classes={{ containerAnchorOriginTopRight: classes.snackBarTopRightContainer }}
+          >
             <AppRouter />
           </SnackbarProvider>
         </ApolloProvider>

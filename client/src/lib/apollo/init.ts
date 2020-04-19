@@ -1,7 +1,6 @@
-import { ApolloClient, ApolloLink, InMemoryCache } from 'apollo-boost';
+import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from 'apollo-boost';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
-import { BatchHttpLink } from 'apollo-link-batch-http';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export interface AppClient {
@@ -17,9 +16,9 @@ export function initClient(): AppClient {
     host = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
   }
 
-  const healthEndpoint = `${isSecureProtocol() ? 'https' : 'http'}://${host}/status`;
+  const healthEndpoint = `${isSecured() ? 'https' : 'http'}://${host}/status`;
 
-  const batchLink = new BatchHttpLink({ uri: `${isSecureProtocol() ? 'https' : 'http'}://${host}/graphql` });
+  const batchLink = new HttpLink({ uri: `${isSecured() ? 'https' : 'http'}://${host}/graphql` });
   const authLink = new ApolloLink((operation, next) => {
     const token = localStorage.getItem('token');
 
@@ -35,7 +34,7 @@ export function initClient(): AppClient {
   });
   const httpLink = ApolloLink.from([authLink, batchLink]);
 
-  const subscriptionClient = new SubscriptionClient(`${isSecureProtocol() ? 'wss' : 'ws'}://${host}/graphql`, {
+  const subscriptionClient = new SubscriptionClient(`${isSecured() ? 'wss' : 'ws'}://${host}/graphql`, {
     reconnect: true,
     connectionParams: () => {
       const token = localStorage.getItem('token');
@@ -53,7 +52,6 @@ export function initClient(): AppClient {
     httpLink,
   );
 
-  (window as any).subscription = subscriptionClient;
   return {
     healthEndpoint,
     apollo: new ApolloClient({ link, cache: new InMemoryCache() }),
@@ -67,6 +65,6 @@ interface Context {
   };
 }
 
-function isSecureProtocol() {
+function isSecured() {
   return window.location.protocol === 'https:';
 }

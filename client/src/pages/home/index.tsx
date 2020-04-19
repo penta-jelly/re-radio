@@ -8,7 +8,7 @@ import { PrimaryButton } from 'components/button/primary-button';
 import { ReSearch } from 'components/input/re-search';
 import { PageLoader } from 'components/page-loader';
 import { Layout } from 'containers/layout';
-import { CreateStationForm, StationsList } from 'modules';
+import { CreateStationForm, StationsList } from 'modules/station';
 import {
   MutationEnum,
   OrderEnum,

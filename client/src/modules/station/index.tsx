@@ -1,47 +1,42 @@
-import { Grid, Hidden, Portal, Slide, Tab, Tabs } from '@material-ui/core';
-import { TabProps } from '@material-ui/core/Tab';
+import { Grid, Hidden, Portal, Slide } from '@material-ui/core';
 import React from 'react';
 import { MdClose, MdPlaylistAdd } from 'react-icons/md';
-import { useToggle } from 'hooks/use-toggle';
+import { useTranslation } from 'react-i18next';
 import { Fab } from 'components/button/fab';
+import { RadioTab, RadioTabs } from 'components/tabs/tabs';
 import { AddSong } from './add-song';
 import { Header } from './header';
+import { HistorySongs } from './history-songs';
 import { Player } from './player';
 import { Playlist } from './playlist';
 import { useStyles } from './styles';
-import { HistorySongs } from './history-songs';
+import { useStationContextState } from './context';
 
 export * from './context';
-export * from './list';
 export * from './create';
+export * from './list';
 
 export const StationLayout: React.FC = () => {
   const classes = useStyles();
 
-  const [showAddSong, toggleShowAddSong] = useToggle(false);
-
-  const tabs = React.useMemo<TabProps[]>(
-    () => [{ value: 'Playlist' }, { value: 'History' }, { value: 'Favorite' }],
-    [],
-  );
-
-  const [selectedTab, setSelectedTab] = React.useState<string>(tabs[0].value);
+  const { t } = useTranslation('stations');
+  const { tabs, selectedTab, setSelectedTab, addSongDialog, setAddSongDialogState } = useStationContextState();
 
   return (
     <Grid container className={classes.container}>
       <Grid item xs={12} md={4} lg={3}>
         <Grid container className={classes.container}>
           <Grid item xs={12} className={classes.header}>
-            <Tabs value={selectedTab} onChange={(_, tab) => setSelectedTab(tab)}>
-              {tabs.map(({ value, ...tabProps }) => (
-                <Tab {...tabProps} key={value} value={value} label={value} selected={selectedTab === value} />
+            <RadioTabs value={selectedTab} onChange={(_, tab) => setSelectedTab(tab)}>
+              {tabs.map(tab => (
+                <RadioTab key={tab} value={tab} label={t(tab)} selected={selectedTab === tab} />
               ))}
-            </Tabs>
+            </RadioTabs>
           </Grid>
           <Grid item xs={12} className={[classes.content, classes.songsList].join(' ')}>
             {(() => {
               switch (selectedTab) {
-                case 'History':
+                case 'history':
                   return <HistorySongs />;
                 default:
                   return <Playlist />;
@@ -64,17 +59,17 @@ export const StationLayout: React.FC = () => {
       </Grid>
       <Fab
         muiProps={{
-          color: showAddSong ? 'secondary' : 'primary',
+          color: addSongDialog.hidden ? 'primary' : 'secondary',
           className: classes.fabIcon,
-          onClick: toggleShowAddSong,
+          onClick: () => setAddSongDialogState({ hidden: !addSongDialog.hidden }),
           id: 'add-song-fab',
           title: 'Add a song',
         }}
       >
-        {showAddSong ? <MdClose /> : <MdPlaylistAdd />}
+        {addSongDialog.hidden ? <MdPlaylistAdd /> : <MdClose />}
       </Fab>
       <Portal>
-        <Slide in={showAddSong} direction="left">
+        <Slide in={!addSongDialog.hidden} direction="left">
           <div className={classes.addSongContainer}>
             <AddSong />
           </div>
