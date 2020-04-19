@@ -1,5 +1,6 @@
 import React from 'react';
 import * as StationLayout from 'containers/layout';
+import { useLocalStorage } from 'hooks/use-local-storage';
 
 export interface StationContext {
   // Mute
@@ -59,7 +60,7 @@ const defaultState: StationContext = {
 export const StationContext = React.createContext<StationContext>(defaultState);
 
 export function useStationContextStateProvider(): StationContext {
-  const [muted, setMuted] = React.useState<StationContext['muted']>(defaultState.muted);
+  const [muted, setMuted] = useLocalStorage<StationContext['muted']>('muted', defaultState.muted);
 
   const [chatBox, setChatBoxState] = React.useState<StationContext['chatBox']>(defaultState.chatBox);
 
@@ -69,7 +70,10 @@ export function useStationContextStateProvider(): StationContext {
     defaultState.addSongDialog,
   );
 
-  const [selectedTab, setSelectedTab] = React.useState<StationContext['selectedTab']>(defaultState.selectedTab);
+  const [selectedTab, setSelectedTab] = useLocalStorage<StationContext['selectedTab']>(
+    'selectedStationTab',
+    defaultState.selectedTab,
+  );
 
   return {
     muted,

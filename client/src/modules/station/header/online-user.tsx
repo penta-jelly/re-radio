@@ -32,6 +32,7 @@ export const OnlineUser: React.FC<Props> = props => {
       classes={{ dot: classes.onlineIndicator }}
     >
       <Image
+        data-role="online-user-avatar"
         alt={data.user.username}
         title={data.user.username}
         src={data.user.avatarUrl || '/asset/avatar/female.png'}
