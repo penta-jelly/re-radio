@@ -74,7 +74,7 @@
     "pkg": "4.4.7",
     "prettier": "1.19.1",
     "shx": "0.3.2",
-    "source-map-support": "0.5.16",
+    "source-map-support": "0.5.17",
     "typescript": "3.8.3",
     "wait-on": "4.0.2"    
   },
