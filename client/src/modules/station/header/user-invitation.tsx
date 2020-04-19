@@ -9,11 +9,7 @@ export const UserInvitation: React.FC<Props> = props => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const onClick = React.useCallback(() => {
-    enqueueSnackbar('This feature is not ready yet!', {
-      variant: 'warning',
-      key: 'UserInvitationWarning',
-      persist: true,
-    });
+    enqueueSnackbar('This feature is not ready yet!', { variant: 'warning', key: 'UserInvitationWarning' });
   }, [enqueueSnackbar]);
   return (
     <Avatar className={classes.userAvatar} title="Invite your friend." onClick={onClick}>

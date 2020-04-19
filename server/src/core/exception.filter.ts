@@ -22,8 +22,12 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
 
   catch(exception: CatchableException, host: ArgumentsHost) {
     const ctx = GqlArgumentsHost.create(host);
-    const info = ctx.getInfo<GraphQLResolveInfo>();
-    const rawArgs = Util.inspect(ctx.getArgs(), { depth: 5, breakLength: 120 });
+    const info = ctx.getInfo<GraphQLResolveInfo | undefined>();
+    const args = ctx.getArgs<object | undefined>();
+    if (!info || !args) {
+      throw exception;
+    }
+    const rawArgs = Util.inspect(args, { depth: 5, breakLength: 120 });
     this.log(exception, info, rawArgs);
     return this.transformException(exception);
   }

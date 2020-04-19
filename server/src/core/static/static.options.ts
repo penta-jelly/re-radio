@@ -9,7 +9,9 @@ export class StaticOptions implements ServeStaticModuleOptionsFactory {
     const fallbackPath = Path.join(process.cwd(), '..', 'client', 'build');
     if (Fs.existsSync(buildPath)) {
       return [{ ...baseOption, rootPath: buildPath }];
+    } else if (Fs.existsSync(fallbackPath)) {
+      return [{ ...baseOption, rootPath: fallbackPath }];
     }
-    return [{ ...baseOption, rootPath: fallbackPath }];
+    return [];
   }
 }
