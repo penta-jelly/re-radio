@@ -19,11 +19,11 @@ const isLocalhost = Boolean(
 );
 
 interface Config {
-  onSuccess?: (registration: ServiceWorkerRegistration) => void;
-  onUpdate?: (registration: ServiceWorkerRegistration) => void;
+  onSuccess?: () => void;
+  onUpdate?: () => void;
 }
 
-export function register(config?: Config) {
+function register(config?: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL((process as { env: { [key: string]: string } }).env.PUBLIC_URL, window.location.href);
@@ -79,9 +79,7 @@ function registerValidSW(swUrl: string, config?: Config) {
               );
 
               // Execute callback
-              if (config?.onUpdate) {
-                config.onUpdate(registration);
-              }
+              config?.onUpdate?.();
             } else {
               // At this point, everything has been precached.
               // It's the perfect time to display a
@@ -90,9 +88,7 @@ function registerValidSW(swUrl: string, config?: Config) {
               console.log('Content is cached for offline use.');
 
               // Execute callback
-              if (config?.onSuccess) {
-                config.onSuccess(registration);
-              }
+              config?.onSuccess?.();
             }
           }
         };
@@ -126,10 +122,74 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
     });
 }
 
-export function unregister() {
+function unregister() {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.ready.then((registration) => {
       registration.unregister();
     });
   }
 }
+
+/**
+ *
+ */
+const eventRegistry: { onSuccess: { [id: number]: Function }; onUpdate: { [id: number]: Function } } = {
+  onSuccess: {},
+  onUpdate: {},
+};
+
+export interface ServiceWorkerContext {
+  onSuccess(callback: Function): number;
+  offSuccess(id: number): void;
+  onUpdate(callback: Function): number;
+  offUpdate(id: number): void;
+  unregister(): void;
+}
+
+export function getServiceWorkerContextInstance() {
+  return serviceWorker;
+}
+
+let id = 0;
+const serviceWorker: ServiceWorkerContext = {
+  onSuccess(callback) {
+    const usedId = id;
+    eventRegistry['onSuccess'][usedId] = callback;
+    id++;
+    return usedId;
+  },
+  offSuccess(id) {
+    delete eventRegistry['onSuccess'][id];
+  },
+  onUpdate(callback) {
+    const usedId = id;
+    eventRegistry['onUpdate'][usedId] = callback;
+    id++;
+    return usedId;
+  },
+  offUpdate(id) {
+    delete eventRegistry['onUpdate'][id];
+  },
+  unregister,
+};
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: http://bit.ly/CRA-PWA
+register({
+  onSuccess() {
+    Object.keys(eventRegistry.onSuccess).forEach((key: string) => {
+      eventRegistry.onSuccess[parseInt(key)]();
+    });
+  },
+  onUpdate() {
+    Object.keys(eventRegistry.onUpdate).forEach((key: string) => {
+      eventRegistry.onUpdate[parseInt(key)]();
+    });
+    // Force reload if there is no listener.
+    // Usually this only happens when your UI is not fully loaded yet.
+    if (Object.keys(eventRegistry.onUpdate).length === 0) {
+      window.location.reload(true);
+    }
+  },
+});

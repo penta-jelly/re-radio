@@ -1,21 +1,20 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/styles';
-import { SnackbarProvider } from 'notistack';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
+import { Button, CircularProgress } from '@material-ui/core';
 import { theme } from 'lib/@material-ui/theme';
 import { AppClient, initClient } from 'lib/apollo/init';
 import { initI18n } from 'lib/react-i18next';
-import { ServiceWorkerContext } from '..';
+import { ServiceWorkerContext, getServiceWorkerContextInstance } from 'service-worker';
 import { AppRouter } from './router';
 import { useStyles } from './styles';
 
 initI18n();
 const initialClient = initClient();
 
-interface Props {
-  serviceWorker: ServiceWorkerContext;
-}
+interface Props {}
 
 interface IAppContext {
   disconnected: boolean;
@@ -28,13 +27,21 @@ export const AppContext = React.createContext<IAppContext>({
   client: initialClient,
   disconnected: false,
   resetClient() {},
-  serviceWorker: { onSuccess: () => 0, onUpdate: () => 0, offSuccess: () => {}, offUpdate: () => {} },
+  serviceWorker: {
+    onSuccess: () => -1,
+    onUpdate: () => -1,
+    offSuccess: () => {},
+    offUpdate: () => {},
+    unregister: () => {},
+  },
 });
 
-export const App: React.FC<Props> = ({ serviceWorker }) => {
+export const App: React.FC<Props> = () => {
   const classes = useStyles();
   const [client, setClient] = React.useState(initialClient);
   const [disconnected, setDisconnected] = React.useState(false);
+
+  const serviceWorker = React.useMemo(getServiceWorkerContextInstance, []);
 
   const resetClient = React.useCallback(() => {
     setClient((client) => {
@@ -106,11 +113,58 @@ export const App: React.FC<Props> = ({ serviceWorker }) => {
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             classes={{ containerAnchorOriginTopRight: classes.snackBarTopRightContainer }}
           >
-            <AppRouter />
+            <Main />
           </SnackbarProvider>
         </ApolloProvider>
         <CssBaseline />
       </ThemeProvider>
     </AppContext.Provider>
   );
+};
+
+const Main = () => {
+  const appContext = React.useContext(AppContext);
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const suspendedSnackbarId = 'SuspendedSnackbar';
+  React.useEffect(() => {
+    if (appContext.disconnected === true) {
+      enqueueSnackbar(
+        <>
+          <CircularProgress size={16} color="inherit" style={{ marginRight: 8 }} /> Cannot connect to the server.
+          Reconnecting...
+        </>,
+        { key: suspendedSnackbarId, persist: true, anchorOrigin: { vertical: 'bottom', horizontal: 'left' } },
+      );
+      return () => {
+        closeSnackbar(suspendedSnackbarId);
+      };
+    } else {
+      closeSnackbar(suspendedSnackbarId);
+    }
+  }, [appContext.disconnected, closeSnackbar, enqueueSnackbar]);
+
+  React.useEffect(() => {
+    const id = appContext.serviceWorker.onUpdate(() => {
+      enqueueSnackbar(
+        <>
+          A new version of your app is ready and will be used on your next browser's reloading.
+          <Button
+            // variant="outlined"
+            color="inherit"
+            size="small"
+            style={{ marginLeft: 8 }}
+            onClick={() => window.location.reload(true)}
+          >
+            Reload now
+          </Button>
+        </>,
+        { persist: true, anchorOrigin: { vertical: 'bottom', horizontal: 'left' } },
+      );
+    });
+    return () => {
+      appContext.serviceWorker.offUpdate(id);
+    };
+  }, [appContext.serviceWorker, enqueueSnackbar]);
+
+  return <AppRouter />;
 };
