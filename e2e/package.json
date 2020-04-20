@@ -25,6 +25,5 @@
     "prettier": "1.19.1",
     "tsify": "4.0.1",
     "typescript": "3.8.3"
-  },
-  "license": "MIT"
+  }
 }

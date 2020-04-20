@@ -22,7 +22,3 @@ Client project for re-radio
 ## Recommended Extensions
 
 - [Apollo GraphQL](https://marketplace.visualstudio.com/items?itemName=apollographql.vscode-apollo): This provides auto complete for `.graphql` files, see `apollo.config.js` for more detail.
-
-## License
-
-MIT
