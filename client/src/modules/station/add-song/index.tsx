@@ -20,7 +20,7 @@ export const AddSong: React.FC<{}> = () => {
     }
   }, [debounceQuery, fetch]);
 
-  const onChangeInputValue = useCallback<React.ChangeEventHandler<HTMLInputElement>>(event => {
+  const onChangeInputValue = useCallback<React.ChangeEventHandler<HTMLInputElement>>((event) => {
     if (event?.target) {
       setQuery(event.target.value);
     }

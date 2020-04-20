@@ -5,15 +5,15 @@ import { UserDTO } from './user.dto';
 
 @ObjectType('UserRole')
 export class UserRoleDTO {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
-  @Field(type => UserRoleEnum)
+  @Field((type) => UserRoleEnum)
   role: UserRoleEnum;
 
-  @Field(type => UserDTO)
+  @Field((type) => UserDTO)
   user: UserDTO;
 
-  @Field(type => StationDTO, { nullable: true })
+  @Field((type) => StationDTO, { nullable: true })
   station?: StationDTO;
 }

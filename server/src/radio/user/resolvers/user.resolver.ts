@@ -18,7 +18,7 @@ import {
   UserUpdateInput,
 } from '../user.input';
 
-@Resolver(of => UserDTO)
+@Resolver((of) => UserDTO)
 export class UserResolver {
   constructor(
     private readonly userService: UserService,
@@ -26,12 +26,12 @@ export class UserResolver {
     private readonly pubSub: PubSub,
   ) {}
 
-  @ResolveField(returns => [UserRoleDTO])
+  @ResolveField((returns) => [UserRoleDTO])
   async roles(@Root() user: UserDTO) {
     return this.userRoleService.find({ where: { user: { id: user.id } } });
   }
 
-  @Query(returns => [UserDTO])
+  @Query((returns) => [UserDTO])
   async users(
     @Args({ name: 'pagination', nullable: true, type: () => PaginationInput }) pagination: PaginationInput,
     @Args({ name: 'where', nullable: true, type: () => UserFindAllWhereInput }) where: UserFindAllWhereInput,
@@ -40,19 +40,19 @@ export class UserResolver {
     return this.userService.find({ ...pagination, where, order });
   }
 
-  @Query(returns => UserDTO)
+  @Query((returns) => UserDTO)
   async user(@Args({ name: 'where', type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput) {
     return this.userService.findOneOrFail({ where });
   }
 
-  @Mutation(returns => UserDTO)
+  @Mutation((returns) => UserDTO)
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
   async createUser(@Args({ name: 'data', type: () => UserCreateInput }) data: UserCreateInput) {
     return this.userService.create(data);
   }
 
-  @Mutation(returns => Boolean)
+  @Mutation((returns) => Boolean)
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
   async updateUser(
@@ -63,7 +63,7 @@ export class UserResolver {
     return true;
   }
 
-  @Mutation(returns => Boolean)
+  @Mutation((returns) => Boolean)
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
   async deleteUser(@Args({ name: 'where', type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput) {

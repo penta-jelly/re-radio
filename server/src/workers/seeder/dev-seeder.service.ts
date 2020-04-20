@@ -49,7 +49,7 @@ export class DevSeederService {
     const existedUser = await Promise.all(
       rawUsers.map(({ username, email }) => this.userRepository.findOne({ where: { username, email } })),
     );
-    const result = existedUser.every(user => !user);
+    const result = existedUser.every((user) => !user);
     if (result) {
       this.logger.log('The database is empty, ready to seed.');
     } else {
@@ -60,13 +60,13 @@ export class DevSeederService {
 
   private async seedUsers() {
     this.logger.log('Seeding users');
-    await Promise.all(this.getUserFixtures().map(user => this.userRepository.save(user)));
+    await Promise.all(this.getUserFixtures().map((user) => this.userRepository.save(user)));
   }
 
   private async resetUsers() {
     this.logger.log('Resetting users');
     await Promise.all(
-      this.getUserFixtures().map(async data => {
+      this.getUserFixtures().map(async (data) => {
         const user = await this.userRepository.findOne({ where: { email: data.email } });
         return user && (await this.userRepository.remove(user));
       }),
@@ -88,14 +88,14 @@ export class DevSeederService {
 
   private async seedUserRoles() {
     this.logger.log('Seeding user roles');
-    await Promise.all((await this.getUserRoleFixtures()).map(role => this.userRoleRepository.save(role)));
+    await Promise.all((await this.getUserRoleFixtures()).map((role) => this.userRoleRepository.save(role)));
   }
 
   private async resetUserRoles() {
     this.logger.log('Resetting user roles');
     const toBeRemovedTags: string[] = [];
     await Promise.all(
-      (await this.getUserRoleFixtures()).map(async data => {
+      (await this.getUserRoleFixtures()).map(async (data) => {
         const userRole = await this.userRoleRepository.findOne({
           where: { user: { id: data.user.id }, role: data.role },
         });
@@ -113,7 +113,7 @@ export class DevSeederService {
             where: { id: station.id },
             relations: ['tags'],
           });
-          toBeRemovedTags.push(...tags.map(tag => tag.name));
+          toBeRemovedTags.push(...tags.map((tag) => tag.name));
         }
         await this.userRoleRepository.remove(ownerRoles);
         await this.stationRepository.remove(ownedStations);
@@ -122,7 +122,7 @@ export class DevSeederService {
     await Promise.all(
       toBeRemovedTags
         .filter((tagName, index) => toBeRemovedTags.indexOf(tagName) === index)
-        .map(tagName => this.stationTagRepository.delete({ name: tagName })),
+        .map((tagName) => this.stationTagRepository.delete({ name: tagName })),
     );
   }
 
@@ -130,7 +130,7 @@ export class DevSeederService {
     const result: UserRole[] = [];
     const adminUsers = ['pvtri96', 'admin', 'dungle1811', 'lednhatkhanh', 'lybaokhanh', 'thanhvinhlu'];
     await Promise.all(
-      adminUsers.map(async username => {
+      adminUsers.map(async (username) => {
         const user = await this.userRepository.findOne({ where: { username } });
         if (user) {
           result.push(
@@ -152,7 +152,7 @@ export class DevSeederService {
       this.stationTagRepository.create({ name: 'QA' }),
     ]);
     await Promise.all(
-      this.getStationFixtures().map(async data => {
+      this.getStationFixtures().map(async (data) => {
         const { name, slug } = data;
         let station = this.stationRepository.create({ name, slug, tags: defaultTags });
         station = await this.stationRepository.save(station);
@@ -171,12 +171,12 @@ export class DevSeederService {
   private async resetStations() {
     this.logger.log('Resetting stations');
     await Promise.all(
-      this.getStationFixtures().map(async data => {
+      this.getStationFixtures().map(async (data) => {
         const { name, slug } = data;
         const station = await this.stationRepository.findOne({ where: { name, slug }, relations: ['songs'] });
         if (!station) return;
 
-        await Promise.all(station.songs.map(song => this.songRepository.remove(song)));
+        await Promise.all(station.songs.map((song) => this.songRepository.remove(song)));
 
         if (!data.owner) {
           data.owner = { username: 'admin' };
@@ -213,7 +213,7 @@ export class DevSeederService {
   public async seedSongs() {
     this.logger.log('Seeding songs');
     await Promise.all(
-      this.getSongFixtures().map(async data => {
+      this.getSongFixtures().map(async (data) => {
         if (!data.creator) data.creator = { username: 'admin' };
         if (!data.station) data.station = { slug: 'station-a' };
         if (!data.status) data.status = SongStatusEnum.PENDING;
@@ -234,7 +234,7 @@ export class DevSeederService {
   private async resetSongs() {
     this.logger.log('Resetting songs');
     await Promise.all(
-      this.getSongFixtures().map(async data => {
+      this.getSongFixtures().map(async (data) => {
         if (!data.creator) data.creator = { username: 'admin' };
         if (!data.station) data.station = { slug: 'station-a' };
         const creator = await this.userRepository.findOne({ where: { username: data.creator.username } });

@@ -31,8 +31,8 @@ export const Playlist: React.FC = () => {
       const { onPlaylistSongChanged } = data;
       if (!onPlaylistSongChanged) return;
       const { entity } = onPlaylistSongChanged;
-      updateQuery(prev => {
-        let playlist = prev.playlist.filter(song => song && song.id !== entity.id);
+      updateQuery((prev) => {
+        let playlist = prev.playlist.filter((song) => song && song.id !== entity.id);
         if (entity.status === SongStatusEnum.Playing || entity.status === SongStatusEnum.Pending) {
           playlist = [...playlist, { ...entity, __typename: 'Song' }];
         }
@@ -54,10 +54,10 @@ export const Playlist: React.FC = () => {
         </Typography>
       );
     } else {
-      const songs = sortSongs(data.playlist.map(song => ({ ...song, createdAt: new Date(song.createdAt) })));
+      const songs = sortSongs(data.playlist.map((song) => ({ ...song, createdAt: new Date(song.createdAt) })));
       content = (
         <List className={classes.list} disablePadding dense>
-          {songs.map(song => (
+          {songs.map((song) => (
             <PlaylistItem data={song} key={song.id} />
           ))}
         </List>

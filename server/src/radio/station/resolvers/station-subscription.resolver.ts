@@ -7,16 +7,16 @@ import { StationService } from '../services/station.service';
 import { StationFindOneWhereInput } from '../station.input';
 import { STATION_SUBSCRIPTION } from '../station.subscriber';
 
-@Resolver(of => StationSubscriptionDTO)
+@Resolver((of) => StationSubscriptionDTO)
 export class StationSubscriptionResolver {
   constructor(private readonly pubSub: PubSub, private readonly stationService: StationService) {}
 
-  @Subscription(returns => StationSubscriptionDTO, { name: 'station' })
+  @Subscription((returns) => StationSubscriptionDTO, { name: 'station' })
   async *stationSubscription(
     @Args({ name: 'where', nullable: true, type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput,
   ) {
     for await (const payload of this.pubSub.asyncIterable<EntitySubscription<Station>>(STATION_SUBSCRIPTION)) {
-      if (!Object.keys(where).every(key => where[key] === payload.entity[key])) {
+      if (!Object.keys(where).every((key) => where[key] === payload.entity[key])) {
         continue;
       }
       if (payload.mutation !== MutationEnum.DELETED) {

@@ -25,7 +25,7 @@ interface Data {
   tags?: string;
 }
 
-export const CreateStationForm: React.FC<Props> = props => {
+export const CreateStationForm: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const history = useHistory();
@@ -46,7 +46,7 @@ export const CreateStationForm: React.FC<Props> = props => {
         const { name, slug, description } = values;
 
         const rawTags = values.tags ? values.tags.split(' ') : [];
-        const tags = rawTags.map(tag => tag.replace('#', '')).map(name => ({ name }));
+        const tags = rawTags.map((tag) => tag.replace('#', '')).map((name) => ({ name }));
 
         await createStationMutation({
           variables: { data: { name, slug, description, tags } },
@@ -70,10 +70,7 @@ export const CreateStationForm: React.FC<Props> = props => {
         <Formik<Data>
           initialValues={{ name: '', slug: '', description: '', tags: '' }}
           validationSchema={yup.object().shape({
-            name: yup
-              .string()
-              .required()
-              .max(64),
+            name: yup.string().required().max(64),
             slug: yup
               .string()
               .matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'Must be in slug format, e.g.: awesome-station')
@@ -84,7 +81,7 @@ export const CreateStationForm: React.FC<Props> = props => {
               .string()
               .test('is-tags-input', 'Must be a valid tags format, e.g.: #re-radio #radio', (value?: string) => {
                 const tags = value ? value.split(' ') : [];
-                return tags.every(tag => /\B(#[a-zA-Z0-9]+\b)(?!;)/.test(tag));
+                return tags.every((tag) => /\B(#[a-zA-Z0-9]+\b)(?!;)/.test(tag));
               }),
           })}
           onSubmit={onCreateStation}

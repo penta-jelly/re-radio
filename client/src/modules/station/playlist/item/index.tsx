@@ -10,7 +10,7 @@ interface Props {
   data: NonNullable<StationPlaylistQuery['playlist'][0]>;
 }
 
-export const PlaylistItem: React.FC<Props> = props => {
+export const PlaylistItem: React.FC<Props> = (props) => {
   const classes = useStyles();
   const { title, status, thumbnail, duration, creator } = props.data;
 

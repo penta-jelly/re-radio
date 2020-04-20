@@ -47,7 +47,7 @@ export class UserService {
   async delete(criteria: FindConditions<User>): Promise<void> {
     const user = await this.findOneOrFail({ where: criteria, relations: ['roles'] });
     await Promise.all(
-      user.roles.map(async role => {
+      user.roles.map(async (role) => {
         role = await this.userRoleRepository.findOneOrFail({ where: { id: role.id }, relations: ['station'] });
         if (role.station) {
           await this.stationService.delete({ id: role.station.id });

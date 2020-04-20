@@ -15,7 +15,7 @@ interface Props {
 export const StationItem: React.FC<Props> = ({ data, className, placeHolderThumbnail = placeHolderImage }) => {
   const content = React.useMemo<string | null>(() => {
     if (data.tags) {
-      return data.tags.map(tag => `#${tag.name}`).join(' ');
+      return data.tags.map((tag) => `#${tag.name}`).join(' ');
     }
     return null;
   }, [data]);

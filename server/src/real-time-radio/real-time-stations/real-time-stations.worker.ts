@@ -24,7 +24,7 @@ export class RealTimeStationsWorker {
   async scanAllStationsOnInitialization() {
     const stations = await this.realTimeStationService.findAllAvailableStations();
     await Promise.all(
-      stations.map(async station => {
+      stations.map(async (station) => {
         if (await this.realTimeStationService.isStationReadyToPlayNextSong(station.slug)) {
           const nextPlayingSong = await this.realTimeSongService.findNextPlayingSongInStation(station.slug);
           nextPlayingSong && (await this.realTimeSongService.updateSongStatusToPlaying(nextPlayingSong.id));
@@ -65,9 +65,9 @@ export class RealTimeStationsWorker {
     this.aliveUsersMap[this.createAliveUserKey(station, user)] = { timer, user };
 
     const stationsWithOnlineUser = await this.stationService.findStationsByOnlineUser(user);
-    const joinedStations = stationsWithOnlineUser.filter(joinedStation => joinedStation.id !== station.id);
+    const joinedStations = stationsWithOnlineUser.filter((joinedStation) => joinedStation.id !== station.id);
     await Promise.all(
-      joinedStations.map(async joinedStation => {
+      joinedStations.map(async (joinedStation) => {
         await this.stationService.removeOnlineUser(joinedStation, user);
         await this.pubSub.publish<RealTimeStationEvent.UserLeftPayload>(RealTimeStationEvent.USER_LEFT, {
           user,

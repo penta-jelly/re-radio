@@ -3,7 +3,7 @@ import { Field, InputType, Int } from '@nestjs/graphql';
 
 @InputType()
 export class PaginationInput {
-  @Field(type => Int, {
+  @Field((type) => Int, {
     nullable: true,
     description: 'Offset (paginated) where from entities should be taken. Default: 0',
   })
@@ -11,7 +11,7 @@ export class PaginationInput {
   @IsOptional()
   skip: number = 0;
 
-  @Field(type => Int, {
+  @Field((type) => Int, {
     nullable: true,
     description: 'Limit (paginated) - max number of entities should be taken. Default: 10',
   })

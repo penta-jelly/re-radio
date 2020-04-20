@@ -32,7 +32,7 @@ export class RealTimeSongsWorker {
    */
   async scanAllPlayingSongsOnInitialization() {
     const songs = await this.realTimeSongService.findAllPlayingSongs();
-    await Promise.all(songs.map(song => this.playSong(song)));
+    await Promise.all(songs.map((song) => this.playSong(song)));
   }
 
   protected async playSong(song: Song) {

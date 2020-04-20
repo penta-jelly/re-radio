@@ -5,25 +5,25 @@ import { SongStatusEnum } from './entities/song.entity';
 
 @InputType()
 export class SongFindAllOrderInput {
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   id?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   createdAt?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   updatedAt?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   title?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   url?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   thumbnail?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   duration?: OrderEnum;
 }
 
@@ -41,16 +41,16 @@ export class SongFindAllWhereInput {
   @Field({ nullable: true })
   thumbnail?: string;
 
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   duration?: number;
 
-  @Field(type => SongStatusEnum, { nullable: true })
+  @Field((type) => SongStatusEnum, { nullable: true })
   status?: SongStatusEnum;
 }
 
 @InputType()
 export class SongFindOneWhereInput {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 }
 
@@ -67,10 +67,10 @@ export class SongCreateInput {
   @IsUrl()
   thumbnail: string;
 
-  @Field(type => Int)
+  @Field((type) => Int)
   duration: number;
 
-  @Field(type => SongStatusEnum, { nullable: true })
+  @Field((type) => SongStatusEnum, { nullable: true })
   status?: SongStatusEnum;
 
   @Field({ nullable: true })
@@ -90,10 +90,10 @@ export class SongUpdateInput {
   @IsUrl()
   thumbnail?: string;
 
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   duration?: number;
 
-  @Field(type => SongStatusEnum, { nullable: true })
+  @Field((type) => SongStatusEnum, { nullable: true })
   status?: SongStatusEnum;
 }
 

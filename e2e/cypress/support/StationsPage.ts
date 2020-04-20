@@ -32,9 +32,7 @@ export default (url = '/') => ({
 
   checkStationCard(slug: string, name?: string, tags?: string[]) {
     cy.log(`Check station card for slug "${slug}"`);
-    cy.get(this.elements.stationCard(slug))
-      .scrollIntoView()
-      .should('be.visible');
+    cy.get(this.elements.stationCard(slug)).scrollIntoView().should('be.visible');
     cy.get(this.elements.stationCardTitle(slug)).should('be.visible');
     cy.get(this.elements.stationCardContent(slug)).should('exist');
     cy.get(this.elements.stationCardMedia(slug)).should('be.visible');
@@ -43,8 +41,8 @@ export default (url = '/') => ({
       cy.get(this.elements.stationCardTitle(slug)).should('contain', name);
     }
     if (tags) {
-      cy.get(this.elements.stationCardContent(slug)).should(element => {
-        tags.forEach(tag => {
+      cy.get(this.elements.stationCardContent(slug)).should((element) => {
+        tags.forEach((tag) => {
           expect(element).to.contain(tag);
         });
       });

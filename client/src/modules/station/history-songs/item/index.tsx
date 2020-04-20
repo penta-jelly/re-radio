@@ -14,7 +14,7 @@ interface RouteParams {
   slug: string;
 }
 
-export const HistorySongItem: React.FC<Props> = props => {
+export const HistorySongItem: React.FC<Props> = (props) => {
   const classes = useStyles();
   const match = useRouteMatch<RouteParams>();
   if (!match) {

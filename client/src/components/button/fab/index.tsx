@@ -7,7 +7,7 @@ interface FabProps {
   muiProps?: MuiFabProps;
 }
 
-export const Fab: React.FC<FabProps> = props => {
+export const Fab: React.FC<FabProps> = (props) => {
   const classes = useStyles();
 
   return (

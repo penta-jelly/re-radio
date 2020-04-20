@@ -34,7 +34,7 @@ const defaultProps = {
   drawer: { open: true, collapsed: false },
 };
 
-export const Layout: React.FC<Props> = props => {
+export const Layout: React.FC<Props> = (props) => {
   const classes = useStyles(props);
   const sidebar = React.useMemo<DrawerProps>(() => props.drawer || defaultProps.drawer, [props.drawer]);
   const currentUserQuery = useCurrentUserQuery();

@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "compile": "tsc",
-    "lint": "eslint --ext .ts src/ && prettier --check src/**/*.ts",
-    "format": "prettier --write \"src/**/*.ts\" && eslint --fix --ext .ts src/",
+    "lint": "eslint --ext .ts src/",
+    "format": "eslint --fix --ext .ts src/",
     "dev": "run-p dev:**",
     "dev:typescript": "tsc --watch --preserveWatchOutput"
   },

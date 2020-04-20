@@ -5,19 +5,19 @@ import { OrderEnum } from '../../core/graphql/input/order';
 
 @InputType()
 export class StationFindAllOrderInput {
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   id?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   name?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   slug?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   createdAt?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   updatedAt?: OrderEnum;
 }
 
@@ -32,7 +32,7 @@ export class StationFindAllWhereInput {
 
 @InputType()
 export class StationFindOneWhereInput {
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   id?: number;
 
   @Field({ nullable: true })
@@ -67,7 +67,7 @@ export class StationCreateInput {
   @IsOptional()
   description?: string;
 
-  @Field(type => [StationTagCreateInput], { nullable: true })
+  @Field((type) => [StationTagCreateInput], { nullable: true })
   @ValidateNested({ each: true })
   @Type(() => StationTagCreateInput)
   tags?: StationTagCreateInput[];

@@ -47,15 +47,15 @@ export class AuthorizationGuard implements CanActivate {
 
     if (user.roles) {
       const result = await Promise.all(
-        allowedRoles.map(role => {
+        allowedRoles.map((role) => {
           if (typeof role === 'function') {
             return role({ user, args, info });
           } else {
-            return user.roles.some(userRole => userRole.role === role);
+            return user.roles.some((userRole) => userRole.role === role);
           }
         }),
       );
-      const allowed = result.some(a => a === true);
+      const allowed = result.some((a) => a === true);
       if (!allowed) throw new UnauthorizedException();
     }
     return true;

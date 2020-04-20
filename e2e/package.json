@@ -7,7 +7,7 @@
     "cypress:open": "cypress open",
     "type-check": "tsc --noEmit",
     "lint": "eslint --ext .ts cypress",
-    "format": "prettier --write \"cypress/**/*.ts\" && eslint --fix --ext .ts cypress"
+    "format": "eslint --fix --ext .ts cypress"
   },
   "dependencies": {
     "cypress": "4.4.0"

@@ -4,8 +4,8 @@
   "scripts": {
     "initialize": "shx cp -n .env.example .env",
     "compile": "tsc",
-    "lint": "eslint --ext .ts src/ && prettier --check src/**/*.ts",
-    "format": "prettier --write \"src/**/*.ts\" && eslint --fix --ext .ts src/",
+    "lint": "eslint --ext .ts src/",
+    "format": "eslint --fix --ext .ts src/",
     "prestart": "rm -rf lib",
     "start": "run-p start:**",
     "start:typescript": "tsc --watch --preserveWatchOutput",

@@ -24,7 +24,7 @@ import {
   StationFindOneWhereInput,
 } from '../station.input';
 
-@Resolver(of => StationDTO)
+@Resolver((of) => StationDTO)
 export class StationResolver {
   constructor(
     private readonly stationService: StationService,
@@ -36,12 +36,12 @@ export class StationResolver {
     private readonly pubSub: PubSub,
   ) {}
 
-  @ResolveField(returns => [UserRoleDTO])
+  @ResolveField((returns) => [UserRoleDTO])
   async userRoles(@Root() station: StationDTO) {
     return this.userRoleService.find({ where: { station: { id: station.id } } });
   }
 
-  @ResolveField(returns => [SongDTO])
+  @ResolveField((returns) => [SongDTO])
   async playingSong(@Root() station: StationDTO) {
     const { playingSong } = await this.stationService.findOneOrFail({
       where: { id: station.id },
@@ -50,7 +50,7 @@ export class StationResolver {
     return playingSong;
   }
 
-  @ResolveField(returns => [StationTagDTO])
+  @ResolveField((returns) => [StationTagDTO])
   async tags(@Root() station: StationDTO) {
     const { tags } = await this.stationService.findOneOrFail({
       where: { id: station.id },
@@ -59,7 +59,7 @@ export class StationResolver {
     return tags;
   }
 
-  @Query(returns => [StationDTO])
+  @Query((returns) => [StationDTO])
   async stations(
     @Args({ name: 'pagination', nullable: true, type: () => PaginationInput }) pagination: PaginationInput,
     @Args({ name: 'where', nullable: 'itemsAndList', type: () => [StationFindAllWhereInput] })
@@ -69,12 +69,12 @@ export class StationResolver {
     return this.stationService.find({ ...pagination, where, order });
   }
 
-  @Query(returns => StationDTO)
+  @Query((returns) => StationDTO)
   async station(@Args({ name: 'where', type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput) {
     return this.stationService.findOneOrFail({ where });
   }
 
-  @Mutation(returns => StationDTO)
+  @Mutation((returns) => StationDTO)
   @UseGuards(AuthenticationGuard)
   async createStation(
     @Args({ name: 'data', type: () => StationCreateInput }) data: StationCreateInput,
@@ -83,7 +83,7 @@ export class StationResolver {
     return await this.stationService.create(data, user);
   }
 
-  @Mutation(returns => Boolean)
+  @Mutation((returns) => Boolean)
   @UseGuards(AuthenticationGuard, AuthorizationGuard)
   @Roles([UserRoleEnum.ADMIN])
   async deleteStation(@Args({ name: 'where', type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput) {
@@ -91,7 +91,7 @@ export class StationResolver {
     return true;
   }
 
-  @Mutation(returns => Boolean)
+  @Mutation((returns) => Boolean)
   @UseGuards(AuthenticationGuard)
   async joinStation(
     @Args({ name: 'where', type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput,
@@ -106,7 +106,7 @@ export class StationResolver {
     return success;
   }
 
-  @Mutation(returns => Boolean)
+  @Mutation((returns) => Boolean)
   @UseGuards(AuthenticationGuard)
   async leaveStation(
     @Args({ name: 'where', type: () => StationFindOneWhereInput }) where: StationFindOneWhereInput,

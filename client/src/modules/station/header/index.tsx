@@ -12,7 +12,7 @@ interface RouteParams {
   slug: string;
 }
 
-export const Header: React.FC = props => {
+export const Header: React.FC = (props) => {
   const classes = useStyles();
   const params = useParams<RouteParams>();
   const { data, error } = useStationQuery({ variables: { slug: params.slug } });
@@ -49,7 +49,7 @@ export const Header: React.FC = props => {
             </IconButton>
           </div>
           <div className={`${classes.content} ${classes.rightContent}`}>
-            {data.station.onlineUserIds.slice(0, 5).map(id => (
+            {data.station.onlineUserIds.slice(0, 5).map((id) => (
               <OnlineUser key={id} userId={id} />
             ))}
             <UserInvitation />

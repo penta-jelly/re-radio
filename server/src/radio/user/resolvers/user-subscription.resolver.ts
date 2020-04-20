@@ -7,14 +7,14 @@ import { User } from '../entities/user.entity';
 import { UserFindOneWhereInput } from '../user.input';
 import { USER_SUBSCRIPTION } from '../user.subscriber';
 
-@Resolver(of => StationSubscriptionDTO)
+@Resolver((of) => StationSubscriptionDTO)
 export class UserSubscriptionResolver {
   constructor(private readonly pubSub: PubSub) {}
 
-  @Subscription(returns => UserSubscriptionDTO, { name: 'user' })
+  @Subscription((returns) => UserSubscriptionDTO, { name: 'user' })
   async *userSubscription(@Args({ name: 'where', type: () => UserFindOneWhereInput }) where: UserFindOneWhereInput) {
     for await (const payload of this.pubSub.asyncIterable<EntitySubscription<User>>(USER_SUBSCRIPTION)) {
-      if (!Object.keys(where).every(key => where[key] === payload.entity[key])) {
+      if (!Object.keys(where).every((key) => where[key] === payload.entity[key])) {
         continue;
       }
       yield { user: payload };

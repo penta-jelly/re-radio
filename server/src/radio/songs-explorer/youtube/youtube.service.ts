@@ -23,7 +23,7 @@ export class YoutubeService {
     const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
     const part = 'id,snippet,contentDetails';
     const serviceUrl = `${apiUrl}/videos?id=${videoId}&key=${apiKey}&part=${part}`;
-    const data = await fetch(serviceUrl).then(res => res.json());
+    const data = await fetch(serviceUrl).then((res) => res.json());
     const video = data?.items?.[0];
     if (video) {
       video.contentDetails.duration = this.parseDuration(video.contentDetails.duration);
@@ -42,9 +42,9 @@ export class YoutubeService {
     const part = 'id,snippet';
     const type = 'video';
     const serviceUrl = `${apiUrl}/search?key=${apiKey}&type=${type}&part=${part}&q=${q}&maxResults=${maxResults}&order=${order}`;
-    const data = await fetch(serviceUrl).then(res => res.json());
+    const data = await fetch(serviceUrl).then((res) => res.json());
     if (data && Array.isArray(data.items)) {
-      return data.items.map(item => ({
+      return data.items.map((item) => ({
         ...item,
         id: item.id && item.id.videoId,
       }));

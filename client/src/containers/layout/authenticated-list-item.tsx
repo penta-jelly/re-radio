@@ -19,12 +19,12 @@ export const AuthenticatedListItem: React.FC<Props> = ({ user, drawer }) => {
 
   const appContext = React.useContext(AppContext);
 
-  const onContainerClicked = React.useCallback(event => {
+  const onContainerClicked = React.useCallback((event) => {
     setAnchorEl(event.currentTarget);
   }, []);
 
   const logout = React.useCallback(
-    event => {
+    (event) => {
       setAnchorEl(null);
       localStorage.removeItem('token');
       appContext.resetClient();

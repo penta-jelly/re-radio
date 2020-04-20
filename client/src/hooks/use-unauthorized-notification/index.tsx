@@ -15,7 +15,7 @@ export const useUnauthorizedNotification = (message: string = 'You need to login
       variant: 'warning',
       preventDuplicate: true,
       onClose: () => closeSnackbar(key),
-      action: key => (
+      action: (key) => (
         <IconButton
           className={classes.closeNotificationButton}
           size="small"

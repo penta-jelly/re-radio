@@ -9,6 +9,6 @@ export class StationTag {
   @Column({ unique: true })
   name: string;
 
-  @ManyToMany(type => Station)
+  @ManyToMany((type) => Station)
   stations: Station[];
 }

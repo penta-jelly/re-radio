@@ -33,6 +33,6 @@ export class YoutubeVideoFindAllInput {
   @IsOptional()
   maxResults?: number;
 
-  @Field(type => YoutubeVideoOrderEnum, { nullable: true })
+  @Field((type) => YoutubeVideoOrderEnum, { nullable: true })
   order?: YoutubeVideoOrderEnum;
 }

@@ -19,7 +19,7 @@ export const StationsList: React.FC<Props> = ({ data, empty, itemClassName }) =>
           </Grid>
         ) : (
           data.stations.map(
-            station => station && <StationItem key={station.id} data={station} className={itemClassName} />,
+            (station) => station && <StationItem key={station.id} data={station} className={itemClassName} />,
           )
         ))}
     </>

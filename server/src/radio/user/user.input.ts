@@ -4,31 +4,31 @@ import { OrderEnum } from '../../core/graphql/input/order';
 
 @InputType()
 export class UserFindAllOrderInput {
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   id?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   username?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   email?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   createdAt?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   updatedAt?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   name?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   country?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   city?: OrderEnum;
 
-  @Field(type => OrderEnum, { nullable: true })
+  @Field((type) => OrderEnum, { nullable: true })
   reputation?: OrderEnum;
 }
 
@@ -48,7 +48,7 @@ export class UserFindAllWhereInput {
 
 @InputType()
 export class UserFindOneWhereInput {
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   id?: number;
 
   @Field({ nullable: true })

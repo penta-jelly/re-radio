@@ -26,7 +26,7 @@ export const HistorySongs: React.FC = () => {
     fetchPolicy: 'network-only',
   });
 
-  const onBottomReached = React.useCallback(() => !loading && setTake(value => value + baseIncrement), [loading]);
+  const onBottomReached = React.useCallback(() => !loading && setTake((value) => value + baseIncrement), [loading]);
   const [, ref] = useScrollMonitor({ onBottomReached }, [data]);
 
   let content: React.ReactNode = <Typography variant="subtitle1">History</Typography>;
@@ -36,7 +36,7 @@ export const HistorySongs: React.FC = () => {
     } else {
       content = (
         <List className={classes.list} disablePadding dense innerRef={ref}>
-          {data.songs.map(song => (
+          {data.songs.map((song) => (
             <HistorySongItem data={song} key={song.title} />
           ))}
           {loading && (

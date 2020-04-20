@@ -34,10 +34,7 @@ export default (url = '/station') => ({
   },
 
   clickAddSongFab() {
-    cy.get(this.elements.addSong.addSongFab)
-      .should('be.visible')
-      .click()
-      .wait(300);
+    cy.get(this.elements.addSong.addSongFab).should('be.visible').click().wait(300);
   },
 
   checkRenderingOfAddSong() {
@@ -58,16 +55,11 @@ export default (url = '/station') => ({
     cy.get(this.elements.addSong.closeIconButton).should('be.visible');
     cy.get(this.elements.addSong.searchButton).should('not.be.visible');
     cy.get(this.elements.addSong.searchSongMenu).should('be.visible');
-    cy.get(this.elements.addSong.searchSongMenu)
-      .children()
-      .should('have.length', 5);
+    cy.get(this.elements.addSong.searchSongMenu).children().should('have.length', 5);
   },
 
   checkRenderingOfPreviewSong() {
-    cy.get(this.elements.addSong.searchSongMenu)
-      .children()
-      .first()
-      .click();
+    cy.get(this.elements.addSong.searchSongMenu).children().first().click();
 
     cy.get(this.elements.addSong.previewSongImage).should('be.visible');
     cy.get(this.elements.addSong.previewSongTitle).should('be.visible');
