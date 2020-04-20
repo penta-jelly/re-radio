@@ -3,12 +3,12 @@ import { StationDTO } from './station.dto';
 
 @ObjectType('StationTag')
 export class StationTagDTO {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
   @Field()
   name: string;
 
-  @Field(type => [StationDTO])
+  @Field((type) => [StationDTO])
   stations: StationDTO[];
 }

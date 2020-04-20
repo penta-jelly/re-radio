@@ -5,7 +5,7 @@ import { SongStatusEnum } from '../entities/song.entity';
 
 @ObjectType('Song')
 export class SongDTO {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
   @Field()
@@ -26,25 +26,25 @@ export class SongDTO {
   @Field()
   thumbnail: string;
 
-  @Field(type => Int)
+  @Field((type) => Int)
   duration: number;
 
-  @Field(type => SongStatusEnum)
+  @Field((type) => SongStatusEnum)
   status: SongStatusEnum;
 
-  @Field(type => UserDTO)
+  @Field((type) => UserDTO)
   creator: UserDTO;
 
-  @Field(type => StationDTO)
+  @Field((type) => StationDTO)
   station: StationDTO;
 
   @Field()
   stationSlug: string;
 
-  @Field(type => [Int])
+  @Field((type) => [Int])
   upVoteUserIds: number[];
 
-  @Field(type => [Int])
+  @Field((type) => [Int])
   downVoteUserIds: number[];
 }
 
@@ -62,18 +62,18 @@ export class HistorySongDTO {
   @Field()
   thumbnail: string;
 
-  @Field(type => Int)
+  @Field((type) => Int)
   duration: number;
 
-  @Field(type => StationDTO)
+  @Field((type) => StationDTO)
   station: StationDTO;
 
   @Field()
   stationSlug: string;
 
-  @Field(type => [Int])
+  @Field((type) => [Int])
   creatorIds: number[];
 
-  @Field(type => Int)
+  @Field((type) => Int)
   playedTimes: number;
 }

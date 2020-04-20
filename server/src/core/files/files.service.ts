@@ -16,7 +16,7 @@ export class FilesService {
     const path = Path.join(storagePath, hashedFilename);
     return new Promise((resolve, reject) =>
       stream
-        .on('error', error => {
+        .on('error', (error) => {
           if ((stream as { truncated?: boolean }).truncated) {
             // Delete the truncated file.
             Fs.unlinkSync(path);
@@ -24,7 +24,7 @@ export class FilesService {
           reject(error);
         })
         .pipe(Fs.createWriteStream(path))
-        .on('error', error => reject(error))
+        .on('error', (error) => reject(error))
         .on('finish', () => resolve({ id, path, hashedFilename })),
     );
   }

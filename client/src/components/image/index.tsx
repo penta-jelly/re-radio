@@ -8,7 +8,7 @@ interface Props extends Pick<ImgAttributes, Exclude<keyof ImgAttributes, 'src' |
   fallbackSrc?: string | null;
 }
 
-export const Image: React.FC<Props> = props => {
+export const Image: React.FC<Props> = (props) => {
   const { fallbackSrc, alt, children, ...imgProps } = props;
 
   const { url, fallBackUrl } = useServerImageResource(props.src, fallbackSrc);
@@ -17,7 +17,7 @@ export const Image: React.FC<Props> = props => {
    * @see: https://stackoverflow.com/questions/34097560/react-js-replace-img-src-onerror
    */
   const onError = React.useCallback<React.EventHandler<any>>(
-    e => {
+    (e) => {
       e.target.onerror = null;
       e.target.src = fallBackUrl;
     },

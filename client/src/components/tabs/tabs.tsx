@@ -5,7 +5,7 @@ export const RadioTabs = withStyles({
   indicator: {},
 })(Tabs);
 
-export const RadioTab = withStyles(theme => ({
+export const RadioTab = withStyles((theme) => ({
   root: {
     textTransform: 'none',
     minWidth: 64,

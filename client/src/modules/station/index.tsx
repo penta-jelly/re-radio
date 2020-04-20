@@ -28,7 +28,7 @@ export const StationLayout: React.FC = () => {
         <Grid container className={classes.container}>
           <Grid item xs={12} className={classes.header}>
             <RadioTabs value={selectedTab} onChange={(_, tab) => setSelectedTab(tab)}>
-              {tabs.map(tab => (
+              {tabs.map((tab) => (
                 <RadioTab key={tab} value={tab} label={t(tab)} selected={selectedTab === tab} />
               ))}
             </RadioTabs>

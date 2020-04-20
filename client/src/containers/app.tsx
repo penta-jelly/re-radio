@@ -37,7 +37,7 @@ export const App: React.FC<Props> = ({ serviceWorker }) => {
   const [disconnected, setDisconnected] = React.useState(false);
 
   const resetClient = React.useCallback(() => {
-    setClient(client => {
+    setClient((client) => {
       client.subscription.close(true);
       client.apollo.stop();
       return initClient();
@@ -46,7 +46,7 @@ export const App: React.FC<Props> = ({ serviceWorker }) => {
 
   const retry = React.useCallback(async (endpoint: string, success: () => void, error?: () => void) => {
     const ping = () => fetch(endpoint);
-    const postpone = (delay: number) => new Promise(resolve => setTimeout(resolve, delay));
+    const postpone = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay));
     let isSuccess = false;
     let delay = 2000;
     while (!isSuccess) {

@@ -3,7 +3,7 @@ import { UserRoleDTO } from './user-role.dto';
 
 @ObjectType('User')
 export class UserDTO {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
   @Field()
@@ -36,7 +36,7 @@ export class UserDTO {
   @Field({ nullable: true })
   coverUrl?: string;
 
-  @Field(type => Int, { nullable: true })
+  @Field((type) => Int, { nullable: true })
   reputation: number;
 
   @Field({ nullable: true })
@@ -45,7 +45,7 @@ export class UserDTO {
   @Field({ nullable: true })
   googleId?: string;
 
-  @Field(type => [UserRoleDTO])
+  @Field((type) => [UserRoleDTO])
   roles: UserRoleDTO[];
 
   @Field({ nullable: true })

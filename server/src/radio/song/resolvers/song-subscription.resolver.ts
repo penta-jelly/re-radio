@@ -7,16 +7,16 @@ import { SongService } from '../services/song.service';
 import { SongFindAllWhereInput } from '../song.input';
 import { SONG_SUBSCRIPTION } from '../song.subscriber';
 
-@Resolver(of => SongSubscriptionDTO)
+@Resolver((of) => SongSubscriptionDTO)
 export class SongSubscriptionResolver {
   constructor(private readonly pubSub: PubSub, private readonly songService: SongService) {}
 
-  @Subscription(returns => SongSubscriptionDTO, { name: 'song' })
+  @Subscription((returns) => SongSubscriptionDTO, { name: 'song' })
   async *songSubscription(
     @Args({ name: 'where', nullable: true, type: () => SongFindAllWhereInput }) where: SongFindAllWhereInput,
   ) {
     for await (const payload of this.pubSub.asyncIterable<EntitySubscription<Song>>(SONG_SUBSCRIPTION)) {
-      if (!Object.keys(where).every(key => where[key] === payload.entity[key])) {
+      if (!Object.keys(where).every((key) => where[key] === payload.entity[key])) {
         continue;
       }
       yield { song: payload };

@@ -14,7 +14,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export const NotFoundError: React.FC = props => {
+export const NotFoundError: React.FC = (props) => {
   const classes = useStyles();
   return (
     <div className={classes.container}>

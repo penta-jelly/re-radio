@@ -84,7 +84,7 @@ export class StationService {
   }
 
   async addOnlineUser(station: Station, user: User): Promise<boolean> {
-    const userIndex = station.onlineUserIds.findIndex(id => id === user.id);
+    const userIndex = station.onlineUserIds.findIndex((id) => id === user.id);
     if (userIndex === -1) {
       station.onlineUserIds.push(user.id);
       await Promise.all([
@@ -97,7 +97,7 @@ export class StationService {
   }
 
   async removeOnlineUser(station: Station, user: User): Promise<boolean> {
-    const userIndex = station.onlineUserIds.findIndex(id => id === user.id);
+    const userIndex = station.onlineUserIds.findIndex((id) => id === user.id);
     if (userIndex !== -1) {
       station.onlineUserIds.splice(userIndex, 1);
       await Promise.all([

@@ -21,7 +21,7 @@ export interface AutocompleteProps {
 
 type AutocompleteWithDownshiftType = PropGetters<DropdownItem> & Actions<DropdownItem> & DownshiftState<DropdownItem>;
 
-export const Autocomplete: React.FC<AutocompleteProps> = props => {
+export const Autocomplete: React.FC<AutocompleteProps> = (props) => {
   const classes = useStyles();
 
   const inputRef = React.useRef<HTMLInputElement>();
@@ -75,7 +75,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
         inputRef,
         placeholder: props.placeholder || '',
         value: inputValue,
-        onChange: event => {
+        onChange: (event) => {
           if (event.target.value === '') {
             clearSelection();
           }
@@ -159,7 +159,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = props => {
     <Downshift<DropdownItem>
       stateReducer={handleStateReducer}
       itemToString={itemToString}
-      onSelect={selectedItem => {
+      onSelect={(selectedItem) => {
         selectedItem && setPreviewSong(selectedItem);
       }}
     >

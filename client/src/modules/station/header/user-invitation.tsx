@@ -5,7 +5,7 @@ import { useSnackbar } from 'notistack';
 import { useStyles } from './styles';
 
 interface Props {}
-export const UserInvitation: React.FC<Props> = props => {
+export const UserInvitation: React.FC<Props> = (props) => {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const onClick = React.useCallback(() => {

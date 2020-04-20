@@ -6,7 +6,7 @@ import { StationDTO } from '../dto/station.dto';
 import { StationTagService } from '../services/station-tag.service';
 import { StationService } from '../services/station.service';
 
-@Resolver(of => StationTagDTO)
+@Resolver((of) => StationTagDTO)
 export class StationTagResolver {
   constructor(
     private readonly stationService: StationService,
@@ -15,7 +15,7 @@ export class StationTagResolver {
     private readonly userRoleService: UserRoleService,
   ) {}
 
-  @ResolveField(returns => [StationDTO])
+  @ResolveField((returns) => [StationDTO])
   async stations(@Root() stationTag: StationTagDTO) {
     const { stations } = await this.stationTagService.findOneOrFail({
       where: { id: stationTag.id },

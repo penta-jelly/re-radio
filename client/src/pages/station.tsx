@@ -30,7 +30,7 @@ const Station: React.FC = () => {
       const { onStationChanged } = data;
       if (!onStationChanged) return;
       const { entity } = onStationChanged;
-      updateQuery(prev => {
+      updateQuery((prev) => {
         const { onlineUserIds } = entity;
         if (!prev || !prev.station) return prev;
         return { ...prev, station: { ...prev.station, onlineUserIds } };

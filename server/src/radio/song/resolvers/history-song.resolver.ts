@@ -6,22 +6,22 @@ import { HistorySongDTO } from '../dto/song.dto';
 import { SongService } from '../services/song.service';
 import { HistorySongFindAllWhereInput } from '../song.input';
 
-@Resolver(of => HistorySongDTO)
+@Resolver((of) => HistorySongDTO)
 export class HistorySongResolver {
   constructor(private readonly songService: SongService, private readonly stationService: StationService) {}
 
-  @ResolveField(returns => StationDTO)
+  @ResolveField((returns) => StationDTO)
   async station(@Root() song: HistorySongDTO) {
     return this.stationService.findOneOrFail({ where: { slug: song.stationSlug } });
   }
 
-  @Query(returns => [HistorySongDTO])
+  @Query((returns) => [HistorySongDTO])
   async historySongs(
     @Args({ name: 'pagination', nullable: true, type: () => PaginationInput }) pagination: PaginationInput,
     @Args({ name: 'where', type: () => HistorySongFindAllWhereInput })
     where: HistorySongFindAllWhereInput,
   ) {
     const entities = await this.songService.findHistorySongs(where.stationSlug, pagination);
-    return entities.map(entity => ({ ...entity, id: entity.url }));
+    return entities.map((entity) => ({ ...entity, id: entity.url }));
   }
 }

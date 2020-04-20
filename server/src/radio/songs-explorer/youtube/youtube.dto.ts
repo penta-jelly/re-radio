@@ -12,15 +12,15 @@ export class Thumbnail {
 
 @ObjectType()
 export class Thumbnails {
-  @Field(type => Thumbnail)
+  @Field((type) => Thumbnail)
   default: Thumbnail;
-  @Field(type => Thumbnail, { nullable: true })
+  @Field((type) => Thumbnail, { nullable: true })
   medium: Thumbnail;
-  @Field(type => Thumbnail, { nullable: true })
+  @Field((type) => Thumbnail, { nullable: true })
   high: Thumbnail;
-  @Field(type => Thumbnail, { nullable: true })
+  @Field((type) => Thumbnail, { nullable: true })
   standard: Thumbnail;
-  @Field(type => Thumbnail, { nullable: true })
+  @Field((type) => Thumbnail, { nullable: true })
   maxres: Thumbnail;
 }
 
@@ -34,7 +34,7 @@ export class Snippet {
   title: string;
   @Field()
   description: string;
-  @Field(type => Thumbnails)
+  @Field((type) => Thumbnails)
   thumbnails: Thumbnails;
   @Field()
   channelTitle: string;
@@ -57,10 +57,10 @@ export class YoutubeVideoDetailDTO {
   @Field()
   id: string;
 
-  @Field(type => Snippet)
+  @Field((type) => Snippet)
   snippet: Snippet;
 
-  @Field(type => ContentDetails)
+  @Field((type) => ContentDetails)
   contentDetails: ContentDetails;
 }
 
@@ -82,6 +82,6 @@ export class YoutubeVideoDTO {
   @Field()
   id: string;
 
-  @Field(type => Snippet)
+  @Field((type) => Snippet)
   snippet: Snippet;
 }

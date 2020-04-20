@@ -50,13 +50,10 @@ export class Song {
   @Column({ enum: [SongStatusEnum.PENDING, SongStatusEnum.PLAYING, SongStatusEnum.PLAYED, SongStatusEnum.SKIPPED] })
   status: SongStatusEnum;
 
-  @ManyToOne(type => User, { onDelete: 'SET NULL' })
+  @ManyToOne((type) => User, { onDelete: 'SET NULL' })
   creator: User;
 
-  @ManyToOne(
-    type => Station,
-    station => station.songs,
-  )
+  @ManyToOne((type) => Station, (station) => station.songs)
   station: Station;
 
   @Column()

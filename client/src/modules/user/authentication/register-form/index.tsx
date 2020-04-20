@@ -14,7 +14,7 @@ interface Props {
   postRegister?(): void;
 }
 
-export const RegisterForm: React.FC<Props> = props => {
+export const RegisterForm: React.FC<Props> = (props) => {
   const classNames = useStyles();
   const [registerMutation] = useRegisterMutation();
   const { t } = useTranslation('common');
@@ -45,10 +45,7 @@ export const RegisterForm: React.FC<Props> = props => {
       initialValues={{ username: '', email: '', password: '' }}
       validationSchema={yup.object().shape({
         username: yup.string().required('Username is required'),
-        email: yup
-          .string()
-          .email('Invalid email address')
-          .required('Email is required'),
+        email: yup.string().email('Invalid email address').required('Email is required'),
         password: yup.string().required('Password is required'),
       })}
       onSubmit={onRegister}

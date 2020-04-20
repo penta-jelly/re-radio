@@ -5,7 +5,7 @@ import { StationTagDTO } from './station-tag.dto';
 
 @ObjectType('Station')
 export class StationDTO {
-  @Field(type => Int)
+  @Field((type) => Int)
   id: number;
 
   @Field()
@@ -23,15 +23,15 @@ export class StationDTO {
   @Field({ nullable: true })
   description?: string;
 
-  @Field(type => SongDTO, { nullable: true })
+  @Field((type) => SongDTO, { nullable: true })
   playingSong?: SongDTO;
 
-  @Field(type => [UserRoleDTO])
+  @Field((type) => [UserRoleDTO])
   userRoles: UserRoleDTO[];
 
-  @Field(type => [StationTagDTO])
+  @Field((type) => [StationTagDTO])
   tags: StationTagDTO[];
 
-  @Field(type => [Int])
+  @Field((type) => [Int])
   onlineUserIds: number[];
 }

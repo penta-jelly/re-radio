@@ -49,9 +49,9 @@ const HomePage: React.FunctionComponent<{}> = () => {
       const { entity, mutation } = onStationChanged;
 
       if (mutation === MutationEnum.Updated) {
-        updateQuery(prev => ({
+        updateQuery((prev) => ({
           ...prev,
-          stations: prev.stations.map(station => {
+          stations: prev.stations.map((station) => {
             const { __typename, ...entityWithoutTypename } = entity;
             if (station.slug === entity.slug) return { ...station, ...entityWithoutTypename };
             return station;
@@ -59,13 +59,13 @@ const HomePage: React.FunctionComponent<{}> = () => {
         }));
       }
       if (mutation === MutationEnum.Deleted) {
-        updateQuery(prev => ({ ...prev, stations: prev.stations.filter(station => station.slug !== entity.slug) }));
+        updateQuery((prev) => ({ ...prev, stations: prev.stations.filter((station) => station.slug !== entity.slug) }));
       }
       if (mutation === MutationEnum.Created) {
         const {
           data: { station },
         } = await client.query<StationQuery>({ query: StationDocument, variables: { slug: entity.slug } });
-        updateQuery(prev => ({ ...prev, stations: [...prev.stations, station] }));
+        updateQuery((prev) => ({ ...prev, stations: [...prev.stations, station] }));
       }
     },
   });

@@ -9,7 +9,7 @@ yargs
   .command(
     'serve <app>',
     'start the application',
-    yargs => {
+    (yargs) => {
       yargs
         .positional('app', {
           describe: 'which application to start',
@@ -36,7 +36,7 @@ yargs
   .command(
     'run <worker>',
     'run pre-defined worker',
-    yargs => {
+    (yargs) => {
       yargs
         .positional('worker', {
           describe: 'which worker to run',

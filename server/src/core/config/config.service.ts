@@ -58,7 +58,7 @@ export class ConfigService {
 
     const envLogLevel = ConfigService.get(EnvVariables.LOG_LEVEL);
     let logLevel: LogLevel = 'log';
-    if (defaultLogLevels.some(level => envLogLevel === level)) {
+    if (defaultLogLevels.some((level) => envLogLevel === level)) {
       logLevel = envLogLevel as LogLevel;
     }
     switch (logLevel) {

@@ -8,8 +8,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "generate": "gql-gen",
-    "format": "prettier --write \"src/**/*.{tsx,ts}\" && eslint --fix --ext .tsx --ext .ts src/",
-    "lint": "eslint --ext .tsx --ext .ts src/ && prettier --check src/**/*.ts"
+    "format": "eslint --fix --ext .tsx --ext .ts src/",
+    "lint": "eslint --ext .tsx --ext .ts src/"
   },
   "dependencies": {
     "@material-ui/core": "4.9.11",
@@ -56,7 +56,7 @@
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-prettier": "3.1.3",
     "patch-package": "6.2.2",
-    "prettier": "1.19.1",
+    "prettier": "2.0.4",
     "react-scripts": "3.4.1",
     "shx": "0.3.2",
     "typescript": "3.8.3"

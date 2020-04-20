@@ -4,9 +4,9 @@ import { SongDTO } from './song.dto';
 
 @ObjectType('SongSubscription')
 export class SongSubscriptionDTO {
-  @Field(type => MutationEnum)
+  @Field((type) => MutationEnum)
   mutation: MutationEnum;
 
-  @Field(type => SongDTO)
+  @Field((type) => SongDTO)
   entity: SongDTO;
 }

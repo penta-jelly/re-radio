@@ -8,7 +8,7 @@ import { useStyles } from './styles';
 interface Props {
   userId: number;
 }
-export const OnlineUser: React.FC<Props> = props => {
+export const OnlineUser: React.FC<Props> = (props) => {
   const classes = useStyles();
 
   const history = useHistory();

@@ -4,11 +4,11 @@ import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from './youtube.dto';
 import { YoutubeVideoFindAllInput, YoutubeVideoFindOneInput } from './youtube.input';
 import { YoutubeService } from './youtube.service';
 
-@Resolver(of => YoutubeVideoDetailDTO)
+@Resolver((of) => YoutubeVideoDetailDTO)
 export class YoutubeResolver {
   constructor(private readonly youtubeService: YoutubeService) {}
 
-  @Query(returns => YoutubeVideoDetailDTO)
+  @Query((returns) => YoutubeVideoDetailDTO)
   async youtubeVideo(@Args({ name: 'where', type: () => YoutubeVideoFindOneInput }) where: YoutubeVideoFindOneInput) {
     if (!where.url && !where.videoId) throw new BadRequestException('Either url or videoId are required.');
     let videoId = where.videoId || '';
@@ -18,7 +18,7 @@ export class YoutubeResolver {
     return await this.youtubeService.fetchVideoDetail(videoId);
   }
 
-  @Query(returns => [YoutubeVideoDTO])
+  @Query((returns) => [YoutubeVideoDTO])
   async youtubeVideos(@Args({ name: 'where', type: () => YoutubeVideoFindAllInput }) where: YoutubeVideoFindAllInput) {
     if (!where.q.trim()) return [];
     return this.youtubeService.searchVideos(where);

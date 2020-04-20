@@ -5,8 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "compile": "tsc",
-    "lint": "eslint --ext .ts src/ && prettier --check src/**/*.ts",
-    "format": "prettier --write \"src/**/*.ts\" && eslint --fix --ext .ts src/",
+    "lint": "eslint --ext .ts src/",
+    "format": "eslint --fix --ext .ts src/",
     "dev": "run-p dev:**",
     "dev:typescript": "tsc --watch --preserveWatchOutput"
   },
@@ -18,7 +18,7 @@
     "eslint-config-prettier": "6.10.1",
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-prettier": "3.1.3",
-    "prettier": "1.19.1",
+    "prettier": "2.0.4",
     "typescript": "3.8.3"
   },
   "dependencies": {}

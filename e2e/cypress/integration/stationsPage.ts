@@ -70,9 +70,7 @@ describe('Create a Station', () => {
         .find(stationsPage.elements.createStation.stationSlugInput)
         .type(`this-will-not-go-well`);
 
-      cy.get(stationsPage.elements.createStation.form)
-        .find(stationsPage.elements.createStation.submitButton)
-        .click();
+      cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.submitButton).click();
 
       cy.contains('You need to login first.').should('be.visible');
     });
@@ -82,61 +80,45 @@ describe('Create a Station', () => {
 
       cy.get(stationsPage.elements.createStationButton).click();
 
-      cy.get(stationsPage.elements.createStation.form)
-        .find(stationsPage.elements.createStation.submitButton)
-        .click();
+      cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.submitButton).click();
 
-      cy.get(stationsPage.elements.createStation.form)
-        .contains('name is a required field')
-        .should('be.visible');
+      cy.get(stationsPage.elements.createStation.form).contains('name is a required field').should('be.visible');
 
-      cy.get(stationsPage.elements.createStation.form)
-        .contains('slug is a required field')
-        .should('be.visible');
+      cy.get(stationsPage.elements.createStation.form).contains('slug is a required field').should('be.visible');
     });
 
     it('should validate station tags field', () => {
       stationsPage.navigate();
 
       cy.get(stationsPage.elements.createStationButton).click();
-      cy.get(stationsPage.elements.createStation.form)
-        .find(stationsPage.elements.createStation.showMoreButton)
-        .click();
+      cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.showMoreButton).click();
 
       cy.get(stationsPage.elements.createStation.form)
         .find(stationsPage.elements.createStation.stationTagsInput)
         .type('# b12');
       cy.get(stationsPage.elements.createStation.form).submit();
-      cy.get(stationsPage.elements.createStation.form)
-        .contains('Must be a valid tags format')
-        .should('be.visible');
+      cy.get(stationsPage.elements.createStation.form).contains('Must be a valid tags format').should('be.visible');
 
       cy.get(stationsPage.elements.createStation.form)
         .find(stationsPage.elements.createStation.stationTagsInput)
         .clear()
         .type('#b12 cde');
       cy.get(stationsPage.elements.createStation.form).submit();
-      cy.get(stationsPage.elements.createStation.form)
-        .contains('Must be a valid tags format')
-        .should('be.visible');
+      cy.get(stationsPage.elements.createStation.form).contains('Must be a valid tags format').should('be.visible');
 
       cy.get(stationsPage.elements.createStation.form)
         .find(stationsPage.elements.createStation.stationTagsInput)
         .clear()
         .type('#b12-cde a332e #polics');
       cy.get(stationsPage.elements.createStation.form).submit();
-      cy.get(stationsPage.elements.createStation.form)
-        .contains('Must be a valid tags format')
-        .should('be.visible');
+      cy.get(stationsPage.elements.createStation.form).contains('Must be a valid tags format').should('be.visible');
 
       cy.get(stationsPage.elements.createStation.form)
         .find(stationsPage.elements.createStation.stationTagsInput)
         .clear()
         .type('#b12 #polics');
       cy.get(stationsPage.elements.createStation.form).submit();
-      cy.get(stationsPage.elements.createStation.form)
-        .contains('Must be a valid tags format')
-        .should('be.not.visible');
+      cy.get(stationsPage.elements.createStation.form).contains('Must be a valid tags format').should('be.not.visible');
     });
   });
 
@@ -154,9 +136,7 @@ describe('Create a Station', () => {
       .find(stationsPage.elements.createStation.stationSlugInput)
       .type(`awesome-station${randomId}`);
 
-    cy.get(stationsPage.elements.createStation.form)
-      .find(stationsPage.elements.createStation.submitButton)
-      .click();
+    cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.submitButton).click();
 
     cy.get(stationsPage.elements.createStation.form).should('be.not.visible');
     stationsPage.checkStationCard(`awesome-station${randomId}`, `Awesome Station ${randomId}`);
@@ -167,9 +147,7 @@ describe('Create a Station', () => {
     const randomId = Math.round(Math.random() * 1000);
 
     cy.get(stationsPage.elements.createStationButton).click();
-    cy.get(stationsPage.elements.createStation.form)
-      .find(stationsPage.elements.createStation.showMoreButton)
-      .click();
+    cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.showMoreButton).click();
 
     cy.get(stationsPage.elements.createStation.form)
       .find(stationsPage.elements.createStation.stationNameInput)
@@ -187,9 +165,7 @@ describe('Create a Station', () => {
       .find(stationsPage.elements.createStation.stationTagsInput)
       .type(`#awesome #radio #re-radio`);
 
-    cy.get(stationsPage.elements.createStation.form)
-      .find(stationsPage.elements.createStation.submitButton)
-      .click();
+    cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.submitButton).click();
 
     cy.get(stationsPage.elements.createStation.form).should('be.not.visible');
     stationsPage.checkStationCard(`awesome-station${randomId}`, `Awesome Station ${randomId}`, [
