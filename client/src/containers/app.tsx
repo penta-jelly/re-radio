@@ -3,7 +3,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { Button, CircularProgress } from '@material-ui/core';
+import { Button, CircularProgress, StylesProvider, createGenerateClassName } from '@material-ui/core';
 import { theme } from 'lib/@material-ui/theme';
 import { AppClient, initClient } from 'lib/apollo/init';
 import { initI18n } from 'lib/react-i18next';
@@ -105,19 +105,25 @@ export const App: React.FC<Props> = () => {
       });
   }, [client.healthEndpoint, resetClient, retry]);
 
+  const generateClassName = React.useMemo(() => {
+    return createGenerateClassName({ disableGlobal: false, productionPrefix: 'radio-jss-' });
+  }, []);
+
   return (
     <AppContext.Provider value={{ client, resetClient, disconnected, serviceWorker }}>
-      <ThemeProvider theme={theme}>
-        <ApolloProvider client={client.apollo}>
-          <SnackbarProvider
-            anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-            classes={{ containerAnchorOriginTopRight: classes.snackBarTopRightContainer }}
-          >
-            <Main />
-          </SnackbarProvider>
-        </ApolloProvider>
-        <CssBaseline />
-      </ThemeProvider>
+      <StylesProvider injectFirst={false} generateClassName={generateClassName}>
+        <ThemeProvider theme={theme}>
+          <ApolloProvider client={client.apollo}>
+            <SnackbarProvider
+              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+              classes={{ containerAnchorOriginTopRight: classes.snackBarTopRightContainer }}
+            >
+              <Main />
+            </SnackbarProvider>
+          </ApolloProvider>
+          <CssBaseline />
+        </ThemeProvider>
+      </StylesProvider>
     </AppContext.Provider>
   );
 };

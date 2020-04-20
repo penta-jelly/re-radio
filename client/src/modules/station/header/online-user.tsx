@@ -30,11 +30,11 @@ export const OnlineUser: React.FC<Props> = (props) => {
       variant="dot"
       anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
       classes={{ dot: classes.onlineIndicator }}
+      title={data.user.username}
     >
       <Image
         data-role="online-user-avatar"
         alt={data.user.username}
-        title={data.user.username}
         src={data.user.avatarUrl || '/asset/avatar/female.png'}
         className={classes.userAvatar}
         onClick={onClick}

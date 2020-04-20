@@ -29,5 +29,20 @@
   ],
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
-  }
+  },
+  "files.exclude": {
+		".git": true,
+		".build": true,
+		"**/.DS_Store": true,
+		"**/dist/**/*": true,
+		"**/build/**/*": true,
+		"server/lib/**/*.js": true,
+		"common/lib/**/*.js": true
+  },
+  "files.watcherExclude": {
+		"**/.git/objects/**": true,
+		"**/.git/subtree-cache/**": true,
+		"**/node_modules/**": true,
+		"**/lib/**": true
+	},
 }
