@@ -81,6 +81,5 @@
   "bin": "lib/main.js",
   "pkg": {
     "assets": ["lib/migrations/**/*"]
-  },
-  "license": "MIT"
+  }
 }
