@@ -4,7 +4,13 @@ import { ServeStaticModuleOptionsFactory, ServeStaticModuleOptions } from '@nest
 
 export class StaticOptions implements ServeStaticModuleOptionsFactory {
   createLoggerOptions(): ServeStaticModuleOptions[] {
-    const baseOption: Partial<ServeStaticModuleOptions> = {};
+    const baseOption: Partial<ServeStaticModuleOptions> = {
+      serveStaticOptions: {
+        setHeaders: (res) => {
+          res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+        },
+      },
+    };
     const buildPath = Path.join(process.cwd(), 'static');
     const fallbackPath = Path.join(process.cwd(), '..', 'client', 'build');
     if (Fs.existsSync(buildPath)) {

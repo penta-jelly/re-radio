@@ -21,11 +21,11 @@ const isLocalhost = Boolean(
 let registration: ServiceWorkerRegistration | undefined;
 
 interface Config {
-  onSuccess?: () => void;
-  onUpdate?: () => void;
+  onSuccess: () => void;
+  onUpdate: () => void;
 }
 
-function register(config?: Config) {
+function register(config: Config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL((process as { env: { [key: string]: string } }).env.PUBLIC_URL, window.location.href);
@@ -56,18 +56,10 @@ function register(config?: Config) {
         registerValidSW(swUrl, config);
       }
     });
-
-    // A technique to prevent infinite loop when reloading browser while the dev tool is opening
-    let refreshing: boolean = false;
-    navigator.serviceWorker.oncontrollerchange = () => {
-      if (refreshing) return;
-      refreshing = true;
-      window.location.reload();
-    };
   }
 }
 
-async function registerValidSW(swUrl: string, config?: Config) {
+async function registerValidSW(swUrl: string, config: Config) {
   try {
     registration = await navigator.serviceWorker.register(swUrl);
     registration.onupdatefound = () => {
@@ -87,8 +79,7 @@ async function registerValidSW(swUrl: string, config?: Config) {
                 'tabs for this page are closed. See http://bit.ly/CRA-PWA.',
             );
 
-            // Execute callback
-            config?.onUpdate?.();
+            config.onUpdate();
           } else {
             // At this point, everything has been precached.
             // It's the perfect time to display a
@@ -96,10 +87,17 @@ async function registerValidSW(swUrl: string, config?: Config) {
 
             console.log('Content is cached for offline use.');
 
-            // Execute callback
-            config?.onSuccess?.();
+            config.onSuccess();
           }
         }
+
+        // A technique to prevent infinite loop when reloading browser while the dev tool is opening
+        let refreshing: boolean = false;
+        navigator.serviceWorker.oncontrollerchange = () => {
+          if (refreshing) return;
+          refreshing = true;
+          window.location.reload();
+        };
       };
     };
   } catch (error) {
@@ -107,7 +105,7 @@ async function registerValidSW(swUrl: string, config?: Config) {
   }
 }
 
-async function checkValidServiceWorker(swUrl: string, config?: Config) {
+async function checkValidServiceWorker(swUrl: string, config: Config) {
   // Check if the service worker can be found. If it can't reload the page.
   try {
     const response = await fetch(swUrl);
@@ -180,7 +178,7 @@ const serviceWorker: ServiceWorkerContext = {
   },
   unregister,
   reloadToApplyNewContent() {
-    registration?.waiting?.postMessage('skipWaiting');
+    registration?.waiting?.postMessage({ type: 'SKIP_WAITING' });
   },
 };
 
