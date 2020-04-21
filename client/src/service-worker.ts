@@ -57,6 +57,7 @@ function register(config?: Config) {
       }
     });
 
+    // A technique to prevent infinite loop when reloading browser while the dev tool is opening
     let refreshing: boolean = false;
     navigator.serviceWorker.oncontrollerchange = () => {
       if (refreshing) return;

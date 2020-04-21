@@ -100,7 +100,7 @@ export const App: React.FC<Props> = () => {
   }, [client.healthEndpoint, resetClient, retry]);
 
   const generateClassName = React.useMemo(() => {
-    return createGenerateClassName({ disableGlobal: false, productionPrefix: 'radio-jss-' });
+    return createGenerateClassName({ disableGlobal: true, productionPrefix: 'radio-' });
   }, []);
 
   return (
