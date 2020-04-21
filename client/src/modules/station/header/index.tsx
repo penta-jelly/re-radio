@@ -1,11 +1,11 @@
-import { CircularProgress, Typography, IconButton } from '@material-ui/core';
+import { CircularProgress, IconButton, Typography } from '@material-ui/core';
 import React from 'react';
-import { useParams } from 'react-router-dom';
 import { MdVolumeOff, MdVolumeUp } from 'react-icons/md';
+import { useParams } from 'react-router-dom';
 import { useStationQuery } from 'operations';
 import { useStationContextState } from '../context';
-import { useStyles } from './styles';
 import { OnlineUser } from './online-user';
+import { useStyles } from './styles';
 import { UserInvitation } from './user-invitation';
 
 interface RouteParams {
@@ -21,7 +21,7 @@ export const Header: React.FC = (props) => {
     if (data) {
       let newTitle = `${data.station.name}`;
       if (data.station.playingSong) {
-        newTitle = `${data.station.name} - ${data.station.playingSong.title}`;
+        newTitle = `${data.station.playingSong.title} - ${data.station.name}`;
       }
       document.title = newTitle;
     }
@@ -34,7 +34,9 @@ export const Header: React.FC = (props) => {
     [],
   );
 
-  const { muted, setMuted } = useStationContextState();
+  const {
+    player: { muted, setMuted },
+  } = useStationContextState();
 
   const content = React.useMemo<React.ReactNode>(() => {
     if (data) {
@@ -60,7 +62,7 @@ export const Header: React.FC = (props) => {
       return error.message;
     }
     return <CircularProgress color="inherit" />;
-  }, [classes, data, error, muted, setMuted]);
+  }, [classes.buttonGroup, classes.content, classes.iconButton, classes.rightContent, data, error, muted, setMuted]);
 
   return <div className={classes.container}>{content}</div>;
 };

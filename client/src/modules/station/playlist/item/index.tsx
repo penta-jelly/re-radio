@@ -2,6 +2,7 @@ import React from 'react';
 import { ListItem, ListItemText, Typography, LinearProgress, IconButton } from '@material-ui/core';
 import { GiMusicalNotes } from 'react-icons/gi';
 import { MdThumbUp, MdThumbDown } from 'react-icons/md';
+import Moment from 'moment';
 import { SongStatusEnum, StationPlaylistQuery } from 'operations';
 import { Image } from 'components/image';
 import { useStyles } from './styles';
@@ -19,7 +20,7 @@ export const PlaylistItem: React.FC<Props> = (props) => {
     <ListItem selected={status === SongStatusEnum.Playing} dense>
       <div className={classes.thumbnailContainer}>
         <img src={thumbnail} alt={title} className={classes.thumbnail} />
-        <span className={classes.duration}>{duration}</span>
+        <span className={classes.duration}>{Moment.duration(duration).format('HH:mm:ss')}</span>
       </div>
       <ListItemText
         disableTypography

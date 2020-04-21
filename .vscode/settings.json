@@ -13,7 +13,7 @@
   "emmet.excludeLanguages": [
     "markdown", "typescript"
   ],
-  "typescript.tsdk": "./node_modules/typescript/lib",
+  "typescript.tsdk": "./common/node_modules/typescript/lib",
   "eslint.enable": true,
   "eslint.workingDirectories": [
 		{ "directory": "./client", "changeProcessCWD": true },

@@ -1,3 +1,5 @@
+// eslint-disable-next-line import/no-unassigned-import
+import 'moment-duration-format';
 import React from 'react';
 import ReactDOM from 'react-dom';
 

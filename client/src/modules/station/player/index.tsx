@@ -1,14 +1,14 @@
-import { Card, Typography, CircularProgress } from '@material-ui/core';
+import { Card, CircularProgress, Typography } from '@material-ui/core';
 import React, { useCallback, useRef } from 'react';
 import ReactPlayer, { Config as ReactPlayerConfig } from 'react-player';
 import { useRouteMatch } from 'react-router-dom';
-import { usePreviousNonNullableValue } from 'hooks/use-previous-non-nullable-value';
 import {
   SongStatusEnum,
+  StationPlayerQuery,
   useOnStationPlayerChangedSubscription,
   useStationPlayerQuery,
-  StationPlayerQuery,
 } from 'operations';
+import { usePreviousNonNullableValue } from 'hooks/use-previous-non-nullable-value';
 import { useStationContextState } from '../context';
 import { useStyles } from './styles';
 
@@ -24,7 +24,9 @@ export const Player: React.FC = () => {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
 
-  const { muted } = useStationContextState();
+  const {
+    player: { muted },
+  } = useStationContextState();
 
   const { loading, data, updateQuery } = useStationPlayerQuery({
     variables: { stationSlug: match.params.slug },

@@ -35,9 +35,9 @@ export const useStyles = makeStyles(({ palette, spacing }) => ({
     borderRadius: '50%',
   },
   onlineIndicator: {
-    backgroundColor: palette.success.main,
-    border: `1px solid #bfbfbf`,
-    bottom: 3,
-    right: 3,
+    backgroundColor: `${palette.success.main} !important`,
+    border: `1px solid #bfbfbf !important`,
+    bottom: `3px !important`,
+    right: `3px !important`,
   },
 }));

@@ -3,9 +3,11 @@ import * as StationLayout from 'containers/layout';
 import { useLocalStorage } from 'hooks/use-local-storage';
 
 export interface StationContext {
-  // Mute
-  muted: boolean;
-  setMuted: (value: boolean) => void;
+  player: {
+    // Mute
+    muted: boolean;
+    setMuted: (value: boolean) => void;
+  };
 
   // Chat box
   chatBox: {
@@ -31,9 +33,11 @@ export interface StationContext {
 
 const defaultFn = () => {};
 const defaultState: StationContext = {
-  // Mute
-  muted: false,
-  setMuted: defaultFn,
+  player: {
+    // Mute
+    muted: false,
+    setMuted: defaultFn,
+  },
 
   // Chat box
   chatBox: {
@@ -60,7 +64,7 @@ const defaultState: StationContext = {
 export const StationContext = React.createContext<StationContext>(defaultState);
 
 export function useStationContextStateProvider(): StationContext {
-  const [muted, setMuted] = useLocalStorage<StationContext['muted']>('muted', defaultState.muted);
+  const [muted, setMuted] = useLocalStorage<StationContext['player']['muted']>('muted', defaultState.player.muted);
 
   const [chatBox, setChatBoxState] = React.useState<StationContext['chatBox']>(defaultState.chatBox);
 
@@ -75,19 +79,20 @@ export function useStationContextStateProvider(): StationContext {
     defaultState.selectedTab,
   );
 
-  return {
-    muted,
-    setMuted,
-    chatBox,
-    setChatBoxState,
-    drawer,
-    setDrawerState,
-    addSongDialog,
-    setAddSongDialogState,
-    tabs: defaultState.tabs,
-    selectedTab,
-    setSelectedTab,
-  };
+  return React.useMemo(() => {
+    return {
+      player: { muted, setMuted },
+      chatBox,
+      setChatBoxState,
+      drawer,
+      setDrawerState,
+      addSongDialog,
+      setAddSongDialogState,
+      tabs: defaultState.tabs,
+      selectedTab,
+      setSelectedTab,
+    };
+  }, [addSongDialog, chatBox, drawer, muted, selectedTab, setMuted, setSelectedTab]);
 }
 
 export function useStationContextState(): StationContext {

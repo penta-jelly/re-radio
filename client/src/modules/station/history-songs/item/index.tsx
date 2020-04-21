@@ -2,6 +2,7 @@ import { ListItem, ListItemText, ListItemSecondaryAction, IconButton, CircularPr
 import { MdReplay } from 'react-icons/md';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
+import Moment from 'moment';
 import { HistorySongsQuery, useCreateSongMutation, useCurrentUserQuery } from 'operations';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import { useStyles } from './styles';
@@ -42,11 +43,12 @@ export const HistorySongItem: React.FC<Props> = (props) => {
     }
   }, [addSong, currentUserQuery, match.params.slug, notifyUnauthorizedUser, props.data]);
 
-  const { title, thumbnail, playedTimes, creatorIds } = props.data;
+  const { title, thumbnail, duration, playedTimes, creatorIds } = props.data;
   return (
     <ListItem dense>
       <div className={classes.thumbnailContainer}>
         <img src={thumbnail} alt={title} className={classes.thumbnail} />
+        <span className={classes.duration}>{Moment.duration(duration).format('HH:mm:ss')}</span>
       </div>
       <ListItemText
         disableTypography
