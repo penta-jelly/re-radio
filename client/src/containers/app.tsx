@@ -27,13 +27,7 @@ export const AppContext = React.createContext<IAppContext>({
   client: initialClient,
   disconnected: false,
   resetClient() {},
-  serviceWorker: {
-    onSuccess: () => -1,
-    onUpdate: () => -1,
-    offSuccess: () => {},
-    offUpdate: () => {},
-    unregister: () => {},
-  },
+  serviceWorker: getServiceWorkerContextInstance(),
 });
 
 export const App: React.FC<Props> = () => {
@@ -130,6 +124,7 @@ export const App: React.FC<Props> = () => {
 
 const Main = () => {
   const appContext = React.useContext(AppContext);
+
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const suspendedSnackbarId = 'SuspendedSnackbar';
   React.useEffect(() => {
@@ -159,7 +154,7 @@ const Main = () => {
             color="inherit"
             size="small"
             style={{ marginLeft: 8 }}
-            onClick={() => window.location.reload(true)}
+            onClick={appContext.serviceWorker.reloadToApplyNewContent}
           >
             Reload now
           </Button>
