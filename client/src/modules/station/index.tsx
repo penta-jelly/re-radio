@@ -11,6 +11,7 @@ import { Player } from './player';
 import { Playlist } from './playlist';
 import { useStyles } from './styles';
 import { useStationContextState } from './context';
+import { RelatedSongs } from './related-songs';
 
 export * from './context';
 export * from './create';
@@ -39,7 +40,12 @@ export const StationLayout: React.FC = () => {
                 case 'history':
                   return <HistorySongs />;
                 default:
-                  return <Playlist />;
+                  return (
+                    <>
+                      <Playlist />
+                      <RelatedSongs />
+                    </>
+                  );
               }
             })()}
           </Grid>

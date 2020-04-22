@@ -75,10 +75,7 @@ export const Player: React.FC = () => {
   const [url] = usePreviousNonNullableValue(playingSong?.url);
   const [id] = usePreviousNonNullableValue(playingSong?.id);
 
-  const playerConfig = React.useMemo<ReactPlayerConfig>(
-    () => ({ youtube: { playerVars: { controls: 0 }, preload: true } }),
-    [],
-  );
+  const playerConfig = React.useMemo<ReactPlayerConfig>(() => ({ youtube: { preload: true } }), []);
 
   let content: React.ReactNode;
   // Always try to render the ReactPlayer when url is available
@@ -96,6 +93,7 @@ export const Player: React.FC = () => {
         height="100%"
         muted={muted}
         playing
+        controls={false}
       />
     );
   } else if (loading) {

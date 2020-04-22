@@ -338,9 +338,10 @@ export type YoutubeVideoFindOneInput = {
 };
 
 export type YoutubeVideoFindAllInput = {
-  readonly q: Scalars['String'];
+  readonly q?: Maybe<Scalars['String']>;
   readonly maxResults?: Maybe<Scalars['Float']>;
   readonly order?: Maybe<SongExplorerOrderEnum>;
+  readonly relatedToVideoUrl?: Maybe<Scalars['String']>;
 };
 
 export enum SongExplorerOrderEnum {

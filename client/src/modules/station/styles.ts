@@ -14,6 +14,8 @@ export const useStyles = makeStyles(({ palette, breakpoints, zIndex, spacing }) 
   },
   songsList: {
     paddingRight: 0,
+    display: 'flex',
+    flexDirection: 'column',
   },
   subContent: {
     height: '100%',

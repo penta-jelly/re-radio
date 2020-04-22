@@ -263,9 +263,10 @@ input YoutubeVideoFindOneInput {
 }
 
 input YoutubeVideoFindAllInput {
-  q: String!
+  q: String
   maxResults: Float
   order: SongExplorerOrderEnum
+  relatedToVideoUrl: String
 }
 
 enum SongExplorerOrderEnum {
