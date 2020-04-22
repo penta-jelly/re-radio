@@ -1,13 +1,12 @@
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { Button, CircularProgress, createGenerateClassName, StylesProvider, CssBaseline } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import React from 'react';
 import { ApolloProvider } from 'react-apollo';
-import { Button, CircularProgress, StylesProvider, createGenerateClassName } from '@material-ui/core';
 import { theme } from 'lib/@material-ui/theme';
 import { AppClient, initClient } from 'lib/apollo/init';
 import { initI18n } from 'lib/react-i18next';
-import { ServiceWorkerContext, getServiceWorkerContextInstance } from 'service-worker';
+import { ServiceWorkerProvider, useServiceWorker } from 'lib/service-worker';
 import { AppRouter } from './router';
 import { useStyles } from './styles';
 
@@ -17,25 +16,18 @@ const initialClient = initClient();
 interface Props {}
 
 interface IAppContext {
-  disconnected: boolean;
   client: AppClient;
   resetClient(): void;
-  serviceWorker: ServiceWorkerContext;
 }
 
 export const AppContext = React.createContext<IAppContext>({
   client: initialClient,
-  disconnected: false,
   resetClient() {},
-  serviceWorker: getServiceWorkerContextInstance(),
 });
 
 export const App: React.FC<Props> = () => {
   const classes = useStyles();
   const [client, setClient] = React.useState(initialClient);
-  const [disconnected, setDisconnected] = React.useState(false);
-
-  const serviceWorker = React.useMemo(getServiceWorkerContextInstance, []);
 
   const resetClient = React.useCallback(() => {
     setClient((client) => {
@@ -44,6 +36,38 @@ export const App: React.FC<Props> = () => {
       return initClient();
     });
   }, []);
+
+  const generateClassName = React.useMemo(() => {
+    return createGenerateClassName({ disableGlobal: true, productionPrefix: 'radio-jss-' });
+  }, []);
+
+  return (
+    <ServiceWorkerProvider>
+      <AppContext.Provider value={{ client, resetClient }}>
+        <StylesProvider injectFirst={false} generateClassName={generateClassName}>
+          <ThemeProvider theme={theme}>
+            <ApolloProvider client={client.apollo}>
+              <SnackbarProvider
+                anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                classes={{ containerAnchorOriginTopRight: classes.snackBarTopRightContainer }}
+              >
+                <AppHOC>
+                  <AppRouter />
+                </AppHOC>
+              </SnackbarProvider>
+            </ApolloProvider>
+            <CssBaseline />
+          </ThemeProvider>
+        </StylesProvider>
+      </AppContext.Provider>
+    </ServiceWorkerProvider>
+  );
+};
+
+const AppHOC: React.FC = (props) => {
+  const appContext = React.useContext(AppContext);
+  const serviceWorker = useServiceWorker();
+  const [disconnected, setDisconnected] = React.useState(false);
 
   const retry = React.useCallback(async (endpoint: string, success: () => void, error?: () => void) => {
     const ping = () => fetch(endpoint);
@@ -65,70 +89,46 @@ export const App: React.FC<Props> = () => {
 
   const reconnectingTimeoutRef = React.useRef<number | undefined>(undefined);
   React.useEffect(() => {
-    client.subscription.onDisconnected(() => {
+    appContext.client.subscription.onDisconnected(() => {
       if (!reconnectingTimeoutRef.current) {
         reconnectingTimeoutRef.current = window.setTimeout(() => {
           setDisconnected(true);
-          retry(client.healthEndpoint, () => {
-            resetClient();
+          retry(appContext.client.healthEndpoint, () => {
+            appContext.resetClient();
             setDisconnected(false);
+            serviceWorker.updateContent();
           });
         }, 5000);
       }
     });
 
-    client.subscription.onReconnected(() => {
+    appContext.client.subscription.onReconnected(() => {
       clearTimeout(reconnectingTimeoutRef.current);
       reconnectingTimeoutRef.current = undefined;
     });
 
     return () => {
-      client.subscription.unsubscribeAll();
+      appContext.client.subscription.unsubscribeAll();
     };
-  }, [client.subscription, client.healthEndpoint, resetClient, retry]);
+  }, [retry, appContext, serviceWorker]);
 
   React.useEffect(() => {
-    fetch(client.healthEndpoint)
+    fetch(appContext.client.healthEndpoint)
       .then(() => {})
       .catch(() => {
         setDisconnected(true);
-        retry(client.healthEndpoint, () => {
-          resetClient();
+        retry(appContext.client.healthEndpoint, () => {
+          appContext.resetClient();
           setDisconnected(false);
+          serviceWorker.updateContent();
         });
       });
-  }, [client.healthEndpoint, resetClient, retry]);
-
-  const generateClassName = React.useMemo(() => {
-    return createGenerateClassName({ disableGlobal: true, productionPrefix: 'radio-' });
-  }, []);
-
-  return (
-    <AppContext.Provider value={{ client, resetClient, disconnected, serviceWorker }}>
-      <StylesProvider injectFirst={false} generateClassName={generateClassName}>
-        <ThemeProvider theme={theme}>
-          <ApolloProvider client={client.apollo}>
-            <SnackbarProvider
-              anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
-              classes={{ containerAnchorOriginTopRight: classes.snackBarTopRightContainer }}
-            >
-              <Main />
-            </SnackbarProvider>
-          </ApolloProvider>
-          <CssBaseline />
-        </ThemeProvider>
-      </StylesProvider>
-    </AppContext.Provider>
-  );
-};
-
-const Main = () => {
-  const appContext = React.useContext(AppContext);
+  }, [appContext, appContext.client.healthEndpoint, retry, serviceWorker]);
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const suspendedSnackbarId = 'SuspendedSnackbar';
   React.useEffect(() => {
-    if (appContext.disconnected === true) {
+    if (disconnected === true) {
       enqueueSnackbar(
         <>
           <CircularProgress size={16} color="inherit" style={{ marginRight: 8 }} /> Cannot connect to the server.
@@ -142,20 +142,14 @@ const Main = () => {
     } else {
       closeSnackbar(suspendedSnackbarId);
     }
-  }, [appContext.disconnected, closeSnackbar, enqueueSnackbar]);
+  }, [disconnected, closeSnackbar, enqueueSnackbar]);
 
   React.useEffect(() => {
-    const id = appContext.serviceWorker.onUpdate(() => {
+    const id = serviceWorker.onUpdate(() => {
       enqueueSnackbar(
         <>
-          A new version of your app is ready and will be used on your next browser's reloading.
-          <Button
-            // variant="outlined"
-            color="inherit"
-            size="small"
-            style={{ marginLeft: 8 }}
-            onClick={appContext.serviceWorker.reloadToApplyNewContent}
-          >
+          A new version of your app is ready. Reload to apply.
+          <Button color="inherit" size="small" style={{ marginLeft: 8 }} onClick={serviceWorker.applyNewContent}>
             Reload now
           </Button>
         </>,
@@ -163,9 +157,9 @@ const Main = () => {
       );
     });
     return () => {
-      appContext.serviceWorker.offUpdate(id);
+      serviceWorker.offUpdate(id);
     };
-  }, [appContext.serviceWorker, enqueueSnackbar]);
+  }, [serviceWorker, enqueueSnackbar]);
 
-  return <AppRouter />;
+  return <>{props.children}</>;
 };
