@@ -47,7 +47,10 @@ export const useStyles = makeStyles(({ spacing, palette }) => ({
     borderRadius: '50%',
     marginLeft: spacing(0.5),
   },
-  vote: {},
+  vote: {
+    // TODO: Enable when the up/down vote feature is ready
+    display: 'none',
+  },
   voteButton: {
     fontSize: 16,
     marginLeft: 2,

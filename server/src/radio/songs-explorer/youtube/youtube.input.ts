@@ -24,8 +24,8 @@ export class YoutubeVideoFindOneInput {
 
 @InputType()
 export class YoutubeVideoFindAllInput {
-  @Field()
-  q: string;
+  @Field({ nullable: true })
+  q?: string;
 
   @Field({ nullable: true })
   @IsPositive()
@@ -35,4 +35,7 @@ export class YoutubeVideoFindAllInput {
 
   @Field((type) => YoutubeVideoOrderEnum, { nullable: true })
   order?: YoutubeVideoOrderEnum;
+
+  @Field({ nullable: true })
+  relatedToVideoUrl?: string;
 }

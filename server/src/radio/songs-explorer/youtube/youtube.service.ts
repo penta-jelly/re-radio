@@ -36,12 +36,17 @@ export class YoutubeService {
     q,
     maxResults = 5,
     order = YoutubeVideoOrderEnum.RELEVANCE,
+    relatedToVideoUrl,
   }: YoutubeVideoFindAllInput): Promise<YoutubeVideoDTO[]> {
     const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
     const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
     const part = 'id,snippet';
     const type = 'video';
-    const serviceUrl = `${apiUrl}/search?key=${apiKey}&type=${type}&part=${part}&q=${q}&maxResults=${maxResults}&order=${order}`;
+    let serviceUrl = `${apiUrl}/search?key=${apiKey}&type=${type}&part=${part}&q=${q}&maxResults=${maxResults}&order=${order}`;
+    const relatedToVideoId = relatedToVideoUrl ? this.parseVideoUrl(relatedToVideoUrl).id : '';
+    if (relatedToVideoId) {
+      serviceUrl += `&relatedToVideoId=${relatedToVideoId}`;
+    }
     const data = await fetch(serviceUrl).then((res) => res.json());
     if (data && Array.isArray(data.items)) {
       return data.items.map((item) => ({

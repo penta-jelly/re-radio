@@ -51,9 +51,16 @@ export const HistorySongItem: React.FC<Props> = (props) => {
         <span className={classes.duration}>{Moment.duration(duration).format('HH:mm:ss')}</span>
       </div>
       <ListItemText
-        disableTypography
-        primary={<div className={classes.text}>{title}</div>}
-        secondary={`Played ${playedTimes} times by ${creatorIds.length} users.`}
+        primary={
+          <span className={classes.text} title={title}>
+            {title}
+          </span>
+        }
+        secondary={
+          <span className={classes.text} title={`Played ${playedTimes} times by ${creatorIds.length} users.`}>
+            Played {playedTimes} times by {creatorIds.length} users.
+          </span>
+        }
       />
       <ListItemSecondaryAction>
         {createSongMutation.loading ? (
