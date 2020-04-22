@@ -32,7 +32,7 @@ export class Song {
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
-  @Column({ type: 'timestamp', nullable: true, default: null })
+  @Column({ type: 'timestamp', nullable: true })
   startedAt?: Date;
 
   @Column()
@@ -59,11 +59,11 @@ export class Song {
   @Column()
   stationSlug: string;
 
-  @Column('int', { array: true, default: '{}' })
-  upVoteUserIds: number[];
+  @Column('int', { array: true })
+  upVoteUserIds: number[] = [];
 
-  @Column('int', { array: true, default: '{}' })
-  downVoteUserIds: number[];
+  @Column('int', { array: true })
+  downVoteUserIds: number[] = [];
 
   @BeforeInsert()
   @BeforeUpdate()

@@ -1,6 +1,6 @@
 {
   "packages": [
-    "client", "server", "e2e", "common"
+    "client", "server", "common"
   ],
   "version": "0.1.0-SNAPSHOT",
   "stream": true

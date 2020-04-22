@@ -64,7 +64,7 @@ export const HistorySongItem: React.FC<Props> = (props) => {
       />
       <ListItemSecondaryAction>
         {createSongMutation.loading ? (
-          <CircularProgress size={16} />
+          <CircularProgress size={26} />
         ) : (
           <IconButton onClick={onReplayClick} size="small">
             <MdReplay />

@@ -17,7 +17,12 @@ export class UserSubscriptionResolver {
       if (!Object.keys(where).every((key) => where[key] === payload.entity[key])) {
         continue;
       }
+      await this.workaroundToMakeNextStepMoveToTheBottomOfTheEventQueue();
       yield { user: payload };
     }
+  }
+
+  async workaroundToMakeNextStepMoveToTheBottomOfTheEventQueue() {
+    return new Promise((r) => setTimeout(r, 300));
   }
 }

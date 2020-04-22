@@ -41,8 +41,8 @@ export class Station {
   @JoinTable()
   tags: StationTag[];
 
-  @Column('int', { array: true, default: '{}' })
-  onlineUserIds: number[];
+  @Column('int', { array: true })
+  onlineUserIds: number[] = [];
 
   @OneToMany((type) => Song, (song) => song.station)
   songs: Song[];

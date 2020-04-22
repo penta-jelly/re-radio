@@ -1,3 +1,4 @@
+// prettier-ignore
 import { MigrationInterface, QueryRunner } from "typeorm";
 
 export class OnlineUsers1573101970989 implements MigrationInterface {
@@ -18,9 +19,9 @@ export class OnlineUsers1573101970989 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "song" ALTER COLUMN "startedAt" DROP DEFAULT`, undefined);
         await queryRunner.query(`ALTER TABLE "user" ALTER COLUMN "reputation" DROP NOT NULL`, undefined);
         await queryRunner.query(`ALTER TABLE "song" DROP COLUMN "downVoteUserIds"`, undefined);
-        await queryRunner.query(`ALTER TABLE "song" ADD COLUMN "downVoteUserIds" text NOT NULL`, undefined);
+        await queryRunner.query(`ALTER TABLE "song" ADD COLUMN "downVoteUserIds" text NOT NULL DEFAULT ''`, undefined);
         await queryRunner.query(`ALTER TABLE "song" DROP COLUMN "upVoteUserIds"`, undefined);
-        await queryRunner.query(`ALTER TABLE "song" ADD COLUMN "upVoteUserIds" text NOT NULL`, undefined);
+        await queryRunner.query(`ALTER TABLE "song" ADD COLUMN "upVoteUserIds" text NOT NULL DEFAULT ''`, undefined);
         await queryRunner.query(`ALTER TABLE "station" DROP COLUMN "onlineUserIds"`, undefined);
         await queryRunner.query(`ALTER TABLE "user" ADD CONSTRAINT "FK_2f22f6a7900d1946ddda4a14e79" FOREIGN KEY ("currentStationId") REFERENCES "station"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`, undefined);
     }

@@ -24,15 +24,15 @@ export const RelatedSongs: React.FC = () => {
 
   const currentPlayingSongUrl = stationPlayerQuery.data?.playingSongs?.[0]?.url;
 
-  const [fetch, { data, loading, error, variables }] = useYoutubeVideosLazyQuery({ fetchPolicy: 'cache-first' });
+  const [fetch, { data, loading, variables }] = useYoutubeVideosLazyQuery({ fetchPolicy: 'cache-first' });
 
   React.useEffect(() => {
     if (currentPlayingSongUrl && variables?.where.relatedToVideoUrl !== currentPlayingSongUrl) {
-      fetch({ variables: { where: { maxResults: 6, relatedToVideoUrl: currentPlayingSongUrl } } });
+      fetch({ variables: { where: { maxResults: 4, relatedToVideoUrl: currentPlayingSongUrl } } });
     }
   }, [currentPlayingSongUrl, fetch, stationPlayerQuery.data, variables]);
 
-  let content: React.ReactNode = <Typography variant="subtitle1">Related songs</Typography>;
+  let content: React.ReactNode = null;
   if (data) {
     if (data.youtubeVideos.length === 0) {
       content = <Typography variant="subtitle1">No related songs</Typography>;
@@ -53,14 +53,10 @@ export const RelatedSongs: React.FC = () => {
         </>
       );
     }
-  } else if (loading) {
-    content = <CircularProgress />;
-  } else if (error) {
-    content = <Typography variant="subtitle1">{error.message}</Typography>;
   }
-  return (
+  return content ? (
     <Card className={classes.container} elevation={0} square id="playlist-container">
       {content}
     </Card>
-  );
+  ) : null;
 };

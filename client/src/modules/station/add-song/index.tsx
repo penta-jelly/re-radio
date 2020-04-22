@@ -8,15 +8,13 @@ import { useStyles } from './styles';
 export const AddSong: React.FC<{}> = () => {
   const classes = useStyles();
   const [query, setQuery] = useState<string>('');
-  const [fetch, { data, loading }] = useYoutubeVideosLazyQuery({
-    variables: { where: { q: query } },
-  });
+  const [fetch, { data, loading }] = useYoutubeVideosLazyQuery();
 
   // Must debounce to prevent firing fetch request every input changed event
-  const debounceQuery = useDebounce(query, 300);
+  const debounceQuery = useDebounce(query, 600);
   React.useEffect(() => {
-    if (debounceQuery) {
-      fetch();
+    if (debounceQuery.trim().length > 0) {
+      fetch({ variables: { where: { q: debounceQuery } } });
     }
   }, [debounceQuery, fetch]);
 

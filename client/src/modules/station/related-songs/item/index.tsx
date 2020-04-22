@@ -1,6 +1,6 @@
 import { CircularProgress, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@material-ui/core';
 import React from 'react';
-import { MdReplay } from 'react-icons/md';
+import { MdPlaylistAdd } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
 import { useApolloClient } from 'react-apollo';
 import { useSnackbar } from 'notistack';
@@ -94,10 +94,10 @@ export const RelatedSongItem: React.FC<Props> = (props) => {
       />
       <ListItemSecondaryAction>
         {mutating ? (
-          <CircularProgress size={16} />
+          <CircularProgress size={26} />
         ) : (
           <IconButton onClick={onReplayClick} size="small">
-            <MdReplay />
+            <MdPlaylistAdd />
           </IconButton>
         )}
       </ListItemSecondaryAction>

@@ -19,6 +19,7 @@ export class StationSubscriptionResolver {
       if (!Object.keys(where).every((key) => where[key] === payload.entity[key])) {
         continue;
       }
+      await this.workaroundToMakeNextStepMoveToTheBottomOfTheEventQueue();
       if (payload.mutation !== MutationEnum.DELETED) {
         payload.entity = await this.stationService.findOneOrFail({
           where: { id: payload.entity.id },
@@ -27,5 +28,9 @@ export class StationSubscriptionResolver {
       }
       yield { station: payload };
     }
+  }
+
+  async workaroundToMakeNextStepMoveToTheBottomOfTheEventQueue() {
+    return new Promise((r) => setTimeout(r, 300));
   }
 }

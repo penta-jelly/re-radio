@@ -19,7 +19,12 @@ export class SongSubscriptionResolver {
       if (!Object.keys(where).every((key) => where[key] === payload.entity[key])) {
         continue;
       }
+      await this.workaroundToMakeNextStepMoveToTheBottomOfTheEventQueue();
       yield { song: payload };
     }
+  }
+
+  async workaroundToMakeNextStepMoveToTheBottomOfTheEventQueue() {
+    return new Promise((r) => setTimeout(r, 300));
   }
 }

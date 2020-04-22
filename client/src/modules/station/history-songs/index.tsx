@@ -50,7 +50,11 @@ export const HistorySongs: React.FC = () => {
   } else if (loading) {
     content = <CircularProgress />;
   } else if (error) {
-    content = <Typography variant="subtitle1">{error.message}</Typography>;
+    content = (
+      <Typography variant="body1" color="error">
+        {error.message}
+      </Typography>
+    );
   }
   return (
     <Card className={classes.container} elevation={0} square id="playlist-container">

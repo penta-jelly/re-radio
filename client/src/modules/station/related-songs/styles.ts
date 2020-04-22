@@ -7,9 +7,10 @@ export const useStyles = makeStyles(({ spacing }) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    height: 650,
+    height: 300,
   },
   list: {
+    height: '100%',
     width: '100%',
     overflowY: 'scroll',
   },
