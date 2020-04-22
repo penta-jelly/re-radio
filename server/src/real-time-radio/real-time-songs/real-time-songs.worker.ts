@@ -1,4 +1,5 @@
 import { forwardRef, Inject, Injectable, InternalServerErrorException, Logger } from '@nestjs/common';
+import Moment from 'moment';
 import { PubSub } from '../../core/pub-sub/pub-sub.service';
 import { EntitySubscription, MutationEnum } from '../../core/typeorm/entity-subscription.interface';
 import { Song, SongStatusEnum } from '../../radio/song/entities/song.entity';
@@ -46,8 +47,9 @@ export class RealTimeSongsWorker {
     if (duration <= 0) {
       await this.updatePlayedSongAndPlayNextSong(song);
     } else {
+      const formattedDuration = Moment.duration(duration).format('HH:mm:ss');
       this.logger.log(
-        `Station [${song.stationSlug}] Song [${song.id}] "${song.title}" will be timed out in ${duration} milliseconds.`,
+        `Station [${song.stationSlug}] Song [${song.id}] "${song.title}" will be timed out in ${formattedDuration}.`,
       );
       this.playersMap[song.stationSlug] = {
         timer: global.setTimeout(() => this.updatePlayedSongAndPlayNextSong(song), duration),

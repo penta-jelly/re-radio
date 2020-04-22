@@ -40,7 +40,12 @@ export const AuthenticatedListItem: React.FC<Props> = ({ user, drawer }) => {
     <ListItem>
       <>
         <ListItemAvatar className={classes.listItemIcon}>
-          <Image className={classes.avatar} src={user.avatarUrl} onClick={onContainerClicked} />
+          <Image
+            className={classes.avatar}
+            src={user.avatarUrl || '/asset/avatar/female.png'}
+            onClick={onContainerClicked}
+            title={user.username}
+          />
         </ListItemAvatar>
         {drawer.collapsed || <ListItemText primary={user.username} />}
         <Menu id="lock-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={onClose}>

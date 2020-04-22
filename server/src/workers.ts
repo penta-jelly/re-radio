@@ -1,6 +1,7 @@
 /* eslint-disable import/first */
 /* eslint-disable import/no-unassigned-import */
 require('source-map-support/register');
+require('moment-duration-format');
 /* eslint-enable import/no-unassigned-import */
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
