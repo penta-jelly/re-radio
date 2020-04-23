@@ -14,15 +14,8 @@ export const useUnauthorizedNotification = (message: string = 'You need to login
       key,
       variant: 'warning',
       preventDuplicate: true,
-      onClose: () => closeSnackbar(key),
       action: (key) => (
-        <IconButton
-          className={classes.closeNotificationButton}
-          size="small"
-          onClick={() => {
-            closeSnackbar(key);
-          }}
-        >
+        <IconButton className={classes.closeNotificationButton} size="small" onClick={() => closeSnackbar(key)}>
           <CloseIcon />
         </IconButton>
       ),
