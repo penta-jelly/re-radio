@@ -14,6 +14,7 @@ export class TypeormOptions implements TypeOrmOptionsFactory {
 
   static createTypeOrmOptions(): PostgresConnectionOptions {
     return {
+      name: `connection-${Math.round(Math.random() * 200)}`,
       type: 'postgres',
       host: ConfigService.get(EnvVariables.DB_HOST),
       port: Number(ConfigService.get(EnvVariables.DB_PORT)),

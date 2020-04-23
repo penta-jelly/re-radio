@@ -32,14 +32,14 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           record: true
-          install: false
+          install: true
           runTests: true
           working-directory: e2e
           wait-on: "http://localhost:2996/status"
-          wait-on-timeout: 120
+          wait-on-timeout: 60
       - name: Persist the log file
         if: failure()
         uses: actions/upload-artifact@v1
         with:
-          name: log.zip
+          name: log
           path: server/storage/log
