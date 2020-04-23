@@ -1,7 +1,7 @@
 import { inspect } from 'util';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, FindManyOptions, FindConditions } from 'typeorm';
+import { Repository, FindConditions } from 'typeorm';
 import { YOUTUBE_SERVICE_KEY } from '../youtube/shared';
 import { SongCache } from './entities/song-cache.entity';
 

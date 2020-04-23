@@ -1,9 +1,10 @@
 import StationPage from '../support/StationPage';
 import StationsPage from '../support/StationsPage';
 
+const stationPage = StationPage();
+
 describe('Show Station Page', () => {
-  const stationPage = StationPage();
-  describe('By using page URL', () => {
+  describe('By using page URL ', () => {
     it('should open station page', () => {
       stationPage.navigate('station-a');
     });
@@ -32,15 +33,16 @@ describe('Show Station Page', () => {
 });
 
 describe('Station Page components', () => {
-  const stationPage = StationPage();
   before(() => {
     stationPage.navigate('station-a');
   });
+
   describe('Player', () => {
     it('should render player container', () => {
       cy.get(stationPage.elements.player.container).should('be.visible');
     });
   });
+
   describe('Playlist', () => {
     it('should render playlist container', () => {
       cy.get(stationPage.elements.playlist.container).should('be.visible');
@@ -49,8 +51,6 @@ describe('Station Page components', () => {
 });
 
 describe('Add a song', () => {
-  const stationPage = StationPage();
-
   it('should be able to add a song to the playlist', () => {
     stationPage.navigate('station-a', true);
 
@@ -65,10 +65,9 @@ describe('Add a song', () => {
 
     stationPage.clickAddSongFab();
 
-    // TODO: temporary disable due to the limitation of Youtube API
-    // cy.get(stationPage.elements.playlist.container, { timeout: 10000 }) // The delay for the server to start the newly added song
-    //   .should('be.visible')
-    //   .contains('Hello')
-    //   .should('be.visible');
+    cy.get(stationPage.elements.playlist.container, { timeout: 10000 }) // The delay for the server to start the newly added song
+      .should('be.visible')
+      .contains('Hello')
+      .should('be.visible');
   });
 });
