@@ -4,7 +4,7 @@ import Moment from 'moment';
 import fetch from 'node-fetch';
 import { ConfigService } from '../../../core/config/config.service';
 import { EnvVariables } from '../../../core/config/config.variables';
-import { SongCacheService } from '../cache/song-cache.service';
+import { ExternalApiCacheService } from '../cache/external-api-cache.service';
 import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from './youtube.dto';
 import { YoutubeVideoFindAllInput, YoutubeVideoOrderEnum } from './youtube.input';
 import { YOUTUBE_SERVICE_KEY } from './shared';
@@ -12,7 +12,7 @@ import { YOUTUBE_SERVICE_KEY } from './shared';
 @Injectable()
 export class YoutubeService {
   private logger = new Logger(YoutubeService.name);
-  constructor(private readonly configService: ConfigService, private readonly cacheService: SongCacheService) {}
+  constructor(private readonly configService: ConfigService, private readonly cacheService: ExternalApiCacheService) {}
 
   public parseVideoUrl(url: string): VideoReturnType {
     const { id, service } = getVideoId(url);
@@ -26,20 +26,20 @@ export class YoutubeService {
     part: string = 'id,snippet,contentDetails',
   ): Promise<YoutubeVideoDetailDTO> {
     let video;
-    const cache = await this.cacheService.findOne(videoId, 'youtube', part);
+    const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
+    const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
+    const params = { id: videoId, part };
+    const serviceUrl = `${apiUrl}/videos?${this.toQueryString(params)}`;
+    const cache = await this.cacheService.findOne(serviceUrl);
     if (cache) {
       video = cache.data;
     } else {
-      const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
-      const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
-      const params = { id: videoId, key: apiKey, part };
-      const serviceUrl = `${apiUrl}/videos?${this.toQueryString(params)}`;
-      const data = await fetch(serviceUrl).then((res) => res.json());
+      const data = await fetch(serviceUrl + `&key=${apiKey}`).then((res) => res.json());
       video = data?.items?.[0];
       if (!video) {
         throw new InternalServerErrorException(`Could not find video with this request URL: ${serviceUrl}`);
       }
-      await this.cacheService.persist(videoId, 'youtube', video, part);
+      await this.cacheService.persist(video, serviceUrl);
     }
 
     if (video?.contentDetails?.duration) {
@@ -56,40 +56,30 @@ export class YoutubeService {
   }: YoutubeVideoFindAllInput): Promise<YoutubeVideoDTO[]> {
     const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
     const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
-    const part = 'id';
+    const part = 'id,snippet';
     const type = 'video';
-    const params: QueryParams = { key: apiKey, part, type, q, maxResults, order };
+    const params: QueryParams = { part, type, q, maxResults, order };
     const relatedToVideoId = relatedToVideoUrl ? this.parseVideoUrl(relatedToVideoUrl).id : '';
     if (relatedToVideoId) {
       params.relatedToVideoId = relatedToVideoId;
     }
     const serviceUrl = `${apiUrl}/search?${this.toQueryString(params)}`;
-    const data = await fetch(serviceUrl).then((res) => res.json());
 
-    if (!data || !Array.isArray(data.items)) {
-      throw new InternalServerErrorException(`Could not find any videos with this request URL: ${serviceUrl}`);
-    }
-    const videoIds: string[] = data.items.map((item) => item.id && item.id.videoId);
-    const resultPart = 'id,snippet';
-    const cachedVideos = await this.cacheService.findAll(
-      videoIds.map((videoId) => ({ songId: videoId, songService: 'youtube', queryParts: resultPart })),
-    );
-
-    const notYetCacheVideoIds = videoIds.filter((id) => cachedVideos.every(({ songId }) => songId !== id));
-    const notYetCacheVideos = await Promise.all(
-      notYetCacheVideoIds.map((videoId) => this.fetchVideoDetail(videoId, resultPart)),
-    );
-
-    const videos = videoIds.map((id) => {
-      const cachedVideo = cachedVideos.find(({ songId }) => songId === id);
-      const notYetCacheVideo = notYetCacheVideos.find((video) => video.id === id);
-      if (!cachedVideo && !notYetCacheVideo) {
-        throw new InternalServerErrorException(`Cannot find video ${id} in either cached or API.`);
+    const cache = await this.cacheService.findOne(serviceUrl);
+    let videos;
+    if (cache) {
+      videos = cache.data;
+    } else {
+      const data = await fetch(serviceUrl + `&key=${apiKey}`).then((res) => res.json());
+      if (!data || !Array.isArray(data.items)) {
+        throw new InternalServerErrorException(`Could not find any videos with this request URL: ${serviceUrl}`);
       }
-      // FIXME: dangerous type casting
-      const video = (cachedVideo?.data || notYetCacheVideo) as YoutubeVideoDTO;
-      return video;
-    });
+      videos = data.items.map((item) => ({
+        ...item,
+        id: item?.id?.videoId,
+      }));
+      await this.cacheService.persist(videos, serviceUrl);
+    }
 
     return videos;
   }

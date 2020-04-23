@@ -9,12 +9,14 @@ export class TypeormOptions implements TypeOrmOptionsFactory {
   constructor(private readonly configService: ConfigService) {}
 
   createTypeOrmOptions(): PostgresConnectionOptions {
-    return { ...TypeormOptions.createTypeOrmOptions() };
+    return {
+      ...TypeormOptions.createTypeOrmOptions(),
+      name: `connection-${Math.round(Math.random() * 100)}`,
+    };
   }
 
   static createTypeOrmOptions(): PostgresConnectionOptions {
     return {
-      name: `connection-${Math.round(Math.random() * 200)}`,
       type: 'postgres',
       host: ConfigService.get(EnvVariables.DB_HOST),
       port: Number(ConfigService.get(EnvVariables.DB_PORT)),

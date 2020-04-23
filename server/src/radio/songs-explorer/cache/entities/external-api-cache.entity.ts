@@ -1,8 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, Column } from 'typeorm';
-import { YOUTUBE_SERVICE_KEY } from '../../youtube/shared';
 
 @Entity()
-export class SongCache {
+export class ExternalApiCache {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -12,14 +11,8 @@ export class SongCache {
   @UpdateDateColumn({ type: 'timestamp' })
   updatedAt: Date;
 
-  @Column()
-  songId: string;
-
-  @Column({ type: 'enum', enum: [YOUTUBE_SERVICE_KEY], default: YOUTUBE_SERVICE_KEY })
-  songService: typeof YOUTUBE_SERVICE_KEY;
-
-  @Column()
-  queryParts: string;
+  @Column({ comment: 'The URL should NOT include the API key. Otherwise, it makes the cache meaningless.' })
+  url: string;
 
   @Column('simple-json')
   data: object;
