@@ -149,7 +149,7 @@ export const ServiceWorkerProvider: React.FC = (props) => {
 
   React.useEffect(() => {
     if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-      register(`service-worker.js`);
+      register(`/service-worker.js`);
     }
   }, [register]);
 
