@@ -193,6 +193,7 @@ export type Query = {
   readonly user: User;
   readonly currentUser: User;
   readonly historySongs: ReadonlyArray<HistorySong>;
+  readonly countHistorySongs: Scalars['Int'];
   readonly songs: ReadonlyArray<Song>;
   readonly song: Song;
   readonly youtubeVideo: YoutubeVideoDetail;
@@ -227,6 +228,11 @@ export type QueryUserArgs = {
 export type QueryHistorySongsArgs = {
   where: HistorySongFindAllWhereInput;
   pagination?: Maybe<PaginationInput>;
+};
+
+
+export type QueryCountHistorySongsArgs = {
+  where: HistorySongFindAllWhereInput;
 };
 
 
@@ -601,6 +607,7 @@ export type HistorySongsQueryVariables = {
 
 export type HistorySongsQuery = (
   { readonly __typename?: 'Query' }
+  & { count: Query['countHistorySongs'] }
   & { readonly songs: ReadonlyArray<(
     { readonly __typename?: 'HistorySong' }
     & Pick<HistorySong, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'creatorIds' | 'playedTimes'>
@@ -1108,6 +1115,7 @@ export const HistorySongsDocument = gql`
     creatorIds
     playedTimes
   }
+  count: countHistorySongs(where: {stationSlug: $stationSlug})
 }
     `;
 

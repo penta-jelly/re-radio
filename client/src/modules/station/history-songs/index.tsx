@@ -18,7 +18,7 @@ export const HistorySongs: React.FC = () => {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
 
-  const baseIncrement = 25;
+  const baseIncrement = 20;
   const [take, setTake] = React.useState(baseIncrement);
 
   const { loading, error, data } = useHistorySongsQuery({
@@ -26,7 +26,12 @@ export const HistorySongs: React.FC = () => {
     fetchPolicy: 'network-only',
   });
 
-  const onBottomReached = React.useCallback(() => !loading && setTake((value) => value + baseIncrement), [loading]);
+  const onBottomReached = React.useCallback(() => {
+    if (!loading && data && take < data.count) {
+      const newTake = take + baseIncrement;
+      setTake(newTake);
+    }
+  }, [loading, data, take]);
   const [, ref] = useScrollMonitor({ onBottomReached }, [data]);
 
   let content: React.ReactNode = <Typography variant="subtitle1">History</Typography>;

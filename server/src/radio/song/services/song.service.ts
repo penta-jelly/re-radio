@@ -36,6 +36,19 @@ export class SongService {
     return this.songRepository.findOneOrFail(options);
   }
 
+  private findHistorySongsQueryBuilder(stationSlug: string) {
+    return this.songRepository
+      .createQueryBuilder()
+      .select(`title, url, thumbnail, duration, "stationSlug"`)
+      .addSelect(`max("createdAt")`, `createdAt`)
+      .addSelect(`count(id)`, `playedTimes`)
+      .addSelect(`array_remove(array_agg(DISTINCT "creatorId"), NULL)`, `creatorIds`)
+      .where(`"stationSlug" = :stationSlug`, { stationSlug })
+      .andWhere(`status = 'PLAYED'`)
+      .groupBy(`title, url, thumbnail, duration, "stationSlug"`)
+      .orderBy(`"createdAt"`, 'DESC');
+  }
+
   async findHistorySongs(
     stationSlug: string,
     { take, skip }: PaginationInput,
@@ -51,19 +64,11 @@ export class SongService {
       createdAt: Date;
     }[]
   > {
-    return this.songRepository
-      .createQueryBuilder()
-      .select(`title, url, thumbnail, duration, "stationSlug"`)
-      .addSelect(`max("createdAt")`, `createdAt`)
-      .addSelect(`count(id)`, `playedTimes`)
-      .addSelect(`array_remove(array_agg(DISTINCT "creatorId"), NULL)`, `creatorIds`)
-      .where(`"stationSlug" = :stationSlug`, { stationSlug })
-      .andWhere(`status = 'PLAYED'`)
-      .groupBy(`title, url, thumbnail, duration, "stationSlug"`)
-      .orderBy(`"createdAt"`, 'DESC')
-      .take(take)
-      .skip(skip)
-      .getRawMany();
+    return this.findHistorySongsQueryBuilder(stationSlug).take(take).skip(skip).getRawMany();
+  }
+
+  async countHistorySongs(stationSlug: string) {
+    return this.findHistorySongsQueryBuilder(stationSlug).getCount();
   }
 
   async create(payload: SongCreateInput, owner: User): Promise<Song> {

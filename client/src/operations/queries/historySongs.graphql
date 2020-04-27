@@ -8,4 +8,6 @@ query HistorySongs($stationSlug: String!, $pagination: PaginationInput) {
     creatorIds
     playedTimes
   }
+
+  count: countHistorySongs(where: { stationSlug: $stationSlug })
 }
