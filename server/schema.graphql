@@ -167,6 +167,7 @@ type Query {
   user(where: UserFindOneWhereInput!): User!
   currentUser: User!
   historySongs(where: HistorySongFindAllWhereInput!, pagination: PaginationInput): [HistorySong!]!
+  countHistorySongs(where: HistorySongFindAllWhereInput!): Int!
   songs(order: SongFindAllOrderInput, where: [SongFindAllWhereInput], pagination: PaginationInput): [Song!]!
   song(where: SongFindOneWhereInput!): Song!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!

@@ -1,4 +1,4 @@
-import { Args, Query, ResolveField, Resolver, Root } from '@nestjs/graphql';
+import { Args, Query, ResolveField, Resolver, Root, Int } from '@nestjs/graphql';
 import { PaginationInput } from '../../../core/graphql/input/pagination';
 import { StationDTO } from '../../station/dto/station.dto';
 import { StationService } from '../../station/services/station.service';
@@ -23,5 +23,14 @@ export class HistorySongResolver {
   ) {
     const entities = await this.songService.findHistorySongs(where.stationSlug, pagination);
     return entities.map((entity) => ({ ...entity, id: entity.url }));
+  }
+
+  @Query((returns) => Int)
+  async countHistorySongs(
+    @Args({ name: 'where', type: () => HistorySongFindAllWhereInput })
+    where: HistorySongFindAllWhereInput,
+  ) {
+    const count = await this.songService.countHistorySongs(where.stationSlug);
+    return count;
   }
 }

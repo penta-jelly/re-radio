@@ -11,7 +11,6 @@ export class TypeormOptions implements TypeOrmOptionsFactory {
   createTypeOrmOptions(): PostgresConnectionOptions {
     return {
       ...TypeormOptions.createTypeOrmOptions(),
-      name: `connection-${Math.round(Math.random() * 100)}`,
     };
   }
 

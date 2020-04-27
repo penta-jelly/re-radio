@@ -10,8 +10,8 @@ export function useScrollMonitor<T extends HTMLElement = HTMLDivElement>(
     (event: Event) => {
       const node = event.target as T | null;
       if (!node) return;
-      const bottom = node.scrollHeight - node.scrollTop === node.clientHeight;
-      if (bottom) {
+      const bottom = Math.abs(node.scrollHeight - node.scrollTop - node.clientHeight);
+      if (bottom < 24) {
         config.onBottomReached && config.onBottomReached();
       }
     },

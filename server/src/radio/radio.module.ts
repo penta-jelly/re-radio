@@ -18,7 +18,8 @@ import { UserModule } from './user/user.module';
   imports: [
     LoggerModule,
     StaticModule,
-    RadioTypeOrmModule,
+    // eslint-disable-next-line @typescript-eslint/no-use-before-define
+    RadioTypeOrmModule.forRoot(RadioModule.name),
     RadioGraphqlModule,
     FilesModule,
     SongsExplorerModule,
