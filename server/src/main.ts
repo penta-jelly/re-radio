@@ -2,8 +2,8 @@ import { DEFAULT_WORKERS, Worker } from './workers';
 
 import yargs = require('yargs');
 
-type Application = 'radio' | 'real-time-radio' | 'all';
-const DEFAULT_APPLICATIONS: Application[] = ['radio', 'real-time-radio', 'all'];
+type Application = 'radio' | 'real-time-radio';
+const DEFAULT_APPLICATIONS: Application[] = ['radio', 'real-time-radio'];
 
 yargs
   .command(
@@ -26,9 +26,6 @@ yargs
 
         case 'real-time-radio':
           require('./real-time-radio').bootstrap();
-          break;
-        case 'all':
-          Promise.all([require('./radio').bootstrap(), require('./real-time-radio').bootstrap()]);
           break;
       }
     },

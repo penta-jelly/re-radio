@@ -42,4 +42,4 @@ ENV RADIO_SERVER_PORT 2996
 
 EXPOSE 2996
 
-CMD /wait && ./app serve all
+CMD /wait && ./app serve radio & ./app serve real-time-radio

@@ -8,7 +8,7 @@
       "sourceMaps": true,
       "restart": true,
       "protocol": "inspector",
-      "port": 2997,
+      "port": 2998,
       "outFiles": ["${workspaceFolder}/server/lib/**/*.js"]
     },
     {
@@ -18,7 +18,7 @@
       "sourceMaps": true,
       "restart": true,
       "protocol": "inspector",
-      "port": 2998,
+      "port": 2999,
       "outFiles": ["${workspaceFolder}/server/lib/**/*.js"]
     },
     {
