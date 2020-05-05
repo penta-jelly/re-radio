@@ -32,7 +32,7 @@
     "react-helmet": "6.0.0",
     "react-i18next": "11.4.0",
     "react-icons": "3.10.0",
-    "react-player": "1.15.3",
+    "react-player": "2.0.1",
     "react-router-dom": "5.1.2",
     "subscriptions-transport-ws": "0.9.16",
     "yup": "0.28.5"
