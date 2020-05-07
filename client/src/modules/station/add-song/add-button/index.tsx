@@ -3,6 +3,8 @@ import { FabProps as MuiFabProps } from '@material-ui/core/Fab';
 import React, { useCallback } from 'react';
 import { MdSend } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
+import { useTranslation } from 'react-i18next';
 import { useCreateSongMutation, useCurrentUserQuery, useYoutubeVideoLazyQuery, YoutubeVideo } from 'operations';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 
@@ -19,6 +21,8 @@ interface RouteParams {
 export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }) => {
   const [addSong, createSongMutation] = useCreateSongMutation();
   const match = useRouteMatch<RouteParams>();
+  const { enqueueSnackbar } = useSnackbar();
+  const { t } = useTranslation('stations');
   if (!match) {
     throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
   }
@@ -33,10 +37,19 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
     }
   }, [previewSong, queryYoutubeVideo]);
 
+  const playable = React.useMemo(() => {
+    if (youtubeVideoQuery.data?.youtubeVideo.contentDetails.duration) {
+      return youtubeVideoQuery.data.youtubeVideo.contentDetails.duration > 10000;
+    }
+    return false;
+  }, [youtubeVideoQuery.data]);
+
   // TODO: DO NOT ALLOW TO SUBMIT IF DURATION = 0
   const onSubmit = useCallback(async () => {
     if (currentUserQuery.error) {
       notifyUnauthorizedUser();
+    } else if (!playable) {
+      enqueueSnackbar(t('unplayableSong'), { variant: 'warning' });
     } else {
       if (
         !currentUserQuery.loading &&
@@ -75,23 +88,23 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
     currentUserQuery.error,
     currentUserQuery.loading,
     currentUserQuery.data,
+    playable,
     notifyUnauthorizedUser,
+    enqueueSnackbar,
+    t,
     youtubeVideoQuery.loading,
     youtubeVideoQuery.data,
     addSong,
-    match,
+    match.params.slug,
     postSubmit,
   ]);
 
+  const disabled = React.useMemo(() => {
+    return !previewSong || createSongMutation.loading || youtubeVideoQuery.loading;
+  }, [createSongMutation.loading, previewSong, youtubeVideoQuery.loading]);
+
   return (
-    <Fab
-      {...muiProps}
-      id="submit-song-button"
-      size="medium"
-      color="primary"
-      disabled={!previewSong || createSongMutation.loading || youtubeVideoQuery.loading}
-      onClick={onSubmit}
-    >
+    <Fab {...muiProps} id="submit-song-button" size="medium" color="primary" disabled={disabled} onClick={onSubmit}>
       <MdSend />
     </Fab>
   );

@@ -3,5 +3,6 @@
   "discoverStations": "Discover Stations",
   "playlist": "Playlist",
   "history": "History",
-  "favorite": "Favorite"
+  "favorite": "Favorite",
+  "unplayableSong": "This song is unplayable, please consider switching to another one."
 }

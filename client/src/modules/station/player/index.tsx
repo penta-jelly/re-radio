@@ -75,7 +75,7 @@ export const Player: React.FC = () => {
   const [url] = usePreviousNonNullableValue(playingSong?.url);
   const [id] = usePreviousNonNullableValue(playingSong?.id);
 
-  const playerConfig = React.useMemo<ReactPlayerConfig>(() => ({ youtube: { preload: true } }), []);
+  const playerConfig = React.useMemo<ReactPlayerConfig>(() => ({}), []);
 
   let content: React.ReactNode;
   // Always try to render the ReactPlayer when url is available

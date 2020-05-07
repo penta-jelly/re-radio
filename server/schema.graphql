@@ -347,6 +347,8 @@ input SongCreateInput {
   title: String!
   url: String!
   thumbnail: String!
+
+  """Should have the minimum of 10 seconds"""
   duration: Int!
   status: SongStatusEnum
   stationSlug: String
