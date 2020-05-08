@@ -80,7 +80,7 @@
     "shx": "0.3.2",
     "source-map-support": "0.5.19",
     "typescript": "3.8.3",
-    "wait-on": "4.0.2"    
+    "wait-on": "5.0.0"    
   },
   "bin": "lib/main.js",
   "pkg": {
