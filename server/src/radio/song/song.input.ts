@@ -1,5 +1,5 @@
 import { Field, InputType, Int } from '@nestjs/graphql';
-import { IsUrl, Min } from 'class-validator';
+import { IsUrl, Min, Max } from 'class-validator';
 import { OrderEnum } from '../../core/graphql/input/order';
 import { SongStatusEnum } from './entities/song.entity';
 
@@ -67,8 +67,12 @@ export class SongCreateInput {
   @IsUrl()
   thumbnail: string;
 
-  @Field((type) => Int, { description: 'Should have the minimum of 10 seconds' })
+  @Field((type) => Int, {
+    description:
+      'Duration of a song in milliseconds(ms). Minimum is 10000ms (10 seconds), maximum is 86400000ms (a day)',
+  })
   @Min(10000)
+  @Max(86400000)
   duration: number;
 
   @Field((type) => SongStatusEnum, { nullable: true })

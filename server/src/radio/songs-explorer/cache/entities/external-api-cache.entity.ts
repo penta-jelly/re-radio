@@ -5,10 +5,10 @@ export class ExternalApiCache {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
 
   @Column({ comment: 'The URL should NOT include the API key. Otherwise, it makes the cache meaningless.' })

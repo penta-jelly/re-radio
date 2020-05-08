@@ -1,7 +1,8 @@
 import { inspect } from 'util';
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, FindConditions } from 'typeorm';
+import { Repository } from 'typeorm';
+import Moment from 'moment';
 import { ExternalApiCache } from './entities/external-api-cache.entity';
 
 @Injectable()
@@ -12,12 +13,22 @@ export class ExternalApiCacheService {
     private readonly repository: Repository<ExternalApiCache>,
   ) {}
 
-  async findAll(where: FindConditions<{ url: string }>[]): Promise<ExternalApiCache[]> {
-    return this.repository.find({ where });
-  }
+  async find(url: string): Promise<ExternalApiCache | undefined> {
+    const cache = await this.repository.findOne({ where: { url } });
+    if (!cache) {
+      return undefined;
+    }
+    console.log(process.env.TZ);
+    const updatedAt = Moment(cache.updatedAt.getTime());
+    const now = Moment(new Date().getTime());
+    const duration = Moment.duration(now.diff(updatedAt));
+    const days = duration.asDays();
+    if (days > 7) {
+      this.logger.log(`The cache of url "${url}" is outdated, removing it now.`);
+      return undefined;
+    }
 
-  async findOne(url: string): Promise<ExternalApiCache | undefined> {
-    return this.repository.findOne({ where: { url } });
+    return cache;
   }
 
   async persist(data: object, url: string): Promise<ExternalApiCache> {

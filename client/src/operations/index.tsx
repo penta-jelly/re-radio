@@ -484,6 +484,7 @@ export type SongCreateInput = {
   readonly title: Scalars['String'];
   readonly url: Scalars['String'];
   readonly thumbnail: Scalars['String'];
+  /** Duration of a song in milliseconds(ms). Minimum is 10000ms (10 seconds), maximum is 86400000ms (a day) */
   readonly duration: Scalars['Int'];
   readonly status?: Maybe<SongStatusEnum>;
   readonly stationSlug?: Maybe<Scalars['String']>;

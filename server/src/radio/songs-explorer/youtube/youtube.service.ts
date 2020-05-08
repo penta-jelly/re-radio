@@ -30,7 +30,7 @@ export class YoutubeService {
     const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
     const params = { id: videoId, part };
     const serviceUrl = `${apiUrl}/videos?${this.toQueryString(params)}`;
-    const cache = await this.cacheService.findOne(serviceUrl);
+    const cache = await this.cacheService.find(serviceUrl);
     if (cache) {
       video = cache.data;
     } else {
@@ -65,7 +65,7 @@ export class YoutubeService {
     }
     const serviceUrl = `${apiUrl}/search?${this.toQueryString(params)}`;
 
-    const cache = await this.cacheService.findOne(serviceUrl);
+    const cache = await this.cacheService.find(serviceUrl);
     let videos;
     if (cache) {
       videos = cache.data;

@@ -16,10 +16,10 @@ export class UserRole {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @CreateDateColumn({ type: 'timestamp' })
+  @CreateDateColumn({ type: 'timestamptz' })
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'timestamp' })
+  @UpdateDateColumn({ type: 'timestamptz' })
   updatedAt: Date;
 
   @Column({ enum: [UserRoleEnum.ADMIN, UserRoleEnum.STATION_ADMIN, UserRoleEnum.STATION_OWNER] })
