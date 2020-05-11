@@ -18,7 +18,6 @@ export class ExternalApiCacheService {
     if (!cache) {
       return undefined;
     }
-    console.log(process.env.TZ);
     const updatedAt = Moment(cache.updatedAt.getTime());
     const now = Moment(new Date().getTime());
     const duration = Moment.duration(now.diff(updatedAt));
