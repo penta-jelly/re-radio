@@ -1,5 +1,5 @@
 import { Card, CardContent, Fade, FormHelperText, TextField, Typography } from '@material-ui/core';
-import { RefetchQueryDescription } from 'apollo-client/core/watchQueryOptions';
+import { PureQueryOptions } from 'apollo-boost';
 import { Formik, FormikHelpers } from 'formik';
 import React from 'react';
 import { MdRadio as StationIcon } from 'react-icons/md';
@@ -13,7 +13,7 @@ import { useStyles } from './styles';
 
 interface Props {
   postSubmit?: {
-    refetchQueries?: RefetchQueryDescription;
+    refetchQueries?: PureQueryOptions[];
     redirectTo?: string;
   };
 }
@@ -50,9 +50,9 @@ export const CreateStationForm: React.FC<Props> = (props) => {
 
         await createStationMutation({
           variables: { data: { name, slug, description, tags } },
-          refetchQueries: props.postSubmit && props.postSubmit.refetchQueries,
+          refetchQueries: props.postSubmit?.refetchQueries,
         });
-        if (props.postSubmit && props.postSubmit.redirectTo) {
+        if (props.postSubmit?.redirectTo) {
           history.push(props.postSubmit.redirectTo);
         }
       } catch (e) {
