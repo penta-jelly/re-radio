@@ -2,6 +2,7 @@ export enum EnvVariables {
   NODE_ENV,
 
   LOG_LEVEL,
+  LOG_UNCOLORIZE,
 
   RADIO_SERVER_HOST,
   RADIO_SERVER_PORT,

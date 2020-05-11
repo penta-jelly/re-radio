@@ -18,6 +18,8 @@ services:
     container_name: re-radio_pgadmin
     image: dpage/pgadmin4:4.21
     restart: ${RESTART_POLICY}
+    logging: 
+      driver: "none"
     ports:
       - "${PGADMIN_PORT}:80"
     environment:

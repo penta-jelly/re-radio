@@ -6,6 +6,8 @@ services:
     restart: ${RESTART_POLICY}
     ports:
       - "${DB_HOST_PORT}:5432"
+    logging: 
+      driver: ${LOGGING_DRIVER}
     environment:
       POSTGRES_DB: ${DB_NAME}
       POSTGRES_USER: ${DB_USER}
@@ -20,6 +22,8 @@ services:
     restart: ${RESTART_POLICY}
     ports:
       - "${REDIS_HOST_PORT}:6379"
+    logging: 
+      driver: ${LOGGING_DRIVER}
   
   radio:
     container_name: re-radio_main
@@ -27,10 +31,13 @@ services:
     restart: ${RESTART_POLICY}
     ports: 
       - "${MAIN_HOST_PORT}:2996"
+    logging: 
+      driver: ${LOGGING_DRIVER}
     depends_on:
       - postgres
       - redis
-    environment: 
+    environment:
+      LOG_UNCOLORIZE: true
       REDIS_HOST: re-radio_redis
       REDIS_PORT: 6379
       DB_HOST: re-radio_postgres

@@ -3,6 +3,8 @@ import Fs from 'fs';
 import { Module, OnModuleDestroy, Logger } from '@nestjs/common';
 import * as winston from 'winston';
 import { utilities, WinstonModule } from 'nest-winston';
+import { ConfigService } from '../config/config.service';
+import { EnvVariables } from '../config/config.variables';
 
 const logFilePath = Path.join(process.cwd(), 'storage', 'log');
 const logFileName = 'server.log';
@@ -12,7 +14,13 @@ const logFileName = 'server.log';
     WinstonModule.forRoot({
       transports: [
         new winston.transports.Console({
-          format: winston.format.combine(winston.format.timestamp(), utilities.format.nestLike()),
+          format: ConfigService.get(EnvVariables.LOG_UNCOLORIZE)
+            ? winston.format.combine(
+                winston.format.timestamp(),
+                utilities.format.nestLike(),
+                winston.format.uncolorize(),
+              )
+            : winston.format.combine(winston.format.timestamp(), utilities.format.nestLike()),
         }),
         new winston.transports.File({
           format: winston.format.combine(
