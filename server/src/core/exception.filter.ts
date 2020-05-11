@@ -55,9 +55,7 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
       message = exception.toString();
     }
 
-    this.logger.log(
-      `${COLOR_RED}[ERROR]${COLOR_RESET} ${operation} ${info.fieldName} "${message}"\n[Args: ${rawArgs}]`,
-    );
+    this.logger.log(`${COLOR_RED}[ERROR]${COLOR_RESET} ${operation} ${info.fieldName} "${message}" [Args: ${rawArgs}]`);
     if (exception instanceof UnauthorizedException) {
       this.logger.verbose(exception.stack);
     } else {

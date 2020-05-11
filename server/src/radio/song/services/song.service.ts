@@ -36,24 +36,8 @@ export class SongService {
     return this.songRepository.findOneOrFail(options);
   }
 
-  private findHistorySongsQueryBuilder(stationSlug: string) {
-    return this.songRepository
-      .createQueryBuilder()
-      .select(`title, url, thumbnail, duration, "stationSlug"`)
-      .addSelect(`max("createdAt")`, `createdAt`)
-      .addSelect(`count(id)`, `playedTimes`)
-      .addSelect(`array_remove(array_agg(DISTINCT "creatorId"), NULL)`, `creatorIds`)
-      .where(`"stationSlug" = :stationSlug`, { stationSlug })
-      .andWhere(`status = 'PLAYED'`)
-      .groupBy(`title, url, thumbnail, duration, "stationSlug"`)
-      .orderBy(`"createdAt"`, 'DESC');
-  }
-
-  async findHistorySongs(
-    stationSlug: string,
-    { take, skip }: PaginationInput,
-  ): Promise<
-    {
+  async findHistorySongs(stationSlug: string, { take, skip }: PaginationInput) {
+    type Entity = {
       title: string;
       url: string;
       thumbnail: string;
@@ -62,13 +46,35 @@ export class SongService {
       creatorIds: number[];
       playedTimes: number;
       createdAt: Date;
-    }[]
-  > {
-    return this.findHistorySongsQueryBuilder(stationSlug).take(take).skip(skip).getRawMany();
+    };
+    return this.songRepository
+      .createQueryBuilder()
+      .select(`url, "stationSlug"`)
+      .addSelect(`max("title")`, `title`)
+      .addSelect(`max("thumbnail")`, `thumbnail`)
+      .addSelect(`max("duration")`, `duration`)
+      .addSelect(`max("createdAt")`, `createdAt`)
+      .addSelect(`count(id)`, `playedTimes`)
+      .addSelect(`array_remove(array_agg(DISTINCT "creatorId"), NULL)`, `creatorIds`)
+      .where(`"stationSlug" = :stationSlug`, { stationSlug })
+      .andWhere(`status = 'PLAYED'`)
+      .groupBy(`url, "stationSlug"`)
+      .orderBy(`"createdAt"`, 'DESC')
+      .take(take)
+      .skip(skip)
+      .getRawMany<Entity>();
   }
 
   async countHistorySongs(stationSlug: string) {
-    return this.findHistorySongsQueryBuilder(stationSlug).getCount();
+    type Entity = { url: string };
+    const entities = await this.songRepository
+      .createQueryBuilder()
+      .select(`url`)
+      .where(`"stationSlug" = :stationSlug`, { stationSlug })
+      .andWhere(`status = 'PLAYED'`)
+      .groupBy(`url, "stationSlug"`)
+      .getRawMany<Entity>();
+    return entities.length;
   }
 
   async create(payload: SongCreateInput, owner: User): Promise<Song> {

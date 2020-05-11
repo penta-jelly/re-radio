@@ -26,7 +26,7 @@ export class RequestsInterceptor implements NestInterceptor {
         .pipe(
           tap(() =>
             this.logger.log(
-              `${COLOR_RESET}${operation} ${info.fieldName} ${this.colorizeDiffTime(before)}\n[Args: ${rawArgs}]`,
+              `${COLOR_RESET}${operation} ${info.fieldName} ${this.colorizeDiffTime(before)} [Args: ${rawArgs}]`,
             ),
           ),
         );
