@@ -14,7 +14,7 @@
   "dependencies": {
     "@material-ui/core": "4.9.13",
     "@material-ui/styles": "4.9.13",
-    "apollo-boost": "0.4.7",
+    "apollo-boost": "0.4.8",
     "apollo-link-context": "1.0.20",
     "apollo-link-ws": "1.0.20",
     "downshift": "5.2.7",
