@@ -7,7 +7,7 @@ import { EnvVariables } from '../../../core/config/config.variables';
 import { ExternalApiCacheService } from '../cache/external-api-cache.service';
 import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from './youtube.dto';
 import { YoutubeVideoFindAllInput, YoutubeVideoOrderEnum } from './youtube.input';
-import { YOUTUBE_SERVICE_KEY } from './shared';
+import { YOUTUBE_SERVICE_KEY, MUSIC_VIDEO_CATEGORY_ID } from './shared';
 
 @Injectable()
 export class YoutubeService {
@@ -58,7 +58,9 @@ export class YoutubeService {
     const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
     const part = 'id,snippet';
     const type = 'video';
-    const params: QueryParams = { part, type, q, maxResults, order };
+    const videoCategoryId = MUSIC_VIDEO_CATEGORY_ID;
+    const videoEmbeddable = 'true';
+    const params: QueryParams = { part, type, q, maxResults, order, videoCategoryId, videoEmbeddable };
     const relatedToVideoId = relatedToVideoUrl ? this.parseVideoUrl(relatedToVideoUrl).id : '';
     if (relatedToVideoId) {
       params.relatedToVideoId = relatedToVideoId;
