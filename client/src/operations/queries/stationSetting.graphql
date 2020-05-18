@@ -1,0 +1,13 @@
+query StationSetting($stationId: Int!, $userId: Int) {
+  stationSetting(where: { stationId: $stationId, userId: $userId }) { 
+    id,
+    user { 
+      outOfSongsBehavior
+      notifyOnlineUser
+    }
+    station {
+      outOfSongsBehavior
+    }
+  }
+}
+

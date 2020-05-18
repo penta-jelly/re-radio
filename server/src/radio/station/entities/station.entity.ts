@@ -13,6 +13,7 @@ import {
 import { Song } from '../../song/entities/song.entity';
 import { UserRole } from '../../user/entities/user-role.entity';
 import { StationTag } from './station-tag.entity';
+import { StationSetting } from './station-setting.entity';
 
 @Entity()
 export class Station {
@@ -50,4 +51,7 @@ export class Station {
   @OneToOne((type) => Song, { nullable: true, onDelete: 'SET NULL' })
   @JoinColumn()
   playingSong: Song | null;
+
+  @OneToMany((type) => StationSetting, (setting) => setting.station, { onDelete: 'CASCADE' })
+  settings: StationSetting[];
 }

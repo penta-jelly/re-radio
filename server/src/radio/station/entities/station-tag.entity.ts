@@ -4,7 +4,7 @@ import { Station } from './station.entity';
 @Entity()
 export class StationTag {
   @PrimaryGeneratedColumn()
-  id: string;
+  id: number;
 
   @Column({ unique: true })
   name: string;

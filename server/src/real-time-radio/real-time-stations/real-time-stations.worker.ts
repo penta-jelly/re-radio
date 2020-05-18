@@ -3,6 +3,7 @@ import { ConfigService } from '../../core/config/config.service';
 import { EnvVariables } from '../../core/config/config.variables';
 import { PubSub } from '../../core/pub-sub/pub-sub.service';
 import { Station } from '../../radio/station/entities/station.entity';
+import { StationSettingService } from '../../radio/station/services/station-setting.service';
 import { StationService } from '../../radio/station/services/station.service';
 import { User } from '../../radio/user/entities/user.entity';
 import { RealTimeSongService } from '../real-time-songs/real-time-songs.service';
@@ -17,6 +18,7 @@ export class RealTimeStationsWorker {
     @Inject(forwardRef(() => RealTimeSongService))
     private readonly realTimeSongService: RealTimeSongService,
     private readonly stationService: StationService,
+    private readonly stationSettingService: StationSettingService,
     private readonly pubSub: PubSub,
     private readonly configService: ConfigService,
   ) {}

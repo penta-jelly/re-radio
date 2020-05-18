@@ -24,6 +24,8 @@ export class RealTimeStationService {
       return false;
     }
 
+    // Workaround for the case where the event is emitted before the save operation
+    await new Promise((resolve) => setTimeout(resolve, 0));
     const count = await this.songService.count({ where: { stationSlug, status: SongStatusEnum.PENDING } });
     if (count === 0) {
       return false;

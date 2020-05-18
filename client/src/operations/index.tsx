@@ -121,6 +121,24 @@ export enum MutationEnum {
   Deleted = 'DELETED'
 }
 
+export type UserStationSetting = {
+  readonly __typename?: 'UserStationSetting';
+  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
+  readonly notifyOnlineUser: Scalars['Boolean'];
+};
+
+export enum StationRunningOutOfSongsBehaviorEnum {
+  PlayRandomSongFromHistorySongs = 'PLAY_RANDOM_SONG_FROM_HISTORY_SONGS',
+  PlayFirstSongFromRelatedSongs = 'PLAY_FIRST_SONG_FROM_RELATED_SONGS'
+}
+
+export type StationSetting = {
+  readonly __typename?: 'StationSetting';
+  readonly id: Scalars['String'];
+  readonly user?: Maybe<UserStationSetting>;
+  readonly station: UserStationSetting;
+};
+
 export type UserSubscription = {
   readonly __typename?: 'UserSubscription';
   readonly mutation: MutationEnum;
@@ -189,6 +207,7 @@ export type Query = {
   readonly __typename?: 'Query';
   readonly stations: ReadonlyArray<Station>;
   readonly station: Station;
+  readonly stationSetting: StationSetting;
   readonly users: ReadonlyArray<User>;
   readonly user: User;
   readonly currentUser: User;
@@ -210,6 +229,11 @@ export type QueryStationsArgs = {
 
 export type QueryStationArgs = {
   where: StationFindOneWhereInput;
+};
+
+
+export type QueryStationSettingArgs = {
+  where: StationSettingFindInput;
 };
 
 
@@ -286,6 +310,11 @@ export type StationFindOneWhereInput = {
   readonly id?: Maybe<Scalars['Int']>;
   readonly name?: Maybe<Scalars['String']>;
   readonly slug?: Maybe<Scalars['String']>;
+};
+
+export type StationSettingFindInput = {
+  readonly stationId: Scalars['Int'];
+  readonly userId?: Maybe<Scalars['Int']>;
 };
 
 export type UserFindAllOrderInput = {
@@ -719,6 +748,27 @@ export type OnStationPlaylistChangedSubscription = (
         { readonly __typename?: 'User' }
         & UserBaseInformationFragment
       ) }
+    ) }
+  ) }
+);
+
+export type StationSettingQueryVariables = {
+  stationId: Scalars['Int'];
+  userId?: Maybe<Scalars['Int']>;
+};
+
+
+export type StationSettingQuery = (
+  { readonly __typename?: 'Query' }
+  & { readonly stationSetting: (
+    { readonly __typename?: 'StationSetting' }
+    & Pick<StationSetting, 'id'>
+    & { readonly user?: Maybe<(
+      { readonly __typename?: 'UserStationSetting' }
+      & Pick<UserStationSetting, 'outOfSongsBehavior' | 'notifyOnlineUser'>
+    )>, readonly station: (
+      { readonly __typename?: 'UserStationSetting' }
+      & Pick<UserStationSetting, 'outOfSongsBehavior'>
     ) }
   ) }
 );
@@ -1408,6 +1458,47 @@ export function useOnStationPlaylistChangedSubscription(baseOptions?: ApolloReac
       }
 export type OnStationPlaylistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlaylistChangedSubscription>;
 export type OnStationPlaylistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlaylistChangedSubscription>;
+export const StationSettingDocument = gql`
+    query StationSetting($stationId: Int!, $userId: Int) {
+  stationSetting(where: {stationId: $stationId, userId: $userId}) {
+    id
+    user {
+      outOfSongsBehavior
+      notifyOnlineUser
+    }
+    station {
+      outOfSongsBehavior
+    }
+  }
+}
+    `;
+
+/**
+ * __useStationSettingQuery__
+ *
+ * To run a query within a React component, call `useStationSettingQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStationSettingQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStationSettingQuery({
+ *   variables: {
+ *      stationId: // value for 'stationId'
+ *      userId: // value for 'userId'
+ *   },
+ * });
+ */
+export function useStationSettingQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
+        return ApolloReactHooks.useQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
+      }
+export function useStationSettingLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
+        }
+export type StationSettingQueryHookResult = ReturnType<typeof useStationSettingQuery>;
+export type StationSettingLazyQueryHookResult = ReturnType<typeof useStationSettingLazyQuery>;
+export type StationSettingQueryResult = ApolloReactCommon.QueryResult<StationSettingQuery, StationSettingQueryVariables>;
 export const StationsDocument = gql`
     query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: [StationFindAllWhereInput]) {
   stations(pagination: $pagination, order: $order, where: $where) {
