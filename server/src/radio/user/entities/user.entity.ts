@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { StationSetting } from '../../station/entities/station-setting.entity';
 import { UserRole } from './user-role.entity';
 
 @Entity()
@@ -53,4 +54,7 @@ export class User {
 
   @Column('int', { nullable: true })
   currentStationId: number | null;
+
+  @OneToMany((type) => StationSetting, (stationSetting) => stationSetting.user, { onDelete: 'CASCADE' })
+  stationSettings: StationSetting[];
 }

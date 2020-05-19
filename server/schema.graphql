@@ -105,6 +105,26 @@ enum MutationEnum {
   DELETED
 }
 
+type UserStationSetting {
+  outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum!
+  notifyOnlineUser: Boolean!
+}
+
+enum StationRunningOutOfSongsBehaviorEnum {
+  PLAY_RANDOM_SONG_FROM_HISTORY_SONGS
+  PLAY_FIRST_SONG_FROM_RELATED_SONGS
+}
+
+type StationSharedSetting {
+  outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum!
+}
+
+type StationSetting {
+  id: String!
+  user: UserStationSetting
+  station: StationSharedSetting!
+}
+
 type UserSubscription {
   mutation: MutationEnum!
   entity: User!
@@ -163,6 +183,7 @@ type YoutubeVideo {
 type Query {
   stations(order: StationFindAllOrderInput, where: [StationFindAllWhereInput], pagination: PaginationInput): [Station!]!
   station(where: StationFindOneWhereInput!): Station!
+  stationSetting(where: StationSettingFindInput!): StationSetting!
   users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
   user(where: UserFindOneWhereInput!): User!
   currentUser: User!
@@ -206,6 +227,11 @@ input StationFindOneWhereInput {
   id: Int
   name: String
   slug: String
+}
+
+input StationSettingFindInput {
+  stationId: Int!
+  userId: Int
 }
 
 input UserFindAllOrderInput {

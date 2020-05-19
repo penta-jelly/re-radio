@@ -27,6 +27,7 @@
     "Embeddable",
     "maxsize",
     "notistack",
+    "timestamptz",
     "uncolorize"
   ],
   "editor.codeActionsOnSave": {

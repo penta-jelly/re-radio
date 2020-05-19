@@ -15,6 +15,7 @@ import { UserRoleService } from '../../user/services/user-role.service';
 import { UserService } from '../../user/services/user.service';
 import { StationTagDTO } from '../dto/station-tag.dto';
 import { StationDTO } from '../dto/station.dto';
+import { StationSettingService } from '../services/station-setting.service';
 import { StationTagService } from '../services/station-tag.service';
 import { StationService } from '../services/station.service';
 import {
@@ -29,6 +30,7 @@ export class StationResolver {
   constructor(
     private readonly stationService: StationService,
     private readonly stationTagService: StationTagService,
+    private readonly stationSettingService: StationSettingService,
     @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
     @Inject(forwardRef(() => UserRoleService))
@@ -98,6 +100,11 @@ export class StationResolver {
     @CurrentUser() user: User,
   ) {
     const station = await this.stationService.findOneOrFail({ where });
+    const stationSetting = await this.stationSettingService.findOne(station.id, user.id);
+    if (!stationSetting) {
+      await this.stationSettingService.create(station.id, user.id);
+    }
+
     const success = await this.stationService.addOnlineUser(station, user);
     await this.pubSub.publish<RealTimeStationEvent.UserJoinedPayload>(RealTimeStationEvent.USER_JOINED, {
       user,

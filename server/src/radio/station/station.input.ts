@@ -90,3 +90,12 @@ export class StationUpdateInput {
   @IsOptional()
   description?: string;
 }
+
+@InputType()
+export class StationSettingFindInput {
+  @Field((type) => Int)
+  stationId: number;
+
+  @Field((type) => Int, { nullable: true })
+  userId: number;
+}
