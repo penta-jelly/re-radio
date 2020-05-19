@@ -35,7 +35,7 @@
     "react-player": "2.0.1",
     "react-router-dom": "5.2.0",
     "subscriptions-transport-ws": "0.9.16",
-    "yup": "0.28.5"
+    "yup": "0.29.0"
   },
   "devDependencies": {
     "@graphql-codegen/add": "1.13.3",
@@ -52,7 +52,7 @@
     "@types/react-dom": "16.9.8",
     "@types/react-helmet": "6.0.0",
     "@types/react-router-dom": "5.1.5",
-    "@types/yup": "0.28.3",
+    "@types/yup": "0.29.0",
     "eslint": "6.8.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-config-react-app": "5.2.1",
