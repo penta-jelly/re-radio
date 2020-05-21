@@ -132,11 +132,16 @@ export enum StationRunningOutOfSongsBehaviorEnum {
   PlayFirstSongFromRelatedSongs = 'PLAY_FIRST_SONG_FROM_RELATED_SONGS'
 }
 
+export type StationSharedSetting = {
+  readonly __typename?: 'StationSharedSetting';
+  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
+};
+
 export type StationSetting = {
   readonly __typename?: 'StationSetting';
   readonly id: Scalars['String'];
   readonly user?: Maybe<UserStationSetting>;
-  readonly station: UserStationSetting;
+  readonly station: StationSharedSetting;
 };
 
 export type UserSubscription = {
@@ -767,8 +772,8 @@ export type StationSettingQuery = (
       { readonly __typename?: 'UserStationSetting' }
       & Pick<UserStationSetting, 'outOfSongsBehavior' | 'notifyOnlineUser'>
     )>, readonly station: (
-      { readonly __typename?: 'UserStationSetting' }
-      & Pick<UserStationSetting, 'outOfSongsBehavior'>
+      { readonly __typename?: 'StationSharedSetting' }
+      & Pick<StationSharedSetting, 'outOfSongsBehavior'>
     ) }
   ) }
 );
