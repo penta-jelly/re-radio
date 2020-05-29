@@ -4,7 +4,7 @@
   "scripts": {
     "initialize": "npm-run-all initialize:*",
     "initialize:env": "shx cp -n .env.example .env",
-    "initialize:docker-images": "docker-compose -f ./docker-compose.db.yml --project-directory . pull",
+    "initialize:docker-images": "docker-compose -f ./docker-compose.db.yml --project-directory . pull --quiet",
     "compile": "tsc",
     "lint": "eslint --ext .ts src/",
     "format": "eslint --fix --ext .ts src/",
