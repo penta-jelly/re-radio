@@ -1,4 +1,4 @@
-import { sortSongs } from 're-radio-common';
+import { sortSongs } from 're-radio-common/lib/sort-songs';
 import { Card, CircularProgress, Icon, List, Typography } from '@material-ui/core';
 import React from 'react';
 import { MdPlaylistAdd } from 'react-icons/md';
