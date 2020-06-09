@@ -10,7 +10,7 @@ jobs:
           node-version: 10.x
       - uses: actions/checkout@master
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: npm ci
       - name: Initialize
         run: npm run initialize
       - name: Compile
@@ -28,14 +28,14 @@ jobs:
       - name: Run e2e tests
         uses: cypress-io/github-action@v1
         env:
-          CYPRESS_baseUrl: "http://localhost:2996"
+          CYPRESS_baseUrl: 'http://localhost:2996'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
         with:
           record: true
           install: true
           runTests: true
           working-directory: e2e
-          wait-on: "http://localhost:2996/status"
+          wait-on: 'http://localhost:2996/status'
           wait-on-timeout: 60
       - name: Persist the log file
         if: failure()
