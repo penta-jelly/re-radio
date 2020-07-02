@@ -58,7 +58,7 @@
     "reflect-metadata": "0.1.13",
     "rxjs": "6.5.5",
     "typeorm": "0.2.25",
-    "winston": "3.2.1",
+    "winston": "3.3.3",
     "yargs": "15.3.1"
   },
   "devDependencies": {
