@@ -21,7 +21,7 @@
     "formik": "2.1.4",
     "graphql": "15.2.0",
     "i18next": "19.4.5",
-    "jss": "10.1.1",
+    "jss": "10.3.0",
     "moment": "2.26.0",
     "moment-duration-format": "2.3.2",
     "notistack": "0.9.16",
