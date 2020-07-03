@@ -2,7 +2,7 @@ import { Card, CircularProgress, List, Typography } from '@material-ui/core';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { usePreviousNonNullableValue } from 'hooks/use-previous-non-nullable-value';
-import { StationPlayerQuery, useHistorySongsQuery, useStationPlayerQuery } from 'operations';
+import { useHistorySongsQuery, useStationPlayerQuery } from 'operations';
 import { useScrollMonitor } from 'hooks/use-scroll-monitor';
 import { HistorySongItem } from './item';
 import { useStyles } from './styles';
