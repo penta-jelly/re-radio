@@ -20,13 +20,13 @@ COPY common/package-lock.json ./common/package-lock.json
 RUN npm ci --unsafe-perm
 
 COPY . .
-RUN npm run initialize
+RUN npx lerna run initialize:env
 RUN npm run compile
 RUN npm run build
 
 RUN cd server && node lib/pkg.js
 
-FROM alpine:latest  
+FROM alpine:latest
 
 RUN apk update && \
   apk add --no-cache libstdc++ libgcc ca-certificates git && \

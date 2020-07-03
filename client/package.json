@@ -3,7 +3,8 @@
   "version": "0.1.0-SNAPSHOT",
   "scripts": {
     "postinstall": "patch-package",
-    "initialize": "shx cp -n .env.example .env",
+    "initialize": "npm-run-all initialize:*",
+    "initialize:env": "shx cp -n .env.example .env",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
