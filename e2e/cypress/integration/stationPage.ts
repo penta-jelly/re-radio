@@ -22,6 +22,7 @@ describe('Show Station Page', () => {
 
     function navigateFromStationsPage(slug: string) {
       stationsPage.navigate();
+      stationPage.mockGraphql();
       cy.get(stationsPage.elements.stationCardMedia(slug)).click();
     }
 
