@@ -4,7 +4,7 @@
   "scripts": {
     "postinstall": "patch-package",
     "initialize": "shx cp -n .env.example .env",
-    "start": "react-scripts start | cat -",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "generate": "gql-gen",

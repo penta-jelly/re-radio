@@ -8,7 +8,7 @@
     "compile": "tsc",
     "lint": "eslint --ext .ts src/",
     "format": "eslint --fix --ext .ts src/",
-    "prestart": "rm -rf lib",
+    "prestart": "shx rm -rf lib",
     "start": "run-p start:**",
     "start:typescript": "tsc --watch --preserveWatchOutput",
     "start:radio": "wait-on lib/main.js && nodemon --inspect=2998 lib/main.js serve radio",
@@ -82,7 +82,7 @@
     "shx": "0.3.2",
     "source-map-support": "0.5.19",
     "typescript": "3.9.6",
-    "wait-on": "5.0.1"    
+    "wait-on": "5.0.1"
   },
   "bin": "lib/main.js",
   "pkg": {
