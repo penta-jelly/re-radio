@@ -1,7 +1,8 @@
 import { Card, CircularProgress, List, Typography } from '@material-ui/core';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useHistorySongsQuery } from 'operations';
+import { usePreviousNonNullableValue } from 'hooks/use-previous-non-nullable-value';
+import { StationPlayerQuery, useHistorySongsQuery, useStationPlayerQuery } from 'operations';
 import { useScrollMonitor } from 'hooks/use-scroll-monitor';
 import { HistorySongItem } from './item';
 import { useStyles } from './styles';
@@ -21,7 +22,7 @@ export const HistorySongs: React.FC = () => {
   const baseIncrement = 20;
   const [take, setTake] = React.useState(baseIncrement);
 
-  const { loading, error, data } = useHistorySongsQuery({
+  const { loading, error, data, refetch } = useHistorySongsQuery({
     variables: { stationSlug: match.params.slug, pagination: { take } },
     fetchPolicy: 'network-only',
   });
@@ -33,6 +34,18 @@ export const HistorySongs: React.FC = () => {
     }
   }, [loading, data, take]);
   const [, ref] = useScrollMonitor({ onBottomReached }, [data]);
+
+  // Try to refetch the history songs whenever the player playing a new song
+  const playerQuery = useStationPlayerQuery({
+    variables: { stationSlug: match.params.slug },
+    fetchPolicy: 'network-only',
+  });
+  const [url] = usePreviousNonNullableValue(playerQuery.data?.playingSongs[0]?.url);
+  React.useEffect(() => {
+    if (url) {
+      refetch();
+    }
+  }, [refetch, url]);
 
   let content: React.ReactNode = <Typography variant="subtitle1">History</Typography>;
   if (data) {
