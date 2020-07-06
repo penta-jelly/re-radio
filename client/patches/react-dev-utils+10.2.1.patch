@@ -6,7 +6,7 @@ index 2099a57..da5d195 100644
 +++ b/node_modules/react-dev-utils/clearConsole.js
 @@ -8,9 +8,9 @@
  'use strict';
-
+ 
  function clearConsole() {
 -  process.stdout.write(
 -    process.platform === 'win32' ? '\x1B[2J\x1B[0f' : '\x1B[2J\x1B[3J\x1B[H'
@@ -15,5 +15,5 @@ index 2099a57..da5d195 100644
 +  //   process.platform === 'win32' ? '\x1B[2J\x1B[0f' : '\x1B[2J\x1B[3J\x1B[H'
 +  // );
  }
-
+ 
  module.exports = clearConsole;
