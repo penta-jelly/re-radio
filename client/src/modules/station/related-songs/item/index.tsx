@@ -28,7 +28,7 @@ export const RelatedSongItem: React.FC<Props> = (props) => {
   const classes = useStyles();
   const match = useRouteMatch<RouteParams>();
   if (!match) {
-    throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
+    throw new Error(`Match not found. The "$stationSlug" is not existed in query param.`);
   }
 
   const { enqueueSnackbar } = useSnackbar();

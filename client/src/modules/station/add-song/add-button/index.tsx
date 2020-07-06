@@ -24,7 +24,7 @@ export const AddButton: React.FC<Props> = ({ previewSong, postSubmit, muiProps }
   const { enqueueSnackbar } = useSnackbar();
   const { t } = useTranslation('stations');
   if (!match) {
-    throw new Error(`Match not found. Do you $stationSlug is not existed in query param.`);
+    throw new Error(`Match not found. The "$stationSlug" is not existed in query param.`);
   }
   const currentUserQuery = useCurrentUserQuery();
   const notifyUnauthorizedUser = useUnauthorizedNotification();

@@ -1,7 +1,7 @@
 import { useRef, useCallback, useEffect } from 'react';
 
 export function useScrollMonitor<T extends HTMLElement = HTMLDivElement>(
-  config: { onBottomReached?: () => void },
+  { onBottomReached }: { onBottomReached?: () => void },
   deps: React.DependencyList,
 ): [object, React.RefObject<T>] {
   const containerRef = useRef<T>(null);
@@ -12,10 +12,10 @@ export function useScrollMonitor<T extends HTMLElement = HTMLDivElement>(
       if (!node) return;
       const bottom = Math.abs(node.scrollHeight - node.scrollTop - node.clientHeight);
       if (bottom < 24) {
-        config.onBottomReached && config.onBottomReached();
+        onBottomReached?.();
       }
     },
-    [config],
+    [onBottomReached],
   );
 
   useEffect(
