@@ -59,7 +59,7 @@
     "rxjs": "6.5.5",
     "typeorm": "0.2.25",
     "winston": "3.2.1",
-    "yargs": "15.4.0"
+    "yargs": "15.4.1"
   },
   "devDependencies": {
     "@types/bcrypt-nodejs": "0.0.31",
