@@ -6,6 +6,7 @@ declare namespace NodeJS {
     REACT_APP_SERVICE_HOST: string;
     REACT_APP_SERVICE_PORT: string;
     REACT_APP_JOIN_STATION_INTERVAL: string;
+    REACT_APP_GITHUB_REPO_URL: string;
   }
 }
 

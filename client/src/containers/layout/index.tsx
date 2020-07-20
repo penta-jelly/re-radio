@@ -1,6 +1,7 @@
 import { Drawer, Icon, List, ListItem, ListItemIcon, ListItemText, Modal, Slide } from '@material-ui/core';
 import React from 'react';
 import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
+import { FaGithub as GithubIcon } from 'react-icons/fa';
 import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom';
 import { Image } from 'components/image';
 import { AppContext } from 'containers/app';
@@ -87,6 +88,22 @@ export const Layout: React.FC<Props> = (props) => {
             </>
           </ListItem>
           <div className={classes.spacer} />
+          <ListItem
+            button
+            component="a"
+            href={process.env.REACT_APP_GITHUB_REPO_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <>
+              <ListItemIcon className={classes.listItemIcon}>
+                <Icon>
+                  <GithubIcon />
+                </Icon>
+              </ListItemIcon>
+              {sidebar.collapsed || <ListItemText primary="Github" />}
+            </>
+          </ListItem>
           {currentUserQuery.error && (
             <ListItem button onClick={openLoginModal}>
               <>
