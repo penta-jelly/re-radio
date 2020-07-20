@@ -8,7 +8,7 @@ jobs:
         uses: deliverybot/deployment-status@v1
         with:
           state: pending
-          token: ${{ secrets.GITHUB_REPO_DEPLOYMENT_TOKEN }}
+          token: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
       - name: Check out code
         uses: actions/checkout@master
       - name: Build docker image
@@ -45,11 +45,11 @@ jobs:
         uses: deliverybot/deployment-status@v1
         with:
           state: success
-          token: ${{ secrets.GITHUB_REPO_DEPLOYMENT_TOKEN }}
+          token: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
 
       - name: Set deployment state to failure
         if: failure()
         uses: deliverybot/deployment-status@v1
         with:
           state: failure
-          token: ${{ secrets.GITHUB_REPO_DEPLOYMENT_TOKEN }}
+          token: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
