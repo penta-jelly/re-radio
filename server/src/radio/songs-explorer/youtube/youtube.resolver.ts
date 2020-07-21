@@ -1,11 +1,14 @@
-import { BadRequestException } from '@nestjs/common';
+import { BadRequestException, Logger } from '@nestjs/common';
 import { Args, Query, Resolver } from '@nestjs/graphql';
+import AcceptLanguageParser from 'accept-language-parser';
+import { Headers } from '../../../core/graphql/decorators/Headers.decorator';
 import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from './youtube.dto';
-import { YoutubeVideoFindAllInput, YoutubeVideoFindOneInput } from './youtube.input';
+import { YoutubeVideoFindAllInput, YoutubeVideoFindOneInput, YoutubeTrendingVideoFindAllInput } from './youtube.input';
 import { YoutubeService } from './youtube.service';
 
 @Resolver((of) => YoutubeVideoDetailDTO)
 export class YoutubeResolver {
+  private readonly logger = new Logger(YoutubeResolver.name);
   constructor(private readonly youtubeService: YoutubeService) {}
 
   @Query((returns) => YoutubeVideoDetailDTO)
@@ -25,5 +28,16 @@ export class YoutubeResolver {
       throw new BadRequestException('Either q or relatedToVideoUrl are required.');
     }
     return this.youtubeService.searchVideos(where);
+  }
+
+  @Query((returns) => [YoutubeVideoDTO])
+  async youtubeTrendingVideos(
+    @Args({ name: 'where', type: () => YoutubeTrendingVideoFindAllInput }) where: YoutubeTrendingVideoFindAllInput,
+    @Headers('Accept-Language') acceptLanguageHeader: string,
+  ) {
+    this.logger.log(`Headers ${acceptLanguageHeader}`);
+    const language = AcceptLanguageParser.parse(acceptLanguageHeader).filter(({ region }) => !!region)[0];
+    const region = language?.region || 'US';
+    return this.youtubeService.fetchTrendingVideos({ regionCode: region, ...where });
   }
 }

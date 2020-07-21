@@ -6,7 +6,7 @@ import { ConfigService } from '../../../core/config/config.service';
 import { EnvVariables } from '../../../core/config/config.variables';
 import { ExternalApiCacheService } from '../cache/external-api-cache.service';
 import { YoutubeVideoDetailDTO, YoutubeVideoDTO } from './youtube.dto';
-import { YoutubeVideoFindAllInput, YoutubeVideoOrderEnum } from './youtube.input';
+import { YoutubeVideoFindAllInput, YoutubeTrendingVideoFindAllInput } from './youtube.input';
 import { YOUTUBE_SERVICE_KEY, MUSIC_VIDEO_CATEGORY_ID } from './shared';
 
 @Injectable()
@@ -50,8 +50,8 @@ export class YoutubeService {
 
   public async searchVideos({
     q,
-    maxResults = 5,
-    order = YoutubeVideoOrderEnum.RELEVANCE,
+    maxResults,
+    order,
     relatedToVideoUrl,
   }: YoutubeVideoFindAllInput): Promise<YoutubeVideoDTO[]> {
     const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
@@ -80,6 +80,34 @@ export class YoutubeService {
         ...item,
         id: item?.id?.videoId,
       }));
+      await this.cacheService.persist(videos, serviceUrl);
+    }
+
+    return videos;
+  }
+
+  public async fetchTrendingVideos({
+    maxResults,
+    regionCode,
+  }: YoutubeTrendingVideoFindAllInput): Promise<YoutubeVideoDTO[]> {
+    const apiUrl = this.configService.get(EnvVariables.YOUTUBE_API_URL);
+    const apiKey = this.configService.get(EnvVariables.YOUTUBE_API_KEY);
+    const part = 'id,snippet';
+    const chart = 'mostPopular';
+    const videoCategoryId = MUSIC_VIDEO_CATEGORY_ID;
+    const params: QueryParams = { part, chart, maxResults, regionCode, videoCategoryId };
+    const serviceUrl = `${apiUrl}/videos?${this.toQueryString(params)}`;
+
+    const cache = await this.cacheService.find(serviceUrl, 2);
+    let videos;
+    if (cache) {
+      videos = cache.data;
+    } else {
+      const data = await fetch(serviceUrl + `&key=${apiKey}`).then((res) => res.json());
+      if (!data || !Array.isArray(data.items)) {
+        throw new InternalServerErrorException(`Could not find any videos with this request URL: ${serviceUrl}`);
+      }
+      videos = data.items;
       await this.cacheService.persist(videos, serviceUrl);
     }
 

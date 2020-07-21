@@ -193,6 +193,7 @@ type Query {
   song(where: SongFindOneWhereInput!): Song!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
+  youtubeTrendingVideos(where: YoutubeTrendingVideoFindAllInput!): [YoutubeVideo!]!
 }
 
 input StationFindAllOrderInput {
@@ -291,8 +292,8 @@ input YoutubeVideoFindOneInput {
 
 input YoutubeVideoFindAllInput {
   q: String
-  maxResults: Float
-  order: SongExplorerOrderEnum
+  maxResults: Float = 5
+  order: SongExplorerOrderEnum = RELEVANCE
   relatedToVideoUrl: String
 }
 
@@ -303,6 +304,11 @@ enum SongExplorerOrderEnum {
   TITLE
   VIEW_COUNT
   VIDEO_COUNT
+}
+
+input YoutubeTrendingVideoFindAllInput {
+  maxResults: Float = 5
+  regionCode: String
 }
 
 type Mutation {
