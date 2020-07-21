@@ -31,11 +31,24 @@ export class YoutubeVideoFindAllInput {
   @IsPositive()
   @Max(20)
   @IsOptional()
-  maxResults?: number;
+  maxResults: number = 5;
 
   @Field((type) => YoutubeVideoOrderEnum, { nullable: true })
-  order?: YoutubeVideoOrderEnum;
+  order: YoutubeVideoOrderEnum = YoutubeVideoOrderEnum.RELEVANCE;
 
   @Field({ nullable: true })
   relatedToVideoUrl?: string;
+}
+
+@InputType()
+export class YoutubeTrendingVideoFindAllInput {
+  @Field({ nullable: true, defaultValue: 5 })
+  @IsPositive()
+  @Max(20)
+  @IsOptional()
+  maxResults: number = 5;
+
+  @Field({ nullable: true })
+  @IsOptional()
+  regionCode?: string;
 }

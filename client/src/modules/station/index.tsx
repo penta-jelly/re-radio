@@ -12,6 +12,7 @@ import { Playlist } from './playlist';
 import { useStyles } from './styles';
 import { useStationContextState } from './context';
 import { RelatedSongs } from './related-songs';
+import { TrendingSongs } from './trending-songs';
 
 export * from './context';
 export * from './create';
@@ -39,6 +40,8 @@ export const StationLayout: React.FC = () => {
               switch (selectedTab) {
                 case 'history':
                   return <HistorySongs />;
+                case 'trending':
+                  return <TrendingSongs />;
                 default:
                   return (
                     <>

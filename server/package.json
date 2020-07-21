@@ -37,6 +37,7 @@
     "@nestjs/platform-express": "7.3.2",
     "@nestjs/serve-static": "2.1.1",
     "@nestjs/typeorm": "7.1.0",
+    "accept-language-parser": "1.5.0",
     "apollo-server-express": "2.16.0",
     "bcrypt-nodejs": "0.0.3",
     "class-transformer": "0.2.3",
@@ -62,6 +63,7 @@
     "yargs": "15.4.1"
   },
   "devDependencies": {
+    "@types/accept-language-parser": "1.5.1",
     "@types/bcrypt-nodejs": "0.0.31",
     "@types/graphql": "14.2.3",
     "@types/moment-duration-format": "2.2.2",
@@ -86,6 +88,8 @@
   },
   "bin": "lib/main.js",
   "pkg": {
-    "assets": ["lib/migrations/**/*"]
+    "assets": [
+      "lib/migrations/**/*"
+    ]
   }
 }

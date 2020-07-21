@@ -36,7 +36,6 @@ export const HistorySongs: React.FC = () => {
 
   // Try to fetch the history songs whenever the player is changing
   const playerQuery = useStationPlayerQuery({ variables: { stationSlug: match.params.slug } });
-  console.log(playerQuery.data?.playingSongs[0]?.url);
   React.useEffect(fetch, [fetch, playerQuery.data?.playingSongs[0]?.url]);
 
   let content: React.ReactNode = <Typography variant="subtitle1">History</Typography>;

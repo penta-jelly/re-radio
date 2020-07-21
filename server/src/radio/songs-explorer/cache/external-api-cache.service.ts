@@ -13,7 +13,12 @@ export class ExternalApiCacheService {
     private readonly repository: Repository<ExternalApiCache>,
   ) {}
 
-  async find(url: string): Promise<ExternalApiCache | undefined> {
+  /**
+   *
+   * @param url cached url
+   * @param timeout in days
+   */
+  async find(url: string, timeout: number = 7): Promise<ExternalApiCache | undefined> {
     const cache = await this.repository.findOne({ where: { url } });
     if (!cache) {
       return undefined;
@@ -22,7 +27,7 @@ export class ExternalApiCacheService {
     const now = Moment(new Date().getTime());
     const duration = Moment.duration(now.diff(updatedAt));
     const days = duration.asDays();
-    if (days > 7) {
+    if (days > timeout) {
       this.logger.log(`The cache of url "${url}" is outdated, removing it now.`);
       return undefined;
     }
@@ -36,7 +41,7 @@ export class ExternalApiCacheService {
       await this.repository.remove(existingCache);
     }
     const cache = this.repository.create({ data, url });
-    const inspectedData = inspect(data, { depth: 0 });
+    const inspectedData = inspect(data, { depth: 1 });
     this.logger.log(`Request "${url}" has been persisted to internal cache. Data: ${inspectedData}`);
     return this.repository.save(cache);
   }
