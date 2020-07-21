@@ -194,6 +194,7 @@ type Query {
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
   youtubeTrendingVideos(where: YoutubeTrendingVideoFindAllInput!): [YoutubeVideo!]!
+  preferredRegion: String!
 }
 
 input StationFindAllOrderInput {

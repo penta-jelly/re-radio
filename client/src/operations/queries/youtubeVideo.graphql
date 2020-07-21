@@ -1,4 +1,4 @@
-query youtubeVideo($where: YoutubeVideoFindOneInput!){
+query YoutubeVideo($where: YoutubeVideoFindOneInput!) {
   youtubeVideo(where: $where) {
     id
     snippet {

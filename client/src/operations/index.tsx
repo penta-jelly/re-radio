@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
+export type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
 
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
@@ -222,6 +223,8 @@ export type Query = {
   readonly song: Song;
   readonly youtubeVideo: YoutubeVideoDetail;
   readonly youtubeVideos: ReadonlyArray<YoutubeVideo>;
+  readonly youtubeTrendingVideos: ReadonlyArray<YoutubeVideo>;
+  readonly preferredRegion: Scalars['String'];
 };
 
 
@@ -284,6 +287,11 @@ export type QueryYoutubeVideoArgs = {
 
 export type QueryYoutubeVideosArgs = {
   where: YoutubeVideoFindAllInput;
+};
+
+
+export type QueryYoutubeTrendingVideosArgs = {
+  where: YoutubeTrendingVideoFindAllInput;
 };
 
 export type StationFindAllOrderInput = {
@@ -392,6 +400,11 @@ export enum SongExplorerOrderEnum {
   ViewCount = 'VIEW_COUNT',
   VideoCount = 'VIDEO_COUNT'
 }
+
+export type YoutubeTrendingVideoFindAllInput = {
+  readonly maxResults?: Maybe<Scalars['Float']>;
+  readonly regionCode?: Maybe<Scalars['String']>;
+};
 
 export type Mutation = {
   readonly __typename?: 'Mutation';
@@ -546,9 +559,9 @@ export type SubscriptionSongArgs = {
   where?: Maybe<SongFindAllWhereInput>;
 };
 
-export type CreateSongMutationVariables = {
+export type CreateSongMutationVariables = Exact<{
   data: SongCreateInput;
-};
+}>;
 
 
 export type CreateSongMutation = (
@@ -559,9 +572,9 @@ export type CreateSongMutation = (
   ) }
 );
 
-export type CreateStationMutationVariables = {
+export type CreateStationMutationVariables = Exact<{
   data: StationCreateInput;
-};
+}>;
 
 
 export type CreateStationMutation = (
@@ -572,9 +585,9 @@ export type CreateStationMutation = (
   ) }
 );
 
-export type JoinStationMutationVariables = {
+export type JoinStationMutationVariables = Exact<{
   where: StationFindOneWhereInput;
-};
+}>;
 
 
 export type JoinStationMutation = (
@@ -582,9 +595,9 @@ export type JoinStationMutation = (
   & Pick<Mutation, 'joinStation'>
 );
 
-export type LeaveStationMutationVariables = {
+export type LeaveStationMutationVariables = Exact<{
   where: StationFindOneWhereInput;
-};
+}>;
 
 
 export type LeaveStationMutation = (
@@ -592,9 +605,9 @@ export type LeaveStationMutation = (
   & Pick<Mutation, 'leaveStation'>
 );
 
-export type LoginMutationVariables = {
+export type LoginMutationVariables = Exact<{
   data: LoginInput;
-};
+}>;
 
 
 export type LoginMutation = (
@@ -605,9 +618,9 @@ export type LoginMutation = (
   ) }
 );
 
-export type RegisterMutationVariables = {
+export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
-};
+}>;
 
 
 export type RegisterMutation = (
@@ -618,7 +631,7 @@ export type RegisterMutation = (
   ) }
 );
 
-export type CurrentUserQueryVariables = {};
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type CurrentUserQuery = (
@@ -634,10 +647,10 @@ export type UserBaseInformationFragment = (
   & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'>
 );
 
-export type HistorySongsQueryVariables = {
+export type HistorySongsQueryVariables = Exact<{
   stationSlug: Scalars['String'];
   pagination?: Maybe<PaginationInput>;
-};
+}>;
 
 
 export type HistorySongsQuery = (
@@ -649,9 +662,9 @@ export type HistorySongsQuery = (
   )> }
 );
 
-export type MiniUserQueryVariables = {
+export type MiniUserQueryVariables = Exact<{
   where: UserFindOneWhereInput;
-};
+}>;
 
 
 export type MiniUserQuery = (
@@ -662,9 +675,9 @@ export type MiniUserQuery = (
   ) }
 );
 
-export type StationQueryVariables = {
+export type StationQueryVariables = Exact<{
   slug: Scalars['String'];
-};
+}>;
 
 
 export type StationQuery = (
@@ -689,9 +702,9 @@ export type StationQuery = (
   ) }
 );
 
-export type StationPlayerQueryVariables = {
+export type StationPlayerQueryVariables = Exact<{
   stationSlug: Scalars['String'];
-};
+}>;
 
 
 export type StationPlayerQuery = (
@@ -702,9 +715,9 @@ export type StationPlayerQuery = (
   )> }
 );
 
-export type OnStationPlayerChangedSubscriptionVariables = {
+export type OnStationPlayerChangedSubscriptionVariables = Exact<{
   stationSlug: Scalars['String'];
-};
+}>;
 
 
 export type OnStationPlayerChangedSubscription = (
@@ -719,9 +732,9 @@ export type OnStationPlayerChangedSubscription = (
   ) }
 );
 
-export type StationPlaylistQueryVariables = {
+export type StationPlaylistQueryVariables = Exact<{
   stationSlug: Scalars['String'];
-};
+}>;
 
 
 export type StationPlaylistQuery = (
@@ -736,9 +749,9 @@ export type StationPlaylistQuery = (
   )> }
 );
 
-export type OnStationPlaylistChangedSubscriptionVariables = {
+export type OnStationPlaylistChangedSubscriptionVariables = Exact<{
   stationSlug: Scalars['String'];
-};
+}>;
 
 
 export type OnStationPlaylistChangedSubscription = (
@@ -757,10 +770,10 @@ export type OnStationPlaylistChangedSubscription = (
   ) }
 );
 
-export type StationSettingQueryVariables = {
+export type StationSettingQueryVariables = Exact<{
   stationId: Scalars['Int'];
   userId?: Maybe<Scalars['Int']>;
-};
+}>;
 
 
 export type StationSettingQuery = (
@@ -778,11 +791,11 @@ export type StationSettingQuery = (
   ) }
 );
 
-export type StationsQueryVariables = {
+export type StationsQueryVariables = Exact<{
   pagination?: Maybe<PaginationInput>;
   order?: Maybe<StationFindAllOrderInput>;
   where?: Maybe<ReadonlyArray<Maybe<StationFindAllWhereInput>>>;
-};
+}>;
 
 
 export type StationsQuery = (
@@ -807,9 +820,9 @@ export type StationsQuery = (
   )> }
 );
 
-export type OnStationChangedSubscriptionVariables = {
+export type OnStationChangedSubscriptionVariables = Exact<{
   where?: Maybe<StationFindOneWhereInput>;
-};
+}>;
 
 
 export type OnStationChangedSubscription = (
@@ -828,9 +841,9 @@ export type OnStationChangedSubscription = (
   ) }
 );
 
-export type UserProfileQueryVariables = {
+export type UserProfileQueryVariables = Exact<{
   where: UserFindOneWhereInput;
-};
+}>;
 
 
 export type UserProfileQuery = (
@@ -853,9 +866,46 @@ export type UserProfileQuery = (
   ) }
 );
 
-export type YoutubeVideoQueryVariables = {
+export type YoutubeTrendingVideosQueryVariables = Exact<{
+  where: YoutubeTrendingVideoFindAllInput;
+}>;
+
+
+export type YoutubeTrendingVideosQuery = (
+  { readonly __typename?: 'Query' }
+  & Pick<Query, 'preferredRegion'>
+  & { readonly youtubeTrendingVideos: ReadonlyArray<(
+    { readonly __typename?: 'YoutubeVideo' }
+    & Pick<YoutubeVideo, 'id'>
+    & { readonly snippet: (
+      { readonly __typename?: 'Snippet' }
+      & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'>
+      & { readonly thumbnails: (
+        { readonly __typename?: 'Thumbnails' }
+        & { readonly default: (
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        ), readonly medium?: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly high?: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly standard?: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )>, readonly maxres?: Maybe<(
+          { readonly __typename?: 'Thumbnail' }
+          & Pick<Thumbnail, 'url' | 'width' | 'height'>
+        )> }
+      ) }
+    ) }
+  )> }
+);
+
+export type YoutubeVideoQueryVariables = Exact<{
   where: YoutubeVideoFindOneInput;
-};
+}>;
 
 
 export type YoutubeVideoQuery = (
@@ -892,9 +942,9 @@ export type YoutubeVideoQuery = (
   ) }
 );
 
-export type YoutubeVideosQueryVariables = {
+export type YoutubeVideosQueryVariables = Exact<{
   where: YoutubeVideoFindAllInput;
-};
+}>;
 
 
 export type YoutubeVideosQuery = (
@@ -1654,8 +1704,76 @@ export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQuery
 export type UserProfileQueryHookResult = ReturnType<typeof useUserProfileQuery>;
 export type UserProfileLazyQueryHookResult = ReturnType<typeof useUserProfileLazyQuery>;
 export type UserProfileQueryResult = ApolloReactCommon.QueryResult<UserProfileQuery, UserProfileQueryVariables>;
+export const YoutubeTrendingVideosDocument = gql`
+    query YoutubeTrendingVideos($where: YoutubeTrendingVideoFindAllInput!) {
+  youtubeTrendingVideos(where: $where) {
+    id
+    snippet {
+      publishedAt
+      channelId
+      title
+      description
+      thumbnails {
+        default {
+          url
+          width
+          height
+        }
+        medium {
+          url
+          width
+          height
+        }
+        high {
+          url
+          width
+          height
+        }
+        standard {
+          url
+          width
+          height
+        }
+        maxres {
+          url
+          width
+          height
+        }
+      }
+      channelTitle
+    }
+  }
+  preferredRegion
+}
+    `;
+
+/**
+ * __useYoutubeTrendingVideosQuery__
+ *
+ * To run a query within a React component, call `useYoutubeTrendingVideosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useYoutubeTrendingVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useYoutubeTrendingVideosQuery({
+ *   variables: {
+ *      where: // value for 'where'
+ *   },
+ * });
+ */
+export function useYoutubeTrendingVideosQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
+        return ApolloReactHooks.useQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
+      }
+export function useYoutubeTrendingVideosLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
+        }
+export type YoutubeTrendingVideosQueryHookResult = ReturnType<typeof useYoutubeTrendingVideosQuery>;
+export type YoutubeTrendingVideosLazyQueryHookResult = ReturnType<typeof useYoutubeTrendingVideosLazyQuery>;
+export type YoutubeTrendingVideosQueryResult = ApolloReactCommon.QueryResult<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>;
 export const YoutubeVideoDocument = gql`
-    query youtubeVideo($where: YoutubeVideoFindOneInput!) {
+    query YoutubeVideo($where: YoutubeVideoFindOneInput!) {
   youtubeVideo(where: $where) {
     id
     snippet {
@@ -1727,7 +1845,7 @@ export type YoutubeVideoQueryHookResult = ReturnType<typeof useYoutubeVideoQuery
 export type YoutubeVideoLazyQueryHookResult = ReturnType<typeof useYoutubeVideoLazyQuery>;
 export type YoutubeVideoQueryResult = ApolloReactCommon.QueryResult<YoutubeVideoQuery, YoutubeVideoQueryVariables>;
 export const YoutubeVideosDocument = gql`
-    query youtubeVideos($where: YoutubeVideoFindAllInput!) {
+    query YoutubeVideos($where: YoutubeVideoFindAllInput!) {
   youtubeVideos(where: $where) {
     id
     snippet {

@@ -18,6 +18,7 @@
     "apollo-boost": "0.4.9",
     "apollo-link-context": "1.0.20",
     "apollo-link-ws": "1.0.20",
+    "countries-list": "2.5.5",
     "downshift": "5.4.7",
     "formik": "2.1.5",
     "graphql": "15.3.0",

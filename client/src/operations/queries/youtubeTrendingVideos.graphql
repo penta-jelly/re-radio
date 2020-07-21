@@ -1,5 +1,5 @@
-query YoutubeVideos($where: YoutubeVideoFindAllInput!) {
-  youtubeVideos(where: $where) {
+query YoutubeTrendingVideos($where: YoutubeTrendingVideoFindAllInput!) {
+  youtubeTrendingVideos(where: $where) {
     id
     snippet {
       publishedAt
@@ -36,4 +36,5 @@ query YoutubeVideos($where: YoutubeVideoFindAllInput!) {
       channelTitle
     }
   }
+  preferredRegion
 }

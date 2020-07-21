@@ -35,9 +35,15 @@ export class YoutubeResolver {
     @Args({ name: 'where', type: () => YoutubeTrendingVideoFindAllInput }) where: YoutubeTrendingVideoFindAllInput,
     @Headers('Accept-Language') acceptLanguageHeader: string,
   ) {
-    this.logger.log(`Headers ${acceptLanguageHeader}`);
     const language = AcceptLanguageParser.parse(acceptLanguageHeader).filter(({ region }) => !!region)[0];
     const region = language?.region || 'US';
     return this.youtubeService.fetchTrendingVideos({ regionCode: region, ...where });
+  }
+
+  @Query((returns) => String)
+  async preferredRegion(@Headers('Accept-Language') acceptLanguageHeader: string) {
+    const language = AcceptLanguageParser.parse(acceptLanguageHeader).filter(({ region }) => !!region)[0];
+    const region = language?.region || 'US';
+    return region;
   }
 }

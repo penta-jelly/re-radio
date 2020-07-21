@@ -27,7 +27,7 @@ export interface StationContext {
 
   // Tabs
   tabs: StationContext['selectedTab'][];
-  selectedTab: 'playlist' | 'history' | 'favorite';
+  selectedTab: 'playlist' | 'history' | 'trending';
   setSelectedTab(tab: StationContext['selectedTab']): void;
 }
 
@@ -56,7 +56,7 @@ const defaultState: StationContext = {
   setAddSongDialogState: defaultFn,
 
   // Tabs
-  tabs: ['playlist', 'history', 'favorite'],
+  tabs: ['playlist', 'history', 'trending'],
   selectedTab: 'playlist',
   setSelectedTab: defaultFn,
 };
