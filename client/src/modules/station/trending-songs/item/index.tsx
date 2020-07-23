@@ -1,5 +1,5 @@
 import { ListItem, ListItemText, ListItemSecondaryAction, IconButton, CircularProgress } from '@material-ui/core';
-import { MdPlayArrow } from 'react-icons/md';
+import { MdPlaylistAdd } from 'react-icons/md';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import { useApolloClient } from 'react-apollo';
@@ -100,7 +100,7 @@ export const HistorySongItem: React.FC<Props> = (props) => {
           <CircularProgress size={26} />
         ) : (
           <IconButton onClick={onPlaySongClick} size="small">
-            <MdPlayArrow />
+            <MdPlaylistAdd />
           </IconButton>
         )}
       </ListItemSecondaryAction>
