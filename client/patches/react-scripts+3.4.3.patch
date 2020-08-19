@@ -1,9 +1,5 @@
-# This patch is use to fix the issue that cause react-scripts could not be able to run under
-# "lerna run --parallel" command.
-# @see: https://github.com/facebook/create-react-app/issues/8685
-
 diff --git a/node_modules/react-scripts/scripts/start.js b/node_modules/react-scripts/scripts/start.js
-index 2568ab3..270c7f0 100644
+index 2568ab3..ee954bd 100644
 --- a/node_modules/react-scripts/scripts/start.js
 +++ b/node_modules/react-scripts/scripts/start.js
 @@ -171,7 +171,7 @@ checkBrowsers(paths.appPath, isInteractive)
