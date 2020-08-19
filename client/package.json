@@ -16,9 +16,11 @@
   "dependencies": {
     "@material-ui/core": "4.10.1",
     "@material-ui/styles": "4.10.0",
+    "@reduxjs/toolkit": "1.4.0",
     "apollo-boost": "0.4.9",
     "apollo-link-context": "1.0.20",
     "apollo-link-ws": "1.0.20",
+    "connected-react-router": "6.8.0",
     "countries-list": "2.5.6",
     "downshift": "6.0.5",
     "formik": "2.1.5",
@@ -36,6 +38,7 @@
     "react-i18next": "11.5.0",
     "react-icons": "3.10.0",
     "react-player": "2.6.0",
+    "react-redux": "7.2.1",
     "react-router-dom": "5.2.0",
     "subscriptions-transport-ws": "0.9.18",
     "yup": "0.29.3"
@@ -54,6 +57,7 @@
     "@types/react": "16.9.46",
     "@types/react-dom": "16.9.8",
     "@types/react-helmet": "6.0.0",
+    "@types/react-redux": "7.1.9",
     "@types/react-router-dom": "5.1.5",
     "@types/yup": "0.29.4",
     "eslint": "6.8.0",
