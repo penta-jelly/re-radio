@@ -5,6 +5,7 @@
     "postinstall": "patch-package",
     "initialize": "npm-run-all initialize:*",
     "initialize:env": "shx cp -n .env.example .env",
+    "initialize:graphql": "npm run generate",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

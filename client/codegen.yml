@@ -4,13 +4,15 @@ documents: ./src/operations/**/*.graphql
 generates:
   ./src/operations/index.tsx:
     config:
+      reactApolloVersion: 2
       noNamespaces: true
       withComponent: false
       withHooks: true
       withHOC: false
       immutableTypes: true
     plugins:
-      - add: "/* eslint-disable */"
+      - add:
+          content: '/* eslint-disable */'
       - typescript
       - typescript-operations
       - typescript-react-apollo

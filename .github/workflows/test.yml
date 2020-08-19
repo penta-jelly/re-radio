@@ -43,3 +43,9 @@ jobs:
         with:
           name: log
           path: server/storage/log
+      - name: Check if there are changes in the workspace
+        id: codeChanges
+        uses: UnicornGlobal/has-changes-action@v1.0.11
+      - name: Process changes in the workspace
+        if: steps.codeChanges.outputs.changed == 1
+        run: echo "There are some changes exist in the repository while building. Abort now!" && exit 1
