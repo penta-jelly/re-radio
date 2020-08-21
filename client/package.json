@@ -35,7 +35,7 @@
     "react-helmet": "6.0.0",
     "react-i18next": "11.7.1",
     "react-icons": "3.11.0",
-    "react-player": "2.6.0",
+    "react-player": "2.6.1",
     "react-router-dom": "5.2.0",
     "subscriptions-transport-ws": "0.9.18",
     "yup": "0.29.3"
