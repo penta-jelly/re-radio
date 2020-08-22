@@ -27,7 +27,7 @@
     "jss": "10.4.0",
     "moment": "2.26.0",
     "moment-duration-format": "2.3.2",
-    "notistack": "0.9.16",
+    "notistack": "1.0.0",
     "re-radio-common": "^0.1.0-SNAPSHOT",
     "react": "16.13.1",
     "react-apollo": "3.1.5",
