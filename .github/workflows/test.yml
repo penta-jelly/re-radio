@@ -39,7 +39,7 @@ jobs:
           wait-on-timeout: 60
       - name: Persist the log file
         if: failure()
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: log
           path: server/storage/log
