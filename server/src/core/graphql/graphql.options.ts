@@ -11,7 +11,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
   constructor(private readonly pubSub: PubSub) {}
 
   createGqlOptions(): GqlModuleOptions {
-    type RadioWsConnectionContext = ConnectionContext & { connectionParams?: object };
+    type RadioWsConnectionContext = ConnectionContext & { connectionParams?: Record<string, unknown> };
 
     return {
       path: 'graphql',
@@ -20,8 +20,10 @@ export class GraphqlOptions implements GqlOptionsFactory {
       subscriptions: {
         keepAlive: 20000,
         onConnect: async (connectionParams, _, context: RadioWsConnectionContext) => {
-          context.connectionParams = connectionParams;
-          await this.pubSub.publish<WsEvent.ConnectedPayload>(WsEvent.Type.CONNECTED, { connectionParams });
+          context.connectionParams = connectionParams as Record<string, unknown>;
+          await this.pubSub.publish<WsEvent.ConnectedPayload>(WsEvent.Type.CONNECTED, {
+            connectionParams: connectionParams as Record<string, unknown>,
+          });
         },
         onDisconnect: async (_, context: RadioWsConnectionContext) => {
           const { connectionParams } = context;

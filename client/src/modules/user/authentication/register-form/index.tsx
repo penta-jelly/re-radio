@@ -26,9 +26,9 @@ export const RegisterForm: React.FC<Props> = (props) => {
             data: values,
           },
         });
-        if (response.data && response.data.register.token) {
+        if (response.data?.register.token) {
           localStorage.setItem('token', response.data.register.token);
-          props.postRegister && props.postRegister();
+          props.postRegister?.();
           return;
         }
       } catch (error) {

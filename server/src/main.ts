@@ -1,5 +1,6 @@
 import { DEFAULT_WORKERS, Worker } from './workers';
-
+/* eslint-disable @typescript-eslint/no-var-requires */
+// eslint-disable-next-line import/order
 import yargs = require('yargs');
 
 type Application = 'radio' | 'real-time-radio';

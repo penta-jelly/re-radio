@@ -61,6 +61,7 @@ const defaultState: StationContext = {
   setSelectedTab: defaultFn,
 };
 
+// eslint-disable-next-line @typescript-eslint/no-redeclare
 export const StationContext = React.createContext<StationContext>(defaultState);
 
 export function useStationContextStateProvider(): StationContext {

@@ -37,7 +37,7 @@ export const LoginForm: React.FC<Props> = ({ postLogin }) => {
         const response = await loginMutation({
           variables: { data: values.email.includes('@') ? loginWithEmailValue : loginWithUsernameValue },
         });
-        if (response.data && response.data.login.token) {
+        if (response.data?.login.token) {
           localStorage.setItem('token', response.data.login.token);
           postLogin?.();
           return;

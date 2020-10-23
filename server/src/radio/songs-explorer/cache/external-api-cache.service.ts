@@ -35,7 +35,7 @@ export class ExternalApiCacheService {
     return cache;
   }
 
-  async persist(data: object, url: string): Promise<ExternalApiCache> {
+  async persist(data: Record<string, unknown>, url: string): Promise<ExternalApiCache> {
     const existingCache = await this.repository.find({ where: { url } });
     if (existingCache) {
       await this.repository.remove(existingCache);
