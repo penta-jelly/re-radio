@@ -15,5 +15,5 @@ export class ExternalApiCache {
   url: string;
 
   @Column('simple-json')
-  data: object;
+  data: Record<string, unknown>;
 }

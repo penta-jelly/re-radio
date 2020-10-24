@@ -20,7 +20,11 @@ export class PubSub {
     return this.instance.publish<T>(trigger, payload);
   }
 
-  subscribe(trigger: string, onMessage: Function, options?: object): Promise<number> {
+  subscribe<T extends (...args: never[]) => Promise<void>>(
+    trigger: string,
+    onMessage: T,
+    options?: Record<string, unknown>,
+  ): Promise<number> {
     return this.instance.subscribe(trigger, onMessage, options);
   }
 
@@ -28,13 +32,13 @@ export class PubSub {
     return this.instance.unsubscribe(subId);
   }
 
-  asyncIterable<T>(triggers: string | string[], options?: object): AsyncIterable<T> {
+  asyncIterable<T>(triggers: string | string[], options?: Record<string, unknown>): AsyncIterable<T> {
     return {
       [Symbol.asyncIterator]: () => this.instance.asyncIterator<T>(triggers, options),
     };
   }
 
-  asyncIterator<T>(triggers: string | string[], options?: object): AsyncIterator<T> {
+  asyncIterator<T>(triggers: string | string[], options?: Record<string, unknown>): AsyncIterator<T> {
     return this.instance.asyncIterator<T>(triggers, options);
   }
 

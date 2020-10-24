@@ -30,7 +30,7 @@ export const Preview: React.FC<Props> = ({ previewSong }) => {
         <Typography variant="body2" id="preview-song-channel">
           {previewSong.snippet.channelTitle}
         </Typography>
-        {currentUser.data && currentUser.data.user && (
+        {currentUser.data?.user && (
           <Typography variant="caption" className={classes.creator} id="song-creator">
             Added by {currentUser.data.user.username}
           </Typography>

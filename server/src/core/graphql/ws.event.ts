@@ -5,10 +5,10 @@ export namespace WsEvent {
     DISCONNECTED = 'WsEvent/DISCONNECTED',
   }
   export interface ConnectedPayload {
-    connectionParams: object;
+    connectionParams: Record<string, unknown>;
   }
 
   export interface DisconnectedPayload {
-    connectionParams: object;
+    connectionParams: Record<string, unknown>;
   }
 }

@@ -8,7 +8,7 @@ export function useInterval(callback: Function, delay: number) {
   }, [callback]);
 
   useEffect(() => {
-    const handler = (...args: any[]) => savedCallback.current && savedCallback.current(...args);
+    const handler = (...args: any[]) => savedCallback.current?.(...args);
 
     if (delay !== null) {
       const id = setInterval(handler, delay);

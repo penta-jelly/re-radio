@@ -1,7 +1,7 @@
 export interface Stub {
   operation: string;
   response: {
-    data: object;
+    data: Record<string, unknown>;
   };
 }
 
