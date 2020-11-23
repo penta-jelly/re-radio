@@ -26,7 +26,7 @@ jobs:
           RADIO_SERVER_HOST: localhost
           RADIO_SERVER_PORT: 2996
       - name: Run e2e tests
-        uses: cypress-io/github-action@v1
+        uses: cypress-io/github-action@v2
         env:
           CYPRESS_baseUrl: 'http://localhost:2996'
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
