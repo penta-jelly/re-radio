@@ -4,6 +4,8 @@ import * as ApolloReactCommon from '@apollo/react-common';
 import * as ApolloReactHooks from '@apollo/react-hooks';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -1241,7 +1243,7 @@ export const HistorySongsDocument = gql`
  *   },
  * });
  */
-export function useHistorySongsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
+export function useHistorySongsQuery(baseOptions: ApolloReactHooks.QueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
         return ApolloReactHooks.useQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
       }
 export function useHistorySongsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
@@ -1279,7 +1281,7 @@ export const MiniUserDocument = gql`
  *   },
  * });
  */
-export function useMiniUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
+export function useMiniUserQuery(baseOptions: ApolloReactHooks.QueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
         return ApolloReactHooks.useQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, baseOptions);
       }
 export function useMiniUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
@@ -1331,7 +1333,7 @@ export const StationDocument = gql`
  *   },
  * });
  */
-export function useStationQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
+export function useStationQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
         return ApolloReactHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
       }
 export function useStationLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
@@ -1373,7 +1375,7 @@ export const StationPlayerDocument = gql`
  *   },
  * });
  */
-export function useStationPlayerQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
+export function useStationPlayerQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
         return ApolloReactHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
       }
 export function useStationPlayerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
@@ -1418,7 +1420,7 @@ export const OnStationPlayerChangedDocument = gql`
  *   },
  * });
  */
-export function useOnStationPlayerChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
+export function useOnStationPlayerChangedSubscription(baseOptions: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
         return ApolloReactHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
       }
 export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
@@ -1459,7 +1461,7 @@ export const StationPlaylistDocument = gql`
  *   },
  * });
  */
-export function useStationPlaylistQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
+export function useStationPlaylistQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
         return ApolloReactHooks.useQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
       }
 export function useStationPlaylistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
@@ -1507,7 +1509,7 @@ export const OnStationPlaylistChangedDocument = gql`
  *   },
  * });
  */
-export function useOnStationPlaylistChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>) {
+export function useOnStationPlaylistChangedSubscription(baseOptions: ApolloReactHooks.SubscriptionHookOptions<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>) {
         return ApolloReactHooks.useSubscription<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>(OnStationPlaylistChangedDocument, baseOptions);
       }
 export type OnStationPlaylistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlaylistChangedSubscription>;
@@ -1544,7 +1546,7 @@ export const StationSettingDocument = gql`
  *   },
  * });
  */
-export function useStationSettingQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
+export function useStationSettingQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
         return ApolloReactHooks.useQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
       }
 export function useStationSettingLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
@@ -1694,7 +1696,7 @@ export const UserProfileDocument = gql`
  *   },
  * });
  */
-export function useUserProfileQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
+export function useUserProfileQuery(baseOptions: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
         return ApolloReactHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
       }
 export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
@@ -1762,7 +1764,7 @@ export const YoutubeTrendingVideosDocument = gql`
  *   },
  * });
  */
-export function useYoutubeTrendingVideosQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
+export function useYoutubeTrendingVideosQuery(baseOptions: ApolloReactHooks.QueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
         return ApolloReactHooks.useQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
       }
 export function useYoutubeTrendingVideosLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
@@ -1834,7 +1836,7 @@ export const YoutubeVideoDocument = gql`
  *   },
  * });
  */
-export function useYoutubeVideoQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
+export function useYoutubeVideoQuery(baseOptions: ApolloReactHooks.QueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
         return ApolloReactHooks.useQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
       }
 export function useYoutubeVideoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
@@ -1901,7 +1903,7 @@ export const YoutubeVideosDocument = gql`
  *   },
  * });
  */
-export function useYoutubeVideosQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
+export function useYoutubeVideosQuery(baseOptions: ApolloReactHooks.QueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
         return ApolloReactHooks.useQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
       }
 export function useYoutubeVideosLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
