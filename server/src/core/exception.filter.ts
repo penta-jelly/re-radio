@@ -27,7 +27,7 @@ export class RadioExceptionFilter implements GqlExceptionFilter {
     if (!info || !args) {
       throw exception;
     }
-    const rawArgs = Util.inspect(args, { depth: 5, breakLength: 120 });
+    const rawArgs = Util.inspect(args, { depth: 5, breakLength: Infinity });
     this.log(exception, info, rawArgs);
     return this.transformException(exception);
   }

@@ -41,7 +41,7 @@ export class ExternalApiCacheService {
       await this.repository.remove(existingCache);
     }
     const cache = this.repository.create({ data, url });
-    const inspectedData = inspect(data, { depth: 1 });
+    const inspectedData = inspect(data, { depth: 1, breakLength: Infinity });
     this.logger.log(`Request "${url}" has been persisted to internal cache. Data: ${inspectedData}`);
     return this.repository.save(cache);
   }
