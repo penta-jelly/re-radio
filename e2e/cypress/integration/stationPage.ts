@@ -52,7 +52,7 @@ describe('Station Page components', () => {
 });
 
 describe('Add a song', () => {
-  it('should be able to add a song to the playlist', () => {
+  it.only('should be able to add a song to the playlist', () => {
     stationPage.navigate('station-a', true);
 
     stationPage.clickAddSongFab();

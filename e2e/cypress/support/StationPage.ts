@@ -44,7 +44,6 @@ export default (url = '/station') => ({
     cy.get(this.elements.addSong.searchSongInput).should('have.value', '');
 
     cy.get(this.elements.addSong.searchButton).should('be.visible');
-    cy.get(this.elements.addSong.closeIconButton).should('not.be.visible');
 
     cy.get(this.elements.addSong.defaultPreviewSongCover).should('be.visible');
 
@@ -55,7 +54,6 @@ export default (url = '/station') => ({
   searchSong(query: string) {
     cy.get(this.elements.addSong.searchSongInput).type(query);
     cy.get(this.elements.addSong.closeIconButton).should('be.visible');
-    cy.get(this.elements.addSong.searchButton).should('not.be.visible');
     cy.get(this.elements.addSong.searchSongMenu).should('be.visible');
     cy.get(this.elements.addSong.searchSongMenu).children().should('have.length', 5);
   },

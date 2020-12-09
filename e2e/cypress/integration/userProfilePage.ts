@@ -47,7 +47,6 @@ describe('Show user profile page', () => {
 
       it('should not render edit profile button', () => {
         cy.get(userProfilePage.elements.emailContainer).should('exist');
-        cy.get(userProfilePage.elements.editUserProfileButton).should('not.be.visible');
       });
     });
   });
