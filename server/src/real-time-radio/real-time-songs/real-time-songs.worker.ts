@@ -92,9 +92,7 @@ export class RealTimeSongsWorker {
   protected async onSongCreated(song: Song) {
     this.logger.log(`Station [${song.stationSlug}] Song [${song.id}] "${song.title}" has been created.`);
     if (await this.realTimeStationService.isStationReadyToPlayNextSong(song.stationSlug)) {
-      console.log('station is ready', song.stationSlug);
       const nextSong = await this.realTimeSongService.findNextPlayingSongInStation(song.stationSlug);
-      console.log('nextSong', nextSong);
       if (!nextSong || this.sleepersMap[nextSong.stationSlug]) return;
       await this.realTimeSongService.updateSongStatusToPlaying(nextSong.id);
     }
