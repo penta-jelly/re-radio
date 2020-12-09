@@ -53,7 +53,7 @@ describe('Create a Station', () => {
       .should('be.visible');
 
     cy.get(stationsPage.elements.createStation.modal).click();
-    cy.get(stationsPage.elements.createStation.form).should('be.not.visible');
+    cy.get(stationsPage.elements.createStation.form).should('not.exist');
   });
 
   describe('form validation', () => {
@@ -118,7 +118,7 @@ describe('Create a Station', () => {
         .clear()
         .type('#b12 #polics');
       cy.get(stationsPage.elements.createStation.form).submit();
-      cy.get(stationsPage.elements.createStation.form).contains('Must be a valid tags format').should('be.not.visible');
+      cy.get(stationsPage.elements.createStation.form).contains('Must be a valid tags format').should('not.exist');
     });
   });
 
@@ -138,7 +138,7 @@ describe('Create a Station', () => {
 
     cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.submitButton).click();
 
-    cy.get(stationsPage.elements.createStation.form).should('be.not.visible');
+    cy.get(stationsPage.elements.createStation.form).should('not.exist');
     stationsPage.checkStationCard(`awesome-station${randomId}`, `Awesome Station ${randomId}`);
   });
 
@@ -167,7 +167,7 @@ describe('Create a Station', () => {
 
     cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.submitButton).click();
 
-    cy.get(stationsPage.elements.createStation.form).should('be.not.visible');
+    cy.get(stationsPage.elements.createStation.form).should('not.exist');
     stationsPage.checkStationCard(`awesome-station${randomId}`, `Awesome Station ${randomId}`, [
       'awesome',
       'radio',
