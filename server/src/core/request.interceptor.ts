@@ -20,7 +20,7 @@ export class RequestsInterceptor implements NestInterceptor {
       const info = ctx.getInfo<GraphQLResolveInfo>();
       const operation = info.operation.operation.toUpperCase();
       const before = Date.now();
-      const rawArgs = Util.inspect(ctx.getArgs(), { depth: 5, breakLength: 120 });
+      const rawArgs = Util.inspect(ctx.getArgs(), { depth: 5, breakLength: Infinity });
       return next
         .handle()
         .pipe(

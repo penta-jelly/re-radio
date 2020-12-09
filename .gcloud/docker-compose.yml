@@ -37,6 +37,7 @@ services:
       - postgres
       - redis
     environment:
+      NODE_ENV: "production"
       LOG_UNCOLORIZE: "${LOG_UNCOLORIZE:-1}"
       REDIS_HOST: re-radio_redis
       REDIS_PORT: 6379
