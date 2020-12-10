@@ -38,7 +38,7 @@
     "react-player": "2.7.0",
     "react-router-dom": "5.2.0",
     "subscriptions-transport-ws": "0.9.18",
-    "yup": "0.32.6"
+    "yup": "0.32.8"
   },
   "devDependencies": {
     "@graphql-codegen/add": "2.0.2",
