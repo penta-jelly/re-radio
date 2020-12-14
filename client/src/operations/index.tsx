@@ -1427,7 +1427,10 @@ export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof use
 export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
 export const StationPlaylistDocument = gql`
     query StationPlaylist($stationSlug: String!) {
-  playlist: songs(where: [{stationSlug: $stationSlug, status: PENDING}, {stationSlug: $stationSlug, status: PLAYING}], pagination: {take: 99}) {
+  playlist: songs(
+    where: [{stationSlug: $stationSlug, status: PENDING}, {stationSlug: $stationSlug, status: PLAYING}]
+    pagination: {take: 99}
+  ) {
     id
     title
     url
