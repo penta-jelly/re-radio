@@ -3,7 +3,7 @@ import * as React from 'react';
 import { useStyles } from './styles';
 
 interface FabProps {
-  muiProps?: React.ComponentProps<typeof MuiFab>;
+  muiProps?: Omit<React.ComponentProps<typeof MuiFab>, 'children'>;
 }
 
 export const Fab: React.FC<FabProps> = (props) => {
