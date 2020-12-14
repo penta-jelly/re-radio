@@ -47,6 +47,7 @@ jobs:
       - name: Process changes in the workspace
         if: steps.codeChanges.outputs.changed == 1
         run: |
-          echo "There are some changes exist in the repository while building."
           git status
+          echo "There are some changes exist in the repository while building."
+          git diff
           exit 1
