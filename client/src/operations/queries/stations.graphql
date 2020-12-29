@@ -9,7 +9,9 @@ query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $
     }
     userRoles {
       role
-      user { ...UserBaseInformation }
+      user {
+        ...UserBaseInformation
+      }
     }
     playingSong {
       id
@@ -26,15 +28,6 @@ subscription OnStationChanged($where: StationFindOneWhereInput) {
     mutation
     entity {
       id
-      name
-      slug
-      playingSong {
-        id
-        title
-        thumbnail
-        startedAt
-      }
-      onlineUserIds
     }
   }
 }

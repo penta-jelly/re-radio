@@ -14,21 +14,10 @@ query StationPlayer($stationSlug: String!) {
 }
 
 subscription OnStationPlayerChanged($stationSlug: String!) {
-  onPlayingSongChanged: song(
-    where: { stationSlug: $stationSlug }
-  ) {
+  onPlayingSongChanged: song(where: { stationSlug: $stationSlug }) {
     mutation
     entity {
       id
-      title
-      url
-      thumbnail
-      duration
-      createdAt
-      startedAt
-      status
-      upVoteUserIds
-      downVoteUserIds
     }
   }
 }
