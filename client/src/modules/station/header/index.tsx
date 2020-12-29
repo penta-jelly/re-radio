@@ -2,7 +2,7 @@ import { CircularProgress, IconButton, Typography } from '@material-ui/core';
 import React from 'react';
 import { MdVolumeOff, MdVolumeUp } from 'react-icons/md';
 import { useParams } from 'react-router-dom';
-import { useStationQuery, useStationSettingLazyQuery, useCurrentUserQuery } from 'operations';
+import { useCurrentUserQuery, useStationQuery, useStationSettingLazyQuery } from 'operations';
 import { useStationContextState } from '../context';
 import { OnlineUser } from './online-user';
 import { useStyles } from './styles';

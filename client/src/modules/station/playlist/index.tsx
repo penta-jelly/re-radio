@@ -1,9 +1,9 @@
-import { sortSongs } from 're-radio-common/lib/sort-songs';
 import { Card, CircularProgress, Icon, List, Typography } from '@material-ui/core';
+import { sortSongs } from 're-radio-common/lib/sort-songs';
 import React from 'react';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
-import { SongStatusEnum, useOnStationPlaylistChangedSubscription, useStationPlaylistQuery } from 'operations';
+import { useOnStationPlaylistChangedSubscription, useStationPlaylistQuery } from 'operations';
 import { PlaylistItem } from 'modules/station/playlist/item';
 import { useStyles } from './styles';
 
@@ -19,7 +19,7 @@ export const Playlist: React.FC = () => {
     throw new Error(`Match not found. The "$stationSlug" is not existed in query param.`);
   }
 
-  const { loading, error, data, updateQuery } = useStationPlaylistQuery({
+  const { loading, error, data, refetch } = useStationPlaylistQuery({
     variables: { stationSlug: match.params.slug },
     fetchPolicy: 'network-only',
   });
@@ -30,14 +30,7 @@ export const Playlist: React.FC = () => {
       if (!data) return;
       const { onPlaylistSongChanged } = data;
       if (!onPlaylistSongChanged) return;
-      const { entity } = onPlaylistSongChanged;
-      updateQuery((prev) => {
-        let playlist = prev.playlist.filter((song) => song && song.id !== entity.id);
-        if (entity.status === SongStatusEnum.Playing || entity.status === SongStatusEnum.Pending) {
-          playlist = [...playlist, { ...entity, __typename: 'Song' }];
-        }
-        return { ...prev, playlist };
-      });
+      refetch();
     },
   });
 

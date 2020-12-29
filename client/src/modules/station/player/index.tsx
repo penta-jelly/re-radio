@@ -2,12 +2,7 @@ import { Card, CircularProgress, Typography } from '@material-ui/core';
 import React, { useCallback, useRef } from 'react';
 import ReactPlayer, { Config as ReactPlayerConfig } from 'react-player/lazy';
 import { useRouteMatch } from 'react-router-dom';
-import {
-  SongStatusEnum,
-  StationPlayerQuery,
-  useOnStationPlayerChangedSubscription,
-  useStationPlayerQuery,
-} from 'operations';
+import { StationPlayerQuery, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
 import { usePreviousNonNullableValue } from 'hooks/use-previous-non-nullable-value';
 import { useStationContextState } from '../context';
 import { useStyles } from './styles';
@@ -28,7 +23,7 @@ export const Player: React.FC = () => {
     player: { muted },
   } = useStationContextState();
 
-  const { loading, data, updateQuery } = useStationPlayerQuery({
+  const { loading, data, refetch } = useStationPlayerQuery({
     variables: { stationSlug: match.params.slug },
     fetchPolicy: 'network-only',
   });
@@ -39,16 +34,7 @@ export const Player: React.FC = () => {
       if (!data) return;
       const { onPlayingSongChanged } = data;
       if (!onPlayingSongChanged) return;
-      const { entity } = onPlayingSongChanged;
-      updateQuery((prev) => {
-        // Remove the updated entity from the current list first, including played and skipped entity
-        let playingSongs = prev.playingSongs.filter((song) => song.id !== entity.id);
-        // Then only add the updated entity if the status is playing. Played/skipped status will be ignore.
-        if (entity.status === SongStatusEnum.Playing) {
-          playingSongs = [...playingSongs, { ...entity, __typename: 'Song' }];
-        }
-        return { ...prev, playingSongs };
-      });
+      refetch();
     },
   });
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { Layout } from 'containers/layout';
+import { useInterval } from 'hooks/use-interval';
 import { StationContext, StationLayout, useStationContextStateProvider } from 'modules/station';
 import {
   useCurrentUserQuery,
   useJoinStationMutation,
-  useStationQuery,
   useOnStationChangedSubscription,
+  useStationQuery,
 } from 'operations';
-import { useInterval } from 'hooks/use-interval';
 
 interface RouteParams {
   slug: string;
@@ -21,7 +21,7 @@ const Station: React.FC = () => {
   const currentUserQuery = useCurrentUserQuery();
   const [joinStation] = useJoinStationMutation();
 
-  const { data, updateQuery } = useStationQuery({ variables: { slug: params.slug } });
+  const { data, refetch } = useStationQuery({ variables: { slug: params.slug } });
 
   useOnStationChangedSubscription({
     variables: { where: { slug: params.slug } },
@@ -29,12 +29,7 @@ const Station: React.FC = () => {
       if (!data) return;
       const { onStationChanged } = data;
       if (!onStationChanged) return;
-      const { entity } = onStationChanged;
-      updateQuery((prev) => {
-        const { onlineUserIds } = entity;
-        if (!prev || !prev.station) return prev;
-        return { ...prev, station: { ...prev.station, onlineUserIds } };
-      });
+      refetch();
     },
   });
 

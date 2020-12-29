@@ -728,7 +728,7 @@ export type OnStationPlayerChangedSubscription = (
     & Pick<SongSubscription, 'mutation'>
     & { readonly entity: (
       { readonly __typename?: 'Song' }
-      & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
+      & Pick<Song, 'id'>
     ) }
   ) }
 );
@@ -762,11 +762,7 @@ export type OnStationPlaylistChangedSubscription = (
     & Pick<SongSubscription, 'mutation'>
     & { readonly entity: (
       { readonly __typename?: 'Song' }
-      & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
-      & { readonly creator: (
-        { readonly __typename?: 'User' }
-        & UserBaseInformationFragment
-      ) }
+      & Pick<Song, 'id'>
     ) }
   ) }
 );
@@ -833,11 +829,7 @@ export type OnStationChangedSubscription = (
     & Pick<StationSubscription, 'mutation'>
     & { readonly entity: (
       { readonly __typename?: 'Station' }
-      & Pick<Station, 'id' | 'name' | 'slug' | 'onlineUserIds'>
-      & { readonly playingSong?: Maybe<(
-        { readonly __typename?: 'Song' }
-        & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
-      )> }
+      & Pick<Station, 'id'>
     ) }
   ) }
 );
@@ -1390,15 +1382,6 @@ export const OnStationPlayerChangedDocument = gql`
     mutation
     entity {
       id
-      title
-      url
-      thumbnail
-      duration
-      createdAt
-      startedAt
-      status
-      upVoteUserIds
-      downVoteUserIds
     }
   }
 }
@@ -1479,22 +1462,10 @@ export const OnStationPlaylistChangedDocument = gql`
     mutation
     entity {
       id
-      title
-      url
-      thumbnail
-      duration
-      createdAt
-      startedAt
-      status
-      upVoteUserIds
-      downVoteUserIds
-      creator {
-        ...UserBaseInformation
-      }
     }
   }
 }
-    ${UserBaseInformationFragmentDoc}`;
+    `;
 
 /**
  * __useOnStationPlaylistChangedSubscription__
@@ -1618,15 +1589,6 @@ export const OnStationChangedDocument = gql`
     mutation
     entity {
       id
-      name
-      slug
-      playingSong {
-        id
-        title
-        thumbnail
-        startedAt
-      }
-      onlineUserIds
     }
   }
 }

@@ -1,9 +1,6 @@
 query StationPlaylist($stationSlug: String!) {
   playlist: songs(
-    where: [
-      { stationSlug: $stationSlug, status: PENDING }
-      { stationSlug: $stationSlug, status: PLAYING }
-    ],
+    where: [{ stationSlug: $stationSlug, status: PENDING }, { stationSlug: $stationSlug, status: PLAYING }]
     pagination: { take: 99 }
   ) {
     id
@@ -16,7 +13,7 @@ query StationPlaylist($stationSlug: String!) {
     status
     upVoteUserIds
     downVoteUserIds
-    creator { 
+    creator {
       ...UserBaseInformation
     }
   }
@@ -27,18 +24,6 @@ subscription OnStationPlaylistChanged($stationSlug: String!) {
     mutation
     entity {
       id
-      title
-      url
-      thumbnail
-      duration
-      createdAt
-      startedAt
-      status
-      upVoteUserIds
-      downVoteUserIds
-      creator { 
-        ...UserBaseInformation
-      }
     }
   }
 }
