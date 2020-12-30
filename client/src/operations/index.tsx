@@ -1,7 +1,6 @@
 /* eslint-disable */
-import gql from 'graphql-tag';
-import * as ApolloReactCommon from '@apollo/react-common';
-import * as ApolloReactHooks from '@apollo/react-hooks';
+import { gql } from '@apollo/client';
+import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
@@ -988,7 +987,7 @@ export const CreateSongDocument = gql`
   }
 }
     `;
-export type CreateSongMutationFn = ApolloReactCommon.MutationFunction<CreateSongMutation, CreateSongMutationVariables>;
+export type CreateSongMutationFn = Apollo.MutationFunction<CreateSongMutation, CreateSongMutationVariables>;
 
 /**
  * __useCreateSongMutation__
@@ -1007,12 +1006,12 @@ export type CreateSongMutationFn = ApolloReactCommon.MutationFunction<CreateSong
  *   },
  * });
  */
-export function useCreateSongMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
-        return ApolloReactHooks.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
+export function useCreateSongMutation(baseOptions?: Apollo.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
+        return Apollo.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
       }
 export type CreateSongMutationHookResult = ReturnType<typeof useCreateSongMutation>;
-export type CreateSongMutationResult = ApolloReactCommon.MutationResult<CreateSongMutation>;
-export type CreateSongMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateSongMutation, CreateSongMutationVariables>;
+export type CreateSongMutationResult = Apollo.MutationResult<CreateSongMutation>;
+export type CreateSongMutationOptions = Apollo.BaseMutationOptions<CreateSongMutation, CreateSongMutationVariables>;
 export const CreateStationDocument = gql`
     mutation CreateStation($data: StationCreateInput!) {
   createStation(data: $data) {
@@ -1022,7 +1021,7 @@ export const CreateStationDocument = gql`
   }
 }
     `;
-export type CreateStationMutationFn = ApolloReactCommon.MutationFunction<CreateStationMutation, CreateStationMutationVariables>;
+export type CreateStationMutationFn = Apollo.MutationFunction<CreateStationMutation, CreateStationMutationVariables>;
 
 /**
  * __useCreateStationMutation__
@@ -1041,18 +1040,18 @@ export type CreateStationMutationFn = ApolloReactCommon.MutationFunction<CreateS
  *   },
  * });
  */
-export function useCreateStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
-        return ApolloReactHooks.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
+export function useCreateStationMutation(baseOptions?: Apollo.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
+        return Apollo.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
       }
 export type CreateStationMutationHookResult = ReturnType<typeof useCreateStationMutation>;
-export type CreateStationMutationResult = ApolloReactCommon.MutationResult<CreateStationMutation>;
-export type CreateStationMutationOptions = ApolloReactCommon.BaseMutationOptions<CreateStationMutation, CreateStationMutationVariables>;
+export type CreateStationMutationResult = Apollo.MutationResult<CreateStationMutation>;
+export type CreateStationMutationOptions = Apollo.BaseMutationOptions<CreateStationMutation, CreateStationMutationVariables>;
 export const JoinStationDocument = gql`
     mutation JoinStation($where: StationFindOneWhereInput!) {
   joinStation(where: $where)
 }
     `;
-export type JoinStationMutationFn = ApolloReactCommon.MutationFunction<JoinStationMutation, JoinStationMutationVariables>;
+export type JoinStationMutationFn = Apollo.MutationFunction<JoinStationMutation, JoinStationMutationVariables>;
 
 /**
  * __useJoinStationMutation__
@@ -1071,18 +1070,18 @@ export type JoinStationMutationFn = ApolloReactCommon.MutationFunction<JoinStati
  *   },
  * });
  */
-export function useJoinStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<JoinStationMutation, JoinStationMutationVariables>) {
-        return ApolloReactHooks.useMutation<JoinStationMutation, JoinStationMutationVariables>(JoinStationDocument, baseOptions);
+export function useJoinStationMutation(baseOptions?: Apollo.MutationHookOptions<JoinStationMutation, JoinStationMutationVariables>) {
+        return Apollo.useMutation<JoinStationMutation, JoinStationMutationVariables>(JoinStationDocument, baseOptions);
       }
 export type JoinStationMutationHookResult = ReturnType<typeof useJoinStationMutation>;
-export type JoinStationMutationResult = ApolloReactCommon.MutationResult<JoinStationMutation>;
-export type JoinStationMutationOptions = ApolloReactCommon.BaseMutationOptions<JoinStationMutation, JoinStationMutationVariables>;
+export type JoinStationMutationResult = Apollo.MutationResult<JoinStationMutation>;
+export type JoinStationMutationOptions = Apollo.BaseMutationOptions<JoinStationMutation, JoinStationMutationVariables>;
 export const LeaveStationDocument = gql`
     mutation LeaveStation($where: StationFindOneWhereInput!) {
   leaveStation(where: $where)
 }
     `;
-export type LeaveStationMutationFn = ApolloReactCommon.MutationFunction<LeaveStationMutation, LeaveStationMutationVariables>;
+export type LeaveStationMutationFn = Apollo.MutationFunction<LeaveStationMutation, LeaveStationMutationVariables>;
 
 /**
  * __useLeaveStationMutation__
@@ -1101,12 +1100,12 @@ export type LeaveStationMutationFn = ApolloReactCommon.MutationFunction<LeaveSta
  *   },
  * });
  */
-export function useLeaveStationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LeaveStationMutation, LeaveStationMutationVariables>) {
-        return ApolloReactHooks.useMutation<LeaveStationMutation, LeaveStationMutationVariables>(LeaveStationDocument, baseOptions);
+export function useLeaveStationMutation(baseOptions?: Apollo.MutationHookOptions<LeaveStationMutation, LeaveStationMutationVariables>) {
+        return Apollo.useMutation<LeaveStationMutation, LeaveStationMutationVariables>(LeaveStationDocument, baseOptions);
       }
 export type LeaveStationMutationHookResult = ReturnType<typeof useLeaveStationMutation>;
-export type LeaveStationMutationResult = ApolloReactCommon.MutationResult<LeaveStationMutation>;
-export type LeaveStationMutationOptions = ApolloReactCommon.BaseMutationOptions<LeaveStationMutation, LeaveStationMutationVariables>;
+export type LeaveStationMutationResult = Apollo.MutationResult<LeaveStationMutation>;
+export type LeaveStationMutationOptions = Apollo.BaseMutationOptions<LeaveStationMutation, LeaveStationMutationVariables>;
 export const LoginDocument = gql`
     mutation login($data: LoginInput!) {
   login(data: $data) {
@@ -1114,7 +1113,7 @@ export const LoginDocument = gql`
   }
 }
     `;
-export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, LoginMutationVariables>;
+export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutationVariables>;
 
 /**
  * __useLoginMutation__
@@ -1133,12 +1132,12 @@ export type LoginMutationFn = ApolloReactCommon.MutationFunction<LoginMutation, 
  *   },
  * });
  */
-export function useLoginMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        return ApolloReactHooks.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
       }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
-export type LoginMutationResult = ApolloReactCommon.MutationResult<LoginMutation>;
-export type LoginMutationOptions = ApolloReactCommon.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
+export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
 export const RegisterDocument = gql`
     mutation Register($data: RegisterInput!) {
   register(data: $data) {
@@ -1146,7 +1145,7 @@ export const RegisterDocument = gql`
   }
 }
     `;
-export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, RegisterMutationVariables>;
 
 /**
  * __useRegisterMutation__
@@ -1165,12 +1164,12 @@ export type RegisterMutationFn = ApolloReactCommon.MutationFunction<RegisterMuta
  *   },
  * });
  */
-export function useRegisterMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-        return ApolloReactHooks.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
       }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
-export type RegisterMutationResult = ApolloReactCommon.MutationResult<RegisterMutation>;
-export type RegisterMutationOptions = ApolloReactCommon.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
+export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
 export const CurrentUserDocument = gql`
     query CurrentUser {
   user: currentUser {
@@ -1194,15 +1193,15 @@ export const CurrentUserDocument = gql`
  *   },
  * });
  */
-export function useCurrentUserQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-        return ApolloReactHooks.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+export function useCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
       }
-export function useCurrentUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
         }
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
-export type CurrentUserQueryResult = ApolloReactCommon.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
+export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const HistorySongsDocument = gql`
     query HistorySongs($stationSlug: String!, $pagination: PaginationInput) {
   songs: historySongs(where: {stationSlug: $stationSlug}, pagination: $pagination) {
@@ -1235,15 +1234,15 @@ export const HistorySongsDocument = gql`
  *   },
  * });
  */
-export function useHistorySongsQuery(baseOptions: ApolloReactHooks.QueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
-        return ApolloReactHooks.useQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
+export function useHistorySongsQuery(baseOptions: Apollo.QueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
+        return Apollo.useQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
       }
-export function useHistorySongsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
+export function useHistorySongsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
+          return Apollo.useLazyQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
         }
 export type HistorySongsQueryHookResult = ReturnType<typeof useHistorySongsQuery>;
 export type HistorySongsLazyQueryHookResult = ReturnType<typeof useHistorySongsLazyQuery>;
-export type HistorySongsQueryResult = ApolloReactCommon.QueryResult<HistorySongsQuery, HistorySongsQueryVariables>;
+export type HistorySongsQueryResult = Apollo.QueryResult<HistorySongsQuery, HistorySongsQueryVariables>;
 export const MiniUserDocument = gql`
     query MiniUser($where: UserFindOneWhereInput!) {
   user(where: $where) {
@@ -1273,15 +1272,15 @@ export const MiniUserDocument = gql`
  *   },
  * });
  */
-export function useMiniUserQuery(baseOptions: ApolloReactHooks.QueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
-        return ApolloReactHooks.useQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, baseOptions);
+export function useMiniUserQuery(baseOptions: Apollo.QueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
+        return Apollo.useQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, baseOptions);
       }
-export function useMiniUserLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, baseOptions);
+export function useMiniUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
+          return Apollo.useLazyQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, baseOptions);
         }
 export type MiniUserQueryHookResult = ReturnType<typeof useMiniUserQuery>;
 export type MiniUserLazyQueryHookResult = ReturnType<typeof useMiniUserLazyQuery>;
-export type MiniUserQueryResult = ApolloReactCommon.QueryResult<MiniUserQuery, MiniUserQueryVariables>;
+export type MiniUserQueryResult = Apollo.QueryResult<MiniUserQuery, MiniUserQueryVariables>;
 export const StationDocument = gql`
     query Station($slug: String!) {
   station(where: {slug: $slug}) {
@@ -1325,15 +1324,15 @@ export const StationDocument = gql`
  *   },
  * });
  */
-export function useStationQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationQuery, StationQueryVariables>) {
-        return ApolloReactHooks.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+export function useStationQuery(baseOptions: Apollo.QueryHookOptions<StationQuery, StationQueryVariables>) {
+        return Apollo.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
       }
-export function useStationLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+export function useStationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
+          return Apollo.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
         }
 export type StationQueryHookResult = ReturnType<typeof useStationQuery>;
 export type StationLazyQueryHookResult = ReturnType<typeof useStationLazyQuery>;
-export type StationQueryResult = ApolloReactCommon.QueryResult<StationQuery, StationQueryVariables>;
+export type StationQueryResult = Apollo.QueryResult<StationQuery, StationQueryVariables>;
 export const StationPlayerDocument = gql`
     query StationPlayer($stationSlug: String!) {
   playingSongs: songs(where: {stationSlug: $stationSlug, status: PLAYING}) {
@@ -1367,15 +1366,15 @@ export const StationPlayerDocument = gql`
  *   },
  * });
  */
-export function useStationPlayerQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
-        return ApolloReactHooks.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+export function useStationPlayerQuery(baseOptions: Apollo.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
+        return Apollo.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
       }
-export function useStationPlayerLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+export function useStationPlayerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
+          return Apollo.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
         }
 export type StationPlayerQueryHookResult = ReturnType<typeof useStationPlayerQuery>;
 export type StationPlayerLazyQueryHookResult = ReturnType<typeof useStationPlayerLazyQuery>;
-export type StationPlayerQueryResult = ApolloReactCommon.QueryResult<StationPlayerQuery, StationPlayerQueryVariables>;
+export type StationPlayerQueryResult = Apollo.QueryResult<StationPlayerQuery, StationPlayerQueryVariables>;
 export const OnStationPlayerChangedDocument = gql`
     subscription OnStationPlayerChanged($stationSlug: String!) {
   onPlayingSongChanged: song(where: {stationSlug: $stationSlug}) {
@@ -1403,11 +1402,11 @@ export const OnStationPlayerChangedDocument = gql`
  *   },
  * });
  */
-export function useOnStationPlayerChangedSubscription(baseOptions: ApolloReactHooks.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
-        return ApolloReactHooks.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
+export function useOnStationPlayerChangedSubscription(baseOptions: Apollo.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
+        return Apollo.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
       }
 export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
-export type OnStationPlayerChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlayerChangedSubscription>;
+export type OnStationPlayerChangedSubscriptionResult = Apollo.SubscriptionResult<OnStationPlayerChangedSubscription>;
 export const StationPlaylistDocument = gql`
     query StationPlaylist($stationSlug: String!) {
   playlist: songs(
@@ -1447,15 +1446,15 @@ export const StationPlaylistDocument = gql`
  *   },
  * });
  */
-export function useStationPlaylistQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
-        return ApolloReactHooks.useQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
+export function useStationPlaylistQuery(baseOptions: Apollo.QueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
+        return Apollo.useQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
       }
-export function useStationPlaylistLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
+export function useStationPlaylistLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
+          return Apollo.useLazyQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
         }
 export type StationPlaylistQueryHookResult = ReturnType<typeof useStationPlaylistQuery>;
 export type StationPlaylistLazyQueryHookResult = ReturnType<typeof useStationPlaylistLazyQuery>;
-export type StationPlaylistQueryResult = ApolloReactCommon.QueryResult<StationPlaylistQuery, StationPlaylistQueryVariables>;
+export type StationPlaylistQueryResult = Apollo.QueryResult<StationPlaylistQuery, StationPlaylistQueryVariables>;
 export const OnStationPlaylistChangedDocument = gql`
     subscription OnStationPlaylistChanged($stationSlug: String!) {
   onPlaylistSongChanged: song(where: {stationSlug: $stationSlug}) {
@@ -1483,11 +1482,11 @@ export const OnStationPlaylistChangedDocument = gql`
  *   },
  * });
  */
-export function useOnStationPlaylistChangedSubscription(baseOptions: ApolloReactHooks.SubscriptionHookOptions<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>) {
-        return ApolloReactHooks.useSubscription<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>(OnStationPlaylistChangedDocument, baseOptions);
+export function useOnStationPlaylistChangedSubscription(baseOptions: Apollo.SubscriptionHookOptions<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>) {
+        return Apollo.useSubscription<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>(OnStationPlaylistChangedDocument, baseOptions);
       }
 export type OnStationPlaylistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlaylistChangedSubscription>;
-export type OnStationPlaylistChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationPlaylistChangedSubscription>;
+export type OnStationPlaylistChangedSubscriptionResult = Apollo.SubscriptionResult<OnStationPlaylistChangedSubscription>;
 export const StationSettingDocument = gql`
     query StationSetting($stationId: Int!, $userId: Int) {
   stationSetting(where: {stationId: $stationId, userId: $userId}) {
@@ -1520,15 +1519,15 @@ export const StationSettingDocument = gql`
  *   },
  * });
  */
-export function useStationSettingQuery(baseOptions: ApolloReactHooks.QueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
-        return ApolloReactHooks.useQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
+export function useStationSettingQuery(baseOptions: Apollo.QueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
+        return Apollo.useQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
       }
-export function useStationSettingLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
+export function useStationSettingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
+          return Apollo.useLazyQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
         }
 export type StationSettingQueryHookResult = ReturnType<typeof useStationSettingQuery>;
 export type StationSettingLazyQueryHookResult = ReturnType<typeof useStationSettingLazyQuery>;
-export type StationSettingQueryResult = ApolloReactCommon.QueryResult<StationSettingQuery, StationSettingQueryVariables>;
+export type StationSettingQueryResult = Apollo.QueryResult<StationSettingQuery, StationSettingQueryVariables>;
 export const StationsDocument = gql`
     query Stations($pagination: PaginationInput, $order: StationFindAllOrderInput, $where: [StationFindAllWhereInput]) {
   stations(pagination: $pagination, order: $order, where: $where) {
@@ -1574,15 +1573,15 @@ export const StationsDocument = gql`
  *   },
  * });
  */
-export function useStationsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
-        return ApolloReactHooks.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+export function useStationsQuery(baseOptions?: Apollo.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
+        return Apollo.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
       }
-export function useStationsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+export function useStationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
+          return Apollo.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
         }
 export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
 export type StationsLazyQueryHookResult = ReturnType<typeof useStationsLazyQuery>;
-export type StationsQueryResult = ApolloReactCommon.QueryResult<StationsQuery, StationsQueryVariables>;
+export type StationsQueryResult = Apollo.QueryResult<StationsQuery, StationsQueryVariables>;
 export const OnStationChangedDocument = gql`
     subscription OnStationChanged($where: StationFindOneWhereInput) {
   onStationChanged: station(where: $where) {
@@ -1610,11 +1609,11 @@ export const OnStationChangedDocument = gql`
  *   },
  * });
  */
-export function useOnStationChangedSubscription(baseOptions?: ApolloReactHooks.SubscriptionHookOptions<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>) {
-        return ApolloReactHooks.useSubscription<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>(OnStationChangedDocument, baseOptions);
+export function useOnStationChangedSubscription(baseOptions?: Apollo.SubscriptionHookOptions<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>) {
+        return Apollo.useSubscription<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>(OnStationChangedDocument, baseOptions);
       }
 export type OnStationChangedSubscriptionHookResult = ReturnType<typeof useOnStationChangedSubscription>;
-export type OnStationChangedSubscriptionResult = ApolloReactCommon.SubscriptionResult<OnStationChangedSubscription>;
+export type OnStationChangedSubscriptionResult = Apollo.SubscriptionResult<OnStationChangedSubscription>;
 export const UserProfileDocument = gql`
     query UserProfile($where: UserFindOneWhereInput!) {
   user(where: $where) {
@@ -1661,15 +1660,15 @@ export const UserProfileDocument = gql`
  *   },
  * });
  */
-export function useUserProfileQuery(baseOptions: ApolloReactHooks.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
-        return ApolloReactHooks.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+export function useUserProfileQuery(baseOptions: Apollo.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
+        return Apollo.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
       }
-export function useUserProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+export function useUserProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
+          return Apollo.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
         }
 export type UserProfileQueryHookResult = ReturnType<typeof useUserProfileQuery>;
 export type UserProfileLazyQueryHookResult = ReturnType<typeof useUserProfileLazyQuery>;
-export type UserProfileQueryResult = ApolloReactCommon.QueryResult<UserProfileQuery, UserProfileQueryVariables>;
+export type UserProfileQueryResult = Apollo.QueryResult<UserProfileQuery, UserProfileQueryVariables>;
 export const YoutubeTrendingVideosDocument = gql`
     query YoutubeTrendingVideos($where: YoutubeTrendingVideoFindAllInput!) {
   youtubeTrendingVideos(where: $where) {
@@ -1729,15 +1728,15 @@ export const YoutubeTrendingVideosDocument = gql`
  *   },
  * });
  */
-export function useYoutubeTrendingVideosQuery(baseOptions: ApolloReactHooks.QueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
-        return ApolloReactHooks.useQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
+export function useYoutubeTrendingVideosQuery(baseOptions: Apollo.QueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
+        return Apollo.useQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
       }
-export function useYoutubeTrendingVideosLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
+export function useYoutubeTrendingVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
+          return Apollo.useLazyQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
         }
 export type YoutubeTrendingVideosQueryHookResult = ReturnType<typeof useYoutubeTrendingVideosQuery>;
 export type YoutubeTrendingVideosLazyQueryHookResult = ReturnType<typeof useYoutubeTrendingVideosLazyQuery>;
-export type YoutubeTrendingVideosQueryResult = ApolloReactCommon.QueryResult<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>;
+export type YoutubeTrendingVideosQueryResult = Apollo.QueryResult<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>;
 export const YoutubeVideoDocument = gql`
     query YoutubeVideo($where: YoutubeVideoFindOneInput!) {
   youtubeVideo(where: $where) {
@@ -1801,15 +1800,15 @@ export const YoutubeVideoDocument = gql`
  *   },
  * });
  */
-export function useYoutubeVideoQuery(baseOptions: ApolloReactHooks.QueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
-        return ApolloReactHooks.useQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
+export function useYoutubeVideoQuery(baseOptions: Apollo.QueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
+        return Apollo.useQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
       }
-export function useYoutubeVideoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
+export function useYoutubeVideoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
+          return Apollo.useLazyQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
         }
 export type YoutubeVideoQueryHookResult = ReturnType<typeof useYoutubeVideoQuery>;
 export type YoutubeVideoLazyQueryHookResult = ReturnType<typeof useYoutubeVideoLazyQuery>;
-export type YoutubeVideoQueryResult = ApolloReactCommon.QueryResult<YoutubeVideoQuery, YoutubeVideoQueryVariables>;
+export type YoutubeVideoQueryResult = Apollo.QueryResult<YoutubeVideoQuery, YoutubeVideoQueryVariables>;
 export const YoutubeVideosDocument = gql`
     query YoutubeVideos($where: YoutubeVideoFindAllInput!) {
   youtubeVideos(where: $where) {
@@ -1868,12 +1867,12 @@ export const YoutubeVideosDocument = gql`
  *   },
  * });
  */
-export function useYoutubeVideosQuery(baseOptions: ApolloReactHooks.QueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
-        return ApolloReactHooks.useQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
+export function useYoutubeVideosQuery(baseOptions: Apollo.QueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
+        return Apollo.useQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
       }
-export function useYoutubeVideosLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
+export function useYoutubeVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
+          return Apollo.useLazyQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
         }
 export type YoutubeVideosQueryHookResult = ReturnType<typeof useYoutubeVideosQuery>;
 export type YoutubeVideosLazyQueryHookResult = ReturnType<typeof useYoutubeVideosLazyQuery>;
-export type YoutubeVideosQueryResult = ApolloReactCommon.QueryResult<YoutubeVideosQuery, YoutubeVideosQueryVariables>;
+export type YoutubeVideosQueryResult = Apollo.QueryResult<YoutubeVideosQuery, YoutubeVideosQueryVariables>;

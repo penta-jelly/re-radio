@@ -1,6 +1,6 @@
-import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from 'apollo-boost';
-import { WebSocketLink } from 'apollo-link-ws';
-import { getMainDefinition } from 'apollo-utilities';
+import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export interface AppClient {
