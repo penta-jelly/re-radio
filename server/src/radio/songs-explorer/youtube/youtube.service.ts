@@ -83,7 +83,10 @@ export class YoutubeService {
       await this.cacheService.persist(videos, serviceUrl);
     }
 
-    return videos;
+    if (!Array.isArray(videos)) {
+      throw new Error(`Invalid videos type, expected to be an array`);
+    }
+    return videos.filter((video) => !!video.snippet);
   }
 
   public async fetchTrendingVideos({
