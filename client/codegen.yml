@@ -4,7 +4,7 @@ documents: ./src/operations/**/*.graphql
 generates:
   ./src/operations/index.tsx:
     config:
-      reactApolloVersion: 2
+      reactApolloVersion: 3
       noNamespaces: true
       withComponent: false
       withHooks: true

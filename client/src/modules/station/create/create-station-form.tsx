@@ -1,5 +1,5 @@
 import { Card, CardContent, Fade, FormHelperText, TextField, Typography } from '@material-ui/core';
-import { PureQueryOptions } from 'apollo-boost';
+import { PureQueryOptions } from '@apollo/client';
 import { Formik, FormikHelpers } from 'formik';
 import React from 'react';
 import { MdRadio as StationIcon } from 'react-icons/md';

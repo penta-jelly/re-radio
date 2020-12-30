@@ -2,7 +2,7 @@ import { ListItem, ListItemText, ListItemSecondaryAction, IconButton, CircularPr
 import { MdPlaylistAdd } from 'react-icons/md';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useApolloClient } from 'react-apollo';
+import { useApolloClient } from '@apollo/client';
 import { useSnackbar } from 'notistack';
 import {
   useCreateSongMutation,
