@@ -211,20 +211,47 @@ export type YoutubeVideo = {
 
 export type Query = {
   readonly __typename?: 'Query';
-  readonly stations: ReadonlyArray<Station>;
-  readonly station: Station;
-  readonly stationSetting: StationSetting;
-  readonly users: ReadonlyArray<User>;
-  readonly user: User;
-  readonly currentUser: User;
-  readonly historySongs: ReadonlyArray<HistorySong>;
-  readonly countHistorySongs: Scalars['Int'];
-  readonly songs: ReadonlyArray<Song>;
-  readonly song: Song;
   readonly youtubeVideo: YoutubeVideoDetail;
   readonly youtubeVideos: ReadonlyArray<YoutubeVideo>;
   readonly youtubeTrendingVideos: ReadonlyArray<YoutubeVideo>;
   readonly preferredRegion: Scalars['String'];
+  readonly users: ReadonlyArray<User>;
+  readonly user: User;
+  readonly stations: ReadonlyArray<Station>;
+  readonly station: Station;
+  readonly stationSetting: StationSetting;
+  readonly currentUser: User;
+  readonly songs: ReadonlyArray<Song>;
+  readonly song: Song;
+  readonly historySongs: ReadonlyArray<HistorySong>;
+  readonly countHistorySongs: Scalars['Int'];
+};
+
+
+export type QueryYoutubeVideoArgs = {
+  where: YoutubeVideoFindOneInput;
+};
+
+
+export type QueryYoutubeVideosArgs = {
+  where: YoutubeVideoFindAllInput;
+};
+
+
+export type QueryYoutubeTrendingVideosArgs = {
+  where: YoutubeTrendingVideoFindAllInput;
+};
+
+
+export type QueryUsersArgs = {
+  order?: Maybe<UserFindAllOrderInput>;
+  where?: Maybe<UserFindAllWhereInput>;
+  pagination?: Maybe<PaginationInput>;
+};
+
+
+export type QueryUserArgs = {
+  where: UserFindOneWhereInput;
 };
 
 
@@ -245,29 +272,6 @@ export type QueryStationSettingArgs = {
 };
 
 
-export type QueryUsersArgs = {
-  order?: Maybe<UserFindAllOrderInput>;
-  where?: Maybe<UserFindAllWhereInput>;
-  pagination?: Maybe<PaginationInput>;
-};
-
-
-export type QueryUserArgs = {
-  where: UserFindOneWhereInput;
-};
-
-
-export type QueryHistorySongsArgs = {
-  where: HistorySongFindAllWhereInput;
-  pagination?: Maybe<PaginationInput>;
-};
-
-
-export type QueryCountHistorySongsArgs = {
-  where: HistorySongFindAllWhereInput;
-};
-
-
 export type QuerySongsArgs = {
   order?: Maybe<SongFindAllOrderInput>;
   where?: Maybe<ReadonlyArray<Maybe<SongFindAllWhereInput>>>;
@@ -280,104 +284,14 @@ export type QuerySongArgs = {
 };
 
 
-export type QueryYoutubeVideoArgs = {
-  where: YoutubeVideoFindOneInput;
+export type QueryHistorySongsArgs = {
+  where: HistorySongFindAllWhereInput;
+  pagination?: Maybe<PaginationInput>;
 };
 
 
-export type QueryYoutubeVideosArgs = {
-  where: YoutubeVideoFindAllInput;
-};
-
-
-export type QueryYoutubeTrendingVideosArgs = {
-  where: YoutubeTrendingVideoFindAllInput;
-};
-
-export type StationFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly name?: Maybe<OrderEnum>;
-  readonly slug?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-};
-
-export enum OrderEnum {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
-
-export type StationFindAllWhereInput = {
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-};
-
-export type PaginationInput = {
-  /** Offset (paginated) where from entities should be taken. Default: 0 */
-  readonly skip?: Maybe<Scalars['Int']>;
-  /** Limit (paginated) - max number of entities should be taken. Default: 10 */
-  readonly take?: Maybe<Scalars['Int']>;
-};
-
-export type StationFindOneWhereInput = {
-  readonly id?: Maybe<Scalars['Int']>;
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-};
-
-export type StationSettingFindInput = {
-  readonly stationId: Scalars['Int'];
-  readonly userId?: Maybe<Scalars['Int']>;
-};
-
-export type UserFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly username?: Maybe<OrderEnum>;
-  readonly email?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-  readonly name?: Maybe<OrderEnum>;
-  readonly country?: Maybe<OrderEnum>;
-  readonly city?: Maybe<OrderEnum>;
-  readonly reputation?: Maybe<OrderEnum>;
-};
-
-export type UserFindAllWhereInput = {
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type UserFindOneWhereInput = {
-  readonly id?: Maybe<Scalars['Int']>;
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type HistorySongFindAllWhereInput = {
-  readonly stationSlug: Scalars['String'];
-};
-
-export type SongFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-  readonly title?: Maybe<OrderEnum>;
-  readonly url?: Maybe<OrderEnum>;
-  readonly thumbnail?: Maybe<OrderEnum>;
-  readonly duration?: Maybe<OrderEnum>;
-};
-
-export type SongFindAllWhereInput = {
-  readonly stationSlug?: Maybe<Scalars['String']>;
-  readonly title?: Maybe<Scalars['String']>;
-  readonly url?: Maybe<Scalars['String']>;
-  readonly thumbnail?: Maybe<Scalars['String']>;
-  readonly duration?: Maybe<Scalars['Int']>;
-  readonly status?: Maybe<SongStatusEnum>;
-};
-
-export type SongFindOneWhereInput = {
-  readonly id: Scalars['Int'];
+export type QueryCountHistorySongsArgs = {
+  where: HistorySongFindAllWhereInput;
 };
 
 export type YoutubeVideoFindOneInput = {
@@ -406,19 +320,121 @@ export type YoutubeTrendingVideoFindAllInput = {
   readonly regionCode?: Maybe<Scalars['String']>;
 };
 
+export type UserFindAllOrderInput = {
+  readonly id?: Maybe<OrderEnum>;
+  readonly username?: Maybe<OrderEnum>;
+  readonly email?: Maybe<OrderEnum>;
+  readonly createdAt?: Maybe<OrderEnum>;
+  readonly updatedAt?: Maybe<OrderEnum>;
+  readonly name?: Maybe<OrderEnum>;
+  readonly country?: Maybe<OrderEnum>;
+  readonly city?: Maybe<OrderEnum>;
+  readonly reputation?: Maybe<OrderEnum>;
+};
+
+export enum OrderEnum {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type UserFindAllWhereInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+};
+
+export type PaginationInput = {
+  /** Offset (paginated) where from entities should be taken. Default: 0 */
+  readonly skip?: Maybe<Scalars['Int']>;
+  /** Limit (paginated) - max number of entities should be taken. Default: 10 */
+  readonly take?: Maybe<Scalars['Int']>;
+};
+
+export type UserFindOneWhereInput = {
+  readonly id?: Maybe<Scalars['Int']>;
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+};
+
+export type StationFindAllOrderInput = {
+  readonly id?: Maybe<OrderEnum>;
+  readonly name?: Maybe<OrderEnum>;
+  readonly slug?: Maybe<OrderEnum>;
+  readonly createdAt?: Maybe<OrderEnum>;
+  readonly updatedAt?: Maybe<OrderEnum>;
+};
+
+export type StationFindAllWhereInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+};
+
+export type StationFindOneWhereInput = {
+  readonly id?: Maybe<Scalars['Int']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+};
+
+export type StationSettingFindInput = {
+  readonly stationId: Scalars['Int'];
+  readonly userId?: Maybe<Scalars['Int']>;
+};
+
+export type SongFindAllOrderInput = {
+  readonly id?: Maybe<OrderEnum>;
+  readonly createdAt?: Maybe<OrderEnum>;
+  readonly updatedAt?: Maybe<OrderEnum>;
+  readonly title?: Maybe<OrderEnum>;
+  readonly url?: Maybe<OrderEnum>;
+  readonly thumbnail?: Maybe<OrderEnum>;
+  readonly duration?: Maybe<OrderEnum>;
+};
+
+export type SongFindAllWhereInput = {
+  readonly stationSlug?: Maybe<Scalars['String']>;
+  readonly title?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
+  readonly thumbnail?: Maybe<Scalars['String']>;
+  readonly duration?: Maybe<Scalars['Int']>;
+  readonly status?: Maybe<SongStatusEnum>;
+};
+
+export type SongFindOneWhereInput = {
+  readonly id: Scalars['Int'];
+};
+
+export type HistorySongFindAllWhereInput = {
+  readonly stationSlug: Scalars['String'];
+};
+
 export type Mutation = {
   readonly __typename?: 'Mutation';
+  readonly createUser: User;
+  readonly updateUser: Scalars['Boolean'];
+  readonly deleteUser: Scalars['Boolean'];
   readonly createStation: Station;
   readonly deleteStation: Scalars['Boolean'];
   readonly joinStation: Scalars['Boolean'];
   readonly leaveStation: Scalars['Boolean'];
-  readonly createUser: User;
-  readonly updateUser: Scalars['Boolean'];
-  readonly deleteUser: Scalars['Boolean'];
   readonly login: Authentication;
   readonly register: Authentication;
   readonly createSong: Song;
   readonly deleteSong: Scalars['Boolean'];
+};
+
+
+export type MutationCreateUserArgs = {
+  data: UserCreateInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  data: UserUpdateInput;
+  where: UserFindOneWhereInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  where: UserFindOneWhereInput;
 };
 
 
@@ -442,22 +458,6 @@ export type MutationLeaveStationArgs = {
 };
 
 
-export type MutationCreateUserArgs = {
-  data: UserCreateInput;
-};
-
-
-export type MutationUpdateUserArgs = {
-  data: UserUpdateInput;
-  where: UserFindOneWhereInput;
-};
-
-
-export type MutationDeleteUserArgs = {
-  where: UserFindOneWhereInput;
-};
-
-
 export type MutationLoginArgs = {
   data: LoginInput;
 };
@@ -475,17 +475,6 @@ export type MutationCreateSongArgs = {
 
 export type MutationDeleteSongArgs = {
   where: SongFindOneWhereInput;
-};
-
-export type StationCreateInput = {
-  readonly name: Scalars['String'];
-  readonly slug: Scalars['String'];
-  readonly description?: Maybe<Scalars['String']>;
-  readonly tags?: Maybe<ReadonlyArray<StationTagCreateInput>>;
-};
-
-export type StationTagCreateInput = {
-  readonly name: Scalars['String'];
 };
 
 export type UserCreateInput = {
@@ -515,6 +504,17 @@ export type UserUpdateInput = {
   readonly googleId?: Maybe<Scalars['String']>;
 };
 
+export type StationCreateInput = {
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly tags?: Maybe<ReadonlyArray<StationTagCreateInput>>;
+};
+
+export type StationTagCreateInput = {
+  readonly name: Scalars['String'];
+};
+
 export type LoginInput = {
   readonly password: Scalars['String'];
   readonly email?: Maybe<Scalars['String']>;
@@ -539,19 +539,19 @@ export type SongCreateInput = {
 
 export type Subscription = {
   readonly __typename?: 'Subscription';
-  readonly station: StationSubscription;
   readonly user: UserSubscription;
+  readonly station: StationSubscription;
   readonly song: SongSubscription;
-};
-
-
-export type SubscriptionStationArgs = {
-  where?: Maybe<StationFindOneWhereInput>;
 };
 
 
 export type SubscriptionUserArgs = {
   where: UserFindOneWhereInput;
+};
+
+
+export type SubscriptionStationArgs = {
+  where?: Maybe<StationFindOneWhereInput>;
 };
 
 

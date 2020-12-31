@@ -181,109 +181,20 @@ type YoutubeVideo {
 }
 
 type Query {
-  stations(order: StationFindAllOrderInput, where: [StationFindAllWhereInput], pagination: PaginationInput): [Station!]!
-  station(where: StationFindOneWhereInput!): Station!
-  stationSetting(where: StationSettingFindInput!): StationSetting!
-  users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
-  user(where: UserFindOneWhereInput!): User!
-  currentUser: User!
-  historySongs(where: HistorySongFindAllWhereInput!, pagination: PaginationInput): [HistorySong!]!
-  countHistorySongs(where: HistorySongFindAllWhereInput!): Int!
-  songs(order: SongFindAllOrderInput, where: [SongFindAllWhereInput], pagination: PaginationInput): [Song!]!
-  song(where: SongFindOneWhereInput!): Song!
   youtubeVideo(where: YoutubeVideoFindOneInput!): YoutubeVideoDetail!
   youtubeVideos(where: YoutubeVideoFindAllInput!): [YoutubeVideo!]!
   youtubeTrendingVideos(where: YoutubeTrendingVideoFindAllInput!): [YoutubeVideo!]!
   preferredRegion: String!
-}
-
-input StationFindAllOrderInput {
-  id: OrderEnum
-  name: OrderEnum
-  slug: OrderEnum
-  createdAt: OrderEnum
-  updatedAt: OrderEnum
-}
-
-enum OrderEnum {
-  ASC
-  DESC
-}
-
-input StationFindAllWhereInput {
-  name: String
-  slug: String
-}
-
-input PaginationInput {
-  """Offset (paginated) where from entities should be taken. Default: 0"""
-  skip: Int = 0
-
-  """
-  Limit (paginated) - max number of entities should be taken. Default: 10
-  """
-  take: Int = 10
-}
-
-input StationFindOneWhereInput {
-  id: Int
-  name: String
-  slug: String
-}
-
-input StationSettingFindInput {
-  stationId: Int!
-  userId: Int
-}
-
-input UserFindAllOrderInput {
-  id: OrderEnum
-  username: OrderEnum
-  email: OrderEnum
-  createdAt: OrderEnum
-  updatedAt: OrderEnum
-  name: OrderEnum
-  country: OrderEnum
-  city: OrderEnum
-  reputation: OrderEnum
-}
-
-input UserFindAllWhereInput {
-  email: String
-  username: String
-}
-
-input UserFindOneWhereInput {
-  id: Int
-  email: String
-  username: String
-}
-
-input HistorySongFindAllWhereInput {
-  stationSlug: String!
-}
-
-input SongFindAllOrderInput {
-  id: OrderEnum
-  createdAt: OrderEnum
-  updatedAt: OrderEnum
-  title: OrderEnum
-  url: OrderEnum
-  thumbnail: OrderEnum
-  duration: OrderEnum
-}
-
-input SongFindAllWhereInput {
-  stationSlug: String
-  title: String
-  url: String
-  thumbnail: String
-  duration: Int
-  status: SongStatusEnum
-}
-
-input SongFindOneWhereInput {
-  id: Int!
+  users(order: UserFindAllOrderInput, where: UserFindAllWhereInput, pagination: PaginationInput): [User!]!
+  user(where: UserFindOneWhereInput!): User!
+  stations(order: StationFindAllOrderInput, where: [StationFindAllWhereInput], pagination: PaginationInput): [Station!]!
+  station(where: StationFindOneWhereInput!): Station!
+  stationSetting(where: StationSettingFindInput!): StationSetting!
+  currentUser: User!
+  songs(order: SongFindAllOrderInput, where: [SongFindAllWhereInput], pagination: PaginationInput): [Song!]!
+  song(where: SongFindOneWhereInput!): Song!
+  historySongs(where: HistorySongFindAllWhereInput!, pagination: PaginationInput): [HistorySong!]!
+  countHistorySongs(where: HistorySongFindAllWhereInput!): Int!
 }
 
 input YoutubeVideoFindOneInput {
@@ -312,29 +223,107 @@ input YoutubeTrendingVideoFindAllInput {
   regionCode: String
 }
 
+input UserFindAllOrderInput {
+  id: OrderEnum
+  username: OrderEnum
+  email: OrderEnum
+  createdAt: OrderEnum
+  updatedAt: OrderEnum
+  name: OrderEnum
+  country: OrderEnum
+  city: OrderEnum
+  reputation: OrderEnum
+}
+
+enum OrderEnum {
+  ASC
+  DESC
+}
+
+input UserFindAllWhereInput {
+  email: String
+  username: String
+}
+
+input PaginationInput {
+  """Offset (paginated) where from entities should be taken. Default: 0"""
+  skip: Int = 0
+
+  """
+  Limit (paginated) - max number of entities should be taken. Default: 10
+  """
+  take: Int = 10
+}
+
+input UserFindOneWhereInput {
+  id: Int
+  email: String
+  username: String
+}
+
+input StationFindAllOrderInput {
+  id: OrderEnum
+  name: OrderEnum
+  slug: OrderEnum
+  createdAt: OrderEnum
+  updatedAt: OrderEnum
+}
+
+input StationFindAllWhereInput {
+  name: String
+  slug: String
+}
+
+input StationFindOneWhereInput {
+  id: Int
+  name: String
+  slug: String
+}
+
+input StationSettingFindInput {
+  stationId: Int!
+  userId: Int
+}
+
+input SongFindAllOrderInput {
+  id: OrderEnum
+  createdAt: OrderEnum
+  updatedAt: OrderEnum
+  title: OrderEnum
+  url: OrderEnum
+  thumbnail: OrderEnum
+  duration: OrderEnum
+}
+
+input SongFindAllWhereInput {
+  stationSlug: String
+  title: String
+  url: String
+  thumbnail: String
+  duration: Int
+  status: SongStatusEnum
+}
+
+input SongFindOneWhereInput {
+  id: Int!
+}
+
+input HistorySongFindAllWhereInput {
+  stationSlug: String!
+}
+
 type Mutation {
+  createUser(data: UserCreateInput!): User!
+  updateUser(data: UserUpdateInput!, where: UserFindOneWhereInput!): Boolean!
+  deleteUser(where: UserFindOneWhereInput!): Boolean!
   createStation(data: StationCreateInput!): Station!
   deleteStation(where: StationFindOneWhereInput!): Boolean!
   joinStation(where: StationFindOneWhereInput!): Boolean!
   leaveStation(where: StationFindOneWhereInput!): Boolean!
-  createUser(data: UserCreateInput!): User!
-  updateUser(data: UserUpdateInput!, where: UserFindOneWhereInput!): Boolean!
-  deleteUser(where: UserFindOneWhereInput!): Boolean!
   login(data: LoginInput!): Authentication!
   register(data: RegisterInput!): Authentication!
   createSong(data: SongCreateInput!): Song!
   deleteSong(where: SongFindOneWhereInput!): Boolean!
-}
-
-input StationCreateInput {
-  name: String!
-  slug: String!
-  description: String
-  tags: [StationTagCreateInput!]
-}
-
-input StationTagCreateInput {
-  name: String!
 }
 
 input UserCreateInput {
@@ -364,6 +353,17 @@ input UserUpdateInput {
   googleId: String
 }
 
+input StationCreateInput {
+  name: String!
+  slug: String!
+  description: String
+  tags: [StationTagCreateInput!]
+}
+
+input StationTagCreateInput {
+  name: String!
+}
+
 input LoginInput {
   password: String!
   email: String
@@ -390,7 +390,7 @@ input SongCreateInput {
 }
 
 type Subscription {
-  station(where: StationFindOneWhereInput): StationSubscription!
   user(where: UserFindOneWhereInput!): UserSubscription!
+  station(where: StationFindOneWhereInput): StationSubscription!
   song(where: SongFindAllWhereInput): SongSubscription!
 }
