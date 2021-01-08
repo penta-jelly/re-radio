@@ -18,7 +18,7 @@
     "@material-ui/core": "4.11.2",
     "@material-ui/styles": "4.11.2",
     "countries-list": "2.5.6",
-    "downshift": "6.0.11",
+    "downshift": "6.0.12",
     "formik": "2.2.6",
     "graphql": "15.4.0",
     "i18next": "19.8.4",
