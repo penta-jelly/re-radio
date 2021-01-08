@@ -17,7 +17,7 @@
     "@apollo/client": "3.3.6",
     "@material-ui/core": "4.11.2",
     "@material-ui/styles": "4.11.2",
-    "countries-list": "2.5.6",
+    "countries-list": "2.6.0",
     "downshift": "6.0.12",
     "formik": "2.2.6",
     "graphql": "15.4.0",
