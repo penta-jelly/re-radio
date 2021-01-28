@@ -16,7 +16,7 @@ services:
 
   pgadmin:
     container_name: re-radio_pgadmin
-    image: dpage/pgadmin4:4.29
+    image: dpage/pgadmin4:4.30
     restart: ${RESTART_POLICY}
     logging: 
       driver: "none"
