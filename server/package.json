@@ -67,7 +67,7 @@
     "@types/bcrypt-nodejs": "0.0.31",
     "@types/graphql": "14.2.3",
     "@types/moment-duration-format": "2.2.2",
-    "@types/node": "10.17.53",
+    "@types/node": "10.17.54",
     "@types/node-fetch": "2.5.8",
     "@types/passport-jwt": "3.0.4",
     "@types/yargs": "16.0.0",
