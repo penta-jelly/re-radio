@@ -18,7 +18,7 @@ services:
 
   redis:
     container_name: re-radio_redis
-    image: redis:5.0.10-alpine
+    image: redis:5.0.11-alpine
     restart: ${RESTART_POLICY}
     ports:
       - "${REDIS_HOST_PORT}:6379"
