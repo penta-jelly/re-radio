@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "@cypress/browserify-preprocessor": "3.0.1",
-    "@types/node": "10.17.54",
+    "@types/node": "10.17.55",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
     "eslint": "7.21.0",
