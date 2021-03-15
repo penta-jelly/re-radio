@@ -43,7 +43,7 @@ jobs:
           path: server/storage/log
       - name: Check if there are changes in the workspace
         id: codeChanges
-        uses: UnicornGlobal/has-changes-action@v1.0.11
+        uses: UnicornGlobal/has-changes-action@v1.0.12
       - name: Process changes in the workspace
         if: steps.codeChanges.outputs.changed == 1
         run: |
