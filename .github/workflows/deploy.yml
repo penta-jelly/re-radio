@@ -10,7 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set deployment state to pending
-        if: ${{ secrets.REPO_DEPLOYMENT_TOKEN != '' }}
+        env:
+          REPO_DEPLOYMENT_TOKEN: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
+        if: ${{ env.REPO_DEPLOYMENT_TOKEN != null }}
         uses: deliverybot/deployment-status@v1
         with:
           state: pending
@@ -47,14 +49,18 @@ jobs:
           gcloud compute ssh ${VM_USER}@${VM_INSTANCE} --zone=${VM_ZONE} --command="sh ./deploy.sh"
 
       - name: Set deployment state to success
-        if: ${{ success() && secrets.REPO_DEPLOYMENT_TOKEN != '' }}
+        env:
+          REPO_DEPLOYMENT_TOKEN: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
+        if: ${{ success() && env.REPO_DEPLOYMENT_TOKEN != null }}
         uses: deliverybot/deployment-status@v1
         with:
           state: success
           token: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
 
       - name: Set deployment state to failure
-        if: ${{ failure() && secrets.REPO_DEPLOYMENT_TOKEN != '' }}
+        env:
+          REPO_DEPLOYMENT_TOKEN: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
+        if: ${{ failure() && env.REPO_DEPLOYMENT_TOKEN != null }}
         uses: deliverybot/deployment-status@v1
         with:
           state: failure
