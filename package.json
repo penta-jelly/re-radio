@@ -30,5 +30,6 @@
   "bugs": {
     "url": "https://github.com/penta-jelly/re-radio/issues"
   },
-  "homepage": "https://github.com/penta-jelly/re-radio#readme"
+  "homepage": "https://github.com/penta-jelly/re-radio#readme",
+  "dependencies": {}
 }
