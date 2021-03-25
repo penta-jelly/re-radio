@@ -16,7 +16,7 @@ jobs:
 
       - name: Check out code
         uses: actions/checkout@master
-        
+
       - name: Build docker image
         env:
           APP_IMAGE: ${{ secrets.DOCKER_HUB_APP_IMAGE }}
@@ -33,7 +33,7 @@ jobs:
           APP_IMAGE: ${{ secrets.DOCKER_HUB_APP_IMAGE }}
         run: docker push ${APP_IMAGE}
 
-      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+      - uses: google-github-actions/setup-gcloud@master
         with:
           version: "271.0.0"
           service_account_email: ${{ secrets.GCP_SA_EMAIL }}
