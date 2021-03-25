@@ -12,7 +12,7 @@ jobs:
       - name: Set deployment state to pending
         env:
           REPO_DEPLOYMENT_TOKEN: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
-        if: ${{ env.REPO_DEPLOYMENT_TOKEN != null }}
+        if: ${{ env.REPO_DEPLOYMENT_TOKEN != '' }}
         uses: deliverybot/deployment-status@v1
         with:
           state: pending
@@ -51,7 +51,7 @@ jobs:
       - name: Set deployment state to success
         env:
           REPO_DEPLOYMENT_TOKEN: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
-        if: ${{ success() && env.REPO_DEPLOYMENT_TOKEN != null }}
+        if: ${{ success() && env.REPO_DEPLOYMENT_TOKEN != '' }}
         uses: deliverybot/deployment-status@v1
         with:
           state: success
@@ -60,7 +60,7 @@ jobs:
       - name: Set deployment state to failure
         env:
           REPO_DEPLOYMENT_TOKEN: ${{ secrets.REPO_DEPLOYMENT_TOKEN }}
-        if: ${{ failure() && env.REPO_DEPLOYMENT_TOKEN != null }}
+        if: ${{ failure() && env.REPO_DEPLOYMENT_TOKEN != '' }}
         uses: deliverybot/deployment-status@v1
         with:
           state: failure
