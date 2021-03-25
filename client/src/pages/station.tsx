@@ -1,14 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { Layout } from 'containers/layout';
-import { useInterval } from 'hooks/use-interval';
-import { StationContext, StationLayout, useStationContextStateProvider } from 'modules/station';
 import {
   useCurrentUserQuery,
   useJoinStationMutation,
   useOnStationChangedSubscription,
   useStationQuery,
-} from 'operations';
+} from 're-radio-common/lib/operations';
+import { Layout } from 'containers/layout';
+import { useInterval } from 'hooks/use-interval';
+import { StationContext, StationLayout, useStationContextStateProvider } from 'modules/station';
 
 interface RouteParams {
   slug: string;

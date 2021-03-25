@@ -1,7 +1,7 @@
 import { ListItem, ListItemAvatar, ListItemText, Menu, MenuItem } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { CurrentUserQuery } from 'operations';
+import { CurrentUserQuery } from 're-radio-common/lib/operations';
 import { Image } from 'components/image';
 import { AppContext } from 'containers/app';
 import { useStyles } from './styles';

@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { sortSongs } from 're-radio-common/lib/sort-songs';
+import { sortSongs } from 're-radio-common/lib/utils/sort-songs';
 import { Song, SongStatusEnum } from '../../radio/song/entities/song.entity';
 import { SongService } from '../../radio/song/services/song.service';
 import { StationService } from '../../radio/station/services/station.service';

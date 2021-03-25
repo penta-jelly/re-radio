@@ -2,7 +2,7 @@ import { CircularProgress, IconButton, ListItem, ListItemSecondaryAction, ListIt
 import React from 'react';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
-import { useApolloClient } from '@apollo/client';
+import { useApolloClient } from 're-radio-common/lib/@apollo/client';
 import { useSnackbar } from 'notistack';
 import {
   useCreateSongMutation,
@@ -11,7 +11,7 @@ import {
   YoutubeVideoDocument,
   YoutubeVideoQuery,
   YoutubeVideoQueryVariables,
-} from 'operations';
+} from 're-radio-common/lib/operations';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import { useToggle } from 'hooks/use-toggle';
 import { useStyles } from './styles';

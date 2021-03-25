@@ -1,10 +1,10 @@
 import { useSnackbar } from 'notistack';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
+import { useCurrentUserQuery } from 're-radio-common/lib/operations';
 import { PageLoader } from 'components/page-loader';
 import { AppContext } from 'containers/app';
 import { LoginForm } from 'modules/user';
-import { useCurrentUserQuery } from 'operations';
 import { useStyles } from './styles';
 
 const Login: React.FC<RouteComponentProps> = ({ history }) => {

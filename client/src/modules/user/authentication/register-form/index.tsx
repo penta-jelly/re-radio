@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 import * as yup from 'yup';
-import { RegisterInput, useRegisterMutation } from 'operations';
+import { RegisterInput, useRegisterMutation } from 're-radio-common/lib/operations';
 import { useStyles } from './styles';
 
 type DataKeys = keyof RegisterInput;

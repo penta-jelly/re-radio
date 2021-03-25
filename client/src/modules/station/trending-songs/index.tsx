@@ -1,7 +1,7 @@
 import { Card, CircularProgress, List, Typography } from '@material-ui/core';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useYoutubeTrendingVideosQuery } from 'operations';
+import { useYoutubeTrendingVideosQuery } from 're-radio-common/lib/operations';
 import { useLocalStorage } from 'hooks/use-local-storage';
 import { HistorySongItem as TrendingSongItem } from './item';
 import { useStyles } from './styles';

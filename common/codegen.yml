@@ -13,6 +13,8 @@ generates:
     plugins:
       - add:
           content: '/* eslint-disable */'
+      - add:
+          content: '// @ts-nocheck'
       - typescript
       - typescript-operations
       - typescript-react-apollo

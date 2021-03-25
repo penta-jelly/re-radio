@@ -1,6 +1,6 @@
 {
   "packages": [
-    "client", "server", "common"
+    "client", "server", "common", "mobile"
   ],
   "version": "0.1.0-SNAPSHOT",
   "stream": true

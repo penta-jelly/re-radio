@@ -13,7 +13,8 @@ export interface AppClient {
 export function initClient(): AppClient {
   let host = window.location.host;
   if (process.env.NODE_ENV !== 'production') {
-    host = `${process.env.REACT_APP_SERVICE_HOST}:${process.env.REACT_APP_SERVICE_PORT}`;
+    // TODO: Host
+    host = `localhost:2996`;
   }
 
   const healthEndpoint = `${isSecured() ? 'https' : 'http'}://${host}/status`;

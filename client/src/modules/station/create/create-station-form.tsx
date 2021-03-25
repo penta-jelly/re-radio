@@ -1,11 +1,11 @@
 import { Card, CardContent, Fade, FormHelperText, TextField, Typography } from '@material-ui/core';
-import { PureQueryOptions } from '@apollo/client';
+import { PureQueryOptions } from 're-radio-common/lib/@apollo/client';
 import { Formik, FormikHelpers } from 'formik';
 import React from 'react';
 import { MdRadio as StationIcon } from 'react-icons/md';
 import { useHistory } from 'react-router-dom';
 import * as yup from 'yup';
-import { useCreateStationMutation, useCurrentUserQuery } from 'operations';
+import { useCreateStationMutation, useCurrentUserQuery } from 're-radio-common/lib/operations';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import { useToggle } from 'hooks/use-toggle';
 import { PrimaryButton } from 'components/button/primary-button';

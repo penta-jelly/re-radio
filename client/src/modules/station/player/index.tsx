@@ -2,7 +2,11 @@ import { Card, CircularProgress, Typography } from '@material-ui/core';
 import React, { useCallback, useRef } from 'react';
 import ReactPlayer, { Config as ReactPlayerConfig } from 'react-player/lazy';
 import { useRouteMatch } from 'react-router-dom';
-import { StationPlayerQuery, useOnStationPlayerChangedSubscription, useStationPlayerQuery } from 'operations';
+import {
+  StationPlayerQuery,
+  useOnStationPlayerChangedSubscription,
+  useStationPlayerQuery,
+} from 're-radio-common/lib/operations';
 import { usePreviousNonNullableValue } from 'hooks/use-previous-non-nullable-value';
 import { useStationContextState } from '../context';
 import { useStyles } from './styles';

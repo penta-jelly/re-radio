@@ -2,7 +2,7 @@ import { Button, CircularProgress, createGenerateClassName, StylesProvider, CssB
 import { ThemeProvider } from '@material-ui/styles';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import React from 'react';
-import { ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from 're-radio-common/lib/@apollo/client';
 import { theme } from 'lib/@material-ui/theme';
 import { AppClient, initClient } from 'lib/apollo/init';
 import { initI18n } from 'lib/react-i18next';

@@ -1,6 +1,6 @@
 import { Card, Grid } from '@material-ui/core';
 import React, { useCallback, useState } from 'react';
-import { useYoutubeVideosLazyQuery } from 'operations';
+import { useYoutubeVideosLazyQuery } from 're-radio-common/lib/operations';
 import { useDebounce } from 'hooks/use-debounce';
 import { Autocomplete } from './autocomplete';
 import { useStyles } from './styles';

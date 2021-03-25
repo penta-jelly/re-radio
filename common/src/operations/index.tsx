@@ -1,4 +1,5 @@
 /* eslint-disable */
+// @ts-nocheck
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
@@ -23,12 +24,6 @@ export type UserRole = {
   readonly user: User;
   readonly station?: Maybe<Station>;
 };
-
-export enum UserRoleEnum {
-  Admin = 'ADMIN',
-  StationOwner = 'STATION_OWNER',
-  StationAdmin = 'STATION_ADMIN'
-}
 
 export type User = {
   readonly __typename?: 'User';
@@ -299,12 +294,11 @@ export type YoutubeVideoFindOneInput = {
   readonly url?: Maybe<Scalars['String']>;
 };
 
-export type YoutubeVideoFindAllInput = {
-  readonly q?: Maybe<Scalars['String']>;
-  readonly maxResults?: Maybe<Scalars['Float']>;
-  readonly order?: Maybe<SongExplorerOrderEnum>;
-  readonly relatedToVideoUrl?: Maybe<Scalars['String']>;
-};
+export enum UserRoleEnum {
+  Admin = 'ADMIN',
+  StationOwner = 'STATION_OWNER',
+  StationAdmin = 'STATION_ADMIN'
+}
 
 export enum SongExplorerOrderEnum {
   Date = 'DATE',
@@ -557,6 +551,13 @@ export type SubscriptionStationArgs = {
 
 export type SubscriptionSongArgs = {
   where?: Maybe<SongFindAllWhereInput>;
+};
+
+export type YoutubeVideoFindAllInput = {
+  readonly q?: Maybe<Scalars['String']>;
+  readonly maxResults?: Maybe<Scalars['Float']>;
+  readonly order?: Maybe<SongExplorerOrderEnum>;
+  readonly relatedToVideoUrl?: Maybe<Scalars['String']>;
 };
 
 export type CreateSongMutationVariables = Exact<{

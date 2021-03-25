@@ -6,7 +6,7 @@ import { FaFacebookF, FaGithub, FaGoogle } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { LoginInput, useLoginMutation } from 'operations';
+import { LoginInput, useLoginMutation } from 're-radio-common/lib/operations';
 import { useStyles } from './styles';
 
 type DataKeys = keyof LoginInput;

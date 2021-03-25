@@ -1,7 +1,7 @@
 import { Card, CircularProgress, List, Typography } from '@material-ui/core';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useStationPlayerQuery, useYoutubeVideosLazyQuery } from 'operations';
+import { useStationPlayerQuery, useYoutubeVideosLazyQuery } from 're-radio-common/lib/operations';
 import { RelatedSongItem } from './item';
 import { useStyles } from './styles';
 

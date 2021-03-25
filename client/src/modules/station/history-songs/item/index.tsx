@@ -3,7 +3,7 @@ import { MdReplay } from 'react-icons/md';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import Moment from 'moment';
-import { HistorySongsQuery, useCreateSongMutation, useCurrentUserQuery } from 'operations';
+import { HistorySongsQuery, useCreateSongMutation, useCurrentUserQuery } from 're-radio-common/lib/operations';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 import { useStyles } from './styles';
 

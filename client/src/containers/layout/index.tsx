@@ -3,11 +3,11 @@ import React from 'react';
 import { MdFingerprint as LoginIcon, MdRadio as StationIcon } from 'react-icons/md';
 import { FaGithub as GithubIcon } from 'react-icons/fa';
 import { Link, Route, useHistory, useRouteMatch } from 'react-router-dom';
+import { useCurrentUserQuery } from 're-radio-common/lib/operations';
 import { Image } from 'components/image';
 import { AppContext } from 'containers/app';
 import { AuthenticatedListItem } from 'containers/layout/authenticated-list-item';
 import { LoginForm } from 'modules/user/authentication/login-form';
-import { useCurrentUserQuery } from 'operations';
 import { useStyles } from './styles';
 
 export interface Props {

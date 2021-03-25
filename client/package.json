@@ -5,7 +5,6 @@
     "postinstall": "patch-package",
     "initialize": "npm-run-all initialize:*",
     "initialize:env": "shx cp -n .env.example .env",
-    "initialize:graphql": "npm run generate",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -14,7 +13,6 @@
     "lint": "eslint --ext .tsx --ext .ts src/"
   },
   "dependencies": {
-    "@apollo/client": "3.3.13",
     "@material-ui/core": "4.11.3",
     "@material-ui/styles": "4.11.3",
     "countries-list": "2.6.1",
@@ -38,11 +36,6 @@
     "yup": "0.32.9"
   },
   "devDependencies": {
-    "@graphql-codegen/add": "2.0.2",
-    "@graphql-codegen/cli": "1.20.0",
-    "@graphql-codegen/typescript": "1.19.0",
-    "@graphql-codegen/typescript-operations": "1.17.13",
-    "@graphql-codegen/typescript-react-apollo": "2.2.1",
     "@types/graphql": "14.2.3",
     "@types/jest": "25.2.3",
     "@types/moment-duration-format": "2.2.2",

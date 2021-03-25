@@ -11,7 +11,7 @@ import {
   FaInfoCircle,
   FaUser,
 } from 'react-icons/fa';
-import { useUserProfileQuery } from 'operations';
+import { useUserProfileQuery } from 're-radio-common/lib/operations';
 import { PrimaryButton } from 'components/button/primary-button';
 import { ProfileAvatar } from '../avatar';
 import { useStyles } from './styles';

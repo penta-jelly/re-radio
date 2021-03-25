@@ -5,7 +5,12 @@ import { MdSend } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useTranslation } from 'react-i18next';
-import { useCreateSongMutation, useCurrentUserQuery, useYoutubeVideoLazyQuery, YoutubeVideo } from 'operations';
+import {
+  useCreateSongMutation,
+  useCurrentUserQuery,
+  useYoutubeVideoLazyQuery,
+  YoutubeVideo,
+} from 're-radio-common/lib/operations';
 import { useUnauthorizedNotification } from 'hooks/use-unauthorized-notification';
 
 interface Props {

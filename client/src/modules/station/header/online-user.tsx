@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router';
 import { Badge } from '@material-ui/core';
+import { useMiniUserQuery } from 're-radio-common/lib/operations';
 import { Image } from 'components/image';
-import { useMiniUserQuery } from 'operations';
 import { useStyles } from './styles';
 
 interface Props {

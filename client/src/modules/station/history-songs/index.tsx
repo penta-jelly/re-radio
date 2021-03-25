@@ -1,7 +1,7 @@
 import { Card, CircularProgress, List, Typography } from '@material-ui/core';
 import React from 'react';
 import { useRouteMatch } from 'react-router-dom';
-import { useStationPlayerQuery, useHistorySongsLazyQuery } from 'operations';
+import { useStationPlayerQuery, useHistorySongsLazyQuery } from 're-radio-common/lib/operations';
 import { useScrollMonitor } from 'hooks/use-scroll-monitor';
 import { HistorySongItem } from './item';
 import { useStyles } from './styles';

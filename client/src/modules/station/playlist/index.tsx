@@ -1,9 +1,9 @@
 import { Card, CircularProgress, Icon, List, Typography } from '@material-ui/core';
-import { sortSongs } from 're-radio-common/lib/sort-songs';
+import { sortSongs } from 're-radio-common/lib/utils/sort-songs';
 import React from 'react';
 import { MdPlaylistAdd } from 'react-icons/md';
 import { useRouteMatch } from 'react-router-dom';
-import { useOnStationPlaylistChangedSubscription, useStationPlaylistQuery } from 'operations';
+import { useOnStationPlaylistChangedSubscription, useStationPlaylistQuery } from 're-radio-common/lib/operations';
 import { PlaylistItem } from 'modules/station/playlist/item';
 import { useStyles } from './styles';
 

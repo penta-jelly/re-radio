@@ -1,6 +1,6 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
-import { StationsQuery } from 'operations';
+import { StationsQuery } from 're-radio-common/lib/operations';
 import { StationItem } from './item';
 
 interface Props {

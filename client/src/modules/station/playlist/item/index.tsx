@@ -3,7 +3,7 @@ import { ListItem, ListItemText, Typography, LinearProgress, IconButton } from '
 import { GiMusicalNotes } from 'react-icons/gi';
 import { MdThumbUp, MdThumbDown } from 'react-icons/md';
 import Moment from 'moment';
-import { SongStatusEnum, StationPlaylistQuery } from 'operations';
+import { SongStatusEnum, StationPlaylistQuery } from 're-radio-common/lib/operations';
 import { Image } from 'components/image';
 import { useStyles } from './styles';
 

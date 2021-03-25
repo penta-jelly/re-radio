@@ -3,19 +3,19 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MdRadio as StationIcon } from 'react-icons/md';
 import { Route, useHistory, useRouteMatch } from 'react-router-dom';
-import { PrimaryButton } from 'components/button/primary-button';
-import { NotFoundError } from 'components/error';
-import { ReSearch } from 'components/input/re-search';
-import { PageLoader } from 'components/page-loader';
-import { Layout } from 'containers/layout';
-import { CreateStationForm, StationsList } from 'modules/station';
 import {
   OrderEnum,
   StationsDocument,
   StationsQueryVariables,
   useOnStationChangedSubscription,
   useStationsQuery,
-} from 'operations';
+} from 're-radio-common/lib/operations';
+import { PrimaryButton } from 'components/button/primary-button';
+import { NotFoundError } from 'components/error';
+import { ReSearch } from 'components/input/re-search';
+import { PageLoader } from 'components/page-loader';
+import { Layout } from 'containers/layout';
+import { CreateStationForm, StationsList } from 'modules/station';
 import { useStyles } from './styles';
 
 const HomePage: React.FunctionComponent<{}> = () => {

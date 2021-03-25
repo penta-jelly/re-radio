@@ -1,8 +1,8 @@
 import { Grid, Typography } from '@material-ui/core';
 import React from 'react';
+import { OrderEnum, useStationsQuery } from 're-radio-common/lib/operations';
 import { PageLoader } from 'components/page-loader';
 import { StationsList } from 'modules/station';
-import { OrderEnum, useStationsQuery } from 'operations';
 import { useStyles } from './styles';
 
 interface Props {
