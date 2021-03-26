@@ -1,11 +1,11 @@
+import { ApolloProvider } from '@apollo/client';
 import { StatusBar } from 'expo-status-bar';
+import { AppBar, NativeBaseProvider } from 'native-base';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ApolloProvider } from '@apollo/client';
-
+import { AppClient, initClient } from './src/apollo/client';
 import useCachedResources from './src/hooks/useCachedResources';
 import useColorScheme from './src/hooks/useColorScheme';
-import { AppClient, initClient } from './src/apollo/client';
 import Navigation from './src/navigation';
 
 const initialClient = initClient();
@@ -37,15 +37,18 @@ export default function App() {
     return null;
   } else {
     return (
-      <SafeAreaProvider>
-        {/* @ts-ignore */}
-        <ApolloProvider client={client}>
-          <AppContext.Provider value={{ client, resetClient }}>
-            <Navigation colorScheme={colorScheme} />
-            <StatusBar style={colorScheme} />
-          </AppContext.Provider>
-        </ApolloProvider>
-      </SafeAreaProvider>
+      <NativeBaseProvider>
+        <SafeAreaProvider>
+          {/* @ts-ignore */}
+          <ApolloProvider client={client}>
+            <AppContext.Provider value={{ client, resetClient }}>
+              <AppBar></AppBar>
+              <Navigation colorScheme={colorScheme} />
+              <StatusBar style={colorScheme} />
+            </AppContext.Provider>
+          </ApolloProvider>
+        </SafeAreaProvider>
+      </NativeBaseProvider>
     );
   }
 }
