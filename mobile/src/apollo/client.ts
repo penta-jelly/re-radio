@@ -1,6 +1,6 @@
-import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from 're-radio-common/lib/@apollo/client';
-import { WebSocketLink } from 're-radio-common/node_modules/@apollo/client/link/ws';
-import { getMainDefinition } from 're-radio-common/node_modules/@apollo/client/utilities';
+import { ApolloClient, ApolloLink, InMemoryCache, HttpLink } from '@apollo/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
+import { getMainDefinition } from '@apollo/client/utilities';
 import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 export interface AppClient {
@@ -11,7 +11,7 @@ export interface AppClient {
 
 // TODO: setup apollo-upload-client
 export function initClient(): AppClient {
-  let host = window.location.host;
+  let host = 'localhost:2996';
   if (process.env.NODE_ENV !== 'production') {
     // TODO: Host
     host = `localhost:2996`;
@@ -67,5 +67,5 @@ interface Context {
 }
 
 function isSecured() {
-  return window.location.protocol === 'https:';
+  return process.env.NODE_ENV === 'production';
 }
