@@ -49,7 +49,7 @@
     "graphql-subscriptions": "1.2.1",
     "moment": "2.29.1",
     "moment-duration-format": "2.3.2",
-    "nest-winston": "1.4.0",
+    "nest-winston": "1.4.1",
     "node-fetch": "2.6.1",
     "passport": "0.4.1",
     "passport-http-bearer": "1.0.1",
