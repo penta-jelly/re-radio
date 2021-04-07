@@ -1,4 +1,4 @@
-FROM node:10.24.0-alpine AS builder
+FROM node:10.24.1-alpine AS builder
 
 WORKDIR /usr/app
 
