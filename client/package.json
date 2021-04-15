@@ -46,7 +46,7 @@
     "@types/graphql": "14.2.3",
     "@types/jest": "25.2.3",
     "@types/moment-duration-format": "2.2.2",
-    "@types/node": "10.17.56",
+    "@types/node": "10.17.57",
     "@types/react": "17.0.3",
     "@types/react-dom": "17.0.3",
     "@types/react-helmet": "6.0.0",
