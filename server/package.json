@@ -60,7 +60,7 @@
     "rxjs": "7.0.0",
     "typeorm": "0.2.32",
     "winston": "3.2.1",
-    "yargs": "16.2.0"
+    "yargs": "17.0.0"
   },
   "devDependencies": {
     "@types/accept-language-parser": "1.5.1",
