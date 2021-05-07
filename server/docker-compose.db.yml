@@ -2,7 +2,7 @@ version: "3.7"
 services:
   postgres:
     container_name: re-radio_postgres
-    image: postgres:10.16-alpine
+    image: postgres:13.2-alpine
     restart: ${RESTART_POLICY}
     ports:
       - "${DB_PORT}:5432"
