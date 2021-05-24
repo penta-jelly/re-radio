@@ -1,12 +1,12 @@
-version: "3.7"
+version: '3.7'
 services:
   postgres:
     container_name: re-radio_postgres
-    image: postgres:13.3-alpine
+    image: postgres:10-alpine
     restart: ${RESTART_POLICY}
     ports:
-      - "${DB_HOST_PORT}:5432"
-    logging: 
+      - '${DB_HOST_PORT}:5432'
+    logging:
       driver: ${LOGGING_DRIVER}
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -21,24 +21,24 @@ services:
     image: redis:6.2.3-alpine
     restart: ${RESTART_POLICY}
     ports:
-      - "${REDIS_HOST_PORT}:6379"
-    logging: 
+      - '${REDIS_HOST_PORT}:6379'
+    logging:
       driver: ${LOGGING_DRIVER}
-  
+
   radio:
     container_name: re-radio_main
     image: ${APP_IMAGE}
     restart: ${RESTART_POLICY}
-    ports: 
-      - "${MAIN_HOST_PORT}:2996"
-    logging: 
+    ports:
+      - '${MAIN_HOST_PORT}:2996'
+    logging:
       driver: ${LOGGING_DRIVER}
     depends_on:
       - postgres
       - redis
     environment:
-      NODE_ENV: "production"
-      LOG_UNCOLORIZE: "${LOG_UNCOLORIZE:-1}"
+      NODE_ENV: 'production'
+      LOG_UNCOLORIZE: '${LOG_UNCOLORIZE:-1}'
       REDIS_HOST: re-radio_redis
       REDIS_PORT: 6379
       DB_HOST: re-radio_postgres

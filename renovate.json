@@ -8,6 +8,7 @@
   "automerge": true,
   "automergeType": "branch",
   "ignoreDeps": [
-    "re-radio-common"
+    "re-radio-common",
+    "postgres"
   ]
 }
