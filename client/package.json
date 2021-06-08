@@ -34,7 +34,7 @@
     "react-icons": "4.2.0",
     "react-player": "2.9.0",
     "react-router-dom": "5.2.0",
-    "subscriptions-transport-ws": "0.9.18",
+    "subscriptions-transport-ws": "0.9.19",
     "yup": "0.32.9"
   },
   "devDependencies": {
