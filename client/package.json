@@ -52,7 +52,7 @@
     "@types/react-helmet": "6.0.0",
     "@types/react-router-dom": "5.1.7",
     "@types/yup": "0.29.11",
-    "eslint": "7.28.0",
+    "eslint": "7.29.0",
     "eslint-config-prettier": "7.2.0",
     "eslint-config-react-app": "6.0.0",
     "eslint-plugin-import": "2.23.4",
