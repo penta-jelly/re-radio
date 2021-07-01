@@ -83,7 +83,7 @@
     "prettier": "2.2.1",
     "shx": "0.3.3",
     "source-map-support": "0.5.19",
-    "typescript": "4.3.4",
+    "typescript": "4.3.5",
     "wait-on": "6.0.0"
   },
   "bin": "lib/main.js",
