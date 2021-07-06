@@ -63,7 +63,7 @@
     "yargs": "17.0.0"
   },
   "devDependencies": {
-    "@types/accept-language-parser": "1.5.1",
+    "@types/accept-language-parser": "1.5.2",
     "@types/bcrypt-nodejs": "0.0.31",
     "@types/graphql": "14.2.3",
     "@types/moment-duration-format": "2.2.2",
