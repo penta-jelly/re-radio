@@ -10,7 +10,7 @@
     "format": "eslint --fix --ext .ts cypress"
   },
   "dependencies": {
-    "cypress": "8.1.0"
+    "cypress": "8.2.0"
   },
   "devDependencies": {
     "@cypress/browserify-preprocessor": "3.0.1",
