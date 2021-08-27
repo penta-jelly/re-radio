@@ -55,7 +55,7 @@ export class GraphqlOptions implements GqlOptionsFactory {
 
   private formatValidationError(errors: ValidationError[]): string {
     let children = errors;
-    while (children[0].children.length > 0) {
+    while (children[0].children && children[0].children.length > 0) {
       children = children[0].children;
     }
     const message = children[0].constraints?.[Object.keys(children[0].constraints)[0]];
