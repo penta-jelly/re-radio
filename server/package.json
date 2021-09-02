@@ -43,7 +43,7 @@
     "class-transformer": "0.4.0",
     "class-validator": "0.13.1",
     "dotenv": "10.0.0",
-    "get-video-id": "3.4.0",
+    "get-video-id": "3.4.1",
     "graphql": "15.5.2",
     "graphql-redis-subscriptions": "2.4.0",
     "graphql-subscriptions": "1.2.1",
