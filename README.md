@@ -16,10 +16,10 @@ TODO: This section need to be updated
 
 ### System requirement
 
-* Docker: 18.x
-* Docker Compose: 1.24
-* NodeJS: 10.x
-* NPM: 6.x
+- Docker: 18.x
+- Docker Compose: 1.24
+- NodeJS: 14.x
+- NPM: 6.x
 
 ### Build
 
@@ -37,14 +37,14 @@ npm start
 
 ## All services
 
-Assume there is no customized configuration and we are talking about *localhost*.
+Assume there is no customized configuration and we are talking about _localhost_.
 
-* Database:
-  * PostgreSQL (See [.env.example](./server/.env.example))
-  * PG Admin: [http://localhost:3001](http://localhost:3001) (`admin@reradio.com`/`123456`. See [.env.example](./server/.env.example))
-  * Redis (See [.env.example](./server/.env.example))
-* Server: [http://localhost:2996/graphql](http://localhost:2996/graphql)
-* Client: [http://localhost:3000](http://localhost:3000)
+- Database:
+  - PostgreSQL (See [.env.example](./server/.env.example))
+  - PG Admin: [http://localhost:3001](http://localhost:3001) (`admin@reradio.com`/`123456`. See [.env.example](./server/.env.example))
+  - Redis (See [.env.example](./server/.env.example))
+- Server: [http://localhost:2996/graphql](http://localhost:2996/graphql)
+- Client: [http://localhost:3000](http://localhost:3000)
 
 ## Development guideline
 
