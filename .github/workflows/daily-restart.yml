@@ -1,0 +1,27 @@
+name: Google Cloud Platform daily restart
+on:
+  schedule:
+    - cron: "0 4 * * *" # At 04:00 everyday.
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/setup-gcloud@master
+        with:
+          version: "271.0.0"
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Deploy
+        env:
+          PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+          VM_INSTANCE: ${{ secrets.GCP_VM_INSTANCE }}
+          VM_USER: ${{ secrets.GCP_VM_USER }}
+          VM_ZONE: ${{ secrets.GCP_VM_ZONE }}
+        run: |
+          gcloud config set project ${PROJECT_ID}
+          gcloud compute scp .gcloud/docker-compose.yml .gcloud/deploy.sh ${VM_USER}@${VM_INSTANCE}:~ --zone=${VM_ZONE}
+          gcloud compute ssh ${VM_USER}@${VM_INSTANCE} --zone=${VM_ZONE} --command="docker-compose restart"
+      
