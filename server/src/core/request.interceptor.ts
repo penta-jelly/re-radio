@@ -12,7 +12,7 @@ export const COLOR_RESET = '\x1b[0m';
 
 @Injectable()
 export class RequestsInterceptor implements NestInterceptor {
-  private logger = new Logger(RequestsInterceptor.name, false);
+  private logger = new Logger(RequestsInterceptor.name, { timestamp: false });
 
   intercept(context: ExecutionContext, next: CallHandler<unknown>): Observable<unknown> {
     if (context.getArgs().length === 4) {
