@@ -44,7 +44,7 @@
     "@graphql-codegen/typescript-operations": "1.17.13",
     "@graphql-codegen/typescript-react-apollo": "2.2.1",
     "@types/graphql": "14.2.3",
-    "@types/jest": "27.0.1",
+    "@types/jest": "27.0.2",
     "@types/moment-duration-format": "2.2.3",
     "@types/node": "14.17.17",
     "@types/react": "17.0.22",
