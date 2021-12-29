@@ -94,8 +94,9 @@ export class DevSeederService {
   private async resetUserRoles() {
     this.logger.log('Resetting user roles');
     const toBeRemovedTags: string[] = [];
+    const fixtures = await this.getUserRoleFixtures();
     await Promise.all(
-      (await this.getUserRoleFixtures()).map(async (data) => {
+      fixtures.map(async (data) => {
         const userRole = await this.userRoleRepository.findOne({
           where: { user: { id: data.user.id }, role: data.role },
         });
