@@ -14,12 +14,11 @@ const Login: React.FC<RouteComponentProps> = ({ history }) => {
   React.useEffect(() => {
     if (currentUserQuery.data) {
       history.push('/');
-      const options = { 
+      enqueueSnackbar('You have to logout first to access this page.', {
         anchorOrigin: { vertical: 'top', horizontal: 'left' },
         preventDuplicate: true,
-        variant: 'warning'
-      }
-      enqueueSnackbar('You have to logout first to access this page.', options);
+        variant: 'warning',
+      });
     }
   }, [enqueueSnackbar, history, currentUserQuery]);
 
