@@ -29,12 +29,12 @@
     "seed:reset": "npm run worker -- seed:reset"
   },
   "dependencies": {
-    "@nestjs/common": "8.0.10",
-    "@nestjs/core": "8.0.10",
+    "@nestjs/common": "8.2.4",
+    "@nestjs/core": "8.2.4",
     "@nestjs/graphql": "7.10.6",
     "@nestjs/jwt": "8.0.0",
     "@nestjs/passport": "8.0.1",
-    "@nestjs/platform-express": "8.0.10",
+    "@nestjs/platform-express": "8.2.4",
     "@nestjs/serve-static": "2.2.2",
     "@nestjs/typeorm": "8.0.2",
     "accept-language-parser": "1.5.0",
