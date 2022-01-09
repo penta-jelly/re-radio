@@ -18,13 +18,13 @@ TODO: This section need to be updated
 
 - Docker: 18.x
 - Docker Compose: 1.24
-- NodeJS: 14.x
-- NPM: 6.x
+- NodeJS: 16.x
+- NPM: 8.x
 
 ### Build
 
 ```sh
-npm install && npm run initialize && npm run compile
+npm install && npm install -ws && npm run initialize && npm run compile
 ```
 
 ### Start

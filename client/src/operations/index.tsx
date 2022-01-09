@@ -16,65 +16,18 @@ export type Scalars = {
   Timestamp: any;
 };
 
-export type UserRole = {
-  readonly __typename?: 'UserRole';
-  readonly id: Scalars['Int'];
-  readonly role: UserRoleEnum;
-  readonly user: User;
-  readonly station?: Maybe<Station>;
+export type Authentication = {
+  readonly __typename?: 'Authentication';
+  readonly token: Scalars['String'];
 };
 
-export enum UserRoleEnum {
-  Admin = 'ADMIN',
-  StationOwner = 'STATION_OWNER',
-  StationAdmin = 'STATION_ADMIN'
-}
-
-export type User = {
-  readonly __typename?: 'User';
-  readonly id: Scalars['Int'];
-  readonly createdAt: Scalars['Timestamp'];
-  readonly updatedAt: Scalars['Timestamp'];
-  readonly email: Scalars['String'];
-  readonly username: Scalars['String'];
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly reputation?: Maybe<Scalars['Int']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
-  readonly roles: ReadonlyArray<UserRole>;
-  readonly currentStationId?: Maybe<Scalars['Float']>;
+export type ContentDetails = {
+  readonly __typename?: 'ContentDetails';
+  readonly duration: Scalars['Float'];
+  readonly dimension: Scalars['String'];
+  readonly definition: Scalars['String'];
+  readonly caption: Scalars['String'];
 };
-
-
-export type Song = {
-  readonly __typename?: 'Song';
-  readonly id: Scalars['Int'];
-  readonly createdAt: Scalars['Timestamp'];
-  readonly updatedAt: Scalars['Timestamp'];
-  readonly startedAt?: Maybe<Scalars['Timestamp']>;
-  readonly title: Scalars['String'];
-  readonly url: Scalars['String'];
-  readonly thumbnail: Scalars['String'];
-  readonly duration: Scalars['Int'];
-  readonly status: SongStatusEnum;
-  readonly creator: User;
-  readonly station: Station;
-  readonly stationSlug: Scalars['String'];
-  readonly upVoteUserIds: ReadonlyArray<Scalars['Int']>;
-  readonly downVoteUserIds: ReadonlyArray<Scalars['Int']>;
-};
-
-export enum SongStatusEnum {
-  Pending = 'PENDING',
-  Playing = 'PLAYING',
-  Played = 'PLAYED',
-  Skipped = 'SKIPPED'
-}
 
 export type HistorySong = {
   readonly __typename?: 'HistorySong';
@@ -89,31 +42,85 @@ export type HistorySong = {
   readonly playedTimes: Scalars['Int'];
 };
 
-export type StationTag = {
-  readonly __typename?: 'StationTag';
-  readonly id: Scalars['Int'];
-  readonly name: Scalars['String'];
-  readonly stations: ReadonlyArray<Station>;
+export type HistorySongFindAllWhereInput = {
+  readonly stationSlug: Scalars['String'];
 };
 
-export type Station = {
-  readonly __typename?: 'Station';
-  readonly id: Scalars['Int'];
-  readonly createdAt: Scalars['Timestamp'];
-  readonly updatedAt: Scalars['Timestamp'];
-  readonly name: Scalars['String'];
-  readonly slug: Scalars['String'];
-  readonly description?: Maybe<Scalars['String']>;
-  readonly playingSong?: Maybe<Song>;
-  readonly userRoles: ReadonlyArray<UserRole>;
-  readonly tags: ReadonlyArray<StationTag>;
-  readonly onlineUserIds: ReadonlyArray<Scalars['Int']>;
+export type LoginInput = {
+  readonly password: Scalars['String'];
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
 };
 
-export type StationSubscription = {
-  readonly __typename?: 'StationSubscription';
-  readonly mutation: MutationEnum;
-  readonly entity: Station;
+export type Mutation = {
+  readonly __typename?: 'Mutation';
+  readonly createUser: User;
+  readonly updateUser: Scalars['Boolean'];
+  readonly deleteUser: Scalars['Boolean'];
+  readonly createStation: Station;
+  readonly deleteStation: Scalars['Boolean'];
+  readonly joinStation: Scalars['Boolean'];
+  readonly leaveStation: Scalars['Boolean'];
+  readonly login: Authentication;
+  readonly register: Authentication;
+  readonly createSong: Song;
+  readonly deleteSong: Scalars['Boolean'];
+};
+
+
+export type MutationCreateUserArgs = {
+  data: UserCreateInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  data: UserUpdateInput;
+  where: UserFindOneWhereInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  where: UserFindOneWhereInput;
+};
+
+
+export type MutationCreateStationArgs = {
+  data: StationCreateInput;
+};
+
+
+export type MutationDeleteStationArgs = {
+  where: StationFindOneWhereInput;
+};
+
+
+export type MutationJoinStationArgs = {
+  where: StationFindOneWhereInput;
+};
+
+
+export type MutationLeaveStationArgs = {
+  where: StationFindOneWhereInput;
+};
+
+
+export type MutationLoginArgs = {
+  data: LoginInput;
+};
+
+
+export type MutationRegisterArgs = {
+  data: RegisterInput;
+};
+
+
+export type MutationCreateSongArgs = {
+  data: SongCreateInput;
+};
+
+
+export type MutationDeleteSongArgs = {
+  where: SongFindOneWhereInput;
 };
 
 export enum MutationEnum {
@@ -122,91 +129,16 @@ export enum MutationEnum {
   Deleted = 'DELETED'
 }
 
-export type UserStationSetting = {
-  readonly __typename?: 'UserStationSetting';
-  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
-  readonly notifyOnlineUser: Scalars['Boolean'];
-};
-
-export enum StationRunningOutOfSongsBehaviorEnum {
-  PlayRandomSongFromHistorySongs = 'PLAY_RANDOM_SONG_FROM_HISTORY_SONGS',
-  PlayFirstSongFromRelatedSongs = 'PLAY_FIRST_SONG_FROM_RELATED_SONGS'
+export enum OrderEnum {
+  Asc = 'ASC',
+  Desc = 'DESC'
 }
 
-export type StationSharedSetting = {
-  readonly __typename?: 'StationSharedSetting';
-  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
-};
-
-export type StationSetting = {
-  readonly __typename?: 'StationSetting';
-  readonly id: Scalars['String'];
-  readonly user?: Maybe<UserStationSetting>;
-  readonly station: StationSharedSetting;
-};
-
-export type UserSubscription = {
-  readonly __typename?: 'UserSubscription';
-  readonly mutation: MutationEnum;
-  readonly entity: User;
-};
-
-export type Authentication = {
-  readonly __typename?: 'Authentication';
-  readonly token: Scalars['String'];
-};
-
-export type SongSubscription = {
-  readonly __typename?: 'SongSubscription';
-  readonly mutation: MutationEnum;
-  readonly entity: Song;
-};
-
-export type Thumbnail = {
-  readonly __typename?: 'Thumbnail';
-  readonly url: Scalars['String'];
-  readonly width: Scalars['Float'];
-  readonly height: Scalars['Float'];
-};
-
-export type Thumbnails = {
-  readonly __typename?: 'Thumbnails';
-  readonly default: Thumbnail;
-  readonly medium?: Maybe<Thumbnail>;
-  readonly high?: Maybe<Thumbnail>;
-  readonly standard?: Maybe<Thumbnail>;
-  readonly maxres?: Maybe<Thumbnail>;
-};
-
-export type Snippet = {
-  readonly __typename?: 'Snippet';
-  readonly publishedAt: Scalars['String'];
-  readonly channelId: Scalars['String'];
-  readonly title: Scalars['String'];
-  readonly description: Scalars['String'];
-  readonly thumbnails: Thumbnails;
-  readonly channelTitle: Scalars['String'];
-};
-
-export type ContentDetails = {
-  readonly __typename?: 'ContentDetails';
-  readonly duration: Scalars['Float'];
-  readonly dimension: Scalars['String'];
-  readonly definition: Scalars['String'];
-  readonly caption: Scalars['String'];
-};
-
-export type YoutubeVideoDetail = {
-  readonly __typename?: 'YoutubeVideoDetail';
-  readonly id: Scalars['String'];
-  readonly snippet: Snippet;
-  readonly contentDetails: ContentDetails;
-};
-
-export type YoutubeVideo = {
-  readonly __typename?: 'YoutubeVideo';
-  readonly id: Scalars['String'];
-  readonly snippet: Snippet;
+export type PaginationInput = {
+  /** Offset (paginated) where from entities should be taken. Default: 0 */
+  readonly skip?: Maybe<Scalars['Int']>;
+  /** Limit (paginated) - max number of entities should be taken. Default: 10 */
+  readonly take?: Maybe<Scalars['Int']>;
 };
 
 export type Query = {
@@ -294,16 +226,48 @@ export type QueryCountHistorySongsArgs = {
   where: HistorySongFindAllWhereInput;
 };
 
-export type YoutubeVideoFindOneInput = {
-  readonly videoId?: Maybe<Scalars['String']>;
-  readonly url?: Maybe<Scalars['String']>;
+export type RegisterInput = {
+  readonly password: Scalars['String'];
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
 };
 
-export type YoutubeVideoFindAllInput = {
-  readonly q?: Maybe<Scalars['String']>;
-  readonly maxResults?: Maybe<Scalars['Float']>;
-  readonly order?: Maybe<SongExplorerOrderEnum>;
-  readonly relatedToVideoUrl?: Maybe<Scalars['String']>;
+export type Snippet = {
+  readonly __typename?: 'Snippet';
+  readonly publishedAt: Scalars['String'];
+  readonly channelId: Scalars['String'];
+  readonly title: Scalars['String'];
+  readonly description: Scalars['String'];
+  readonly thumbnails: Thumbnails;
+  readonly channelTitle: Scalars['String'];
+};
+
+export type Song = {
+  readonly __typename?: 'Song';
+  readonly id: Scalars['Int'];
+  readonly createdAt: Scalars['Timestamp'];
+  readonly updatedAt: Scalars['Timestamp'];
+  readonly startedAt?: Maybe<Scalars['Timestamp']>;
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
+  readonly thumbnail: Scalars['String'];
+  readonly duration: Scalars['Int'];
+  readonly status: SongStatusEnum;
+  readonly creator: User;
+  readonly station: Station;
+  readonly stationSlug: Scalars['String'];
+  readonly upVoteUserIds: ReadonlyArray<Scalars['Int']>;
+  readonly downVoteUserIds: ReadonlyArray<Scalars['Int']>;
+};
+
+export type SongCreateInput = {
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
+  readonly thumbnail: Scalars['String'];
+  /** Duration of a song in milliseconds(ms). Minimum is 10000ms (10 seconds), maximum is 86400000ms (a day) */
+  readonly duration: Scalars['Int'];
+  readonly status?: Maybe<SongStatusEnum>;
+  readonly stationSlug?: Maybe<Scalars['String']>;
 };
 
 export enum SongExplorerOrderEnum {
@@ -314,70 +278,6 @@ export enum SongExplorerOrderEnum {
   ViewCount = 'VIEW_COUNT',
   VideoCount = 'VIDEO_COUNT'
 }
-
-export type YoutubeTrendingVideoFindAllInput = {
-  readonly maxResults?: Maybe<Scalars['Float']>;
-  readonly regionCode?: Maybe<Scalars['String']>;
-};
-
-export type UserFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly username?: Maybe<OrderEnum>;
-  readonly email?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-  readonly name?: Maybe<OrderEnum>;
-  readonly country?: Maybe<OrderEnum>;
-  readonly city?: Maybe<OrderEnum>;
-  readonly reputation?: Maybe<OrderEnum>;
-};
-
-export enum OrderEnum {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
-
-export type UserFindAllWhereInput = {
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type PaginationInput = {
-  /** Offset (paginated) where from entities should be taken. Default: 0 */
-  readonly skip?: Maybe<Scalars['Int']>;
-  /** Limit (paginated) - max number of entities should be taken. Default: 10 */
-  readonly take?: Maybe<Scalars['Int']>;
-};
-
-export type UserFindOneWhereInput = {
-  readonly id?: Maybe<Scalars['Int']>;
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type StationFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly name?: Maybe<OrderEnum>;
-  readonly slug?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-};
-
-export type StationFindAllWhereInput = {
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-};
-
-export type StationFindOneWhereInput = {
-  readonly id?: Maybe<Scalars['Int']>;
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-};
-
-export type StationSettingFindInput = {
-  readonly stationId: Scalars['Int'];
-  readonly userId?: Maybe<Scalars['Int']>;
-};
 
 export type SongFindAllOrderInput = {
   readonly id?: Maybe<OrderEnum>;
@@ -402,106 +302,31 @@ export type SongFindOneWhereInput = {
   readonly id: Scalars['Int'];
 };
 
-export type HistorySongFindAllWhereInput = {
-  readonly stationSlug: Scalars['String'];
+export enum SongStatusEnum {
+  Pending = 'PENDING',
+  Playing = 'PLAYING',
+  Played = 'PLAYED',
+  Skipped = 'SKIPPED'
+}
+
+export type SongSubscription = {
+  readonly __typename?: 'SongSubscription';
+  readonly mutation: MutationEnum;
+  readonly entity: Song;
 };
 
-export type Mutation = {
-  readonly __typename?: 'Mutation';
-  readonly createUser: User;
-  readonly updateUser: Scalars['Boolean'];
-  readonly deleteUser: Scalars['Boolean'];
-  readonly createStation: Station;
-  readonly deleteStation: Scalars['Boolean'];
-  readonly joinStation: Scalars['Boolean'];
-  readonly leaveStation: Scalars['Boolean'];
-  readonly login: Authentication;
-  readonly register: Authentication;
-  readonly createSong: Song;
-  readonly deleteSong: Scalars['Boolean'];
-};
-
-
-export type MutationCreateUserArgs = {
-  data: UserCreateInput;
-};
-
-
-export type MutationUpdateUserArgs = {
-  data: UserUpdateInput;
-  where: UserFindOneWhereInput;
-};
-
-
-export type MutationDeleteUserArgs = {
-  where: UserFindOneWhereInput;
-};
-
-
-export type MutationCreateStationArgs = {
-  data: StationCreateInput;
-};
-
-
-export type MutationDeleteStationArgs = {
-  where: StationFindOneWhereInput;
-};
-
-
-export type MutationJoinStationArgs = {
-  where: StationFindOneWhereInput;
-};
-
-
-export type MutationLeaveStationArgs = {
-  where: StationFindOneWhereInput;
-};
-
-
-export type MutationLoginArgs = {
-  data: LoginInput;
-};
-
-
-export type MutationRegisterArgs = {
-  data: RegisterInput;
-};
-
-
-export type MutationCreateSongArgs = {
-  data: SongCreateInput;
-};
-
-
-export type MutationDeleteSongArgs = {
-  where: SongFindOneWhereInput;
-};
-
-export type UserCreateInput = {
-  readonly email: Scalars['String'];
-  readonly username: Scalars['String'];
-  readonly password: Scalars['String'];
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
-};
-
-export type UserUpdateInput = {
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
+export type Station = {
+  readonly __typename?: 'Station';
+  readonly id: Scalars['Int'];
+  readonly createdAt: Scalars['Timestamp'];
+  readonly updatedAt: Scalars['Timestamp'];
+  readonly name: Scalars['String'];
+  readonly slug: Scalars['String'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly playingSong?: Maybe<Song>;
+  readonly userRoles: ReadonlyArray<UserRole>;
+  readonly tags: ReadonlyArray<StationTag>;
+  readonly onlineUserIds: ReadonlyArray<Scalars['Int']>;
 };
 
 export type StationCreateInput = {
@@ -511,30 +336,62 @@ export type StationCreateInput = {
   readonly tags?: Maybe<ReadonlyArray<StationTagCreateInput>>;
 };
 
+export type StationFindAllOrderInput = {
+  readonly id?: Maybe<OrderEnum>;
+  readonly name?: Maybe<OrderEnum>;
+  readonly slug?: Maybe<OrderEnum>;
+  readonly createdAt?: Maybe<OrderEnum>;
+  readonly updatedAt?: Maybe<OrderEnum>;
+};
+
+export type StationFindAllWhereInput = {
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+};
+
+export type StationFindOneWhereInput = {
+  readonly id?: Maybe<Scalars['Int']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly slug?: Maybe<Scalars['String']>;
+};
+
+export enum StationRunningOutOfSongsBehaviorEnum {
+  PlayRandomSongFromHistorySongs = 'PLAY_RANDOM_SONG_FROM_HISTORY_SONGS',
+  PlayFirstSongFromRelatedSongs = 'PLAY_FIRST_SONG_FROM_RELATED_SONGS'
+}
+
+export type StationSetting = {
+  readonly __typename?: 'StationSetting';
+  readonly id: Scalars['String'];
+  readonly user?: Maybe<UserStationSetting>;
+  readonly station: StationSharedSetting;
+};
+
+export type StationSettingFindInput = {
+  readonly stationId: Scalars['Int'];
+  readonly userId?: Maybe<Scalars['Int']>;
+};
+
+export type StationSharedSetting = {
+  readonly __typename?: 'StationSharedSetting';
+  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
+};
+
+export type StationSubscription = {
+  readonly __typename?: 'StationSubscription';
+  readonly mutation: MutationEnum;
+  readonly entity: Station;
+};
+
+export type StationTag = {
+  readonly __typename?: 'StationTag';
+  readonly id: Scalars['Int'];
+  readonly name: Scalars['String'];
+  readonly stations: ReadonlyArray<Station>;
+};
+
 export type StationTagCreateInput = {
   readonly name: Scalars['String'];
-};
-
-export type LoginInput = {
-  readonly password: Scalars['String'];
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type RegisterInput = {
-  readonly password: Scalars['String'];
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type SongCreateInput = {
-  readonly title: Scalars['String'];
-  readonly url: Scalars['String'];
-  readonly thumbnail: Scalars['String'];
-  /** Duration of a song in milliseconds(ms). Minimum is 10000ms (10 seconds), maximum is 86400000ms (a day) */
-  readonly duration: Scalars['Int'];
-  readonly status?: Maybe<SongStatusEnum>;
-  readonly stationSlug?: Maybe<Scalars['String']>;
 };
 
 export type Subscription = {
@@ -557,6 +414,149 @@ export type SubscriptionStationArgs = {
 
 export type SubscriptionSongArgs = {
   where?: Maybe<SongFindAllWhereInput>;
+};
+
+export type Thumbnail = {
+  readonly __typename?: 'Thumbnail';
+  readonly url: Scalars['String'];
+  readonly width: Scalars['Float'];
+  readonly height: Scalars['Float'];
+};
+
+export type Thumbnails = {
+  readonly __typename?: 'Thumbnails';
+  readonly default: Thumbnail;
+  readonly medium?: Maybe<Thumbnail>;
+  readonly high?: Maybe<Thumbnail>;
+  readonly standard?: Maybe<Thumbnail>;
+  readonly maxres?: Maybe<Thumbnail>;
+};
+
+
+export type User = {
+  readonly __typename?: 'User';
+  readonly id: Scalars['Int'];
+  readonly createdAt: Scalars['Timestamp'];
+  readonly updatedAt: Scalars['Timestamp'];
+  readonly email: Scalars['String'];
+  readonly username: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly roles: ReadonlyArray<UserRole>;
+  readonly currentStationId?: Maybe<Scalars['Float']>;
+};
+
+export type UserCreateInput = {
+  readonly email: Scalars['String'];
+  readonly username: Scalars['String'];
+  readonly password: Scalars['String'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+};
+
+export type UserFindAllOrderInput = {
+  readonly id?: Maybe<OrderEnum>;
+  readonly username?: Maybe<OrderEnum>;
+  readonly email?: Maybe<OrderEnum>;
+  readonly createdAt?: Maybe<OrderEnum>;
+  readonly updatedAt?: Maybe<OrderEnum>;
+  readonly name?: Maybe<OrderEnum>;
+  readonly country?: Maybe<OrderEnum>;
+  readonly city?: Maybe<OrderEnum>;
+  readonly reputation?: Maybe<OrderEnum>;
+};
+
+export type UserFindAllWhereInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+};
+
+export type UserFindOneWhereInput = {
+  readonly id?: Maybe<Scalars['Int']>;
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+};
+
+export type UserRole = {
+  readonly __typename?: 'UserRole';
+  readonly id: Scalars['Int'];
+  readonly role: UserRoleEnum;
+  readonly user: User;
+  readonly station?: Maybe<Station>;
+};
+
+export enum UserRoleEnum {
+  Admin = 'ADMIN',
+  StationOwner = 'STATION_OWNER',
+  StationAdmin = 'STATION_ADMIN'
+}
+
+export type UserStationSetting = {
+  readonly __typename?: 'UserStationSetting';
+  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
+  readonly notifyOnlineUser: Scalars['Boolean'];
+};
+
+export type UserSubscription = {
+  readonly __typename?: 'UserSubscription';
+  readonly mutation: MutationEnum;
+  readonly entity: User;
+};
+
+export type UserUpdateInput = {
+  readonly email?: Maybe<Scalars['String']>;
+  readonly username?: Maybe<Scalars['String']>;
+  readonly name?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+};
+
+export type YoutubeTrendingVideoFindAllInput = {
+  readonly maxResults?: Maybe<Scalars['Float']>;
+  readonly regionCode?: Maybe<Scalars['String']>;
+};
+
+export type YoutubeVideo = {
+  readonly __typename?: 'YoutubeVideo';
+  readonly id: Scalars['String'];
+  readonly snippet: Snippet;
+};
+
+export type YoutubeVideoDetail = {
+  readonly __typename?: 'YoutubeVideoDetail';
+  readonly id: Scalars['String'];
+  readonly snippet: Snippet;
+  readonly contentDetails: ContentDetails;
+};
+
+export type YoutubeVideoFindAllInput = {
+  readonly q?: Maybe<Scalars['String']>;
+  readonly maxResults?: Maybe<Scalars['Float']>;
+  readonly order?: Maybe<SongExplorerOrderEnum>;
+  readonly relatedToVideoUrl?: Maybe<Scalars['String']>;
+};
+
+export type YoutubeVideoFindOneInput = {
+  readonly videoId?: Maybe<Scalars['String']>;
+  readonly url?: Maybe<Scalars['String']>;
 };
 
 export type CreateSongMutationVariables = Exact<{

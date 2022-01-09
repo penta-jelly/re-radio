@@ -18,18 +18,20 @@ export class GraphqlOptions implements GqlOptionsFactory {
       autoSchemaFile: 'schema.graphql',
       installSubscriptionHandlers: true,
       subscriptions: {
-        keepAlive: 20000,
-        onConnect: async (connectionParams, _, context: RadioWsConnectionContext) => {
-          context.connectionParams = connectionParams as Record<string, unknown>;
-          await this.pubSub.publish<WsEvent.ConnectedPayload>(WsEvent.Type.CONNECTED, {
-            connectionParams: connectionParams as Record<string, unknown>,
-          });
-        },
-        onDisconnect: async (_, context: RadioWsConnectionContext) => {
-          const { connectionParams } = context;
-          if (connectionParams) {
-            await this.pubSub.publish<WsEvent.DisconnectedPayload>(WsEvent.Type.DISCONNECTED, { connectionParams });
-          }
+        'subscriptions-transport-ws': {
+          keepAlive: 20000,
+          onConnect: async (connectionParams, _, context: RadioWsConnectionContext) => {
+            context.connectionParams = connectionParams as Record<string, unknown>;
+            await this.pubSub.publish<WsEvent.ConnectedPayload>(WsEvent.Type.CONNECTED, {
+              connectionParams: connectionParams as Record<string, unknown>,
+            });
+          },
+          onDisconnect: async (_, context: RadioWsConnectionContext) => {
+            const { connectionParams } = context;
+            if (connectionParams) {
+              await this.pubSub.publish<WsEvent.DisconnectedPayload>(WsEvent.Type.DISCONNECTED, { connectionParams });
+            }
+          },
         },
       },
       buildSchemaOptions: { dateScalarMode: 'timestamp' },
