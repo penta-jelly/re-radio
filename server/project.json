@@ -1,0 +1,23 @@
+{
+  "root": "server",
+  "sourceRoot": "server/src",
+  "projectType": "application",
+  "targets": {
+    "compile": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "server/lib"
+      ],
+      "dependsOn": [],
+      "options": {
+        "tsConfig": "server/tsconfig.json",
+        "main": "server/src/main.ts",
+        "outputPath": "server/lib"
+      }
+    }
+  },
+  "tags": [
+    "scope:server"
+  ],
+  "implicitDependencies": []
+}

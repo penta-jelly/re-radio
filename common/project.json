@@ -1,0 +1,22 @@
+{
+  "root": "common",
+  "sourceRoot": "common/src",
+  "projectType": "library",
+  "targets": {
+    "compile": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": [
+        "common/lib"
+      ],
+      "dependsOn": [],
+      "options": {
+        "tsConfig": "common/tsconfig.json",
+        "main": "common/src/index.ts"
+      }
+    }
+  },
+  "tags": [
+    "scope:common"
+  ],
+  "implicitDependencies": []
+}

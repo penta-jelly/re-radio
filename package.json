@@ -2,25 +2,34 @@
   "name": "re-radio",
   "private": true,
   "scripts": {
-    "postinstall": "lerna bootstrap",
-    "clean": "lerna run clean && lerna clean -y",
-    "initialize": "lerna run initialize",
-    "format": "lerna run format --parallel --no-bail",
-    "compile": "lerna run compile",
-    "build": "lerna run build",
-    "lint": "lerna run lint --parallel --no-bail",
-    "start": "npm-run-all --parallel lerna:start db",
-    "lerna:start": "lerna run start --no-sort --parallel",
-    "ci:start": "npm-run-all --parallel ci:lerna:start db",
-    "ci:lerna:start": "sleep 30 && lerna run ci:start --scope re-radio-server",
-    "db": "npm run db:up",
-    "db:up": "lerna run db:up --no-sort --parallel",
-    "db:down": "lerna run db:down --no-sort --parallel"
+    "postinstall": "patch-package",
+    "clean": "nx run-many --target=clean --all --parallel && lerna clean -y",
+    "initialize": "nx run-many --target=initialize --all --parallel",
+    "format": "nx run-many --target=format --all --parallel",
+    "compile": "nx run-many --target=compile --all --parallel",
+    "build": "nx run-many --target=build --all --parallel",
+    "lint": "nx run-many --target=lint --all --parallel",
+    "start": "nx run-many --target=start --all --parallel",
+    "ci:start": "npm-run-all --parallel ci:server:start db",
+    "ci:server:start": "sleep 30 && lerna run ci:start --scope re-radio-server",
+    "db": "npm run db:up -w server"
   },
   "devDependencies": {
-    "lerna": "4.0.0",
-    "npm-run-all": "4.1.5"
+    "@nrwl/cli": "13.4.3",
+    "@nrwl/js": "13.4.3",
+    "@nrwl/nx-cloud": "13.0.2",
+    "@nrwl/tao": "13.4.3",
+    "@nrwl/workspace": "13.4.3",
+    "npm-run-all": "4.1.5",
+    "patch-package": "6.4.7",
+    "typescript": "4.2.4"
   },
+  "workspaces": [
+    "client",
+    "server",
+    "common",
+    "e2e"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/penta-jelly/re-radio.git"

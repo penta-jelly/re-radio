@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const Path = require('path');
-const Pkg = require('pkg');
 const Shell = require('shelljs');
+const Pkg = require('pkg');
 
 async function bundle() {
   const target = 'host';

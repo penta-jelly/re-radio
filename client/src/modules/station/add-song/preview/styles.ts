@@ -15,9 +15,7 @@ export const useStyles = makeStyles(({ typography, spacing }: Theme) => ({
     flexDirection: 'column',
     paddingLeft: spacing(2),
   },
-  songTitle: {
-    fontWeight: typography.fontWeightMedium,
-  },
+  songTitle: {},
   creator: {
     marginTop: 'auto',
   },
