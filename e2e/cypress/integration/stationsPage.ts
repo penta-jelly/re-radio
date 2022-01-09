@@ -72,7 +72,7 @@ describe('Create a Station', () => {
 
       cy.get(stationsPage.elements.createStation.form).find(stationsPage.elements.createStation.submitButton).click();
 
-      cy.contains('You need to login first.').should('be.visible');
+      cy.contains('You need to login first.').should('be.exist');
     });
 
     it('should not be able to submit if station name or slug is empty', () => {

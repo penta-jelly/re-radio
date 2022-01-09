@@ -13,7 +13,6 @@ export const useUnauthorizedNotification = (message: string = 'You need to login
     enqueueSnackbar(message, {
       key,
       variant: 'warning',
-      anchorOrigin: { vertical: 'top', horizontal: 'left' },
       preventDuplicate: true,
       action: (key) => (
         <IconButton className={classes.closeNotificationButton} size="small" onClick={() => closeSnackbar(key)}>
