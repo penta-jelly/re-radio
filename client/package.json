@@ -38,11 +38,11 @@
     "yup": "0.32.9"
   },
   "devDependencies": {
-    "@graphql-codegen/add": "2.0.2",
-    "@graphql-codegen/cli": "1.20.0",
-    "@graphql-codegen/typescript": "1.19.0",
-    "@graphql-codegen/typescript-operations": "1.17.13",
-    "@graphql-codegen/typescript-react-apollo": "2.2.1",
+    "@graphql-codegen/add": "3.1.1",
+    "@graphql-codegen/cli": "2.3.1",
+    "@graphql-codegen/typescript": "2.4.2",
+    "@graphql-codegen/typescript-operations": "2.2.2",
+    "@graphql-codegen/typescript-react-apollo": "3.2.3",
     "@types/graphql": "14.2.3",
     "@types/jest": "27.0.2",
     "@types/moment-duration-format": "2.2.3",
