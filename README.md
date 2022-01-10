@@ -3,7 +3,7 @@
 [![Integration test status Status](https://github.com/penta-jelly/re-radio/workflows/Integration%20testing/badge.svg)](https://github.com/penta-jelly/re-radio)
 [![GCP deployment status](https://github.com/penta-jelly/re-radio/workflows/Google%20Cloud%20Platform%20deployment/badge.svg)](https://github.com/penta-jelly/re-radio)
 [![Cypress Dashboard](https://img.shields.io/badge/cypress-dashboard-brightgreen.svg)](https://dashboard.cypress.io/#/projects/nn2y5c/runs)
-[![Renovate](https://badges.renovateapi.com/github/penta-jelly/re-radio)](https://renovatebot.com/)
+[![Renovate](https://img.shields.io/badge/renovate-enabled-green.svg)](https://renovatebot.com/)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fpenta-jelly%2Fre-radio?ref=badge_shield)
 
 ## Introduction
