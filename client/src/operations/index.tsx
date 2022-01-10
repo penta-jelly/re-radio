@@ -2,9 +2,11 @@
 import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+const defaultOptions =  {}
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -16,425 +18,60 @@ export type Scalars = {
   Timestamp: any;
 };
 
-export type UserRole = {
-  readonly __typename?: 'UserRole';
-  readonly id: Scalars['Int'];
-  readonly role: UserRoleEnum;
-  readonly user: User;
-  readonly station?: Maybe<Station>;
-};
-
-export enum UserRoleEnum {
-  Admin = 'ADMIN',
-  StationOwner = 'STATION_OWNER',
-  StationAdmin = 'STATION_ADMIN'
-}
-
-export type User = {
-  readonly __typename?: 'User';
-  readonly id: Scalars['Int'];
-  readonly createdAt: Scalars['Timestamp'];
-  readonly updatedAt: Scalars['Timestamp'];
-  readonly email: Scalars['String'];
-  readonly username: Scalars['String'];
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly reputation?: Maybe<Scalars['Int']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
-  readonly roles: ReadonlyArray<UserRole>;
-  readonly currentStationId?: Maybe<Scalars['Float']>;
-};
-
-
-export type Song = {
-  readonly __typename?: 'Song';
-  readonly id: Scalars['Int'];
-  readonly createdAt: Scalars['Timestamp'];
-  readonly updatedAt: Scalars['Timestamp'];
-  readonly startedAt?: Maybe<Scalars['Timestamp']>;
-  readonly title: Scalars['String'];
-  readonly url: Scalars['String'];
-  readonly thumbnail: Scalars['String'];
-  readonly duration: Scalars['Int'];
-  readonly status: SongStatusEnum;
-  readonly creator: User;
-  readonly station: Station;
-  readonly stationSlug: Scalars['String'];
-  readonly upVoteUserIds: ReadonlyArray<Scalars['Int']>;
-  readonly downVoteUserIds: ReadonlyArray<Scalars['Int']>;
-};
-
-export enum SongStatusEnum {
-  Pending = 'PENDING',
-  Playing = 'PLAYING',
-  Played = 'PLAYED',
-  Skipped = 'SKIPPED'
-}
-
-export type HistorySong = {
-  readonly __typename?: 'HistorySong';
-  readonly id: Scalars['String'];
-  readonly title: Scalars['String'];
-  readonly url: Scalars['String'];
-  readonly thumbnail: Scalars['String'];
-  readonly duration: Scalars['Int'];
-  readonly station: Station;
-  readonly stationSlug: Scalars['String'];
-  readonly creatorIds: ReadonlyArray<Scalars['Int']>;
-  readonly playedTimes: Scalars['Int'];
-};
-
-export type StationTag = {
-  readonly __typename?: 'StationTag';
-  readonly id: Scalars['Int'];
-  readonly name: Scalars['String'];
-  readonly stations: ReadonlyArray<Station>;
-};
-
-export type Station = {
-  readonly __typename?: 'Station';
-  readonly id: Scalars['Int'];
-  readonly createdAt: Scalars['Timestamp'];
-  readonly updatedAt: Scalars['Timestamp'];
-  readonly name: Scalars['String'];
-  readonly slug: Scalars['String'];
-  readonly description?: Maybe<Scalars['String']>;
-  readonly playingSong?: Maybe<Song>;
-  readonly userRoles: ReadonlyArray<UserRole>;
-  readonly tags: ReadonlyArray<StationTag>;
-  readonly onlineUserIds: ReadonlyArray<Scalars['Int']>;
-};
-
-export type StationSubscription = {
-  readonly __typename?: 'StationSubscription';
-  readonly mutation: MutationEnum;
-  readonly entity: Station;
-};
-
-export enum MutationEnum {
-  Created = 'CREATED',
-  Updated = 'UPDATED',
-  Deleted = 'DELETED'
-}
-
-export type UserStationSetting = {
-  readonly __typename?: 'UserStationSetting';
-  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
-  readonly notifyOnlineUser: Scalars['Boolean'];
-};
-
-export enum StationRunningOutOfSongsBehaviorEnum {
-  PlayRandomSongFromHistorySongs = 'PLAY_RANDOM_SONG_FROM_HISTORY_SONGS',
-  PlayFirstSongFromRelatedSongs = 'PLAY_FIRST_SONG_FROM_RELATED_SONGS'
-}
-
-export type StationSharedSetting = {
-  readonly __typename?: 'StationSharedSetting';
-  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
-};
-
-export type StationSetting = {
-  readonly __typename?: 'StationSetting';
-  readonly id: Scalars['String'];
-  readonly user?: Maybe<UserStationSetting>;
-  readonly station: StationSharedSetting;
-};
-
-export type UserSubscription = {
-  readonly __typename?: 'UserSubscription';
-  readonly mutation: MutationEnum;
-  readonly entity: User;
-};
-
 export type Authentication = {
   readonly __typename?: 'Authentication';
   readonly token: Scalars['String'];
 };
 
-export type SongSubscription = {
-  readonly __typename?: 'SongSubscription';
-  readonly mutation: MutationEnum;
-  readonly entity: Song;
-};
-
-export type Thumbnail = {
-  readonly __typename?: 'Thumbnail';
-  readonly url: Scalars['String'];
-  readonly width: Scalars['Float'];
-  readonly height: Scalars['Float'];
-};
-
-export type Thumbnails = {
-  readonly __typename?: 'Thumbnails';
-  readonly default: Thumbnail;
-  readonly medium?: Maybe<Thumbnail>;
-  readonly high?: Maybe<Thumbnail>;
-  readonly standard?: Maybe<Thumbnail>;
-  readonly maxres?: Maybe<Thumbnail>;
-};
-
-export type Snippet = {
-  readonly __typename?: 'Snippet';
-  readonly publishedAt: Scalars['String'];
-  readonly channelId: Scalars['String'];
-  readonly title: Scalars['String'];
-  readonly description: Scalars['String'];
-  readonly thumbnails: Thumbnails;
-  readonly channelTitle: Scalars['String'];
-};
-
 export type ContentDetails = {
   readonly __typename?: 'ContentDetails';
-  readonly duration: Scalars['Float'];
-  readonly dimension: Scalars['String'];
-  readonly definition: Scalars['String'];
   readonly caption: Scalars['String'];
+  readonly definition: Scalars['String'];
+  readonly dimension: Scalars['String'];
+  readonly duration: Scalars['Float'];
 };
 
-export type YoutubeVideoDetail = {
-  readonly __typename?: 'YoutubeVideoDetail';
+export type HistorySong = {
+  readonly __typename?: 'HistorySong';
+  readonly creatorIds: ReadonlyArray<Scalars['Int']>;
+  readonly duration: Scalars['Int'];
   readonly id: Scalars['String'];
-  readonly snippet: Snippet;
-  readonly contentDetails: ContentDetails;
-};
-
-export type YoutubeVideo = {
-  readonly __typename?: 'YoutubeVideo';
-  readonly id: Scalars['String'];
-  readonly snippet: Snippet;
-};
-
-export type Query = {
-  readonly __typename?: 'Query';
-  readonly youtubeVideo: YoutubeVideoDetail;
-  readonly youtubeVideos: ReadonlyArray<YoutubeVideo>;
-  readonly youtubeTrendingVideos: ReadonlyArray<YoutubeVideo>;
-  readonly preferredRegion: Scalars['String'];
-  readonly users: ReadonlyArray<User>;
-  readonly user: User;
-  readonly stations: ReadonlyArray<Station>;
+  readonly playedTimes: Scalars['Int'];
   readonly station: Station;
-  readonly stationSetting: StationSetting;
-  readonly currentUser: User;
-  readonly songs: ReadonlyArray<Song>;
-  readonly song: Song;
-  readonly historySongs: ReadonlyArray<HistorySong>;
-  readonly countHistorySongs: Scalars['Int'];
-};
-
-
-export type QueryYoutubeVideoArgs = {
-  where: YoutubeVideoFindOneInput;
-};
-
-
-export type QueryYoutubeVideosArgs = {
-  where: YoutubeVideoFindAllInput;
-};
-
-
-export type QueryYoutubeTrendingVideosArgs = {
-  where: YoutubeTrendingVideoFindAllInput;
-};
-
-
-export type QueryUsersArgs = {
-  order?: Maybe<UserFindAllOrderInput>;
-  where?: Maybe<UserFindAllWhereInput>;
-  pagination?: Maybe<PaginationInput>;
-};
-
-
-export type QueryUserArgs = {
-  where: UserFindOneWhereInput;
-};
-
-
-export type QueryStationsArgs = {
-  order?: Maybe<StationFindAllOrderInput>;
-  where?: Maybe<ReadonlyArray<Maybe<StationFindAllWhereInput>>>;
-  pagination?: Maybe<PaginationInput>;
-};
-
-
-export type QueryStationArgs = {
-  where: StationFindOneWhereInput;
-};
-
-
-export type QueryStationSettingArgs = {
-  where: StationSettingFindInput;
-};
-
-
-export type QuerySongsArgs = {
-  order?: Maybe<SongFindAllOrderInput>;
-  where?: Maybe<ReadonlyArray<Maybe<SongFindAllWhereInput>>>;
-  pagination?: Maybe<PaginationInput>;
-};
-
-
-export type QuerySongArgs = {
-  where: SongFindOneWhereInput;
-};
-
-
-export type QueryHistorySongsArgs = {
-  where: HistorySongFindAllWhereInput;
-  pagination?: Maybe<PaginationInput>;
-};
-
-
-export type QueryCountHistorySongsArgs = {
-  where: HistorySongFindAllWhereInput;
-};
-
-export type YoutubeVideoFindOneInput = {
-  readonly videoId?: Maybe<Scalars['String']>;
-  readonly url?: Maybe<Scalars['String']>;
-};
-
-export type YoutubeVideoFindAllInput = {
-  readonly q?: Maybe<Scalars['String']>;
-  readonly maxResults?: Maybe<Scalars['Float']>;
-  readonly order?: Maybe<SongExplorerOrderEnum>;
-  readonly relatedToVideoUrl?: Maybe<Scalars['String']>;
-};
-
-export enum SongExplorerOrderEnum {
-  Date = 'DATE',
-  Rating = 'RATING',
-  Relevance = 'RELEVANCE',
-  Title = 'TITLE',
-  ViewCount = 'VIEW_COUNT',
-  VideoCount = 'VIDEO_COUNT'
-}
-
-export type YoutubeTrendingVideoFindAllInput = {
-  readonly maxResults?: Maybe<Scalars['Float']>;
-  readonly regionCode?: Maybe<Scalars['String']>;
-};
-
-export type UserFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly username?: Maybe<OrderEnum>;
-  readonly email?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-  readonly name?: Maybe<OrderEnum>;
-  readonly country?: Maybe<OrderEnum>;
-  readonly city?: Maybe<OrderEnum>;
-  readonly reputation?: Maybe<OrderEnum>;
-};
-
-export enum OrderEnum {
-  Asc = 'ASC',
-  Desc = 'DESC'
-}
-
-export type UserFindAllWhereInput = {
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type PaginationInput = {
-  /** Offset (paginated) where from entities should be taken. Default: 0 */
-  readonly skip?: Maybe<Scalars['Int']>;
-  /** Limit (paginated) - max number of entities should be taken. Default: 10 */
-  readonly take?: Maybe<Scalars['Int']>;
-};
-
-export type UserFindOneWhereInput = {
-  readonly id?: Maybe<Scalars['Int']>;
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type StationFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly name?: Maybe<OrderEnum>;
-  readonly slug?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-};
-
-export type StationFindAllWhereInput = {
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-};
-
-export type StationFindOneWhereInput = {
-  readonly id?: Maybe<Scalars['Int']>;
-  readonly name?: Maybe<Scalars['String']>;
-  readonly slug?: Maybe<Scalars['String']>;
-};
-
-export type StationSettingFindInput = {
-  readonly stationId: Scalars['Int'];
-  readonly userId?: Maybe<Scalars['Int']>;
-};
-
-export type SongFindAllOrderInput = {
-  readonly id?: Maybe<OrderEnum>;
-  readonly createdAt?: Maybe<OrderEnum>;
-  readonly updatedAt?: Maybe<OrderEnum>;
-  readonly title?: Maybe<OrderEnum>;
-  readonly url?: Maybe<OrderEnum>;
-  readonly thumbnail?: Maybe<OrderEnum>;
-  readonly duration?: Maybe<OrderEnum>;
-};
-
-export type SongFindAllWhereInput = {
-  readonly stationSlug?: Maybe<Scalars['String']>;
-  readonly title?: Maybe<Scalars['String']>;
-  readonly url?: Maybe<Scalars['String']>;
-  readonly thumbnail?: Maybe<Scalars['String']>;
-  readonly duration?: Maybe<Scalars['Int']>;
-  readonly status?: Maybe<SongStatusEnum>;
-};
-
-export type SongFindOneWhereInput = {
-  readonly id: Scalars['Int'];
+  readonly stationSlug: Scalars['String'];
+  readonly thumbnail: Scalars['String'];
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
 };
 
 export type HistorySongFindAllWhereInput = {
   readonly stationSlug: Scalars['String'];
 };
 
+export type LoginInput = {
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly password: Scalars['String'];
+  readonly username?: InputMaybe<Scalars['String']>;
+};
+
 export type Mutation = {
   readonly __typename?: 'Mutation';
-  readonly createUser: User;
-  readonly updateUser: Scalars['Boolean'];
-  readonly deleteUser: Scalars['Boolean'];
+  readonly createSong: Song;
   readonly createStation: Station;
+  readonly createUser: User;
+  readonly deleteSong: Scalars['Boolean'];
   readonly deleteStation: Scalars['Boolean'];
+  readonly deleteUser: Scalars['Boolean'];
   readonly joinStation: Scalars['Boolean'];
   readonly leaveStation: Scalars['Boolean'];
   readonly login: Authentication;
   readonly register: Authentication;
-  readonly createSong: Song;
-  readonly deleteSong: Scalars['Boolean'];
+  readonly updateUser: Scalars['Boolean'];
 };
 
 
-export type MutationCreateUserArgs = {
-  data: UserCreateInput;
-};
-
-
-export type MutationUpdateUserArgs = {
-  data: UserUpdateInput;
-  where: UserFindOneWhereInput;
-};
-
-
-export type MutationDeleteUserArgs = {
-  where: UserFindOneWhereInput;
+export type MutationCreateSongArgs = {
+  data: SongCreateInput;
 };
 
 
@@ -443,8 +80,23 @@ export type MutationCreateStationArgs = {
 };
 
 
+export type MutationCreateUserArgs = {
+  data: UserCreateInput;
+};
+
+
+export type MutationDeleteSongArgs = {
+  where: SongFindOneWhereInput;
+};
+
+
 export type MutationDeleteStationArgs = {
   where: StationFindOneWhereInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  where: UserFindOneWhereInput;
 };
 
 
@@ -468,80 +120,297 @@ export type MutationRegisterArgs = {
 };
 
 
-export type MutationCreateSongArgs = {
-  data: SongCreateInput;
+export type MutationUpdateUserArgs = {
+  data: UserUpdateInput;
+  where: UserFindOneWhereInput;
+};
+
+export enum MutationEnum {
+  Created = 'CREATED',
+  Deleted = 'DELETED',
+  Updated = 'UPDATED'
+}
+
+export enum OrderEnum {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
+
+export type PaginationInput = {
+  /** Offset (paginated) where from entities should be taken. Default: 0 */
+  readonly skip?: InputMaybe<Scalars['Int']>;
+  /** Limit (paginated) - max number of entities should be taken. Default: 10 */
+  readonly take?: InputMaybe<Scalars['Int']>;
+};
+
+export type Query = {
+  readonly __typename?: 'Query';
+  readonly countHistorySongs: Scalars['Int'];
+  readonly currentUser: User;
+  readonly historySongs: ReadonlyArray<HistorySong>;
+  readonly preferredRegion: Scalars['String'];
+  readonly song: Song;
+  readonly songs: ReadonlyArray<Song>;
+  readonly station: Station;
+  readonly stationSetting: StationSetting;
+  readonly stations: ReadonlyArray<Station>;
+  readonly user: User;
+  readonly users: ReadonlyArray<User>;
+  readonly youtubeTrendingVideos: ReadonlyArray<YoutubeVideo>;
+  readonly youtubeVideo: YoutubeVideoDetail;
+  readonly youtubeVideos: ReadonlyArray<YoutubeVideo>;
 };
 
 
-export type MutationDeleteSongArgs = {
+export type QueryCountHistorySongsArgs = {
+  where: HistorySongFindAllWhereInput;
+};
+
+
+export type QueryHistorySongsArgs = {
+  pagination?: InputMaybe<PaginationInput>;
+  where: HistorySongFindAllWhereInput;
+};
+
+
+export type QuerySongArgs = {
   where: SongFindOneWhereInput;
 };
 
-export type UserCreateInput = {
-  readonly email: Scalars['String'];
-  readonly username: Scalars['String'];
-  readonly password: Scalars['String'];
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
+
+export type QuerySongsArgs = {
+  order?: InputMaybe<SongFindAllOrderInput>;
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<ReadonlyArray<InputMaybe<SongFindAllWhereInput>>>;
 };
 
-export type UserUpdateInput = {
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-  readonly name?: Maybe<Scalars['String']>;
-  readonly country?: Maybe<Scalars['String']>;
-  readonly city?: Maybe<Scalars['String']>;
-  readonly bio?: Maybe<Scalars['String']>;
-  readonly avatarUrl?: Maybe<Scalars['String']>;
-  readonly coverUrl?: Maybe<Scalars['String']>;
-  readonly facebookId?: Maybe<Scalars['String']>;
-  readonly googleId?: Maybe<Scalars['String']>;
+
+export type QueryStationArgs = {
+  where: StationFindOneWhereInput;
+};
+
+
+export type QueryStationSettingArgs = {
+  where: StationSettingFindInput;
+};
+
+
+export type QueryStationsArgs = {
+  order?: InputMaybe<StationFindAllOrderInput>;
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<ReadonlyArray<InputMaybe<StationFindAllWhereInput>>>;
+};
+
+
+export type QueryUserArgs = {
+  where: UserFindOneWhereInput;
+};
+
+
+export type QueryUsersArgs = {
+  order?: InputMaybe<UserFindAllOrderInput>;
+  pagination?: InputMaybe<PaginationInput>;
+  where?: InputMaybe<UserFindAllWhereInput>;
+};
+
+
+export type QueryYoutubeTrendingVideosArgs = {
+  where: YoutubeTrendingVideoFindAllInput;
+};
+
+
+export type QueryYoutubeVideoArgs = {
+  where: YoutubeVideoFindOneInput;
+};
+
+
+export type QueryYoutubeVideosArgs = {
+  where: YoutubeVideoFindAllInput;
+};
+
+export type RegisterInput = {
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly password: Scalars['String'];
+  readonly username?: InputMaybe<Scalars['String']>;
+};
+
+export type Snippet = {
+  readonly __typename?: 'Snippet';
+  readonly channelId: Scalars['String'];
+  readonly channelTitle: Scalars['String'];
+  readonly description: Scalars['String'];
+  readonly publishedAt: Scalars['String'];
+  readonly thumbnails: Thumbnails;
+  readonly title: Scalars['String'];
+};
+
+export type Song = {
+  readonly __typename?: 'Song';
+  readonly createdAt: Scalars['Timestamp'];
+  readonly creator: User;
+  readonly downVoteUserIds: ReadonlyArray<Scalars['Int']>;
+  readonly duration: Scalars['Int'];
+  readonly id: Scalars['Int'];
+  readonly startedAt?: Maybe<Scalars['Timestamp']>;
+  readonly station: Station;
+  readonly stationSlug: Scalars['String'];
+  readonly status: SongStatusEnum;
+  readonly thumbnail: Scalars['String'];
+  readonly title: Scalars['String'];
+  readonly upVoteUserIds: ReadonlyArray<Scalars['Int']>;
+  readonly updatedAt: Scalars['Timestamp'];
+  readonly url: Scalars['String'];
+};
+
+export type SongCreateInput = {
+  /** Duration of a song in milliseconds(ms). Minimum is 10000ms (10 seconds), maximum is 86400000ms (a day) */
+  readonly duration: Scalars['Int'];
+  readonly stationSlug?: InputMaybe<Scalars['String']>;
+  readonly status?: InputMaybe<SongStatusEnum>;
+  readonly thumbnail: Scalars['String'];
+  readonly title: Scalars['String'];
+  readonly url: Scalars['String'];
+};
+
+export enum SongExplorerOrderEnum {
+  Date = 'DATE',
+  Rating = 'RATING',
+  Relevance = 'RELEVANCE',
+  Title = 'TITLE',
+  VideoCount = 'VIDEO_COUNT',
+  ViewCount = 'VIEW_COUNT'
+}
+
+export type SongFindAllOrderInput = {
+  readonly createdAt?: InputMaybe<OrderEnum>;
+  readonly duration?: InputMaybe<OrderEnum>;
+  readonly id?: InputMaybe<OrderEnum>;
+  readonly thumbnail?: InputMaybe<OrderEnum>;
+  readonly title?: InputMaybe<OrderEnum>;
+  readonly updatedAt?: InputMaybe<OrderEnum>;
+  readonly url?: InputMaybe<OrderEnum>;
+};
+
+export type SongFindAllWhereInput = {
+  readonly duration?: InputMaybe<Scalars['Int']>;
+  readonly stationSlug?: InputMaybe<Scalars['String']>;
+  readonly status?: InputMaybe<SongStatusEnum>;
+  readonly thumbnail?: InputMaybe<Scalars['String']>;
+  readonly title?: InputMaybe<Scalars['String']>;
+  readonly url?: InputMaybe<Scalars['String']>;
+};
+
+export type SongFindOneWhereInput = {
+  readonly id: Scalars['Int'];
+};
+
+export enum SongStatusEnum {
+  Pending = 'PENDING',
+  Played = 'PLAYED',
+  Playing = 'PLAYING',
+  Skipped = 'SKIPPED'
+}
+
+export type SongSubscription = {
+  readonly __typename?: 'SongSubscription';
+  readonly entity: Song;
+  readonly mutation: MutationEnum;
+};
+
+export type Station = {
+  readonly __typename?: 'Station';
+  readonly createdAt: Scalars['Timestamp'];
+  readonly description?: Maybe<Scalars['String']>;
+  readonly id: Scalars['Int'];
+  readonly name: Scalars['String'];
+  readonly onlineUserIds: ReadonlyArray<Scalars['Int']>;
+  readonly playingSong?: Maybe<Song>;
+  readonly slug: Scalars['String'];
+  readonly tags: ReadonlyArray<StationTag>;
+  readonly updatedAt: Scalars['Timestamp'];
+  readonly userRoles: ReadonlyArray<UserRole>;
 };
 
 export type StationCreateInput = {
+  readonly description?: InputMaybe<Scalars['String']>;
   readonly name: Scalars['String'];
   readonly slug: Scalars['String'];
-  readonly description?: Maybe<Scalars['String']>;
-  readonly tags?: Maybe<ReadonlyArray<StationTagCreateInput>>;
+  readonly tags?: InputMaybe<ReadonlyArray<StationTagCreateInput>>;
+};
+
+export type StationFindAllOrderInput = {
+  readonly createdAt?: InputMaybe<OrderEnum>;
+  readonly id?: InputMaybe<OrderEnum>;
+  readonly name?: InputMaybe<OrderEnum>;
+  readonly slug?: InputMaybe<OrderEnum>;
+  readonly updatedAt?: InputMaybe<OrderEnum>;
+};
+
+export type StationFindAllWhereInput = {
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly slug?: InputMaybe<Scalars['String']>;
+};
+
+export type StationFindOneWhereInput = {
+  readonly id?: InputMaybe<Scalars['Int']>;
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly slug?: InputMaybe<Scalars['String']>;
+};
+
+export enum StationRunningOutOfSongsBehaviorEnum {
+  PlayFirstSongFromRelatedSongs = 'PLAY_FIRST_SONG_FROM_RELATED_SONGS',
+  PlayRandomSongFromHistorySongs = 'PLAY_RANDOM_SONG_FROM_HISTORY_SONGS'
+}
+
+export type StationSetting = {
+  readonly __typename?: 'StationSetting';
+  readonly id: Scalars['String'];
+  readonly station: StationSharedSetting;
+  readonly user?: Maybe<UserStationSetting>;
+};
+
+export type StationSettingFindInput = {
+  readonly stationId: Scalars['Int'];
+  readonly userId?: InputMaybe<Scalars['Int']>;
+};
+
+export type StationSharedSetting = {
+  readonly __typename?: 'StationSharedSetting';
+  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
+};
+
+export type StationSubscription = {
+  readonly __typename?: 'StationSubscription';
+  readonly entity: Station;
+  readonly mutation: MutationEnum;
+};
+
+export type StationTag = {
+  readonly __typename?: 'StationTag';
+  readonly id: Scalars['Int'];
+  readonly name: Scalars['String'];
+  readonly stations: ReadonlyArray<Station>;
 };
 
 export type StationTagCreateInput = {
   readonly name: Scalars['String'];
 };
 
-export type LoginInput = {
-  readonly password: Scalars['String'];
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type RegisterInput = {
-  readonly password: Scalars['String'];
-  readonly email?: Maybe<Scalars['String']>;
-  readonly username?: Maybe<Scalars['String']>;
-};
-
-export type SongCreateInput = {
-  readonly title: Scalars['String'];
-  readonly url: Scalars['String'];
-  readonly thumbnail: Scalars['String'];
-  /** Duration of a song in milliseconds(ms). Minimum is 10000ms (10 seconds), maximum is 86400000ms (a day) */
-  readonly duration: Scalars['Int'];
-  readonly status?: Maybe<SongStatusEnum>;
-  readonly stationSlug?: Maybe<Scalars['String']>;
-};
-
 export type Subscription = {
   readonly __typename?: 'Subscription';
-  readonly user: UserSubscription;
-  readonly station: StationSubscription;
   readonly song: SongSubscription;
+  readonly station: StationSubscription;
+  readonly user: UserSubscription;
+};
+
+
+export type SubscriptionSongArgs = {
+  where?: InputMaybe<SongFindAllWhereInput>;
+};
+
+
+export type SubscriptionStationArgs = {
+  where?: InputMaybe<StationFindOneWhereInput>;
 };
 
 
@@ -549,14 +418,146 @@ export type SubscriptionUserArgs = {
   where: UserFindOneWhereInput;
 };
 
-
-export type SubscriptionStationArgs = {
-  where?: Maybe<StationFindOneWhereInput>;
+export type Thumbnail = {
+  readonly __typename?: 'Thumbnail';
+  readonly height: Scalars['Float'];
+  readonly url: Scalars['String'];
+  readonly width: Scalars['Float'];
 };
 
+export type Thumbnails = {
+  readonly __typename?: 'Thumbnails';
+  readonly default: Thumbnail;
+  readonly high?: Maybe<Thumbnail>;
+  readonly maxres?: Maybe<Thumbnail>;
+  readonly medium?: Maybe<Thumbnail>;
+  readonly standard?: Maybe<Thumbnail>;
+};
 
-export type SubscriptionSongArgs = {
-  where?: Maybe<SongFindAllWhereInput>;
+export type User = {
+  readonly __typename?: 'User';
+  readonly avatarUrl?: Maybe<Scalars['String']>;
+  readonly bio?: Maybe<Scalars['String']>;
+  readonly city?: Maybe<Scalars['String']>;
+  readonly country?: Maybe<Scalars['String']>;
+  readonly coverUrl?: Maybe<Scalars['String']>;
+  readonly createdAt: Scalars['Timestamp'];
+  readonly currentStationId?: Maybe<Scalars['Float']>;
+  readonly email: Scalars['String'];
+  readonly facebookId?: Maybe<Scalars['String']>;
+  readonly googleId?: Maybe<Scalars['String']>;
+  readonly id: Scalars['Int'];
+  readonly name?: Maybe<Scalars['String']>;
+  readonly reputation?: Maybe<Scalars['Int']>;
+  readonly roles: ReadonlyArray<UserRole>;
+  readonly updatedAt: Scalars['Timestamp'];
+  readonly username: Scalars['String'];
+};
+
+export type UserCreateInput = {
+  readonly avatarUrl?: InputMaybe<Scalars['String']>;
+  readonly bio?: InputMaybe<Scalars['String']>;
+  readonly city?: InputMaybe<Scalars['String']>;
+  readonly country?: InputMaybe<Scalars['String']>;
+  readonly coverUrl?: InputMaybe<Scalars['String']>;
+  readonly email: Scalars['String'];
+  readonly facebookId?: InputMaybe<Scalars['String']>;
+  readonly googleId?: InputMaybe<Scalars['String']>;
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly password: Scalars['String'];
+  readonly username: Scalars['String'];
+};
+
+export type UserFindAllOrderInput = {
+  readonly city?: InputMaybe<OrderEnum>;
+  readonly country?: InputMaybe<OrderEnum>;
+  readonly createdAt?: InputMaybe<OrderEnum>;
+  readonly email?: InputMaybe<OrderEnum>;
+  readonly id?: InputMaybe<OrderEnum>;
+  readonly name?: InputMaybe<OrderEnum>;
+  readonly reputation?: InputMaybe<OrderEnum>;
+  readonly updatedAt?: InputMaybe<OrderEnum>;
+  readonly username?: InputMaybe<OrderEnum>;
+};
+
+export type UserFindAllWhereInput = {
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly username?: InputMaybe<Scalars['String']>;
+};
+
+export type UserFindOneWhereInput = {
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly id?: InputMaybe<Scalars['Int']>;
+  readonly username?: InputMaybe<Scalars['String']>;
+};
+
+export type UserRole = {
+  readonly __typename?: 'UserRole';
+  readonly id: Scalars['Int'];
+  readonly role: UserRoleEnum;
+  readonly station?: Maybe<Station>;
+  readonly user: User;
+};
+
+export enum UserRoleEnum {
+  Admin = 'ADMIN',
+  StationAdmin = 'STATION_ADMIN',
+  StationOwner = 'STATION_OWNER'
+}
+
+export type UserStationSetting = {
+  readonly __typename?: 'UserStationSetting';
+  readonly notifyOnlineUser: Scalars['Boolean'];
+  readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum;
+};
+
+export type UserSubscription = {
+  readonly __typename?: 'UserSubscription';
+  readonly entity: User;
+  readonly mutation: MutationEnum;
+};
+
+export type UserUpdateInput = {
+  readonly avatarUrl?: InputMaybe<Scalars['String']>;
+  readonly bio?: InputMaybe<Scalars['String']>;
+  readonly city?: InputMaybe<Scalars['String']>;
+  readonly country?: InputMaybe<Scalars['String']>;
+  readonly coverUrl?: InputMaybe<Scalars['String']>;
+  readonly email?: InputMaybe<Scalars['String']>;
+  readonly facebookId?: InputMaybe<Scalars['String']>;
+  readonly googleId?: InputMaybe<Scalars['String']>;
+  readonly name?: InputMaybe<Scalars['String']>;
+  readonly username?: InputMaybe<Scalars['String']>;
+};
+
+export type YoutubeTrendingVideoFindAllInput = {
+  readonly maxResults?: InputMaybe<Scalars['Float']>;
+  readonly regionCode?: InputMaybe<Scalars['String']>;
+};
+
+export type YoutubeVideo = {
+  readonly __typename?: 'YoutubeVideo';
+  readonly id: Scalars['String'];
+  readonly snippet: Snippet;
+};
+
+export type YoutubeVideoDetail = {
+  readonly __typename?: 'YoutubeVideoDetail';
+  readonly contentDetails: ContentDetails;
+  readonly id: Scalars['String'];
+  readonly snippet: Snippet;
+};
+
+export type YoutubeVideoFindAllInput = {
+  readonly maxResults?: InputMaybe<Scalars['Float']>;
+  readonly order?: InputMaybe<SongExplorerOrderEnum>;
+  readonly q?: InputMaybe<Scalars['String']>;
+  readonly relatedToVideoUrl?: InputMaybe<Scalars['String']>;
+};
+
+export type YoutubeVideoFindOneInput = {
+  readonly url?: InputMaybe<Scalars['String']>;
+  readonly videoId?: InputMaybe<Scalars['String']>;
 };
 
 export type CreateSongMutationVariables = Exact<{
@@ -564,411 +565,151 @@ export type CreateSongMutationVariables = Exact<{
 }>;
 
 
-export type CreateSongMutation = (
-  { readonly __typename?: 'Mutation' }
-  & { readonly createSong: (
-    { readonly __typename?: 'Song' }
-    & Pick<Song, 'id'>
-  ) }
-);
+export type CreateSongMutation = { readonly __typename?: 'Mutation', readonly createSong: { readonly __typename?: 'Song', readonly id: number } };
 
 export type CreateStationMutationVariables = Exact<{
   data: StationCreateInput;
 }>;
 
 
-export type CreateStationMutation = (
-  { readonly __typename?: 'Mutation' }
-  & { readonly createStation: (
-    { readonly __typename?: 'Station' }
-    & Pick<Station, 'id' | 'slug' | 'name'>
-  ) }
-);
+export type CreateStationMutation = { readonly __typename?: 'Mutation', readonly createStation: { readonly __typename?: 'Station', readonly id: number, readonly slug: string, readonly name: string } };
 
 export type JoinStationMutationVariables = Exact<{
   where: StationFindOneWhereInput;
 }>;
 
 
-export type JoinStationMutation = (
-  { readonly __typename?: 'Mutation' }
-  & Pick<Mutation, 'joinStation'>
-);
+export type JoinStationMutation = { readonly __typename?: 'Mutation', readonly joinStation: boolean };
 
 export type LeaveStationMutationVariables = Exact<{
   where: StationFindOneWhereInput;
 }>;
 
 
-export type LeaveStationMutation = (
-  { readonly __typename?: 'Mutation' }
-  & Pick<Mutation, 'leaveStation'>
-);
+export type LeaveStationMutation = { readonly __typename?: 'Mutation', readonly leaveStation: boolean };
 
 export type LoginMutationVariables = Exact<{
   data: LoginInput;
 }>;
 
 
-export type LoginMutation = (
-  { readonly __typename?: 'Mutation' }
-  & { readonly login: (
-    { readonly __typename?: 'Authentication' }
-    & Pick<Authentication, 'token'>
-  ) }
-);
+export type LoginMutation = { readonly __typename?: 'Mutation', readonly login: { readonly __typename?: 'Authentication', readonly token: string } };
 
 export type RegisterMutationVariables = Exact<{
   data: RegisterInput;
 }>;
 
 
-export type RegisterMutation = (
-  { readonly __typename?: 'Mutation' }
-  & { readonly register: (
-    { readonly __typename?: 'Authentication' }
-    & Pick<Authentication, 'token'>
-  ) }
-);
+export type RegisterMutation = { readonly __typename?: 'Mutation', readonly register: { readonly __typename?: 'Authentication', readonly token: string } };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly user: (
-    { readonly __typename?: 'User' }
-    & UserBaseInformationFragment
-  ) }
-);
+export type CurrentUserQuery = { readonly __typename?: 'Query', readonly user: { readonly __typename?: 'User', readonly id: number, readonly email: string, readonly username: string, readonly avatarUrl?: string | null | undefined, readonly coverUrl?: string | null | undefined, readonly reputation?: number | null | undefined } };
 
-export type UserBaseInformationFragment = (
-  { readonly __typename?: 'User' }
-  & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'>
-);
+export type UserBaseInformationFragment = { readonly __typename?: 'User', readonly id: number, readonly email: string, readonly username: string, readonly avatarUrl?: string | null | undefined, readonly coverUrl?: string | null | undefined, readonly reputation?: number | null | undefined };
 
 export type HistorySongsQueryVariables = Exact<{
   stationSlug: Scalars['String'];
-  pagination?: Maybe<PaginationInput>;
+  pagination?: InputMaybe<PaginationInput>;
 }>;
 
 
-export type HistorySongsQuery = (
-  { readonly __typename?: 'Query' }
-  & { count: Query['countHistorySongs'] }
-  & { readonly songs: ReadonlyArray<(
-    { readonly __typename?: 'HistorySong' }
-    & Pick<HistorySong, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'creatorIds' | 'playedTimes'>
-  )> }
-);
+export type HistorySongsQuery = { readonly __typename?: 'Query', readonly count: number, readonly songs: ReadonlyArray<{ readonly __typename?: 'HistorySong', readonly id: string, readonly title: string, readonly url: string, readonly thumbnail: string, readonly duration: number, readonly creatorIds: ReadonlyArray<number>, readonly playedTimes: number }> };
 
 export type MiniUserQueryVariables = Exact<{
   where: UserFindOneWhereInput;
 }>;
 
 
-export type MiniUserQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly user: (
-    { readonly __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation'>
-  ) }
-);
+export type MiniUserQuery = { readonly __typename?: 'Query', readonly user: { readonly __typename?: 'User', readonly id: number, readonly email: string, readonly username: string, readonly avatarUrl?: string | null | undefined, readonly coverUrl?: string | null | undefined, readonly reputation?: number | null | undefined } };
 
 export type StationQueryVariables = Exact<{
   slug: Scalars['String'];
 }>;
 
 
-export type StationQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly station: (
-    { readonly __typename?: 'Station' }
-    & Pick<Station, 'id' | 'name' | 'slug' | 'onlineUserIds'>
-    & { readonly tags: ReadonlyArray<(
-      { readonly __typename?: 'StationTag' }
-      & Pick<StationTag, 'id' | 'name'>
-    )>, readonly userRoles: ReadonlyArray<(
-      { readonly __typename?: 'UserRole' }
-      & Pick<UserRole, 'role'>
-      & { readonly user: (
-        { readonly __typename?: 'User' }
-        & UserBaseInformationFragment
-      ) }
-    )>, readonly playingSong?: Maybe<(
-      { readonly __typename?: 'Song' }
-      & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
-    )> }
-  ) }
-);
+export type StationQuery = { readonly __typename?: 'Query', readonly station: { readonly __typename?: 'Station', readonly id: number, readonly name: string, readonly slug: string, readonly onlineUserIds: ReadonlyArray<number>, readonly tags: ReadonlyArray<{ readonly __typename?: 'StationTag', readonly id: number, readonly name: string }>, readonly userRoles: ReadonlyArray<{ readonly __typename?: 'UserRole', readonly role: UserRoleEnum, readonly user: { readonly __typename?: 'User', readonly id: number, readonly email: string, readonly username: string, readonly avatarUrl?: string | null | undefined, readonly coverUrl?: string | null | undefined, readonly reputation?: number | null | undefined } }>, readonly playingSong?: { readonly __typename?: 'Song', readonly id: number, readonly title: string, readonly thumbnail: string, readonly startedAt?: any | null | undefined } | null | undefined } };
 
 export type StationPlayerQueryVariables = Exact<{
   stationSlug: Scalars['String'];
 }>;
 
 
-export type StationPlayerQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly playingSongs: ReadonlyArray<(
-    { readonly __typename?: 'Song' }
-    & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
-  )> }
-);
+export type StationPlayerQuery = { readonly __typename?: 'Query', readonly playingSongs: ReadonlyArray<{ readonly __typename?: 'Song', readonly id: number, readonly title: string, readonly url: string, readonly thumbnail: string, readonly duration: number, readonly createdAt: any, readonly startedAt?: any | null | undefined, readonly status: SongStatusEnum, readonly upVoteUserIds: ReadonlyArray<number>, readonly downVoteUserIds: ReadonlyArray<number> }> };
 
 export type OnStationPlayerChangedSubscriptionVariables = Exact<{
   stationSlug: Scalars['String'];
 }>;
 
 
-export type OnStationPlayerChangedSubscription = (
-  { readonly __typename?: 'Subscription' }
-  & { readonly onPlayingSongChanged: (
-    { readonly __typename?: 'SongSubscription' }
-    & Pick<SongSubscription, 'mutation'>
-    & { readonly entity: (
-      { readonly __typename?: 'Song' }
-      & Pick<Song, 'id'>
-    ) }
-  ) }
-);
+export type OnStationPlayerChangedSubscription = { readonly __typename?: 'Subscription', readonly onPlayingSongChanged: { readonly __typename?: 'SongSubscription', readonly mutation: MutationEnum, readonly entity: { readonly __typename?: 'Song', readonly id: number } } };
 
 export type StationPlaylistQueryVariables = Exact<{
   stationSlug: Scalars['String'];
 }>;
 
 
-export type StationPlaylistQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly playlist: ReadonlyArray<(
-    { readonly __typename?: 'Song' }
-    & Pick<Song, 'id' | 'title' | 'url' | 'thumbnail' | 'duration' | 'createdAt' | 'startedAt' | 'status' | 'upVoteUserIds' | 'downVoteUserIds'>
-    & { readonly creator: (
-      { readonly __typename?: 'User' }
-      & UserBaseInformationFragment
-    ) }
-  )> }
-);
+export type StationPlaylistQuery = { readonly __typename?: 'Query', readonly playlist: ReadonlyArray<{ readonly __typename?: 'Song', readonly id: number, readonly title: string, readonly url: string, readonly thumbnail: string, readonly duration: number, readonly createdAt: any, readonly startedAt?: any | null | undefined, readonly status: SongStatusEnum, readonly upVoteUserIds: ReadonlyArray<number>, readonly downVoteUserIds: ReadonlyArray<number>, readonly creator: { readonly __typename?: 'User', readonly id: number, readonly email: string, readonly username: string, readonly avatarUrl?: string | null | undefined, readonly coverUrl?: string | null | undefined, readonly reputation?: number | null | undefined } }> };
 
 export type OnStationPlaylistChangedSubscriptionVariables = Exact<{
   stationSlug: Scalars['String'];
 }>;
 
 
-export type OnStationPlaylistChangedSubscription = (
-  { readonly __typename?: 'Subscription' }
-  & { readonly onPlaylistSongChanged: (
-    { readonly __typename?: 'SongSubscription' }
-    & Pick<SongSubscription, 'mutation'>
-    & { readonly entity: (
-      { readonly __typename?: 'Song' }
-      & Pick<Song, 'id'>
-    ) }
-  ) }
-);
+export type OnStationPlaylistChangedSubscription = { readonly __typename?: 'Subscription', readonly onPlaylistSongChanged: { readonly __typename?: 'SongSubscription', readonly mutation: MutationEnum, readonly entity: { readonly __typename?: 'Song', readonly id: number } } };
 
 export type StationSettingQueryVariables = Exact<{
   stationId: Scalars['Int'];
-  userId?: Maybe<Scalars['Int']>;
+  userId?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type StationSettingQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly stationSetting: (
-    { readonly __typename?: 'StationSetting' }
-    & Pick<StationSetting, 'id'>
-    & { readonly user?: Maybe<(
-      { readonly __typename?: 'UserStationSetting' }
-      & Pick<UserStationSetting, 'outOfSongsBehavior' | 'notifyOnlineUser'>
-    )>, readonly station: (
-      { readonly __typename?: 'StationSharedSetting' }
-      & Pick<StationSharedSetting, 'outOfSongsBehavior'>
-    ) }
-  ) }
-);
+export type StationSettingQuery = { readonly __typename?: 'Query', readonly stationSetting: { readonly __typename?: 'StationSetting', readonly id: string, readonly user?: { readonly __typename?: 'UserStationSetting', readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum, readonly notifyOnlineUser: boolean } | null | undefined, readonly station: { readonly __typename?: 'StationSharedSetting', readonly outOfSongsBehavior: StationRunningOutOfSongsBehaviorEnum } } };
 
 export type StationsQueryVariables = Exact<{
-  pagination?: Maybe<PaginationInput>;
-  order?: Maybe<StationFindAllOrderInput>;
-  where?: Maybe<ReadonlyArray<Maybe<StationFindAllWhereInput>>>;
+  pagination?: InputMaybe<PaginationInput>;
+  order?: InputMaybe<StationFindAllOrderInput>;
+  where?: InputMaybe<ReadonlyArray<InputMaybe<StationFindAllWhereInput>> | InputMaybe<StationFindAllWhereInput>>;
 }>;
 
 
-export type StationsQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly stations: ReadonlyArray<(
-    { readonly __typename?: 'Station' }
-    & Pick<Station, 'id' | 'name' | 'slug' | 'onlineUserIds'>
-    & { readonly tags: ReadonlyArray<(
-      { readonly __typename?: 'StationTag' }
-      & Pick<StationTag, 'id' | 'name'>
-    )>, readonly userRoles: ReadonlyArray<(
-      { readonly __typename?: 'UserRole' }
-      & Pick<UserRole, 'role'>
-      & { readonly user: (
-        { readonly __typename?: 'User' }
-        & UserBaseInformationFragment
-      ) }
-    )>, readonly playingSong?: Maybe<(
-      { readonly __typename?: 'Song' }
-      & Pick<Song, 'id' | 'title' | 'thumbnail' | 'startedAt'>
-    )> }
-  )> }
-);
+export type StationsQuery = { readonly __typename?: 'Query', readonly stations: ReadonlyArray<{ readonly __typename?: 'Station', readonly id: number, readonly name: string, readonly slug: string, readonly onlineUserIds: ReadonlyArray<number>, readonly tags: ReadonlyArray<{ readonly __typename?: 'StationTag', readonly id: number, readonly name: string }>, readonly userRoles: ReadonlyArray<{ readonly __typename?: 'UserRole', readonly role: UserRoleEnum, readonly user: { readonly __typename?: 'User', readonly id: number, readonly email: string, readonly username: string, readonly avatarUrl?: string | null | undefined, readonly coverUrl?: string | null | undefined, readonly reputation?: number | null | undefined } }>, readonly playingSong?: { readonly __typename?: 'Song', readonly id: number, readonly title: string, readonly thumbnail: string, readonly startedAt?: any | null | undefined } | null | undefined }> };
 
 export type OnStationChangedSubscriptionVariables = Exact<{
-  where?: Maybe<StationFindOneWhereInput>;
+  where?: InputMaybe<StationFindOneWhereInput>;
 }>;
 
 
-export type OnStationChangedSubscription = (
-  { readonly __typename?: 'Subscription' }
-  & { readonly onStationChanged: (
-    { readonly __typename?: 'StationSubscription' }
-    & Pick<StationSubscription, 'mutation'>
-    & { readonly entity: (
-      { readonly __typename?: 'Station' }
-      & Pick<Station, 'id'>
-    ) }
-  ) }
-);
+export type OnStationChangedSubscription = { readonly __typename?: 'Subscription', readonly onStationChanged: { readonly __typename?: 'StationSubscription', readonly mutation: MutationEnum, readonly entity: { readonly __typename?: 'Station', readonly id: number } } };
 
 export type UserProfileQueryVariables = Exact<{
   where: UserFindOneWhereInput;
 }>;
 
 
-export type UserProfileQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly user: (
-    { readonly __typename?: 'User' }
-    & Pick<User, 'id' | 'email' | 'username' | 'avatarUrl' | 'coverUrl' | 'reputation' | 'bio' | 'city' | 'country' | 'googleId' | 'facebookId'>
-    & { readonly roles: ReadonlyArray<(
-      { readonly __typename?: 'UserRole' }
-      & Pick<UserRole, 'role'>
-      & { readonly station?: Maybe<(
-        { readonly __typename?: 'Station' }
-        & Pick<Station, 'name' | 'slug' | 'description'>
-        & { readonly tags: ReadonlyArray<(
-          { readonly __typename?: 'StationTag' }
-          & Pick<StationTag, 'id' | 'name'>
-        )> }
-      )> }
-    )> }
-  ) }
-);
+export type UserProfileQuery = { readonly __typename?: 'Query', readonly user: { readonly __typename?: 'User', readonly id: number, readonly email: string, readonly username: string, readonly avatarUrl?: string | null | undefined, readonly coverUrl?: string | null | undefined, readonly reputation?: number | null | undefined, readonly bio?: string | null | undefined, readonly city?: string | null | undefined, readonly country?: string | null | undefined, readonly googleId?: string | null | undefined, readonly facebookId?: string | null | undefined, readonly roles: ReadonlyArray<{ readonly __typename?: 'UserRole', readonly role: UserRoleEnum, readonly station?: { readonly __typename?: 'Station', readonly name: string, readonly slug: string, readonly description?: string | null | undefined, readonly tags: ReadonlyArray<{ readonly __typename?: 'StationTag', readonly id: number, readonly name: string }> } | null | undefined }> } };
 
 export type YoutubeTrendingVideosQueryVariables = Exact<{
   where: YoutubeTrendingVideoFindAllInput;
 }>;
 
 
-export type YoutubeTrendingVideosQuery = (
-  { readonly __typename?: 'Query' }
-  & Pick<Query, 'preferredRegion'>
-  & { readonly youtubeTrendingVideos: ReadonlyArray<(
-    { readonly __typename?: 'YoutubeVideo' }
-    & Pick<YoutubeVideo, 'id'>
-    & { readonly snippet: (
-      { readonly __typename?: 'Snippet' }
-      & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'>
-      & { readonly thumbnails: (
-        { readonly __typename?: 'Thumbnails' }
-        & { readonly default: (
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        ), readonly medium?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly high?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly standard?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly maxres?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )> }
-      ) }
-    ) }
-  )> }
-);
+export type YoutubeTrendingVideosQuery = { readonly __typename?: 'Query', readonly preferredRegion: string, readonly youtubeTrendingVideos: ReadonlyArray<{ readonly __typename?: 'YoutubeVideo', readonly id: string, readonly snippet: { readonly __typename?: 'Snippet', readonly publishedAt: string, readonly channelId: string, readonly title: string, readonly description: string, readonly channelTitle: string, readonly thumbnails: { readonly __typename?: 'Thumbnails', readonly default: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number }, readonly medium?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly high?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly standard?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly maxres?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined } } }> };
 
 export type YoutubeVideoQueryVariables = Exact<{
   where: YoutubeVideoFindOneInput;
 }>;
 
 
-export type YoutubeVideoQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly youtubeVideo: (
-    { readonly __typename?: 'YoutubeVideoDetail' }
-    & Pick<YoutubeVideoDetail, 'id'>
-    & { readonly snippet: (
-      { readonly __typename?: 'Snippet' }
-      & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'>
-      & { readonly thumbnails: (
-        { readonly __typename?: 'Thumbnails' }
-        & { readonly default: (
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        ), readonly medium?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly high?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly standard?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly maxres?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )> }
-      ) }
-    ), readonly contentDetails: (
-      { readonly __typename?: 'ContentDetails' }
-      & Pick<ContentDetails, 'duration' | 'dimension' | 'caption'>
-    ) }
-  ) }
-);
+export type YoutubeVideoQuery = { readonly __typename?: 'Query', readonly youtubeVideo: { readonly __typename?: 'YoutubeVideoDetail', readonly id: string, readonly snippet: { readonly __typename?: 'Snippet', readonly publishedAt: string, readonly channelId: string, readonly title: string, readonly description: string, readonly channelTitle: string, readonly thumbnails: { readonly __typename?: 'Thumbnails', readonly default: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number }, readonly medium?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly high?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly standard?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly maxres?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined } }, readonly contentDetails: { readonly __typename?: 'ContentDetails', readonly duration: number, readonly dimension: string, readonly caption: string } } };
 
 export type YoutubeVideosQueryVariables = Exact<{
   where: YoutubeVideoFindAllInput;
 }>;
 
 
-export type YoutubeVideosQuery = (
-  { readonly __typename?: 'Query' }
-  & { readonly youtubeVideos: ReadonlyArray<(
-    { readonly __typename?: 'YoutubeVideo' }
-    & Pick<YoutubeVideo, 'id'>
-    & { readonly snippet: (
-      { readonly __typename?: 'Snippet' }
-      & Pick<Snippet, 'publishedAt' | 'channelId' | 'title' | 'description' | 'channelTitle'>
-      & { readonly thumbnails: (
-        { readonly __typename?: 'Thumbnails' }
-        & { readonly default: (
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        ), readonly medium?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly high?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly standard?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )>, readonly maxres?: Maybe<(
-          { readonly __typename?: 'Thumbnail' }
-          & Pick<Thumbnail, 'url' | 'width' | 'height'>
-        )> }
-      ) }
-    ) }
-  )> }
-);
+export type YoutubeVideosQuery = { readonly __typename?: 'Query', readonly youtubeVideos: ReadonlyArray<{ readonly __typename?: 'YoutubeVideo', readonly id: string, readonly snippet: { readonly __typename?: 'Snippet', readonly publishedAt: string, readonly channelId: string, readonly title: string, readonly description: string, readonly channelTitle: string, readonly thumbnails: { readonly __typename?: 'Thumbnails', readonly default: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number }, readonly medium?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly high?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly standard?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined, readonly maxres?: { readonly __typename?: 'Thumbnail', readonly url: string, readonly width: number, readonly height: number } | null | undefined } } }> };
 
 export const UserBaseInformationFragmentDoc = gql`
     fragment UserBaseInformation on User {
@@ -1007,7 +748,8 @@ export type CreateSongMutationFn = Apollo.MutationFunction<CreateSongMutation, C
  * });
  */
 export function useCreateSongMutation(baseOptions?: Apollo.MutationHookOptions<CreateSongMutation, CreateSongMutationVariables>) {
-        return Apollo.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateSongMutation, CreateSongMutationVariables>(CreateSongDocument, options);
       }
 export type CreateSongMutationHookResult = ReturnType<typeof useCreateSongMutation>;
 export type CreateSongMutationResult = Apollo.MutationResult<CreateSongMutation>;
@@ -1041,7 +783,8 @@ export type CreateStationMutationFn = Apollo.MutationFunction<CreateStationMutat
  * });
  */
 export function useCreateStationMutation(baseOptions?: Apollo.MutationHookOptions<CreateStationMutation, CreateStationMutationVariables>) {
-        return Apollo.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateStationMutation, CreateStationMutationVariables>(CreateStationDocument, options);
       }
 export type CreateStationMutationHookResult = ReturnType<typeof useCreateStationMutation>;
 export type CreateStationMutationResult = Apollo.MutationResult<CreateStationMutation>;
@@ -1071,7 +814,8 @@ export type JoinStationMutationFn = Apollo.MutationFunction<JoinStationMutation,
  * });
  */
 export function useJoinStationMutation(baseOptions?: Apollo.MutationHookOptions<JoinStationMutation, JoinStationMutationVariables>) {
-        return Apollo.useMutation<JoinStationMutation, JoinStationMutationVariables>(JoinStationDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<JoinStationMutation, JoinStationMutationVariables>(JoinStationDocument, options);
       }
 export type JoinStationMutationHookResult = ReturnType<typeof useJoinStationMutation>;
 export type JoinStationMutationResult = Apollo.MutationResult<JoinStationMutation>;
@@ -1101,7 +845,8 @@ export type LeaveStationMutationFn = Apollo.MutationFunction<LeaveStationMutatio
  * });
  */
 export function useLeaveStationMutation(baseOptions?: Apollo.MutationHookOptions<LeaveStationMutation, LeaveStationMutationVariables>) {
-        return Apollo.useMutation<LeaveStationMutation, LeaveStationMutationVariables>(LeaveStationDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LeaveStationMutation, LeaveStationMutationVariables>(LeaveStationDocument, options);
       }
 export type LeaveStationMutationHookResult = ReturnType<typeof useLeaveStationMutation>;
 export type LeaveStationMutationResult = Apollo.MutationResult<LeaveStationMutation>;
@@ -1133,7 +878,8 @@ export type LoginMutationFn = Apollo.MutationFunction<LoginMutation, LoginMutati
  * });
  */
 export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginMutation, LoginMutationVariables>) {
-        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<LoginMutation, LoginMutationVariables>(LoginDocument, options);
       }
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
@@ -1165,7 +911,8 @@ export type RegisterMutationFn = Apollo.MutationFunction<RegisterMutation, Regis
  * });
  */
 export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<RegisterMutation, RegisterMutationVariables>) {
-        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<RegisterMutation, RegisterMutationVariables>(RegisterDocument, options);
       }
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
@@ -1194,10 +941,12 @@ export const CurrentUserDocument = gql`
  * });
  */
 export function useCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
       }
 export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
         }
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
@@ -1235,10 +984,12 @@ export const HistorySongsDocument = gql`
  * });
  */
 export function useHistorySongsQuery(baseOptions: Apollo.QueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
-        return Apollo.useQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, options);
       }
 export function useHistorySongsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<HistorySongsQuery, HistorySongsQueryVariables>) {
-          return Apollo.useLazyQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<HistorySongsQuery, HistorySongsQueryVariables>(HistorySongsDocument, options);
         }
 export type HistorySongsQueryHookResult = ReturnType<typeof useHistorySongsQuery>;
 export type HistorySongsLazyQueryHookResult = ReturnType<typeof useHistorySongsLazyQuery>;
@@ -1273,10 +1024,12 @@ export const MiniUserDocument = gql`
  * });
  */
 export function useMiniUserQuery(baseOptions: Apollo.QueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
-        return Apollo.useQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, options);
       }
 export function useMiniUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MiniUserQuery, MiniUserQueryVariables>) {
-          return Apollo.useLazyQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MiniUserQuery, MiniUserQueryVariables>(MiniUserDocument, options);
         }
 export type MiniUserQueryHookResult = ReturnType<typeof useMiniUserQuery>;
 export type MiniUserLazyQueryHookResult = ReturnType<typeof useMiniUserLazyQuery>;
@@ -1325,10 +1078,12 @@ export const StationDocument = gql`
  * });
  */
 export function useStationQuery(baseOptions: Apollo.QueryHookOptions<StationQuery, StationQueryVariables>) {
-        return Apollo.useQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StationQuery, StationQueryVariables>(StationDocument, options);
       }
 export function useStationLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationQuery, StationQueryVariables>) {
-          return Apollo.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StationQuery, StationQueryVariables>(StationDocument, options);
         }
 export type StationQueryHookResult = ReturnType<typeof useStationQuery>;
 export type StationLazyQueryHookResult = ReturnType<typeof useStationLazyQuery>;
@@ -1367,10 +1122,12 @@ export const StationPlayerDocument = gql`
  * });
  */
 export function useStationPlayerQuery(baseOptions: Apollo.QueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
-        return Apollo.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, options);
       }
 export function useStationPlayerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationPlayerQuery, StationPlayerQueryVariables>) {
-          return Apollo.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StationPlayerQuery, StationPlayerQueryVariables>(StationPlayerDocument, options);
         }
 export type StationPlayerQueryHookResult = ReturnType<typeof useStationPlayerQuery>;
 export type StationPlayerLazyQueryHookResult = ReturnType<typeof useStationPlayerLazyQuery>;
@@ -1403,7 +1160,8 @@ export const OnStationPlayerChangedDocument = gql`
  * });
  */
 export function useOnStationPlayerChangedSubscription(baseOptions: Apollo.SubscriptionHookOptions<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>) {
-        return Apollo.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OnStationPlayerChangedSubscription, OnStationPlayerChangedSubscriptionVariables>(OnStationPlayerChangedDocument, options);
       }
 export type OnStationPlayerChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlayerChangedSubscription>;
 export type OnStationPlayerChangedSubscriptionResult = Apollo.SubscriptionResult<OnStationPlayerChangedSubscription>;
@@ -1447,10 +1205,12 @@ export const StationPlaylistDocument = gql`
  * });
  */
 export function useStationPlaylistQuery(baseOptions: Apollo.QueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
-        return Apollo.useQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, options);
       }
 export function useStationPlaylistLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationPlaylistQuery, StationPlaylistQueryVariables>) {
-          return Apollo.useLazyQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StationPlaylistQuery, StationPlaylistQueryVariables>(StationPlaylistDocument, options);
         }
 export type StationPlaylistQueryHookResult = ReturnType<typeof useStationPlaylistQuery>;
 export type StationPlaylistLazyQueryHookResult = ReturnType<typeof useStationPlaylistLazyQuery>;
@@ -1483,7 +1243,8 @@ export const OnStationPlaylistChangedDocument = gql`
  * });
  */
 export function useOnStationPlaylistChangedSubscription(baseOptions: Apollo.SubscriptionHookOptions<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>) {
-        return Apollo.useSubscription<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>(OnStationPlaylistChangedDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OnStationPlaylistChangedSubscription, OnStationPlaylistChangedSubscriptionVariables>(OnStationPlaylistChangedDocument, options);
       }
 export type OnStationPlaylistChangedSubscriptionHookResult = ReturnType<typeof useOnStationPlaylistChangedSubscription>;
 export type OnStationPlaylistChangedSubscriptionResult = Apollo.SubscriptionResult<OnStationPlaylistChangedSubscription>;
@@ -1520,10 +1281,12 @@ export const StationSettingDocument = gql`
  * });
  */
 export function useStationSettingQuery(baseOptions: Apollo.QueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
-        return Apollo.useQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, options);
       }
 export function useStationSettingLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationSettingQuery, StationSettingQueryVariables>) {
-          return Apollo.useLazyQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StationSettingQuery, StationSettingQueryVariables>(StationSettingDocument, options);
         }
 export type StationSettingQueryHookResult = ReturnType<typeof useStationSettingQuery>;
 export type StationSettingLazyQueryHookResult = ReturnType<typeof useStationSettingLazyQuery>;
@@ -1574,10 +1337,12 @@ export const StationsDocument = gql`
  * });
  */
 export function useStationsQuery(baseOptions?: Apollo.QueryHookOptions<StationsQuery, StationsQueryVariables>) {
-        return Apollo.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StationsQuery, StationsQueryVariables>(StationsDocument, options);
       }
 export function useStationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StationsQuery, StationsQueryVariables>) {
-          return Apollo.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StationsQuery, StationsQueryVariables>(StationsDocument, options);
         }
 export type StationsQueryHookResult = ReturnType<typeof useStationsQuery>;
 export type StationsLazyQueryHookResult = ReturnType<typeof useStationsLazyQuery>;
@@ -1610,7 +1375,8 @@ export const OnStationChangedDocument = gql`
  * });
  */
 export function useOnStationChangedSubscription(baseOptions?: Apollo.SubscriptionHookOptions<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>) {
-        return Apollo.useSubscription<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>(OnStationChangedDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useSubscription<OnStationChangedSubscription, OnStationChangedSubscriptionVariables>(OnStationChangedDocument, options);
       }
 export type OnStationChangedSubscriptionHookResult = ReturnType<typeof useOnStationChangedSubscription>;
 export type OnStationChangedSubscriptionResult = Apollo.SubscriptionResult<OnStationChangedSubscription>;
@@ -1661,10 +1427,12 @@ export const UserProfileDocument = gql`
  * });
  */
 export function useUserProfileQuery(baseOptions: Apollo.QueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
-        return Apollo.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, options);
       }
 export function useUserProfileLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<UserProfileQuery, UserProfileQueryVariables>) {
-          return Apollo.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<UserProfileQuery, UserProfileQueryVariables>(UserProfileDocument, options);
         }
 export type UserProfileQueryHookResult = ReturnType<typeof useUserProfileQuery>;
 export type UserProfileLazyQueryHookResult = ReturnType<typeof useUserProfileLazyQuery>;
@@ -1729,10 +1497,12 @@ export const YoutubeTrendingVideosDocument = gql`
  * });
  */
 export function useYoutubeTrendingVideosQuery(baseOptions: Apollo.QueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
-        return Apollo.useQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, options);
       }
 export function useYoutubeTrendingVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>) {
-          return Apollo.useLazyQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<YoutubeTrendingVideosQuery, YoutubeTrendingVideosQueryVariables>(YoutubeTrendingVideosDocument, options);
         }
 export type YoutubeTrendingVideosQueryHookResult = ReturnType<typeof useYoutubeTrendingVideosQuery>;
 export type YoutubeTrendingVideosLazyQueryHookResult = ReturnType<typeof useYoutubeTrendingVideosLazyQuery>;
@@ -1801,10 +1571,12 @@ export const YoutubeVideoDocument = gql`
  * });
  */
 export function useYoutubeVideoQuery(baseOptions: Apollo.QueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
-        return Apollo.useQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, options);
       }
 export function useYoutubeVideoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<YoutubeVideoQuery, YoutubeVideoQueryVariables>) {
-          return Apollo.useLazyQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<YoutubeVideoQuery, YoutubeVideoQueryVariables>(YoutubeVideoDocument, options);
         }
 export type YoutubeVideoQueryHookResult = ReturnType<typeof useYoutubeVideoQuery>;
 export type YoutubeVideoLazyQueryHookResult = ReturnType<typeof useYoutubeVideoLazyQuery>;
@@ -1868,10 +1640,12 @@ export const YoutubeVideosDocument = gql`
  * });
  */
 export function useYoutubeVideosQuery(baseOptions: Apollo.QueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
-        return Apollo.useQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, options);
       }
 export function useYoutubeVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<YoutubeVideosQuery, YoutubeVideosQueryVariables>) {
-          return Apollo.useLazyQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, baseOptions);
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<YoutubeVideosQuery, YoutubeVideosQueryVariables>(YoutubeVideosDocument, options);
         }
 export type YoutubeVideosQueryHookResult = ReturnType<typeof useYoutubeVideosQuery>;
 export type YoutubeVideosLazyQueryHookResult = ReturnType<typeof useYoutubeVideosLazyQuery>;
