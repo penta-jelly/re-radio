@@ -50,7 +50,7 @@
     "moment": "2.29.1",
     "moment-duration-format": "2.3.2",
     "nest-winston": "1.6.1",
-    "node-fetch": "2.6.5",
+    "node-fetch": "2.6.7",
     "passport": "0.5.0",
     "passport-http-bearer": "1.0.1",
     "passport-jwt": "4.0.0",
