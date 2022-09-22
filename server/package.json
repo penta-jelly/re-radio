@@ -58,7 +58,7 @@
     "re-radio-common": "^0.1.0-SNAPSHOT",
     "reflect-metadata": "0.1.13",
     "rxjs": "7.5.1",
-    "typeorm": "0.2.34",
+    "typeorm": "0.3.10",
     "winston": "3.2.1",
     "yargs": "17.2.1"
   },
