@@ -47,7 +47,7 @@
     "graphql": "15.6.1",
     "graphql-redis-subscriptions": "2.4.0",
     "graphql-subscriptions": "1.2.1",
-    "moment": "2.29.1",
+    "moment": "2.29.4",
     "moment-duration-format": "2.3.2",
     "nest-winston": "1.6.1",
     "node-fetch": "2.6.5",
